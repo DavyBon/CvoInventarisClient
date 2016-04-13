@@ -1,0 +1,67 @@
+﻿@model IEnumerable<CvoInventarisClient.Models.DeviceModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{ 
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdDevice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Merk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Serienummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsPcCompatibel)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FabrieksNummer)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdDevice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Merk)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Serienummer)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsPcCompatibel)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FabrieksNummer)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdDevice }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdDevice }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdDevice }) 
+            </td>
+        </tr>
+    }
+</table>
