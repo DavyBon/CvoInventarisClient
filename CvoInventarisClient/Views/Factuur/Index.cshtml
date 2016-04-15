@@ -1,0 +1,157 @@
+﻿@model IEnumerable<CvoInventarisClient.Models.FactuurModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<br />
+
+<div>
+    @Html.ActionLink("Create New", "Insert", "Factuur")
+</div>
+
+<br />
+<br />
+
+<table class="table" width="1000">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idFactuur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Boekjaar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CvoVolgNummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FactuurNummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FactuurDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FactuurStatusGetekend)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.VerwerkingsDatum)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idLeverancier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Prijs)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Garantie)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Omschrijving)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Opmerking)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Afschrijfperiode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OleDoc)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OleDocPath)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OleDocFileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserInsert)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DatumModified)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserModified)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.idFactuur)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Boekjaar)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.CvoVolgNummer)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.FactuurNummer)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.FactuurDatum)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.FactuurStatusGetekend)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.VerwerkingsDatum)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.idLeverancier)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Garantie)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Omschrijving)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Opmerking)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.Afschrijfperiode)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.OleDoc)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.OleDocPath)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.OleDocFileName)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DatumInsert)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.UserInsert)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.DatumModified)
+            </td>
+            <td align="center">
+                @Html.DisplayFor(modelItem => item.UserModified)
+            </td>
+            <td>
+                @Html.ActionLink("Update", "Update", new { id = item.idFactuur }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.idFactuur })
+            </td>
+        </tr>
+    }
+</table>
+
+

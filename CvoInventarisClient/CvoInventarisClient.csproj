@@ -110,13 +110,34 @@
     <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Lokaal.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.TblInventaris.datasource">
+    <Content Include="Views\Harddisk\Delete.cshtml" />
+    <Content Include="Views\Harddisk\Index.cshtml" />
+    <Content Include="Views\Harddisk\Insert.cshtml" />
+    <Content Include="Views\Leverancier\Delete.cshtml" />
+    <Content Include="Views\Leverancier\Index.cshtml" />
+    <Content Include="Views\Leverancier\Insert.cshtml" />
+    <Content Include="Views\Lokaal\Delete.cshtml" />
+    <Content Include="Views\Lokaal\Index.cshtml" />
+    <Content Include="Views\Lokaal\Insert.cshtml" />
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Factuur.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.TblNetwerk.datasource">
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Hardware.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.TblObject.datasource">
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Inventaris.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Netwerk.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Object.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.ObjectTypes.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Verzekering.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
     <None Include="Service References\ServiceReference\Service1.disco" />
@@ -132,10 +153,18 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\CpuController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
+    <Compile Include="Controllers\FactuurController.cs" />
     <Compile Include="Controllers\GrafischeKaartController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Controllers\HarddiskController.cs" />
+    <Compile Include="Controllers\LeverancierController.cs" />
+    <Compile Include="Controllers\LokaalController.cs" />
+    <Compile Include="Models\FactuurModel.cs" />
+    <Compile Include="Models\HarddiskModel.cs" />
+    <Compile Include="Models\LeverancierModel.cs" />
+    <Compile Include="Models\LokaalModel.cs" />
     <Compile Include="Models\CpuModel.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\GrafischeKaartModel.cs" />
@@ -175,6 +204,14 @@
     <Content Include="Views\GrafischeKaart\Details.cshtml" />
     <Content Include="Views\GrafischeKaart\Edit.cshtml" />
     <Content Include="Views\GrafischeKaart\Index.cshtml" />
+    <Content Include="Views\Harddisk\Update.cshtml" />
+    <Content Include="Views\Leverancier\Update.cshtml" />
+    <Content Include="Views\Lokaal\Update.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Factuur\Index.cshtml" />
+    <Content Include="Views\Factuur\Insert.cshtml" />
+    <Content Include="Views\Factuur\Update.cshtml" />
+    <Content Include="Views\Factuur\Delete.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

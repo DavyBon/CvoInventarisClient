@@ -1,0 +1,54 @@
+﻿@model CvoInventarisClient.Models.HarddiskModel
+
+@{
+    ViewBag.Title = "Insert";
+}
+
+<h2>Insert Harddisk</h2>
+
+@using (Html.BeginForm("insertHarddisk", "Harddisk"))
+{
+    @Html.ValidationSummary(true)
+
+    <table class="table" width="1000">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.merk)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.merk)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.grootte)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.grootte)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.fabrieksNummer)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.fabrieksNummer)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                
+            </td>
+            <td>
+                <input type="submit" value="Insert" class="btn btn-default" />
+            </td>
+        </tr>
+    </table>
+}
+
+<br />
+
+<div>
+    @Html.ActionLink("Back to Harddisks", "Index")
+</div>
+

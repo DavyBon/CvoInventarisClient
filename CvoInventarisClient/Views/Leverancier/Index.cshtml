@@ -1,0 +1,126 @@
+﻿@model IEnumerable<CvoInventarisClient.Models.LeverancierModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<br />
+
+<div>
+    @Html.ActionLink("Create New", "Insert", "Leverancier")
+</div>
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idLeverancier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.naam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.afkorting)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.straat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.huisNummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.busNummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postcode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefoon)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fax)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.website)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.btwNummer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.iban)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.bic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.toegevoegdOp)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idLeverancier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.naam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.afkorting)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.straat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.huisNummer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.busNummer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postcode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.telefoon)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fax)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.email)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.website)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.btwNummer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.iban)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.bic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.toegevoegdOp)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Update", new { id = item.idLeverancier }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idLeverancier })                      
+        </td>
+    </tr>
+}
+</table>
+

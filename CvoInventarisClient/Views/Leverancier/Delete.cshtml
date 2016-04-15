@@ -1,0 +1,142 @@
+﻿@model CvoInventarisClient.Models.LeverancierModel
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete Leverancier</h2>
+
+@using (Html.BeginForm("deleteLeverancier", "Leverancier"))
+{
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(model => model.idLeverancier)
+
+    <table class="table" width="1000">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.naam)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.naam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.afkorting)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.afkorting)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.straat)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.straat)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.huisNummer)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.huisNummer)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.busNummer)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.busNummer)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.postcode)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.postcode)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.telefoon)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.telefoon)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.fax)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.fax)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.email)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.email)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.website)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.website)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.btwNummer)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.btwNummer)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.iban)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.iban)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.bic)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.bic)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.toegevoegdOp)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.toegevoegdOp)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Delete" class="btn btn-default" />
+            </td>
+        </tr>
+    </table>
+}
+
+<br />
+
+<div>
+    @Html.ActionLink("Back to Leveranciers", "Index")
+</div>
+
+

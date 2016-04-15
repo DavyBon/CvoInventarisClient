@@ -1,6 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
   <xs:import schemaLocation="http://localhost:50881/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" />
+  <xs:element name="FactuurDelete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurDeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactuurDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="CpuGetById">
     <xs:complexType>
       <xs:sequence>
@@ -205,254 +219,50 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="GetHarddisks">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetHarddisksResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GetHarddisksResult" nillable="true" type="q13:ArrayOfHarddisk" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetHarddiskById">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetHarddiskByIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GetHarddiskByIdResult" nillable="true" type="q14:Harddisk" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertHarddisk">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="h" nillable="true" type="q15:Harddisk" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertHarddiskResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="InsertHarddiskResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateHarddisk">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="h" nillable="true" type="q16:Harddisk" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateHarddiskResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateHarddiskResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteHarddisk">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="h" nillable="true" type="q17:Harddisk" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteHarddiskResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteHarddiskResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLeveranciers">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLeveranciersResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GetLeveranciersResult" nillable="true" type="q18:ArrayOfLeverancier" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLeverancierById">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLeverancierByIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GetLeverancierByIdResult" nillable="true" type="q19:Leverancier" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertLeverancier">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q20:Leverancier" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertLeverancierResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="InsertLeverancierResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateLeverancier">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q21:Leverancier" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateLeverancierResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateLeverancierResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteLeverancier">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q22:Leverancier" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteLeverancierResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteLeverancierResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLokalen">
-    <xs:complexType>
-      <xs:sequence />
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLokalenResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GetLokalenResult" nillable="true" type="q23:ArrayOfLokaal" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLokaalById">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="id" nillable="true" type="xs:string" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="GetLokaalByIdResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GetLokaalByIdResult" nillable="true" type="q24:Lokaal" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertLokaal">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q25:Lokaal" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="InsertLokaalResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="InsertLokaalResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateLokaal">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q26:Lokaal" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="UpdateLokaalResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="UpdateLokaalResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteLokaal">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q27:Lokaal" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
-  <xs:element name="DeleteLokaalResponse">
-    <xs:complexType>
-      <xs:sequence>
-        <xs:element minOccurs="0" name="DeleteLokaalResult" type="xs:int" />
-      </xs:sequence>
-    </xs:complexType>
-  </xs:element>
   <xs:element name="InventarisCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q28:TblInventaris" />
+        <xs:element xmlns:q13="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q13:Inventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InventarisCreateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="InventarisCreateResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="InventarisCreateResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InventarisReadAll">
+  <xs:element name="InventarisGetAll">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="InventarisReadAllResponse">
+  <xs:element name="InventarisGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisReadAllResult" nillable="true" type="q29:ArrayOfTblInventaris" />
+        <xs:element xmlns:q14="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisGetAllResult" nillable="true" type="q14:ArrayOfInventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InventarisReadOne">
+  <xs:element name="InventarisGetById">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="InventarisReadOneResponse">
+  <xs:element name="InventarisGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisReadOneResult" nillable="true" type="q30:TblInventaris" />
+        <xs:element xmlns:q15="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisGetByIdResult" nillable="true" type="q15:Inventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InventarisUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q31:TblInventaris" />
+        <xs:element xmlns:q16="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q16:Inventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -480,47 +290,47 @@
   <xs:element name="ObjectCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q32:TblObject" />
+        <xs:element xmlns:q17="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q17:Object" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObjectCreateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="ObjectCreateResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="ObjectCreateResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ObjectReadAll">
+  <xs:element name="ObjectGetAll">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="ObjectReadAllResponse">
+  <xs:element name="ObjectGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectReadAllResult" nillable="true" type="q33:ArrayOfTblObject" />
+        <xs:element xmlns:q18="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectGetAllResult" nillable="true" type="q18:ArrayOfObject" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ObjectReadOne">
+  <xs:element name="ObjectGetById">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="ObjectReadOneResponse">
+  <xs:element name="ObjectGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectReadOneResult" nillable="true" type="q34:TblObject" />
+        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectGetByIdResult" nillable="true" type="q19:Object" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObjectUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q35:TblObject" />
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q20:Object" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -548,47 +358,47 @@
   <xs:element name="NetwerkCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q36:TblNetwerk" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q21:Netwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NetwerkCreateResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element minOccurs="0" name="NetwerkCreateResult" type="xs:boolean" />
+        <xs:element minOccurs="0" name="NetwerkCreateResult" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NetwerkReadAll">
+  <xs:element name="NetwerkGetAll">
     <xs:complexType>
       <xs:sequence />
     </xs:complexType>
   </xs:element>
-  <xs:element name="NetwerkReadAllResponse">
+  <xs:element name="NetwerkGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkReadAllResult" nillable="true" type="q37:ArrayOfTblNetwerk" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkGetAllResult" nillable="true" type="q22:ArrayOfNetwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NetwerkReadOne">
+  <xs:element name="NetwerkGetById">
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="id" type="xs:int" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-  <xs:element name="NetwerkReadOneResponse">
+  <xs:element name="NetwerkGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkReadOneResult" nillable="true" type="q38:TblNetwerk" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkGetByIdResult" nillable="true" type="q23:Netwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NetwerkUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q39:TblNetwerk" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q24:Netwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -610,6 +420,468 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="NetwerkDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="verzekering" nillable="true" type="q25:Verzekering" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringCreateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VerzekeringCreateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringDelete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringDeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VerzekeringDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringGetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="VerzekeringGetAllResult" nillable="true" type="q26:ArrayOfVerzekering" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringGetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringGetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="VerzekeringGetByIdResult" nillable="true" type="q27:Verzekering" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="verzekering" nillable="true" type="q28:Verzekering" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerzekeringUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="VerzekeringUpdateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="objectType" nillable="true" type="q29:ObjectTypes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeCreateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObjectTypeCreateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeGetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeGetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectTypeGetByIdResult" nillable="true" type="q30:ObjectTypes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeGetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectTypeGetAllResult" nillable="true" type="q31:ArrayOfObjectTypes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeDelete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeDeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObjectTypeDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="objectType" nillable="true" type="q32:ObjectTypes" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ObjectTypeUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="ObjectTypeUpdateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="hardware" nillable="true" type="q33:Hardware" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareCreateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HardwareCreateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareGetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareGetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="HardwareGetByIdResult" nillable="true" type="q34:Hardware" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareGetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="HardwareGetAllResult" nillable="true" type="q35:ArrayOfHardware" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="hardware" nillable="true" type="q36:Hardware" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HardwareUpdateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareDelete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HardwareDeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HardwareDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskGetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="HarddiskGetAllResult" nillable="true" type="q37:ArrayOfHarddisk" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskGetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskGetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="HarddiskGetByIdResult" nillable="true" type="q38:Harddisk" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="h" nillable="true" type="q39:Harddisk" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskCreateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HarddiskCreateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="h" nillable="true" type="q40:Harddisk" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HarddiskUpdateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskDelete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="HarddiskDeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="HarddiskDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierGetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="LeverancierGetAllResult" nillable="true" type="q41:ArrayOfLeverancier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierGetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierGetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="LeverancierGetByIdResult" nillable="true" type="q42:Leverancier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q43:Leverancier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierCreateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LeverancierCreateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q44:Leverancier" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LeverancierUpdateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierDelete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LeverancierDeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LeverancierDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalGetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="LokaalGetAllResult" nillable="true" type="q45:ArrayOfLokaal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalGetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalGetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="LokaalGetByIdResult" nillable="true" type="q46:Lokaal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q47:Lokaal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalCreateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LokaalCreateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="l" nillable="true" type="q48:Lokaal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LokaalUpdateResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalDelete">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="LokaalDeleteResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="LokaalDeleteResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurGetAll">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurGetAllResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="FactuurGetAllResult" nillable="true" type="q49:ArrayOfFactuur" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurGetById">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="id" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurGetByIdResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="FactuurGetByIdResult" nillable="true" type="q50:Factuur" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurCreate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="f" nillable="true" type="q51:Factuur" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurCreateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactuurCreateResult" type="xs:int" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurUpdate">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="f" nillable="true" type="q52:Factuur" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="FactuurUpdateResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="FactuurUpdateResult" type="xs:boolean" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>

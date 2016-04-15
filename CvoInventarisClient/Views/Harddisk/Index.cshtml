@@ -1,0 +1,60 @@
+﻿@model IEnumerable<CvoInventarisClient.Models.HarddiskModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<br />
+
+<div>
+    @Html.ActionLink("Create New", "Insert", "Harddisk")
+</div>
+
+<br />
+<br />
+
+<table class="table" width="1000">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idHarddisk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.merk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.grootte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fabrieksNummer)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.idHarddisk)
+        </td>
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.merk)
+        </td>
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.grootte)
+        </td>
+        <td align="center">
+            @Html.DisplayFor(modelItem => item.fabrieksNummer)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Update", new { id = item.idHarddisk }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idHarddisk })
+        </td>
+    </tr>
+}
+</table>
+

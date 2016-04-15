@@ -1,0 +1,60 @@
+﻿@model CvoInventarisClient.Models.LokaalModel
+
+@{
+    ViewBag.Title = "Insert";
+}
+
+<h2>Insert Harddisk</h2>
+
+@using (Html.BeginForm("insertLokaal", "Lokaal"))
+{
+    @Html.ValidationSummary(true)
+
+    <table class="table" width="1000">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.lokaalNaam)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.lokaalNaam)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.aantalPlaatsen)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.aantalPlaatsen)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.isComputerLokaal)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.isComputerLokaal)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.idNetwerk)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.idNetwerk)
+            </td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <input type="submit" value="Insert" class="btn btn-default" />
+            </td>
+        </tr>
+    </table>
+}
+
+<br />
+
+<div>
+    @Html.ActionLink("Back to Lokalen", "Index")
+</div>
+

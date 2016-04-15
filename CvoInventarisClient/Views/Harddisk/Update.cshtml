@@ -1,0 +1,54 @@
+﻿@model CvoInventarisClient.Models.HarddiskModel
+
+@{
+    ViewBag.Title = "Update";
+}
+
+<h2>Update Harddisk</h2>
+
+@using (Html.BeginForm("updateHarddisk", "Harddisk"))
+{
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idHarddisk)
+
+    <table class="table" width="1000">
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.merk)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.merk)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.grootte)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.grootte)
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @Html.DisplayNameFor(model => model.fabrieksNummer)
+            </td>
+            <td>
+                @Html.EditorFor(model => model.fabrieksNummer)
+            </td>
+        </tr>
+        <tr>
+            <td>
+
+            </td>
+            <td>
+                <input type="submit" value="Update" class="btn btn-default" />
+            </td>
+        </tr>
+    </table>
+}
+
+<br />
+
+<div>
+    @Html.ActionLink("Back to Harddisks", "Index")
+</div>

@@ -1,0 +1,66 @@
+﻿@model IEnumerable<CvoInventarisClient.Models.LokaalModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<br />
+
+<div>
+    @Html.ActionLink("Create New", "Insert", "Lokaal")
+</div>
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idLokaal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.lokaalNaam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.aantalPlaatsen)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isComputerLokaal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idNetwerk)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idLokaal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.lokaalNaam)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.aantalPlaatsen)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isComputerLokaal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idNetwerk)
+        </td>
+        <td>
+            @Html.ActionLink("Update", "Update", new { id = item.idLokaal }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.idLokaal })
+        </td>
+    </tr>
+}
+</table>
+
