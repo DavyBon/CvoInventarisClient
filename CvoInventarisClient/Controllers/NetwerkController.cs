@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace CvoInventarisMalik.Controllers
+namespace CvoInventarisClient.Controllers
 {
     public class NetwerkController : Controller
     {

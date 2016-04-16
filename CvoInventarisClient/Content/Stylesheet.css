@@ -1,12 +1,26 @@
-﻿.spacer {
+﻿html, body {
+    height: 100%;
+}
+
+.stretchHorizontal {
+    height: 100%;
+}
+
+.spacer {
     height: 2em;
     width: 100%;
     background-color: azure;
 }
 
+.logoutButton {
+    color: red;
+    position: absolute;
+    bottom: 0;
+}
+
 .tile {
     width: 100%;
-    height:20em;
+    height: 20em;
     display: inline-block;
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -23,6 +37,7 @@
         line-height: 1.5em;
         font-weight: 300;
     }
+
     .tile.main {
         background: #337AB7;
         color: #fff;

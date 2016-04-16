@@ -1604,6 +1604,7 @@ pre code {
   }
 }
 .container-fluid {
+  height:100%;/*changed*/
   padding: 15px;/*changed*/
   margin-right: auto;
   margin-left: auto;
