@@ -1,12 +1,16 @@
 ﻿@model CvoInventarisClient.Models.HarddiskModel
 
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
     ViewBag.Title = "Update";
 }
 
 <h2>Update Harddisk</h2>
 
-@using (Html.BeginForm("updateHarddisk", "Harddisk"))
+@using (Html.BeginForm("Update", "Harddisk"))
 {
         @Html.ValidationSummary(true)
         @Html.HiddenFor(model => model.idHarddisk)

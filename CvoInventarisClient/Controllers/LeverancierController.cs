@@ -22,28 +22,37 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            Leverancier[] arrLeveranciers = sr.LeverancierGetAll();
+            Leverancier[] arrLeveranciers = new Leverancier[] { };
+
+            try
+            {
+                arrLeveranciers = sr.LeverancierGetAll();
+            }
+            catch(Exception e)
+            {
+
+            }
 
             List<LeverancierModel> listLeveranciers = new List<LeverancierModel>();
 
-            foreach (var item in arrLeveranciers)
+            foreach (Leverancier leverancier in arrLeveranciers)
             {
                 LeverancierModel lv = new LeverancierModel();
-                lv.idLeverancier = item.idLeverancier;
-                lv.naam = item.naam;
-                lv.afkorting = item.afkorting;
-                lv.straat = item.straat;
-                lv.huisNummer = item.huisNummer;
-                lv.busNummer = item.busNummer;
-                lv.postcode = item.postcode;
-                lv.telefoon = item.telefoon;
-                lv.fax = item.fax;
-                lv.email = item.email;
-                lv.website = item.website;
-                lv.btwNummer = item.btwNummer;
-                lv.iban = item.iban;
-                lv.bic = item.bic;
-                lv.toegevoegdOp = item.toegevoegdOp;
+                lv.idLeverancier = leverancier.idLeverancier;
+                lv.naam = leverancier.naam;
+                lv.afkorting = leverancier.afkorting;
+                lv.straat = leverancier.straat;
+                lv.huisNummer = leverancier.huisNummer;
+                lv.busNummer = leverancier.busNummer;
+                lv.postcode = leverancier.postcode;
+                lv.telefoon = leverancier.telefoon;
+                lv.fax = leverancier.fax;
+                lv.email = leverancier.email;
+                lv.website = leverancier.website;
+                lv.btwNummer = leverancier.btwNummer;
+                lv.iban = leverancier.iban;
+                lv.bic = leverancier.bic;
+                lv.toegevoegdOp = leverancier.toegevoegdOp;
                 listLeveranciers.Add(lv);
             }
 
@@ -56,17 +65,94 @@ namespace CvoInventarisClient.Controllers
         [HttpGet]
         public ActionResult Insert()
         {
-            return View();
+            return View(new LeverancierModel());
         }
 
         [HttpPost]
-        public ActionResult insertLeverancier(Leverancier lv)
+        public ActionResult insertLeverancier(LeverancierModel lv)
+        {
+            if (InsertLeverancier(lv) >= 0)
+            {
+                ViewBag.CreateMessage = "Row inserted";
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                ViewBag.EditMessage = "Row not inserted";
+                return View();
+            }
+        }
+
+        public int InsertLeverancier(LeverancierModel lv)
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            sr.LeverancierCreate(lv);
+            Leverancier leverancier = new Leverancier();
+            leverancier.naam = lv.naam;
+            leverancier.afkorting = lv.afkorting;
+            leverancier.straat = lv.straat;
+            leverancier.huisNummer = lv.huisNummer;
+            leverancier.busNummer = lv.busNummer;
+            leverancier.postcode = lv.postcode;
+            leverancier.telefoon = lv.telefoon;
+            leverancier.fax = lv.fax;
+            leverancier.email = lv.email;
+            leverancier.website = lv.website;
+            leverancier.btwNummer = lv.btwNummer;
+            leverancier.iban = lv.iban;
+            leverancier.bic = lv.bic;
+            leverancier.toegevoegdOp = lv.toegevoegdOp;
 
-            return View("Index", ReadAll());
+            try
+            {
+                return sr.LeverancierCreate(leverancier);
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        // DETAILS:
+
+        public ActionResult Details(int? id)
+        {
+            return View(GetLeverancierById((int)id));
+        }
+
+        public LeverancierModel GetLeverancierById(int id)
+        {
+            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
+
+            Leverancier leverancier = new Leverancier();
+
+            try
+            {
+                leverancier = sr.LeverancierGetById(id);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            LeverancierModel lv = new LeverancierModel();
+            lv.idLeverancier = leverancier.idLeverancier;
+            lv.naam = leverancier.naam;
+            lv.afkorting = leverancier.afkorting;
+            lv.straat = leverancier.straat;
+            lv.huisNummer = leverancier.huisNummer;
+            lv.busNummer = leverancier.busNummer;
+            lv.postcode = leverancier.postcode;
+            lv.telefoon = leverancier.telefoon;
+            lv.fax = leverancier.fax;
+            lv.email = leverancier.email;
+            lv.website = leverancier.website;
+            lv.btwNummer = leverancier.btwNummer;
+            lv.iban = leverancier.iban;
+            lv.bic = leverancier.bic;
+            lv.toegevoegdOp = leverancier.toegevoegdOp;
+
+            return lv;
         }
 
 
@@ -75,39 +161,53 @@ namespace CvoInventarisClient.Controllers
         [HttpGet]
         public ActionResult Update(int? id)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Leverancier leverancier = sr.LeverancierGetById((int)id);
-
-            LeverancierModel leverancierModel = new LeverancierModel();
-
-            leverancierModel.idLeverancier = (int)id;
-            leverancierModel.naam = leverancier.naam;
-            leverancierModel.afkorting = leverancier.afkorting;
-            leverancierModel.straat = leverancier.straat;
-            leverancierModel.huisNummer = leverancier.huisNummer;
-            leverancierModel.busNummer = leverancier.busNummer;
-            leverancierModel.postcode = leverancier.postcode;
-            leverancierModel.telefoon = leverancier.telefoon;
-            leverancierModel.fax = leverancier.fax;
-            leverancierModel.email = leverancier.email;
-            leverancierModel.website = leverancier.website;
-            leverancierModel.btwNummer = leverancier.btwNummer;
-            leverancierModel.iban = leverancier.iban;
-            leverancierModel.bic = leverancier.bic;
-            leverancierModel.toegevoegdOp = leverancier.toegevoegdOp;
-
-            return View(leverancierModel);
+            return View(GetLeverancierById((int)id));
         }
 
         [HttpPost]
-        public ActionResult updateLeverancier(Leverancier lv)
+        public ActionResult updateLeverancier(LeverancierModel lv)
+        {
+            if (UpdateLeverancier(lv))
+            {
+                ViewBag.EditMessage = "Row Updated";
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                ViewBag.EditMessage = "Row not updated";
+                return View();
+            }
+        }
+
+        public bool UpdateLeverancier(LeverancierModel lv)
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            sr.LeverancierUpdate(lv);
+            Leverancier leverancier = new Leverancier();
+            leverancier.idLeverancier = lv.idLeverancier;
+            leverancier.naam = lv.naam;
+            leverancier.afkorting = lv.afkorting;
+            leverancier.straat = lv.straat;
+            leverancier.huisNummer = lv.huisNummer;
+            leverancier.busNummer = lv.busNummer;
+            leverancier.postcode = lv.postcode;
+            leverancier.telefoon = lv.telefoon;
+            leverancier.fax = lv.fax;
+            leverancier.email = lv.email;
+            leverancier.website = lv.website;
+            leverancier.btwNummer = lv.btwNummer;
+            leverancier.iban = lv.iban;
+            leverancier.bic = lv.bic;
+            leverancier.toegevoegdOp = lv.toegevoegdOp;
 
-            return View("Index", ReadAll());
+            try
+            {
+                return sr.LeverancierUpdate(leverancier);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 
@@ -116,39 +216,38 @@ namespace CvoInventarisClient.Controllers
         [HttpGet]
         public ActionResult Delete(int? id)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Leverancier leverancier = sr.LeverancierGetById((int)id);
-
-            LeverancierModel leverancierModel = new LeverancierModel();
-
-            leverancierModel.idLeverancier = (int)id;
-            leverancierModel.naam = leverancier.naam;
-            leverancierModel.afkorting = leverancier.afkorting;
-            leverancierModel.straat = leverancier.straat;
-            leverancierModel.huisNummer = leverancier.huisNummer;
-            leverancierModel.busNummer = leverancier.busNummer;
-            leverancierModel.postcode = leverancier.postcode;
-            leverancierModel.telefoon = leverancier.telefoon;
-            leverancierModel.fax = leverancier.fax;
-            leverancierModel.email = leverancier.email;
-            leverancierModel.website = leverancier.website;
-            leverancierModel.btwNummer = leverancier.btwNummer;
-            leverancierModel.iban = leverancier.iban;
-            leverancierModel.bic = leverancier.bic;
-            leverancierModel.toegevoegdOp = leverancier.toegevoegdOp;
-
-            return View(leverancierModel);
+            return View(GetLeverancierById((int)id));
         }
 
         [HttpPost]
-        public ActionResult deleteLeverancier(Leverancier lv)
+        public ActionResult deleteLeverancier(LeverancierModel lv)
+        {
+            if (DeleteLeverancier(lv))
+            {
+                ViewBag.DeleteMessage = "Row deleted";
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                ViewBag.DeletMessage = "Row not deleted";
+                return View();
+            }
+        }
+
+        public bool DeleteLeverancier(LeverancierModel lv)
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            sr.LeverancierDelete(lv.idLeverancier);
+            int id = lv.idLeverancier;
 
-            return View("Index", ReadAll());
+            try
+            {
+                return sr.LeverancierDelete(id);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

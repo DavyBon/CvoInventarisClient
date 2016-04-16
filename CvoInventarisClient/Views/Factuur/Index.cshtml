@@ -147,7 +147,8 @@
                 @Html.DisplayFor(modelItem => item.UserModified)
             </td>
             <td>
-                @Html.ActionLink("Update", "Update", new { id = item.idFactuur }) |
+                @Html.ActionLink("Edit", "Update", new { id = item.idFactuur }) |
+                @Html.ActionLink("Details", "Details", new { id = item.idFactuur }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.idFactuur })
             </td>
         </tr>

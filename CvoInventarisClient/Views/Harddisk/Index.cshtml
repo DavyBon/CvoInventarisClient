@@ -51,7 +51,8 @@
             @Html.DisplayFor(modelItem => item.fabrieksNummer)
         </td>
         <td>
-            @Html.ActionLink("Update", "Update", new { id = item.idHarddisk }) |
+            @Html.ActionLink("Edit", "Update", new { id = item.idHarddisk }) |
+            @Html.ActionLink("Details", "Details", new { id = item.idHarddisk }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.idHarddisk })
         </td>
     </tr>

@@ -1,0 +1,46 @@
+﻿@model CvoInventarisClient.Models.HarddiskModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TblHarddisk</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.merk)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.merk)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.grootte)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.grootte)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fabrieksNummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fabrieksNummer)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Update", new { id = Model.idHarddisk }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

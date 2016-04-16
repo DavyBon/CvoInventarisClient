@@ -254,6 +254,10 @@
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Overzicht\Index.cshtml" />
+    <Content Include="Views\Harddisk\Details.cshtml" />
+    <Content Include="Views\Leverancier\Details.cshtml" />
+    <Content Include="Views\Lokaal\Details.cshtml" />
+    <Content Include="Views\Factuur\Details.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

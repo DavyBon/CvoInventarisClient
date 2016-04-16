@@ -1,0 +1,134 @@
+﻿@model CvoInventarisClient.Models.LeverancierModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TblLeverancier</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.naam)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.naam)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.afkorting)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.afkorting)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.straat)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.straat)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.huisNummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.huisNummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.busNummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.busNummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postcode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postcode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.telefoon)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.telefoon)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fax)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fax)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.website)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.website)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.btwNummer)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.btwNummer)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.iban)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.iban)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.bic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.bic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.toegevoegdOp)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.toegevoegdOp)
+        </dd>
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Update", new { id = Model.idLeverancier }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

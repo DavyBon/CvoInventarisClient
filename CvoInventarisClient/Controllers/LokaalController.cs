@@ -22,18 +22,27 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            Lokaal[] arrLokalen = sr.LokaalGetAll();
+            Lokaal[] arrLokalen = new Lokaal[] { };
+
+            try
+            {
+                arrLokalen = sr.LokaalGetAll();
+            }
+            catch (Exception e)
+            {
+
+            }
 
             List<LokaalModel> listLokalen = new List<LokaalModel>();
 
-            foreach (var item in arrLokalen)
+            foreach (Lokaal lokaal in arrLokalen)
             {
                 LokaalModel lk = new LokaalModel();
-                lk.idLokaal = item.idLokaal;
-                lk.lokaalNaam = item.lokaalNaam;
-                lk.aantalPlaatsen = item.aantalPlaatsen;
-                lk.isComputerLokaal = item.isComputerLokaal;
-                lk.idNetwerk = item.idNetwerk;
+                lk.idLokaal = lokaal.idLokaal;
+                lk.lokaalNaam = lokaal.lokaalNaam;
+                lk.aantalPlaatsen = lokaal.aantalPlaatsen;
+                lk.isComputerLokaal = lokaal.isComputerLokaal;
+                lk.idNetwerk = lokaal.idNetwerk;
                 listLokalen.Add(lk);
             }
 
@@ -46,17 +55,74 @@ namespace CvoInventarisClient.Controllers
         [HttpGet]
         public ActionResult Insert()
         {
-            return View();
+            return View(new LokaalModel());
         }
 
         [HttpPost]
-        public ActionResult insertLokaal(Lokaal lk)
+        public ActionResult insertLokaal(LokaalModel lk)
+        {
+            if (InsertLokaal(lk) >= 0)
+            {
+                ViewBag.CreateMessage = "Row inserted";
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                ViewBag.EditMessage = "Row not inserted";
+                return View();
+            }
+        }
+
+        public int InsertLokaal(LokaalModel lk)
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            sr.LokaalCreate(lk);
+            Lokaal lokaal = new Lokaal();
+            lokaal.lokaalNaam = lk.lokaalNaam;
+            lokaal.aantalPlaatsen = lk.aantalPlaatsen;
+            lokaal.isComputerLokaal = lk.isComputerLokaal;
+            lokaal.idNetwerk = lk.idNetwerk;
 
-            return View("Index", ReadAll());
+            try
+            {
+                return sr.LokaalCreate(lokaal);
+            }
+            catch (Exception)
+            {
+                return -1;
+            }
+        }
+
+        // DETAILS:
+
+        public ActionResult Details(int? id)
+        {
+            return View(GetLokaalById((int)id));
+        }
+
+        public LokaalModel GetLokaalById(int id)
+        {
+            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
+
+            Lokaal lokaal = new Lokaal();
+
+            try
+            {
+                lokaal = sr.LokaalGetById(id);
+            }
+            catch (Exception e)
+            {
+
+            }
+
+            LokaalModel lk = new LokaalModel();
+            lk.idLokaal = lokaal.idLokaal;
+            lk.lokaalNaam = lokaal.lokaalNaam;
+            lk.aantalPlaatsen = lokaal.aantalPlaatsen;
+            lk.isComputerLokaal = lokaal.isComputerLokaal;
+            lk.idNetwerk = lokaal.idNetwerk;
+
+            return lk;
         }
 
 
@@ -65,29 +131,43 @@ namespace CvoInventarisClient.Controllers
         [HttpGet]
         public ActionResult Update(int? id)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Lokaal lokaal = sr.LokaalGetById((int)id);
-
-            LokaalModel lokaalModel = new LokaalModel();
-
-            lokaalModel.idLokaal = (int)id;
-            lokaalModel.lokaalNaam = lokaal.lokaalNaam;
-            lokaalModel.aantalPlaatsen = lokaal.aantalPlaatsen;
-            lokaalModel.isComputerLokaal = lokaal.isComputerLokaal;
-            lokaalModel.idNetwerk = lokaal.idNetwerk;
-
-            return View(lokaalModel);
+            return View(GetLokaalById((int)id));
         }
 
         [HttpPost]
-        public ActionResult updateLokaal(Lokaal lk)
+        public ActionResult updateLokaal(LokaalModel lk)
+        {
+            if (UpdateLokaal(lk))
+            {
+                ViewBag.EditMessage = "Row Updated";
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                ViewBag.EditMessage = "Row not updated";
+                return View();
+            }
+        }
+
+        public bool UpdateLokaal(LokaalModel lk)
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            sr.LokaalUpdate(lk);
+            Lokaal lokaal = new Lokaal();
+            lokaal.idLokaal = lk.idLokaal;
+            lokaal.lokaalNaam = lk.lokaalNaam;
+            lokaal.aantalPlaatsen = lk.aantalPlaatsen;
+            lokaal.isComputerLokaal = lk.isComputerLokaal;
+            lokaal.idNetwerk = lk.idNetwerk;
 
-            return View("Index", ReadAll());
+            try
+            {
+                return sr.LokaalUpdate(lokaal);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 
@@ -96,29 +176,38 @@ namespace CvoInventarisClient.Controllers
         [HttpGet]
         public ActionResult Delete(int? id)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Lokaal lokaal = sr.LokaalGetById((int)id);
-
-            LokaalModel lokaalModel = new LokaalModel();
-
-            lokaalModel.idLokaal = (int)id;
-            lokaalModel.lokaalNaam = lokaal.lokaalNaam;
-            lokaalModel.aantalPlaatsen = lokaal.aantalPlaatsen;
-            lokaalModel.isComputerLokaal = lokaal.isComputerLokaal;
-            lokaalModel.idNetwerk = lokaal.idNetwerk;
-
-            return View(lokaalModel);
+            return View(GetLokaalById((int)id));
         }
 
         [HttpPost]
-        public ActionResult deleteLokaal(Lokaal lk)
+        public ActionResult deleteLokaal(LokaalModel lk)
+        {
+            if (DeleteLokaal(lk))
+            {
+                ViewBag.DeleteMessage = "Row deleted";
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                ViewBag.DeletMessage = "Row not deleted";
+                return View();
+            }
+        }
+
+        public bool DeleteLokaal(LokaalModel lk)
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            sr.LokaalDelete(lk.idLokaal);
+            int id = lk.idLokaal;
 
-            return View("Index", ReadAll());
+            try
+            {
+                return sr.LokaalDelete(id);
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

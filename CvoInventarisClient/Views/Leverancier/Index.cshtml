@@ -117,7 +117,8 @@
             @Html.DisplayFor(modelItem => item.toegevoegdOp)
         </td>
         <td>
-            @Html.ActionLink("Update", "Update", new { id = item.idLeverancier }) |
+            @Html.ActionLink("Edit", "Update", new { id = item.idLeverancier }) |
+            @Html.ActionLink("Details", "Details", new { id = item.idLeverancier }) |
             @Html.ActionLink("Delete", "Delete", new { id = item.idLeverancier })                      
         </td>
     </tr>
