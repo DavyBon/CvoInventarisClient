@@ -2,21 +2,35 @@
 @{
     ViewBag.Title = "Overzicht";
 }
-WIP
-<div class="col-sm-6 col-md-3">
-    <div class="thumbnail tile tile-medium tile-teal">
-        <a href="#">
-            <h1>Hello</h1>
-        </a>
+
+    <div class="row">
+
+        <div class="col-sm-12 col-md-12 col-lg-12">
+            <a href="@Url.Action("Index","Inventaris")">
+                <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                    <h3 class="title">Inventaris</h3>
+                    <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <a href="@Url.Action("Index","Object")">
+                <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                    <h3 class="title">Objecten</h3>
+                    <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-sm-12 col-md-4 col-lg-3">
+            <a href="@Url.Action("Index","Netwerk")">
+                <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                    <h3 class="title">Netwerken</h3>
+                    <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
+                </div>
+            </a>
+        </div>
+
     </div>
-</div>
-<div class="col-sm-6 col-md-3">
-    <div class="thumbnail tile tile-medium">
-        <a href="#">
-            <h2>
-                Tweet
-            </h2>
-        </a>
-    </div>
-</div>
 
