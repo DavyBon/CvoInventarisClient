@@ -1,0 +1,51 @@
+﻿@model IEnumerable<CvoInventarisMalik.CvoWebservice.Object>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.idFactuur)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idLeverancier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idObjectType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.kenmerken)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.idFactuur)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idLeverancier)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idObjectType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.kenmerken)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

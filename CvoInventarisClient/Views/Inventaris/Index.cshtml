@@ -1,0 +1,81 @@
+﻿@model IEnumerable<CvoInventarisMalik.CvoWebservice.Inventaris>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>@ViewBag.Test</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.aankoopjaar)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.afschrijvingsperiode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.historiek)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idLokaal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idObject)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.idVerzekering)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isAanwezig)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isActief)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.label)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.aankoopjaar)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.afschrijvingsperiode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.historiek)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idLokaal)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idObject)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.idVerzekering)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isAanwezig)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isActief)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.label)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.id })
+        </td>
+    </tr>
+}
+
+</table>

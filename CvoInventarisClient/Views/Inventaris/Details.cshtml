@@ -1,0 +1,90 @@
+﻿@model CvoInventarisMalik.CvoWebservice.Inventaris
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TblInventaris</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.aankoopjaar)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.aankoopjaar)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.afschrijvingsperiode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.afschrijvingsperiode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.historiek)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.historiek)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idLokaal)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idLokaal)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idObject)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idObject)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.idVerzekering)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.idVerzekering)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isAanwezig)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isAanwezig)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.isActief)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.isActief)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.label)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.label)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

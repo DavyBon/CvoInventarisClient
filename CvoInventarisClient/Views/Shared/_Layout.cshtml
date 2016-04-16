@@ -3,30 +3,28 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - CvoClientAB</title>
-
+    <title>@ViewBag.Title</title>
+        <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <meta name="description" content="The description of my page" />
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Cpu", "Index", "Cpu")</li>
-                    <li>@Html.ActionLink("Device", "Index", "Device")</li>
-                    <li>@Html.ActionLink("Grafische Kaart", "Index", "GrafischeKaart")</li>
-                    <li>@Html.ActionLink("Harddisk", "Index", "Harddisk")</li>
-                    <li>@Html.ActionLink("Leverancier", "Index", "Leverancier")</li>
-                    <li>@Html.ActionLink("Lokaal", "Index", "Lokaal")</li>
-                    <li>@Html.ActionLink("Factuur", "Index", "Factuur")</li>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <ul class="nav nav-pills nav-stacked">
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Profiel" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-user"></span> Account</a></li>
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Overzicht" ? "active" : "")"><a href="@Url.Action("Index","Overzicht")"><span class="glyphicon glyphicon-list-alt"></span> Overzicht</a></li>
                 </ul>
+            </div>
+            <div class="col-lg-9">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-    </div>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.js"></script>
 </body>
 </html>

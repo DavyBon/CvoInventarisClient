@@ -91,7 +91,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Content\bootstrap.min.css" />
+    <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Scripts\jquery-1.9.1.intellisense.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\jquery-1.9.1.js" />
+    <Content Include="Scripts\jquery-1.9.1.min.js" />
     <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Cpu.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -140,6 +158,7 @@
     <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Verzekering.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Scripts\jquery-1.9.1.min.map" />
     <None Include="Service References\ServiceReference\Service1.disco" />
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference\configuration.svcinfo" />
@@ -155,6 +174,11 @@
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\FactuurController.cs" />
     <Compile Include="Controllers\GrafischeKaartController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\InventarisController.cs" />
+    <Compile Include="Controllers\NetwerkController.cs" />
+    <Compile Include="Controllers\ObjectController.cs" />
+    <Compile Include="Controllers\OverzichtController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -212,6 +236,23 @@
     <Content Include="Views\Factuur\Insert.cshtml" />
     <Content Include="Views\Factuur\Update.cshtml" />
     <Content Include="Views\Factuur\Delete.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Inventaris\Create.cshtml" />
+    <Content Include="Views\Inventaris\Delete.cshtml" />
+    <Content Include="Views\Inventaris\Details.cshtml" />
+    <Content Include="Views\Inventaris\Edit.cshtml" />
+    <Content Include="Views\Inventaris\Index.cshtml" />
+    <Content Include="Views\Netwerk\Create.cshtml" />
+    <Content Include="Views\Netwerk\Delete.cshtml" />
+    <Content Include="Views\Netwerk\Details.cshtml" />
+    <Content Include="Views\Netwerk\Edit.cshtml" />
+    <Content Include="Views\Netwerk\Index.cshtml" />
+    <Content Include="Views\Object\Create.cshtml" />
+    <Content Include="Views\Object\Delete.cshtml" />
+    <Content Include="Views\Object\Details.cshtml" />
+    <Content Include="Views\Object\Edit.cshtml" />
+    <Content Include="Views\Object\Index.cshtml" />
+    <Content Include="Views\Overzicht\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
