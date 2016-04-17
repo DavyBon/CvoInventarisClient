@@ -12,7 +12,7 @@
 <body>
     <div class="container-fluid">
         <div class="row stretchHorizontal">
-            <div class="col-lg-3 stretchHorizontal">
+            <div class="col-lg-1 stretchHorizontal">
                 <ul class="nav nav-pills nav-stacked stretchHorizontal">
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Profiel" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-user"></span> Account</a></li>
@@ -20,7 +20,7 @@
                     <li><a class="bottom-align-text" href="@Url.Action("Loguit","Account")"><span class="glyphicon glyphicon-log-out"></span> Log uit</a></li>
                 </ul>
             </div>
-            <div class="col-lg-9">
+            <div class="col-lg-11">
                 <div class="container-fluid">
                     @RenderBody()
                 </div>

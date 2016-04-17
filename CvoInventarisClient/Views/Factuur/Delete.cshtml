@@ -8,178 +8,177 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete Harddisk</h2>
+<h2>Delete Factuur</h2>
 
+<h3>Are you sure you want to delete this?</h3>
+
+<div>
 @using (Html.BeginForm("deleteFactuur", "Factuur"))
 {
     @Html.ValidationSummary(true)
     @Html.HiddenFor(model => model.idFactuur)
 
-    <table class="table" width="1000">
-        <tr>
-            <td>
+    <h4>TblFactuur</h4>
+    <hr />
+
+        <dl class="dl-horizontal">
+            <dt>
                 @Html.DisplayNameFor(model => model.Boekjaar)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Boekjaar)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Boekjaar)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.CvoVolgNummer)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.CvoVolgNummer)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.CvoVolgNummer)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.FactuurNummer)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.FactuurNummer)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FactuurNummer)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.FactuurDatum)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.FactuurDatum)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FactuurDatum)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.FactuurStatusGetekend)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.FactuurStatusGetekend)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.FactuurStatusGetekend)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.VerwerkingsDatum)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.VerwerkingsDatum)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.VerwerkingsDatum)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.idLeverancier)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.idLeverancier)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.idLeverancier)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.Prijs)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Prijs)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Prijs)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.Garantie)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Garantie)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Garantie)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.Omschrijving)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Omschrijving)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Omschrijving)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.Opmerking)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Opmerking)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Opmerking)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.Afschrijfperiode)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.Afschrijfperiode)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Afschrijfperiode)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.OleDoc)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.OleDoc)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OleDoc)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.OleDocPath)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.OleDocPath)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OleDocPath)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.OleDocFileName)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.OleDocFileName)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.OleDocFileName)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.DatumInsert)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.DatumInsert)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DatumInsert)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.UserInsert)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.UserInsert)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserInsert)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.DatumModified)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.DatumModified)
-            </td>
-        </tr>
-        <tr>
-            <td>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.DatumModified)
+            </dd>
+
+            <dt>
                 @Html.DisplayNameFor(model => model.UserModified)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.UserModified)
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Delete" class="btn btn-default" />
-            </td>
-        </tr>
-    </table>
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.UserModified)
+            </dd>
+        </dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
 }
-
-<br />
-
-<div>
-    @Html.ActionLink("Back to Facturen", "Index")
 </div>
 

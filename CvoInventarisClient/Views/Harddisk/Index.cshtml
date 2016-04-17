@@ -19,7 +19,7 @@
 <br />
 <br />
 
-<table class="table" width="1000">
+<table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.idHarddisk)
@@ -38,16 +38,16 @@
 @foreach (var item in Model)
 {
     <tr>
-        <td align="center">
+        <td>
             @Html.DisplayFor(modelItem => item.idHarddisk)
         </td>
-        <td align="center">
+        <td>
             @Html.DisplayFor(modelItem => item.merk)
         </td>
-        <td align="center">
+        <td>
             @Html.DisplayFor(modelItem => item.grootte)
         </td>
-        <td align="center">
+        <td>
             @Html.DisplayFor(modelItem => item.fabrieksNummer)
         </td>
         <td>

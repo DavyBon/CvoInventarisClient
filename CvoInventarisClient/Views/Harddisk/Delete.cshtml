@@ -10,48 +10,47 @@
 
 <h2>Delete Harddisk</h2>
 
-@using (Html.BeginForm("deleteHarddisk", "Harddisk"))
-{
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.idHarddisk)
-
-    <table class="table" width="1000">
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.merk)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.merk)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.grootte)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.grootte)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.fabrieksNummer)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.fabrieksNummer)
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <input type="submit" value="Delete" class="btn btn-default" />
-            </td>
-        </tr>
-    </table>
-}
-
-<br />
+<h3>Are you sure you want to delete this?</h3>
 
 <div>
-    @Html.ActionLink("Back to Harddisks", "Index")
+    @using (Html.BeginForm("deleteHarddisk", "Harddisk"))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idHarddisk)
+
+        <h4>TblHarddisk</h4>
+        <hr />
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.merk)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.merk)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.grootte)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.grootte)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.fabrieksNummer)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.fabrieksNummer)
+            </dd>
+        </dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
 </div>
 

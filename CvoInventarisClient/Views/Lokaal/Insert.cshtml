@@ -8,57 +8,60 @@
     ViewBag.Title = "Insert";
 }
 
-<h2>Insert Harddisk</h2>
+<h2>Insert Lokaal</h2>
 
 @using (Html.BeginForm("insertLokaal", "Lokaal"))
 {
-    @Html.ValidationSummary(true)
+    @Html.AntiForgeryToken()
 
-    <table class="table" width="1000">
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.lokaalNaam)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.lokaalNaam)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.aantalPlaatsen)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.aantalPlaatsen)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.isComputerLokaal)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.isComputerLokaal)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.idNetwerk)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.idNetwerk)
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
+    <div class="form-horizontal">
+        <h4>TblLokaal</h4>
+        <hr />
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.lokaalNaam, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.lokaalNaam, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.lokaalNaam, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.aantalPlaatsen, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.aantalPlaatsen, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.aantalPlaatsen, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.isComputerLokaal, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.isComputerLokaal, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.isComputerLokaal, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.idNetwerk, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.idNetwerk, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.idNetwerk, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Insert" class="btn btn-default" />
-            </td>
-        </tr>
-    </table>
+            </div>
+        </div>
+    </div>
 }
-
 <br />
 
 <div>
-    @Html.ActionLink("Back to Lokalen", "Index")
+    @Html.ActionLink("Back to List", "Index")
 </div>
 

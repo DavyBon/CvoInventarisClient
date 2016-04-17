@@ -8,59 +8,56 @@
     ViewBag.Title = "Delete";
 }
 
-<h2>Delete Harddisk</h2>
+<h2>Delete Lokaal</h2>
 
-@using (Html.BeginForm("deleteLokaal", "Lokaal"))
-{
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.idLokaal)
-
-    <table class="table" width="1000">
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.lokaalNaam)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.lokaalNaam)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.aantalPlaatsen)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.aantalPlaatsen)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.isComputerLokaal)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.isComputerLokaal)
-            </td>
-        </tr>
-        <tr>
-            <td>
-                @Html.DisplayNameFor(model => model.idNetwerk)
-            </td>
-            <td>
-                @Html.EditorFor(model => model.idNetwerk)
-            </td>
-        </tr>
-        <tr>
-            <td>
-
-            </td>
-            <td>
-                <input type="submit" value="Delete" class="btn btn-default" />
-            </td>
-        </tr>
-    </table>
-}
-
-<br />
+<h3>Are you sure you want to delete this?</h3>
 
 <div>
-    @Html.ActionLink("Back to Lokalen", "Index")
+    @using (Html.BeginForm("deleteLokaal", "Lokaal"))
+    {
+        @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.idLokaal)
+
+        <h4>TblLokaal</h4>
+        <hr />
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.lokaalNaam)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.lokaalNaam)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.aantalPlaatsen)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.aantalPlaatsen)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.isComputerLokaal)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.isComputerLokaal)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.idNetwerk)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.idNetwerk)
+            </dd>
+        </dl>
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
 </div>
