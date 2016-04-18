@@ -43,15 +43,15 @@ namespace CvoInventarisClient.Controllers
                 ViewBag.action = Request.Form["label"] + " was added";
 
                 Inventaris inventaris = new Inventaris();
-                inventaris.aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
-                inventaris.afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
-                inventaris.historiek = Request.Form["historiek"];
-                inventaris.idLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
-                inventaris.idObject = Convert.ToInt32(Request.Form["idObject"]);
-                inventaris.idVerzekering = Convert.ToInt32(Request.Form["idVerzekering"]);
+                inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
+                inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
+                inventaris.Historiek = Request.Form["historiek"];
+                inventaris.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
+                inventaris.IdObject = Convert.ToInt32(Request.Form["idObject"]);
+                inventaris.IdVerzekering = Convert.ToInt32(Request.Form["idVerzekering"]);
                 //inventaris.isAanwezig = Boolean.Parse(Request.Form["isAanwezig"]);
                 //inventaris.isActief = Convert.ToBoolean(Request.Form["isActief"]);
-                inventaris.label = Request.Form["label"];
+                inventaris.Label = Request.Form["label"];
                 client.InventarisCreate(inventaris);
             }
             return RedirectToAction("Index");
@@ -75,16 +75,16 @@ namespace CvoInventarisClient.Controllers
                 ViewBag.action = Request.Form["label"] + " was added";
 
                 Inventaris inventaris = new Inventaris();
-                inventaris.id = id;
-                inventaris.aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
-                inventaris.afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
-                inventaris.historiek = Request.Form["historiek"];
-                inventaris.idLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
-                inventaris.idObject = Convert.ToInt32(Request.Form["idObject"]);
-                inventaris.idVerzekering = Convert.ToInt32(Request.Form["idVerzekering"]);
+                inventaris.Id = id;
+                inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
+                inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
+                inventaris.Historiek = Request.Form["historiek"];
+                inventaris.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
+                inventaris.IdObject = Convert.ToInt32(Request.Form["idObject"]);
+                inventaris.IdVerzekering = Convert.ToInt32(Request.Form["idVerzekering"]);
                 //inventaris.isAanwezig = Boolean.Parse(Request.Form["isAanwezig"]);
                 //inventaris.isActief = Convert.ToBoolean(Request.Form["isActief"]);
-                inventaris.label = Request.Form["label"];
+                inventaris.Label = Request.Form["label"];
                 client.InventarisUpdate(inventaris);
             }
             return RedirectToAction("Index");

@@ -16,34 +16,34 @@
     @using (Html.BeginForm("deleteHarddisk", "Harddisk"))
     {
         @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.idHarddisk)
+        @Html.HiddenFor(model => model.IdHarddisk)
 
         <h4>TblHarddisk</h4>
         <hr />
 
         <dl class="dl-horizontal">
             <dt>
-                @Html.DisplayNameFor(model => model.merk)
+                @Html.DisplayNameFor(model => model.Merk)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.merk)
+                @Html.DisplayFor(model => model.Merk)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.grootte)
+                @Html.DisplayNameFor(model => model.Grootte)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.grootte)
+                @Html.DisplayFor(model => model.Grootte)
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.fabrieksNummer)
+                @Html.DisplayNameFor(model => model.FabrieksNummer)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.fabrieksNummer)
+                @Html.DisplayFor(model => model.FabrieksNummer)
             </dd>
         </dl>
 

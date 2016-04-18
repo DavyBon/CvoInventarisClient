@@ -12,7 +12,7 @@
 
 @using (Html.BeginForm("updateFactuur", "Factuur"))
 {
-    @Html.HiddenFor(model => model.idFactuur)
+    @Html.HiddenFor(model => model.IdFactuur)
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -70,10 +70,10 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.idLeverancier, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.Leverancier, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.idLeverancier, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.idLeverancier, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Leverancier, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Leverancier, "", new { @class = "text-danger" })
             </div>
         </div>
 

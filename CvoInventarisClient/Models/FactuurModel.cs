@@ -7,14 +7,15 @@ namespace CvoInventarisClient.Models
 {
     public class FactuurModel
     {
-        public int idFactuur { get; set; }
+        public int IdFactuur { get; set; }
         public string Boekjaar { get; set; }
         public string CvoVolgNummer { get; set; }
         public string FactuurNummer { get; set; }
         public DateTime FactuurDatum { get; set; }
         public bool FactuurStatusGetekend { get; set; }
         public DateTime VerwerkingsDatum { get; set; }
-        public int idLeverancier { get; set; }
+        public LeverancierModel Leverancier { get; set; }
+        //public int IdLeverancier { get; set; }
         public int Prijs { get; set; }
         public int Garantie { get; set; }
         public string Omschrijving { get; set; }

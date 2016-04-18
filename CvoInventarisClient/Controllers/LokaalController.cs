@@ -38,11 +38,12 @@ namespace CvoInventarisClient.Controllers
             foreach (Lokaal lokaal in arrLokalen)
             {
                 LokaalModel lk = new LokaalModel();
-                lk.idLokaal = lokaal.idLokaal;
-                lk.lokaalNaam = lokaal.lokaalNaam;
-                lk.aantalPlaatsen = lokaal.aantalPlaatsen;
-                lk.isComputerLokaal = lokaal.isComputerLokaal;
-                lk.idNetwerk = lokaal.idNetwerk;
+                lk.IdLokaal = lokaal.IdLokaal;
+                lk.LokaalNaam = lokaal.LokaalNaam;
+                lk.AantalPlaatsen = lokaal.AantalPlaatsen;
+                lk.IsComputerLokaal = lokaal.IsComputerLokaal;
+                lokaal.IdNetwerk = Convert.ToInt32(lk.Netwerk);
+                //lk.IdNetwerk = lokaal.idNetwerk;
                 listLokalen.Add(lk);
             }
 
@@ -78,10 +79,11 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
             Lokaal lokaal = new Lokaal();
-            lokaal.lokaalNaam = lk.lokaalNaam;
-            lokaal.aantalPlaatsen = lk.aantalPlaatsen;
-            lokaal.isComputerLokaal = lk.isComputerLokaal;
-            lokaal.idNetwerk = lk.idNetwerk;
+            lokaal.LokaalNaam = lk.LokaalNaam;
+            lokaal.AantalPlaatsen = lk.AantalPlaatsen;
+            lokaal.IsComputerLokaal = lk.IsComputerLokaal;
+            lokaal.IdNetwerk = Convert.ToInt32(lk.Netwerk);
+            //lokaal.idNetwerk = lk.IdNetwerk;
 
             try
             {
@@ -116,11 +118,12 @@ namespace CvoInventarisClient.Controllers
             }
 
             LokaalModel lk = new LokaalModel();
-            lk.idLokaal = lokaal.idLokaal;
-            lk.lokaalNaam = lokaal.lokaalNaam;
-            lk.aantalPlaatsen = lokaal.aantalPlaatsen;
-            lk.isComputerLokaal = lokaal.isComputerLokaal;
-            lk.idNetwerk = lokaal.idNetwerk;
+            lk.IdLokaal = lokaal.IdLokaal;
+            lk.LokaalNaam = lokaal.LokaalNaam;
+            lk.AantalPlaatsen = lokaal.AantalPlaatsen;
+            lk.IsComputerLokaal = lokaal.IsComputerLokaal;
+            lokaal.IdNetwerk = Convert.ToInt32(lk.Netwerk);
+            //lk.IdNetwerk = lokaal.idNetwerk;
 
             return lk;
         }
@@ -154,11 +157,12 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
             Lokaal lokaal = new Lokaal();
-            lokaal.idLokaal = lk.idLokaal;
-            lokaal.lokaalNaam = lk.lokaalNaam;
-            lokaal.aantalPlaatsen = lk.aantalPlaatsen;
-            lokaal.isComputerLokaal = lk.isComputerLokaal;
-            lokaal.idNetwerk = lk.idNetwerk;
+            lokaal.IdLokaal = lk.IdLokaal;
+            lokaal.LokaalNaam = lk.LokaalNaam;
+            lokaal.AantalPlaatsen = lk.AantalPlaatsen;
+            lokaal.IsComputerLokaal = lk.IsComputerLokaal;
+            lokaal.IdNetwerk = Convert.ToInt32(lk.Netwerk);
+            //lokaal.idNetwerk = lk.IdNetwerk;
 
             try
             {
@@ -198,7 +202,7 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            int id = lk.idLokaal;
+            int id = lk.IdLokaal;
 
             try
             {

@@ -38,21 +38,21 @@ namespace CvoInventarisClient.Controllers
             foreach (Leverancier leverancier in arrLeveranciers)
             {
                 LeverancierModel lv = new LeverancierModel();
-                lv.idLeverancier = leverancier.idLeverancier;
-                lv.naam = leverancier.naam;
-                lv.afkorting = leverancier.afkorting;
-                lv.straat = leverancier.straat;
-                lv.huisNummer = leverancier.huisNummer;
-                lv.busNummer = leverancier.busNummer;
-                lv.postcode = leverancier.postcode;
-                lv.telefoon = leverancier.telefoon;
-                lv.fax = leverancier.fax;
-                lv.email = leverancier.email;
-                lv.website = leverancier.website;
-                lv.btwNummer = leverancier.btwNummer;
-                lv.iban = leverancier.iban;
-                lv.bic = leverancier.bic;
-                lv.toegevoegdOp = leverancier.toegevoegdOp;
+                lv.IdLeverancier = leverancier.IdLeverancier;
+                lv.Naam = leverancier.Naam;
+                lv.Afkorting = leverancier.Afkorting;
+                lv.Straat = leverancier.Straat;
+                lv.HuisNummer = leverancier.HuisNummer;
+                lv.BusNummer = leverancier.BusNummer;
+                lv.Postcode = leverancier.Postcode;
+                lv.Telefoon = leverancier.Telefoon;
+                lv.Fax = leverancier.Fax;
+                lv.Email = leverancier.Email;
+                lv.Website = leverancier.Website;
+                lv.BtwNummer = leverancier.BtwNummer;
+                lv.Iban = leverancier.Iban;
+                lv.Bic = leverancier.Bic;
+                lv.ToegevoegdOp = leverancier.ToegevoegdOp;
                 listLeveranciers.Add(lv);
             }
 
@@ -88,20 +88,20 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
             Leverancier leverancier = new Leverancier();
-            leverancier.naam = lv.naam;
-            leverancier.afkorting = lv.afkorting;
-            leverancier.straat = lv.straat;
-            leverancier.huisNummer = lv.huisNummer;
-            leverancier.busNummer = lv.busNummer;
-            leverancier.postcode = lv.postcode;
-            leverancier.telefoon = lv.telefoon;
-            leverancier.fax = lv.fax;
-            leverancier.email = lv.email;
-            leverancier.website = lv.website;
-            leverancier.btwNummer = lv.btwNummer;
-            leverancier.iban = lv.iban;
-            leverancier.bic = lv.bic;
-            leverancier.toegevoegdOp = lv.toegevoegdOp;
+            leverancier.Naam = lv.Naam;
+            leverancier.Afkorting = lv.Afkorting;
+            leverancier.Straat = lv.Straat;
+            leverancier.HuisNummer = lv.HuisNummer;
+            leverancier.BusNummer = lv.BusNummer;
+            leverancier.Postcode = lv.Postcode;
+            leverancier.Telefoon = lv.Telefoon;
+            leverancier.Fax = lv.Fax;
+            leverancier.Email = lv.Email;
+            leverancier.Website = lv.Website;
+            leverancier.BtwNummer = lv.BtwNummer;
+            leverancier.Iban = lv.Iban;
+            leverancier.Bic = lv.Bic;
+            leverancier.ToegevoegdOp = lv.ToegevoegdOp;
 
             try
             {
@@ -136,21 +136,21 @@ namespace CvoInventarisClient.Controllers
             }
 
             LeverancierModel lv = new LeverancierModel();
-            lv.idLeverancier = leverancier.idLeverancier;
-            lv.naam = leverancier.naam;
-            lv.afkorting = leverancier.afkorting;
-            lv.straat = leverancier.straat;
-            lv.huisNummer = leverancier.huisNummer;
-            lv.busNummer = leverancier.busNummer;
-            lv.postcode = leverancier.postcode;
-            lv.telefoon = leverancier.telefoon;
-            lv.fax = leverancier.fax;
-            lv.email = leverancier.email;
-            lv.website = leverancier.website;
-            lv.btwNummer = leverancier.btwNummer;
-            lv.iban = leverancier.iban;
-            lv.bic = leverancier.bic;
-            lv.toegevoegdOp = leverancier.toegevoegdOp;
+            lv.IdLeverancier = leverancier.IdLeverancier;
+            lv.Naam = leverancier.Naam;
+            lv.Afkorting = leverancier.Afkorting;
+            lv.Straat = leverancier.Straat;
+            lv.HuisNummer = leverancier.HuisNummer;
+            lv.BusNummer = leverancier.BusNummer;
+            lv.Postcode = leverancier.Postcode;
+            lv.Telefoon = leverancier.Telefoon;
+            lv.Fax = leverancier.Fax;
+            lv.Email = leverancier.Email;
+            lv.Website = leverancier.Website;
+            lv.BtwNummer = leverancier.BtwNummer;
+            lv.Iban = leverancier.Iban;
+            lv.Bic = leverancier.Bic;
+            lv.ToegevoegdOp = leverancier.ToegevoegdOp;
 
             return lv;
         }
@@ -184,21 +184,21 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
             Leverancier leverancier = new Leverancier();
-            leverancier.idLeverancier = lv.idLeverancier;
-            leverancier.naam = lv.naam;
-            leverancier.afkorting = lv.afkorting;
-            leverancier.straat = lv.straat;
-            leverancier.huisNummer = lv.huisNummer;
-            leverancier.busNummer = lv.busNummer;
-            leverancier.postcode = lv.postcode;
-            leverancier.telefoon = lv.telefoon;
-            leverancier.fax = lv.fax;
-            leverancier.email = lv.email;
-            leverancier.website = lv.website;
-            leverancier.btwNummer = lv.btwNummer;
-            leverancier.iban = lv.iban;
-            leverancier.bic = lv.bic;
-            leverancier.toegevoegdOp = lv.toegevoegdOp;
+            leverancier.IdLeverancier = lv.IdLeverancier;
+            leverancier.Naam = lv.Naam;
+            leverancier.Afkorting = lv.Afkorting;
+            leverancier.Straat = lv.Straat;
+            leverancier.HuisNummer = lv.HuisNummer;
+            leverancier.BusNummer = lv.BusNummer;
+            leverancier.Postcode = lv.Postcode;
+            leverancier.Telefoon = lv.Telefoon;
+            leverancier.Fax = lv.Fax;
+            leverancier.Email = lv.Email;
+            leverancier.Website = lv.Website;
+            leverancier.BtwNummer = lv.BtwNummer;
+            leverancier.Iban = lv.Iban;
+            leverancier.Bic = lv.Bic;
+            leverancier.ToegevoegdOp = lv.ToegevoegdOp;
 
             try
             {
@@ -238,7 +238,7 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            int id = lv.idLeverancier;
+            int id = lv.IdLeverancier;
 
             try
             {

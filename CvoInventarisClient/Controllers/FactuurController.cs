@@ -38,14 +38,15 @@ namespace CvoInventarisClient.Controllers
             foreach (Factuur factuur in arrFacturen)
             {
                 FactuurModel fctr = new FactuurModel();
-                fctr.idFactuur = factuur.idFactuur;
+                fctr.IdFactuur = factuur.IdFactuur;
                 fctr.Boekjaar = factuur.Boekjaar;
                 fctr.CvoVolgNummer = factuur.CvoVolgNummer;
                 fctr.FactuurNummer = factuur.FactuurNummer;
                 fctr.FactuurDatum = factuur.FactuurDatum;
                 fctr.FactuurStatusGetekend = factuur.FactuurStatusGetekend;
                 fctr.VerwerkingsDatum = factuur.VerwerkingsDatum;
-                fctr.idLeverancier = factuur.idLeverancier;
+                factuur.IdLeverancier = Convert.ToInt32(fctr.Leverancier); 
+                //fctr.IdLeverancier = factuur.idLeverancier;
                 fctr.Prijs = factuur.Prijs;
                 fctr.Garantie = factuur.Garantie;
                 fctr.Omschrijving = factuur.Omschrijving;
@@ -99,7 +100,8 @@ namespace CvoInventarisClient.Controllers
             factuur.FactuurDatum = fctr.FactuurDatum;
             factuur.FactuurStatusGetekend = fctr.FactuurStatusGetekend;
             factuur.VerwerkingsDatum = fctr.VerwerkingsDatum;
-            factuur.idLeverancier = fctr.idLeverancier;
+            factuur.IdLeverancier = Convert.ToInt32(fctr.Leverancier);
+            //factuur.idLeverancier = fctr.IdLeverancier;
             factuur.Prijs = fctr.Prijs;
             factuur.Garantie = fctr.Garantie;
             factuur.Omschrijving = fctr.Omschrijving;
@@ -147,14 +149,15 @@ namespace CvoInventarisClient.Controllers
             }
 
             FactuurModel fctr = new FactuurModel();
-            fctr.idFactuur = factuur.idFactuur;
+            fctr.IdFactuur = factuur.IdFactuur;
             fctr.Boekjaar = factuur.Boekjaar;
             fctr.CvoVolgNummer = factuur.CvoVolgNummer;
             fctr.FactuurNummer = factuur.FactuurNummer;
             fctr.FactuurDatum = factuur.FactuurDatum;
             fctr.FactuurStatusGetekend = factuur.FactuurStatusGetekend;
             fctr.VerwerkingsDatum = factuur.VerwerkingsDatum;
-            fctr.idLeverancier = factuur.idLeverancier;
+            factuur.IdLeverancier = Convert.ToInt32(fctr.Leverancier);
+            //fctr.IdLeverancier = factuur.idLeverancier;
             fctr.Prijs = factuur.Prijs;
             fctr.Garantie = factuur.Garantie;
             fctr.Omschrijving = factuur.Omschrijving;
@@ -199,14 +202,15 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
             Factuur factuur = new Factuur();
-            factuur.idFactuur = fctr.idFactuur;
+            factuur.IdFactuur = fctr.IdFactuur;
             factuur.Boekjaar = fctr.Boekjaar;
             factuur.CvoVolgNummer = fctr.CvoVolgNummer;
             factuur.FactuurNummer = fctr.FactuurNummer;
             factuur.FactuurDatum = fctr.FactuurDatum;
             factuur.FactuurStatusGetekend = fctr.FactuurStatusGetekend;
             factuur.VerwerkingsDatum = fctr.VerwerkingsDatum;
-            factuur.idLeverancier = fctr.idLeverancier;
+            factuur.IdLeverancier = Convert.ToInt32(fctr.Leverancier);
+            //factuur.idLeverancier = fctr.IdLeverancier;
             factuur.Prijs = fctr.Prijs;
             factuur.Garantie = fctr.Garantie;
             factuur.Omschrijving = fctr.Omschrijving;
@@ -259,7 +263,7 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            int id = fctr.idFactuur;
+            int id = fctr.IdFactuur;
 
             try
             {

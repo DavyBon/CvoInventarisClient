@@ -51,16 +51,16 @@
   <xs:element name="ArrayOfGrafischeKaart" nillable="true" type="tns:ArrayOfGrafischeKaart" />
   <xs:complexType name="Inventaris">
     <xs:sequence>
-      <xs:element minOccurs="0" name="aankoopjaar" type="xs:int" />
-      <xs:element minOccurs="0" name="afschrijvingsperiode" type="xs:int" />
-      <xs:element minOccurs="0" name="historiek" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="id" type="xs:int" />
-      <xs:element minOccurs="0" name="idLokaal" type="xs:int" />
-      <xs:element minOccurs="0" name="idObject" type="xs:int" />
-      <xs:element minOccurs="0" name="idVerzekering" type="xs:int" />
-      <xs:element minOccurs="0" name="isAanwezig" type="xs:boolean" />
-      <xs:element minOccurs="0" name="isActief" type="xs:boolean" />
-      <xs:element minOccurs="0" name="label" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Aankoopjaar" type="xs:int" />
+      <xs:element minOccurs="0" name="Afschrijvingsperiode" type="xs:int" />
+      <xs:element minOccurs="0" name="Historiek" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdLokaal" type="xs:int" />
+      <xs:element minOccurs="0" name="IdObject" type="xs:int" />
+      <xs:element minOccurs="0" name="IdVerzekering" type="xs:int" />
+      <xs:element minOccurs="0" name="IsAanwezig" type="xs:boolean" />
+      <xs:element minOccurs="0" name="IsActief" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Label" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Inventaris" nillable="true" type="tns:Inventaris" />
@@ -72,11 +72,11 @@
   <xs:element name="ArrayOfInventaris" nillable="true" type="tns:ArrayOfInventaris" />
   <xs:complexType name="Object">
     <xs:sequence>
-      <xs:element minOccurs="0" name="id" type="xs:int" />
-      <xs:element minOccurs="0" name="idFactuur" type="xs:int" />
-      <xs:element minOccurs="0" name="idLeverancier" type="xs:int" />
-      <xs:element minOccurs="0" name="idObjectType" type="xs:int" />
-      <xs:element minOccurs="0" name="kenmerken" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="IdFactuur" type="xs:int" />
+      <xs:element minOccurs="0" name="IdLeverancier" type="xs:int" />
+      <xs:element minOccurs="0" name="IdObjectType" type="xs:int" />
+      <xs:element minOccurs="0" name="Kenmerken" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Object" nillable="true" type="tns:Object" />
@@ -88,11 +88,11 @@
   <xs:element name="ArrayOfObject" nillable="true" type="tns:ArrayOfObject" />
   <xs:complexType name="Netwerk">
     <xs:sequence>
-      <xs:element minOccurs="0" name="driver" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="id" type="xs:int" />
-      <xs:element minOccurs="0" name="merk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="snelheid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="type" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Driver" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Snelheid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Netwerk" nillable="true" type="tns:Netwerk" />
@@ -152,10 +152,10 @@
   <xs:element name="ArrayOfHarddisk" nillable="true" type="tns:ArrayOfHarddisk" />
   <xs:complexType name="Harddisk">
     <xs:sequence>
-      <xs:element minOccurs="0" name="fabrieksNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="grootte" type="xs:int" />
-      <xs:element minOccurs="0" name="idHarddisk" type="xs:int" />
-      <xs:element minOccurs="0" name="merk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Grootte" type="xs:int" />
+      <xs:element minOccurs="0" name="IdHarddisk" type="xs:int" />
+      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Harddisk" nillable="true" type="tns:Harddisk" />
@@ -167,21 +167,21 @@
   <xs:element name="ArrayOfLeverancier" nillable="true" type="tns:ArrayOfLeverancier" />
   <xs:complexType name="Leverancier">
     <xs:sequence>
-      <xs:element minOccurs="0" name="afkorting" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="bic" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="btwNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="busNummer" type="xs:int" />
-      <xs:element minOccurs="0" name="email" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="fax" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="huisNummer" type="xs:int" />
-      <xs:element minOccurs="0" name="iban" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="idLeverancier" type="xs:int" />
-      <xs:element minOccurs="0" name="naam" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="postcode" type="xs:int" />
-      <xs:element minOccurs="0" name="straat" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="telefoon" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="toegevoegdOp" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="website" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Afkorting" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Bic" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BtwNummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="BusNummer" type="xs:int" />
+      <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Fax" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="HuisNummer" type="xs:int" />
+      <xs:element minOccurs="0" name="Iban" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdLeverancier" type="xs:int" />
+      <xs:element minOccurs="0" name="Naam" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Postcode" type="xs:int" />
+      <xs:element minOccurs="0" name="Straat" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Telefoon" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ToegevoegdOp" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="Website" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Leverancier" nillable="true" type="tns:Leverancier" />
@@ -193,11 +193,11 @@
   <xs:element name="ArrayOfLokaal" nillable="true" type="tns:ArrayOfLokaal" />
   <xs:complexType name="Lokaal">
     <xs:sequence>
-      <xs:element minOccurs="0" name="aantalPlaatsen" type="xs:int" />
-      <xs:element minOccurs="0" name="idLokaal" type="xs:int" />
-      <xs:element minOccurs="0" name="idNetwerk" type="xs:int" />
-      <xs:element minOccurs="0" name="isComputerLokaal" type="xs:boolean" />
-      <xs:element minOccurs="0" name="lokaalNaam" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="AantalPlaatsen" type="xs:int" />
+      <xs:element minOccurs="0" name="IdLokaal" type="xs:int" />
+      <xs:element minOccurs="0" name="IdNetwerk" type="xs:int" />
+      <xs:element minOccurs="0" name="IsComputerLokaal" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LokaalNaam" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Lokaal" nillable="true" type="tns:Lokaal" />
@@ -218,6 +218,8 @@
       <xs:element minOccurs="0" name="FactuurNummer" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="FactuurStatusGetekend" type="xs:boolean" />
       <xs:element minOccurs="0" name="Garantie" type="xs:int" />
+      <xs:element minOccurs="0" name="IdFactuur" type="xs:int" />
+      <xs:element minOccurs="0" name="IdLeverancier" type="xs:int" />
       <xs:element minOccurs="0" name="OleDoc" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OleDocFileName" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="OleDocPath" nillable="true" type="xs:string" />
@@ -227,8 +229,6 @@
       <xs:element minOccurs="0" name="UserInsert" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserModified" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="VerwerkingsDatum" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="idFactuur" type="xs:int" />
-      <xs:element minOccurs="0" name="idLeverancier" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Factuur" nillable="true" type="tns:Factuur" />

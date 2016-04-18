@@ -42,10 +42,10 @@ namespace CvoInventarisClient.Controllers
                 ViewBag.action = Request.Form["merk"] + " was added";
 
                 Netwerk netwerk = new Netwerk();
-                netwerk.driver = Request.Form["driver"];
-                netwerk.merk = Request.Form["merk"];
-                netwerk.type = Request.Form["type"];
-                netwerk.snelheid = Request.Form["snelheid"];
+                netwerk.Driver = Request.Form["driver"];
+                netwerk.Merk = Request.Form["merk"];
+                netwerk.Type = Request.Form["type"];
+                netwerk.Snelheid = Request.Form["snelheid"];
 
 
                 client.NetwerkCreate(netwerk);
@@ -71,10 +71,10 @@ namespace CvoInventarisClient.Controllers
                 ViewBag.action = Request.Form["merk"] + " was changed";
 
                 Netwerk netwerk = new Netwerk();
-                netwerk.driver = Request.Form["driver"];
-                netwerk.merk = Request.Form["merk"];
-                netwerk.type = Request.Form["type"];
-                netwerk.snelheid = Request.Form["snelheid"];
+                netwerk.Driver = Request.Form["driver"];
+                netwerk.Merk = Request.Form["merk"];
+                netwerk.Type = Request.Form["type"];
+                netwerk.Snelheid = Request.Form["snelheid"];
 
 
                 client.NetwerkUpdate(netwerk);

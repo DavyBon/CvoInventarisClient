@@ -39,10 +39,10 @@ namespace CvoInventarisClient.Controllers
             foreach (Harddisk harddisk in arrHarddisks)
             {
                 HarddiskModel hd = new HarddiskModel();
-                hd.idHarddisk = harddisk.idHarddisk;
-                hd.merk = harddisk.merk;
-                hd.grootte = harddisk.grootte;
-                hd.fabrieksNummer = harddisk.fabrieksNummer;
+                hd.IdHarddisk = harddisk.IdHarddisk;
+                hd.Merk = harddisk.Merk;
+                hd.Grootte = harddisk.Grootte;
+                hd.FabrieksNummer = harddisk.FabrieksNummer;
                 listHarddisks.Add(hd);
             }
 
@@ -78,9 +78,9 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
             Harddisk harddisk = new Harddisk();
-            harddisk.merk = hd.merk;
-            harddisk.grootte = hd.grootte;
-            harddisk.fabrieksNummer = hd.fabrieksNummer;
+            harddisk.Merk = hd.Merk;
+            harddisk.Grootte = hd.Grootte;
+            harddisk.FabrieksNummer = hd.FabrieksNummer;
 
             try
             {
@@ -116,10 +116,10 @@ namespace CvoInventarisClient.Controllers
             }
 
             HarddiskModel hd = new HarddiskModel();
-            hd.idHarddisk = harddisk.idHarddisk;
-            hd.merk = harddisk.merk;
-            hd.grootte = harddisk.grootte;
-            hd.fabrieksNummer = harddisk.fabrieksNummer;
+            hd.IdHarddisk = harddisk.IdHarddisk;
+            hd.Merk = harddisk.Merk;
+            hd.Grootte = harddisk.Grootte;
+            hd.FabrieksNummer = harddisk.FabrieksNummer;
 
             return hd;
         }
@@ -154,10 +154,10 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
             Harddisk harddisk = new Harddisk();
-            harddisk.idHarddisk = hd.idHarddisk;
-            harddisk.merk = hd.merk;
-            harddisk.grootte = hd.grootte;
-            harddisk.fabrieksNummer = hd.fabrieksNummer;
+            harddisk.IdHarddisk = hd.IdHarddisk;
+            harddisk.Merk = hd.Merk;
+            harddisk.Grootte = hd.Grootte;
+            harddisk.FabrieksNummer = hd.FabrieksNummer;
 
             try
             {
@@ -197,7 +197,7 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
 
-            int id = hd.idHarddisk;
+            int id = hd.IdHarddisk;
 
             try
             {

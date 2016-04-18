@@ -16,7 +16,7 @@
 @using (Html.BeginForm("deleteFactuur", "Factuur"))
 {
     @Html.ValidationSummary(true)
-    @Html.HiddenFor(model => model.idFactuur)
+    @Html.HiddenFor(model => model.IdFactuur)
 
     <h4>TblFactuur</h4>
     <hr />
@@ -71,11 +71,11 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.idLeverancier)
+                @Html.DisplayNameFor(model => model.Leverancier)
             </dt>
 
             <dd>
-                @Html.DisplayFor(model => model.idLeverancier)
+                @Html.DisplayFor(model => model.Leverancier)
             </dd>
 
             <dt>

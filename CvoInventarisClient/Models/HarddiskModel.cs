@@ -7,9 +7,9 @@ namespace CvoInventarisClient.Models
 {
     public class HarddiskModel
     {
-        public int idHarddisk { get; set; }
-        public string merk { get; set; }
-        public int grootte { get; set; }
-        public string fabrieksNummer { get; set; }
+        public int IdHarddisk { get; set; }
+        public string Merk { get; set; }
+        public int Grootte { get; set; }
+        public string FabrieksNummer { get; set; }
     }
 }

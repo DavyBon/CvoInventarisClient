@@ -7,20 +7,20 @@ namespace CvoInventarisClient.Models
 {
     public class LeverancierModel
     {
-        public int idLeverancier { get; set; }
-        public string naam { get; set; }
-        public string afkorting { get; set; }
-        public string straat { get; set; }
-        public int huisNummer { get; set; }
-        public int busNummer { get; set; }
-        public int postcode { get; set; }
-        public string telefoon { get; set; }
-        public string fax { get; set; }
-        public string email { get; set; }
-        public string website { get; set; }
-        public string btwNummer { get; set; }
-        public string iban { get; set; }
-        public string bic { get; set; }
-        public DateTime toegevoegdOp { get; set; }
+        public int IdLeverancier { get; set; }
+        public string Naam { get; set; }
+        public string Afkorting { get; set; }
+        public string Straat { get; set; }
+        public int HuisNummer { get; set; }
+        public int BusNummer { get; set; }
+        public int Postcode { get; set; }
+        public string Telefoon { get; set; }
+        public string Fax { get; set; }
+        public string Email { get; set; }
+        public string Website { get; set; }
+        public string BtwNummer { get; set; }
+        public string Iban { get; set; }
+        public string Bic { get; set; }
+        public DateTime ToegevoegdOp { get; set; }
     }
 }
