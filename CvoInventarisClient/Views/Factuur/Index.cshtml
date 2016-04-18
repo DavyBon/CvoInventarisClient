@@ -43,7 +43,7 @@
             @Html.DisplayNameFor(model => model.VerwerkingsDatum)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Leverancier)
+            @Html.DisplayNameFor(model => model.Leverancier.IdLeverancier)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Prijs)
@@ -108,7 +108,7 @@
                 @Html.DisplayFor(modelItem => item.VerwerkingsDatum)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Leverancier)
+                @Html.DisplayFor(modelItem => item.Leverancier.IdLeverancier)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Prijs)

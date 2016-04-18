@@ -34,7 +34,7 @@
             @Html.DisplayNameFor(model => model.IsComputerLokaal)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Netwerk)
+            @Html.DisplayNameFor(model => model.Netwerk.Id)
         </th>
     </tr>
 
@@ -54,7 +54,7 @@
             @Html.DisplayFor(modelItem => item.IsComputerLokaal)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Netwerk)
+            @Html.DisplayFor(modelItem => item.Netwerk.Id)
         </td>
         <td>
             @Html.ActionLink("Edit", "Update", new { id = item.IdLokaal }) |
