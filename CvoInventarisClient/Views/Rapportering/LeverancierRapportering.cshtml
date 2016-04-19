@@ -1,0 +1,156 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <h1>Rapportering</h1>
+    <p>Stap 1 : Uit welke tabel wilt u gegevens halen ?</p>
+    <form action="/Rapportering/Stap1" method="post">
+        <select disabled id="stap1" name="stap1">
+            <option value="leverancier">leverancier</option>
+        </select>
+        <p>Stap 2 : Wilt u al de gegevens uit de tabel of enkel bepaalde gegevens</p>
+        <button disabled name="action" type="submit" value="stap2ZonderConditie">Alle gegevens</button>
+        <button disabled name="action" type="submit" value="stap2Conditie">bepaalde gegevens</button>
+    </form>
+    <form action="/Rapportering/Stap3Leverancier" method="post">
+        <p>stap 3 : Kies welke gegevens je uit de tabel Grafische kaart wilt hebben</p>
+        @Html.CheckBox("idLeverancier") id leverancier
+        @Html.CheckBox("naam") naam
+        @Html.CheckBox("afkorting") afkorting
+        @Html.CheckBox("straat") straat
+        @Html.CheckBox("huisNummer") huisnummer
+        @Html.CheckBox("busNummer") busnummer
+        @Html.CheckBox("postcode") postcode
+        @Html.CheckBox("telefoon") telefoon
+        @Html.CheckBox("fax") fax
+        @Html.CheckBox("email") email
+        @Html.CheckBox("website") website
+        @Html.CheckBox("btwNummer") btw nummer
+        @Html.CheckBox("iban") iban
+        @Html.CheckBox("bic") bic
+        @Html.CheckBox("toegevoegdOp") toegevoegd op
+        <button name="action" type="submit" value="kolomKeuze">klaar</button>
+        <div style="display : @ViewBag.styleCpuStap4">
+            <p>stap 4 : Kies welke conditie of condities u op de gegevens @ViewBag.resultaatCheck wilt toepassen</p>
+            <p>@Html.CheckBox("naamKeuzeCheck") naam = @Html.TextBox("naamKeuzeTekst")</p>
+            <p>@Html.CheckBox("afkortingKeuzeCheck") afkorting = @Html.TextBox("afkortingKeuzeTekst")</p>
+            <p>@Html.CheckBox("straatKeuzeCheck") straat = @Html.TextBox("straatKeuzeTekst")</p>
+            <p>@Html.CheckBox("huisNummerKeuzeCheck") huisnummer = @Html.TextBox("huisNummerKeuzeTekst")</p>
+            <p>@Html.CheckBox("busNummerKeuzeCheck") busnummer = @Html.TextBox("busNummerKeuzeTekst")</p>
+            <p>@Html.CheckBox("postcodeKeuzeCheck") postcode = @Html.TextBox("postcodeKeuzeTekst")</p>
+            <p>@Html.CheckBox("telefoonKeuzeCheck") telefoon = @Html.TextBox("telefoonKeuzeTekst")</p>
+            <p>@Html.CheckBox("faxKeuzeCheck") fax = @Html.TextBox("faxKeuzeTekst")</p>
+            <p>@Html.CheckBox("emailKeuzeCheck") email = @Html.TextBox("emailKeuzeTekst")</p>
+            <p>@Html.CheckBox("websiteKeuzeCheck") website = @Html.TextBox("websiteKeuzeTekst")</p>
+            <p>@Html.CheckBox("btwNummerKeuzeCheck") btw nummer = @Html.TextBox("btwNummerKeuzeTekst")</p>
+            <p>@Html.CheckBox("ibanKeuzeCheck") iban = @Html.TextBox("ibanKeuzeTekst")</p>
+            <p>@Html.CheckBox("bicKeuzeCheck") bic = @Html.TextBox("bicKeuzeTekst")</p>
+            <p>@Html.CheckBox("toegevoegdOpKeuzeCheck") bic = @Html.TextBox("toegevoegdOpKeuzeTekst")</p>
+            <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
+        </div>
+        <div style="display : @ViewBag.styleCpuStap5">
+            @if (ViewBag.Rapport != null)
+            {
+                <table>
+                    <tr>
+                        <td>@ViewBag.test</td>
+                        <td>@ViewBag.test1</td>
+                        <td>@ViewBag.test2</td>
+                        <td>@ViewBag.test3</td>
+                        <td>@ViewBag.test4</td>
+                        <td>@ViewBag.test5</td>
+                        <td>@ViewBag.test6</td>
+                        <td>@ViewBag.test7</td>
+                        <td>@ViewBag.test8</td>
+                        <td>@ViewBag.test9</td>
+                        <td>@ViewBag.test10</td>
+                        <td>@ViewBag.test11</td>
+                        <td>@ViewBag.test12</td>
+                        <td>@ViewBag.test13</td>
+                        <td>@ViewBag.test14</td>
+                    </tr>
+                    @foreach (var item in ViewBag.Rapport)
+                    {
+                        <tr>
+                            @if (@item.idLeverancier != 0)
+                            {
+                                <td>@item.idLeverancier</td> }
+                            @if (@item.naam != null)
+                            {
+                                <td>@item.naam</td>
+                            }
+                            @if (@item.afkorting != null)
+                            {
+                                <td>@item.afkorting</td>
+                            }
+                            @if (@item.straat != null)
+                            {
+                                <td>@item.straat</td>
+                            }
+                            @if (@item.huisNummer != 0)
+                            {
+                                <td>@item.huisNummer</td>
+                            }
+                            @if (@item.busNummer != 0)
+                            {
+                                <td>@item.busNummer</td> }
+                            @if (@item.postcode != 0)
+                            {
+                                <td>@item.postcode</td>
+                            }
+                            @if (@item.telefoon != null)
+                            {
+                                <td>@item.telefoon</td>
+                            }
+                            @if (@item.fax != null)
+                            {
+                                <td>@item.fax</td>
+                            }
+                            @if (@item.email != null)
+                            {
+                                <td>@item.email</td>
+                            }
+                            @if (@item.website != 0)
+                            {
+                                <td>@item.website</td> }
+                            @if (@item.btwNummer != null)
+                            {
+                                <td>@item.btwNummer</td>
+                            }
+                            @if (@item.iban != null)
+                            {
+                                <td>@item.iban</td>
+                            }
+                            @if (@item.bic != null)
+                            {
+                                <td>@item.bic</td>
+                            }
+                            @if (@item.toegevoegdOp != new DateTime(0001, 01, 1).Add(new TimeSpan(0, 00, 00)))
+                            {
+                                <td>@item.toegevoegdOp</td>
+                            }
+
+                        </tr>
+                    }
+                </table>
+                @Html.Hidden("query", (string)@ViewBag.query)
+                @Html.Hidden("tables", (string)@ViewBag.tables)
+                <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
+                <button type="submit" value="OpslaanExcel">Opslaan als excel</button>
+                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.query/@ViewBag.tables">opslaan als pdf</button>
+            }
+        </div>
+    </form>
+
+
+</body>
+</html>

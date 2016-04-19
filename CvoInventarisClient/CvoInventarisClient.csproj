@@ -180,6 +180,7 @@
     <Compile Include="Controllers\NetwerkController.cs" />
     <Compile Include="Controllers\ObjectController.cs" />
     <Compile Include="Controllers\OverzichtController.cs" />
+    <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -263,6 +264,13 @@
     <Content Include="Views\Leverancier\Details.cshtml" />
     <Content Include="Views\Lokaal\Details.cshtml" />
     <Content Include="Views\Factuur\Details.cshtml" />
+    <Content Include="Views\Rapportering\CpuRapportering.cshtml" />
+    <Content Include="Views\Rapportering\DeviceRapportering.cshtml" />
+    <Content Include="Views\Rapportering\GrafischeKaartRapportering.cshtml" />
+    <Content Include="Views\Rapportering\HarddiskRapportering.cshtml" />
+    <Content Include="Views\Rapportering\Index.cshtml" />
+    <Content Include="Views\Rapportering\LeverancierRapportering.cshtml" />
+    <Content Include="Views\Rapportering\NetwerkRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
