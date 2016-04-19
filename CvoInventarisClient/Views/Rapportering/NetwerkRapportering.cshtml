@@ -51,24 +51,24 @@
                     @foreach (var item in ViewBag.Rapport)
                     {
                         <tr>
-                            @if (@item.id != 0)
+                            @if (@item.Id != 0)
                             {
-                                <td>@item.id</td> }
-                            @if (@item.merk != null)
+                                <td>@item.Id</td> }
+                            @if (@item.Merk != null)
                             {
-                                <td>@item.merk</td>
+                                <td>@item.Merk</td>
                             }
-                            @if (@item.type != null)
+                            @if (@item.Type != null)
                             {
-                                <td>@item.type</td>
+                                <td>@item.Type</td>
                             }
-                            @if (@item.snelheid != null)
+                            @if (@item.Snelheid != null)
                             {
-                                <td>@item.snelheid</td>
+                                <td>@item.Snelheid</td>
                             }
-                            @if (@item.driver != null)
+                            @if (@item.Driver != null)
                             {
-                                <td>@item.driver</td>
+                                <td>@item.Driver</td>
                             }
                             
                         </tr>

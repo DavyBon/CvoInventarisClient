@@ -81,62 +81,62 @@
                     @foreach (var item in ViewBag.Rapport)
                     {
                         <tr>
-                            @if (@item.idLeverancier != 0)
+                            @if (@item.IdLeverancier != 0)
                             {
-                                <td>@item.idLeverancier</td> }
-                            @if (@item.naam != null)
+                                <td>@item.IdLeverancier</td> }
+                            @if (@item.Naam != null)
                             {
-                                <td>@item.naam</td>
+                                <td>@item.Naam</td>
                             }
-                            @if (@item.afkorting != null)
+                            @if (@item.Afkorting != null)
                             {
-                                <td>@item.afkorting</td>
+                                <td>@item.Afkorting</td>
                             }
-                            @if (@item.straat != null)
+                            @if (@item.Straat != null)
                             {
-                                <td>@item.straat</td>
+                                <td>@item.Straat</td>
                             }
-                            @if (@item.huisNummer != 0)
+                            @if (@item.HuisNummer != 0)
                             {
-                                <td>@item.huisNummer</td>
+                                <td>@item.HuisNummer</td>
                             }
-                            @if (@item.busNummer != 0)
+                            @if (@item.BusNummer != 0)
                             {
-                                <td>@item.busNummer</td> }
-                            @if (@item.postcode != 0)
+                                <td>@item.BusNummer</td> }
+                            @if (@item.Postcode != 0)
                             {
-                                <td>@item.postcode</td>
+                                <td>@item.Postcode</td>
                             }
-                            @if (@item.telefoon != null)
+                            @if (@item.Telefoon != null)
                             {
-                                <td>@item.telefoon</td>
+                                <td>@item.Telefoon</td>
                             }
-                            @if (@item.fax != null)
+                            @if (@item.Fax != null)
                             {
-                                <td>@item.fax</td>
+                                <td>@item.Fax</td>
                             }
-                            @if (@item.email != null)
+                            @if (@item.Email != null)
                             {
-                                <td>@item.email</td>
+                                <td>@item.Email</td>
                             }
-                            @if (@item.website != 0)
+                            @if (@item.Website != 0)
                             {
-                                <td>@item.website</td> }
-                            @if (@item.btwNummer != null)
+                                <td>@item.Website</td> }
+                            @if (@item.BtwNummer != null)
                             {
-                                <td>@item.btwNummer</td>
+                                <td>@item.BtwNummer</td>
                             }
-                            @if (@item.iban != null)
+                            @if (@item.Iban != null)
                             {
-                                <td>@item.iban</td>
+                                <td>@item.Iban</td>
                             }
-                            @if (@item.bic != null)
+                            @if (@item.Bic != null)
                             {
-                                <td>@item.bic</td>
+                                <td>@item.Bic</td>
                             }
-                            @if (@item.toegevoegdOp != new DateTime(0001, 01, 1).Add(new TimeSpan(0, 00, 00)))
+                            @if (@item.ToegevoegdOp != new DateTime(0001, 01, 1).Add(new TimeSpan(0, 00, 00)))
                             {
-                                <td>@item.toegevoegdOp</td>
+                                <td>@item.ToegevoegdOp</td>
                             }
 
                         </tr>

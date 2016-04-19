@@ -280,6 +280,9 @@
     <Content Include="Views\Rapportering\Index.cshtml" />
     <Content Include="Views\Rapportering\LeverancierRapportering.cshtml" />
     <Content Include="Views\Rapportering\NetwerkRapportering.cshtml" />
+    <None Include="Service References\ServiceReference\Service13.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

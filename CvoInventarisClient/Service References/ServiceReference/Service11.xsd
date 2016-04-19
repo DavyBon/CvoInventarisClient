@@ -1,5 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="Lokaal">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="AantalPlaatsen" type="xs:int" />
+      <xs:element minOccurs="0" name="IdLokaal" type="xs:int" />
+      <xs:element minOccurs="0" name="IdNetwerk" type="xs:int" />
+      <xs:element minOccurs="0" name="IsComputerLokaal" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LokaalNaam" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Lokaal" nillable="true" type="tns:Lokaal" />
+  <xs:complexType name="ArrayOfFactuur">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Factuur" nillable="true" type="tns:Factuur" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfFactuur" nillable="true" type="tns:ArrayOfFactuur" />
+  <xs:complexType name="Factuur">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Afschrijfperiode" type="xs:int" />
+      <xs:element minOccurs="0" name="Boekjaar" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="CvoVolgNummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="DatumInsert" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="DatumModified" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FactuurDatum" type="xs:dateTime" />
+      <xs:element minOccurs="0" name="FactuurNummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FactuurStatusGetekend" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Garantie" type="xs:int" />
+      <xs:element minOccurs="0" name="IdFactuur" type="xs:int" />
+      <xs:element minOccurs="0" name="IdLeverancier" type="xs:int" />
+      <xs:element minOccurs="0" name="OleDoc" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OleDocFileName" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="OleDocPath" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Omschrijving" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Opmerking" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Prijs" type="xs:int" />
+      <xs:element minOccurs="0" name="UserInsert" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="UserModified" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="VerwerkingsDatum" type="xs:dateTime" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Factuur" nillable="true" type="tns:Factuur" />
   <xs:complexType name="Cpu">
     <xs:sequence>
       <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
@@ -191,45 +232,4 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfLokaal" nillable="true" type="tns:ArrayOfLokaal" />
-  <xs:complexType name="Lokaal">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="AantalPlaatsen" type="xs:int" />
-      <xs:element minOccurs="0" name="IdLokaal" type="xs:int" />
-      <xs:element minOccurs="0" name="IdNetwerk" type="xs:int" />
-      <xs:element minOccurs="0" name="IsComputerLokaal" type="xs:boolean" />
-      <xs:element minOccurs="0" name="LokaalNaam" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Lokaal" nillable="true" type="tns:Lokaal" />
-  <xs:complexType name="ArrayOfFactuur">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Factuur" nillable="true" type="tns:Factuur" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfFactuur" nillable="true" type="tns:ArrayOfFactuur" />
-  <xs:complexType name="Factuur">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Afschrijfperiode" type="xs:int" />
-      <xs:element minOccurs="0" name="Boekjaar" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="CvoVolgNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="DatumInsert" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="DatumModified" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FactuurDatum" type="xs:dateTime" />
-      <xs:element minOccurs="0" name="FactuurNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FactuurStatusGetekend" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Garantie" type="xs:int" />
-      <xs:element minOccurs="0" name="IdFactuur" type="xs:int" />
-      <xs:element minOccurs="0" name="IdLeverancier" type="xs:int" />
-      <xs:element minOccurs="0" name="OleDoc" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OleDocFileName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OleDocPath" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Omschrijving" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Opmerking" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Prijs" type="xs:int" />
-      <xs:element minOccurs="0" name="UserInsert" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="UserModified" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="VerwerkingsDatum" type="xs:dateTime" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Factuur" nillable="true" type="tns:Factuur" />
 </xs:schema>

@@ -977,7 +977,30 @@ namespace WebApplication.Controllers
                 if (stap1.Equals("factuur"))
                 {
                     PdfPTable table = new PdfPTable(6);
-                    pdfDoc.SetPageSize(PageSize.A4.Rotate());
+                    List<Factuur> facturen = test.FactuurGetAll().ToList();
+                    foreach(var item in facturen)
+                    {
+                        table.AddCell(item.IdFactuur.ToString());
+                        table.AddCell(item.Boekjaar);
+                        table.AddCell(item.CvoVolgNummer);
+                        table.AddCell(item.FactuurNummer);
+                        table.AddCell(item.FactuurDatum.ToString());
+                        table.AddCell(item.FactuurStatusGetekend.ToString());
+                        table.AddCell(item.VerwerkingsDatum.ToString());
+                        table.AddCell(item.IdLeverancier.ToString());
+                        table.AddCell(item.Prijs.ToString());
+                        table.AddCell(item.Garantie.ToString());
+                        table.AddCell(item.Omschrijving);
+                        table.AddCell(item.Opmerking);
+                        table.AddCell(item.Afschrijfperiode.ToString());
+                        table.AddCell(item.OleDoc);
+                        table.AddCell(item.OleDocPath);
+                        table.AddCell(item.OleDocFileName);
+                        table.AddCell(item.DatumInsert.ToString());
+                        table.AddCell(item.UserInsert);
+                        table.AddCell(item.DatumModified.ToString());
+                        table.AddCell(item.UserModified);
+                    }
                 }
                 if (stap1.Equals("grafischeKaart"))
                 {
@@ -999,10 +1022,10 @@ namespace WebApplication.Controllers
                     List<Harddisk> harddisks = test.HarddiskGetAll().ToList();
                     foreach(var item in harddisks)
                     {
-                        table.AddCell(item.idHarddisk.ToString());
-                        table.AddCell(item.merk);
-                        table.AddCell(item.grootte.ToString());
-                        table.AddCell(item.fabrieksNummer.ToString());
+                        table.AddCell(item.IdHarddisk.ToString());
+                        table.AddCell(item.Merk);
+                        table.AddCell(item.Grootte.ToString());
+                        table.AddCell(item.FabrieksNummer.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1027,16 +1050,16 @@ namespace WebApplication.Controllers
                     List<Inventaris> inventarissen = test.InventarisGetAll().ToList();
                     foreach (var item in inventarissen)
                     {
-                        table.AddCell(item.id.ToString());
-                        table.AddCell(item.label);
-                        table.AddCell(item.idLokaal.ToString());
-                        table.AddCell(item.idObject.ToString());
-                        table.AddCell(item.aankoopjaar.ToString());
-                        table.AddCell(item.afschrijvingsperiode.ToString());
-                        table.AddCell(item.historiek);
-                        table.AddCell(item.isActief.ToString());
-                        table.AddCell(item.isAanwezig.ToString());
-                        table.AddCell(item.idVerzekering.ToString());
+                        table.AddCell(item.Id.ToString());
+                        table.AddCell(item.Label);
+                        table.AddCell(item.IdLokaal.ToString());
+                        table.AddCell(item.IdObject.ToString());
+                        table.AddCell(item.Aankoopjaar.ToString());
+                        table.AddCell(item.Afschrijvingsperiode.ToString());
+                        table.AddCell(item.Historiek);
+                        table.AddCell(item.IsActief.ToString());
+                        table.AddCell(item.IsAanwezig.ToString());
+                        table.AddCell(item.IdVerzekering.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1046,21 +1069,21 @@ namespace WebApplication.Controllers
                     List<Leverancier> leveranciers = test.LeverancierGetAll().ToList();
                     foreach (var item in leveranciers)
                     {
-                        table.AddCell(item.idLeverancier.ToString());
-                        table.AddCell(item.naam);
-                        table.AddCell(item.afkorting);
-                        table.AddCell(item.straat);
-                        table.AddCell(item.huisNummer.ToString());
-                        table.AddCell(item.busNummer.ToString());
-                        table.AddCell(item.postcode.ToString());
-                        table.AddCell(item.telefoon);
-                        table.AddCell(item.fax);
-                        table.AddCell(item.email.ToString());
-                        table.AddCell(item.website.ToString());
-                        table.AddCell(item.btwNummer.ToString());
-                        table.AddCell(item.iban);
-                        table.AddCell(item.bic);
-                        table.AddCell(item.toegevoegdOp.ToString());
+                        table.AddCell(item.IdLeverancier.ToString());
+                        table.AddCell(item.Naam);
+                        table.AddCell(item.Afkorting);
+                        table.AddCell(item.Straat);
+                        table.AddCell(item.HuisNummer.ToString());
+                        table.AddCell(item.BusNummer.ToString());
+                        table.AddCell(item.Postcode.ToString());
+                        table.AddCell(item.Telefoon);
+                        table.AddCell(item.Fax);
+                        table.AddCell(item.Email.ToString());
+                        table.AddCell(item.Website.ToString());
+                        table.AddCell(item.BtwNummer.ToString());
+                        table.AddCell(item.Iban);
+                        table.AddCell(item.Bic);
+                        table.AddCell(item.ToegevoegdOp.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1070,11 +1093,11 @@ namespace WebApplication.Controllers
                     List<Lokaal> lokalen = test.LokaalGetAll().ToList();
                     foreach (var item in lokalen)
                     {
-                        table.AddCell(item.idLokaal.ToString());
-                        table.AddCell(item.lokaalNaam.ToString());
-                        table.AddCell(item.aantalPlaatsen.ToString());
-                        table.AddCell(item.isComputerLokaal.ToString());
-                        table.AddCell(item.idNetwerk.ToString());
+                        table.AddCell(item.IdLokaal.ToString());
+                        table.AddCell(item.LokaalNaam.ToString());
+                        table.AddCell(item.AantalPlaatsen.ToString());
+                        table.AddCell(item.IsComputerLokaal.ToString());
+                        table.AddCell(item.IdNetwerk.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1084,11 +1107,11 @@ namespace WebApplication.Controllers
                     List<Netwerk> netwerken = test.NetwerkGetAll().ToList();
                     foreach (var item in netwerken)
                     {
-                        table.AddCell(item.id.ToString());
-                        table.AddCell(item.merk.ToString());
-                        table.AddCell(item.type.ToString());
-                        table.AddCell(item.snelheid.ToString());
-                        table.AddCell(item.driver.ToString());
+                        table.AddCell(item.Id.ToString());
+                        table.AddCell(item.Merk.ToString());
+                        table.AddCell(item.Type.ToString());
+                        table.AddCell(item.Snelheid.ToString());
+                        table.AddCell(item.Driver.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1098,11 +1121,11 @@ namespace WebApplication.Controllers
                     List<CvoInventarisClient.ServiceReference.Object> objecten = test.ObjectGetAll().ToList();
                     foreach (var item in objecten)
                     {
-                        table.AddCell(item.id.ToString());
-                        table.AddCell(item.idObjectType.ToString());
-                        table.AddCell(item.kenmerken.ToString());
-                        table.AddCell(item.idLeverancier.ToString());
-                        table.AddCell(item.idFactuur.ToString());
+                        table.AddCell(item.Id.ToString());
+                        table.AddCell(item.IdObjectType.ToString());
+                        table.AddCell(item.Kenmerken.ToString());
+                        table.AddCell(item.IdLeverancier.ToString());
+                        table.AddCell(item.IdFactuur.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1230,25 +1253,25 @@ namespace WebApplication.Controllers
                 }
                 foreach (Netwerk n in Rapport)
                 {
-                    if (n.id != 0)
+                    if (n.Id != 0)
                     {
-                        table.AddCell(n.id.ToString());
+                        table.AddCell(n.Id.ToString());
                     }
-                    if (n.merk != null)
+                    if (n.Merk != null)
                     {
-                        table.AddCell(n.merk);
+                        table.AddCell(n.Merk);
                     }
-                    if (n.type != null)
+                    if (n.Type != null)
                     {
-                        table.AddCell(n.type);
+                        table.AddCell(n.Type);
                     }
-                    if (n.snelheid != null)
+                    if (n.Snelheid != null)
                     {
-                        table.AddCell(n.snelheid.ToString());
+                        table.AddCell(n.Snelheid.ToString());
                     }
-                    if (n.driver != null)
+                    if (n.Driver != null)
                     {
-                        table.AddCell(n.driver);
+                        table.AddCell(n.Driver);
                     }
                 }
                 pdfDoc.Add(table);
@@ -1450,21 +1473,21 @@ namespace WebApplication.Controllers
                 }
                 foreach (Harddisk h in Rapport)
                 {
-                    if (h.idHarddisk != 0)
+                    if (h.IdHarddisk != 0)
                     {
-                        table.AddCell(h.idHarddisk.ToString());
+                        table.AddCell(h.IdHarddisk.ToString());
                     }
-                    if (h.merk != null)
+                    if (h.Merk != null)
                     {
-                        table.AddCell(h.merk);
+                        table.AddCell(h.Merk);
                     }
-                    if (h.grootte != 0)
+                    if (h.Grootte != 0)
                     {
-                        table.AddCell(h.grootte.ToString());
+                        table.AddCell(h.Grootte.ToString());
                     }
-                    if (h.fabrieksNummer != null)
+                    if (h.FabrieksNummer != null)
                     {
-                        table.AddCell(h.fabrieksNummer.ToString());
+                        table.AddCell(h.FabrieksNummer.ToString());
                     }
                 }
                 pdfDoc.Add(table);
@@ -1538,65 +1561,65 @@ namespace WebApplication.Controllers
                 }
                 foreach (Leverancier l in Rapport)
                 {
-                    if (l.idLeverancier != 0)
+                    if (l.IdLeverancier != 0)
                     {
-                        table.AddCell(l.idLeverancier.ToString());
+                        table.AddCell(l.IdLeverancier.ToString());
                     }
-                    if (l.naam != null)
+                    if (l.Naam != null)
                     {
-                        table.AddCell(l.naam);
+                        table.AddCell(l.Naam);
                     }
-                    if (l.afkorting != null)
+                    if (l.Afkorting != null)
                     {
-                        table.AddCell(l.afkorting.ToString());
+                        table.AddCell(l.Afkorting.ToString());
                     }
-                    if (l.straat != null)
+                    if (l.Straat != null)
                     {
-                        table.AddCell(l.straat.ToString());
+                        table.AddCell(l.Straat.ToString());
                     }
-                    if (l.huisNummer != 0)
+                    if (l.HuisNummer != 0)
                     {
-                        table.AddCell(l.huisNummer.ToString());
+                        table.AddCell(l.HuisNummer.ToString());
                     }
-                    if (l.busNummer != 0)
+                    if (l.BusNummer != 0)
                     {
-                        table.AddCell(l.busNummer.ToString());
+                        table.AddCell(l.BusNummer.ToString());
                     }
-                    if (l.postcode != 0)
+                    if (l.Postcode != 0)
                     {
-                        table.AddCell(l.postcode.ToString());
+                        table.AddCell(l.Postcode.ToString());
                     }
-                    if (l.telefoon != null)
+                    if (l.Telefoon != null)
                     {
-                        table.AddCell(l.telefoon.ToString());
+                        table.AddCell(l.Telefoon.ToString());
                     }
-                    if (l.fax != null)
+                    if (l.Fax != null)
                     {
-                        table.AddCell(l.fax.ToString());
+                        table.AddCell(l.Fax.ToString());
                     }
-                    if (l.email != null)
+                    if (l.Email != null)
                     {
-                        table.AddCell(l.email);
+                        table.AddCell(l.Email);
                     }
-                    if (l.website != null)
+                    if (l.Website != null)
                     {
-                        table.AddCell(l.website.ToString());
+                        table.AddCell(l.Website.ToString());
                     }
-                    if (l.btwNummer != null)
+                    if (l.BtwNummer != null)
                     {
-                        table.AddCell(l.btwNummer.ToString());
+                        table.AddCell(l.BtwNummer.ToString());
                     }
-                    if (l.iban != null)
+                    if (l.Iban != null)
                     {
-                        table.AddCell(l.iban);
+                        table.AddCell(l.Iban);
                     }
-                    if (l.bic != null)
+                    if (l.Bic != null)
                     {
-                        table.AddCell(l.bic.ToString());
+                        table.AddCell(l.Bic.ToString());
                     }
-                    if (l.toegevoegdOp != new DateTime(0001, 01, 1).Add(new TimeSpan(0, 00, 00)))
+                    if (l.ToegevoegdOp != new DateTime(0001, 01, 1).Add(new TimeSpan(0, 00, 00)))
                     {
-                        table.AddCell(l.toegevoegdOp.ToString());
+                        table.AddCell(l.ToegevoegdOp.ToString());
                     }
                 }
                 pdfDoc.Add(table);

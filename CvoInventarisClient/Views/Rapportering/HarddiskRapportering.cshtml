@@ -55,20 +55,20 @@
                     @foreach (var item in ViewBag.Rapport)
                     {
                         <tr>
-                            @if (@item.idHarddisk != 0)
+                            @if (@item.IdHarddisk != 0)
                             {
-                                <td>@item.idHarddisk</td> }
-                            @if (@item.merk != null)
+                                <td>@item.IdHarddisk</td> }
+                            @if (@item.Merk != null)
                             {
-                                <td>@item.merk</td>
+                                <td>@item.Merk</td>
                             }
-                            @if (@item.grootte != 0)
+                            @if (@item.Grootte != 0)
                             {
-                                <td>@item.grootte</td>
+                                <td>@item.Grootte</td>
                             }
-                            @if (@item.fabrieksNummer != null)
+                            @if (@item.FabrieksNummer != null)
                             {
-                                <td>@item.fabrieksNummer</td>
+                                <td>@item.FabrieksNummer</td>
                             }
                         </tr>
                     }

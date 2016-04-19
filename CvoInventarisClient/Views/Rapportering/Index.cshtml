@@ -169,12 +169,26 @@
                     {
 
                         <tr>
-                            <td>@item.IdDevice</td>
-                            <td>@item.Merk</td>
-                            <td>@item.Type</td>
-                            <td>@item.Serienummer</td>
-                            <td>@item.IsPcCompatibel</td>
-                            <td>@item.FabrieksNummer</td>
+                            <td>@item.IdFactuur</td>
+                            <td>@item.Boekjaar</td>
+                            <td>@item.CvoVolgNummer</td>
+                            <td>@item.FactuurNummer</td>
+                            <td>@item.FactuurDatum</td>
+                            <td>@item.FactuurStatusGetekend</td>
+                            <td>@item.VerwerkingsDatum</td>
+                            <td>@item.IdLeverancier</td>
+                            <td>@item.Prijs</td>
+                            <td>@item.Garantie</td>
+                            <td>@item.Omschrijving</td>
+                            <td>@item.Opmerking</td>
+                            <td>@item.Afschrijfperiode</td>
+                            <td>@item.OleDoc</td>
+                            <td>@item.OleDocPath</td>
+                            <td>@item.OleDocFileName</td>
+                            <td>@item.DatumInsert</td>
+                            <td>@item.UserInsert</td>
+                            <td>@item.DatumModified</td>
+                            <td>@item.UserModified</td>
                         </tr>
                     }
                 </table>
@@ -225,10 +239,10 @@
                     {
 
                         <tr>
-                            <td>@item.idHarddisk</td>
-                            <td>@item.merk</td>
-                            <td>@item.grootte</td>
-                            <td>@item.fabrieksNummer</td>
+                            <td>@item.IdHarddisk</td>
+                            <td>@item.Merk</td>
+                            <td>@item.Grootte</td>
+                            <td>@item.FabrieksNummer</td>
                         </tr>
                     }
                 </table>
@@ -285,16 +299,16 @@
                     {
 
                         <tr>
-                            <td>@item.id</td>
-                            <td>@item.label</td>
-                            <td>@item.idLokaal</td>
-                            <td>@item.idObject</td>
-                            <td>@item.aankoopjaar</td>
-                            <td>@item.afschrijvingsperiode</td>
-                            <td>@item.historiek</td>
-                            <td>@item.isActief</td>
-                            <td>@item.isAanwezig</td>
-                            <td>@item.idVerzekering</td>
+                            <td>@item.Id</td>
+                            <td>@item.Label</td>
+                            <td>@item.IdLokaal</td>
+                            <td>@item.IdObject</td>
+                            <td>@item.Aankoopjaar</td>
+                            <td>@item.Afschrijvingsperiode</td>
+                            <td>@item.Historiek</td>
+                            <td>@item.IsActief</td>
+                            <td>@item.IsAanwezig</td>
+                            <td>@item.IdVerzekering</td>
                         </tr>
                     }
                 </table>
@@ -328,21 +342,21 @@
                     {
 
                         <tr>
-                            <td>@item.idLeverancier</td>
-                            <td>@item.naam</td>
-                            <td>@item.afkorting</td>
-                            <td>@item.straat</td>
-                            <td>@item.huisNummer</td>
-                            <td>@item.busNummer</td>
-                            <td>@item.postcode</td>
-                            <td>@item.telefoon</td>
-                            <td>@item.fax</td>
-                            <td>@item.email</td>
-                            <td>@item.website</td>
-                            <td>@item.btwNummer</td>
-                            <td>@item.iban</td>
-                            <td>@item.bic</td>
-                            <td>@item.toegevoegdOp</td>
+                            <td>@item.IdLeverancier</td>
+                            <td>@item.Naam</td>
+                            <td>@item.Afkorting</td>
+                            <td>@item.Straat</td>
+                            <td>@item.HuisNummer</td>
+                            <td>@item.BusNummer</td>
+                            <td>@item.Postcode</td>
+                            <td>@item.Telefoon</td>
+                            <td>@item.Fax</td>
+                            <td>@item.Email</td>
+                            <td>@item.Website</td>
+                            <td>@item.BtwNummer</td>
+                            <td>@item.Iban</td>
+                            <td>@item.Bic</td>
+                            <td>@item.ToegevoegdOp</td>
                         </tr>
                     }
                 </table>
@@ -366,11 +380,11 @@
                     {
 
                         <tr>
-                            <td>@item.idLokaal</td>
-                            <td>@item.lokaalNaam</td>
-                            <td>@item.aantalPlaatsen</td>
-                            <td>@item.isComputerLokaal</td>
-                            <td>@item.idNetwerk</td>
+                            <td>@item.IdLokaal</td>
+                            <td>@item.LokaalNaam</td>
+                            <td>@item.AantalPlaatsen</td>
+                            <td>@item.IsComputerLokaal</td>
+                            <td>@item.IdNetwerk</td>
                         </tr>
                     }
                 </table>
@@ -394,11 +408,11 @@
                     {
 
                         <tr>
-                            <td>@item.id</td>
-                            <td>@item.merk</td>
-                            <td>@item.type</td>
-                            <td>@item.snelheid</td>
-                            <td>@item.driver</td>
+                            <td>@item.Id</td>
+                            <td>@item.Merk</td>
+                            <td>@item.Type</td>
+                            <td>@item.Snelheid</td>
+                            <td>@item.Driver</td>
                         </tr>
                     }
                 </table>
@@ -422,11 +436,11 @@
                     {
 
                         <tr>
-                            <td>@item.id</td>
-                            <td>@item.idObjectType</td>
-                            <td>@item.kenmerken</td>
-                            <td>@item.idLeverancier</td>
-                            <td>@item.idFactuur</td>
+                            <td>@item.Id</td>
+                            <td>@item.IdObjectType</td>
+                            <td>@item.Kenmerken</td>
+                            <td>@item.IdLeverancier</td>
+                            <td>@item.IdFactuur</td>
                         </tr>
                     }
                 </table>
