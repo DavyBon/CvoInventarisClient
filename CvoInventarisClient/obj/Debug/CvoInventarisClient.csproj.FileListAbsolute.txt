@@ -97,3 +97,6 @@ D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.xm
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
