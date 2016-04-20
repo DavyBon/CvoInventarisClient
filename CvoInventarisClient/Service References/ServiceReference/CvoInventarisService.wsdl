@@ -5,8 +5,33 @@
       <xsd:import schemaLocation="http://localhost:50881/Service1.svc?xsd=xsd0" namespace="http://tempuri.org/" />
       <xsd:import schemaLocation="http://localhost:50881/Service1.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:50881/Service1.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" />
+      <xsd:import schemaLocation="http://localhost:50881/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="ICvoInventarisService_HardwareGetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareGetAll" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareGetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareGetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareDelete" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HarddiskGetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:HarddiskGetAll" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HarddiskGetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HarddiskGetAllResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_HarddiskGetById_InputMessage">
     <wsdl:part name="parameters" element="tns:HarddiskGetById" />
   </wsdl:message>
@@ -30,6 +55,12 @@
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_HarddiskDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:HarddiskDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringHarddisk_InputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringHarddisk" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringHarddisk_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringHarddiskResponse" />
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_LeverancierGetAll_InputMessage">
     <wsdl:part name="parameters" element="tns:LeverancierGetAll" />
@@ -60,6 +91,12 @@
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_LeverancierDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:LeverancierDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringLeverancier_InputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringLeverancier" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringLeverancier_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringLeverancierResponse" />
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_LokaalGetAll_InputMessage">
     <wsdl:part name="parameters" element="tns:LokaalGetAll" />
@@ -259,6 +296,12 @@
   <wsdl:message name="ICvoInventarisService_CpuDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:CpuDeleteResponse" />
   </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringCpu_InputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringCpu" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringCpu_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringCpuResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_DeviceGetById_InputMessage">
     <wsdl:part name="parameters" element="tns:DeviceGetById" />
   </wsdl:message>
@@ -289,6 +332,12 @@
   <wsdl:message name="ICvoInventarisService_DeviceDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:DeviceDeleteResponse" />
   </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringDevice_InputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringDevice" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringDevice_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringDeviceResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_GrafischeKaartGetById_InputMessage">
     <wsdl:part name="parameters" element="tns:GrafischeKaartGetById" />
   </wsdl:message>
@@ -318,6 +367,12 @@
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_GrafischeKaartDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:GrafischeKaartDeleteResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringGrafischeKaart_InputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringGrafischeKaart" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringGrafischeKaart_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringGrafischeKaartResponse" />
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_InventarisCreate_InputMessage">
     <wsdl:part name="parameters" element="tns:InventarisCreate" />
@@ -409,6 +464,12 @@
   <wsdl:message name="ICvoInventarisService_NetwerkDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:NetwerkDeleteResponse" />
   </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringNetwerk_InputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringNetwerk" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringNetwerk_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringNetwerkResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_VerzekeringCreate_InputMessage">
     <wsdl:part name="parameters" element="tns:VerzekeringCreate" />
   </wsdl:message>
@@ -481,31 +542,23 @@
   <wsdl:message name="ICvoInventarisService_HardwareGetById_OutputMessage">
     <wsdl:part name="parameters" element="tns:HardwareGetByIdResponse" />
   </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareGetAll_InputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareGetAll" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareGetAll_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareGetAllResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareUpdate_InputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareUpdate" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareUpdate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareUpdateResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareDelete_InputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareDelete" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareDelete_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareDeleteResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HarddiskGetAll_InputMessage">
-    <wsdl:part name="parameters" element="tns:HarddiskGetAll" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HarddiskGetAll_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HarddiskGetAllResponse" />
-  </wsdl:message>
   <wsdl:portType name="ICvoInventarisService">
+    <wsdl:operation name="HardwareGetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetAll" message="tns:ICvoInventarisService_HardwareGetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetAllResponse" message="tns:ICvoInventarisService_HardwareGetAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HardwareUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareUpdate" message="tns:ICvoInventarisService_HardwareUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareUpdateResponse" message="tns:ICvoInventarisService_HardwareUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HardwareDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareDelete" message="tns:ICvoInventarisService_HardwareDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareDeleteResponse" message="tns:ICvoInventarisService_HardwareDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HarddiskGetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAll" message="tns:ICvoInventarisService_HarddiskGetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAllResponse" message="tns:ICvoInventarisService_HarddiskGetAll_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="HarddiskGetById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskGetById" message="tns:ICvoInventarisService_HarddiskGetById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskGetByIdResponse" message="tns:ICvoInventarisService_HarddiskGetById_OutputMessage" />
@@ -521,6 +574,10 @@
     <wsdl:operation name="HarddiskDelete">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskDelete" message="tns:ICvoInventarisService_HarddiskDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskDeleteResponse" message="tns:ICvoInventarisService_HarddiskDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RapporteringHarddisk">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringHarddisk" message="tns:ICvoInventarisService_RapporteringHarddisk_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringHarddiskResponse" message="tns:ICvoInventarisService_RapporteringHarddisk_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="LeverancierGetAll">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/LeverancierGetAll" message="tns:ICvoInventarisService_LeverancierGetAll_InputMessage" />
@@ -541,6 +598,10 @@
     <wsdl:operation name="LeverancierDelete">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/LeverancierDelete" message="tns:ICvoInventarisService_LeverancierDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/LeverancierDeleteResponse" message="tns:ICvoInventarisService_LeverancierDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RapporteringLeverancier">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringLeverancier" message="tns:ICvoInventarisService_RapporteringLeverancier_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringLeverancierResponse" message="tns:ICvoInventarisService_RapporteringLeverancier_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="LokaalGetAll">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/LokaalGetAll" message="tns:ICvoInventarisService_LokaalGetAll_InputMessage" />
@@ -674,6 +735,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/CpuDelete" message="tns:ICvoInventarisService_CpuDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/CpuDeleteResponse" message="tns:ICvoInventarisService_CpuDelete_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RapporteringCpu">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringCpu" message="tns:ICvoInventarisService_RapporteringCpu_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringCpuResponse" message="tns:ICvoInventarisService_RapporteringCpu_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="DeviceGetById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/DeviceGetById" message="tns:ICvoInventarisService_DeviceGetById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/DeviceGetByIdResponse" message="tns:ICvoInventarisService_DeviceGetById_OutputMessage" />
@@ -694,6 +759,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/DeviceDelete" message="tns:ICvoInventarisService_DeviceDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/DeviceDeleteResponse" message="tns:ICvoInventarisService_DeviceDelete_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RapporteringDevice">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringDevice" message="tns:ICvoInventarisService_RapporteringDevice_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringDeviceResponse" message="tns:ICvoInventarisService_RapporteringDevice_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="GrafischeKaartGetById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/GrafischeKaartGetById" message="tns:ICvoInventarisService_GrafischeKaartGetById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/GrafischeKaartGetByIdResponse" message="tns:ICvoInventarisService_GrafischeKaartGetById_OutputMessage" />
@@ -713,6 +782,10 @@
     <wsdl:operation name="GrafischeKaartDelete">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/GrafischeKaartDelete" message="tns:ICvoInventarisService_GrafischeKaartDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/GrafischeKaartDeleteResponse" message="tns:ICvoInventarisService_GrafischeKaartDelete_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="RapporteringGrafischeKaart">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringGrafischeKaart" message="tns:ICvoInventarisService_RapporteringGrafischeKaart_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringGrafischeKaartResponse" message="tns:ICvoInventarisService_RapporteringGrafischeKaart_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="InventarisCreate">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/InventarisCreate" message="tns:ICvoInventarisService_InventarisCreate_InputMessage" />
@@ -774,6 +847,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/NetwerkDelete" message="tns:ICvoInventarisService_NetwerkDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/NetwerkDeleteResponse" message="tns:ICvoInventarisService_NetwerkDelete_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RapporteringNetwerk">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringNetwerk" message="tns:ICvoInventarisService_RapporteringNetwerk_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringNetwerkResponse" message="tns:ICvoInventarisService_RapporteringNetwerk_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="VerzekeringCreate">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/VerzekeringCreate" message="tns:ICvoInventarisService_VerzekeringCreate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/VerzekeringCreateResponse" message="tns:ICvoInventarisService_VerzekeringCreate_OutputMessage" />
@@ -822,25 +899,45 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetById" message="tns:ICvoInventarisService_HardwareGetById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetByIdResponse" message="tns:ICvoInventarisService_HardwareGetById_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="HardwareGetAll">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetAll" message="tns:ICvoInventarisService_HardwareGetAll_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetAllResponse" message="tns:ICvoInventarisService_HardwareGetAll_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="HardwareUpdate">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareUpdate" message="tns:ICvoInventarisService_HardwareUpdate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareUpdateResponse" message="tns:ICvoInventarisService_HardwareUpdate_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="HardwareDelete">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareDelete" message="tns:ICvoInventarisService_HardwareDelete_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareDeleteResponse" message="tns:ICvoInventarisService_HardwareDelete_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="HarddiskGetAll">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAll" message="tns:ICvoInventarisService_HarddiskGetAll_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAllResponse" message="tns:ICvoInventarisService_HarddiskGetAll_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICvoInventarisService" type="tns:ICvoInventarisService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HardwareGetAll">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareGetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HardwareUpdate">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HardwareDelete">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HarddiskGetAll">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HarddiskGetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="HarddiskGetById">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HarddiskGetById" style="document" />
       <wsdl:input>
@@ -870,6 +967,15 @@
     </wsdl:operation>
     <wsdl:operation name="HarddiskDelete">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HarddiskDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RapporteringHarddisk">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/RapporteringHarddisk" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -915,6 +1021,15 @@
     </wsdl:operation>
     <wsdl:operation name="LeverancierDelete">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/LeverancierDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RapporteringLeverancier">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/RapporteringLeverancier" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1219,6 +1334,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RapporteringCpu">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/RapporteringCpu" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="DeviceGetById">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/DeviceGetById" style="document" />
       <wsdl:input>
@@ -1264,6 +1388,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RapporteringDevice">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/RapporteringDevice" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GrafischeKaartGetById">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/GrafischeKaartGetById" style="document" />
       <wsdl:input>
@@ -1302,6 +1435,15 @@
     </wsdl:operation>
     <wsdl:operation name="GrafischeKaartDelete">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/GrafischeKaartDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RapporteringGrafischeKaart">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/RapporteringGrafischeKaart" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1444,6 +1586,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="RapporteringNetwerk">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/RapporteringNetwerk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="VerzekeringCreate">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/VerzekeringCreate" style="document" />
       <wsdl:input>
@@ -1545,42 +1696,6 @@
     </wsdl:operation>
     <wsdl:operation name="HardwareGetById">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareGetById" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HardwareGetAll">
-      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareGetAll" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HardwareUpdate">
-      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareUpdate" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HardwareDelete">
-      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareDelete" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HarddiskGetAll">
-      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HarddiskGetAll" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

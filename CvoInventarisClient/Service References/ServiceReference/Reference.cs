@@ -15,24 +15,27 @@ namespace CvoInventarisClient.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Harddisk", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Hardware", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
     [System.SerializableAttribute()]
-    public partial class Harddisk : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+    public partial class Hardware : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string fabrieksNummerField;
+        private int IdCpuField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int grootteField;
+        private int IdDeviceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idHarddiskField;
+        private int IdGrafischeKaartField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string merkField;
+        private int IdHarddiskField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdHardwareField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -45,53 +48,159 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string fabrieksNummer {
+        public int IdCpu {
             get {
-                return this.fabrieksNummerField;
+                return this.IdCpuField;
             }
             set {
-                if ((object.ReferenceEquals(this.fabrieksNummerField, value) != true)) {
-                    this.fabrieksNummerField = value;
-                    this.RaisePropertyChanged("fabrieksNummer");
+                if ((this.IdCpuField.Equals(value) != true)) {
+                    this.IdCpuField = value;
+                    this.RaisePropertyChanged("IdCpu");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int grootte {
+        public int IdDevice {
             get {
-                return this.grootteField;
+                return this.IdDeviceField;
             }
             set {
-                if ((this.grootteField.Equals(value) != true)) {
-                    this.grootteField = value;
-                    this.RaisePropertyChanged("grootte");
+                if ((this.IdDeviceField.Equals(value) != true)) {
+                    this.IdDeviceField = value;
+                    this.RaisePropertyChanged("IdDevice");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idHarddisk {
+        public int IdGrafischeKaart {
             get {
-                return this.idHarddiskField;
+                return this.IdGrafischeKaartField;
             }
             set {
-                if ((this.idHarddiskField.Equals(value) != true)) {
-                    this.idHarddiskField = value;
-                    this.RaisePropertyChanged("idHarddisk");
+                if ((this.IdGrafischeKaartField.Equals(value) != true)) {
+                    this.IdGrafischeKaartField = value;
+                    this.RaisePropertyChanged("IdGrafischeKaart");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string merk {
+        public int IdHarddisk {
             get {
-                return this.merkField;
+                return this.IdHarddiskField;
             }
             set {
-                if ((object.ReferenceEquals(this.merkField, value) != true)) {
-                    this.merkField = value;
-                    this.RaisePropertyChanged("merk");
+                if ((this.IdHarddiskField.Equals(value) != true)) {
+                    this.IdHarddiskField = value;
+                    this.RaisePropertyChanged("IdHarddisk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdHardware {
+            get {
+                return this.IdHardwareField;
+            }
+            set {
+                if ((this.IdHardwareField.Equals(value) != true)) {
+                    this.IdHardwareField = value;
+                    this.RaisePropertyChanged("IdHardware");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Harddisk", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
+    [System.SerializableAttribute()]
+    public partial class Harddisk : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FabrieksNummerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int GrootteField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdHarddiskField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MerkField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FabrieksNummer {
+            get {
+                return this.FabrieksNummerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FabrieksNummerField, value) != true)) {
+                    this.FabrieksNummerField = value;
+                    this.RaisePropertyChanged("FabrieksNummer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Grootte {
+            get {
+                return this.GrootteField;
+            }
+            set {
+                if ((this.GrootteField.Equals(value) != true)) {
+                    this.GrootteField = value;
+                    this.RaisePropertyChanged("Grootte");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdHarddisk {
+            get {
+                return this.IdHarddiskField;
+            }
+            set {
+                if ((this.IdHarddiskField.Equals(value) != true)) {
+                    this.IdHarddiskField = value;
+                    this.RaisePropertyChanged("IdHarddisk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Merk {
+            get {
+                return this.MerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
+                    this.MerkField = value;
+                    this.RaisePropertyChanged("Merk");
                 }
             }
         }
@@ -116,49 +225,49 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string afkortingField;
+        private string AfkortingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string bicField;
+        private string BicField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string btwNummerField;
+        private string BtwNummerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int busNummerField;
+        private int BusNummerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string emailField;
+        private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string faxField;
+        private string FaxField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int huisNummerField;
+        private int HuisNummerField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string ibanField;
+        private string IbanField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idLeverancierField;
+        private int IdLeverancierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string naamField;
+        private string NaamField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int postcodeField;
+        private int PostcodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string straatField;
+        private string StraatField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string telefoonField;
+        private string TelefoonField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private System.DateTime toegevoegdOpField;
+        private System.DateTime ToegevoegdOpField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string websiteField;
+        private string WebsiteField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -171,196 +280,196 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string afkorting {
+        public string Afkorting {
             get {
-                return this.afkortingField;
+                return this.AfkortingField;
             }
             set {
-                if ((object.ReferenceEquals(this.afkortingField, value) != true)) {
-                    this.afkortingField = value;
-                    this.RaisePropertyChanged("afkorting");
+                if ((object.ReferenceEquals(this.AfkortingField, value) != true)) {
+                    this.AfkortingField = value;
+                    this.RaisePropertyChanged("Afkorting");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string bic {
+        public string Bic {
             get {
-                return this.bicField;
+                return this.BicField;
             }
             set {
-                if ((object.ReferenceEquals(this.bicField, value) != true)) {
-                    this.bicField = value;
-                    this.RaisePropertyChanged("bic");
+                if ((object.ReferenceEquals(this.BicField, value) != true)) {
+                    this.BicField = value;
+                    this.RaisePropertyChanged("Bic");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string btwNummer {
+        public string BtwNummer {
             get {
-                return this.btwNummerField;
+                return this.BtwNummerField;
             }
             set {
-                if ((object.ReferenceEquals(this.btwNummerField, value) != true)) {
-                    this.btwNummerField = value;
-                    this.RaisePropertyChanged("btwNummer");
+                if ((object.ReferenceEquals(this.BtwNummerField, value) != true)) {
+                    this.BtwNummerField = value;
+                    this.RaisePropertyChanged("BtwNummer");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int busNummer {
+        public int BusNummer {
             get {
-                return this.busNummerField;
+                return this.BusNummerField;
             }
             set {
-                if ((this.busNummerField.Equals(value) != true)) {
-                    this.busNummerField = value;
-                    this.RaisePropertyChanged("busNummer");
+                if ((this.BusNummerField.Equals(value) != true)) {
+                    this.BusNummerField = value;
+                    this.RaisePropertyChanged("BusNummer");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string email {
+        public string Email {
             get {
-                return this.emailField;
+                return this.EmailField;
             }
             set {
-                if ((object.ReferenceEquals(this.emailField, value) != true)) {
-                    this.emailField = value;
-                    this.RaisePropertyChanged("email");
+                if ((object.ReferenceEquals(this.EmailField, value) != true)) {
+                    this.EmailField = value;
+                    this.RaisePropertyChanged("Email");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string fax {
+        public string Fax {
             get {
-                return this.faxField;
+                return this.FaxField;
             }
             set {
-                if ((object.ReferenceEquals(this.faxField, value) != true)) {
-                    this.faxField = value;
-                    this.RaisePropertyChanged("fax");
+                if ((object.ReferenceEquals(this.FaxField, value) != true)) {
+                    this.FaxField = value;
+                    this.RaisePropertyChanged("Fax");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int huisNummer {
+        public int HuisNummer {
             get {
-                return this.huisNummerField;
+                return this.HuisNummerField;
             }
             set {
-                if ((this.huisNummerField.Equals(value) != true)) {
-                    this.huisNummerField = value;
-                    this.RaisePropertyChanged("huisNummer");
+                if ((this.HuisNummerField.Equals(value) != true)) {
+                    this.HuisNummerField = value;
+                    this.RaisePropertyChanged("HuisNummer");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string iban {
+        public string Iban {
             get {
-                return this.ibanField;
+                return this.IbanField;
             }
             set {
-                if ((object.ReferenceEquals(this.ibanField, value) != true)) {
-                    this.ibanField = value;
-                    this.RaisePropertyChanged("iban");
+                if ((object.ReferenceEquals(this.IbanField, value) != true)) {
+                    this.IbanField = value;
+                    this.RaisePropertyChanged("Iban");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idLeverancier {
+        public int IdLeverancier {
             get {
-                return this.idLeverancierField;
+                return this.IdLeverancierField;
             }
             set {
-                if ((this.idLeverancierField.Equals(value) != true)) {
-                    this.idLeverancierField = value;
-                    this.RaisePropertyChanged("idLeverancier");
+                if ((this.IdLeverancierField.Equals(value) != true)) {
+                    this.IdLeverancierField = value;
+                    this.RaisePropertyChanged("IdLeverancier");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string naam {
+        public string Naam {
             get {
-                return this.naamField;
+                return this.NaamField;
             }
             set {
-                if ((object.ReferenceEquals(this.naamField, value) != true)) {
-                    this.naamField = value;
-                    this.RaisePropertyChanged("naam");
+                if ((object.ReferenceEquals(this.NaamField, value) != true)) {
+                    this.NaamField = value;
+                    this.RaisePropertyChanged("Naam");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int postcode {
+        public int Postcode {
             get {
-                return this.postcodeField;
+                return this.PostcodeField;
             }
             set {
-                if ((this.postcodeField.Equals(value) != true)) {
-                    this.postcodeField = value;
-                    this.RaisePropertyChanged("postcode");
+                if ((this.PostcodeField.Equals(value) != true)) {
+                    this.PostcodeField = value;
+                    this.RaisePropertyChanged("Postcode");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string straat {
+        public string Straat {
             get {
-                return this.straatField;
+                return this.StraatField;
             }
             set {
-                if ((object.ReferenceEquals(this.straatField, value) != true)) {
-                    this.straatField = value;
-                    this.RaisePropertyChanged("straat");
+                if ((object.ReferenceEquals(this.StraatField, value) != true)) {
+                    this.StraatField = value;
+                    this.RaisePropertyChanged("Straat");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string telefoon {
+        public string Telefoon {
             get {
-                return this.telefoonField;
+                return this.TelefoonField;
             }
             set {
-                if ((object.ReferenceEquals(this.telefoonField, value) != true)) {
-                    this.telefoonField = value;
-                    this.RaisePropertyChanged("telefoon");
+                if ((object.ReferenceEquals(this.TelefoonField, value) != true)) {
+                    this.TelefoonField = value;
+                    this.RaisePropertyChanged("Telefoon");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public System.DateTime toegevoegdOp {
+        public System.DateTime ToegevoegdOp {
             get {
-                return this.toegevoegdOpField;
+                return this.ToegevoegdOpField;
             }
             set {
-                if ((this.toegevoegdOpField.Equals(value) != true)) {
-                    this.toegevoegdOpField = value;
-                    this.RaisePropertyChanged("toegevoegdOp");
+                if ((this.ToegevoegdOpField.Equals(value) != true)) {
+                    this.ToegevoegdOpField = value;
+                    this.RaisePropertyChanged("ToegevoegdOp");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string website {
+        public string Website {
             get {
-                return this.websiteField;
+                return this.WebsiteField;
             }
             set {
-                if ((object.ReferenceEquals(this.websiteField, value) != true)) {
-                    this.websiteField = value;
-                    this.RaisePropertyChanged("website");
+                if ((object.ReferenceEquals(this.WebsiteField, value) != true)) {
+                    this.WebsiteField = value;
+                    this.RaisePropertyChanged("Website");
                 }
             }
         }
@@ -385,19 +494,19 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int aantalPlaatsenField;
+        private int AantalPlaatsenField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idLokaalField;
+        private int IdLokaalField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idNetwerkField;
+        private int IdNetwerkField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool isComputerLokaalField;
+        private bool IsComputerLokaalField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string lokaalNaamField;
+        private string LokaalNaamField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -410,66 +519,66 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int aantalPlaatsen {
+        public int AantalPlaatsen {
             get {
-                return this.aantalPlaatsenField;
+                return this.AantalPlaatsenField;
             }
             set {
-                if ((this.aantalPlaatsenField.Equals(value) != true)) {
-                    this.aantalPlaatsenField = value;
-                    this.RaisePropertyChanged("aantalPlaatsen");
+                if ((this.AantalPlaatsenField.Equals(value) != true)) {
+                    this.AantalPlaatsenField = value;
+                    this.RaisePropertyChanged("AantalPlaatsen");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idLokaal {
+        public int IdLokaal {
             get {
-                return this.idLokaalField;
+                return this.IdLokaalField;
             }
             set {
-                if ((this.idLokaalField.Equals(value) != true)) {
-                    this.idLokaalField = value;
-                    this.RaisePropertyChanged("idLokaal");
+                if ((this.IdLokaalField.Equals(value) != true)) {
+                    this.IdLokaalField = value;
+                    this.RaisePropertyChanged("IdLokaal");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idNetwerk {
+        public int IdNetwerk {
             get {
-                return this.idNetwerkField;
+                return this.IdNetwerkField;
             }
             set {
-                if ((this.idNetwerkField.Equals(value) != true)) {
-                    this.idNetwerkField = value;
-                    this.RaisePropertyChanged("idNetwerk");
+                if ((this.IdNetwerkField.Equals(value) != true)) {
+                    this.IdNetwerkField = value;
+                    this.RaisePropertyChanged("IdNetwerk");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool isComputerLokaal {
+        public bool IsComputerLokaal {
             get {
-                return this.isComputerLokaalField;
+                return this.IsComputerLokaalField;
             }
             set {
-                if ((this.isComputerLokaalField.Equals(value) != true)) {
-                    this.isComputerLokaalField = value;
-                    this.RaisePropertyChanged("isComputerLokaal");
+                if ((this.IsComputerLokaalField.Equals(value) != true)) {
+                    this.IsComputerLokaalField = value;
+                    this.RaisePropertyChanged("IsComputerLokaal");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string lokaalNaam {
+        public string LokaalNaam {
             get {
-                return this.lokaalNaamField;
+                return this.LokaalNaamField;
             }
             set {
-                if ((object.ReferenceEquals(this.lokaalNaamField, value) != true)) {
-                    this.lokaalNaamField = value;
-                    this.RaisePropertyChanged("lokaalNaam");
+                if ((object.ReferenceEquals(this.LokaalNaamField, value) != true)) {
+                    this.LokaalNaamField = value;
+                    this.RaisePropertyChanged("LokaalNaam");
                 }
             }
         }
@@ -521,6 +630,12 @@ namespace CvoInventarisClient.ServiceReference {
         private int GarantieField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdFactuurField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdLeverancierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OleDocField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -546,12 +661,6 @@ namespace CvoInventarisClient.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private System.DateTime VerwerkingsDatumField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idFactuurField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idLeverancierField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -681,6 +790,32 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdFactuur {
+            get {
+                return this.IdFactuurField;
+            }
+            set {
+                if ((this.IdFactuurField.Equals(value) != true)) {
+                    this.IdFactuurField = value;
+                    this.RaisePropertyChanged("IdFactuur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int IdLeverancier {
+            get {
+                return this.IdLeverancierField;
+            }
+            set {
+                if ((this.IdLeverancierField.Equals(value) != true)) {
+                    this.IdLeverancierField = value;
+                    this.RaisePropertyChanged("IdLeverancier");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public string OleDoc {
             get {
                 return this.OleDocField;
@@ -793,32 +928,6 @@ namespace CvoInventarisClient.ServiceReference {
                 if ((this.VerwerkingsDatumField.Equals(value) != true)) {
                     this.VerwerkingsDatumField = value;
                     this.RaisePropertyChanged("VerwerkingsDatum");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idFactuur {
-            get {
-                return this.idFactuurField;
-            }
-            set {
-                if ((this.idFactuurField.Equals(value) != true)) {
-                    this.idFactuurField = value;
-                    this.RaisePropertyChanged("idFactuur");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idLeverancier {
-            get {
-                return this.idLeverancierField;
-            }
-            set {
-                if ((this.idLeverancierField.Equals(value) != true)) {
-                    this.idLeverancierField = value;
-                    this.RaisePropertyChanged("idLeverancier");
                 }
             }
         }
@@ -1561,34 +1670,34 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int aankoopjaarField;
+        private int AankoopjaarField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int afschrijvingsperiodeField;
+        private int AfschrijvingsperiodeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string historiekField;
+        private string HistoriekField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idLokaalField;
+        private int IdLokaalField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idObjectField;
+        private int IdObjectField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idVerzekeringField;
+        private int IdVerzekeringField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool isAanwezigField;
+        private bool IsAanwezigField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool isActiefField;
+        private bool IsActiefField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string labelField;
+        private string LabelField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1601,131 +1710,131 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int aankoopjaar {
+        public int Aankoopjaar {
             get {
-                return this.aankoopjaarField;
+                return this.AankoopjaarField;
             }
             set {
-                if ((this.aankoopjaarField.Equals(value) != true)) {
-                    this.aankoopjaarField = value;
-                    this.RaisePropertyChanged("aankoopjaar");
+                if ((this.AankoopjaarField.Equals(value) != true)) {
+                    this.AankoopjaarField = value;
+                    this.RaisePropertyChanged("Aankoopjaar");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int afschrijvingsperiode {
+        public int Afschrijvingsperiode {
             get {
-                return this.afschrijvingsperiodeField;
+                return this.AfschrijvingsperiodeField;
             }
             set {
-                if ((this.afschrijvingsperiodeField.Equals(value) != true)) {
-                    this.afschrijvingsperiodeField = value;
-                    this.RaisePropertyChanged("afschrijvingsperiode");
+                if ((this.AfschrijvingsperiodeField.Equals(value) != true)) {
+                    this.AfschrijvingsperiodeField = value;
+                    this.RaisePropertyChanged("Afschrijvingsperiode");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string historiek {
+        public string Historiek {
             get {
-                return this.historiekField;
+                return this.HistoriekField;
             }
             set {
-                if ((object.ReferenceEquals(this.historiekField, value) != true)) {
-                    this.historiekField = value;
-                    this.RaisePropertyChanged("historiek");
+                if ((object.ReferenceEquals(this.HistoriekField, value) != true)) {
+                    this.HistoriekField = value;
+                    this.RaisePropertyChanged("Historiek");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
+        public int Id {
             get {
-                return this.idField;
+                return this.IdField;
             }
             set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idLokaal {
+        public int IdLokaal {
             get {
-                return this.idLokaalField;
+                return this.IdLokaalField;
             }
             set {
-                if ((this.idLokaalField.Equals(value) != true)) {
-                    this.idLokaalField = value;
-                    this.RaisePropertyChanged("idLokaal");
+                if ((this.IdLokaalField.Equals(value) != true)) {
+                    this.IdLokaalField = value;
+                    this.RaisePropertyChanged("IdLokaal");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idObject {
+        public int IdObject {
             get {
-                return this.idObjectField;
+                return this.IdObjectField;
             }
             set {
-                if ((this.idObjectField.Equals(value) != true)) {
-                    this.idObjectField = value;
-                    this.RaisePropertyChanged("idObject");
+                if ((this.IdObjectField.Equals(value) != true)) {
+                    this.IdObjectField = value;
+                    this.RaisePropertyChanged("IdObject");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idVerzekering {
+        public int IdVerzekering {
             get {
-                return this.idVerzekeringField;
+                return this.IdVerzekeringField;
             }
             set {
-                if ((this.idVerzekeringField.Equals(value) != true)) {
-                    this.idVerzekeringField = value;
-                    this.RaisePropertyChanged("idVerzekering");
+                if ((this.IdVerzekeringField.Equals(value) != true)) {
+                    this.IdVerzekeringField = value;
+                    this.RaisePropertyChanged("IdVerzekering");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool isAanwezig {
+        public bool IsAanwezig {
             get {
-                return this.isAanwezigField;
+                return this.IsAanwezigField;
             }
             set {
-                if ((this.isAanwezigField.Equals(value) != true)) {
-                    this.isAanwezigField = value;
-                    this.RaisePropertyChanged("isAanwezig");
+                if ((this.IsAanwezigField.Equals(value) != true)) {
+                    this.IsAanwezigField = value;
+                    this.RaisePropertyChanged("IsAanwezig");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool isActief {
+        public bool IsActief {
             get {
-                return this.isActiefField;
+                return this.IsActiefField;
             }
             set {
-                if ((this.isActiefField.Equals(value) != true)) {
-                    this.isActiefField = value;
-                    this.RaisePropertyChanged("isActief");
+                if ((this.IsActiefField.Equals(value) != true)) {
+                    this.IsActiefField = value;
+                    this.RaisePropertyChanged("IsActief");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string label {
+        public string Label {
             get {
-                return this.labelField;
+                return this.LabelField;
             }
             set {
-                if ((object.ReferenceEquals(this.labelField, value) != true)) {
-                    this.labelField = value;
-                    this.RaisePropertyChanged("label");
+                if ((object.ReferenceEquals(this.LabelField, value) != true)) {
+                    this.LabelField = value;
+                    this.RaisePropertyChanged("Label");
                 }
             }
         }
@@ -1750,19 +1859,19 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idFactuurField;
+        private int IdFactuurField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idLeverancierField;
+        private int IdLeverancierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idObjectTypeField;
+        private int IdObjectTypeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string kenmerkenField;
+        private string KenmerkenField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1775,66 +1884,66 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
+        public int Id {
             get {
-                return this.idField;
+                return this.IdField;
             }
             set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idFactuur {
+        public int IdFactuur {
             get {
-                return this.idFactuurField;
+                return this.IdFactuurField;
             }
             set {
-                if ((this.idFactuurField.Equals(value) != true)) {
-                    this.idFactuurField = value;
-                    this.RaisePropertyChanged("idFactuur");
+                if ((this.IdFactuurField.Equals(value) != true)) {
+                    this.IdFactuurField = value;
+                    this.RaisePropertyChanged("IdFactuur");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idLeverancier {
+        public int IdLeverancier {
             get {
-                return this.idLeverancierField;
+                return this.IdLeverancierField;
             }
             set {
-                if ((this.idLeverancierField.Equals(value) != true)) {
-                    this.idLeverancierField = value;
-                    this.RaisePropertyChanged("idLeverancier");
+                if ((this.IdLeverancierField.Equals(value) != true)) {
+                    this.IdLeverancierField = value;
+                    this.RaisePropertyChanged("IdLeverancier");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int idObjectType {
+        public int IdObjectType {
             get {
-                return this.idObjectTypeField;
+                return this.IdObjectTypeField;
             }
             set {
-                if ((this.idObjectTypeField.Equals(value) != true)) {
-                    this.idObjectTypeField = value;
-                    this.RaisePropertyChanged("idObjectType");
+                if ((this.IdObjectTypeField.Equals(value) != true)) {
+                    this.IdObjectTypeField = value;
+                    this.RaisePropertyChanged("IdObjectType");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string kenmerken {
+        public string Kenmerken {
             get {
-                return this.kenmerkenField;
+                return this.KenmerkenField;
             }
             set {
-                if ((object.ReferenceEquals(this.kenmerkenField, value) != true)) {
-                    this.kenmerkenField = value;
-                    this.RaisePropertyChanged("kenmerken");
+                if ((object.ReferenceEquals(this.KenmerkenField, value) != true)) {
+                    this.KenmerkenField = value;
+                    this.RaisePropertyChanged("Kenmerken");
                 }
             }
         }
@@ -1859,19 +1968,19 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string driverField;
+        private string DriverField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int idField;
+        private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string merkField;
+        private string MerkField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string snelheidField;
+        private string SnelheidField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string typeField;
+        private string TypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1884,66 +1993,66 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string driver {
+        public string Driver {
             get {
-                return this.driverField;
+                return this.DriverField;
             }
             set {
-                if ((object.ReferenceEquals(this.driverField, value) != true)) {
-                    this.driverField = value;
-                    this.RaisePropertyChanged("driver");
+                if ((object.ReferenceEquals(this.DriverField, value) != true)) {
+                    this.DriverField = value;
+                    this.RaisePropertyChanged("Driver");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int id {
+        public int Id {
             get {
-                return this.idField;
+                return this.IdField;
             }
             set {
-                if ((this.idField.Equals(value) != true)) {
-                    this.idField = value;
-                    this.RaisePropertyChanged("id");
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string merk {
+        public string Merk {
             get {
-                return this.merkField;
+                return this.MerkField;
             }
             set {
-                if ((object.ReferenceEquals(this.merkField, value) != true)) {
-                    this.merkField = value;
-                    this.RaisePropertyChanged("merk");
+                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
+                    this.MerkField = value;
+                    this.RaisePropertyChanged("Merk");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string snelheid {
+        public string Snelheid {
             get {
-                return this.snelheidField;
+                return this.SnelheidField;
             }
             set {
-                if ((object.ReferenceEquals(this.snelheidField, value) != true)) {
-                    this.snelheidField = value;
-                    this.RaisePropertyChanged("snelheid");
+                if ((object.ReferenceEquals(this.SnelheidField, value) != true)) {
+                    this.SnelheidField = value;
+                    this.RaisePropertyChanged("Snelheid");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string type {
+        public string Type {
             get {
-                return this.typeField;
+                return this.TypeField;
             }
             set {
-                if ((object.ReferenceEquals(this.typeField, value) != true)) {
-                    this.typeField = value;
-                    this.RaisePropertyChanged("type");
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -2080,118 +2189,33 @@ namespace CvoInventarisClient.ServiceReference {
         }
     }
     
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Hardware", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
-    [System.SerializableAttribute()]
-    public partial class Hardware : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdCpuField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdDeviceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdGrafischeKaartField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdHarddiskField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdHardwareField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdCpu {
-            get {
-                return this.IdCpuField;
-            }
-            set {
-                if ((this.IdCpuField.Equals(value) != true)) {
-                    this.IdCpuField = value;
-                    this.RaisePropertyChanged("IdCpu");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdDevice {
-            get {
-                return this.IdDeviceField;
-            }
-            set {
-                if ((this.IdDeviceField.Equals(value) != true)) {
-                    this.IdDeviceField = value;
-                    this.RaisePropertyChanged("IdDevice");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdGrafischeKaart {
-            get {
-                return this.IdGrafischeKaartField;
-            }
-            set {
-                if ((this.IdGrafischeKaartField.Equals(value) != true)) {
-                    this.IdGrafischeKaartField = value;
-                    this.RaisePropertyChanged("IdGrafischeKaart");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdHarddisk {
-            get {
-                return this.IdHarddiskField;
-            }
-            set {
-                if ((this.IdHarddiskField.Equals(value) != true)) {
-                    this.IdHarddiskField = value;
-                    this.RaisePropertyChanged("IdHarddisk");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdHardware {
-            get {
-                return this.IdHardwareField;
-            }
-            set {
-                if ((this.IdHardwareField.Equals(value) != true)) {
-                    this.IdHardwareField = value;
-                    this.RaisePropertyChanged("IdHardware");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.ICvoInventarisService")]
     public interface ICvoInventarisService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareGetAllResponse")]
+        CvoInventarisClient.ServiceReference.Hardware[] HardwareGetAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareGetAllResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware[]> HardwareGetAllAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareUpdateResponse")]
+        bool HardwareUpdate(CvoInventarisClient.ServiceReference.Hardware hardware);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareUpdateResponse")]
+        System.Threading.Tasks.Task<bool> HardwareUpdateAsync(CvoInventarisClient.ServiceReference.Hardware hardware);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareDeleteResponse")]
+        bool HardwareDelete(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareDeleteResponse")]
+        System.Threading.Tasks.Task<bool> HardwareDeleteAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HarddiskGetAllResponse")]
+        CvoInventarisClient.ServiceReference.Harddisk[] HarddiskGetAll();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HarddiskGetAllResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Harddisk[]> HarddiskGetAllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HarddiskGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/HarddiskGetByIdResponse")]
         CvoInventarisClient.ServiceReference.Harddisk HarddiskGetById(int id);
@@ -2216,6 +2240,12 @@ namespace CvoInventarisClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HarddiskDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/HarddiskDeleteResponse")]
         System.Threading.Tasks.Task<bool> HarddiskDeleteAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringHarddisk", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringHarddiskResponse")]
+        CvoInventarisClient.ServiceReference.Harddisk[] RapporteringHarddisk(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringHarddisk", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringHarddiskResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Harddisk[]> RapporteringHarddiskAsync(string s, string[] keuzeKolommen);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/LeverancierGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/LeverancierGetAllResponse")]
         CvoInventarisClient.ServiceReference.Leverancier[] LeverancierGetAll();
@@ -2246,6 +2276,12 @@ namespace CvoInventarisClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/LeverancierDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/LeverancierDeleteResponse")]
         System.Threading.Tasks.Task<bool> LeverancierDeleteAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringLeverancier", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringLeverancierResponse")]
+        CvoInventarisClient.ServiceReference.Leverancier[] RapporteringLeverancier(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringLeverancier", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringLeverancierResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Leverancier[]> RapporteringLeverancierAsync(string s, string[] keuzeKolommen);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/LokaalGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/LokaalGetAllResponse")]
         CvoInventarisClient.ServiceReference.Lokaal[] LokaalGetAll();
@@ -2445,6 +2481,12 @@ namespace CvoInventarisClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/CpuDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/CpuDeleteResponse")]
         System.Threading.Tasks.Task<bool> CpuDeleteAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringCpu", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringCpuResponse")]
+        CvoInventarisClient.ServiceReference.Cpu[] RapporteringCpu(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringCpu", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringCpuResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Cpu[]> RapporteringCpuAsync(string s, string[] keuzeKolommen);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/DeviceGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/DeviceGetByIdResponse")]
         CvoInventarisClient.ServiceReference.Device DeviceGetById(int id);
         
@@ -2475,6 +2517,12 @@ namespace CvoInventarisClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/DeviceDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/DeviceDeleteResponse")]
         System.Threading.Tasks.Task<bool> DeviceDeleteAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringDevice", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringDeviceResponse")]
+        CvoInventarisClient.ServiceReference.Device[] RapporteringDevice(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringDevice", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringDeviceResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Device[]> RapporteringDeviceAsync(string s, string[] keuzeKolommen);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/GrafischeKaartGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/GrafischeKaartGetByIdResponse")]
         CvoInventarisClient.ServiceReference.GrafischeKaart GrafischeKaartGetById(int id);
         
@@ -2504,6 +2552,12 @@ namespace CvoInventarisClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/GrafischeKaartDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/GrafischeKaartDeleteResponse")]
         System.Threading.Tasks.Task<bool> GrafischeKaartDeleteAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringGrafischeKaart", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringGrafischeKaartResponse")]
+        CvoInventarisClient.ServiceReference.GrafischeKaart[] RapporteringGrafischeKaart(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringGrafischeKaart", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringGrafischeKaartResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.GrafischeKaart[]> RapporteringGrafischeKaartAsync(string s, string[] keuzeKolommen);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/InventarisCreate", ReplyAction="http://tempuri.org/ICvoInventarisService/InventarisCreateResponse")]
         int InventarisCreate(CvoInventarisClient.ServiceReference.Inventaris inventaris);
@@ -2578,10 +2632,10 @@ namespace CvoInventarisClient.ServiceReference {
         System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Netwerk[]> NetwerkGetAllAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/NetwerkGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/NetwerkGetByIdResponse")]
-        CvoInventarisClient.ServiceReference.Netwerk NetwerkGetById(int id);
+        CvoInventarisClient.ServiceReference.Netwerk NetwerkGetById(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/NetwerkGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/NetwerkGetByIdResponse")]
-        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Netwerk> NetwerkGetByIdAsync(int id);
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Netwerk> NetwerkGetByIdAsync(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/NetwerkUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/NetwerkUpdateResponse")]
         bool NetwerkUpdate(CvoInventarisClient.ServiceReference.Netwerk Netwerk);
@@ -2590,10 +2644,16 @@ namespace CvoInventarisClient.ServiceReference {
         System.Threading.Tasks.Task<bool> NetwerkUpdateAsync(CvoInventarisClient.ServiceReference.Netwerk Netwerk);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/NetwerkDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/NetwerkDeleteResponse")]
-        bool NetwerkDelete(int id);
+        bool NetwerkDelete(int Id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/NetwerkDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/NetwerkDeleteResponse")]
-        System.Threading.Tasks.Task<bool> NetwerkDeleteAsync(int id);
+        System.Threading.Tasks.Task<bool> NetwerkDeleteAsync(int Id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringNetwerk", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringNetwerkResponse")]
+        CvoInventarisClient.ServiceReference.Netwerk[] RapporteringNetwerk(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringNetwerk", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringNetwerkResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Netwerk[]> RapporteringNetwerkAsync(string s, string[] keuzeKolommen);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/VerzekeringCreate", ReplyAction="http://tempuri.org/ICvoInventarisService/VerzekeringCreateResponse")]
         int VerzekeringCreate(CvoInventarisClient.ServiceReference.Verzekering verzekering);
@@ -2666,30 +2726,6 @@ namespace CvoInventarisClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareGetByIdResponse")]
         System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware> HardwareGetByIdAsync(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareGetAllResponse")]
-        CvoInventarisClient.ServiceReference.Hardware[] HardwareGetAll();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareGetAllResponse")]
-        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware[]> HardwareGetAllAsync();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareUpdateResponse")]
-        bool HardwareUpdate(CvoInventarisClient.ServiceReference.Hardware hardware);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareUpdateResponse")]
-        System.Threading.Tasks.Task<bool> HardwareUpdateAsync(CvoInventarisClient.ServiceReference.Hardware hardware);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareDeleteResponse")]
-        bool HardwareDelete(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareDeleteResponse")]
-        System.Threading.Tasks.Task<bool> HardwareDeleteAsync(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HarddiskGetAllResponse")]
-        CvoInventarisClient.ServiceReference.Harddisk[] HarddiskGetAll();
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HarddiskGetAllResponse")]
-        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Harddisk[]> HarddiskGetAllAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2717,6 +2753,38 @@ namespace CvoInventarisClient.ServiceReference {
         
         public CvoInventarisServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public CvoInventarisClient.ServiceReference.Hardware[] HardwareGetAll() {
+            return base.Channel.HardwareGetAll();
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware[]> HardwareGetAllAsync() {
+            return base.Channel.HardwareGetAllAsync();
+        }
+        
+        public bool HardwareUpdate(CvoInventarisClient.ServiceReference.Hardware hardware) {
+            return base.Channel.HardwareUpdate(hardware);
+        }
+        
+        public System.Threading.Tasks.Task<bool> HardwareUpdateAsync(CvoInventarisClient.ServiceReference.Hardware hardware) {
+            return base.Channel.HardwareUpdateAsync(hardware);
+        }
+        
+        public bool HardwareDelete(int id) {
+            return base.Channel.HardwareDelete(id);
+        }
+        
+        public System.Threading.Tasks.Task<bool> HardwareDeleteAsync(int id) {
+            return base.Channel.HardwareDeleteAsync(id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.Harddisk[] HarddiskGetAll() {
+            return base.Channel.HarddiskGetAll();
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Harddisk[]> HarddiskGetAllAsync() {
+            return base.Channel.HarddiskGetAllAsync();
         }
         
         public CvoInventarisClient.ServiceReference.Harddisk HarddiskGetById(int id) {
@@ -2749,6 +2817,14 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> HarddiskDeleteAsync(int id) {
             return base.Channel.HarddiskDeleteAsync(id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.Harddisk[] RapporteringHarddisk(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringHarddisk(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Harddisk[]> RapporteringHarddiskAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringHarddiskAsync(s, keuzeKolommen);
         }
         
         public CvoInventarisClient.ServiceReference.Leverancier[] LeverancierGetAll() {
@@ -2789,6 +2865,14 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> LeverancierDeleteAsync(int id) {
             return base.Channel.LeverancierDeleteAsync(id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.Leverancier[] RapporteringLeverancier(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringLeverancier(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Leverancier[]> RapporteringLeverancierAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringLeverancierAsync(s, keuzeKolommen);
         }
         
         public CvoInventarisClient.ServiceReference.Lokaal[] LokaalGetAll() {
@@ -3055,6 +3139,14 @@ namespace CvoInventarisClient.ServiceReference {
             return base.Channel.CpuDeleteAsync(id);
         }
         
+        public CvoInventarisClient.ServiceReference.Cpu[] RapporteringCpu(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringCpu(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Cpu[]> RapporteringCpuAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringCpuAsync(s, keuzeKolommen);
+        }
+        
         public CvoInventarisClient.ServiceReference.Device DeviceGetById(int id) {
             return base.Channel.DeviceGetById(id);
         }
@@ -3095,6 +3187,14 @@ namespace CvoInventarisClient.ServiceReference {
             return base.Channel.DeviceDeleteAsync(id);
         }
         
+        public CvoInventarisClient.ServiceReference.Device[] RapporteringDevice(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringDevice(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Device[]> RapporteringDeviceAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringDeviceAsync(s, keuzeKolommen);
+        }
+        
         public CvoInventarisClient.ServiceReference.GrafischeKaart GrafischeKaartGetById(int id) {
             return base.Channel.GrafischeKaartGetById(id);
         }
@@ -3133,6 +3233,14 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> GrafischeKaartDeleteAsync(int id) {
             return base.Channel.GrafischeKaartDeleteAsync(id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.GrafischeKaart[] RapporteringGrafischeKaart(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringGrafischeKaart(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.GrafischeKaart[]> RapporteringGrafischeKaartAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringGrafischeKaartAsync(s, keuzeKolommen);
         }
         
         public int InventarisCreate(CvoInventarisClient.ServiceReference.Inventaris inventaris) {
@@ -3231,12 +3339,12 @@ namespace CvoInventarisClient.ServiceReference {
             return base.Channel.NetwerkGetAllAsync();
         }
         
-        public CvoInventarisClient.ServiceReference.Netwerk NetwerkGetById(int id) {
-            return base.Channel.NetwerkGetById(id);
+        public CvoInventarisClient.ServiceReference.Netwerk NetwerkGetById(int Id) {
+            return base.Channel.NetwerkGetById(Id);
         }
         
-        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Netwerk> NetwerkGetByIdAsync(int id) {
-            return base.Channel.NetwerkGetByIdAsync(id);
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Netwerk> NetwerkGetByIdAsync(int Id) {
+            return base.Channel.NetwerkGetByIdAsync(Id);
         }
         
         public bool NetwerkUpdate(CvoInventarisClient.ServiceReference.Netwerk Netwerk) {
@@ -3247,12 +3355,20 @@ namespace CvoInventarisClient.ServiceReference {
             return base.Channel.NetwerkUpdateAsync(Netwerk);
         }
         
-        public bool NetwerkDelete(int id) {
-            return base.Channel.NetwerkDelete(id);
+        public bool NetwerkDelete(int Id) {
+            return base.Channel.NetwerkDelete(Id);
         }
         
-        public System.Threading.Tasks.Task<bool> NetwerkDeleteAsync(int id) {
-            return base.Channel.NetwerkDeleteAsync(id);
+        public System.Threading.Tasks.Task<bool> NetwerkDeleteAsync(int Id) {
+            return base.Channel.NetwerkDeleteAsync(Id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.Netwerk[] RapporteringNetwerk(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringNetwerk(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Netwerk[]> RapporteringNetwerkAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringNetwerkAsync(s, keuzeKolommen);
         }
         
         public int VerzekeringCreate(CvoInventarisClient.ServiceReference.Verzekering verzekering) {
@@ -3349,38 +3465,6 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware> HardwareGetByIdAsync(int id) {
             return base.Channel.HardwareGetByIdAsync(id);
-        }
-        
-        public CvoInventarisClient.ServiceReference.Hardware[] HardwareGetAll() {
-            return base.Channel.HardwareGetAll();
-        }
-        
-        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware[]> HardwareGetAllAsync() {
-            return base.Channel.HardwareGetAllAsync();
-        }
-        
-        public bool HardwareUpdate(CvoInventarisClient.ServiceReference.Hardware hardware) {
-            return base.Channel.HardwareUpdate(hardware);
-        }
-        
-        public System.Threading.Tasks.Task<bool> HardwareUpdateAsync(CvoInventarisClient.ServiceReference.Hardware hardware) {
-            return base.Channel.HardwareUpdateAsync(hardware);
-        }
-        
-        public bool HardwareDelete(int id) {
-            return base.Channel.HardwareDelete(id);
-        }
-        
-        public System.Threading.Tasks.Task<bool> HardwareDeleteAsync(int id) {
-            return base.Channel.HardwareDeleteAsync(id);
-        }
-        
-        public CvoInventarisClient.ServiceReference.Harddisk[] HarddiskGetAll() {
-            return base.Channel.HarddiskGetAll();
-        }
-        
-        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Harddisk[]> HarddiskGetAllAsync() {
-            return base.Channel.HarddiskGetAllAsync();
         }
     }
 }
