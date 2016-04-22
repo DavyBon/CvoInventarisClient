@@ -1,10 +1,10 @@
-﻿@model IEnumerable<CvoInventarisClient.ServiceReference.Inventaris>
+﻿@model IEnumerable<CvoInventarisClient.Models.InventarisModel>
 
 @{
     ViewBag.Title = "Index";
 }
 
-<h2>@ViewBag.Test</h2>
+<h2>Index</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,22 +12,10 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Aankoopjaar)
+            @Html.DisplayNameFor(model => model.Label)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Afschrijvingsperiode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Historiek)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdLokaal)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdObject)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IdVerzekering)
+            @Html.DisplayNameFor(model => model.Object.ObjectType.Omschrijving)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsAanwezig)
@@ -35,41 +23,23 @@
         <th>
             @Html.DisplayNameFor(model => model.IsActief)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Label)
-        </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Aankoopjaar)
+            @Html.DisplayFor(modelItem => item.Label)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Afschrijvingsperiode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Historiek)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdLokaal)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdObject)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdVerzekering)
+            @Html.DisplayFor(modelItem => item.Object.Kenmerken)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsAanwezig)
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.IsActief)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Label)
-        </td>
+        </td>      
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
             @Html.ActionLink("Details", "Details", new { id=item.Id }) |
