@@ -7,5 +7,7 @@ namespace CvoInventarisClient.Models
 {
     public class ObjectTypeModel
     {
+        public int IdObjectType { get; set; }
+        public string Omschrijving { get; set; }
     }
 }

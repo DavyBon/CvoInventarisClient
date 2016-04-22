@@ -194,13 +194,16 @@
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\FactuurController.cs" />
     <Compile Include="Controllers\GrafischeKaartController.cs" />
+    <Compile Include="Controllers\HardwareController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InventarisController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\NetwerkController.cs" />
     <Compile Include="Controllers\ObjectController.cs" />
+    <Compile Include="Controllers\ObjectTypeController.cs" />
     <Compile Include="Controllers\OverzichtController.cs" />
     <Compile Include="Controllers\RapporteringController.cs" />
+    <Compile Include="Controllers\VerzekeringController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -210,6 +213,7 @@
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\FactuurModel.cs" />
     <Compile Include="Models\HarddiskModel.cs" />
+    <Compile Include="Models\HardwareModel.cs" />
     <Compile Include="Models\InventarisModel.cs" />
     <Compile Include="Models\LeverancierModel.cs" />
     <Compile Include="Models\LokaalModel.cs" />
@@ -298,6 +302,9 @@
     <None Include="Service References\ServiceReference\Service13.xsd">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Views\Verzekering\Index.cshtml" />
+    <Content Include="Views\ObjectType\Index.cshtml" />
+    <Content Include="Views\Hardware\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

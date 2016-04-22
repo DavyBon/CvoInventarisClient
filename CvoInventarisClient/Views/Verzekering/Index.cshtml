@@ -1,0 +1,45 @@
+﻿@model IEnumerable<CvoInventarisClient.Models.VerzekeringModel>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdVerzekering)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Omschrijving)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.IdVerzekering)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Omschrijving)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.IdVerzekering }) |
+                @Html.ActionLink("Details", "Details", new { id = item.IdVerzekering }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.IdVerzekering })
+            </td>
+        </tr>
+    }
+</table>
+
+
