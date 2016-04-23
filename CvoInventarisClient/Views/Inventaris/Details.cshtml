@@ -1,4 +1,4 @@
-﻿@model CvoInventarisClient.ServiceReference.Inventaris
+﻿@model CvoInventarisClient.Models.InventarisModel
 
 @{
     ViewBag.Title = "Details";
@@ -7,57 +7,9 @@
 <h2>Details</h2>
 
 <div>
-    <h4>TblInventaris</h4>
+    <h4>InventarisModel</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Aankoopjaar)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Aankoopjaar)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Afschrijvingsperiode)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Afschrijvingsperiode)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Historiek)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Historiek)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdLokaal)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdLokaal)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdObject)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdObject)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.IdVerzekering)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.IdVerzekering)
-        </dd>
-
         <dt>
             @Html.DisplayNameFor(model => model.IsAanwezig)
         </dt>

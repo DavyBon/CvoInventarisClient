@@ -1,15 +1,16 @@
 ﻿@model IEnumerable<CvoInventarisClient.Models.InventarisModel>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Inventaris";
 }
 
 <div class="panel panel-primary">
     <div class="panel-heading">Inventaris</div>
     <table class="table">
         <tr>
+            <th></th>
             <th>
-                @Html.DisplayNameFor(model => model.Label)
+                Label
             </th>
             <th>
                 Omschrijving
@@ -18,17 +19,25 @@
                 Type
             </th>
             <th>
+                Lokaal
+            </th>
+            <th>
                 Aanwezig
             </th>
             <th>
                 Actief
             </th>
-            <th></th>
+            <th>
+                Verzekeringstype
+            </th>
         </tr>
 
         @foreach (var item in Model)
         {
             <tr>
+                <td>
+                    <a class="bottom-align-text" href="@Url.Action("Edit","Inventaris", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Label)
                 </td>
@@ -39,21 +48,23 @@
                     @Html.DisplayFor(modelItem => item.Object.ObjectType.Omschrijving)
                 </td>
                 <td>
+                    @Html.DisplayFor(modelItem => item.Lokaal.LokaalNaam)
+                </td>
+                <td>
                     @Html.DisplayFor(modelItem => item.IsAanwezig)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.IsActief)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
                 </td>
             </tr>
         }
 
     </table>
-    <p>
-        @Html.ActionLink("Nieuw", "Create", "Inventaris", null, new { @class = "btn btn-default" })
-    </p>
 </div>
+<p>
+    @Html.ActionLink("Nieuw", "Create", "Inventaris", null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Delete", "Delete", new { id = 99 }, new { @class = "btn btn-danger" })
+</p>
