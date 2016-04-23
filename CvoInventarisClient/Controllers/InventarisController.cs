@@ -22,14 +22,15 @@ namespace CvoInventarisClient.Controllers
                 {
                     InventarisModel inventarisModel = new InventarisModel();
 
+                    //Objecten van webservice
                     ServiceReference.Object obj = client.ObjectGetById(i.IdObject);
-                    //Objecten van wcf
                     Leverancier lev = client.LeverancierGetById(obj.IdLeverancier);
                     Factuur fac = client.FactuurGetById(obj.IdFactuur);
                     ObjectTypes objType = client.ObjectTypeGetById(obj.IdObjectType);
                     Verzekering ver = client.VerzekeringGetById(i.IdVerzekering);
                     Lokaal lok = client.LokaalGetById(i.IdLokaal);
                     Netwerk net = client.NetwerkGetById(lok.IdNetwerk);
+
                     //Objecten van wcf naar models
                     LeverancierModel leverancierModel = new LeverancierModel();
                     leverancierModel.IdLeverancier = lev.IdLeverancier;
@@ -78,8 +79,8 @@ namespace CvoInventarisClient.Controllers
                     netwerkModel.Type = net.Type;
 
                     ObjectTypeModel objectTypeModel = new ObjectTypeModel();
-                    //afmaken wanneer model klaar is
-
+                    objectTypeModel.IdObjectType = objType.Id;
+                    objectTypeModel.Omschrijving = objType.Omschrijving;
 
                     ObjectModel objectModel = new ObjectModel();
                     objectModel.Id = obj.Id;
@@ -89,7 +90,8 @@ namespace CvoInventarisClient.Controllers
                     objectModel.Kenmerken = obj.Kenmerken;
 
                     VerzekeringModel verzekeringModel = new VerzekeringModel();
-                    //afmaken wanneer model klaar is
+                    verzekeringModel.IdVerzekering = ver.Id;
+                    verzekeringModel.Omschrijving = ver.Omschrijving;
 
                     LokaalModel lokaalModel = new LokaalModel();
                     lokaalModel.IdLokaal = lok.IdLokaal;

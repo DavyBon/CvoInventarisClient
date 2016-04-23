@@ -4,48 +4,56 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<div class="panel panel-primary">
+    <div class="panel-heading">Inventaris</div>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Label)
+            </th>
+            <th>
+                Omschrijving
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Aanwezig
+            </th>
+            <th>
+                Actief
+            </th>
+            <th></th>
+        </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Label)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Object.ObjectType.Omschrijving)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsAanwezig)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsActief)
-        </th>
-        <th></th>
-    </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Label)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Object.Kenmerken)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Object.ObjectType.Omschrijving)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsAanwezig)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IsActief)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Label)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Object.Kenmerken)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsAanwezig)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActief)
-        </td>      
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
-</table>
+    </table>
+    <p>
+        @Html.ActionLink("Nieuw", "Create", "Inventaris", null, new { @class = "btn btn-default" })
+    </p>
+</div>
