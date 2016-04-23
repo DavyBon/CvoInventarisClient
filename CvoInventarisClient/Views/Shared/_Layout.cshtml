@@ -11,9 +11,9 @@
 </head>
 <body>
     <div class="container-fluid">
-        <div class="row stretchHorizontal">
-            <div class="col-lg-2 stretchHorizontal">
-                <ul class="nav nav-pills nav-stacked stretchHorizontal">
+        <div class="row">
+            <div class="col-lg-2">
+                <ul class="nav nav-pills nav-stacked">
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Profiel" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-user"></span> Account</a></li>
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Overzicht" ? "active" : "")"><a href="@Url.Action("Index","Overzicht")"><span class="glyphicon glyphicon-list-alt"></span> Overzicht</a></li>

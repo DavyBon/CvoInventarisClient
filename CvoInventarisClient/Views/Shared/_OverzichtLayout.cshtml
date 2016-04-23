@@ -11,16 +11,12 @@
     <meta name="description" content="CvoInventaris applicatie" />
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row stretchHorizontal">
-            <div class="col-lg-1 stretchHorizontal">
-                <ul class="nav nav-pills nav-stacked stretchHorizontal">
-                    <li><a class="bottom-align-text" href="@Url.Action("Index","Overzicht")"><span class="glyphicon glyphicon-arrow-left"></span> Overzicht</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-11">
-                @RenderBody()
-            </div>
+    <div class="container">
+        <div class="row">
+            <a class="bottom-align-text" href="@Url.Action("Index","Overzicht")"><span class="glyphicon glyphicon-arrow-left"></span> Overzicht</a>
+        </div>
+        <div class="row">
+            @RenderBody();
         </div>
     </div>
     <script src="~/Scripts/bootstrap.js"></script>
