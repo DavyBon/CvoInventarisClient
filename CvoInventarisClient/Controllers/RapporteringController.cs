@@ -11,6 +11,7 @@ using CvoInventarisClient.ServiceReference;
 using CvoInventarisClient.Models;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace WebApplication.Controllers
 {
@@ -194,6 +195,10 @@ namespace WebApplication.Controllers
             if (requestOplossing[0].Equals("OpslaanPdf"))
             {
                 OpslaanPdf(requestOplossing[1]);
+            }
+            if (requestOplossing[0].Equals("OpslaanExcel"))
+            {
+                OpslaanExcel(requestOplossing[1]);
             }
             return null;
 
@@ -1142,8 +1147,36 @@ namespace WebApplication.Controllers
             { Response.Write(ex.Message); }
         }
 
-        public ActionResult OpslaanExcel()
+        public ActionResult OpslaanExcel(string stap1)
         {
+            if (stap1.Equals("objectType"))
+            {
+                List<ObjectTypes> objectTypes = test.ObjectTypeGetAll().ToList();
+                List<ObjectTypeModel> objectTypesOplossing = new List<ObjectTypeModel>();
+                foreach(ObjectTypes ot in objectTypes)
+                {
+                    ObjectTypeModel model = new ObjectTypeModel();
+                    model.IdObjectType = ot.Id;
+                    model.Omschrijving = ot.Omschrijving;
+                    objectTypesOplossing.Add(model);
+                }
+                Response.ClearContent();
+                Response.AddHeader("content-disposition", "attachment;filename=Contact.xls");
+                Response.AddHeader("Content-Type", "application/vnd.ms-excel");
+                using (System.IO.StringWriter sw = new System.IO.StringWriter())
+                {
+                    using (System.Web.UI.HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw))
+                    {
+                        GridView grid = new GridView();
+                        grid.DataSource = objectTypesOplossing;
+                        grid.DataBind();
+                        grid.RenderControl(htw);
+                        Response.Write(sw.ToString());
+                    }
+                }
+
+                Response.End();
+            }
 
             return View("Index");
         }

@@ -100,3 +100,41 @@ D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventar
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\csc.exe
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\vbc.exe
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\VBCSCompiler.exe
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll.config
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.pdb
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.pdfa.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xtra.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.xml
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
+C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
