@@ -87,7 +87,7 @@
                     @Html.Hidden("query", (string)@ViewBag.query)
                     @Html.Hidden("tables", (string)@ViewBag.tables)
                     <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
-                    <button type="submit" value="OpslaanExcel">Opslaan als excel</button>
+                    <button name="action" type="submit" value="OpslaanExcel/@ViewBag.query/@ViewBag.tables">Opslaan als excel</button>
                     <button name="action" type="submit" value="OpslaanPdf/@ViewBag.query/@ViewBag.tables">opslaan als pdf</button>
                 }
         </div>

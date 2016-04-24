@@ -216,6 +216,11 @@ namespace WebApplication.Controllers
                 OpslaanPdfCpu(requestOplossing[1], requestOplossing[2]);
                 ViewBag.testj = requestOplossing[1] + requestOplossing[2];
             }
+            if (requestOplossing[0].Equals("OpslaanExcel"))
+            {
+                OpslaanExcelCpu(requestOplossing[1], requestOplossing[2]);
+                ViewBag.testj = requestOplossing[1] + requestOplossing[2];
+            }
             if (requestOplossing[0].Equals("kolomKeuze"))
             {
                 string resultaat = "";
@@ -1313,7 +1318,52 @@ namespace WebApplication.Controllers
                 Response.End();
         }
 
-       public void OpslaanPdfCpu(string query, string tables)
+        public void OpslaanExcelCpu(string query, string tables)
+        {
+            GridView grid = new GridView();
+            string[] tablesOplossingVoorlopig = tables.Split(' ');
+            string[] tabllesOplossing = new string[tablesOplossingVoorlopig.Count()];
+            int teller = 0;
+            foreach (string s in tablesOplossingVoorlopig)
+            {
+                if (!s.Equals(" "))
+                {
+                    tabllesOplossing[teller] = s; teller++;
+                }
+            }
+            tabllesOplossing = tablesOplossingVoorlopig.Take(tablesOplossingVoorlopig.Count() - 1).ToArray();
+            List<Cpu> cpuRapport = test.RapporteringCpu(query, tabllesOplossing).ToList();
+            List<CpuModel> modellen = new List<CpuModel>();
+            foreach (Cpu c in cpuRapport)
+            {
+                CpuModel model = new CpuModel();
+                if (c.IdCpu != 0)
+                {
+                    model.IdCpu = c.IdCpu;
+                }
+                if (c.Merk != null)
+                {
+                    model.Merk = c.Merk;
+                }
+                if (c.Type != null)
+                {
+                    model.Type = c.Type;
+                }
+                if (c.Snelheid != 0)
+                {
+                    model.Snelheid = c.Snelheid;
+                }
+                if (c.FabrieksNummer != null)
+                {
+                    model.FabrieksNummer = c.FabrieksNummer;
+                }
+                modellen.Add(model);
+            }
+            grid.DataSource = modellen;
+            toExcel(grid);
+        }
+
+        public void OpslaanPdfCpu(string query, string tables)
         {
             try
             {
