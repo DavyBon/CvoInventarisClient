@@ -4,67 +4,74 @@
     ViewBag.Title = "Inventaris";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Inventaris</div>
-    <table class="table">
-        <tr>
-            <th></th>
-            <th>
-                Label
-            </th>
-            <th>
-                Omschrijving
-            </th>
-            <th>
-                Type
-            </th>
-            <th>
-                Lokaal
-            </th>
-            <th>
-                Aanwezig
-            </th>
-            <th>
-                Actief
-            </th>
-            <th>
-                Verzekeringstype
-            </th>
-        </tr>
+@using (Html.BeginForm("Delete", "Inventaris"))
+{
 
-        @foreach (var item in Model)
-        {
+    <div class="panel panel-primary">
+        <div class="panel-heading">Inventaris</div>
+        <table class="table">
             <tr>
-                <td>
-                    <a class="bottom-align-text" href="@Url.Action("Edit","Inventaris", new {id = item.Id})"><span class="glyphicon glyphicon-pencil"></span></a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Label)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Object.Kenmerken)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Object.ObjectType.Omschrijving)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Lokaal.LokaalNaam)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsAanwezig)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IsActief)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
-                </td>
+                <th></th>
+                <th></th>
+                <th>
+                    Label
+                </th>
+                <th>
+                    Omschrijving
+                </th>
+                <th>
+                    Type
+                </th>
+                <th>
+                    Lokaal
+                </th>
+                <th>
+                    Aanwezig
+                </th>
+                <th>
+                    Actief
+                </th>
+                <th>
+                    Verzekeringstype
+                </th>
             </tr>
-        }
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="idArray" value="@item.Id" />
+                    </td>
+                    <td>
+                        <a class="bottom-align-text" href="@Url.Action("Edit", "Inventaris", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Object.Kenmerken)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Object.ObjectType.Omschrijving)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lokaal.LokaalNaam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAanwezig)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActief)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
+                    </td>
+                </tr>
+            }
 
-    </table>
-</div>
-<p>
-    @Html.ActionLink("Nieuw", "Create", "Inventaris", null, new { @class = "btn btn-primary" })
-    @Html.ActionLink("Delete", "Delete", new { id = 99 }, new { @class = "btn btn-danger" })
-</p>
+        </table>
+    </div>
+    <p>
+        @Html.ActionLink("Nieuw", "Create", "Inventaris", null, new { @class = "btn btn-primary" })
+        <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+    </p>
+}

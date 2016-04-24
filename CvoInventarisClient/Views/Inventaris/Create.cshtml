@@ -1,7 +1,7 @@
 ﻿@model CvoInventarisClient.ServiceReference.Inventaris
 
 @{
-    ViewBag.Title = "Create";
+    ViewBag.Title = "Voeg toe";
 }
 
 <h2>Create</h2>
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>TblInventaris</h4>
+        <h4>Inventaris</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
