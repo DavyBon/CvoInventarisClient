@@ -1147,7 +1147,7 @@ namespace WebApplication.Controllers
             { Response.Write(ex.Message); }
         }
 
-        public ActionResult OpslaanExcel(string stap1)
+        public void OpslaanExcel(string stap1)
         {
             if (stap1.Equals("objectType"))
             {
@@ -1177,8 +1177,6 @@ namespace WebApplication.Controllers
 
                 Response.End();
             }
-
-            return View("Index");
         }
 
        public void OpslaanPdfCpu(string query, string tables)
