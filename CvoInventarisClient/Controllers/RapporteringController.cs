@@ -114,7 +114,9 @@ namespace WebApplication.Controllers
                 }
                 if (stap1.Equals("factuur"))
                 {
-                    
+                    ViewBag.FactuurList = test.FactuurGetAll();
+                    ViewBag.Factuur = "inline";
+                    ViewBag.resultaat = stap1;
                 }
                 if (stap1.Equals("grafischeKaart"))
                 {
@@ -981,7 +983,7 @@ namespace WebApplication.Controllers
                 }
                 if (stap1.Equals("factuur"))
                 {
-                    PdfPTable table = new PdfPTable(6);
+                    PdfPTable table = new PdfPTable(21);
                     List<Factuur> facturen = test.FactuurGetAll().ToList();
                     foreach(var item in facturen)
                     {
@@ -1147,28 +1149,161 @@ namespace WebApplication.Controllers
             { Response.Write(ex.Message); }
         }
 
-        public ActionResult OpslaanExcel(string stap1)
+        public void OpslaanExcel(string stap1)
         {
+            GridView grid = new GridView();
             if (stap1.Equals("objectType"))
             {
-                List<ObjectTypes> objectTypes = test.ObjectTypeGetAll().ToList();
-                List<ObjectTypeModel> objectTypesOplossing = new List<ObjectTypeModel>();
-                foreach(ObjectTypes ot in objectTypes)
+                grid.DataSource = test.ObjectTypeGetAll().ToList();
+            }
+            if (stap1.Equals("verzekering"))
+            {
+                grid.DataSource = test.VerzekeringGetAll().ToList();
+            }
+            if (stap1.Equals("cpu"))
+            {
+                grid.DataSource = test.CpuGetAll().ToList();
+            }
+            if (stap1.Equals("device"))
+            {
+                List<DeviceModel> modellen = new List<DeviceModel>();
+                List<Device> devices = test.DeviceGetAll().ToList();
+                foreach(Device d in devices)
                 {
-                    ObjectTypeModel model = new ObjectTypeModel();
-                    model.IdObjectType = ot.Id;
-                    model.Omschrijving = ot.Omschrijving;
-                    objectTypesOplossing.Add(model);
+                    DeviceModel model = new DeviceModel();
+                    model.IdDevice = d.IdDevice;
+                    model.Merk = d.Merk;
+                    model.Type = d.Type;
+                    model.Serienummer = d.Serienummer;
+                    model.IsPcCompatibel = d.IsPcCompatibel;
+                    model.FabrieksNummer = d.FabrieksNummer;
+                    modellen.Add(model);
                 }
-                Response.ClearContent();
-                Response.AddHeader("content-disposition", "attachment;filename=Contact.xls");
+                grid.DataSource = modellen;
+            }
+            if (stap1.Equals("factuur"))
+            {
+                List<FactuurModel> modellen = new List<FactuurModel>();
+                List<Factuur> facturen = new List<Factuur>();
+                foreach(Factuur f in facturen)
+                {
+                    FactuurModel model = new FactuurModel();
+                    model.IdFactuur = f.IdFactuur;
+                    model.Boekjaar = f.Boekjaar;
+                    model.CvoVolgNummer = f.CvoVolgNummer;
+                    model.FactuurNummer = f.FactuurNummer;
+                    model.FactuurDatum = f.FactuurDatum;
+                    model.FactuurStatusGetekend = f.FactuurStatusGetekend;
+                    model.VerwerkingsDatum = f.VerwerkingsDatum;
+                    model.Leverancier.IdLeverancier = f.IdLeverancier;
+                    model.Prijs = f.Prijs;
+                    model.Garantie = f.Garantie;
+                    model.Omschrijving = f.Omschrijving;
+                    model.Opmerking = f.Opmerking;
+                    model.Afschrijfperiode = f.Afschrijfperiode;
+                    model.OleDoc = f.OleDoc;
+                    model.OleDocPath = f.OleDocPath;
+                    model.OleDocFileName = f.OleDocFileName;
+                    model.DatumInsert = f.DatumInsert;
+                    model.UserInsert = f.UserInsert;
+                    model.DatumModified = f.DatumModified;
+                    model.UserModified = f.UserModified;
+                    modellen.Add(model);
+                }
+                grid.DataSource = modellen;
+            }
+            if (stap1.Equals("grafischeKaart"))
+            {
+                List<GrafischeKaartModel> modellen = new List<GrafischeKaartModel>();
+                List<GrafischeKaart> grafischeKaarten = test.GrafischeKaartGetAll().ToList();
+                foreach(GrafischeKaart g in grafischeKaarten)
+                {
+                    GrafischeKaartModel model = new GrafischeKaartModel();
+                    model.IdGrafischeKaart = g.IdGrafischeKaart;
+                    model.Merk = g.Merk;
+                    model.Type = g.Type;
+                    model.Driver = g.Driver;
+                    model.FabrieksNummer = g.FabrieksNummer;
+                    modellen.Add(model);
+                }
+                grid.DataSource = modellen;
+            }
+            if (stap1.Equals("harddisk"))
+            {
+                List<HarddiskModel> modellen = new List<HarddiskModel>();
+                List<Harddisk> harddisks = test.HarddiskGetAll().ToList();
+                foreach(Harddisk h in harddisks)
+                {
+                    HarddiskModel model = new HarddiskModel();
+                    model.IdHarddisk = h.IdHarddisk;
+                    model.Merk = h.Merk;
+                    model.Grootte = h.Grootte;
+                    model.FabrieksNummer = h.FabrieksNummer;
+                    modellen.Add(model);
+                }
+                grid.DataSource = modellen;
+            }
+            if (stap1.Equals("hardware"))
+            {
+                List<HardwareModel> modellen = new List<HardwareModel>();
+                List<Hardware> hardwares = new List<Hardware>();
+                foreach(Hardware h in hardwares)
+                {
+                    HardwareModel model = new HardwareModel();
+                    model.IdHardware = h.IdHardware;
+                    model.IdCpu = h.IdCpu;
+                    model.IdDevice = h.IdDevice;
+                    model.IdGrafischeKaart = h.IdGrafischeKaart;
+                    model.IdHarddisk = h.IdHarddisk;
+                    modellen.Add(model);
+                }
+                grid.DataSource = modellen;
+            }
+            if (stap1.Equals("inventaris"))
+            {
+                grid.DataSource = test.InventarisGetAll().ToList();
+            }
+            if (stap1.Equals("leverancier"))
+            {
+                grid.DataSource = test.LeverancierGetAll().ToList();
+            }
+            if (stap1.Equals("lokaal"))
+            {
+                grid.DataSource = test.LokaalGetAll().ToList();
+            }
+            if (stap1.Equals("netwerk"))
+            {
+                List<NetwerkModel> modellen = new List<NetwerkModel>();
+                List<Netwerk> netwerken = new List<Netwerk>();
+                foreach(Netwerk n in netwerken)
+                {
+                    NetwerkModel model = new NetwerkModel();
+                    model.Id = n.Id;
+                    model.Merk = n.Merk;
+                    model.Type = n.Type;
+                    model.Snelheid = n.Snelheid;
+                    model.Driver = n.Driver;
+                    modellen.Add(model);
+                }
+                grid.DataSource = modellen;
+            }
+            if (stap1.Equals("object"))
+            {
+                grid.DataSource = test.ObjectGetAll().ToList();
+            }
+            toExcel(grid);
+        }
+
+        public void toExcel(GridView grid)
+        {
+            Response.ClearContent();
+                Response.AddHeader("content-disposition", "attachment;filename=rapport.xls");
                 Response.AddHeader("Content-Type", "application/vnd.ms-excel");
                 using (System.IO.StringWriter sw = new System.IO.StringWriter())
                 {
                     using (System.Web.UI.HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw))
                     {
-                        GridView grid = new GridView();
-                        grid.DataSource = objectTypesOplossing;
+                        grid.AllowSorting = false;
                         grid.DataBind();
                         grid.RenderControl(htw);
                         Response.Write(sw.ToString());
@@ -1176,9 +1311,6 @@ namespace WebApplication.Controllers
                 }
 
                 Response.End();
-            }
-
-            return View("Index");
         }
 
        public void OpslaanPdfCpu(string query, string tables)
