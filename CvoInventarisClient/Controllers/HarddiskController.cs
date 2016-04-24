@@ -18,35 +18,26 @@ namespace CvoInventarisClient.Controllers
         {
             return View(ReadAll());
         }
-        
+
         private List<HarddiskModel> ReadAll()
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Harddisk[] arrHarddisks = new Harddisk[] { };
-
-            try
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                arrHarddisks = sr.HarddiskGetAll();
-            }
-            catch (Exception e)
-            {
+                List<Harddisk> listHarddisk = sr.HarddiskGetAll().ToList();
 
-            }
-           
-            List<HarddiskModel> listHarddisks = new List<HarddiskModel>();
+                List<HarddiskModel> listHarddisks = new List<HarddiskModel>();
 
-            foreach (Harddisk harddisk in arrHarddisks)
-            {
-                HarddiskModel hd = new HarddiskModel();
-                hd.IdHarddisk = harddisk.IdHarddisk;
-                hd.Merk = harddisk.Merk;
-                hd.Grootte = harddisk.Grootte;
-                hd.FabrieksNummer = harddisk.FabrieksNummer;
-                listHarddisks.Add(hd);
+                foreach (Harddisk harddisk in listHarddisk)
+                {
+                    HarddiskModel harddiskModel = new HarddiskModel();
+                    harddiskModel.IdHarddisk = harddisk.IdHarddisk;
+                    harddiskModel.Merk = harddisk.Merk;
+                    harddiskModel.Grootte = harddisk.Grootte;
+                    harddiskModel.FabrieksNummer = harddisk.FabrieksNummer;
+                    listHarddisks.Add(harddiskModel);
+                }
+                return listHarddisks;
             }
-
-            return listHarddisks;
         }
 
 
@@ -59,36 +50,36 @@ namespace CvoInventarisClient.Controllers
         }
         
         [HttpPost]
-        public ActionResult Insert(HarddiskModel hd)
+        public ActionResult Insert(HarddiskModel harddiskModel)
         {
-            if(insertHarddisk(hd) >= 0)
+            if(insertHarddisk(harddiskModel) >= 0)
             {
-                ViewBag.CreateMessage = "Row inserted";
                 return View("Index", ReadAll());
             }
             else
             {
-                ViewBag.EditMessage = "Row not inserted";
-                return View();
+                return View("Insert");
             }
         }
-        
-        public int insertHarddisk(HarddiskModel hd)
+
+        public int insertHarddisk(HarddiskModel harddiskModel)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Harddisk harddisk = new Harddisk();
-            harddisk.Merk = hd.Merk;
-            harddisk.Grootte = hd.Grootte;
-            harddisk.FabrieksNummer = hd.FabrieksNummer;
-
-            try
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                return sr.HarddiskCreate(harddisk);
-            }
-            catch(Exception)
-            {
-                return -1;
+
+                Harddisk harddisk = new Harddisk();
+                harddisk.Merk = harddiskModel.Merk;
+                harddisk.Grootte = harddiskModel.Grootte;
+                harddisk.FabrieksNummer = harddiskModel.FabrieksNummer;
+
+                try
+                {
+                    return sr.HarddiskCreate(harddisk);
+                }
+                catch (Exception)
+                {
+                    return -1;
+                }
             }
         }
 
@@ -99,29 +90,31 @@ namespace CvoInventarisClient.Controllers
         {
             return View(GetHarddiskById((int)id));
         }
-        
+
         public HarddiskModel GetHarddiskById(int id)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Harddisk harddisk = new Harddisk();
-
-            try
-            {
-                harddisk = sr.HarddiskGetById(id);
-            }
-            catch (Exception e)
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
 
+                Harddisk harddisk = new Harddisk();
+
+                try
+                {
+                    harddisk = sr.HarddiskGetById(id);
+                }
+                catch (Exception e)
+                {
+
+                }
+
+                HarddiskModel harddiskModel = new HarddiskModel();
+                harddiskModel.IdHarddisk = harddisk.IdHarddisk;
+                harddiskModel.Merk = harddisk.Merk;
+                harddiskModel.Grootte = harddisk.Grootte;
+                harddiskModel.FabrieksNummer = harddisk.FabrieksNummer;
+
+                return harddiskModel;
             }
-
-            HarddiskModel hd = new HarddiskModel();
-            hd.IdHarddisk = harddisk.IdHarddisk;
-            hd.Merk = harddisk.Merk;
-            hd.Grootte = harddisk.Grootte;
-            hd.FabrieksNummer = harddisk.FabrieksNummer;
-
-            return hd;
         }
 
 
@@ -135,37 +128,37 @@ namespace CvoInventarisClient.Controllers
 
         
         [HttpPost]
-        public ActionResult Update(HarddiskModel hd)
+        public ActionResult Update(HarddiskModel harddiskModel)
         {
-            if(UpdateHarddisk(hd))
+            if(UpdateHarddisk(harddiskModel))
             {
-                ViewBag.EditMessage = "Row Updated";
                 return View("Index", ReadAll());
             }
             else
             {
-                ViewBag.EditMessage = "Row not updated";
-                return View();
+                return View("Update");
             }
         }
-        
-        public bool UpdateHarddisk(HarddiskModel hd)
+
+        public bool UpdateHarddisk(HarddiskModel harddiskModel)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            Harddisk harddisk = new Harddisk();
-            harddisk.IdHarddisk = hd.IdHarddisk;
-            harddisk.Merk = hd.Merk;
-            harddisk.Grootte = hd.Grootte;
-            harddisk.FabrieksNummer = hd.FabrieksNummer;
-
-            try
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                return sr.HarddiskUpdate(harddisk);
-            }
-            catch(Exception)
-            {
-                return false;
+
+                Harddisk harddisk = new Harddisk();
+                harddisk.IdHarddisk = harddiskModel.IdHarddisk;
+                harddisk.Merk = harddiskModel.Merk;
+                harddisk.Grootte = harddiskModel.Grootte;
+                harddisk.FabrieksNummer = harddiskModel.FabrieksNummer;
+
+                try
+                {
+                    return sr.HarddiskUpdate(harddisk);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
 
@@ -179,33 +172,33 @@ namespace CvoInventarisClient.Controllers
         }
         
         [HttpPost]
-        public ActionResult deleteHarddisk(HarddiskModel hd)
+        public ActionResult deleteHarddisk(HarddiskModel harddiskModel)
         {
-            if(DeleteHarddisk(hd))
+            if(DeleteHarddisk(harddiskModel))
             {
-                ViewBag.DeleteMessage = "Row deleted";
                 return View("Index", ReadAll());
             }
             else
             {
-                ViewBag.DeletMessage = "Row not deleted";
-                return View();
+                return View("Delete");
             }
         }
         
-        public bool DeleteHarddisk(HarddiskModel hd)
+        public bool DeleteHarddisk(HarddiskModel harddiskModel)
         {
-            CvoInventarisServiceClient sr = new CvoInventarisServiceClient();
-
-            int id = hd.IdHarddisk;
-
-            try
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                return sr.HarddiskDelete(id);
-            }
-            catch(Exception)
-            {
-                return false;
+
+                int id = harddiskModel.IdHarddisk;
+
+                try
+                {
+                    return sr.HarddiskDelete(id);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
             }
         }
     }
