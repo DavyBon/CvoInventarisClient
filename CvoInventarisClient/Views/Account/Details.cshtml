@@ -1,0 +1,82 @@
+﻿@model CvoInventarisClient.Models.AccountModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+@using (Html.BeginForm())
+{
+    <div class="form-horizintal">
+        <h4>Account</h4>
+        <hr />
+
+        <div>
+            @Html.LabelFor(model => model.IdAccount)
+            <div>
+                @Html.EditorFor(model => model.IdAccount)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Type)
+            <div>
+                @Html.EditorFor(model => model.Type)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Gebruikersnaam)
+            <div>
+                @Html.EditorFor(model => model.Gebruikersnaam)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Voornaam)
+            <div>
+                @Html.EditorFor(model => model.Voornaam)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Achternaam)
+            <div>
+                @Html.EditorFor(model => model.Achternaam)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Telefoonnummer)
+            <div>
+                @Html.EditorFor(model => model.Telefoonnummer)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Email)
+            <div>
+                @Html.EditorFor(model => model.Email)
+            </div>
+        </div>
+
+        <div>
+            @Html.LabelFor(model => model.Wachtwoord)
+            <div>
+                @Html.EditorFor(model => model.Wachtwoord)
+            </div>
+        </div>
+
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+

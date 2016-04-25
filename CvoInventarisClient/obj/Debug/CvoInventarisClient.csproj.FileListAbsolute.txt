@@ -173,3 +173,35 @@ D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoI
 D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\csc.exe
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CSharp.Core.targets
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.VisualBasic.Core.targets
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Collections.Immutable.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Reflection.Metadata.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\vbc.exe
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\VBCSCompiler.exe
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\VBCSCompiler.exe.config
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll.config
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.pdb
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.Web.Infrastructure.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache

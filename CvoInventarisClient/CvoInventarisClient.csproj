@@ -190,6 +190,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CpuController.cs" />
     <Compile Include="Controllers\DeviceController.cs" />
     <Compile Include="Controllers\FactuurController.cs" />
@@ -306,6 +307,11 @@
     <Content Include="Views\Inventaris\Index.cshtml" />
     <Content Include="Views\Shared\_OverzichtLayout.cshtml" />
     <Content Include="Views\Inventaris\Details.cshtml" />
+    <Content Include="Views\Account\Create.cshtml" />
+    <Content Include="Views\Account\Delete.cshtml" />
+    <Content Include="Views\Account\Details.cshtml" />
+    <Content Include="Views\Account\Edit.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
