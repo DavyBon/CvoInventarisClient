@@ -23,6 +23,18 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CpuMerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DeviceMerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string GrafischeKaartMerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HarddiskMerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdCpuField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -44,6 +56,58 @@ namespace CvoInventarisClient.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string CpuMerk {
+            get {
+                return this.CpuMerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CpuMerkField, value) != true)) {
+                    this.CpuMerkField = value;
+                    this.RaisePropertyChanged("CpuMerk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string DeviceMerk {
+            get {
+                return this.DeviceMerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DeviceMerkField, value) != true)) {
+                    this.DeviceMerkField = value;
+                    this.RaisePropertyChanged("DeviceMerk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string GrafischeKaartMerk {
+            get {
+                return this.GrafischeKaartMerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.GrafischeKaartMerkField, value) != true)) {
+                    this.GrafischeKaartMerkField = value;
+                    this.RaisePropertyChanged("GrafischeKaartMerk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string HarddiskMerk {
+            get {
+                return this.HarddiskMerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HarddiskMerkField, value) != true)) {
+                    this.HarddiskMerkField = value;
+                    this.RaisePropertyChanged("HarddiskMerk");
+                }
             }
         }
         
@@ -500,13 +564,13 @@ namespace CvoInventarisClient.ServiceReference {
         private int IdLokaalField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdNetwerkField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsComputerLokaalField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LokaalNaamField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CvoInventarisClient.ServiceReference.Netwerk NetwerkField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -545,19 +609,6 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdNetwerk {
-            get {
-                return this.IdNetwerkField;
-            }
-            set {
-                if ((this.IdNetwerkField.Equals(value) != true)) {
-                    this.IdNetwerkField = value;
-                    this.RaisePropertyChanged("IdNetwerk");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsComputerLokaal {
             get {
                 return this.IsComputerLokaalField;
@@ -579,6 +630,128 @@ namespace CvoInventarisClient.ServiceReference {
                 if ((object.ReferenceEquals(this.LokaalNaamField, value) != true)) {
                     this.LokaalNaamField = value;
                     this.RaisePropertyChanged("LokaalNaam");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CvoInventarisClient.ServiceReference.Netwerk Netwerk {
+            get {
+                return this.NetwerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NetwerkField, value) != true)) {
+                    this.NetwerkField = value;
+                    this.RaisePropertyChanged("Netwerk");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Netwerk", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
+    [System.SerializableAttribute()]
+    public partial class Netwerk : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DriverField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SnelheidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Driver {
+            get {
+                return this.DriverField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DriverField, value) != true)) {
+                    this.DriverField = value;
+                    this.RaisePropertyChanged("Driver");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Merk {
+            get {
+                return this.MerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
+                    this.MerkField = value;
+                    this.RaisePropertyChanged("Merk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Snelheid {
+            get {
+                return this.SnelheidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SnelheidField, value) != true)) {
+                    this.SnelheidField = value;
+                    this.RaisePropertyChanged("Snelheid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -633,7 +806,7 @@ namespace CvoInventarisClient.ServiceReference {
         private int IdFactuurField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdLeverancierField;
+        private CvoInventarisClient.ServiceReference.Leverancier LeverancierField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OleDocField;
@@ -803,14 +976,14 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdLeverancier {
+        public CvoInventarisClient.ServiceReference.Leverancier Leverancier {
             get {
-                return this.IdLeverancierField;
+                return this.LeverancierField;
             }
             set {
-                if ((this.IdLeverancierField.Equals(value) != true)) {
-                    this.IdLeverancierField = value;
-                    this.RaisePropertyChanged("IdLeverancier");
+                if ((object.ReferenceEquals(this.LeverancierField, value) != true)) {
+                    this.LeverancierField = value;
+                    this.RaisePropertyChanged("Leverancier");
                 }
             }
         }
@@ -1682,15 +1855,6 @@ namespace CvoInventarisClient.ServiceReference {
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdLokaalField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdObjectField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdVerzekeringField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private bool IsAanwezigField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1698,6 +1862,15 @@ namespace CvoInventarisClient.ServiceReference {
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string LabelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CvoInventarisClient.ServiceReference.Lokaal LokaalField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CvoInventarisClient.ServiceReference.Object ObjectField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CvoInventarisClient.ServiceReference.Verzekering VerzekeringField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1762,45 +1935,6 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdLokaal {
-            get {
-                return this.IdLokaalField;
-            }
-            set {
-                if ((this.IdLokaalField.Equals(value) != true)) {
-                    this.IdLokaalField = value;
-                    this.RaisePropertyChanged("IdLokaal");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdObject {
-            get {
-                return this.IdObjectField;
-            }
-            set {
-                if ((this.IdObjectField.Equals(value) != true)) {
-                    this.IdObjectField = value;
-                    this.RaisePropertyChanged("IdObject");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdVerzekering {
-            get {
-                return this.IdVerzekeringField;
-            }
-            set {
-                if ((this.IdVerzekeringField.Equals(value) != true)) {
-                    this.IdVerzekeringField = value;
-                    this.RaisePropertyChanged("IdVerzekering");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public bool IsAanwezig {
             get {
                 return this.IsAanwezigField;
@@ -1839,6 +1973,45 @@ namespace CvoInventarisClient.ServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CvoInventarisClient.ServiceReference.Lokaal Lokaal {
+            get {
+                return this.LokaalField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LokaalField, value) != true)) {
+                    this.LokaalField = value;
+                    this.RaisePropertyChanged("Lokaal");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CvoInventarisClient.ServiceReference.Object Object {
+            get {
+                return this.ObjectField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ObjectField, value) != true)) {
+                    this.ObjectField = value;
+                    this.RaisePropertyChanged("Object");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public CvoInventarisClient.ServiceReference.Verzekering Verzekering {
+            get {
+                return this.VerzekeringField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VerzekeringField, value) != true)) {
+                    this.VerzekeringField = value;
+                    this.RaisePropertyChanged("Verzekering");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -1859,19 +2032,19 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CvoInventarisClient.ServiceReference.Factuur FactuurField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdFactuurField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdLeverancierField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdObjectTypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string KenmerkenField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CvoInventarisClient.ServiceReference.Leverancier LeverancierField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private CvoInventarisClient.ServiceReference.ObjectTypes ObjectTypeField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -1884,6 +2057,19 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public CvoInventarisClient.ServiceReference.Factuur Factuur {
+            get {
+                return this.FactuurField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FactuurField, value) != true)) {
+                    this.FactuurField = value;
+                    this.RaisePropertyChanged("Factuur");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int Id {
             get {
                 return this.IdField;
@@ -1892,45 +2078,6 @@ namespace CvoInventarisClient.ServiceReference {
                 if ((this.IdField.Equals(value) != true)) {
                     this.IdField = value;
                     this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdFactuur {
-            get {
-                return this.IdFactuurField;
-            }
-            set {
-                if ((this.IdFactuurField.Equals(value) != true)) {
-                    this.IdFactuurField = value;
-                    this.RaisePropertyChanged("IdFactuur");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdLeverancier {
-            get {
-                return this.IdLeverancierField;
-            }
-            set {
-                if ((this.IdLeverancierField.Equals(value) != true)) {
-                    this.IdLeverancierField = value;
-                    this.RaisePropertyChanged("IdLeverancier");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdObjectType {
-            get {
-                return this.IdObjectTypeField;
-            }
-            set {
-                if ((this.IdObjectTypeField.Equals(value) != true)) {
-                    this.IdObjectTypeField = value;
-                    this.RaisePropertyChanged("IdObjectType");
                 }
             }
         }
@@ -1948,111 +2095,28 @@ namespace CvoInventarisClient.ServiceReference {
             }
         }
         
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Netwerk", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
-    [System.SerializableAttribute()]
-    public partial class Netwerk : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DriverField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MerkField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SnelheidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Driver {
+        public CvoInventarisClient.ServiceReference.Leverancier Leverancier {
             get {
-                return this.DriverField;
+                return this.LeverancierField;
             }
             set {
-                if ((object.ReferenceEquals(this.DriverField, value) != true)) {
-                    this.DriverField = value;
-                    this.RaisePropertyChanged("Driver");
+                if ((object.ReferenceEquals(this.LeverancierField, value) != true)) {
+                    this.LeverancierField = value;
+                    this.RaisePropertyChanged("Leverancier");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
+        public CvoInventarisClient.ServiceReference.ObjectTypes ObjectType {
             get {
-                return this.IdField;
+                return this.ObjectTypeField;
             }
             set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Merk {
-            get {
-                return this.MerkField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
-                    this.MerkField = value;
-                    this.RaisePropertyChanged("Merk");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Snelheid {
-            get {
-                return this.SnelheidField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SnelheidField, value) != true)) {
-                    this.SnelheidField = value;
-                    this.RaisePropertyChanged("Snelheid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
+                if ((object.ReferenceEquals(this.ObjectTypeField, value) != true)) {
+                    this.ObjectTypeField = value;
+                    this.RaisePropertyChanged("ObjectType");
                 }
             }
         }

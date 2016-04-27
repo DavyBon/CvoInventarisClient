@@ -999,7 +999,7 @@ namespace WebApplication.Controllers
                         table.AddCell(item.FactuurDatum.ToString());
                         table.AddCell(item.FactuurStatusGetekend.ToString());
                         table.AddCell(item.VerwerkingsDatum.ToString());
-                        table.AddCell(item.IdLeverancier.ToString());
+                        table.AddCell(item.Leverancier.IdLeverancier.ToString());
                         table.AddCell(item.Prijs.ToString());
                         table.AddCell(item.Garantie.ToString());
                         table.AddCell(item.Omschrijving);
@@ -1064,14 +1064,14 @@ namespace WebApplication.Controllers
                     {
                         table.AddCell(item.Id.ToString());
                         table.AddCell(item.Label);
-                        table.AddCell(item.IdLokaal.ToString());
-                        table.AddCell(item.IdObject.ToString());
+                        table.AddCell(item.Lokaal.IdLokaal.ToString());
+                        table.AddCell(item.Object.Id.ToString());
                         table.AddCell(item.Aankoopjaar.ToString());
                         table.AddCell(item.Afschrijvingsperiode.ToString());
                         table.AddCell(item.Historiek);
                         table.AddCell(item.IsActief.ToString());
                         table.AddCell(item.IsAanwezig.ToString());
-                        table.AddCell(item.IdVerzekering.ToString());
+                        table.AddCell(item.Verzekering.Id.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1109,7 +1109,7 @@ namespace WebApplication.Controllers
                         table.AddCell(item.LokaalNaam.ToString());
                         table.AddCell(item.AantalPlaatsen.ToString());
                         table.AddCell(item.IsComputerLokaal.ToString());
-                        table.AddCell(item.IdNetwerk.ToString());
+                        table.AddCell(item.Netwerk.Id.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1134,10 +1134,10 @@ namespace WebApplication.Controllers
                     foreach (var item in objecten)
                     {
                         table.AddCell(item.Id.ToString());
-                        table.AddCell(item.IdObjectType.ToString());
+                        table.AddCell(item.ObjectType.Id.ToString());
                         table.AddCell(item.Kenmerken.ToString());
-                        table.AddCell(item.IdLeverancier.ToString());
-                        table.AddCell(item.IdFactuur.ToString());
+                        table.AddCell(item.Leverancier.IdLeverancier.ToString());
+                        table.AddCell(item.Factuur.IdFactuur.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1200,7 +1200,7 @@ namespace WebApplication.Controllers
                     model.FactuurDatum = f.FactuurDatum;
                     model.FactuurStatusGetekend = f.FactuurStatusGetekend;
                     model.VerwerkingsDatum = f.VerwerkingsDatum;
-                    model.Leverancier.IdLeverancier = f.IdLeverancier;
+                    model.Leverancier.IdLeverancier = f.Leverancier.IdLeverancier;
                     model.Prijs = f.Prijs;
                     model.Garantie = f.Garantie;
                     model.Omschrijving = f.Omschrijving;

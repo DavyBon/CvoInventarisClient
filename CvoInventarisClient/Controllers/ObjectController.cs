@@ -43,9 +43,9 @@ namespace CvoInventarisClient.Controllers
 
                 CvoInventarisClient.ServiceReference.Object obj = new CvoInventarisClient.ServiceReference.Object();
                 obj.Kenmerken = Request.Form["kenmerken"];
-                obj.IdFactuur = Convert.ToInt32(Request.Form["idFactuur"]);
-                obj.IdLeverancier = Convert.ToInt32(Request.Form["idLeverancier"]);
-                obj.IdObjectType = Convert.ToInt32(Request.Form["idObjectType"]);
+                obj.Factuur.IdFactuur = Convert.ToInt32(Request.Form["idFactuur"]);
+                obj.Leverancier.IdLeverancier = Convert.ToInt32(Request.Form["idLeverancier"]);
+                obj.ObjectType.Id = Convert.ToInt32(Request.Form["idObjectType"]);
 
 
                 client.ObjectCreate(obj);
@@ -73,9 +73,9 @@ namespace CvoInventarisClient.Controllers
                 CvoInventarisClient.ServiceReference.Object obj = new CvoInventarisClient.ServiceReference.Object();
                 obj.Id = id;
                 obj.Kenmerken = Request.Form["kenmerken"];
-                obj.IdFactuur = Convert.ToInt32(Request.Form["idFactuur"]);
-                obj.IdLeverancier = Convert.ToInt32(Request.Form["idLeverancier"]);
-                obj.IdObjectType = Convert.ToInt32(Request.Form["idObjectType"]);
+                obj.Factuur.IdFactuur = Convert.ToInt32(Request.Form["idFactuur"]);
+                obj.Leverancier.IdLeverancier = Convert.ToInt32(Request.Form["idLeverancier"]);
+                obj.ObjectType.Id = Convert.ToInt32(Request.Form["idObjectType"]);
 
 
                 client.ObjectUpdate(obj);

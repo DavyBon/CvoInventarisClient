@@ -23,13 +23,13 @@ namespace CvoInventarisClient.Controllers
                     InventarisModel inventarisModel = new InventarisModel();
 
                     //Objecten van webservice
-                    ServiceReference.Object obj = client.ObjectGetById(i.IdObject);
-                    Leverancier lev = client.LeverancierGetById(obj.IdLeverancier);
-                    Factuur fac = client.FactuurGetById(obj.IdFactuur);
-                    ObjectTypes objType = client.ObjectTypeGetById(obj.IdObjectType);
-                    Verzekering ver = client.VerzekeringGetById(i.IdVerzekering);
-                    Lokaal lok = client.LokaalGetById(i.IdLokaal);
-                    Netwerk net = client.NetwerkGetById(lok.IdNetwerk);
+                    ServiceReference.Object obj = client.ObjectGetById(i.Object.Id);
+                    Leverancier lev = client.LeverancierGetById(obj.Leverancier.IdLeverancier);
+                    Factuur fac = client.FactuurGetById(obj.Factuur.IdFactuur);
+                    ObjectTypes objType = client.ObjectTypeGetById(obj.ObjectType.Id);
+                    Verzekering ver = client.VerzekeringGetById(i.Verzekering.Id);
+                    Lokaal lok = client.LokaalGetById(i.Lokaal.IdLokaal);
+                    Netwerk net = client.NetwerkGetById(lok.Netwerk.Id);
 
                     //Objecten van wcf naar models
                     LeverancierModel leverancierModel = new LeverancierModel();
@@ -133,9 +133,9 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
-                inventaris.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
-                inventaris.IdObject = Convert.ToInt32(Request.Form["idObject"]);
-                inventaris.IdVerzekering = Convert.ToInt32(Request.Form["idVerzekering"]);
+                inventaris.Lokaal.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
+                inventaris.Object.Id = Convert.ToInt32(Request.Form["idObject"]);
+                inventaris.Verzekering.Id = Convert.ToInt32(Request.Form["idVerzekering"]);
                 //inventaris.isAanwezig = Boolean.Parse(Request.Form["isAanwezig"]);
                 //inventaris.isActief = Convert.ToBoolean(Request.Form["isActief"]);
                 inventaris.Label = Request.Form["label"];
@@ -166,9 +166,9 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
-                inventaris.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
-                inventaris.IdObject = Convert.ToInt32(Request.Form["idObject"]);
-                inventaris.IdVerzekering = Convert.ToInt32(Request.Form["idVerzekering"]);
+                inventaris.Lokaal.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
+                inventaris.Object.Id = Convert.ToInt32(Request.Form["idObject"]);
+                inventaris.Verzekering.Id = Convert.ToInt32(Request.Form["idVerzekering"]);
                 //inventaris.isAanwezig = Boolean.Parse(Request.Form["isAanwezig"]);
                 //inventaris.isActief = Convert.ToBoolean(Request.Form["isActief"]);
                 inventaris.Label = Request.Form["label"];

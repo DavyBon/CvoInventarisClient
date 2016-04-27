@@ -28,7 +28,7 @@ namespace CvoInventarisClient.Controllers
 
                 foreach (Factuur factuur in listFactuur)
                 {
-                    Leverancier leverancier = sr.LeverancierGetById(factuur.IdLeverancier);
+                    Leverancier leverancier = sr.LeverancierGetById(factuur.Leverancier.IdLeverancier);
 
                     LeverancierModel leverancierModel = new LeverancierModel();
                     leverancierModel.IdLeverancier = leverancier.IdLeverancier;
@@ -108,7 +108,7 @@ namespace CvoInventarisClient.Controllers
                 factuur.FactuurDatum = factuurModel.FactuurDatum;
                 factuur.FactuurStatusGetekend = factuurModel.FactuurStatusGetekend;
                 factuur.VerwerkingsDatum = factuurModel.VerwerkingsDatum;
-                factuur.IdLeverancier = Convert.ToInt32(factuurModel.Leverancier.IdLeverancier);
+                factuur.Leverancier.IdLeverancier = Convert.ToInt32(factuurModel.Leverancier.IdLeverancier);
                 factuur.Prijs = factuurModel.Prijs;
                 factuur.Garantie = factuurModel.Garantie;
                 factuur.Omschrijving = factuurModel.Omschrijving;
@@ -157,7 +157,7 @@ namespace CvoInventarisClient.Controllers
 
                 }
 
-                Leverancier leverancier = sr.LeverancierGetById(factuur.IdLeverancier);
+                Leverancier leverancier = sr.LeverancierGetById(factuur.Leverancier.IdLeverancier);
 
                 LeverancierModel leverancierModel = new LeverancierModel();
                 leverancierModel.IdLeverancier = leverancier.IdLeverancier;
@@ -236,7 +236,7 @@ namespace CvoInventarisClient.Controllers
                 factuur.FactuurDatum = factuurModel.FactuurDatum;
                 factuur.FactuurStatusGetekend = factuurModel.FactuurStatusGetekend;
                 factuur.VerwerkingsDatum = factuurModel.VerwerkingsDatum;
-                factuur.IdLeverancier = Convert.ToInt32(factuurModel.Leverancier.IdLeverancier);
+                factuur.Leverancier.IdLeverancier = Convert.ToInt32(factuurModel.Leverancier.IdLeverancier);
                 factuur.Prijs = factuurModel.Prijs;
                 factuur.Garantie = factuurModel.Garantie;
                 factuur.Omschrijving = factuurModel.Omschrijving;

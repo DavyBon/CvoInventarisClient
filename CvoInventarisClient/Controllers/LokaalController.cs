@@ -28,7 +28,7 @@ namespace CvoInventarisClient.Controllers
 
                 foreach (Lokaal lokaal in listLokaal)
                 {
-                    Netwerk netwerk = sr.NetwerkGetById(lokaal.IdNetwerk);
+                    Netwerk netwerk = sr.NetwerkGetById(lokaal.Netwerk.Id);
 
                     NetwerkModel netwerkModel = new NetwerkModel();
                     netwerkModel.Id = netwerk.Id;
@@ -80,7 +80,7 @@ namespace CvoInventarisClient.Controllers
                 lokaal.LokaalNaam = lokaalModel.LokaalNaam;
                 lokaal.AantalPlaatsen = lokaalModel.AantalPlaatsen;
                 lokaal.IsComputerLokaal = lokaalModel.IsComputerLokaal;
-                lokaal.IdNetwerk = Convert.ToInt32(lokaalModel.Netwerk.Id);
+                lokaal.Netwerk.Id = Convert.ToInt32(lokaalModel.Netwerk.Id);
 
                 try
                 {
@@ -116,7 +116,7 @@ namespace CvoInventarisClient.Controllers
 
                 }
 
-                Netwerk netwerk = sr.NetwerkGetById(lokaal.IdNetwerk);
+                Netwerk netwerk = sr.NetwerkGetById(lokaal.Netwerk.Id);
 
                 NetwerkModel netwerkModel = new NetwerkModel();
                 netwerkModel.Id = netwerk.Id;
@@ -168,7 +168,7 @@ namespace CvoInventarisClient.Controllers
                 lokaal.LokaalNaam = lokaalModel.LokaalNaam;
                 lokaal.AantalPlaatsen = lokaalModel.AantalPlaatsen;
                 lokaal.IsComputerLokaal = lokaalModel.IsComputerLokaal;
-                lokaal.IdNetwerk = Convert.ToInt32(lokaalModel.Netwerk.Id);
+                lokaal.Netwerk.Id = Convert.ToInt32(lokaalModel.Netwerk.Id);
 
                 try
                 {
