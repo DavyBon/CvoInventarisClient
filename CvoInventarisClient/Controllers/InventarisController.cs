@@ -16,100 +16,19 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                List<Inventaris> inv = client.InventarisGetAll().ToList();
+                //WCF servicereference object naar InventarisModel
                 List<InventarisModel> model = new List<InventarisModel>();
-                foreach (Inventaris i in inv)
+                foreach (Inventaris i in client.InventarisGetAll())
                 {
-                    InventarisModel inventarisModel = new InventarisModel();
-
-                    //Objecten van webservice
-                    ServiceReference.Object obj = client.ObjectGetById(i.Object.Id);
-                    Leverancier lev = client.LeverancierGetById(obj.Leverancier.IdLeverancier);
-                    Factuur fac = client.FactuurGetById(obj.Factuur.IdFactuur);
-                    ObjectTypes objType = client.ObjectTypeGetById(obj.ObjectType.Id);
-                    Verzekering ver = client.VerzekeringGetById(i.Verzekering.Id);
-                    Lokaal lok = client.LokaalGetById(i.Lokaal.IdLokaal);
-                    Netwerk net = client.NetwerkGetById(lok.Netwerk.Id);
-
-                    //Objecten van wcf naar models
-                    LeverancierModel leverancierModel = new LeverancierModel();
-                    leverancierModel.IdLeverancier = lev.IdLeverancier;
-                    leverancierModel.Afkorting = lev.Afkorting;
-                    leverancierModel.Bic = lev.Bic;
-                    leverancierModel.BtwNummer = lev.BtwNummer;
-                    leverancierModel.BusNummer = lev.BusNummer;
-                    leverancierModel.Email = lev.Email;
-                    leverancierModel.Fax = lev.Fax;
-                    leverancierModel.HuisNummer = lev.HuisNummer;
-                    leverancierModel.Iban = lev.Iban;
-                    leverancierModel.Naam = lev.Naam;
-                    leverancierModel.Postcode = lev.Postcode;
-                    leverancierModel.Straat = lev.Straat;
-                    leverancierModel.Telefoon = lev.Telefoon;
-                    leverancierModel.ToegevoegdOp = lev.ToegevoegdOp;
-                    leverancierModel.Website = lev.Website;
-
-                    FactuurModel factuurModel = new FactuurModel();
-                    factuurModel.IdFactuur = fac.IdFactuur;
-                    factuurModel.Boekjaar = fac.Boekjaar;
-                    factuurModel.CvoVolgNummer = fac.CvoVolgNummer;
-                    factuurModel.FactuurNummer = fac.FactuurNummer;
-                    factuurModel.FactuurDatum = fac.FactuurDatum;
-                    factuurModel.FactuurStatusGetekend = fac.FactuurStatusGetekend;
-                    factuurModel.VerwerkingsDatum = fac.VerwerkingsDatum;
-                    factuurModel.Leverancier = leverancierModel;
-                    factuurModel.Prijs = fac.Prijs;
-                    factuurModel.Garantie = fac.Garantie;
-                    factuurModel.Omschrijving = fac.Omschrijving;
-                    factuurModel.Opmerking = fac.Opmerking;
-                    factuurModel.Afschrijfperiode = fac.Afschrijfperiode;
-                    factuurModel.OleDoc = fac.OleDoc;
-                    factuurModel.OleDocPath = fac.OleDocPath;
-                    factuurModel.OleDocFileName = fac.OleDocFileName;
-                    factuurModel.DatumInsert = fac.DatumInsert;
-                    factuurModel.UserInsert = fac.UserInsert;
-                    factuurModel.DatumModified = fac.DatumModified;
-                    factuurModel.UserModified = fac.UserModified;
-
-                    NetwerkModel netwerkModel = new NetwerkModel();
-                    netwerkModel.Id = net.Id;
-                    netwerkModel.Driver = net.Driver;
-                    netwerkModel.Merk = net.Driver;
-                    netwerkModel.Snelheid = net.Snelheid;
-                    netwerkModel.Type = net.Type;
-
-                    ObjectTypeModel objectTypeModel = new ObjectTypeModel();
-                    objectTypeModel.IdObjectType = objType.Id;
-                    objectTypeModel.Omschrijving = objType.Omschrijving;
-
-                    ObjectModel objectModel = new ObjectModel();
-                    objectModel.Id = obj.Id;
-                    objectModel.Factuur = factuurModel;
-                    objectModel.Leverancier = leverancierModel;
-                    objectModel.ObjectType = objectTypeModel;
-                    objectModel.Kenmerken = obj.Kenmerken;
-
-                    VerzekeringModel verzekeringModel = new VerzekeringModel();
-                    verzekeringModel.IdVerzekering = ver.Id;
-                    verzekeringModel.Omschrijving = ver.Omschrijving;
-
-                    LokaalModel lokaalModel = new LokaalModel();
-                    lokaalModel.IdLokaal = lok.IdLokaal;
-                    lokaalModel.AantalPlaatsen = lok.AantalPlaatsen;
-                    lokaalModel.IsComputerLokaal = lok.IsComputerLokaal;
-                    lokaalModel.LokaalNaam = lok.LokaalNaam;
-                    lokaalModel.Netwerk = netwerkModel;
-
-
-                    inventarisModel.Id = i.Id;
-                    inventarisModel.IsAanwezig = i.IsAanwezig;
-                    inventarisModel.IsActief = i.IsActief;
-                    inventarisModel.Label = i.Label;
-                    inventarisModel.Lokaal = lokaalModel;
-                    inventarisModel.Object = objectModel;
-                    inventarisModel.Verzekering = verzekeringModel;
-
-                    model.Add(inventarisModel);
+                    InventarisModel inventaris = new InventarisModel();
+                    inventaris.Id = i.Id;
+                    inventaris.IsAanwezig = i.IsAanwezig;
+                    inventaris.IsActief = i.IsActief;
+                    inventaris.Label = i.Label;
+                    inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam,  Netwerk = new NetwerkModel() { Id = i.Lokaal.Netwerk.Id, Driver = i.Lokaal.Netwerk.Driver, Merk = i.Lokaal.Netwerk.Merk, Snelheid = i.Lokaal.Netwerk.Snelheid, Type = i.Lokaal.Netwerk.Type } };
+                    inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, Leverancier = new LeverancierModel() { IdLeverancier = i.Object.Leverancier.IdLeverancier, Afkorting = i.Object.Leverancier.Afkorting, Bic = i.Object.Leverancier.Bic, BtwNummer = i.Object.Leverancier.BtwNummer, BusNummer = i.Object.Leverancier.BusNummer, Email = i.Object.Leverancier.Email, Fax = i.Object.Leverancier.Fax, HuisNummer = i.Object.Leverancier.HuisNummer, Iban = i.Object.Leverancier.Iban, Naam = i.Object.Leverancier.Naam, Postcode = i.Object.Leverancier.Postcode, Straat = i.Object.Leverancier.Straat, Telefoon = i.Object.Leverancier.Telefoon, ToegevoegdOp = i.Object.Leverancier.ToegevoegdOp, Website = i.Object.Leverancier.Website }, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving}};
+                    inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving};
+                    model.Add(inventaris);
                 }
                 return View("Index", "~/Views/Shared/_OverzichtLayout.cshtml", model);
             }
