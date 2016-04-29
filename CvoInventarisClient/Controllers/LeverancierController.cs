@@ -123,7 +123,7 @@ namespace CvoInventarisClient.Controllers
                 {
                     leverancier = sr.LeverancierGetById(id);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }

@@ -92,7 +92,7 @@ namespace CvoInventarisClient.Controllers
             {
                 c = service.CpuGetAll();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }            
@@ -122,7 +122,7 @@ namespace CvoInventarisClient.Controllers
             {
                 cpu = service.CpuGetById(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

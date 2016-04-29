@@ -28,7 +28,7 @@ namespace CvoInventarisClient.Controllers
 
                 foreach (Factuur factuur in listFactuur)
                 {
-                    Leverancier leverancier = sr.LeverancierGetById(factuur.Leverancier.IdLeverancier);
+                    Leverancier leverancier = factuur.Leverancier;
 
                     LeverancierModel leverancierModel = new LeverancierModel();
                     leverancierModel.IdLeverancier = leverancier.IdLeverancier;
@@ -100,15 +100,16 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-
                 Factuur factuur = new Factuur();
+                                
                 factuur.Boekjaar = factuurModel.Boekjaar;
                 factuur.CvoVolgNummer = factuurModel.CvoVolgNummer;
                 factuur.FactuurNummer = factuurModel.FactuurNummer;
                 factuur.FactuurDatum = factuurModel.FactuurDatum;
                 factuur.FactuurStatusGetekend = factuurModel.FactuurStatusGetekend;
                 factuur.VerwerkingsDatum = factuurModel.VerwerkingsDatum;
-                factuur.Leverancier.IdLeverancier = Convert.ToInt32(factuurModel.Leverancier.IdLeverancier);
+                factuur.Leverancier = new Leverancier();
+                factuur.Leverancier.IdLeverancier = factuurModel.Leverancier.IdLeverancier;
                 factuur.Prijs = factuurModel.Prijs;
                 factuur.Garantie = factuurModel.Garantie;
                 factuur.Omschrijving = factuurModel.Omschrijving;
@@ -152,12 +153,12 @@ namespace CvoInventarisClient.Controllers
                 {
                     factuur = sr.FactuurGetById(id);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
 
-                Leverancier leverancier = sr.LeverancierGetById(factuur.Leverancier.IdLeverancier);
+                Leverancier leverancier = factuur.Leverancier;
 
                 LeverancierModel leverancierModel = new LeverancierModel();
                 leverancierModel.IdLeverancier = leverancier.IdLeverancier;
@@ -236,7 +237,8 @@ namespace CvoInventarisClient.Controllers
                 factuur.FactuurDatum = factuurModel.FactuurDatum;
                 factuur.FactuurStatusGetekend = factuurModel.FactuurStatusGetekend;
                 factuur.VerwerkingsDatum = factuurModel.VerwerkingsDatum;
-                factuur.Leverancier.IdLeverancier = Convert.ToInt32(factuurModel.Leverancier.IdLeverancier);
+                factuur.Leverancier = new Leverancier();
+                factuur.Leverancier.IdLeverancier = factuurModel.Leverancier.IdLeverancier;
                 factuur.Prijs = factuurModel.Prijs;
                 factuur.Garantie = factuurModel.Garantie;
                 factuur.Omschrijving = factuurModel.Omschrijving;

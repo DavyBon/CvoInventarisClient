@@ -28,7 +28,7 @@ namespace CvoInventarisClient.Controllers
 
                 foreach (Lokaal lokaal in listLokaal)
                 {
-                    Netwerk netwerk = sr.NetwerkGetById(lokaal.Netwerk.Id);
+                    Netwerk netwerk = lokaal.Netwerk;
 
                     NetwerkModel netwerkModel = new NetwerkModel();
                     netwerkModel.Id = netwerk.Id;
@@ -80,7 +80,8 @@ namespace CvoInventarisClient.Controllers
                 lokaal.LokaalNaam = lokaalModel.LokaalNaam;
                 lokaal.AantalPlaatsen = lokaalModel.AantalPlaatsen;
                 lokaal.IsComputerLokaal = lokaalModel.IsComputerLokaal;
-                lokaal.Netwerk.Id = Convert.ToInt32(lokaalModel.Netwerk.Id);
+                lokaal.Netwerk = new Netwerk();
+                lokaal.Netwerk.Id = lokaalModel.Netwerk.Id;
 
                 try
                 {
@@ -111,12 +112,12 @@ namespace CvoInventarisClient.Controllers
                 {
                     lokaal = sr.LokaalGetById(id);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }
 
-                Netwerk netwerk = sr.NetwerkGetById(lokaal.Netwerk.Id);
+                Netwerk netwerk = lokaal.Netwerk;
 
                 NetwerkModel netwerkModel = new NetwerkModel();
                 netwerkModel.Id = netwerk.Id;
@@ -168,7 +169,8 @@ namespace CvoInventarisClient.Controllers
                 lokaal.LokaalNaam = lokaalModel.LokaalNaam;
                 lokaal.AantalPlaatsen = lokaalModel.AantalPlaatsen;
                 lokaal.IsComputerLokaal = lokaalModel.IsComputerLokaal;
-                lokaal.Netwerk.Id = Convert.ToInt32(lokaalModel.Netwerk.Id);
+                lokaal.Netwerk = new Netwerk();
+                lokaal.Netwerk.Id = lokaalModel.Netwerk.Id;
 
                 try
                 {
@@ -207,7 +209,6 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-
                 int id = lokaalModel.IdLokaal;
 
                 try

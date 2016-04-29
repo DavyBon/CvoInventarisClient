@@ -92,7 +92,7 @@ namespace CvoInventarisClient.Controllers
             {
                 v = service.VerzekeringGetAll();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -119,7 +119,7 @@ namespace CvoInventarisClient.Controllers
             {
                 verzekering = service.VerzekeringGetById(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

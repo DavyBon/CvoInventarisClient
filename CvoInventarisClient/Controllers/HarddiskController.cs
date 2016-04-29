@@ -102,7 +102,7 @@ namespace CvoInventarisClient.Controllers
                 {
                     harddisk = sr.HarddiskGetById(id);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
 
                 }

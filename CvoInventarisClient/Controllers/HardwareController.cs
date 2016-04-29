@@ -92,7 +92,7 @@ namespace CvoInventarisClient.Controllers
             {
                 hw = service.HardwareGetAll();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -122,7 +122,7 @@ namespace CvoInventarisClient.Controllers
             {
                 hardware = service.HardwareGetById(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

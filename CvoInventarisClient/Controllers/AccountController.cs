@@ -92,7 +92,7 @@ namespace CvoInventarisClient.Controllers
             {
                 a = service.AccountGetAll();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -125,7 +125,7 @@ namespace CvoInventarisClient.Controllers
             {
                 acc = service.AccountGetById(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }

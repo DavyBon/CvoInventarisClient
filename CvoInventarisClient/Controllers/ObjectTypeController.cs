@@ -91,7 +91,7 @@ namespace CvoInventarisClient.Controllers
             {
                 o = service.ObjectTypeGetAll();
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
@@ -118,7 +118,7 @@ namespace CvoInventarisClient.Controllers
             {
                 objectType = service.ObjectTypeGetById(id);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
             }
