@@ -216,6 +216,7 @@
     <Compile Include="Models\HarddiskModel.cs" />
     <Compile Include="Models\HardwareModel.cs" />
     <Compile Include="Models\InventarisModel.cs" />
+    <Compile Include="Models\InventarisViewModel.cs" />
     <Compile Include="Models\LeverancierModel.cs" />
     <Compile Include="Models\LokaalModel.cs" />
     <Compile Include="Models\CpuModel.cs" />
