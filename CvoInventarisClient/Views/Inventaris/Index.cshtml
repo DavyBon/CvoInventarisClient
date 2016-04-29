@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CvoInventarisClient.Models.InventarisModel>
+﻿@model CvoInventarisClient.Models.InventarisViewModel
 
 @{
     ViewBag.Title = "Inventaris";
@@ -9,33 +9,33 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">Inventaris</div>
-        <table class="table">
+        <table class="table table-striped">
             <tr>
                 <th></th>
                 <th></th>
                 <th>
-                    Label
+                    @Html.DisplayNameFor(model => model.Inventaris[0].Label)
                 </th>
                 <th>
-                    Omschrijving
+                    @Html.DisplayNameFor(model => model.Inventaris[0].Object.Kenmerken)
                 </th>
                 <th>
-                    Type
+                    @Html.DisplayNameFor(model => model.Inventaris[0].Object.ObjectType.Omschrijving)
                 </th>
                 <th>
-                    Lokaal
+                    @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal.LokaalNaam)
                 </th>
                 <th>
-                    Aanwezig
+                    @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
                 </th>
                 <th>
-                    Actief
+                    @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
                 </th>
                 <th>
-                    Verzekeringstype
+                    @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering.Omschrijving)
                 </th>
             </tr>
-            @foreach (var item in Model)
+            @foreach (var item in Model.Inventaris)
             {
                 <tr>
                     <td>
@@ -70,8 +70,47 @@
 
         </table>
     </div>
-    <p>
-        @Html.ActionLink("Nieuw", "Create", "Inventaris", null, new { @class = "btn btn-primary" })
-        <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger"/>
-    </p>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
 }
+<!-- modal -->
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog" aria-labelledby="nieuwModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>Voeg toe..</strong>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "Inventaris"))
+                {
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Object)
+                        <input class="form-control" type="text" name="Object" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Label)
+                        <input class="form-control" type="text" name="Label" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal)
+                        <input class="form-control" type="text" name="Lokaal" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
+                        <input class="form-control" type="text" name="Verzekering" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
+                        <input class="form-control" type="text" name="Aanwezig" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
+                        <input class="form-control" type="text" name="Actief" />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>

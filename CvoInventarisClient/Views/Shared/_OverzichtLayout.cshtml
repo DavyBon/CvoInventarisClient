@@ -8,18 +8,21 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Stylesheet.css" rel="stylesheet" />
 
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
     <meta name="description" content="CvoInventaris applicatie" />
 </head>
 <body>
     <div class="container">
         <div class="row">
-            <a class="bottom-align-text" href="@Url.Action("Index","Overzicht")"><span class="glyphicon glyphicon-arrow-left"></span> Overzicht</a>
+            @Html.ActionLink("Terug naar overzicht", "Index", "Overzicht", null, new { @class = "btn btn-primary" })
         </div>
         <div class="row">
             @RenderBody()
         </div>
     </div>
-    <script src="~/Scripts/bootstrap.js"></script>
-    <script src="~/Scripts/jquery-1.9.1.js"></script>
 </body>
 </html>
