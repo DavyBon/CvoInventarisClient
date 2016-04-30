@@ -12,25 +12,11 @@ namespace CvoInventarisClient.Controllers
         // GET: Inventaris
         public ActionResult Index()
         {
+            ViewBag.action = TempData["action"];
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
                 return View(client.NetwerkGetAll());
             }
-        }
-
-        // GET: Inventaris/Details/5
-        public ActionResult Details(int id)
-        {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                return View(client.NetwerkGetById(id));
-            }
-        }
-
-        // GET: Inventaris/Create
-        public ActionResult Create()
-        {
-            return View();
         }
 
         // POST: Inventaris/Create
@@ -39,8 +25,6 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.action = Request.Form["merk"] + " was added";
-
                 Netwerk netwerk = new Netwerk();
                 netwerk.Driver = Request.Form["driver"];
                 netwerk.Merk = Request.Form["merk"];
@@ -49,6 +33,8 @@ namespace CvoInventarisClient.Controllers
 
 
                 client.NetwerkCreate(netwerk);
+
+                TempData["action"] = "netwerk" + " " + Request.Form["merk"] + " werd toegevoegd";
             }
             return RedirectToAction("Index");
         }
@@ -67,34 +53,38 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Edit(int id, FormCollection collection)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                ViewBag.action = Request.Form["merk"] + " was changed";
-
+            {             
                 Netwerk netwerk = new Netwerk();
                 netwerk.Driver = Request.Form["driver"];
                 netwerk.Merk = Request.Form["merk"];
                 netwerk.Type = Request.Form["type"];
                 netwerk.Snelheid = Request.Form["snelheid"];
 
+                TempData["action"] = Request.Form["merk"] + " werd aangepast";
 
                 client.NetwerkUpdate(netwerk);
             }
             return RedirectToAction("Index");
         }
 
-        // GET: Inventaris/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
         // POST: Inventaris/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(int[] idArray)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                client.NetwerkDelete(id);
+                foreach (int id in idArray)
+                {
+                    client.NetwerkDelete(id);
+                }
+                if(idArray.Length>=2)
+                {
+                    TempData["action"] = idArray.Length + " netwerken werden verwijderd";
+                }
+                else
+                {
+                    TempData["action"] = idArray.Length + " netwerk werd verwijderd";
+                }
             }
             return RedirectToAction("Index");
         }

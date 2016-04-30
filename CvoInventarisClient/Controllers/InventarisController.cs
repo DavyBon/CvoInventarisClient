@@ -59,7 +59,7 @@ namespace CvoInventarisClient.Controllers
                     verzekering.IdVerzekering = v.Id;
                     verzekering.Omschrijving = v.Omschrijving;
                 }
-                return View("Index", "~/Views/Shared/_OverzichtLayout.cshtml", model);
+                return View(model);
             }
         }
 
