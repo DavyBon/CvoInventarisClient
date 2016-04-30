@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Controllers
 {
-    public class OverzichtController : Controller
+    public class BeheerController : Controller
     {
         // GET: Overzicht
         public ActionResult Index()

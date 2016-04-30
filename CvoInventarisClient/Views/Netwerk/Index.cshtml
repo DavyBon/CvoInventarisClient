@@ -15,6 +15,8 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
 
+    <div class="spacer"></div>
+
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <table class="table table-striped">
@@ -75,19 +77,19 @@
                 {
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Merk)
-                        <input class="form-control" type="text" name="merk" />
+                        <input class="form-control" type="text" name="merk" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Driver)
-                        <input class="form-control" type="text" name="driver" />
+                        <input class="form-control" type="text" name="driver" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Snelheid)
-                        <input class="form-control" type="text" name="snelheid" />
+                        <input class="form-control" type="text" name="snelheid" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Type)
-                        <input class="form-control" type="text" name="type" />
+                        <input class="form-control" type="text" name="type" required/>
                     </div>
                     <button type="submit" class="btn btn-primary">Voeg netwerk toe</button>
                 }

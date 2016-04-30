@@ -7,10 +7,11 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Stylesheet.css" rel="stylesheet" />
 
-    <script src="~/Scripts/bootstrap.min.js"></script>
     <script src="~/Scripts/jquery-1.9.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
 
     <meta name="description" content="CvoInventaris applicatie" />
 </head>
@@ -21,7 +22,8 @@
                 <ul class="nav nav-pills nav-stacked">
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                     <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Profiel" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-user"></span> Account</a></li>
-                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Overzicht" ? "active" : "")"><a href="@Url.Action("Index","Overzicht")"><span class="glyphicon glyphicon-list-alt"></span> Overzicht</a></li>
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Beheer" ? "active" : "")"><a href="@Url.Action("Index","Beheer")"><span class="glyphicon glyphicon-list-alt"></span> Beheer</a></li>
+                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Rapportering" ? "active" : "")"><a href="@Url.Action("Index","Rapportering")"><span class="glyphicon glyphicon-file"></span> Rapportering</a></li>
                     <li><a class="bottom-align-text" href="@Url.Action("Loguit","Account")"><span class="glyphicon glyphicon-log-out"></span> Log uit</a></li>
                 </ul>
             </div>

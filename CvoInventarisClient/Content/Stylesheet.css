@@ -7,9 +7,8 @@
 }
 
 .spacer {
-    height: 2em;
+    height: 1em;
     width: 100%;
-    background-color: azure;
 }
 
 .logoutButton {
