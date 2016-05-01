@@ -12,194 +12,82 @@ namespace CvoInventarisClient.Controllers
     {
 
         // INDEX:
-        
-        [HttpGet]
         public ActionResult Index()
         {
-            return View(ReadAll());
-        }
-
-        private List<HarddiskModel> ReadAll()
-        {
-            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            ViewBag.action = TempData["action"];
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                List<Harddisk> listHarddisk = sr.HarddiskGetAll().ToList();
-
-                List<HarddiskModel> listHarddisks = new List<HarddiskModel>();
-
-                foreach (Harddisk harddisk in listHarddisk)
-                {
-                    HarddiskModel harddiskModel = new HarddiskModel();
-                    harddiskModel.IdHarddisk = harddisk.IdHarddisk;
-                    harddiskModel.Merk = harddisk.Merk;
-                    harddiskModel.Grootte = harddisk.Grootte;
-                    harddiskModel.FabrieksNummer = harddisk.FabrieksNummer;
-                    listHarddisks.Add(harddiskModel);
-                }
-                return listHarddisks;
+                return View(client.HarddiskGetAll());
             }
         }
 
-
-        // INSERT:
-        
-        [HttpGet]
-        public ActionResult Insert()
-        {
-            return View(new HarddiskModel());
-        }
-        
+        // CREATE:        
         [HttpPost]
-        public ActionResult Insert(HarddiskModel harddiskModel)
+        public ActionResult Create(FormCollection collection)
         {
-            if(insertHarddisk(harddiskModel) >= 0)
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                return View("Index", ReadAll());
-            }
-            else
-            {
-                return View("Insert");
-            }
-        }
-
-        public int insertHarddisk(HarddiskModel harddiskModel)
-        {
-            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
-            {
-
                 Harddisk harddisk = new Harddisk();
-                harddisk.Merk = harddiskModel.Merk;
-                harddisk.Grootte = harddiskModel.Grootte;
-                harddisk.FabrieksNummer = harddiskModel.FabrieksNummer;
+                harddisk.Merk = Request.Form["merk"];
+                harddisk.Grootte = Convert.ToInt32(Request.Form["grootte"]);
+                harddisk.FabrieksNummer = Request.Form["fabriekNummer"];
 
-                try
-                {
-                    return sr.HarddiskCreate(harddisk);
-                }
-                catch (Exception)
-                {
-                    return -1;
-                }
+                client.HarddiskCreate(harddisk);
+
+                TempData["action"] = "harddisk van het merk" + " " + Request.Form["merk"] + " werd toegevoegd";
             }
+            return RedirectToAction("Index");
         }
 
-
-        // DETAILS:
-        
-        public ActionResult Details(int? id)
-        {
-            return View(GetHarddiskById((int)id));
-        }
-
-        public HarddiskModel GetHarddiskById(int id)
-        {
-            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
-            {
-
-                Harddisk harddisk = new Harddisk();
-
-                try
-                {
-                    harddisk = sr.HarddiskGetById(id);
-                }
-                catch (Exception)
-                {
-
-                }
-
-                HarddiskModel harddiskModel = new HarddiskModel();
-                harddiskModel.IdHarddisk = harddisk.IdHarddisk;
-                harddiskModel.Merk = harddisk.Merk;
-                harddiskModel.Grootte = harddisk.Grootte;
-                harddiskModel.FabrieksNummer = harddisk.FabrieksNummer;
-
-                return harddiskModel;
-            }
-        }
-
-
-        // UPDATE:
-
+        // EDIT:
         [HttpGet]
-        public ActionResult Update(int? id)
+        public ActionResult Edit(int id)
         {
-            return View(GetHarddiskById((int)id));
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                return View(client.HarddiskGetById(id));
+            }
         }
 
         
         [HttpPost]
-        public ActionResult Update(HarddiskModel harddiskModel)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            if(UpdateHarddisk(harddiskModel))
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                return View("Index", ReadAll());
-            }
-            else
-            {
-                return View("Update");
-            }
-        }
-
-        public bool UpdateHarddisk(HarddiskModel harddiskModel)
-        {
-            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
-            {
-
                 Harddisk harddisk = new Harddisk();
-                harddisk.IdHarddisk = harddiskModel.IdHarddisk;
-                harddisk.Merk = harddiskModel.Merk;
-                harddisk.Grootte = harddiskModel.Grootte;
-                harddisk.FabrieksNummer = harddiskModel.FabrieksNummer;
+                harddisk.Merk = Request.Form["merk"];
+                harddisk.Grootte = Convert.ToInt32(Request.Form["grootte"]);
+                harddisk.FabrieksNummer = Request.Form["fabriekNummer"];
 
-                try
-                {
-                    return sr.HarddiskUpdate(harddisk);
-                }
-                catch (Exception)
-                {
-                    return false;
-                }
+                client.HarddiskUpdate(harddisk);
+
+                TempData["action"] = "harddisk van het merk" + " " + Request.Form["merk"] + " werd aangepast";
             }
+            return RedirectToAction("Index");
         }
 
 
-        // DELETE:
-        
-        [HttpGet]
-        public ActionResult Delete(int? id)
-        {
-            return View(GetHarddiskById((int)id));
-        }
-        
+        // DELETE:        
         [HttpPost]
-        public ActionResult deleteHarddisk(HarddiskModel harddiskModel)
+        public ActionResult Delete(int[] idArray)
         {
-            if(DeleteHarddisk(harddiskModel))
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                return View("Index", ReadAll());
-            }
-            else
-            {
-                return View("Delete");
-            }
-        }
-        
-        public bool DeleteHarddisk(HarddiskModel harddiskModel)
-        {
-            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
-            {
-
-                int id = harddiskModel.IdHarddisk;
-
-                try
+                foreach (int id in idArray)
                 {
-                    return sr.HarddiskDelete(id);
+                    client.HarddiskDelete(id);
                 }
-                catch (Exception)
+                if (idArray.Length >= 2)
                 {
-                    return false;
+                    TempData["action"] = idArray.Length + " harddisks werden verwijderd";
+                }
+                else
+                {
+                    TempData["action"] = idArray.Length + " harddisk werd verwijderd";
                 }
             }
+            return RedirectToAction("Index");
         }
     }
 }

@@ -1,127 +1,198 @@
-﻿@model IEnumerable<CvoInventarisClient.Models.LeverancierModel>
+﻿@model IEnumerable<CvoInventarisClient.ServiceReference.Leverancier>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Leveranciers";
 }
-
-@{
-    ViewBag.Title = "Index";
-}
-
-<h2>Index</h2>
-
-<br />
-
-<div>
-    @Html.ActionLink("Create New", "Insert", "Leverancier")
-</div>
-
-<br />
-<br />
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdLeverancier)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Naam)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Afkorting)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Straat)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.HuisNummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BusNummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Postcode)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Telefoon)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Fax)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Website)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.BtwNummer)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Iban)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Bic)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ToegevoegdOp)
-        </th>
-    </tr>
-
-@foreach (var item in Model)
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
 {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.IdLeverancier)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Naam)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Afkorting)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Straat)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.HuisNummer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BusNummer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Postcode)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Telefoon)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fax)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Website)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BtwNummer)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Iban)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Bic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ToegevoegdOp)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Update", new { id = item.IdLeverancier }) |
-            @Html.ActionLink("Details", "Details", new { id = item.IdLeverancier }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.IdLeverancier })                      
-        </td>
-    </tr>
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
 }
-</table>
+@using (Html.BeginForm("Delete", "Leverancier"))
+{
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+
+    <div class="spacer"></div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <table class="table table-striped">
+            <tr>
+                <th></th>
+                <th></th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Afkorting)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Straat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.HuisNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BusNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Postcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Telefoon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Fax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Website)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BtwNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Iban)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Bic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ToegevoegdOp)
+                </th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        <input type="checkbox" name="idArray" value="@item.IdLeverancier" />
+                    </td>
+                    <td>
+                        <a class="bottom-align-text" href="@Url.Action("Edit", "Leverancier", new { id = item.IdLeverancier })" ><s><span class="glyphicon glyphicon-pencil"></span></s></a>
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Afkorting)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Straat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HuisNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BusNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Postcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefoon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Website)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BtwNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Iban)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ToegevoegdOp)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog" aria-labelledby="nieuwModalLabel">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>Voeg toe...</strong>
+            </div>
+            <div class="modal-body">
+                @using (Html.BeginForm("Create", "Leverancier"))
+                {
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Naam)
+                        <input class="form-control" type="text" name="naam" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Afkorting)
+                        <input class="form-control" type="text" name="afkorting" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Straat)
+                        <input class="form-control" type="text" name="straat" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.HuisNummer)
+                        <input class="form-control" type="text" name="huisNummer" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.BusNummer)
+                        <input class="form-control" type="text" name="busNummer" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Postcode)
+                        <input class="form-control" type="text" name="postcode" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Telefoon)
+                        <input class="form-control" type="text" name="telefoon" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Fax)
+                        <input class="form-control" type="text" name="fax" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Email)
+                        <input class="form-control" type="text" name="email" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Website)
+                        <input class="form-control" type="text" name="website" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.BtwNummer)
+                        <input class="form-control" type="text" name="btwNummer" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Iban)
+                        <input class="form-control" type="text" name="iban" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Bic)
+                        <input class="form-control" type="text" name="bic" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.ToegevoegdOp)
+                        <input class="form-control" type="date" name="toegevoegdOp" required />
+                    </div>
+                    <button type="submit" class="btn btn-primary">Voeg leverancier toe</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 

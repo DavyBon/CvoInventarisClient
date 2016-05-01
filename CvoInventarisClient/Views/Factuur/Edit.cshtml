@@ -1,0 +1,92 @@
+﻿@model CvoInventarisClient.ServiceReference.Factuur
+
+@{
+    ViewBag.Title = "Factuur - Edit";
+}
+
+@using (Html.BeginForm("Edit", "Factuur"))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="container-fluid">
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Boekjaar)
+                <input class="form-control" type="date" name="boekjaar" value="@Model.Boekjaar" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.CvoVolgNummer)
+                <input class="form-control" type="text" name="cvoVolgNummer" value="@Model.CvoVolgNummer" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.FactuurNummer)
+                <input class="form-control" type="text" name="factuurNummer" value="@Model.FactuurNummer" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.FactuurDatum)
+                <input class="form-control" type="date" name="factuurDatum" value="@Model.FactuurDatum" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.FactuurStatusGetekend)
+                <input class="form-control" type="checkbox" name="factuurStatusGetekend" value="@Model.FactuurStatusGetekend" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.VerwerkingsDatum)
+                <input class="form-control" type="date" name="verwerkingsDatum" value="@Model.VerwerkingsDatum" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Leverancier.IdLeverancier)
+                <input class="form-control" type="text" name="idLeverancier" value="@Model.Leverancier.IdLeverancier" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Prijs)
+                <input class="form-control" type="text" name="prijs" value="@Model.Prijs" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Garantie)
+                <input class="form-control" type="text" name="garantie" value="@Model.Garantie" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Omschrijving)
+                <input class="form-control" type="text" name="omschrijving" value="@Model.Omschrijving" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Opmerking)
+                <input class="form-control" type="text" name="opmerking" value="@Model.Opmerking" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Afschrijfperiode)
+                <input class="form-control" type="text" name="afschrijfperiode" value="@Model.Afschrijfperiode" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.OleDoc)
+                <input class="form-control" type="text" name="oleDoc" value="@Model.OleDoc" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.OleDocPath)
+                <input class="form-control" type="text" name="oleDocPath" value="@Model.OleDocPath" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.OleDocFileName)
+                <input class="form-control" type="text" name="oleDocFileName" value="@Model.OleDocFileName" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.DatumInsert)
+                <input class="form-control" type="date" name="datumInsert" value="@Model.DatumInsert" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.UserInsert)
+                <input class="form-control" type="text" name="userInsert" value="@Model.UserInsert" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.DatumModified)
+                <input class="form-control" type="date" name="datumModified" value="@Model.DatumModified" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.UserModified)
+                <input class="form-control" type="text" name="userModified" value="@Model.UserModified" required />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Pas factuur aan</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
