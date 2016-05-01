@@ -1,0 +1,33 @@
+﻿@model CvoInventarisClient.ServiceReference.Lokaal
+
+@{
+    ViewBag.Title = "Lokaal - Edit";
+}
+
+@using (Html.BeginForm("Edit", "Lokaal"))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="container-fluid">
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.LokaalNaam)
+                <input class="form-control" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.AantalPlaatsen)
+                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.IsComputerLokaal)
+                <input class="form-control" type="checkbox" name="isComputerLokaal" value="@Model.IsComputerLokaal" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Netwerk.Id)
+                <input class="form-control" type="text" name="idNetwerk" value="@Model.Netwerk.Id" required />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Pas lokaal aan</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
+
