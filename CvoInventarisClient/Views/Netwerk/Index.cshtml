@@ -12,8 +12,8 @@
 }
 @using (Html.BeginForm("Delete", "Netwerk"))
 {
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
-    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">+</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">-</button>
 
     <div class="spacer"></div>
 
@@ -24,10 +24,10 @@
                 <th></th>
                 <th></th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Driver)
+                    @Html.DisplayNameFor(model => model.Merk)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Merk)
+                    @Html.DisplayNameFor(model => model.Driver)
                 </th>
                 <th>
                     @Html.DisplayNameFor(model => model.Snelheid)
@@ -44,13 +44,13 @@
                         <input type="checkbox" name="idArray" value="@item.Id" />
                     </td>
                     <td>
-                        <a class="bottom-align-text" href="@Url.Action("Edit", "Netwerk", new { id = item.Id })"><s><span class="glyphicon glyphicon-pencil"></span></a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Driver)
+                        <a class="bottom-align-text" href="@Url.Action("Edit", "Netwerk", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Merk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Driver)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.Snelheid)
@@ -64,36 +64,57 @@
 
         </table>
     </div>
+
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
 }
-<!-- modal -->
-<div class="modal fade nieuwModal" tabindex="-1" role="dialog" aria-labelledby="nieuwModalLabel">
+<!-- nieuw modal -->
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <strong>Voeg toe..</strong>
+                <strong>Vul in</strong>
             </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("Create", "Netwerk"))
-                {
+            @using (Html.BeginForm("Create", "Netwerk"))
+            {
+                <div class="modal-body">
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Merk)
-                        <input class="form-control" type="text" name="merk" required/>
+                        <input class="form-control" type="text" name="merk" required />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Driver)
-                        <input class="form-control" type="text" name="driver" required/>
+                        <input class="form-control" type="text" name="driver" required />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Snelheid)
-                        <input class="form-control" type="text" name="snelheid" required/>
+                        <input class="form-control" type="text" name="snelheid" required />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Type)
-                        <input class="form-control" type="text" name="type" required/>
+                        <input class="form-control" type="text" name="type" required />
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                     <button type="submit" class="btn btn-primary">Voeg netwerk toe</button>
-                }
-            </div>
+                </div>
+            }
         </div>
     </div>
 </div>
