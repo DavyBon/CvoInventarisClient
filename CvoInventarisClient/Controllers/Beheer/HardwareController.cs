@@ -102,11 +102,31 @@ namespace CvoInventarisClient.Controllers
             foreach (Hardware hardware in hw)
             {
                 HardwareModel h = new HardwareModel();
-                h.IdHardware = hardware.IdHardware;
-                h.IdCpu = hardware.IdCpu;
-                h.IdDevice = hardware.IdDevice;
-                h.IdGrafischeKaart = hardware.IdGrafischeKaart;
-                h.IdHarddisk = hardware.IdHarddisk;
+                h.IdHardware = hardware.Id;
+
+                h.Cpu.FabrieksNummer = hardware.Cpu.FabrieksNummer;
+                h.Cpu.IdCpu = hardware.Cpu.IdCpu;
+                h.Cpu.Merk = hardware.Cpu.Merk;
+                h.Cpu.Snelheid = hardware.Cpu.Snelheid;
+                h.Cpu.Type = hardware.Cpu.Type;
+
+                h.Device.FabrieksNummer = hardware.Device.FabrieksNummer;
+                h.Device.IdDevice = hardware.Device.IdDevice;
+                h.Device.IsPcCompatibel = hardware.Device.IsPcCompatibel;
+                h.Device.Merk = hardware.Device.Merk;
+                h.Device.Serienummer = hardware.Device.Serienummer;
+                h.Device.Type = hardware.Device.Type;
+
+                h.GrafischeKaart.Driver = hardware.GrafischeKaart.Driver;
+                h.GrafischeKaart.FabrieksNummer = hardware.GrafischeKaart.FabrieksNummer;
+                h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
+                h.GrafischeKaart.Merk = hardware.GrafischeKaart.Merk;
+                h.GrafischeKaart.Type = hardware.GrafischeKaart.Type;
+
+                h.Harddisk.FabrieksNummer = hardware.Harddisk.FabrieksNummer;
+                h.Harddisk.Grootte = hardware.Harddisk.Grootte;
+                h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
+                h.Harddisk.Merk = hardware.Harddisk.Merk;
                 hardwares.Add(h);
             }
 
@@ -128,11 +148,31 @@ namespace CvoInventarisClient.Controllers
             }
 
             HardwareModel h = new HardwareModel();
-            h.IdHardware = hardware.IdHardware;
-            h.IdCpu = hardware.IdCpu;
-            h.IdDevice = hardware.IdDevice;
-            h.IdGrafischeKaart = hardware.IdGrafischeKaart;
-            h.IdHarddisk = hardware.IdHarddisk;
+            h.IdHardware = hardware.Id;
+
+            h.Cpu.FabrieksNummer = hardware.Cpu.FabrieksNummer;
+            h.Cpu.IdCpu = hardware.Cpu.IdCpu;
+            h.Cpu.Merk = hardware.Cpu.Merk;
+            h.Cpu.Snelheid = hardware.Cpu.Snelheid;
+            h.Cpu.Type = hardware.Cpu.Type;
+
+            h.Device.FabrieksNummer = hardware.Device.FabrieksNummer;
+            h.Device.IdDevice = hardware.Device.IdDevice;
+            h.Device.IsPcCompatibel = hardware.Device.IsPcCompatibel;
+            h.Device.Merk = hardware.Device.Merk;
+            h.Device.Serienummer = hardware.Device.Serienummer;
+            h.Device.Type = hardware.Device.Type;
+
+            h.GrafischeKaart.Driver = hardware.GrafischeKaart.Driver;
+            h.GrafischeKaart.FabrieksNummer = hardware.GrafischeKaart.FabrieksNummer;
+            h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
+            h.GrafischeKaart.Merk = hardware.GrafischeKaart.Merk;
+            h.GrafischeKaart.Type = hardware.GrafischeKaart.Type;
+
+            h.Harddisk.FabrieksNummer = hardware.Harddisk.FabrieksNummer;
+            h.Harddisk.Grootte = hardware.Harddisk.Grootte;
+            h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
+            h.Harddisk.Merk = hardware.Harddisk.Merk;
             return h;
         }
 
@@ -141,11 +181,11 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient service = new CvoInventarisServiceClient();
 
             Hardware h = new Hardware();
-            h.IdHardware = hardware.IdHardware;
-            h.IdCpu = hardware.IdCpu;
-            h.IdDevice = hardware.IdDevice;
-            h.IdGrafischeKaart = hardware.IdGrafischeKaart;
-            h.IdHarddisk = hardware.IdHarddisk;
+            h.Id = hardware.IdHardware;
+            h.Cpu.IdCpu = hardware.Cpu.IdCpu;
+            h.Device.IdDevice = hardware.Device.IdDevice;
+            h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
+            h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
 
             try
             {
@@ -162,10 +202,10 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient service = new CvoInventarisServiceClient();
 
             Hardware h = new Hardware();
-            h.IdCpu = hardware.IdCpu;
-            h.IdDevice = hardware.IdDevice;
-            h.IdGrafischeKaart = hardware.IdGrafischeKaart;
-            h.IdHarddisk = hardware.IdHarddisk;
+            h.Cpu.IdCpu = hardware.Cpu.IdCpu;
+            h.Device.IdDevice = hardware.Device.IdDevice;
+            h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
+            h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
 
             try
             {

@@ -1047,11 +1047,11 @@ namespace WebApplication.Controllers
                     List<Hardware> hardwares = test.HardwareGetAll().ToList();
                     foreach (var item in hardwares)
                     {
-                        table.AddCell(item.IdHardware.ToString());
-                        table.AddCell(item.IdCpu.ToString());
-                        table.AddCell(item.IdDevice.ToString());
-                        table.AddCell(item.IdGrafischeKaart.ToString());
-                        table.AddCell(item.IdHarddisk.ToString());
+                        table.AddCell(item.Id.ToString());
+                        table.AddCell(item.Cpu.Merk.ToString());
+                        table.AddCell(item.Device.Merk.ToString());
+                        table.AddCell(item.GrafischeKaart.Merk.ToString());
+                        table.AddCell(item.Harddisk.Merk.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -1255,11 +1255,11 @@ namespace WebApplication.Controllers
                 foreach(Hardware h in hardwares)
                 {
                     HardwareModel model = new HardwareModel();
-                    model.IdHardware = h.IdHardware;
-                    model.IdCpu = h.IdCpu;
-                    model.IdDevice = h.IdDevice;
-                    model.IdGrafischeKaart = h.IdGrafischeKaart;
-                    model.IdHarddisk = h.IdHarddisk;
+                    model.IdHardware = h.Id;
+                    model.Cpu.Merk = h.Cpu.Merk;
+                    model.Device.Merk = h.Device.Merk;
+                    model.GrafischeKaart.Merk = h.GrafischeKaart.Merk;
+                    model.Harddisk.Merk = h.Harddisk.Merk;
                     modellen.Add(model);
                 }
                 grid.DataSource = modellen;

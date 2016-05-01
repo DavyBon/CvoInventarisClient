@@ -176,7 +176,7 @@
                             <td>@item.FactuurDatum</td>
                             <td>@item.FactuurStatusGetekend</td>
                             <td>@item.VerwerkingsDatum</td>
-                            <td>@item.IdLeverancier</td>
+                            <td>@item.Leverancier.IdLeverancier</td>
                             <td>@item.Prijs</td>
                             <td>@item.Garantie</td>
                             <td>@item.Omschrijving</td>
@@ -257,20 +257,20 @@
                 <table>
                     <tr>
                         <td>id</td>
-                        <td>idCpu</td>
-                        <td>idDevice</td>
-                        <td>idGrafischeKaart</td>
-                        <td>idHardisk</td>
+                        <td>Cpu</td>
+                        <td>Device</td>
+                        <td>GrafischeKaart</td>
+                        <td>Hardisk</td>
                     </tr>
                     @foreach (var item in ViewBag.HardwareList)
                     {
 
                         <tr>
                             <td>@item.IdHardware</td>
-                            <td>@item.IdCpu</td>
-                            <td>@item.IdDevice</td>
-                            <td>@item.IdGrafischeKaart</td>
-                            <td>@item.IdHarddisk</td>
+                            <td>@item.Cpu.IdCpu</td>
+                            <td>@item.Device.IdDevice</td>
+                            <td>@item.GrafischeKaart.IdGrafischeKaart</td>
+                            <td>@item.Harddisk.IdHarddisk</td>
                         </tr>
                     }
                 </table>
@@ -286,14 +286,14 @@
                     <tr>
                         <td>id</td>
                         <td>label</td>
-                        <td>idLokaal</td>
-                        <td>idObject</td>
+                        <td>Lokaal</td>
+                        <td>Object</td>
                         <td>aankoopjaar</td>
                         <td>afschrijvingsperiode</td>
                         <td>historiek</td>
                         <td>isActief</td>
                         <td>isAanwezig</td>
-                        <td>idVerzekering</td>
+                        <td>Verzekering</td>
                     </tr>
                     @foreach (var item in ViewBag.InventarisList)
                     {
@@ -301,14 +301,14 @@
                         <tr>
                             <td>@item.Id</td>
                             <td>@item.Label</td>
-                            <td>@item.IdLokaal</td>
-                            <td>@item.IdObject</td>
+                            <td>@item.Lokaal.LokaalNaam</td>
+                            <td>@item.Object.IdObject</td>
                             <td>@item.Aankoopjaar</td>
                             <td>@item.Afschrijvingsperiode</td>
                             <td>@item.Historiek</td>
                             <td>@item.IsActief</td>
                             <td>@item.IsAanwezig</td>
-                            <td>@item.IdVerzekering</td>
+                            <td>@item.Verzekering.Omschrijving</td>
                         </tr>
                     }
                 </table>
@@ -374,7 +374,7 @@
                         <td>naam</td>
                         <td>aantal plaatsen</td>
                         <td>computerlokaal</td>
-                        <td>idNetwerk</td>
+                        <td>Netwerk</td>
                     </tr>
                     @foreach (var item in ViewBag.LokaalList)
                     {
@@ -384,7 +384,7 @@
                             <td>@item.LokaalNaam</td>
                             <td>@item.AantalPlaatsen</td>
                             <td>@item.IsComputerLokaal</td>
-                            <td>@item.IdNetwerk</td>
+                            <td>@item.Netwerk.Merk</td>
                         </tr>
                     }
                 </table>
@@ -427,20 +427,20 @@
                 <table>
                     <tr>
                         <td>id</td>
-                        <td>merk</td>
-                        <td>type</td>
-                        <td>snelheid</td>
-                        <td>driver</td>
+                        <td>object type</td>
+                        <td>kenmerken</td>
+                        <td>leverancier</td>
+                        <td>factuur</td>
                     </tr>
                     @foreach (var item in ViewBag.ObjectList)
                     {
 
                         <tr>
                             <td>@item.Id</td>
-                            <td>@item.IdObjectType</td>
+                            <td>@item.ObjectType.Omschrijving</td>
                             <td>@item.Kenmerken</td>
-                            <td>@item.IdLeverancier</td>
-                            <td>@item.IdFactuur</td>
+                            <td>@item.Leverancier.Naam</td>
+                            <td>@item.Factuur.IdFactuur</td>
                         </tr>
                     }
                 </table>
