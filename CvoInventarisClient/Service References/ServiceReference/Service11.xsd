@@ -8,24 +8,45 @@
   <xs:element name="ArrayOfHardware" nillable="true" type="tns:ArrayOfHardware" />
   <xs:complexType name="Hardware">
     <xs:sequence>
-      <xs:element minOccurs="0" name="CpuMerk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="DeviceMerk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="GrafischeKaartMerk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="HarddiskMerk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdCpu" type="xs:int" />
-      <xs:element minOccurs="0" name="IdDevice" type="xs:int" />
-      <xs:element minOccurs="0" name="IdGrafischeKaart" type="xs:int" />
-      <xs:element minOccurs="0" name="IdHarddisk" type="xs:int" />
-      <xs:element minOccurs="0" name="IdHardware" type="xs:int" />
+      <xs:element minOccurs="0" name="Cpu" nillable="true" type="tns:Cpu" />
+      <xs:element minOccurs="0" name="Device" nillable="true" type="tns:Device" />
+      <xs:element minOccurs="0" name="GrafischeKaart" nillable="true" type="tns:GrafischeKaart" />
+      <xs:element minOccurs="0" name="Harddisk" nillable="true" type="tns:Harddisk" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Hardware" nillable="true" type="tns:Hardware" />
-  <xs:complexType name="ArrayOfHarddisk">
+  <xs:complexType name="Cpu">
     <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Harddisk" nillable="true" type="tns:Harddisk" />
+      <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdCpu" type="xs:int" />
+      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Snelheid" type="xs:int" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>
-  <xs:element name="ArrayOfHarddisk" nillable="true" type="tns:ArrayOfHarddisk" />
+  <xs:element name="Cpu" nillable="true" type="tns:Cpu" />
+  <xs:complexType name="Device">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdDevice" type="xs:int" />
+      <xs:element minOccurs="0" name="IsPcCompatibel" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Serienummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Device" nillable="true" type="tns:Device" />
+  <xs:complexType name="GrafischeKaart">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Driver" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="IdGrafischeKaart" type="xs:int" />
+      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="GrafischeKaart" nillable="true" type="tns:GrafischeKaart" />
   <xs:complexType name="Harddisk">
     <xs:sequence>
       <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
@@ -35,6 +56,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Harddisk" nillable="true" type="tns:Harddisk" />
+  <xs:complexType name="ArrayOfHarddisk">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Harddisk" nillable="true" type="tns:Harddisk" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHarddisk" nillable="true" type="tns:ArrayOfHarddisk" />
   <xs:complexType name="ArrayOfLeverancier">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Leverancier" nillable="true" type="tns:Leverancier" />
@@ -169,49 +196,18 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfTicket" nillable="true" type="tns:ArrayOfTicket" />
-  <xs:complexType name="Cpu">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdCpu" type="xs:int" />
-      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Snelheid" type="xs:int" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Cpu" nillable="true" type="tns:Cpu" />
   <xs:complexType name="ArrayOfCpu">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Cpu" nillable="true" type="tns:Cpu" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfCpu" nillable="true" type="tns:ArrayOfCpu" />
-  <xs:complexType name="Device">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdDevice" type="xs:int" />
-      <xs:element minOccurs="0" name="IsPcCompatibel" type="xs:boolean" />
-      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Serienummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Device" nillable="true" type="tns:Device" />
   <xs:complexType name="ArrayOfDevice">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Device" nillable="true" type="tns:Device" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfDevice" nillable="true" type="tns:ArrayOfDevice" />
-  <xs:complexType name="GrafischeKaart">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Driver" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FabrieksNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="IdGrafischeKaart" type="xs:int" />
-      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="GrafischeKaart" nillable="true" type="tns:GrafischeKaart" />
   <xs:complexType name="ArrayOfGrafischeKaart">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="GrafischeKaart" nillable="true" type="tns:GrafischeKaart" />

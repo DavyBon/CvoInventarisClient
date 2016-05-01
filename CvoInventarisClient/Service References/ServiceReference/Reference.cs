@@ -23,31 +23,19 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string CpuMerkField;
+        private CvoInventarisClient.ServiceReference.Cpu CpuField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DeviceMerkField;
+        private CvoInventarisClient.ServiceReference.Device DeviceField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GrafischeKaartMerkField;
+        private CvoInventarisClient.ServiceReference.GrafischeKaart GrafischeKaartField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string HarddiskMerkField;
+        private CvoInventarisClient.ServiceReference.Harddisk HarddiskField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdCpuField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdDeviceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdGrafischeKaartField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdHarddiskField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdHardwareField;
+        private int IdField;
         
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
@@ -60,53 +48,123 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string CpuMerk {
+        public CvoInventarisClient.ServiceReference.Cpu Cpu {
             get {
-                return this.CpuMerkField;
+                return this.CpuField;
             }
             set {
-                if ((object.ReferenceEquals(this.CpuMerkField, value) != true)) {
-                    this.CpuMerkField = value;
-                    this.RaisePropertyChanged("CpuMerk");
+                if ((object.ReferenceEquals(this.CpuField, value) != true)) {
+                    this.CpuField = value;
+                    this.RaisePropertyChanged("Cpu");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string DeviceMerk {
+        public CvoInventarisClient.ServiceReference.Device Device {
             get {
-                return this.DeviceMerkField;
+                return this.DeviceField;
             }
             set {
-                if ((object.ReferenceEquals(this.DeviceMerkField, value) != true)) {
-                    this.DeviceMerkField = value;
-                    this.RaisePropertyChanged("DeviceMerk");
+                if ((object.ReferenceEquals(this.DeviceField, value) != true)) {
+                    this.DeviceField = value;
+                    this.RaisePropertyChanged("Device");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string GrafischeKaartMerk {
+        public CvoInventarisClient.ServiceReference.GrafischeKaart GrafischeKaart {
             get {
-                return this.GrafischeKaartMerkField;
+                return this.GrafischeKaartField;
             }
             set {
-                if ((object.ReferenceEquals(this.GrafischeKaartMerkField, value) != true)) {
-                    this.GrafischeKaartMerkField = value;
-                    this.RaisePropertyChanged("GrafischeKaartMerk");
+                if ((object.ReferenceEquals(this.GrafischeKaartField, value) != true)) {
+                    this.GrafischeKaartField = value;
+                    this.RaisePropertyChanged("GrafischeKaart");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string HarddiskMerk {
+        public CvoInventarisClient.ServiceReference.Harddisk Harddisk {
             get {
-                return this.HarddiskMerkField;
+                return this.HarddiskField;
             }
             set {
-                if ((object.ReferenceEquals(this.HarddiskMerkField, value) != true)) {
-                    this.HarddiskMerkField = value;
-                    this.RaisePropertyChanged("HarddiskMerk");
+                if ((object.ReferenceEquals(this.HarddiskField, value) != true)) {
+                    this.HarddiskField = value;
+                    this.RaisePropertyChanged("Harddisk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Cpu", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
+    [System.SerializableAttribute()]
+    public partial class Cpu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FabrieksNummerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdCpuField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int SnelheidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FabrieksNummer {
+            get {
+                return this.FabrieksNummerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FabrieksNummerField, value) != true)) {
+                    this.FabrieksNummerField = value;
+                    this.RaisePropertyChanged("FabrieksNummer");
                 }
             }
         }
@@ -125,6 +183,105 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Merk {
+            get {
+                return this.MerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
+                    this.MerkField = value;
+                    this.RaisePropertyChanged("Merk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Snelheid {
+            get {
+                return this.SnelheidField;
+            }
+            set {
+                if ((this.SnelheidField.Equals(value) != true)) {
+                    this.SnelheidField = value;
+                    this.RaisePropertyChanged("Snelheid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Device", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
+    [System.SerializableAttribute()]
+    public partial class Device : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FabrieksNummerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdDeviceField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private bool IsPcCompatibelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SerienummerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FabrieksNummer {
+            get {
+                return this.FabrieksNummerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FabrieksNummerField, value) != true)) {
+                    this.FabrieksNummerField = value;
+                    this.RaisePropertyChanged("FabrieksNummer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
         public int IdDevice {
             get {
                 return this.IdDeviceField;
@@ -133,6 +290,128 @@ namespace CvoInventarisClient.ServiceReference {
                 if ((this.IdDeviceField.Equals(value) != true)) {
                     this.IdDeviceField = value;
                     this.RaisePropertyChanged("IdDevice");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsPcCompatibel {
+            get {
+                return this.IsPcCompatibelField;
+            }
+            set {
+                if ((this.IsPcCompatibelField.Equals(value) != true)) {
+                    this.IsPcCompatibelField = value;
+                    this.RaisePropertyChanged("IsPcCompatibel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Merk {
+            get {
+                return this.MerkField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
+                    this.MerkField = value;
+                    this.RaisePropertyChanged("Merk");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Serienummer {
+            get {
+                return this.SerienummerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SerienummerField, value) != true)) {
+                    this.SerienummerField = value;
+                    this.RaisePropertyChanged("Serienummer");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type {
+            get {
+                return this.TypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GrafischeKaart", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
+    [System.SerializableAttribute()]
+    public partial class GrafischeKaart : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DriverField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FabrieksNummerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdGrafischeKaartField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MerkField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TypeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Driver {
+            get {
+                return this.DriverField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DriverField, value) != true)) {
+                    this.DriverField = value;
+                    this.RaisePropertyChanged("Driver");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string FabrieksNummer {
+            get {
+                return this.FabrieksNummerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FabrieksNummerField, value) != true)) {
+                    this.FabrieksNummerField = value;
+                    this.RaisePropertyChanged("FabrieksNummer");
                 }
             }
         }
@@ -151,27 +430,27 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdHarddisk {
+        public string Merk {
             get {
-                return this.IdHarddiskField;
+                return this.MerkField;
             }
             set {
-                if ((this.IdHarddiskField.Equals(value) != true)) {
-                    this.IdHarddiskField = value;
-                    this.RaisePropertyChanged("IdHarddisk");
+                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
+                    this.MerkField = value;
+                    this.RaisePropertyChanged("Merk");
                 }
             }
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdHardware {
+        public string Type {
             get {
-                return this.IdHardwareField;
+                return this.TypeField;
             }
             set {
-                if ((this.IdHardwareField.Equals(value) != true)) {
-                    this.IdHardwareField = value;
-                    this.RaisePropertyChanged("IdHardware");
+                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
+                    this.TypeField = value;
+                    this.RaisePropertyChanged("Type");
                 }
             }
         }
@@ -1476,349 +1755,6 @@ namespace CvoInventarisClient.ServiceReference {
                 if ((object.ReferenceEquals(this.VerzenderField, value) != true)) {
                     this.VerzenderField = value;
                     this.RaisePropertyChanged("Verzender");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Cpu", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
-    [System.SerializableAttribute()]
-    public partial class Cpu : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FabrieksNummerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdCpuField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MerkField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int SnelheidField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FabrieksNummer {
-            get {
-                return this.FabrieksNummerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FabrieksNummerField, value) != true)) {
-                    this.FabrieksNummerField = value;
-                    this.RaisePropertyChanged("FabrieksNummer");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdCpu {
-            get {
-                return this.IdCpuField;
-            }
-            set {
-                if ((this.IdCpuField.Equals(value) != true)) {
-                    this.IdCpuField = value;
-                    this.RaisePropertyChanged("IdCpu");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Merk {
-            get {
-                return this.MerkField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
-                    this.MerkField = value;
-                    this.RaisePropertyChanged("Merk");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Snelheid {
-            get {
-                return this.SnelheidField;
-            }
-            set {
-                if ((this.SnelheidField.Equals(value) != true)) {
-                    this.SnelheidField = value;
-                    this.RaisePropertyChanged("Snelheid");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Device", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
-    [System.SerializableAttribute()]
-    public partial class Device : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FabrieksNummerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdDeviceField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private bool IsPcCompatibelField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MerkField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string SerienummerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FabrieksNummer {
-            get {
-                return this.FabrieksNummerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FabrieksNummerField, value) != true)) {
-                    this.FabrieksNummerField = value;
-                    this.RaisePropertyChanged("FabrieksNummer");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdDevice {
-            get {
-                return this.IdDeviceField;
-            }
-            set {
-                if ((this.IdDeviceField.Equals(value) != true)) {
-                    this.IdDeviceField = value;
-                    this.RaisePropertyChanged("IdDevice");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsPcCompatibel {
-            get {
-                return this.IsPcCompatibelField;
-            }
-            set {
-                if ((this.IsPcCompatibelField.Equals(value) != true)) {
-                    this.IsPcCompatibelField = value;
-                    this.RaisePropertyChanged("IsPcCompatibel");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Merk {
-            get {
-                return this.MerkField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
-                    this.MerkField = value;
-                    this.RaisePropertyChanged("Merk");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Serienummer {
-            get {
-                return this.SerienummerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.SerienummerField, value) != true)) {
-                    this.SerienummerField = value;
-                    this.RaisePropertyChanged("Serienummer");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="GrafischeKaart", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
-    [System.SerializableAttribute()]
-    public partial class GrafischeKaart : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string DriverField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string FabrieksNummerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdGrafischeKaartField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string MerkField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TypeField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Driver {
-            get {
-                return this.DriverField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.DriverField, value) != true)) {
-                    this.DriverField = value;
-                    this.RaisePropertyChanged("Driver");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string FabrieksNummer {
-            get {
-                return this.FabrieksNummerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.FabrieksNummerField, value) != true)) {
-                    this.FabrieksNummerField = value;
-                    this.RaisePropertyChanged("FabrieksNummer");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int IdGrafischeKaart {
-            get {
-                return this.IdGrafischeKaartField;
-            }
-            set {
-                if ((this.IdGrafischeKaartField.Equals(value) != true)) {
-                    this.IdGrafischeKaartField = value;
-                    this.RaisePropertyChanged("IdGrafischeKaart");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Merk {
-            get {
-                return this.MerkField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.MerkField, value) != true)) {
-                    this.MerkField = value;
-                    this.RaisePropertyChanged("Merk");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
                 }
             }
         }
