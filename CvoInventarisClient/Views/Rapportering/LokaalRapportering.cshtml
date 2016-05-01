@@ -1,0 +1,101 @@
+﻿@{
+    Layout = null;
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title></title>
+</head>
+<body>
+    <h1>Rapportering</h1>
+    <p>Stap 1 : Uit welke tabel wilt u gegevens halen ?</p>
+    <form action="/Rapportering/Stap1" method="post">
+        <select disabled id="stap1" name="stap1">
+            <option value="cpu">Cpu</option>
+        </select>
+        <p>Stap 2 : Wilt u al de gegevens uit de tabel of enkel bepaalde gegevens</p>
+        <button disabled name="action" type="submit" value="stap2ZonderConditie">Alle gegevens</button>
+        <button disabled name="action" type="submit" value="stap2Conditie">bepaalde gegevens</button>
+    </form>
+    <form action="/Rapportering/Stap3Cpu" method="post">
+        <p>stap 3 : Kies welke gegevens je uit de tabel Cpu wilt hebben</p>
+        @Html.CheckBox("idCpu") idCpu
+        @Html.CheckBox("merk") merk
+        @Html.CheckBox("type") type
+        @Html.CheckBox("snelheid") snelheid
+        @Html.CheckBox("fabrieksnummer") fabrieksnummer
+        <button name="action" type="submit" value="kolomKeuze">klaar</button>
+        <div style="display : @ViewBag.styleCpuStap4">
+            <p>stap 4 : Kies welke conditie of condities u op de gegevens @ViewBag.resultaatCheck wilt toepassen</p>
+            <p>@Html.CheckBox("merkKeuzeCheck") merk = @Html.TextBox("merkKeuzeTekst")</p>
+            <p>@Html.CheckBox("typeKeuzeCheck") type = @Html.TextBox("typeKeuzeTekst")</p>
+            <p>
+                @Html.CheckBox("snelheidKeuzeCheck") snelheid @Html.RadioButton("snelheidKeuze", ">") >
+                @Html.RadioButton("snelheidKeuze", "<") <
+                @Html.RadioButton("snelheidKeuze", "=") =
+                @Html.RadioButton("snelheidKeuze", ">=") >=
+                @Html.RadioButton("snelheidKeuze", "<=") <=
+                @Html.TextBox("snelheidKeuze1")
+            </p>
+            <p>
+                @Html.CheckBox("fabrieksnummerKeuzeCheck") fabrieksnummer @Html.RadioButton("fabrieksnummerKeuze", ">") >
+                @Html.RadioButton("fabrieksnummerKeuze", "<") <
+                @Html.RadioButton("fabrieksnummerKeuze", "=") =
+                @Html.RadioButton("fabrieksnummerKeuze", ">=") >=
+                @Html.RadioButton("fabrieksnummerKeuze", "<=") <=
+                @Html.TextBox("fabrieksnummerKeuze1")
+            </p>
+            <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
+        </div>
+        <div style="display : @ViewBag.styleCpuStap5">
+            @if (ViewBag.Rapport != null)
+            {
+                <table>
+                    <tr>
+                        <td>@ViewBag.test</td>
+                        <td>@ViewBag.test1</td>
+                        <td>@ViewBag.test2</td>
+                        <td>@ViewBag.test3</td>
+                        <td>@ViewBag.test4</td>
+                    </tr>
+                    @foreach (var item in ViewBag.Rapport)
+                    {
+                        <tr>
+                            @if (@item.IdCpu != 0)
+                            {
+                                <td>@item.IdCpu</td> }
+                            @if (@item.Merk != null)
+                            {
+                                <td>@item.Merk</td>
+                            }
+                            @if (@item.Type != null)
+                            {
+                                <td>@item.Type</td>
+                            }
+                            @if (@item.Snelheid != 0)
+                            {
+                                <td>@item.Snelheid</td>
+                            }
+                            @if (@item.FabrieksNummer != null)
+                            {
+                                <td>@item.FabrieksNummer</td>
+                            }
+                        </tr>
+                    }
+                </table>
+                    @Html.Hidden("query", (string)@ViewBag.query)
+                    @Html.Hidden("tables", (string)@ViewBag.tables)
+                    <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
+                    <button name="action" type="submit" value="OpslaanExcel/@ViewBag.query/@ViewBag.tables">Opslaan als excel</button>
+                    <button name="action" type="submit" value="OpslaanPdf/@ViewBag.query/@ViewBag.tables">opslaan als pdf</button>
+            }
+        </div>
+    </form>
+
+
+</body>
+</html>

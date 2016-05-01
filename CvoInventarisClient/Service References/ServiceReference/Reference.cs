@@ -2343,6 +2343,12 @@ namespace CvoInventarisClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/FactuurDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/FactuurDeleteResponse")]
         System.Threading.Tasks.Task<bool> FactuurDeleteAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringFactuur", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringFactuurResponse")]
+        CvoInventarisClient.ServiceReference.Factuur[] RapporteringFactuur(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringFactuur", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringFactuurResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Factuur[]> RapporteringFactuurAsync(string s, string[] keuzeKolommen);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/AccountGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/AccountGetByIdResponse")]
         CvoInventarisClient.ServiceReference.Account AccountGetById(int id);
         
@@ -2953,6 +2959,14 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> FactuurDeleteAsync(int id) {
             return base.Channel.FactuurDeleteAsync(id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.Factuur[] RapporteringFactuur(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringFactuur(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Factuur[]> RapporteringFactuurAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringFactuurAsync(s, keuzeKolommen);
         }
         
         public CvoInventarisClient.ServiceReference.Account AccountGetById(int id) {

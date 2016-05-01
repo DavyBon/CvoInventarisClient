@@ -213,6 +213,8 @@
     <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\Beheer\VerzekeringController.cs" />
     <Compile Include="Controllers\RapporteringCpuController.cs" />
+    <Compile Include="Controllers\RapporteringFactuurController.cs" />
+    <Compile Include="Controllers\RapporteringLokaalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -313,6 +315,8 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Rapportering\FactuurRapportering.cshtml" />
+    <Content Include="Views\Rapportering\LokaalRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
