@@ -171,7 +171,8 @@ namespace WebApplication.Controllers
             if (requestOplossing[0].Equals("stap2Conditie"))
             {
                 if (stap1.Equals("cpu")){
-                    return View("CpuRapportering");
+                    return RedirectToAction("CpuRapportering", "RapporteringCpu");
+                    //return View("CpuRapportering");
                 }
                 if (stap1.Equals("device"))
                 {

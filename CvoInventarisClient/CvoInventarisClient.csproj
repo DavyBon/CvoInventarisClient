@@ -212,6 +212,7 @@
     <Compile Include="Controllers\BeheerController.cs" />
     <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\Beheer\VerzekeringController.cs" />
+    <Compile Include="Controllers\RapporteringCpuController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
