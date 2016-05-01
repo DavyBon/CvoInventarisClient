@@ -11,121 +11,215 @@ namespace CvoInventarisClient.Controllers
     public class LokaalController : Controller
     {
         // INDEX:
+
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.action = TempData["action"];
             return View(ReadAll());
         }
 
-        private LokaalViewModel ReadAll()
+        private List<LokaalModel> ReadAll()
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                LokaalViewModel model = new LokaalViewModel();
-                model.Lokaal = new List<LokaalModel>();
-                model.Netwerk = new List<NetwerkModel>();
+                List<Lokaal> listLokaal = sr.LokaalGetAll().ToList();
 
-                foreach (Lokaal lokaal in client.LokaalGetAll())
-                {
-                    LokaalModel lokaalModel = new LokaalModel();
-                    lokaalModel.IdLokaal = lokaal.IdLokaal;
-                    lokaalModel.LokaalNaam = lokaal.LokaalNaam;
-                    lokaalModel.AantalPlaatsen = lokaal.AantalPlaatsen;
-                    lokaalModel.IsComputerLokaal = lokaal.IsComputerLokaal;
-                    lokaalModel.Netwerk = new NetwerkModel() { Id = lokaal.Netwerk.Id, Driver = lokaal.Netwerk.Driver, Merk = lokaal.Netwerk.Merk, Snelheid = lokaal.Netwerk.Snelheid, Type = lokaal.Netwerk.Type };
-                    model.Lokaal.Add(lokaalModel);
-                }
+                List<LokaalModel> listLokalen = new List<LokaalModel>();
 
-                foreach (Netwerk netwerk in client.NetwerkGetAll())
+                foreach (Lokaal lokaal in listLokaal)
                 {
+                    Netwerk netwerk = lokaal.Netwerk;
+
                     NetwerkModel netwerkModel = new NetwerkModel();
                     netwerkModel.Id = netwerk.Id;
                     netwerkModel.Driver = netwerk.Driver;
                     netwerkModel.Merk = netwerk.Merk;
                     netwerkModel.Snelheid = netwerk.Snelheid;
                     netwerkModel.Type = netwerk.Type;
-                    model.Netwerk.Add(netwerkModel);
+
+                    LokaalModel lokaalModel = new LokaalModel();
+                    lokaalModel.IdLokaal = lokaal.IdLokaal;
+                    lokaalModel.LokaalNaam = lokaal.LokaalNaam;
+                    lokaalModel.AantalPlaatsen = lokaal.AantalPlaatsen;
+                    lokaalModel.IsComputerLokaal = lokaal.IsComputerLokaal;
+                    lokaalModel.Netwerk = netwerkModel;
+                    listLokalen.Add(lokaalModel);
                 }
-                return model;
+                return listLokalen;
             }
         }
 
 
-        // CREATE:
+        // INSERT:
+
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Insert()
         {
-            return View();
+            return View(new LokaalModel());
         }
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult insertLokaal(LokaalModel lokaalModel)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            if (InsertLokaal(lokaalModel) >= 0)
             {
-                Lokaal lokaal = new Lokaal();
-                lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-                lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-                lokaal.IsComputerLokaal = Boolean.Parse(Request.Form["isComputerLokaal"]);
-                lokaal.Netwerk.Id = Convert.ToInt32(Request.Form["idNetwerk"]);
-
-                client.LokaalCreate(lokaal);
-
-                TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
+                return View("Index", ReadAll());
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return View("Insert");
+            }
         }
 
-        // EDIT:
-        [HttpGet]
-        public ActionResult Edit(int id)
+        public int InsertLokaal(LokaalModel lokaalModel)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                return View(client.LokaalGetById(id));
+
+                Lokaal lokaal = new Lokaal();
+                lokaal.LokaalNaam = lokaalModel.LokaalNaam;
+                lokaal.AantalPlaatsen = lokaalModel.AantalPlaatsen;
+                lokaal.IsComputerLokaal = lokaalModel.IsComputerLokaal;
+                lokaal.Netwerk = new Netwerk();
+                lokaal.Netwerk.Id = lokaalModel.Netwerk.Id;
+
+                try
+                {
+                    return sr.LokaalCreate(lokaal);
+                }
+                catch (Exception)
+                {
+                    return -1;
+                }
             }
+        }
+
+        // DETAILS:
+
+        public ActionResult Details(int? id)
+        {
+            return View(GetLokaalById((int)id));
+        }
+
+        public LokaalModel GetLokaalById(int id)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                Lokaal lokaal = new Lokaal();
+
+                try
+                {
+                    lokaal = sr.LokaalGetById(id);
+                }
+                catch (Exception)
+                {
+
+                }
+
+                Netwerk netwerk = lokaal.Netwerk;
+
+                NetwerkModel netwerkModel = new NetwerkModel();
+                netwerkModel.Id = netwerk.Id;
+                netwerkModel.Driver = netwerk.Driver;
+                netwerkModel.Merk = netwerk.Merk;
+                netwerkModel.Snelheid = netwerk.Snelheid;
+                netwerkModel.Type = netwerk.Type;
+
+                LokaalModel lokaalModel = new LokaalModel();
+                lokaalModel.IdLokaal = lokaal.IdLokaal;
+                lokaalModel.LokaalNaam = lokaal.LokaalNaam;
+                lokaalModel.AantalPlaatsen = lokaal.AantalPlaatsen;
+                lokaalModel.IsComputerLokaal = lokaal.IsComputerLokaal;
+                lokaalModel.Netwerk = netwerkModel;
+
+                return lokaalModel;
+            }
+        }
+
+
+        // UPDATE:
+
+        [HttpGet]
+        public ActionResult Update(int? id)
+        {
+            return View(GetLokaalById((int)id));
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult updateLokaal(LokaalModel lk)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            if (UpdateLokaal(lk))
             {
-                Lokaal lokaal = new Lokaal();
-                lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-                lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-                lokaal.IsComputerLokaal = Convert.ToBoolean(Request.Form["isComputerLokaal"]);
-                lokaal.Netwerk.Id = Convert.ToInt32(Request.Form["idNetwerk"]);
-
-                client.LokaalUpdate(lokaal);
-
-                TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd aangepast";
+                return View("Index", ReadAll());
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return View("Update");
+            }
+        }
+
+        public bool UpdateLokaal(LokaalModel lokaalModel)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                Lokaal lokaal = new Lokaal();
+                lokaal.IdLokaal = lokaalModel.IdLokaal;
+                lokaal.LokaalNaam = lokaalModel.LokaalNaam;
+                lokaal.AantalPlaatsen = lokaalModel.AantalPlaatsen;
+                lokaal.IsComputerLokaal = lokaalModel.IsComputerLokaal;
+                lokaal.Netwerk = new Netwerk();
+                lokaal.Netwerk.Id = lokaalModel.Netwerk.Id;
+
+                try
+                {
+                    return sr.LokaalUpdate(lokaal);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
         }
 
 
         // DELETE:
-        [HttpPost]
-        public ActionResult Delete(int[] idArray, FormCollection collection)
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            return View(GetLokaalById((int)id));
+        }
+
+        [HttpPost]
+        public ActionResult deleteLokaal(LokaalModel lokaalModel)
+        {
+            if (DeleteLokaal(lokaalModel))
             {
-                foreach (int id in idArray)
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                return View("Delete");
+            }
+        }
+
+        public bool DeleteLokaal(LokaalModel lokaalModel)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+                int id = lokaalModel.IdLokaal;
+
+                try
                 {
-                    client.LokaalDelete(id);
+                    return sr.LokaalDelete(id);
                 }
-                if (idArray.Length >= 2)
+                catch (Exception)
                 {
-                    TempData["action"] = idArray.Length + " lokalen werden verwijderd";
-                }
-                else
-                {
-                    TempData["action"] = idArray.Length + " lokaal werd verwijderd";
+                    return false;
                 }
             }
-            return RedirectToAction("Index");            
         }
     }
 }

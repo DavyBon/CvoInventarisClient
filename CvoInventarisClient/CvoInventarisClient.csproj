@@ -152,9 +152,15 @@
     <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Lokaal.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Views\Harddisk\Delete.cshtml" />
     <Content Include="Views\Harddisk\Index.cshtml" />
+    <Content Include="Views\Harddisk\Insert.cshtml" />
+    <Content Include="Views\Leverancier\Delete.cshtml" />
     <Content Include="Views\Leverancier\Index.cshtml" />
+    <Content Include="Views\Leverancier\Insert.cshtml" />
+    <Content Include="Views\Lokaal\Delete.cshtml" />
     <Content Include="Views\Lokaal\Index.cshtml" />
+    <Content Include="Views\Lokaal\Insert.cshtml" />
     <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Factuur.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
@@ -220,7 +226,6 @@
     <Compile Include="Controllers\Beheer\LokaalController.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\FactuurModel.cs" />
-    <Compile Include="Models\FactuurViewModel.cs" />
     <Compile Include="Models\HarddiskModel.cs" />
     <Compile Include="Models\HardwareModel.cs" />
     <Compile Include="Models\InventarisModel.cs" />
@@ -230,7 +235,6 @@
     <Compile Include="Models\CpuModel.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\GrafischeKaartModel.cs" />
-    <Compile Include="Models\LokaalViewModel.cs" />
     <Compile Include="Models\NetwerkModel.cs" />
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />
@@ -273,12 +277,14 @@
     <Content Include="Views\GrafischeKaart\Details.cshtml" />
     <Content Include="Views\GrafischeKaart\Edit.cshtml" />
     <Content Include="Views\GrafischeKaart\Index.cshtml" />
-    <Content Include="Views\Harddisk\Edit.cshtml" />
-    <Content Include="Views\Leverancier\Edit.cshtml" />
-    <Content Include="Views\Lokaal\Edit.cshtml" />
+    <Content Include="Views\Harddisk\Update.cshtml" />
+    <Content Include="Views\Leverancier\Update.cshtml" />
+    <Content Include="Views\Lokaal\Update.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Factuur\Index.cshtml" />
-    <Content Include="Views\Factuur\Edit.cshtml" />
+    <Content Include="Views\Factuur\Insert.cshtml" />
+    <Content Include="Views\Factuur\Update.cshtml" />
+    <Content Include="Views\Factuur\Delete.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Inventaris\Create.cshtml" />
     <Content Include="Views\Inventaris\Delete.cshtml" />
@@ -291,6 +297,10 @@
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Beheer\Index.cshtml" />
+    <Content Include="Views\Harddisk\Details.cshtml" />
+    <Content Include="Views\Leverancier\Details.cshtml" />
+    <Content Include="Views\Lokaal\Details.cshtml" />
+    <Content Include="Views\Factuur\Details.cshtml" />
     <Content Include="Views\Rapportering\CpuRapportering.cshtml" />
     <Content Include="Views\Rapportering\DeviceRapportering.cshtml" />
     <Content Include="Views\Rapportering\GrafischeKaartRapportering.cshtml" />

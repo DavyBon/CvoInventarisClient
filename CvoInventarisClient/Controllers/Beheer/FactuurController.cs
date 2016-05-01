@@ -11,49 +11,25 @@ namespace CvoInventarisClient.Controllers
     public class FactuurController : Controller
     {
         // INDEX:
+
         [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.action = TempData["action"];
             return View(ReadAll());
         }
 
-        private FactuurViewModel ReadAll()
+        private List<FactuurModel> ReadAll()
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                FactuurViewModel model = new FactuurViewModel();
-                model.Factuur = new List<FactuurModel>();
-                model.Leverancier = new List<LeverancierModel>();
+                List<Factuur> listFactuur = sr.FactuurGetAll().ToList();
 
-                foreach (Factuur factuur in client.FactuurGetAll())
-                {
-                    FactuurModel factuurModel = new FactuurModel();
-                    factuurModel.IdFactuur = factuur.IdFactuur;
-                    factuurModel.Boekjaar = factuur.Boekjaar;
-                    factuurModel.CvoVolgNummer = factuur.CvoVolgNummer;
-                    factuurModel.FactuurNummer = factuur.FactuurNummer;
-                    factuurModel.FactuurDatum = factuur.FactuurDatum;
-                    factuurModel.FactuurStatusGetekend = factuur.FactuurStatusGetekend;
-                    factuurModel.VerwerkingsDatum = factuur.VerwerkingsDatum;
-                    factuurModel.Leverancier = new LeverancierModel() { IdLeverancier = factuur.Leverancier.IdLeverancier, Naam = factuur.Leverancier.Naam, Afkorting = factuur.Leverancier.Afkorting, Straat = factuur.Leverancier.Straat, HuisNummer = factuur.Leverancier.HuisNummer, BusNummer = factuur.Leverancier.BusNummer, Postcode = factuur.Leverancier.Postcode, Telefoon = factuur.Leverancier.Telefoon, Fax = factuur.Leverancier.Fax, Email = factuur.Leverancier.Email, Website = factuur.Leverancier.Website, BtwNummer = factuur.Leverancier.BtwNummer, Iban = factuur.Leverancier.Iban, Bic = factuur.Leverancier.Bic, ToegevoegdOp = factuur.Leverancier.ToegevoegdOp};
-                    factuurModel.Prijs = factuur.Prijs;
-                    factuurModel.Garantie = factuur.Garantie;
-                    factuurModel.Omschrijving = factuur.Omschrijving;
-                    factuurModel.Opmerking = factuur.Opmerking;
-                    factuurModel.Afschrijfperiode = factuur.Afschrijfperiode;
-                    factuurModel.OleDoc = factuur.OleDoc;
-                    factuurModel.OleDocPath = factuur.OleDocPath;
-                    factuurModel.OleDocFileName = factuur.OleDocFileName;
-                    factuurModel.DatumInsert = factuur.DatumInsert;
-                    factuurModel.UserInsert = factuur.UserInsert;
-                    factuurModel.DatumModified = factuur.DatumModified;
-                    factuurModel.UserModified = factuur.UserModified;
-                    model.Factuur.Add(factuurModel);
-                }
+                List<FactuurModel> listFacturen = new List<FactuurModel>();
 
-                foreach (Leverancier leverancier in client.LeverancierGetAll())
+                foreach (Factuur factuur in listFactuur)
                 {
+                    Leverancier leverancier = factuur.Leverancier;
+
                     LeverancierModel leverancierModel = new LeverancierModel();
                     leverancierModel.IdLeverancier = leverancier.IdLeverancier;
                     leverancierModel.Afkorting = leverancier.Afkorting;
@@ -70,117 +46,262 @@ namespace CvoInventarisClient.Controllers
                     leverancierModel.Telefoon = leverancier.Telefoon;
                     leverancierModel.ToegevoegdOp = leverancier.ToegevoegdOp;
                     leverancierModel.Website = leverancier.Website;
-                    model.Leverancier.Add(leverancierModel);
+
+                    FactuurModel factuurModel = new FactuurModel();
+                    factuurModel.IdFactuur = factuur.IdFactuur;
+                    factuurModel.Boekjaar = factuur.Boekjaar;
+                    factuurModel.CvoVolgNummer = factuur.CvoVolgNummer;
+                    factuurModel.FactuurNummer = factuur.FactuurNummer;
+                    factuurModel.FactuurDatum = factuur.FactuurDatum;
+                    factuurModel.FactuurStatusGetekend = factuur.FactuurStatusGetekend;
+                    factuurModel.VerwerkingsDatum = factuur.VerwerkingsDatum;
+                    factuurModel.Leverancier = leverancierModel;
+                    factuurModel.Prijs = factuur.Prijs;
+                    factuurModel.Garantie = factuur.Garantie;
+                    factuurModel.Omschrijving = factuur.Omschrijving;
+                    factuurModel.Opmerking = factuur.Opmerking;
+                    factuurModel.Afschrijfperiode = factuur.Afschrijfperiode;
+                    factuurModel.OleDoc = factuur.OleDoc;
+                    factuurModel.OleDocPath = factuur.OleDocPath;
+                    factuurModel.OleDocFileName = factuur.OleDocFileName;
+                    factuurModel.DatumInsert = factuur.DatumInsert;
+                    factuurModel.UserInsert = factuur.UserInsert;
+                    factuurModel.DatumModified = factuur.DatumModified;
+                    factuurModel.UserModified = factuur.UserModified;
+                    listFacturen.Add(factuurModel);
                 }
-                return model;
+                return listFacturen;
             }
         }
 
 
-        // CREATE:
+        // INSERT:
+
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Insert()
         {
-            return View();
+            return View(new FactuurModel());
         }
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult insertFactuur(FactuurModel factuurModel)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            if (InsertFactuur(factuurModel) >= 0)
             {
-                Factuur factuur = new Factuur();
-                factuur.Boekjaar = Request.Form["boekjaar"];
-                factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
-                factuur.FactuurNummer = Request.Form["factuurNummer"];
-                factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
-                factuur.FactuurStatusGetekend = Boolean.Parse(Request.Form["factuurStatusGetekend"]);
-                factuur.VerwerkingsDatum = Convert.ToDateTime(Request.Form["verwerkingsDatum"]);
-                factuur.Leverancier.IdLeverancier = Convert.ToInt32(Request.Form["idLeverancier"]);
-                factuur.Prijs = Convert.ToInt32(Request.Form["prijs"]);
-                factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
-                factuur.Omschrijving = Request.Form["omschrijving"];
-                factuur.Opmerking = Request.Form["opmerking"];
-                factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-                factuur.OleDoc = Request.Form["oleDoc"];
-                factuur.OleDocPath = Request.Form["oleDocPath"];
-                factuur.OleDocFileName = Request.Form["oleDocFileName"];
-                factuur.DatumInsert = Convert.ToDateTime(Request.Form["datumInsert"]);
-                factuur.UserInsert = Request.Form["userInsert"];
-                factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]);
-                factuur.UserModified = Request.Form["userModified"];
-
-                client.FactuurCreate(factuur);
-
-                TempData["action"] = "factuur met factuurnummer" + " " + Request.Form["factuurNummer"] + " werd toegevoegd";
+                return View("Index", ReadAll());
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return View("Insert");
+            }
         }
 
-        // EDIT:
-        [HttpGet]
-        public ActionResult Edit(int id)
+        public int InsertFactuur(FactuurModel factuurModel)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                return View(client.FactuurGetById(id));
+                Factuur factuur = new Factuur();
+                                
+                factuur.Boekjaar = factuurModel.Boekjaar;
+                factuur.CvoVolgNummer = factuurModel.CvoVolgNummer;
+                factuur.FactuurNummer = factuurModel.FactuurNummer;
+                factuur.FactuurDatum = factuurModel.FactuurDatum;
+                factuur.FactuurStatusGetekend = factuurModel.FactuurStatusGetekend;
+                factuur.VerwerkingsDatum = factuurModel.VerwerkingsDatum;
+                factuur.Leverancier = new Leverancier();
+                factuur.Leverancier.IdLeverancier = factuurModel.Leverancier.IdLeverancier;
+                factuur.Prijs = factuurModel.Prijs;
+                factuur.Garantie = factuurModel.Garantie;
+                factuur.Omschrijving = factuurModel.Omschrijving;
+                factuur.Opmerking = factuurModel.Opmerking;
+                factuur.Afschrijfperiode = factuurModel.Afschrijfperiode;
+                factuur.OleDoc = factuurModel.OleDoc;
+                factuur.OleDocPath = factuurModel.OleDocPath;
+                factuur.OleDocFileName = factuurModel.OleDocFileName;
+                factuur.DatumInsert = factuurModel.DatumInsert;
+                factuur.UserInsert = factuurModel.UserInsert;
+                factuur.DatumModified = factuurModel.DatumModified;
+                factuur.UserModified = factuurModel.UserModified;
+
+                try
+                {
+                    return sr.FactuurCreate(factuur);
+                }
+                catch (Exception)
+                {
+                    return -1;
+                }
+
             }
+        }
+
+        // DETAILS:
+
+        public ActionResult Details(int? id)
+        {
+            return View(GetFactuurById((int)id));
+        }
+
+        public FactuurModel GetFactuurById(int id)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                Factuur factuur = new Factuur();
+
+                try
+                {
+                    factuur = sr.FactuurGetById(id);
+                }
+                catch (Exception)
+                {
+
+                }
+
+                Leverancier leverancier = factuur.Leverancier;
+
+                LeverancierModel leverancierModel = new LeverancierModel();
+                leverancierModel.IdLeverancier = leverancier.IdLeverancier;
+                leverancierModel.Afkorting = leverancier.Afkorting;
+                leverancierModel.Bic = leverancier.Bic;
+                leverancierModel.BtwNummer = leverancier.BtwNummer;
+                leverancierModel.BusNummer = leverancier.BusNummer;
+                leverancierModel.Email = leverancier.Email;
+                leverancierModel.Fax = leverancier.Fax;
+                leverancierModel.HuisNummer = leverancier.HuisNummer;
+                leverancierModel.Iban = leverancier.Iban;
+                leverancierModel.Naam = leverancier.Naam;
+                leverancierModel.Postcode = leverancier.Postcode;
+                leverancierModel.Straat = leverancier.Straat;
+                leverancierModel.Telefoon = leverancier.Telefoon;
+                leverancierModel.ToegevoegdOp = leverancier.ToegevoegdOp;
+                leverancierModel.Website = leverancier.Website;
+
+                FactuurModel factuurModel = new FactuurModel();
+                factuurModel.IdFactuur = factuur.IdFactuur;
+                factuurModel.Boekjaar = factuur.Boekjaar;
+                factuurModel.CvoVolgNummer = factuur.CvoVolgNummer;
+                factuurModel.FactuurNummer = factuur.FactuurNummer;
+                factuurModel.FactuurDatum = factuur.FactuurDatum;
+                factuurModel.FactuurStatusGetekend = factuur.FactuurStatusGetekend;
+                factuurModel.VerwerkingsDatum = factuur.VerwerkingsDatum;
+                factuurModel.Leverancier = leverancierModel;
+                factuurModel.Prijs = factuur.Prijs;
+                factuurModel.Garantie = factuur.Garantie;
+                factuurModel.Omschrijving = factuur.Omschrijving;
+                factuurModel.Opmerking = factuur.Opmerking;
+                factuurModel.Afschrijfperiode = factuur.Afschrijfperiode;
+                factuurModel.OleDoc = factuur.OleDoc;
+                factuurModel.OleDocPath = factuur.OleDocPath;
+                factuurModel.OleDocFileName = factuur.OleDocFileName;
+                factuurModel.DatumInsert = factuur.DatumInsert;
+                factuurModel.UserInsert = factuur.UserInsert;
+                factuurModel.DatumModified = factuur.DatumModified;
+                factuurModel.UserModified = factuur.UserModified;
+
+                return factuurModel;
+            }
+        }
+
+        // UPDATE:
+
+        [HttpGet]
+        public ActionResult Update(int? id)
+        {
+            return View(GetFactuurById((int)id));
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult updateFactuur(FactuurModel factuurModel)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            if (UpdateFactuur(factuurModel))
             {
-                Factuur factuur = new Factuur();
-                factuur.Boekjaar = Request.Form["boekjaar"];
-                factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
-                factuur.FactuurNummer = Request.Form["factuurNummer"];
-                factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
-                factuur.FactuurStatusGetekend = Boolean.Parse(Request.Form["factuurStatusGetekend"]);
-                factuur.VerwerkingsDatum = Convert.ToDateTime(Request.Form["verwerkingsDatum"]);
-                factuur.Leverancier.IdLeverancier = Convert.ToInt32(Request.Form["idLeverancier"]);
-                factuur.Prijs = Convert.ToInt32(Request.Form["prijs"]);
-                factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
-                factuur.Omschrijving = Request.Form["omschrijving"];
-                factuur.Opmerking = Request.Form["opmerking"];
-                factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-                factuur.OleDoc = Request.Form["oleDoc"];
-                factuur.OleDocPath = Request.Form["oleDocPath"];
-                factuur.OleDocFileName = Request.Form["oleDocFileName"];
-                factuur.DatumInsert = Convert.ToDateTime(Request.Form["datumInsert"]);
-                factuur.UserInsert = Request.Form["userInsert"];
-                factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]);
-                factuur.UserModified = Request.Form["userModified"];
-
-                client.FactuurUpdate(factuur);
-
-                TempData["action"] = "factuur met factuurnummer" + " " + Request.Form["factuurNummer"] + " werd aangepast";
+                return View("Index", ReadAll());
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return View("update");
+            }
+        }
+
+        public bool UpdateFactuur(FactuurModel factuurModel)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                Factuur factuur = new Factuur();
+                factuur.IdFactuur = factuurModel.IdFactuur;
+                factuur.Boekjaar = factuurModel.Boekjaar;
+                factuur.CvoVolgNummer = factuurModel.CvoVolgNummer;
+                factuur.FactuurNummer = factuurModel.FactuurNummer;
+                factuur.FactuurDatum = factuurModel.FactuurDatum;
+                factuur.FactuurStatusGetekend = factuurModel.FactuurStatusGetekend;
+                factuur.VerwerkingsDatum = factuurModel.VerwerkingsDatum;
+                factuur.Leverancier = new Leverancier();
+                factuur.Leverancier.IdLeverancier = factuurModel.Leverancier.IdLeverancier;
+                factuur.Prijs = factuurModel.Prijs;
+                factuur.Garantie = factuurModel.Garantie;
+                factuur.Omschrijving = factuurModel.Omschrijving;
+                factuur.Opmerking = factuurModel.Opmerking;
+                factuur.Afschrijfperiode = factuurModel.Afschrijfperiode;
+                factuur.OleDoc = factuurModel.OleDoc;
+                factuur.OleDocPath = factuurModel.OleDocPath;
+                factuur.OleDocFileName = factuurModel.OleDocFileName;
+                factuur.DatumInsert = factuurModel.DatumInsert;
+                factuur.UserInsert = factuurModel.UserInsert;
+                factuur.DatumModified = factuurModel.DatumModified;
+                factuur.UserModified = factuurModel.UserModified;
+
+                try
+                {
+                    return sr.FactuurUpdate(factuur);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+
+            }
         }
 
 
         // DELETE:
-        [HttpPost]
-        public ActionResult Delete(int[] idArray, FormCollection collection)
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            return View(GetFactuurById((int)id));
+        }
+
+        [HttpPost]
+        public ActionResult deleteFactuur(FactuurModel factuurModel)
+        {
+            if (DeleteFactuur(factuurModel))
             {
-                foreach (int id in idArray)
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                return View("Delete");
+            }
+        }
+
+        public bool DeleteFactuur(FactuurModel factuurModel)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                int id = factuurModel.IdFactuur;
+
+                try
                 {
-                    client.FactuurDelete(id);
+                    return sr.FactuurDelete(id);
                 }
-                if (idArray.Length >= 2)
+                catch (Exception)
                 {
-                    TempData["action"] = idArray.Length + " facturen werden verwijderd";
-                }
-                else
-                {
-                    TempData["action"] = idArray.Length + " factuur werd verwijderd";
+                    return false;
                 }
             }
-            return RedirectToAction("Index");
         }
     }
 }

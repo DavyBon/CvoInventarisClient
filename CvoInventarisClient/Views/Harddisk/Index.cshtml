@@ -1,88 +1,61 @@
-﻿@model IEnumerable<CvoInventarisClient.ServiceReference.Harddisk>
+﻿@model IEnumerable<CvoInventarisClient.Models.HarddiskModel>
 
 @{
-    ViewBag.Title = "Harddisks";
-}
-@if (!String.IsNullOrWhiteSpace(ViewBag.action))
-{
-    <div class="alert alert-info alert-dismissible" role="alert">
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        @ViewBag.action
-    </div>
-}
-@using (Html.BeginForm("Delete", "Harddisk"))
-{
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
-    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
-
-    <div class="spacer"></div>
-
-    <div class="panel panel-primary">
-        <div class="panel-heading">@ViewBag.Title</div>
-        <table class="table table-striped">
-            <tr>
-                <th></th>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Merk)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Grootte)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.FabrieksNummer)
-                </th>
-            </tr>
-
-            @foreach (var item in Model)
-            {
-                <tr>
-                    <td>
-                        <input type="checkbox" name="idArray" value="@item.IdHarddisk" />
-                    </td>
-                    <td>
-                        <a class="bottom-align-text" href="@Url.Action("Edit", "Harddisk", new { id = item.IdHarddisk })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Merk)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Grootte)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.FabrieksNummer)
-                    </td>
-                </tr>
-            }
-        </table>
-    </div>
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="modal fade nieuwModal" tabindex="-1" role="dialog" aria-labelledby="nieuwModalLabel">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <strong>Voeg toe...</strong>
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("Create", "Harddisk"))
-                {
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Merk)
-                        <input class="form-control" type="text" name="merk" required />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Grootte)
-                        <input class="form-control" type="text" name="grootte" required />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.FabrieksNummer)
-                        <input class="form-control" type="text" name="fabrieksNummer" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Voeg harddisk toe</button>
-                }
-            </div>
-        </div>
-    </div>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<br />
+
+<div>
+    @Html.ActionLink("Create New", "Insert", "Harddisk", null, new { @class= "btn btn-default" })
 </div>
+
+<br />
+<br />
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.IdHarddisk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Merk)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Grootte)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FabrieksNummer)
+        </th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdHarddisk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Merk)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Grootte)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FabrieksNummer)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Update", new { id = item.IdHarddisk }) |
+            @Html.ActionLink("Details", "Details", new { id = item.IdHarddisk }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.IdHarddisk })
+        </td>
+    </tr>
+}
+</table>
 

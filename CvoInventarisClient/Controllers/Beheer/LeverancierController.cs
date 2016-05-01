@@ -10,104 +10,238 @@ namespace CvoInventarisClient.Controllers
 {
     public class LeverancierController : Controller
     {
-
         // INDEX:
+
+        [HttpGet]
         public ActionResult Index()
         {
-            ViewBag.action = TempData["action"];
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                return View(client.LeverancierGetAll());
-            }
+            return View(ReadAll());
         }
 
-        // CREATE:
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        private List<LeverancierModel> ReadAll()
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
             {
-                Leverancier leverancier = new Leverancier();
-                leverancier.Naam = Request.Form["naam"];
-                leverancier.Afkorting = Request.Form["afkorting"];
-                leverancier.Straat = Request.Form["straat"];
-                leverancier.HuisNummer = Convert.ToInt32(Request.Form["huisNummer"]);
-                leverancier.BusNummer = Convert.ToInt32(Request.Form["busNummer"]);
-                leverancier.Postcode = Convert.ToInt32(Request.Form["postcode"]);
-                leverancier.Telefoon = Request.Form["telefoon"];
-                leverancier.Fax = Request.Form["fax"];
-                leverancier.Email = Request.Form["email"];
-                leverancier.Website = Request.Form["website"];
-                leverancier.BtwNummer = Request.Form["btwNummer"];
-                leverancier.Iban = Request.Form["iban"];
-                leverancier.Bic = Request.Form["bic"];
-                leverancier.ToegevoegdOp = Convert.ToDateTime(Request.Form["toegevoegdOp"]);
 
-                client.LeverancierCreate(leverancier);
+                List<Leverancier> listLeverancier = sr.LeverancierGetAll().ToList();
 
-                TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd toegevoegd";
+                List<LeverancierModel> listLeveranciers = new List<LeverancierModel>();
+
+                foreach (Leverancier leverancier in listLeverancier)
+                {
+                    LeverancierModel leverancierModel = new LeverancierModel();
+                    leverancierModel.IdLeverancier = leverancier.IdLeverancier;
+                    leverancierModel.Naam = leverancier.Naam;
+                    leverancierModel.Afkorting = leverancier.Afkorting;
+                    leverancierModel.Straat = leverancier.Straat;
+                    leverancierModel.HuisNummer = leverancier.HuisNummer;
+                    leverancierModel.BusNummer = leverancier.BusNummer;
+                    leverancierModel.Postcode = leverancier.Postcode;
+                    leverancierModel.Telefoon = leverancier.Telefoon;
+                    leverancierModel.Fax = leverancier.Fax;
+                    leverancierModel.Email = leverancier.Email;
+                    leverancierModel.Website = leverancier.Website;
+                    leverancierModel.BtwNummer = leverancier.BtwNummer;
+                    leverancierModel.Iban = leverancier.Iban;
+                    leverancierModel.Bic = leverancier.Bic;
+                    leverancierModel.ToegevoegdOp = leverancier.ToegevoegdOp;
+                    listLeveranciers.Add(leverancierModel);
+                }
+                return listLeveranciers;
             }
-            return RedirectToAction("Index");
         }
-        
-        // EDIT:
+
+
+        // INSERT:
+
         [HttpGet]
-        public ActionResult Edit(int id)
+        public ActionResult Insert()
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                return View(client.LeverancierGetById(id));
-            }
+            return View(new LeverancierModel());
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult insertLeverancier(LeverancierModel leverancierModel)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            if (InsertLeverancier(leverancierModel) >= 0)
             {
-                Leverancier leverancier = new Leverancier();
-                leverancier.Naam = Request.Form["naam"];
-                leverancier.Afkorting = Request.Form["afkorting"];
-                leverancier.Straat = Request.Form["straat"];
-                leverancier.HuisNummer = Convert.ToInt32(Request.Form["huisNummer"]);
-                leverancier.BusNummer = Convert.ToInt32(Request.Form["busNummer"]);
-                leverancier.Postcode = Convert.ToInt32(Request.Form["postcode"]);
-                leverancier.Telefoon = Request.Form["telefoon"];
-                leverancier.Fax = Request.Form["fax"];
-                leverancier.Email = Request.Form["email"];
-                leverancier.Website = Request.Form["website"];
-                leverancier.BtwNummer = Request.Form["btwNummer"];
-                leverancier.Iban = Request.Form["iban"];
-                leverancier.Bic = Request.Form["bic"];
-                leverancier.ToegevoegdOp = Convert.ToDateTime(Request.Form["toegevoegdOp"]);
-
-                client.LeverancierUpdate(leverancier);
-
-                TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd aangepast";
+                return View("Index", ReadAll());
             }
-            return RedirectToAction("Index");
+            else
+            {
+                return View("Insert");
+            }
         }
+
+        public int InsertLeverancier(LeverancierModel leverancierModel)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                Leverancier leverancier = new Leverancier();
+                leverancier.Naam = leverancierModel.Naam;
+                leverancier.Afkorting = leverancierModel.Afkorting;
+                leverancier.Straat = leverancierModel.Straat;
+                leverancier.HuisNummer = leverancierModel.HuisNummer;
+                leverancier.BusNummer = leverancierModel.BusNummer;
+                leverancier.Postcode = leverancierModel.Postcode;
+                leverancier.Telefoon = leverancierModel.Telefoon;
+                leverancier.Fax = leverancierModel.Fax;
+                leverancier.Email = leverancierModel.Email;
+                leverancier.Website = leverancierModel.Website;
+                leverancier.BtwNummer = leverancierModel.BtwNummer;
+                leverancier.Iban = leverancierModel.Iban;
+                leverancier.Bic = leverancierModel.Bic;
+                leverancier.ToegevoegdOp = leverancierModel.ToegevoegdOp;
+
+                try
+                {
+                    return sr.LeverancierCreate(leverancier);
+                }
+                catch (Exception)
+                {
+                    return -1;
+                }
+            }
+        }
+
+        // DETAILS:
+
+        public ActionResult Details(int? id)
+        {
+            return View(GetLeverancierById((int)id));
+        }
+
+        public LeverancierModel GetLeverancierById(int id)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                Leverancier leverancier = new Leverancier();
+
+                try
+                {
+                    leverancier = sr.LeverancierGetById(id);
+                }
+                catch (Exception)
+                {
+
+                }
+
+                LeverancierModel leverancierModel = new LeverancierModel();
+                leverancierModel.IdLeverancier = leverancier.IdLeverancier;
+                leverancierModel.Naam = leverancier.Naam;
+                leverancierModel.Afkorting = leverancier.Afkorting;
+                leverancierModel.Straat = leverancier.Straat;
+                leverancierModel.HuisNummer = leverancier.HuisNummer;
+                leverancierModel.BusNummer = leverancier.BusNummer;
+                leverancierModel.Postcode = leverancier.Postcode;
+                leverancierModel.Telefoon = leverancier.Telefoon;
+                leverancierModel.Fax = leverancier.Fax;
+                leverancierModel.Email = leverancier.Email;
+                leverancierModel.Website = leverancier.Website;
+                leverancierModel.BtwNummer = leverancier.BtwNummer;
+                leverancierModel.Iban = leverancier.Iban;
+                leverancierModel.Bic = leverancier.Bic;
+                leverancierModel.ToegevoegdOp = leverancier.ToegevoegdOp;
+
+                return leverancierModel;
+            }
+        }
+
+
+        // UPDATE:
+
+        [HttpGet]
+        public ActionResult Update(int? id)
+        {
+            return View(GetLeverancierById((int)id));
+        }
+
+        [HttpPost]
+        public ActionResult updateLeverancier(LeverancierModel leverancierModel)
+        {
+            if (UpdateLeverancier(leverancierModel))
+            {
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                return View("Update");
+            }
+        }
+
+        public bool UpdateLeverancier(LeverancierModel leverancierModel)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                Leverancier leverancier = new Leverancier();
+                leverancier.IdLeverancier = leverancierModel.IdLeverancier;
+                leverancier.Naam = leverancierModel.Naam;
+                leverancier.Afkorting = leverancierModel.Afkorting;
+                leverancier.Straat = leverancierModel.Straat;
+                leverancier.HuisNummer = leverancierModel.HuisNummer;
+                leverancier.BusNummer = leverancierModel.BusNummer;
+                leverancier.Postcode = leverancierModel.Postcode;
+                leverancier.Telefoon = leverancierModel.Telefoon;
+                leverancier.Fax = leverancierModel.Fax;
+                leverancier.Email = leverancierModel.Email;
+                leverancier.Website = leverancierModel.Website;
+                leverancier.BtwNummer = leverancierModel.BtwNummer;
+                leverancier.Iban = leverancierModel.Iban;
+                leverancier.Bic = leverancierModel.Bic;
+                leverancier.ToegevoegdOp = leverancierModel.ToegevoegdOp;
+
+                try
+                {
+                    return sr.LeverancierUpdate(leverancier);
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+            }
+        }
+
 
         // DELETE:
-        [HttpPost]
-        public ActionResult Delete(int[] idArray)
+
+        [HttpGet]
+        public ActionResult Delete(int? id)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            return View(GetLeverancierById((int)id));
+        }
+
+        [HttpPost]
+        public ActionResult deleteLeverancier(LeverancierModel leverancierModel)
+        {
+            if (DeleteLeverancier(leverancierModel))
             {
-                foreach(int id in idArray)
+                return View("Index", ReadAll());
+            }
+            else
+            {
+                return View("Delete");
+            }
+        }
+
+        public bool DeleteLeverancier(LeverancierModel leverancierModel)
+        {
+            using (CvoInventarisServiceClient sr = new CvoInventarisServiceClient())
+            {
+
+                int id = leverancierModel.IdLeverancier;
+
+                try
                 {
-                    client.LeverancierDelete(id);
+                    return sr.LeverancierDelete(id);
                 }
-                if (idArray.Length >= 2)
+                catch (Exception)
                 {
-                    TempData["action"] = idArray.Length + " leveranciers werden verwijderd";
-                }
-                else
-                {
-                    TempData["action"] = idArray.Length + " leverancier werd verwijderd";
+                    return false;
                 }
             }
-            return RedirectToAction("Index");
         }
     }
 }
