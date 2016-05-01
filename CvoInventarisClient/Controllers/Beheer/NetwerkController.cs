@@ -55,7 +55,6 @@ namespace CvoInventarisClient.Controllers
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {             
                 Netwerk netwerk = new Netwerk();
-                netwerk.Id = Convert.ToInt16(Request.Form["idNetwerk"]);
                 netwerk.Driver = Request.Form["driver"];
                 netwerk.Merk = Request.Form["merk"];
                 netwerk.Type = Request.Form["type"];
