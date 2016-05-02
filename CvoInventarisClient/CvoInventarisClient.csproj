@@ -283,8 +283,6 @@
     <Content Include="Views\Factuur\Index.cshtml" />
     <Content Include="Views\Factuur\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Inventaris\Create.cshtml" />
-    <Content Include="Views\Inventaris\Delete.cshtml" />
     <Content Include="Views\Inventaris\Edit.cshtml" />
     <Content Include="Views\Netwerk\Edit.cshtml" />
     <Content Include="Views\Netwerk\Index.cshtml" />
@@ -309,7 +307,6 @@
     <Content Include="Views\ObjectType\Index.cshtml" />
     <Content Include="Views\Hardware\Index.cshtml" />
     <Content Include="Views\Inventaris\Index.cshtml" />
-    <Content Include="Views\Inventaris\Details.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
     <Content Include="Views\Account\Details.cshtml" />

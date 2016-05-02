@@ -15,7 +15,12 @@ namespace CvoInventarisClient.Controllers
             ViewBag.action = TempData["action"];
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                return View(client.NetwerkGetAll());
+                List<Models.NetwerkModel> model = new List<Models.NetwerkModel>();
+                foreach (Netwerk net in client.NetwerkGetAll())
+                {
+                    model.Add(new Models.NetwerkModel() { Id = net.Id, Driver = net.Driver, Merk = net.Merk, Snelheid = net.Snelheid, Type = net.Type });
+                }
+                return View(model);
             }
         }
 
@@ -30,8 +35,6 @@ namespace CvoInventarisClient.Controllers
                 netwerk.Merk = Request.Form["merk"];
                 netwerk.Type = Request.Form["type"];
                 netwerk.Snelheid = Request.Form["snelheid"];
-
-
                 client.NetwerkCreate(netwerk);
 
                 TempData["action"] = "netwerk" + " " + Request.Form["merk"] + " werd toegevoegd";
@@ -44,7 +47,8 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                return View(client.NetwerkGetById(id));
+                Netwerk net = client.NetwerkGetById(id);
+                return View(new Models.NetwerkModel() {Id=net.Id, Driver= net.Driver, Merk = net.Merk, Snelheid = net.Snelheid, Type = net.Type});
             }
         }
 
