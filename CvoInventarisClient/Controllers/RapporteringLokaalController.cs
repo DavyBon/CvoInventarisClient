@@ -27,7 +27,7 @@ namespace CvoInventarisClient.Controllers
             string[] requestOplossing = request.Split('/');
             if (requestOplossing[0].Equals("OpslaanPdf"))
             {
-                OpslaanLokaalCpu(requestOplossing[1], requestOplossing[2]);
+                //OpslaanLokaalCpu(requestOplossing[1], requestOplossing[2]);
                 ViewBag.testj = requestOplossing[1] + requestOplossing[2];
             }
             if (requestOplossing[0].Equals("OpslaanExcel"))

@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CvoInventarisClient.Models;
 using CvoInventarisClient.ServiceReference;
+using System.Web.Security;
 
 namespace CvoInventarisClient.Controllers
 {
@@ -16,7 +17,7 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Index(AccountModel am)
+        public ActionResult Index(AccountModel am, FormCollection formCollection)
         {
             CvoInventarisServiceClient service = new CvoInventarisServiceClient();
 
@@ -35,6 +36,8 @@ namespace CvoInventarisClient.Controllers
                 if (service.AccountLogin(acc))
                 {
                     ViewBag.LoginMessage = "Welkom, je bent ingelogd";
+                    bool onthouden = formCollection["remember-me"] == "on" ? true : false;
+                    FormsAuthentication.RedirectFromLoginPage(acc.IdAccount.ToString(), onthouden);
                 }
                 else
                 {

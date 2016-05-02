@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CvoInventarisClient.Models;
 using CvoInventarisClient.ServiceReference;
+using System.Web.Security;
 
 namespace CvoInventarisClient.Controllers
 {
@@ -204,6 +205,12 @@ namespace CvoInventarisClient.Controllers
             {
                 return false;
             }
+        }
+
+        public ActionResult Loguit()
+        {
+            FormsAuthentication.SignOut();
+            return Redirect(Url.Action("Index", "Login"));
         }
     }
 }

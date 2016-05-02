@@ -317,6 +317,7 @@
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Rapportering\FactuurRapportering.cshtml" />
     <Content Include="Views\Rapportering\LokaalRapportering.cshtml" />
+    <Content Include="Views\Account\Loguit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
