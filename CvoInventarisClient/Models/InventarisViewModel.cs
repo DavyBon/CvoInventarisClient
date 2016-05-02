@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace CvoInventarisClient.Models
 {
@@ -9,7 +10,7 @@ namespace CvoInventarisClient.Models
     {
         public List<InventarisModel> Inventaris { get; set; }
         public List<ObjectModel> Objecten { get; set; }
-        public List<VerzekeringModel> Verzekeringen { get; set; }
-        public List<LokaalModel> Lokalen { get; set; }
+        public List<SelectListItem> Verzekeringen { get; set; }
+        public List<SelectListItem> Lokalen { get; set; }
     }
 }

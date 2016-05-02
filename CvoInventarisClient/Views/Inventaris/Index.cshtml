@@ -3,114 +3,170 @@
 @{
     ViewBag.Title = "Inventaris";
 }
-
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
+}
 @using (Html.BeginForm("Delete", "Inventaris"))
 {
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
+
+    <div class="input-group col-lg-4 pull-right">
+        <span class="input-group-addon">Zoeken</span>
+        <input id="filter" type="text" class="form-control">
+    </div>
+
+    <div class="spacer"></div>
 
     <div class="panel panel-primary">
-        <div class="panel-heading">Inventaris</div>
+        <div class="panel-heading">@ViewBag.Title</div>
         <table class="table table-striped">
-            <tr>
-                <th></th>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Inventaris[0].Label)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Inventaris[0].Object.Kenmerken)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Inventaris[0].Object.ObjectType.Omschrijving)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal.LokaalNaam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering.Omschrijving)
-                </th>
-            </tr>
-            @foreach (var item in Model.Inventaris)
-            {
+            <thead>
                 <tr>
-                    <td>
-                        <input type="checkbox" name="idArray" value="@item.Id" />
-                    </td>
-                    <td>
-                        <a class="bottom-align-text" href="@Url.Action("Edit", "Inventaris", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Label)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Object.Kenmerken)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Object.ObjectType.Omschrijving)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Lokaal.LokaalNaam)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsAanwezig)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsActief)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
-                    </td>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Label)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Object.Kenmerken)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal.LokaalNaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering.Omschrijving)
+                    </th>
                 </tr>
-            }
-
+            </thead>
+            <tbody class="search">
+                @foreach (var item in Model.Inventaris)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="idArray" value="@item.Id" />
+                        </td>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Netwerk", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Label)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Object.Kenmerken)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsAanwezig)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActief)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lokaal.LokaalNaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Historiek)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aankoopjaar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Afschrijvingsperiode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
-    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
-}
-<!-- modal -->
-<div class="modal fade nieuwModal" tabindex="-1" role="dialog" aria-labelledby="nieuwModalLabel">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <strong>Voeg toe..</strong>
-            </div>
-            <div class="modal-body">
-                @using (Html.BeginForm("Create", "Inventaris"))
-                {
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].Object)
-                        <input class="form-control" type="text" name="Object" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].Label)
-                        <input class="form-control" type="text" name="Label" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal)
-                        <input class="form-control" type="text" name="Lokaal" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
-                        <input class="form-control" type="text" name="Verzekering" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
-                        <input class="form-control" type="text" name="Aanwezig" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
-                        <input class="form-control" type="text" name="Actief" />
-                    </div>
-
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                }
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
             </div>
         </div>
     </div>
+}
+<!-- nieuw modal -->
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>Vul in</strong>
+            </div>
+            @using (Html.BeginForm("Create", "Inventaris"))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                       @Html.DisplayNameFor(model => model.Inventaris[0].Object.Kenmerken)
+                        <input class="form-control" type="text" name="merk" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
+                        <input class="form-control" type="text" name="snelheid" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
+                        <input class="form-control" type="text" name="driver" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal)
+                        @Html.DropDownListFor(model => model.Lokalen, Model.Lokalen, "", new { @class = "form-control" })
+                    </div>  
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
+                        <input class="form-control" type="text" name="type" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)
+                        <input class="form-control" type="text" name="type" required />
+                    </div>
+                    <div class="form-group">
+                       @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
+                        <input class="form-control" type="text" name="type" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
+                        @Html.DropDownListFor(model => model.Verzekeringen, Model.Verzekeringen, "", new { @class = "form-control" })
+                    </div>                  
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Voeg toe aan inventaris</button>
+                </div>
+            }
+        </div>
+    </div>
 </div>
+<script src="~/Scripts/Custom/Custom.js"></script>

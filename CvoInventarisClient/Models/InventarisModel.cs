@@ -21,5 +21,11 @@ namespace CvoInventarisClient.Models
         public bool IsActief { get; set; }
         [Display(Name = "Label")]
         public string Label { get; set; }
+        [Display(Name = "Historiek")]
+        public string Historiek { get; set; }
+        [Display(Name = "Aankoopjaar")]
+        public int Aankoopjaar { get; set; }
+        [Display(Name = "Afschrijvingsperiode")]
+        public int Afschrijvingsperiode { get; set; }
     }
 }
