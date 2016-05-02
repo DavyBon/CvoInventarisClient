@@ -15,28 +15,35 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
+    <div class="input-group col-lg-4 pull-right">
+        <span class="input-group-addon">Zoeken</span>
+        <input id="filter" type="text" class="form-control">
+    </div>
+
     <div class="spacer"></div>
 
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <table class="table table-striped">
-            <tr>
-                <th></th>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Merk)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Driver)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Snelheid)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Type)
-                </th>
-            </tr>
-
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Merk)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Driver)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Snelheid)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="search">
             @foreach (var item in Model)
             {
                 <tr>
@@ -61,7 +68,7 @@
 
                 </tr>
             }
-
+            </tbody>
         </table>
     </div>
     <!-- Delete modal -->
@@ -118,3 +125,18 @@
         </div>
     </div>
 </div>
+
+@*Searchbar*@
+<script>
+    $(document).ready(function () {
+        (function ($) {
+            $('#filter').keyup(function () {
+                var rex = new RegExp($(this).val(), 'i');
+                $('.search tr').hide();
+                $('.search tr').filter(function () {
+                    return rex.test($(this).text());
+                }).show();
+            })
+        }(jQuery));
+    });
+</script>
