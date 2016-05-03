@@ -115,9 +115,6 @@ C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventari
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll.config
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.pdb
-C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.dll
-C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.pdfa.dll
-C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xtra.dll
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.Web.Infrastructure.dll
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.dll

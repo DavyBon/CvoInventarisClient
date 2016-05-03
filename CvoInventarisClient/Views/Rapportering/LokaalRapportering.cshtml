@@ -15,43 +15,40 @@
     <p>Stap 1 : Uit welke tabel wilt u gegevens halen ?</p>
     <form action="/Rapportering/Stap1" method="post">
         <select disabled id="stap1" name="stap1">
-            <option value="cpu">Cpu</option>
+            <option value="lokaal">Lokaal</option>
         </select>
         <p>Stap 2 : Wilt u al de gegevens uit de tabel of enkel bepaalde gegevens</p>
         <button disabled name="action" type="submit" value="stap2ZonderConditie">Alle gegevens</button>
         <button disabled name="action" type="submit" value="stap2Conditie">bepaalde gegevens</button>
     </form>
-    <form action="/Rapportering/Stap3Cpu" method="post">
+    <form action="/Rapportering/Stap3Lokaal" method="post">
         <p>stap 3 : Kies welke gegevens je uit de tabel Cpu wilt hebben</p>
-        @Html.CheckBox("idCpu") idCpu
-        @Html.CheckBox("merk") merk
-        @Html.CheckBox("type") type
-        @Html.CheckBox("snelheid") snelheid
-        @Html.CheckBox("fabrieksnummer") fabrieksnummer
+        @Html.CheckBox("TblLokaal.idLokaal") id lokaal
+        @Html.CheckBox("TblLokaal.lokaalNaam") naam
+        @Html.CheckBox("TblLokaal.aantalPlaatsen") aantal plaatsen
+        @Html.CheckBox("TblLokaal.isComputerLokaal") computerlokaal
+        @Html.CheckBox("TblNetwerk.merk") netwerk
         <button name="action" type="submit" value="kolomKeuze">klaar</button>
-        <div style="display : @ViewBag.styleCpuStap4">
+        <div style="display : @ViewBag.styleLokaalStap4">
             <p>stap 4 : Kies welke conditie of condities u op de gegevens @ViewBag.resultaatCheck wilt toepassen</p>
-            <p>@Html.CheckBox("merkKeuzeCheck") merk = @Html.TextBox("merkKeuzeTekst")</p>
-            <p>@Html.CheckBox("typeKeuzeCheck") type = @Html.TextBox("typeKeuzeTekst")</p>
+            <p>@Html.CheckBox("lokaalNaamKeuzeCheck") lokaal naam = @Html.DropDownList("lokalen", "selecteer een lokaal")</p>
             <p>
-                @Html.CheckBox("snelheidKeuzeCheck") snelheid @Html.RadioButton("snelheidKeuze", ">") >
-                @Html.RadioButton("snelheidKeuze", "<") <
-                @Html.RadioButton("snelheidKeuze", "=") =
-                @Html.RadioButton("snelheidKeuze", ">=") >=
-                @Html.RadioButton("snelheidKeuze", "<=") <=
-                @Html.TextBox("snelheidKeuze1")
+                @Html.CheckBox("aantalPlaatsenKeuzeCheck") aantal plaatsen @Html.RadioButton("aantalPlaatsenKeuze", ">") >
+                @Html.RadioButton("aantalPlaatsenKeuze", "<") <
+                @Html.RadioButton("aantalPlaatsenKeuze", "=") =
+                @Html.RadioButton("aantalPlaatsenKeuze", ">=") >=
+                @Html.RadioButton("aantalPlaatsenKeuze", "<=") <=
+                @Html.TextBox("aantalPlaatsenKeuze1")
             </p>
             <p>
-                @Html.CheckBox("fabrieksnummerKeuzeCheck") fabrieksnummer @Html.RadioButton("fabrieksnummerKeuze", ">") >
-                @Html.RadioButton("fabrieksnummerKeuze", "<") <
-                @Html.RadioButton("fabrieksnummerKeuze", "=") =
-                @Html.RadioButton("fabrieksnummerKeuze", ">=") >=
-                @Html.RadioButton("fabrieksnummerKeuze", "<=") <=
-                @Html.TextBox("fabrieksnummerKeuze1")
+                @Html.CheckBox("isComputerLokaalKeuzeCheck") computerlokaal = @Html.RadioButton("isComputerLokaalKeuze", "0") niet waar
+                @Html.RadioButton("isComputerLokaalKeuze", "1") waar
             </p>
+            <p>
+            <p>@Html.CheckBox("netwerkMerkKeuzeCheck") netwerk = @Html.DropDownList("netwerken", "selecteer een netwerk")</p>
             <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
         </div>
-        <div style="display : @ViewBag.styleCpuStap5">
+        <div style="display : @ViewBag.styleLokaalStap5">
             @if (ViewBag.Rapport != null)
             {
                 <table>
@@ -65,31 +62,31 @@
                     @foreach (var item in ViewBag.Rapport)
                     {
                         <tr>
-                            @if (@item.IdCpu != 0)
+                            @if (@item.IdLokaal != 0)
                             {
-                                <td>@item.IdCpu</td> }
-                            @if (@item.Merk != null)
+                                <td>@item.IdLokaal</td> }
+                            @if (@item.LokaalNaam != null)
                             {
-                                <td>@item.Merk</td>
+                                <td>@item.LokaalNaam</td>
                             }
-                            @if (@item.Type != null)
+                            @if (@item.AantalPlaatsen != 0)
                             {
-                                <td>@item.Type</td>
+                                <td>@item.AantalPlaatsen</td>
                             }
-                            @if (@item.Snelheid != 0)
+                            @if (@item.IsComputerLokaal != null)
                             {
-                                <td>@item.Snelheid</td>
+                                <td>@item.IsComputerLokaal</td>
                             }
-                            @if (@item.FabrieksNummer != null)
+                            @if (@item.Netwerk.Merk != null)
                             {
-                                <td>@item.FabrieksNummer</td>
+                                <td>@item.Netwerk.Merk</td>
                             }
                         </tr>
                     }
                 </table>
-                    @Html.Hidden("query", (string)@ViewBag.query)
-                    @Html.Hidden("tables", (string)@ViewBag.tables)
-                    <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
+                @Html.Hidden("query", (string)@ViewBag.query)
+                @Html.Hidden("tables", (string)@ViewBag.tables)
+                <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
                     <button name="action" type="submit" value="OpslaanExcel/@ViewBag.query/@ViewBag.tables">Opslaan als excel</button>
                     <button name="action" type="submit" value="OpslaanPdf/@ViewBag.query/@ViewBag.tables">opslaan als pdf</button>
             }

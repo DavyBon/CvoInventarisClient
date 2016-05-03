@@ -2313,6 +2313,12 @@ namespace CvoInventarisClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/LokaalDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/LokaalDeleteResponse")]
         System.Threading.Tasks.Task<bool> LokaalDeleteAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringLokaal", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringLokaalResponse")]
+        CvoInventarisClient.ServiceReference.Lokaal[] RapporteringLokaal(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringLokaal", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringLokaalResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Lokaal[]> RapporteringLokaalAsync(string s, string[] keuzeKolommen);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/FactuurGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/FactuurGetAllResponse")]
         CvoInventarisClient.ServiceReference.Factuur[] FactuurGetAll();
         
@@ -2919,6 +2925,14 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> LokaalDeleteAsync(int id) {
             return base.Channel.LokaalDeleteAsync(id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.Lokaal[] RapporteringLokaal(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringLokaal(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Lokaal[]> RapporteringLokaalAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringLokaalAsync(s, keuzeKolommen);
         }
         
         public CvoInventarisClient.ServiceReference.Factuur[] FactuurGetAll() {

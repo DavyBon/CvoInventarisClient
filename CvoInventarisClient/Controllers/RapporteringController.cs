@@ -21,6 +21,13 @@ namespace WebApplication.Controllers
     {
         CvoInventarisServiceClient test = new CvoInventarisServiceClient();
 
+        public ActionResult LokaalRapportering()
+        {
+            ViewBag.styleCpuStap4 = "none";
+            ViewBag.styleCpuStap5 = "none";
+            return View();
+        }
+
         public ActionResult HarddiskRapportering()
         {
             ViewBag.styleCpuStap4 = "none";

@@ -128,6 +128,12 @@
   <wsdl:message name="ICvoInventarisService_LokaalDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:LokaalDeleteResponse" />
   </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringLokaal_InputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringLokaal" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_RapporteringLokaal_OutputMessage">
+    <wsdl:part name="parameters" element="tns:RapporteringLokaalResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_FactuurGetAll_InputMessage">
     <wsdl:part name="parameters" element="tns:FactuurGetAll" />
   </wsdl:message>
@@ -629,6 +635,10 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/LokaalDelete" message="tns:ICvoInventarisService_LokaalDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/LokaalDeleteResponse" message="tns:ICvoInventarisService_LokaalDelete_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="RapporteringLokaal">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringLokaal" message="tns:ICvoInventarisService_RapporteringLokaal_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringLokaalResponse" message="tns:ICvoInventarisService_RapporteringLokaal_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="FactuurGetAll">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/FactuurGetAll" message="tns:ICvoInventarisService_FactuurGetAll_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/FactuurGetAllResponse" message="tns:ICvoInventarisService_FactuurGetAll_OutputMessage" />
@@ -1085,6 +1095,15 @@
     </wsdl:operation>
     <wsdl:operation name="LokaalDelete">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/LokaalDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RapporteringLokaal">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/RapporteringLokaal" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

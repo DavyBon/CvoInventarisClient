@@ -276,6 +276,21 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
+  <xs:element name="RapporteringLokaal">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="s" nillable="true" type="xs:string" />
+        <xs:element xmlns:q19="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q19:ArrayOfstring" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="RapporteringLokaalResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringLokaalResult" nillable="true" type="q20:ArrayOfLokaal" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
   <xs:element name="FactuurGetAll">
     <xs:complexType>
       <xs:sequence />
@@ -284,7 +299,7 @@
   <xs:element name="FactuurGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q19="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="FactuurGetAllResult" nillable="true" type="q19:ArrayOfFactuur" />
+        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="FactuurGetAllResult" nillable="true" type="q21:ArrayOfFactuur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -298,14 +313,14 @@
   <xs:element name="FactuurGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q20="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="FactuurGetByIdResult" nillable="true" type="q20:Factuur" />
+        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="FactuurGetByIdResult" nillable="true" type="q22:Factuur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="FactuurCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q21="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="f" nillable="true" type="q21:Factuur" />
+        <xs:element xmlns:q23="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="f" nillable="true" type="q23:Factuur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -319,7 +334,7 @@
   <xs:element name="FactuurUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q22="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="f" nillable="true" type="q22:Factuur" />
+        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="f" nillable="true" type="q24:Factuur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -348,14 +363,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="s" nillable="true" type="xs:string" />
-        <xs:element xmlns:q23="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q23:ArrayOfstring" />
+        <xs:element xmlns:q25="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q25:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RapporteringFactuurResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q24="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringFactuurResult" nillable="true" type="q24:ArrayOfFactuur" />
+        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringFactuurResult" nillable="true" type="q26:ArrayOfFactuur" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -369,7 +384,7 @@
   <xs:element name="AccountGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q25="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="AccountGetByIdResult" nillable="true" type="q25:Account" />
+        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="AccountGetByIdResult" nillable="true" type="q27:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -381,14 +396,14 @@
   <xs:element name="AccountGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q26="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="AccountGetAllResult" nillable="true" type="q26:ArrayOfAccount" />
+        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="AccountGetAllResult" nillable="true" type="q28:ArrayOfAccount" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="AccountCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q27="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q27:Account" />
+        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q29:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -402,7 +417,7 @@
   <xs:element name="AccountUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q28="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q28:Account" />
+        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q30:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -430,7 +445,7 @@
   <xs:element name="AccountLogin">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q29="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q29:Account" />
+        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q31:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -451,7 +466,7 @@
   <xs:element name="AccountGetByEmailResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q30="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="AccountGetByEmailResult" nillable="true" type="q30:Account" />
+        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="AccountGetByEmailResult" nillable="true" type="q32:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -465,7 +480,7 @@
   <xs:element name="SessionGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q31="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="SessionGetByIdResult" nillable="true" type="q31:Session" />
+        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="SessionGetByIdResult" nillable="true" type="q33:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -477,14 +492,14 @@
   <xs:element name="SessionGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q32="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="SessionGetAllResult" nillable="true" type="q32:ArrayOfSession" />
+        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="SessionGetAllResult" nillable="true" type="q34:ArrayOfSession" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="SessionCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q33="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="s" nillable="true" type="q33:Session" />
+        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="s" nillable="true" type="q35:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -498,7 +513,7 @@
   <xs:element name="SessionUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q34="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="s" nillable="true" type="q34:Session" />
+        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="s" nillable="true" type="q36:Session" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -526,7 +541,7 @@
   <xs:element name="SessionGetByAccount">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q35="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q35:Account" />
+        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="a" nillable="true" type="q37:Account" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -547,7 +562,7 @@
   <xs:element name="TicketingGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q36="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="TicketingGetByIdResult" nillable="true" type="q36:Ticket" />
+        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="TicketingGetByIdResult" nillable="true" type="q38:Ticket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -559,14 +574,14 @@
   <xs:element name="TicketingGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q37="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="TicketingGetAllResult" nillable="true" type="q37:ArrayOfTicket" />
+        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="TicketingGetAllResult" nillable="true" type="q39:ArrayOfTicket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="TicketingCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q38="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="t" nillable="true" type="q38:Ticket" />
+        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="t" nillable="true" type="q40:Ticket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -580,7 +595,7 @@
   <xs:element name="TicketingUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q39="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="t" nillable="true" type="q39:Ticket" />
+        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="t" nillable="true" type="q41:Ticket" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -615,7 +630,7 @@
   <xs:element name="CpuGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q40="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="CpuGetByIdResult" nillable="true" type="q40:Cpu" />
+        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="CpuGetByIdResult" nillable="true" type="q42:Cpu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -627,14 +642,14 @@
   <xs:element name="CpuGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q41="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="CpuGetAllResult" nillable="true" type="q41:ArrayOfCpu" />
+        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="CpuGetAllResult" nillable="true" type="q43:ArrayOfCpu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="CpuCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q42="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="c" nillable="true" type="q42:Cpu" />
+        <xs:element xmlns:q44="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="c" nillable="true" type="q44:Cpu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -648,7 +663,7 @@
   <xs:element name="CpuUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q43="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="c" nillable="true" type="q43:Cpu" />
+        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="c" nillable="true" type="q45:Cpu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -677,14 +692,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="s" nillable="true" type="xs:string" />
-        <xs:element xmlns:q44="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q44:ArrayOfstring" />
+        <xs:element xmlns:q46="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q46:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RapporteringCpuResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q45="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringCpuResult" nillable="true" type="q45:ArrayOfCpu" />
+        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringCpuResult" nillable="true" type="q47:ArrayOfCpu" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -698,7 +713,7 @@
   <xs:element name="DeviceGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q46="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="DeviceGetByIdResult" nillable="true" type="q46:Device" />
+        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="DeviceGetByIdResult" nillable="true" type="q48:Device" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -710,14 +725,14 @@
   <xs:element name="DeviceGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q47="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="DeviceGetAllResult" nillable="true" type="q47:ArrayOfDevice" />
+        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="DeviceGetAllResult" nillable="true" type="q49:ArrayOfDevice" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="DeviceCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q48="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="d" nillable="true" type="q48:Device" />
+        <xs:element xmlns:q50="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="d" nillable="true" type="q50:Device" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -731,7 +746,7 @@
   <xs:element name="DeviceUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q49="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="d" nillable="true" type="q49:Device" />
+        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="d" nillable="true" type="q51:Device" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -760,14 +775,14 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="s" nillable="true" type="xs:string" />
-        <xs:element xmlns:q50="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q50:ArrayOfstring" />
+        <xs:element xmlns:q52="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q52:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RapporteringDeviceResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q51="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringDeviceResult" nillable="true" type="q51:ArrayOfDevice" />
+        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringDeviceResult" nillable="true" type="q53:ArrayOfDevice" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -781,7 +796,7 @@
   <xs:element name="GrafischeKaartGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q52="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GrafischeKaartGetByIdResult" nillable="true" type="q52:GrafischeKaart" />
+        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GrafischeKaartGetByIdResult" nillable="true" type="q54:GrafischeKaart" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -793,14 +808,14 @@
   <xs:element name="GrafischeKaartGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q53="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GrafischeKaartGetAllResult" nillable="true" type="q53:ArrayOfGrafischeKaart" />
+        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="GrafischeKaartGetAllResult" nillable="true" type="q55:ArrayOfGrafischeKaart" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="GrafischeKaartCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q54="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="g" nillable="true" type="q54:GrafischeKaart" />
+        <xs:element xmlns:q56="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="g" nillable="true" type="q56:GrafischeKaart" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -814,7 +829,7 @@
   <xs:element name="GrafischeKaartUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q55="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="g" nillable="true" type="q55:GrafischeKaart" />
+        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="g" nillable="true" type="q57:GrafischeKaart" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -843,21 +858,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="s" nillable="true" type="xs:string" />
-        <xs:element xmlns:q56="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q56:ArrayOfstring" />
+        <xs:element xmlns:q58="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q58:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RapporteringGrafischeKaartResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q57="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringGrafischeKaartResult" nillable="true" type="q57:ArrayOfGrafischeKaart" />
+        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringGrafischeKaartResult" nillable="true" type="q59:ArrayOfGrafischeKaart" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InventarisCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q58="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q58:Inventaris" />
+        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q60:Inventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -876,7 +891,7 @@
   <xs:element name="InventarisGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q59="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisGetAllResult" nillable="true" type="q59:ArrayOfInventaris" />
+        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisGetAllResult" nillable="true" type="q61:ArrayOfInventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -890,14 +905,14 @@
   <xs:element name="InventarisGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q60="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisGetByIdResult" nillable="true" type="q60:Inventaris" />
+        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="InventarisGetByIdResult" nillable="true" type="q62:Inventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="InventarisUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q61="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q61:Inventaris" />
+        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="inventaris" nillable="true" type="q63:Inventaris" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -925,7 +940,7 @@
   <xs:element name="ObjectCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q62="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q62:Object" />
+        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q64:Object" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -944,7 +959,7 @@
   <xs:element name="ObjectGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q63="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectGetAllResult" nillable="true" type="q63:ArrayOfObject" />
+        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectGetAllResult" nillable="true" type="q65:ArrayOfObject" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -958,14 +973,14 @@
   <xs:element name="ObjectGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q64="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectGetByIdResult" nillable="true" type="q64:Object" />
+        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectGetByIdResult" nillable="true" type="q66:Object" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="ObjectUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q65="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q65:Object" />
+        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Object" nillable="true" type="q67:Object" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -993,7 +1008,7 @@
   <xs:element name="NetwerkCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q66="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q66:Netwerk" />
+        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q68:Netwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1012,7 +1027,7 @@
   <xs:element name="NetwerkGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q67="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkGetAllResult" nillable="true" type="q67:ArrayOfNetwerk" />
+        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkGetAllResult" nillable="true" type="q69:ArrayOfNetwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1026,14 +1041,14 @@
   <xs:element name="NetwerkGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q68="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkGetByIdResult" nillable="true" type="q68:Netwerk" />
+        <xs:element xmlns:q70="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="NetwerkGetByIdResult" nillable="true" type="q70:Netwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="NetwerkUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q69="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q69:Netwerk" />
+        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="Netwerk" nillable="true" type="q71:Netwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1062,21 +1077,21 @@
     <xs:complexType>
       <xs:sequence>
         <xs:element minOccurs="0" name="s" nillable="true" type="xs:string" />
-        <xs:element xmlns:q70="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q70:ArrayOfstring" />
+        <xs:element xmlns:q72="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="keuzeKolommen" nillable="true" type="q72:ArrayOfstring" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="RapporteringNetwerkResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q71="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringNetwerkResult" nillable="true" type="q71:ArrayOfNetwerk" />
+        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="RapporteringNetwerkResult" nillable="true" type="q73:ArrayOfNetwerk" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="VerzekeringCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q72="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="verzekering" nillable="true" type="q72:Verzekering" />
+        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="verzekering" nillable="true" type="q74:Verzekering" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1109,7 +1124,7 @@
   <xs:element name="VerzekeringGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q73="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="VerzekeringGetAllResult" nillable="true" type="q73:ArrayOfVerzekering" />
+        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="VerzekeringGetAllResult" nillable="true" type="q75:ArrayOfVerzekering" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1123,14 +1138,14 @@
   <xs:element name="VerzekeringGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q74="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="VerzekeringGetByIdResult" nillable="true" type="q74:Verzekering" />
+        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="VerzekeringGetByIdResult" nillable="true" type="q76:Verzekering" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
   <xs:element name="VerzekeringUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q75="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="verzekering" nillable="true" type="q75:Verzekering" />
+        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="verzekering" nillable="true" type="q77:Verzekering" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1144,7 +1159,7 @@
   <xs:element name="ObjectTypeCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q76="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="objectType" nillable="true" type="q76:ObjectTypes" />
+        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="objectType" nillable="true" type="q78:ObjectTypes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1165,7 +1180,7 @@
   <xs:element name="ObjectTypeGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q77="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectTypeGetByIdResult" nillable="true" type="q77:ObjectTypes" />
+        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectTypeGetByIdResult" nillable="true" type="q79:ObjectTypes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1177,7 +1192,7 @@
   <xs:element name="ObjectTypeGetAllResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q78="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectTypeGetAllResult" nillable="true" type="q78:ArrayOfObjectTypes" />
+        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="ObjectTypeGetAllResult" nillable="true" type="q80:ArrayOfObjectTypes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1198,7 +1213,7 @@
   <xs:element name="ObjectTypeUpdate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q79="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="objectType" nillable="true" type="q79:ObjectTypes" />
+        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="objectType" nillable="true" type="q81:ObjectTypes" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1212,7 +1227,7 @@
   <xs:element name="HardwareCreate">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q80="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="hardware" nillable="true" type="q80:Hardware" />
+        <xs:element xmlns:q82="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="hardware" nillable="true" type="q82:Hardware" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
@@ -1233,7 +1248,7 @@
   <xs:element name="HardwareGetByIdResponse">
     <xs:complexType>
       <xs:sequence>
-        <xs:element xmlns:q81="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="HardwareGetByIdResult" nillable="true" type="q81:Hardware" />
+        <xs:element xmlns:q83="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" minOccurs="0" name="HardwareGetByIdResult" nillable="true" type="q83:Hardware" />
       </xs:sequence>
     </xs:complexType>
   </xs:element>
