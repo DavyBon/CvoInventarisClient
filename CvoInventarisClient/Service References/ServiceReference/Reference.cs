@@ -2211,6 +2211,12 @@ namespace CvoInventarisClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareDeleteResponse")]
         System.Threading.Tasks.Task<bool> HardwareDeleteAsync(int id);
         
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringHardware", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringHardwareResponse")]
+        CvoInventarisClient.ServiceReference.Hardware[] RapporteringHardware(string s, string[] keuzeKolommen);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/RapporteringHardware", ReplyAction="http://tempuri.org/ICvoInventarisService/RapporteringHardwareResponse")]
+        System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware[]> RapporteringHardwareAsync(string s, string[] keuzeKolommen);
+        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HarddiskGetAll", ReplyAction="http://tempuri.org/ICvoInventarisService/HarddiskGetAllResponse")]
         CvoInventarisClient.ServiceReference.Harddisk[] HarddiskGetAll();
         
@@ -2789,6 +2795,14 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> HardwareDeleteAsync(int id) {
             return base.Channel.HardwareDeleteAsync(id);
+        }
+        
+        public CvoInventarisClient.ServiceReference.Hardware[] RapporteringHardware(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringHardware(s, keuzeKolommen);
+        }
+        
+        public System.Threading.Tasks.Task<CvoInventarisClient.ServiceReference.Hardware[]> RapporteringHardwareAsync(string s, string[] keuzeKolommen) {
+            return base.Channel.RapporteringHardwareAsync(s, keuzeKolommen);
         }
         
         public CvoInventarisClient.ServiceReference.Harddisk[] HarddiskGetAll() {

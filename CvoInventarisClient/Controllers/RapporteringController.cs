@@ -21,6 +21,13 @@ namespace WebApplication.Controllers
     {
         CvoInventarisServiceClient test = new CvoInventarisServiceClient();
 
+        public ActionResult HardwareRapportering()
+        {
+            ViewBag.styleCpuStap4 = "none";
+            ViewBag.styleCpuStap5 = "none";
+            return View();
+        }
+
         public ActionResult LokaalRapportering()
         {
             ViewBag.styleCpuStap4 = "none";
@@ -203,6 +210,12 @@ namespace WebApplication.Controllers
                     ctrl.ControllerContext = ControllerContext;
                     return ctrl.LokaalRapportering();
                 }
+                if (stap1.Equals("hardware"))
+                {
+                    var ctrl = new RapporteringHardwareController();
+                    ctrl.ControllerContext = ControllerContext;
+                    return ctrl.HardwareRapportering();
+                }
 
                 if (stap1.Equals("device"))
                 {
@@ -243,6 +256,14 @@ namespace WebApplication.Controllers
             var ctrl = new RapporteringCpuController();
             ctrl.ControllerContext = ControllerContext;
             return ctrl.Stap3Cpu(collection);
+        }
+
+        [HttpPost]
+        public ActionResult Stap3Hardware(FormCollection collection)
+        {
+            var ctrl = new RapporteringHardwareController();
+            ctrl.ControllerContext = ControllerContext;
+            return ctrl.Stap3Hardware(collection);
         }
 
         [HttpPost]
