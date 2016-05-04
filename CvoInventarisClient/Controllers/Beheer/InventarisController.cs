@@ -19,7 +19,7 @@ namespace CvoInventarisClient.Controllers
                 //WCF servicereference objecten collection naar InventarisModel objecten collection
                 InventarisViewModel model = new InventarisViewModel();
                 model.Inventaris = new List<InventarisModel>();
-                model.Objecten = new List<ObjectModel>();
+                model.Objecten = new List<SelectListItem>();
                 model.Lokalen = new List<SelectListItem>();
                 model.Verzekeringen = new List<SelectListItem>();
 
@@ -30,9 +30,9 @@ namespace CvoInventarisClient.Controllers
                     inventaris.IsAanwezig = i.IsAanwezig;
                     inventaris.IsActief = i.IsActief;
                     inventaris.Label = i.Label;
-                    inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam,  Netwerk = new NetwerkModel() { Id = i.Lokaal.Netwerk.Id, Driver = i.Lokaal.Netwerk.Driver, Merk = i.Lokaal.Netwerk.Merk, Snelheid = i.Lokaal.Netwerk.Snelheid, Type = i.Lokaal.Netwerk.Type } };
-                    inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, Leverancier = new LeverancierModel() { IdLeverancier = i.Object.Leverancier.IdLeverancier, Afkorting = i.Object.Leverancier.Afkorting, Bic = i.Object.Leverancier.Bic, BtwNummer = i.Object.Leverancier.BtwNummer, BusNummer = i.Object.Leverancier.BusNummer, Email = i.Object.Leverancier.Email, Fax = i.Object.Leverancier.Fax, HuisNummer = i.Object.Leverancier.HuisNummer, Iban = i.Object.Leverancier.Iban, Naam = i.Object.Leverancier.Naam, Postcode = i.Object.Leverancier.Postcode, Straat = i.Object.Leverancier.Straat, Telefoon = i.Object.Leverancier.Telefoon, ToegevoegdOp = i.Object.Leverancier.ToegevoegdOp, Website = i.Object.Leverancier.Website }, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving}};
-                    inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving};
+                    inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam, Netwerk = new NetwerkModel() { Id = i.Lokaal.Netwerk.Id, Driver = i.Lokaal.Netwerk.Driver, Merk = i.Lokaal.Netwerk.Merk, Snelheid = i.Lokaal.Netwerk.Snelheid, Type = i.Lokaal.Netwerk.Type } };
+                    inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, Leverancier = new LeverancierModel() { IdLeverancier = i.Object.Leverancier.IdLeverancier, Afkorting = i.Object.Leverancier.Afkorting, Bic = i.Object.Leverancier.Bic, BtwNummer = i.Object.Leverancier.BtwNummer, BusNummer = i.Object.Leverancier.BusNummer, Email = i.Object.Leverancier.Email, Fax = i.Object.Leverancier.Fax, HuisNummer = i.Object.Leverancier.HuisNummer, Iban = i.Object.Leverancier.Iban, Naam = i.Object.Leverancier.Naam, Postcode = i.Object.Leverancier.Postcode, Straat = i.Object.Leverancier.Straat, Telefoon = i.Object.Leverancier.Telefoon, ToegevoegdOp = i.Object.Leverancier.ToegevoegdOp, Website = i.Object.Leverancier.Website }, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
+                    inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving };
                     inventaris.Aankoopjaar = i.Aankoopjaar;
                     inventaris.Afschrijvingsperiode = i.Afschrijvingsperiode;
                     inventaris.Historiek = i.Historiek;
@@ -40,11 +40,7 @@ namespace CvoInventarisClient.Controllers
                 }
                 foreach (ServiceReference.Object o in client.ObjectGetAll())
                 {
-                    ObjectModel obj = new ObjectModel();
-                    obj.Id = o.Id;
-                    obj.Kenmerken = o.Kenmerken;
-                    obj.Factuur = new FactuurModel() { Afschrijfperiode = o.Factuur.Afschrijfperiode, Boekjaar = o.Factuur.Boekjaar, CvoVolgNummer = o.Factuur.CvoVolgNummer, DatumInsert = o.Factuur.DatumInsert, DatumModified = o.Factuur.DatumModified, FactuurDatum = o.Factuur.FactuurDatum, FactuurNummer = o.Factuur.FactuurNummer, FactuurStatusGetekend = o.Factuur.FactuurStatusGetekend, Garantie = o.Factuur.Garantie, IdFactuur = o.Factuur.IdFactuur, OleDoc = o.Factuur.OleDoc, OleDocFileName = o.Factuur.OleDocFileName, OleDocPath = o.Factuur.OleDocPath, Omschrijving = o.Factuur.Omschrijving, Opmerking = o.Factuur.Opmerking, Prijs = o.Factuur.Prijs, UserInsert = o.Factuur.UserInsert, UserModified = o.Factuur.UserModified, VerwerkingsDatum = o.Factuur.VerwerkingsDatum, Leverancier = new LeverancierModel() { Afkorting = o.Factuur.Leverancier.Afkorting, Bic = o.Factuur.Leverancier.Bic, BtwNummer = o.Factuur.Leverancier.BtwNummer, BusNummer = o.Factuur.Leverancier.BusNummer, Email = o.Factuur.Leverancier.Email, Fax = o.Factuur.Leverancier.Fax, HuisNummer = o.Factuur.Leverancier.HuisNummer, Iban = o.Factuur.Leverancier.Iban, IdLeverancier = o.Factuur.Leverancier.IdLeverancier, Naam = o.Factuur.Leverancier.Naam, Postcode = o.Factuur.Leverancier.Postcode, Straat = o.Factuur.Leverancier.Straat, Telefoon = o.Factuur.Leverancier.Telefoon, ToegevoegdOp = o.Factuur.Leverancier.ToegevoegdOp, Website = o.Factuur.Leverancier.Website} };
-                    obj.ObjectType = new ObjectTypeModel() { IdObjectType = o.ObjectType.Id, Omschrijving = o.ObjectType.Omschrijving};
+                    if (!model.Inventaris.Exists(i => i.Object.Id == o.Id)) { model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() }); }
                 }
                 foreach (Lokaal l in client.LokaalGetAll())
                 {
@@ -53,7 +49,7 @@ namespace CvoInventarisClient.Controllers
                 foreach (Verzekering v in client.VerzekeringGetAll())
                 {
                     model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
-                }             
+                }
                 return View(model);
             }
         }
@@ -76,12 +72,20 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
-                inventaris.Lokaal.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
-                inventaris.Object.Id = Convert.ToInt32(Request.Form["idObject"]);
-                inventaris.Verzekering.Id = Convert.ToInt32(Request.Form["idVerzekering"]);
-                //inventaris.isAanwezig = Boolean.Parse(Request.Form["isAanwezig"]);
-                //inventaris.isActief = Convert.ToBoolean(Request.Form["isActief"]);
-                inventaris.Label = Request.Form["label"];
+                inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
+                inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) };
+                inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) };
+                if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
+                else
+                {
+                    inventaris.IsActief = false;
+                };
+                if (Request.Form["isAanwezig"] != null) { inventaris.IsAanwezig = true; }
+                else
+                {
+                    inventaris.IsAanwezig = false;
+                };
+                inventaris.Label = "TBA";
                 client.InventarisCreate(inventaris);
             }
             return RedirectToAction("Index");
@@ -92,7 +96,36 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                return View(client.InventarisGetById(id));
+                //WCF servicereference objecten collection naar InventarisModel objecten collection
+                InventarisViewModel model = new InventarisViewModel();
+                model.Inventaris = new List<InventarisModel>();
+                model.Objecten = new List<SelectListItem>();
+                model.Lokalen = new List<SelectListItem>();
+                model.Verzekeringen = new List<SelectListItem>();
+
+                Inventaris i = client.InventarisGetById(id);
+                InventarisModel inventaris = new InventarisModel();
+                inventaris.Id = i.Id;
+                inventaris.IsAanwezig = i.IsAanwezig;
+                inventaris.IsActief = i.IsActief;
+                inventaris.Label = i.Label;
+                inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam, Netwerk = new NetwerkModel() { Id = i.Lokaal.Netwerk.Id, Driver = i.Lokaal.Netwerk.Driver, Merk = i.Lokaal.Netwerk.Merk, Snelheid = i.Lokaal.Netwerk.Snelheid, Type = i.Lokaal.Netwerk.Type } };
+                inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, Leverancier = new LeverancierModel() { IdLeverancier = i.Object.Leverancier.IdLeverancier, Afkorting = i.Object.Leverancier.Afkorting, Bic = i.Object.Leverancier.Bic, BtwNummer = i.Object.Leverancier.BtwNummer, BusNummer = i.Object.Leverancier.BusNummer, Email = i.Object.Leverancier.Email, Fax = i.Object.Leverancier.Fax, HuisNummer = i.Object.Leverancier.HuisNummer, Iban = i.Object.Leverancier.Iban, Naam = i.Object.Leverancier.Naam, Postcode = i.Object.Leverancier.Postcode, Straat = i.Object.Leverancier.Straat, Telefoon = i.Object.Leverancier.Telefoon, ToegevoegdOp = i.Object.Leverancier.ToegevoegdOp, Website = i.Object.Leverancier.Website }, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
+                inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving };
+                inventaris.Aankoopjaar = i.Aankoopjaar;
+                inventaris.Afschrijvingsperiode = i.Afschrijvingsperiode;
+                inventaris.Historiek = i.Historiek;
+                model.Inventaris.Add(inventaris);
+
+                foreach (Lokaal l in client.LokaalGetAll())
+                {
+                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+                }
+                foreach (Verzekering v in client.VerzekeringGetAll())
+                {
+                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+                }
+                return View(model);
             }
         }
 

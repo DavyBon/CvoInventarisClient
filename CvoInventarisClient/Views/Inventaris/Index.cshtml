@@ -66,7 +66,7 @@
                             <input type="checkbox" name="idArray" value="@item.Id" />
                         </td>
                         <td>
-                            <a class="bottom-align-text" href="@Url.Action("Edit", "Netwerk", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Inventaris", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Label)
@@ -129,16 +129,14 @@
             {
                 <div class="modal-body">
                     <div class="form-group">
-                       @Html.DisplayNameFor(model => model.Inventaris[0].Object.Kenmerken)
-                        <input class="form-control" type="text" name="merk" required />
+                       @Html.DisplayNameFor(model => model.Inventaris[0].Object)
+                        @Html.DropDownListFor(model => model.Objecten, Model.Objecten, "", new { @class = "form-control" })
                     </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
-                        <input class="form-control" type="text" name="snelheid" required />
+                    <div class="checkbox">
+                        <label><input  type="checkbox" name="isAanwezig" value="True"/>@Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)</label>
                     </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
-                        <input class="form-control" type="text" name="driver" required />
+                    <div class="checkbox">               
+                        <label><input  type="checkbox" name="isActief" value="True"/>@Html.DisplayNameFor(model => model.Inventaris[0].IsActief)</label>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal)
@@ -146,15 +144,15 @@
                     </div>  
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
-                        <input class="form-control" type="text" name="type" required />
+                        <input class="form-control" type="text" name="historiek" required />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)
-                        <input class="form-control" type="text" name="type" required />
+                        <input class="form-control" type="number" name="aankoopjaar" required />
                     </div>
                     <div class="form-group">
                        @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
-                        <input class="form-control" type="text" name="type" required />
+                        <input class="form-control" type="number" name="afschrijvingsperiode" required />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
