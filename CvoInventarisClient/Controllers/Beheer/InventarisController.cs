@@ -119,11 +119,17 @@ namespace CvoInventarisClient.Controllers
 
                 foreach (Lokaal l in client.LokaalGetAll())
                 {
-                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+                    if (!(l.IdLokaal == inventaris.Lokaal.IdLokaal))
+                    {
+                        model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+                    }
                 }
                 foreach (Verzekering v in client.VerzekeringGetAll())
                 {
-                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+                    if (!(v.Id == inventaris.Verzekering.IdVerzekering))
+                    {
+                        model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+                    }
                 }
                 return View(model);
             }
@@ -138,16 +144,29 @@ namespace CvoInventarisClient.Controllers
                 ViewBag.action = Request.Form["label"] + " was added";
 
                 Inventaris inventaris = new Inventaris();
-                inventaris.Id = id;
+                inventaris.Id = Convert.ToInt16(Request.Form["idInventaris"]);
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
-                inventaris.Lokaal.IdLokaal = Convert.ToInt32(Request.Form["idLokaal"]);
-                inventaris.Object.Id = Convert.ToInt32(Request.Form["idObject"]);
-                inventaris.Verzekering.Id = Convert.ToInt32(Request.Form["idVerzekering"]);
-                //inventaris.isAanwezig = Boolean.Parse(Request.Form["isAanwezig"]);
-                //inventaris.isActief = Convert.ToBoolean(Request.Form["isActief"]);
-                inventaris.Label = Request.Form["label"];
+                inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["idObject"]) };
+                string test = Request.Form["Lokalen"];
+                if (!String.IsNullOrWhiteSpace(Request.Form["Lokalen"])) { inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) }; }
+                else { inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["defaultIdLokaal"]) }; }
+
+                if (!String.IsNullOrWhiteSpace(Request.Form["Verzekeringen"])) { inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) }; }
+                else { inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["defaultIdVerzekering"]) }; }
+
+                if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
+                else
+                {
+                    inventaris.IsActief = false;
+                };
+                if (Request.Form["isAanwezig"] != null) { inventaris.IsAanwezig = true; }
+                else
+                {
+                    inventaris.IsAanwezig = false;
+                };
+                inventaris.Label = "TBA";
                 client.InventarisUpdate(inventaris);
             }
             return RedirectToAction("Index");
