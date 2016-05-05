@@ -13,85 +13,114 @@
 @using (Html.BeginForm("Delete", "Lokaal"))
 {
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
-    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
+
+    <div class="input-group col-lg-4 pull-right">
+        <span class="input-group-addon">Zoeken</span>
+        <input id="filter" type="text" class="form-control">
+    </div>
 
     <div class="spacer"></div>
 
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <table class="table table-striped">
-            <tr>
-                <th></th>
-                <th></th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lokaal[0].LokaalNaam)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lokaal[0].AantalPlaatsen)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lokaal[0].IsComputerLokaal)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Lokaal[0].Netwerk.Id)
-                </th>
-            </tr>
-
-            @foreach (var item in Model.Lokaal)
-            {
+            <thead>
                 <tr>
-                    <td>
-                        <input type="checkbox" name="idArray" value="@item.IdLokaal" />
-                    </td>
-                    <td>
-                        <a class="bottom-align-text" href="@Url.Action("Edit", "Lokaal", new { id = item.IdLokaal })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.LokaalNaam)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.AantalPlaatsen)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.IsComputerLokaal)
-                    </td>
-                    <td>
-                        @Html.DisplayFor(modelItem => item.Netwerk.Id)
-                    </td>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokaal[0].LokaalNaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokaal[0].AantalPlaatsen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokaal[0].IsComputerLokaal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokaal[0].Netwerk.Id)
+                    </th>
                 </tr>
-            }
+            </thead>
+            <tbody class="search">
+                @foreach (var item in Model.Lokaal)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="idArray" value="@item.IdLokaal" />
+                        </td>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Lokaal", new { id = item.IdLokaal })"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LokaalNaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AantalPlaatsen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsComputerLokaal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Netwerk.Id)
+                        </td>
+                    </tr>
+                }
+            </tbody>
         </table>
     </div>
 }
-
-<div class="modal fade nieuwModal" tabindex="-1" role="dialog" aria-labelledby="nieuwModalLabel">
+<!-- DELETE -->
+<div class="modal fade verwijderModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
-                <strong>Voeg toe...</strong>
+                <strong>Let op!</strong>
             </div>
             <div class="modal-body">
-                @using (Html.BeginForm("Create", "Lokaal"))
-                {
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Lokaal[0].LokaalNaam)
-                        <input class="form-control" type="text" name="lokaalNaam" required />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Lokaal[0].AantalPlaatsen)
-                        <input class="form-control" type="text" name="aantalPlaatsen" required />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Lokaal[0].IsComputerLokaal)
-                        <input class="form-control" type="checkbox" name="isComputerLokaal" required />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Lokaal[0].Netwerk.Id)
-                        <input class="form-control" type="text" name="idNetwerk" required />
-                    </div>
-                    <button type="submit" class="btn btn-primary">Voeg lokaal toe</button>
-                }
+                Bent u zeker?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
             </div>
         </div>
     </div>
 </div>
+
+<!-- NIEUW -->
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>Vul in</strong>
+            </div>
+                @using (Html.BeginForm("Create", "Lokaal"))
+                {
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Lokaal[0].LokaalNaam)
+                            <input class="form-control" type="text" name="lokaalNaam" required />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Lokaal[0].AantalPlaatsen)
+                            <input class="form-control" type="text" name="aantalPlaatsen" required />
+                        </div>
+                        <div class="checkbox">
+                            <label><input type="checkbox" name="isComputerLokaal" value="True"/>@Html.DisplayNameFor(model => model.Lokaal[0].IsComputerLokaal)</label>
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Lokaal[0].Netwerk)
+                            @Html.DropDownListFor(model => model.Netwerk, Model.Netwerk, "", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Voeg toe aan lokaal</button>
+                    </div>
+                }
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Custom/Custom.js"></script>
