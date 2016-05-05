@@ -14,6 +14,7 @@ namespace CvoInventarisClient.Controllers
         // GET: Inventaris
         public ActionResult Index()
         {
+            ViewBag.action = TempData["action"];
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
                 //WCF servicereference objecten collection naar InventarisModel objecten collection
@@ -54,20 +55,12 @@ namespace CvoInventarisClient.Controllers
             }
         }
 
-        // GET: Inventaris/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
         // POST: Inventaris/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.action = Request.Form["label"] + " was added";
-
                 Inventaris inventaris = new Inventaris();
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
@@ -88,6 +81,7 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Label = "TBA";
                 client.InventarisCreate(inventaris);
             }
+            TempData["action"] = "Object werd toegevoegd aan inventaris";
             return RedirectToAction("Index");
         }
 
@@ -141,15 +135,12 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.action = Request.Form["label"] + " was added";
-
                 Inventaris inventaris = new Inventaris();
                 inventaris.Id = Convert.ToInt16(Request.Form["idInventaris"]);
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
                 inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["idObject"]) };
-                string test = Request.Form["Lokalen"];
                 if (!String.IsNullOrWhiteSpace(Request.Form["Lokalen"])) { inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) }; }
                 else { inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["defaultIdLokaal"]) }; }
 
@@ -169,6 +160,7 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Label = "TBA";
                 client.InventarisUpdate(inventaris);
             }
+            TempData["action"] = "Object in inventaris werd gewijzigd";
             return RedirectToAction("Index");
         }
 
@@ -182,6 +174,14 @@ namespace CvoInventarisClient.Controllers
                 {
                     client.InventarisDelete(id);
                 }
+            }
+            if (idArray.Length >= 2)
+            {
+                TempData["action"] = idArray.Length + " objecten werden verwijderd uit de inventaris";
+            }
+            else
+            {
+                TempData["action"] = idArray.Length + " netwerk werd verwijderd uit de inventaris";
             }
             return RedirectToAction("Index");
         }
