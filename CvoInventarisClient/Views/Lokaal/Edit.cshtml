@@ -1,4 +1,4 @@
-﻿@model CvoInventarisClient.ServiceReference.Lokaal
+﻿@model CvoInventarisClient.Models.LokaalViewModel
 
 @{
     ViewBag.Title = "Lokaal - Edit";
@@ -9,21 +9,22 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
+            @Html.Hidden("idLokaal", Model.Lokaal[0].IdLokaal)
+            @Html.Hidden("idNetwerk", Model.Lokaal[0].Netwerk.Id)
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.LokaalNaam)
-                <input class="form-control" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required />
+                @Html.DisplayNameFor(model => model.Lokaal[0].LokaalNaam)
+                <input class="form-control" type="text" name="lokaalNaam" required value="@Model.Lokaal[0].LokaalNaam"/>
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.AantalPlaatsen)
-                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen" required />
+                @Html.DisplayNameFor(model => model.Lokaal[0].AantalPlaatsen)
+                <input class="form-control" type="text" name="aantalPlaatsen" required value="@Model.Lokaal[0].AantalPlaatsen"/>
+            </div>
+            <div class="checkbox">
+                <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.Lokaal[0].IsComputerLokaal)</label>
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.IsComputerLokaal)
-                <input class="form-control" type="checkbox" name="isComputerLokaal" value="@Model.IsComputerLokaal" required />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Netwerk.Id)
-                <input class="form-control" type="text" name="idNetwerk" value="@Model.Netwerk.Id" required />
+                @Html.DisplayNameFor(model => model.Lokaal[0].Netwerk)
+                @Html.DropDownListFor(model => model.Netwerk, Model.Netwerk, Model.Lokaal[0].Netwerk.Merk, new { @class = "form-control" })
             </div>
         </div>
     </div>
