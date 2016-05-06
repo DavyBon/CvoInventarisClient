@@ -30,7 +30,7 @@ namespace CvoInventarisClient.Controllers
                 Harddisk harddisk = new Harddisk();
                 harddisk.Merk = Request.Form["merk"];
                 harddisk.Grootte = Convert.ToInt32(Request.Form["grootte"]);
-                harddisk.FabrieksNummer = Request.Form["fabriekNummer"];
+                harddisk.FabrieksNummer = Request.Form["fabrieksnummer"];
 
                 client.HarddiskCreate(harddisk);
 
@@ -58,7 +58,7 @@ namespace CvoInventarisClient.Controllers
                 Harddisk harddisk = new Harddisk();
                 harddisk.Merk = Request.Form["merk"];
                 harddisk.Grootte = Convert.ToInt32(Request.Form["grootte"]);
-                harddisk.FabrieksNummer = Request.Form["fabriekNummer"];
+                harddisk.FabrieksNummer = Request.Form["fabrieksnummer"];
 
                 client.HarddiskUpdate(harddisk);
 
