@@ -228,6 +228,7 @@
     <Compile Include="Models\FactuurViewModel.cs" />
     <Compile Include="Models\HarddiskModel.cs" />
     <Compile Include="Models\HardwareModel.cs" />
+    <Compile Include="Models\HardwareViewModel.cs" />
     <Compile Include="Models\InventarisModel.cs" />
     <Compile Include="Models\InventarisViewModel.cs" />
     <Compile Include="Models\LeverancierModel.cs" />
@@ -318,6 +319,9 @@
     <Content Include="Views\Rapportering\LokaalRapportering.cshtml" />
     <Content Include="Views\Account\Loguit.cshtml" />
     <Content Include="Views\Rapportering\HardwareRapportering.cshtml" />
+    <Content Include="Views\ObjectType\Edit.cshtml" />
+    <Content Include="Views\Verzekering\Edit.cshtml" />
+    <Content Include="Views\Hardware\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

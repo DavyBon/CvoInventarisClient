@@ -12,173 +12,78 @@ namespace CvoInventarisClient.Controllers
     {
         public ActionResult Index()
         {
-            return View(GetVerzekering());
+            ViewBag.action = TempData["action"];
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                List<Models.VerzekeringModel> model = new List<Models.VerzekeringModel>();
+                foreach (Verzekering verzekering in client.VerzekeringGetAll())
+                {
+                    model.Add(new Models.VerzekeringModel() { IdVerzekering = verzekering.Id,Omschrijving = verzekering.Omschrijving});
+                }
+                return View(model);
+            }
+        }
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                Verzekering verzekering = new Verzekering();
+                verzekering.Omschrijving = Request.Form["omschrijving"];
+                client.VerzekeringCreate(verzekering);
+
+                TempData["action"] = "verzekering" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
+            }
+            return RedirectToAction("Index");
         }
 
+        // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(VerzekeringGetById(id));
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                Verzekering verzekering = client.VerzekeringGetById(id);
+                return View(new Models.VerzekeringModel() { IdVerzekering = verzekering.Id,Omschrijving = verzekering.Omschrijving });
+            }
         }
 
+        // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(VerzekeringModel vz)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            if (UpdateVerzekering(vz))
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.EditMesage = "Row updated";
-                //return View("Index");
-                return View();
+                Verzekering verzekering = new Verzekering();
+                verzekering.Id = Convert.ToInt16(Request.Form["idVerzekering"]);
+                verzekering.Omschrijving = Request.Form["omschrijving"];
+
+                TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
+
+                client.VerzekeringUpdate(verzekering);
             }
-            else
-            {
-                ViewBag.EditMesage = "Row not updated";
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Create()
-        {
-            return View(new VerzekeringModel());
-        }
-
+        // POST: Inventaris/Delete/5
         [HttpPost]
-        public ActionResult Create(VerzekeringModel vz)
+        public ActionResult Delete(int[] idArray)
         {
-            if (InsertVerzekering(vz) >= 0)
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.CreateMesage = "Row inserted";
-                //return View("Index");
-                return View();
+                foreach (int id in idArray)
+                {
+                    client.VerzekeringDelete(id);
+                }
+                if (idArray.Length >= 2)
+                {
+                    TempData["action"] = idArray.Length + " verzekeringen werden verwijderd";
+                }
+                else
+                {
+                    TempData["action"] = idArray.Length + " verzekeringen werd verwijderd";
+                }
             }
-            else
-            {
-                ViewBag.CreateMesage = "Row not inserted";
-                return View();
-            }
+            return RedirectToAction("Index");
         }
-
-        public ActionResult Details(int id)
-        {
-            return View(VerzekeringGetById(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View(VerzekeringGetById(id));
-        }
-
-        [HttpPost]
-        public ActionResult Delete(VerzekeringModel vz)
-        {
-            if (DeleteVerzekering(vz))
-            {
-                ViewBag.DeleteMesage = "Row deleted";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.DeleteMesage = "Row not deleted";
-                return View();
-            }
-        }
-
-        public List<VerzekeringModel> GetVerzekering()
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Verzekering[] v = new Verzekering[] { };
-
-            try
-            {
-                v = service.VerzekeringGetAll();
-            }
-            catch (Exception)
-            {
-
-            }
-
-            List<VerzekeringModel> verzekeringen = new List<VerzekeringModel>();
-
-            foreach (Verzekering verzekering in v)
-            {
-                VerzekeringModel vz = new VerzekeringModel();
-                vz.IdVerzekering = verzekering.Id;
-                vz.Omschrijving = verzekering.Omschrijving;
-                verzekeringen.Add(vz);
-            }
-
-            return verzekeringen;
-        }
-
-        public VerzekeringModel VerzekeringGetById(int id)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Verzekering verzekering = new Verzekering();
-
-            try
-            {
-                verzekering = service.VerzekeringGetById(id);
-            }
-            catch (Exception)
-            {
-
-            }
-
-            VerzekeringModel vz = new VerzekeringModel();
-            vz.IdVerzekering = verzekering.Id;
-            vz.Omschrijving = verzekering.Omschrijving;
-            return vz;
-        }
-
-        public bool UpdateVerzekering(VerzekeringModel verzekering)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Verzekering vz = new Verzekering();
-            vz.Id = verzekering.IdVerzekering;
-            vz.Omschrijving = verzekering.Omschrijving;
-
-            try
-            {
-                return service.VerzekeringUpdate(vz);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public int InsertVerzekering(VerzekeringModel verzekering)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Verzekering vz = new Verzekering();
-            vz.Omschrijving = verzekering.Omschrijving;
-
-            try
-            {
-                return service.VerzekeringCreate(vz);
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-        }
-
-        public bool DeleteVerzekering(VerzekeringModel verzekering)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            int id = verzekering.IdVerzekering;
-
-            try
-            {
-                return service.VerzekeringDelete(id);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-}
+    }
 }

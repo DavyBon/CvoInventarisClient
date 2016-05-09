@@ -11,173 +11,79 @@ namespace CvoInventarisClient.Controllers
     {
         public ActionResult Index()
         {
-            return View(GetObjectTypes());
+            ViewBag.action = TempData["action"];
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                List<Models.ObjectTypeModel> model = new List<Models.ObjectTypeModel>();
+                foreach (ObjectTypes objectType in client.ObjectTypeGetAll())
+                {
+                    model.Add(new Models.ObjectTypeModel() { IdObjectType = objectType.Id, Omschrijving = objectType.Omschrijving });
+                }
+                return View(model);
+            }
         }
 
+        // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(ObjectTypeGetById(id));
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                ObjectTypes objectType = client.ObjectTypeGetById(id);
+                return View(new Models.ObjectTypeModel() { IdObjectType = objectType.Id,Omschrijving = objectType.Omschrijving });
+            }
+        }
+
+        // POST: Inventaris/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                ObjectTypes objectType = new ObjectTypes();
+                objectType.Id = Convert.ToInt16(Request.Form["idObjectType"]);
+                objectType.Omschrijving = Request.Form["omschrijving"];
+
+                TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
+
+                client.ObjectTypeUpdate(objectType);
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Edit(ObjectTypeModel ot)
+        public ActionResult Create(FormCollection collection)
         {
-            if (UpdateObjectType(ot))
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.EditMesage = "Row updated";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.EditMesage = "Row not updated";
-                return View();
-            }
-        }
+                ObjectTypes objectType = new ObjectTypes();
+                objectType.Id = Convert.ToInt16(Request.Form["driver"]);
+                objectType.Omschrijving = Request.Form["omschrijving"];
+                client.ObjectTypeCreate(objectType);
 
-        public ActionResult Create()
-        {
-            return View(new ObjectTypeModel());
+                TempData["action"] = "objectType" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
+            }
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
-        public ActionResult Create(ObjectTypeModel ot)
+        public ActionResult Delete(int[] idArray)
         {
-            if (InsertObjectType(ot) >= 0)
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.CreateMesage = "Row inserted";
-                //return View("Index");
-                return View();
+                foreach (int id in idArray)
+                {
+                    client.ObjectTypeDelete(id);
+                }
+                if (idArray.Length >= 2)
+                {
+                    TempData["action"] = idArray.Length + " objectTypen werden verwijderd";
+                }
+                else
+                {
+                    TempData["action"] = idArray.Length + " objectType werd verwijderd";
+                }
             }
-            else
-            {
-                ViewBag.CreateMesage = "Row not inserted";
-                return View();
-            }
-        }
-
-        public ActionResult Details(int id)
-        {
-            return View(ObjectTypeGetById(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View(ObjectTypeGetById(id));
-        }
-
-        [HttpPost]
-        public ActionResult Delete(ObjectTypeModel ot)
-        {
-            if (DeleteObjectType(ot))
-            {
-                ViewBag.DeleteMesage = "Row deleted";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.DeleteMesage = "Row not deleted";
-                return View();
-            }
-        }
-
-        public List<ObjectTypeModel> GetObjectTypes()
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            ObjectTypes[] o = new ObjectTypes[] { };
-
-            try
-            {
-                o = service.ObjectTypeGetAll();
-            }
-            catch (Exception)
-            {
-
-            }
-
-            List<ObjectTypeModel> objectTypes = new List<ObjectTypeModel>();
-
-            foreach (ObjectTypes objectType in o)
-            {
-                ObjectTypeModel ot = new ObjectTypeModel();
-                ot.IdObjectType = objectType.Id;
-                ot.Omschrijving = objectType.Omschrijving;
-                objectTypes.Add(ot);
-            }
-
-            return objectTypes;
-        }
-
-        public ObjectTypeModel ObjectTypeGetById(int id)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            ObjectTypes objectType = new ObjectTypes();
-
-            try
-            {
-                objectType = service.ObjectTypeGetById(id);
-            }
-            catch (Exception)
-            {
-
-            }
-
-            ObjectTypeModel ot = new ObjectTypeModel();
-            ot.IdObjectType = objectType.Id;
-            ot.Omschrijving = objectType.Omschrijving;
-            return ot;
-        }
-
-        public bool UpdateObjectType(ObjectTypeModel objectType)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            ObjectTypes ot = new ObjectTypes();
-            ot.Id = objectType.IdObjectType;
-            ot.Omschrijving = objectType.Omschrijving;
-
-            try
-            {
-                return service.ObjectTypeUpdate(ot);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public int InsertObjectType(ObjectTypeModel objectType)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            ObjectTypes ot = new ObjectTypes();
-            ot.Omschrijving = objectType.Omschrijving;
-
-            try
-            {
-                return service.ObjectTypeCreate(ot);
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-        }
-
-        public bool DeleteObjectType(ObjectTypeModel objectType)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            int id = objectType.IdObjectType;
-
-            try
-            {
-                return service.ObjectTypeDelete(id);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            return RedirectToAction("Index");
         }
 
     }
