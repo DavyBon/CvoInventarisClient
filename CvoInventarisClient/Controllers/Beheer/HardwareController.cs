@@ -12,225 +12,165 @@ namespace CvoInventarisClient.Controllers
     {
         public ActionResult Index()
         {
-            return View(HardwareGetAll());
+            ViewBag.action = TempData["action"];
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                //WCF servicereference objecten collection naar InventarisModel objecten collection
+                HardwareViewModel model = new HardwareViewModel();
+                model.Hardwares = new List<HardwareModel>();
+                model.Cpus = new List<SelectListItem>();
+                model.Devices = new List<SelectListItem>();
+                model.GrafischeKaarten = new List<SelectListItem>();
+                model.Harddisks = new List<SelectListItem>();
+
+                foreach (Hardware h in client.HardwareGetAll())
+                {
+                    HardwareModel hardware = new HardwareModel();
+                    hardware.IdHardware = h.Id;
+                    hardware.Cpu = new CpuModel() { IdCpu = h.Cpu.IdCpu, FabrieksNummer = h.Cpu.FabrieksNummer, Merk = h.Cpu.Merk, Snelheid = h.Cpu.Snelheid, Type = h.Cpu.Type };
+                    hardware.Device = new DeviceModel() { IdDevice = h.Device.IdDevice, Type = h.Device.Type, Merk = h.Device.Merk, FabrieksNummer = h.Device.FabrieksNummer, IsPcCompatibel = h.Device.IsPcCompatibel, Serienummer = h.Device.Serienummer };
+                    hardware.GrafischeKaart = new GrafischeKaartModel() { FabrieksNummer = h.GrafischeKaart.FabrieksNummer, Merk = h.GrafischeKaart.Merk, Type = h.GrafischeKaart.Type, Driver = h.GrafischeKaart.Driver, IdGrafischeKaart = h.GrafischeKaart.IdGrafischeKaart };
+                    hardware.Harddisk = new HarddiskModel() { Merk = h.Harddisk.Merk, FabrieksNummer = h.Harddisk.FabrieksNummer, Grootte = h.Harddisk.Grootte, IdHarddisk = h.Harddisk.IdHarddisk};
+                    model.Hardwares.Add(hardware);
+                }
+                foreach (Cpu  c in client.CpuGetAll())
+                {
+                    model.Cpus.Add(new SelectListItem { Text = c.Merk, Value = c.IdCpu.ToString() });
+                }
+                foreach (Device d in client.DeviceGetAll())
+                {
+                    model.Devices.Add(new SelectListItem { Text = d.Merk, Value = d.IdDevice.ToString() });
+                }
+                foreach (GrafischeKaart g in client.GrafischeKaartGetAll())
+                {
+                    model.GrafischeKaarten.Add(new SelectListItem { Text = g.Merk, Value = g.IdGrafischeKaart.ToString() });
+                }
+                foreach (Harddisk h in client.HarddiskGetAll())
+                {
+                    model.Harddisks.Add(new SelectListItem { Text = h.Merk, Value = h.IdHarddisk.ToString() });
+                }
+                return View(model);
+            }
         }
 
+        // POST: Inventaris/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                Hardware hardware = new Hardware();
+                hardware.Cpu = new ServiceReference.Cpu() { IdCpu = Convert.ToInt16(Request.Form["Cpus"]) };
+                hardware.Device = new ServiceReference.Device() { IdDevice = Convert.ToInt16(Request.Form["Devices"]) };
+                hardware.GrafischeKaart = new ServiceReference.GrafischeKaart() { IdGrafischeKaart = Convert.ToInt16(Request.Form["GrafischeKaarten"]) };
+                hardware.Harddisk = new ServiceReference.Harddisk() { IdHarddisk = Convert.ToInt16(Request.Form["Harddisks"]) };
+                client.HardwareCreate(hardware);
+            }
+            TempData["action"] = "Object werd toegevoegd aan hardware";
+            return RedirectToAction("Index");
+        }
+
+        // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(HardwareGetById(id));
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                HardwareViewModel model = new HardwareViewModel();
+                model.Hardwares = new List<HardwareModel>();
+                model.Cpus = new List<SelectListItem>();
+                model.Devices = new List<SelectListItem>();
+                model.GrafischeKaarten = new List<SelectListItem>();
+                model.Harddisks = new List<SelectListItem>();
+
+                Hardware h = client.HardwareGetById(id);
+                HardwareModel hardware = new HardwareModel();
+                hardware.IdHardware = h.Id;
+                hardware.Cpu = new CpuModel() { IdCpu = h.Cpu.IdCpu, FabrieksNummer = h.Cpu.FabrieksNummer, Merk = h.Cpu.Merk, Snelheid = h.Cpu.Snelheid, Type = h.Cpu.Type };
+                hardware.Device = new DeviceModel() { IdDevice = h.Device.IdDevice, Type = h.Device.Type, Merk = h.Device.Merk, FabrieksNummer = h.Device.FabrieksNummer, IsPcCompatibel = h.Device.IsPcCompatibel, Serienummer = h.Device.Serienummer };
+                hardware.GrafischeKaart = new GrafischeKaartModel() { FabrieksNummer = h.GrafischeKaart.FabrieksNummer, Merk = h.GrafischeKaart.Merk, Type = h.GrafischeKaart.Type, Driver = h.GrafischeKaart.Driver, IdGrafischeKaart = h.GrafischeKaart.IdGrafischeKaart };
+                hardware.Harddisk = new HarddiskModel() { Merk = h.Harddisk.Merk, FabrieksNummer = h.Harddisk.FabrieksNummer, Grootte = h.Harddisk.Grootte, IdHarddisk = h.Harddisk.IdHarddisk };
+                model.Hardwares.Add(hardware);
+
+                foreach (Cpu c in client.CpuGetAll())
+                {
+                    if (!(c.IdCpu == hardware.Cpu.IdCpu))
+                    {
+                        model.Cpus.Add(new SelectListItem { Text = c.Merk, Value = c.IdCpu.ToString() });
+                    }
+                }
+                foreach (Device d in client.DeviceGetAll())
+                {
+                    if (!(d.IdDevice == hardware.Device.IdDevice))
+                    {
+                        model.Devices.Add(new SelectListItem { Text = d.Merk, Value = d.IdDevice.ToString() });
+                    }
+                }
+                foreach (GrafischeKaart g in client.GrafischeKaartGetAll())
+                {
+                    if (!(g.IdGrafischeKaart == hardware.GrafischeKaart.IdGrafischeKaart))
+                    {
+                        model.GrafischeKaarten.Add(new SelectListItem { Text = g.Merk, Value = g.IdGrafischeKaart.ToString() });
+                    }
+                }
+                foreach (Harddisk hd in client.HarddiskGetAll())
+                {
+                    if (!(hd.IdHarddisk == hardware.Harddisk.IdHarddisk))
+                    {
+                        model.Harddisks.Add(new SelectListItem { Text = hd.Merk, Value = hd.IdHarddisk.ToString() });
+                    }
+                }
+                return View(model);
+            }
         }
 
+        // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(HardwareModel h)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            if (UpdateHardware(h))
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.EditMesage = "Row updated";
-                //return View("Index");
-                return View();
+                Hardware hardware = new Hardware();
+                hardware.Id = Convert.ToInt16(Request.Form["idHardware"]);
+                hardware.Cpu = new ServiceReference.Cpu() { IdCpu = Convert.ToInt16(Request.Form["idCpu"]) };
+
+                if (!String.IsNullOrWhiteSpace(Request.Form["cpus"])) { hardware.Cpu = new ServiceReference.Cpu() { IdCpu = Convert.ToInt16(Request.Form["cpus"]) }; }
+                else { hardware.Cpu = new ServiceReference.Cpu() { IdCpu = Convert.ToInt16(Request.Form["defaultIdCpu"]) }; }
+
+                if (!String.IsNullOrWhiteSpace(Request.Form["devices"])) { hardware.Device = new ServiceReference.Device() { IdDevice = Convert.ToInt16(Request.Form["devices"]) }; }
+                else { hardware.Device = new ServiceReference.Device() { IdDevice = Convert.ToInt16(Request.Form["defaultIdDevice"]) }; }
+
+                if (!String.IsNullOrWhiteSpace(Request.Form["grafischeKaarten"])) { hardware.GrafischeKaart = new ServiceReference.GrafischeKaart() { IdGrafischeKaart = Convert.ToInt16(Request.Form["grafischeKaarten"]) }; }
+                else { hardware.GrafischeKaart = new ServiceReference.GrafischeKaart() { IdGrafischeKaart = Convert.ToInt16(Request.Form["defaultIdGrafischeKaart"]) }; }
+
+                if (!String.IsNullOrWhiteSpace(Request.Form["harddisks"])) { hardware.Harddisk = new ServiceReference.Harddisk() { IdHarddisk = Convert.ToInt16(Request.Form["harddisks"]) }; }
+                else { hardware.Harddisk = new ServiceReference.Harddisk() { IdHarddisk = Convert.ToInt16(Request.Form["defaultIdHarddisk"]) }; }
+
+                client.HardwareUpdate(hardware);
+            }
+            TempData["action"] = "Object in inventaris werd gewijzigd";
+            return RedirectToAction("Index");
+        }
+
+        // POST: Inventaris/Delete/5
+        [HttpPost]
+        public ActionResult Delete(int[] idArray, FormCollection collection)
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                foreach (int id in idArray)
+                {
+                    client.HardwareDelete(id);
+                }
+            }
+            if (idArray.Length >= 2)
+            {
+                TempData["action"] = idArray.Length + " objecten werden verwijderd uit de hardware tabel";
             }
             else
             {
-                ViewBag.EditMesage = "Row not updated";
-                return View();
+                TempData["action"] = idArray.Length + " netwerk werd verwijderd uit de hardware tabel";
             }
-        }
-
-        public ActionResult Create()
-        {
-            return View(new HardwareModel());
-        }
-
-        [HttpPost]
-        public ActionResult Create(HardwareModel h)
-        {
-            if (InsertHardware(h) >= 0)
-            {
-                ViewBag.CreateMesage = "Row inserted";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.CreateMesage = "Row not inserted";
-                return View();
-            }
-        }
-
-        public ActionResult Details(int id)
-        {
-            return View(HardwareGetById(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View(HardwareGetById(id));
-        }
-
-        [HttpPost]
-        public ActionResult Delete(HardwareModel h)
-        {
-            if (DeleteHardware(h))
-            {
-                ViewBag.DeleteMesage = "Row deleted";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.DeleteMesage = "Row not deleted";
-                return View();
-            }
-        }
-
-        public List<HardwareModel> HardwareGetAll()
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Hardware[] hw = new Hardware[] { };
-
-            try
-            {
-                hw = service.HardwareGetAll();
-            }
-            catch (Exception)
-            {
-
-            }
-
-            List<HardwareModel> hardwares = new List<HardwareModel>();
-
-            foreach (Hardware hardware in hw)
-            {
-                HardwareModel h = new HardwareModel();
-                h.IdHardware = hardware.Id;
-
-                h.Cpu.FabrieksNummer = hardware.Cpu.FabrieksNummer;
-                h.Cpu.IdCpu = hardware.Cpu.IdCpu;
-                h.Cpu.Merk = hardware.Cpu.Merk;
-                h.Cpu.Snelheid = hardware.Cpu.Snelheid;
-                h.Cpu.Type = hardware.Cpu.Type;
-
-                h.Device.FabrieksNummer = hardware.Device.FabrieksNummer;
-                h.Device.IdDevice = hardware.Device.IdDevice;
-                h.Device.IsPcCompatibel = hardware.Device.IsPcCompatibel;
-                h.Device.Merk = hardware.Device.Merk;
-                h.Device.Serienummer = hardware.Device.Serienummer;
-                h.Device.Type = hardware.Device.Type;
-
-                h.GrafischeKaart.Driver = hardware.GrafischeKaart.Driver;
-                h.GrafischeKaart.FabrieksNummer = hardware.GrafischeKaart.FabrieksNummer;
-                h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
-                h.GrafischeKaart.Merk = hardware.GrafischeKaart.Merk;
-                h.GrafischeKaart.Type = hardware.GrafischeKaart.Type;
-
-                h.Harddisk.FabrieksNummer = hardware.Harddisk.FabrieksNummer;
-                h.Harddisk.Grootte = hardware.Harddisk.Grootte;
-                h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
-                h.Harddisk.Merk = hardware.Harddisk.Merk;
-                hardwares.Add(h);
-            }
-
-            return hardwares;
-        }
-
-        public HardwareModel HardwareGetById(int id)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Hardware hardware = new Hardware();
-
-            try
-            {
-                hardware = service.HardwareGetById(id);
-            }
-            catch (Exception)
-            {
-
-            }
-
-            HardwareModel h = new HardwareModel();
-            h.IdHardware = hardware.Id;
-
-            h.Cpu.FabrieksNummer = hardware.Cpu.FabrieksNummer;
-            h.Cpu.IdCpu = hardware.Cpu.IdCpu;
-            h.Cpu.Merk = hardware.Cpu.Merk;
-            h.Cpu.Snelheid = hardware.Cpu.Snelheid;
-            h.Cpu.Type = hardware.Cpu.Type;
-
-            h.Device.FabrieksNummer = hardware.Device.FabrieksNummer;
-            h.Device.IdDevice = hardware.Device.IdDevice;
-            h.Device.IsPcCompatibel = hardware.Device.IsPcCompatibel;
-            h.Device.Merk = hardware.Device.Merk;
-            h.Device.Serienummer = hardware.Device.Serienummer;
-            h.Device.Type = hardware.Device.Type;
-
-            h.GrafischeKaart.Driver = hardware.GrafischeKaart.Driver;
-            h.GrafischeKaart.FabrieksNummer = hardware.GrafischeKaart.FabrieksNummer;
-            h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
-            h.GrafischeKaart.Merk = hardware.GrafischeKaart.Merk;
-            h.GrafischeKaart.Type = hardware.GrafischeKaart.Type;
-
-            h.Harddisk.FabrieksNummer = hardware.Harddisk.FabrieksNummer;
-            h.Harddisk.Grootte = hardware.Harddisk.Grootte;
-            h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
-            h.Harddisk.Merk = hardware.Harddisk.Merk;
-            return h;
-        }
-
-        public bool UpdateHardware(HardwareModel hardware)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Hardware h = new Hardware();
-            h.Id = hardware.IdHardware;
-            h.Cpu.IdCpu = hardware.Cpu.IdCpu;
-            h.Device.IdDevice = hardware.Device.IdDevice;
-            h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
-            h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
-
-            try
-            {
-                return service.HardwareUpdate(h);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public int InsertHardware(HardwareModel hardware)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Hardware h = new Hardware();
-            h.Cpu.IdCpu = hardware.Cpu.IdCpu;
-            h.Device.IdDevice = hardware.Device.IdDevice;
-            h.GrafischeKaart.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
-            h.Harddisk.IdHarddisk = hardware.Harddisk.IdHarddisk;
-
-            try
-            {
-                return service.HardwareCreate(h);
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-        }
-
-        public bool DeleteHardware(HardwareModel hardware)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            int id = hardware.IdHardware;
-
-            try
-            {
-                return service.HardwareDelete(id);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            return RedirectToAction("Index");
         }
     }
 }
