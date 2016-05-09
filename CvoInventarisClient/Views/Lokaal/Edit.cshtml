@@ -13,11 +13,13 @@
             @Html.Hidden("idNetwerk", Model.Lokaal[0].Netwerk.Id)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Lokaal[0].LokaalNaam)
-                <input class="form-control" type="text" name="lokaalNaam" required value="@Model.Lokaal[0].LokaalNaam"/>
+                @Html.ValidationMessageFor(model => model.Lokaal[0].LokaalNaam)
+                <input class="form-control" type="text" name="lokaalNaam" value="@Model.Lokaal[0].LokaalNaam"/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Lokaal[0].AantalPlaatsen)
-                <input class="form-control" type="text" name="aantalPlaatsen" required value="@Model.Lokaal[0].AantalPlaatsen"/>
+                @Html.ValidationMessageFor(model => model.Lokaal[0].AantalPlaatsen)
+                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.Lokaal[0].AantalPlaatsen"/>
             </div>
             <div class="checkbox">
                 <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.Lokaal[0].IsComputerLokaal)</label>

@@ -18,6 +18,7 @@ namespace CvoInventarisClient.Models
 
         [Required(ErrorMessage = "Vul een grootte in")]
         [Range(1, 100000, ErrorMessage = "De grootte moet tussen 1 en 100000 liggen")]
+        [RegularExpression(@"^[0-9]*$", ErrorMessage = "Vul een nummer in als grootte")]
         [Display(Name = "grootte")]
         public int Grootte { get; set; }
 

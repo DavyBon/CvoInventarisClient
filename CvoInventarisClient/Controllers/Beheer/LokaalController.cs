@@ -57,30 +57,42 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(FormCollection collection, LokaalModel lkl)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.action = Request.Form["label"] + " was added";
-
-                Lokaal lokaal = new Lokaal();
-                lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-                lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-                lokaal.Netwerk.Id = Convert.ToInt32(Request.Form["idNetwerk"]);
-                if(Request.Form["isComputerLokaal"] != null)
+                if (ModelState.IsValid)
                 {
-                    lokaal.IsComputerLokaal = true;
+                    ViewBag.action = Request.Form["label"] + " was added";
+
+                    Lokaal lokaal = new Lokaal();
+                    lokaal.LokaalNaam = Request.Form["lokaalNaam"];
+                    lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+                    lokaal.Netwerk.Id = Convert.ToInt32(Request.Form["idNetwerk"]);
+
+                    if (Request.Form["isComputerLokaal"] != null)
+                    {
+                        lokaal.IsComputerLokaal = true;
+                    }
+                    else
+                    {
+                        lokaal.IsComputerLokaal = false;
+                    }
+
+                    client.LokaalCreate(lokaal);
+
+                    TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
+                    return RedirectToAction("Index");
                 }
                 else
                 {
-                    lokaal.IsComputerLokaal = false;
+                    string validationErrors = string.Join(",", ModelState.Values.Where(E => E.Errors.Count > 0)
+                    .SelectMany(E => E.Errors).Select(E => E.ErrorMessage).ToArray());
+
+                    TempData["action"] = "Lokaal niet toegevoegd: " + validationErrors;
+                    return RedirectToAction("Index");
                 }
-
-                client.LokaalCreate(lokaal);
-
-                TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
             }
-            return RedirectToAction("Index");
         }
 
         // EDIT:
@@ -114,31 +126,44 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, FormCollection collection, LokaalModel lkl)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.action = Request.Form["label"] + " was added";
-
-                Lokaal lokaal = new Lokaal();
-                lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-                lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-                lokaal.Netwerk = new ServiceReference.Netwerk() { Id = Convert.ToInt16(Request.Form["idNetwerk"]) };
-
-                if(!String.IsNullOrWhiteSpace(Request.Form["Netwerk"])) { lokaal.Netwerk = new ServiceReference.Netwerk() { Id = Convert.ToInt16(Request.Form["Netwerk"]) }; }
-                else { lokaal.Netwerk = new ServiceReference.Netwerk() { Id = Convert.ToInt16(Request.Form["idNetwerk"]) }; }
-
-                if(Request.Form["isComputerLokaal"] != null ) { lokaal.IsComputerLokaal = true; }
-                else
+                if (ModelState.IsValid)
                 {
-                    lokaal.IsComputerLokaal = false;
+                    ViewBag.action = Request.Form["label"] + " was added";
+
+                    Lokaal lokaal = new Lokaal();
+                    lokaal.IdLokaal = Convert.ToInt16(Request.Form["idLokaal"]);
+                    lokaal.LokaalNaam = Request.Form["lokaalNaam"];
+                    lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+                    lokaal.Netwerk = new ServiceReference.Netwerk() { Id = Convert.ToInt16(Request.Form["idNetwerk"]) };
+
+                    if (!String.IsNullOrWhiteSpace(Request.Form["Netwerk"])) { lokaal.Netwerk = new ServiceReference.Netwerk() { Id = Convert.ToInt16(Request.Form["Netwerk"]) }; }
+                    else { lokaal.Netwerk = new ServiceReference.Netwerk() { Id = Convert.ToInt16(Request.Form["idNetwerk"]) }; }
+
+                    if (Request.Form["isComputerLokaal"] != null) { lokaal.IsComputerLokaal = true; }
+                    else
+                    {
+                        lokaal.IsComputerLokaal = false;
+                    }
+
+                    client.LokaalUpdate(lokaal);
+
+                    TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd aangepast";
+                    return RedirectToAction("Index");
                 }
 
-                client.LokaalUpdate(lokaal);
+                Lokaal lokaalnv = client.LokaalGetById(id);
+                LokaalModel lokaalmodel = new LokaalModel();
+                lokaalmodel.IdLokaal = id;
+                lokaalmodel.LokaalNaam = lokaalnv.LokaalNaam;
+                lokaalmodel.AantalPlaatsen = lokaalnv.AantalPlaatsen;
+                lokaalmodel.Netwerk.Id = Convert.ToInt16(Request.Form["idNetwerk"]);
 
-                TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd aangepast";
+                return View(lokaalmodel);
             }
-            return RedirectToAction("Index");
         }
 
 

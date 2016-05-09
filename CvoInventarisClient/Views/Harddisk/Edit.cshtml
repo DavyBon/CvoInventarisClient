@@ -1,4 +1,4 @@
-﻿@model CvoInventarisClient.ServiceReference.Harddisk
+﻿@model CvoInventarisClient.Models.HarddiskModel
 
 @{ 
     ViewBag.Title = "Harddisk - Edit";
@@ -9,17 +9,21 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
+            @Html.Hidden("idHarddisk", Model.IdHarddisk)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Merk)
-                <input class="form-control" type="text" name="merk" value="@Model.Merk" required/>
+                @Html.ValidationMessageFor(model => model.Merk)
+                <input class="form-control" type="text" name="merk" value="@Model.Merk"/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Grootte)
-                <input class="form-control" type="text" name="grootte" value="@Model.Grootte" required/>
+                @Html.ValidationMessageFor(model => model.Grootte)
+                <input class="form-control" type="text" name="grootte" value="@Model.Grootte"/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.FabrieksNummer)
-                <input class="form-control" type="text" name="fabrieksnummer" value="@Model.FabrieksNummer" required/>
+                @Html.ValidationMessageFor(model => model.FabrieksNummer)
+                <input class="form-control" type="text" name="fabrieksnummer" value="@Model.FabrieksNummer"/>
             </div>
         </div>
     </div>
