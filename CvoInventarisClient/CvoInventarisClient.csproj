@@ -230,6 +230,7 @@
     <Compile Include="Models\FactuurViewModel.cs" />
     <Compile Include="Models\HarddiskModel.cs" />
     <Compile Include="Models\HardwareModel.cs" />
+    <Compile Include="Models\HardwareViewModel.cs" />
     <Compile Include="Models\InventarisModel.cs" />
     <Compile Include="Models\InventarisViewModel.cs" />
     <Compile Include="Models\LeverancierModel.cs" />
