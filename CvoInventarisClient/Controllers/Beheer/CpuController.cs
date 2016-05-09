@@ -3,195 +3,96 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CvoInventarisClient.Models;
 using CvoInventarisClient.ServiceReference;
 
-namespace CvoInventarisClient.Controllers
+namespace CvoInventarisClient.Controllers.Beheer
 {
+    [Authorize(Roles = "Admin")] // enkel een ingelogde admin kan gebruik maken van deze controler
     public class CpuController : Controller
     {
+        // GET: Inventaris
         public ActionResult Index()
         {
-            return View(GetCpus());
+            ViewBag.action = TempData["action"];
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                List<Models.CpuModel> model = new List<Models.CpuModel>();
+                foreach (Cpu cpu in client.CpuGetAll())
+                {
+                    model.Add(new Models.CpuModel() { IdCpu = cpu.IdCpu, Merk = cpu.Merk, Type = cpu.Type, Snelheid = cpu.Snelheid, FabrieksNummer = cpu.FabrieksNummer });
+                }
+                return View(model);
+            }
         }
 
+        // POST: Inventaris/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                Cpu cpu = new Cpu();
+                cpu.Merk = Request.Form["Merk"];
+                cpu.Type = Request.Form["Type"];
+                cpu.Snelheid = Convert.ToInt32(Request.Form["Snelheid"]);
+                cpu.FabrieksNummer = Request.Form["FabrieksNummer"];
+                client.CpuCreate(cpu);
+
+                TempData["action"] = "cpu" + " " + Request.Form["Merk"] + " werd toegevoegd";
+            }
+            return RedirectToAction("Index");
+        }
+
+        // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(GetCpuById(id));
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                Cpu cpu = client.CpuGetById(id);
+                return View(new Models.CpuModel() { IdCpu = cpu.IdCpu, Merk = cpu.Merk, Type = cpu.Type, Snelheid = cpu.Snelheid, FabrieksNummer = cpu.FabrieksNummer });
+            }
         }
 
+        // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(CpuModel cm)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            if (UpdateCpu(cm))
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.EditMesage = "Row updated";
-                //return View("Index");
-                return View();
+                Cpu cpu = new Cpu();
+                cpu.IdCpu = Convert.ToInt16(Request.Form["IdCpu"]);
+                cpu.Merk = Request.Form["Merk"];
+                cpu.Type = Request.Form["Type"];
+                cpu.Snelheid = Convert.ToInt32(Request.Form["Snelheid"]);
+                cpu.FabrieksNummer = Request.Form["FabrieksNummer"];
+
+                TempData["action"] = Request.Form["Merk"] + " werd aangepast";
+
+                client.CpuUpdate(cpu);
             }
-            else
-            {
-                ViewBag.EditMesage = "Row not updated";
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Create()
-        {
-            return View(new CpuModel());
-        }
-
+        // POST: Inventaris/Delete/5
         [HttpPost]
-        public ActionResult Create(CpuModel cm)
+        public ActionResult Delete(int[] idArray)
         {
-            if (InsertCpu(cm) >= 0)
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.CreateMesage = "Row inserted";
-                //return View("Index");
-                return View();
+                foreach (int id in idArray)
+                {
+                    client.CpuDelete(id);
+                }
+                if (idArray.Length >= 2)
+                {
+                    TempData["action"] = idArray.Length + " cpus werden verwijderd";
+                }
+                else
+                {
+                    TempData["action"] = idArray.Length + " cpu werd verwijderd";
+                }
             }
-            else
-            {
-                ViewBag.CreateMesage = "Row not inserted";
-                return View();
-            }
-        }
-
-        public ActionResult Details(int id)
-        {
-            return View(GetCpuById(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View(GetCpuById(id));
-        }
-
-        [HttpPost]
-        public ActionResult Delete(CpuModel cm)
-        {
-            if (DeleteCpu(cm))
-            {
-                ViewBag.DeleteMesage = "Row deleted";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.DeleteMesage = "Row not deleted";
-                return View();
-            }
-        }
-
-        public List<CpuModel> GetCpus()
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Cpu[] c = new Cpu[] { };
-
-            try
-            {
-                c = service.CpuGetAll();
-            }
-            catch (Exception)
-            {
-
-            }            
-
-            List<CpuModel> cpus = new List<CpuModel>();
-
-            foreach (Cpu cpu in c)
-            {
-                CpuModel cm = new CpuModel();
-                cm.IdCpu = cpu.IdCpu;
-                cm.Merk = cpu.Merk;
-                cm.Type = cpu.Type;
-                cm.Snelheid = cpu.Snelheid;
-                cm.FabrieksNummer = cpu.FabrieksNummer;
-                cpus.Add(cm);
-            }
-
-            return cpus;
-        }
-
-        public CpuModel GetCpuById(int id)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Cpu cpu = new Cpu();
-
-            try
-            {
-                cpu = service.CpuGetById(id);
-            }
-            catch (Exception)
-            {
-
-            }
-
-            CpuModel cm = new CpuModel();
-            cm.IdCpu = cpu.IdCpu;
-            cm.Merk = cpu.Merk;
-            cm.Type = cpu.Type;
-            cm.Snelheid = cpu.Snelheid;
-            cm.FabrieksNummer = cpu.FabrieksNummer;
-
-            return cm;
-        }
-
-        public bool UpdateCpu(CpuModel cm)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Cpu cpu = new Cpu();
-            cpu.IdCpu = cm.IdCpu;
-            cpu.Merk = cm.Merk;
-            cpu.Type = cm.Type;
-            cpu.Snelheid = cm.Snelheid;
-            cpu.FabrieksNummer = cm.FabrieksNummer;
-
-            try
-            {
-                return service.CpuUpdate(cpu);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public int InsertCpu(CpuModel cm)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Cpu cpu = new Cpu();
-            cpu.Merk = cm.Merk;
-            cpu.Type = cm.Type;
-            cpu.Snelheid = cm.Snelheid;
-            cpu.FabrieksNummer = cm.FabrieksNummer;
-
-            try
-            {
-                return service.CpuCreate(cpu);
-            }
-            catch (Exception)
-            {
-                return -1;
-            }
-        }
-
-        public bool DeleteCpu(CpuModel cm)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            int id = cm.IdCpu;
-
-            try
-            {
-                return service.CpuDelete(id);
-            }
-            catch (Exception)
-            {
-                return false;
-            }
+            return RedirectToAction("Index");
         }
     }
 }

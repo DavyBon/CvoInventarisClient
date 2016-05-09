@@ -1,63 +1,35 @@
 ﻿@model CvoInventarisClient.Models.CpuModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Cpu - Edit";
 }
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
-<h2>@ViewBag.EditMesage</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Cpu"))
 {
-    <div class="form-horizintal">
-        <h4>Cpu</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.IdCpu)
-
-        <div>
-            @Html.LabelFor(model => model.Merk)
-            <div>
-                @Html.EditorFor(model => model.Merk)
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="container-fluid">
+            @Html.Hidden("IdCpu", Model.IdCpu)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Merk)
+                <input class="form-control" type="text" name="merk" value="@Model.Merk" required />
             </div>
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.Type)
-            <div>
-                @Html.EditorFor(model => model.Type)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Type)
+                <input class="form-control" type="text" name="driver" value="@Model.Type" required />
             </div>
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.Snelheid)
-            <div>
-                @Html.EditorFor(model => model.Snelheid)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Snelheid)
+                <input class="form-control" type="text" name="snelheid" value="@Model.Snelheid" required />
             </div>
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.FabrieksNummer)
-            <div>
-                @Html.EditorFor(model => model.FabrieksNummer)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.FabrieksNummer)
+                <input class="form-control" type="text" name="type" value="@Model.FabrieksNummer" min="1" required />
             </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-primary">Pas cpu aan</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
 
 

@@ -1,61 +1,130 @@
 ﻿@model IEnumerable<CvoInventarisClient.Models.CpuModel>
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Cpu";
 }
-
-@{ 
-    ViewBag.Title = "Index";
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
 }
+@using (Html.BeginForm("Delete", "Cpu"))
+{
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
-<h2>Index</h2>
+    <div class="input-group col-lg-4 pull-right">
+        <span class="input-group-addon">Zoeken</span>
+        <input id="filter" type="text" class="form-control">
+    </div>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
+    <div class="spacer"></div>
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdCpu)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Merk)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Type)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Snelheid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.FabrieksNummer)
-        </th>
-    </tr>
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Merk)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Type)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Snelheid)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.FabrieksNummer)
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="search">
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="idArray" value="@item.IdCpu" />
+                        </td>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Cpu", new { id = item.IdCpu })"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Merk)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Type)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Snelheid)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FabrieksNummer)
+                        </td>
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCpu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Merk)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Type)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Snelheid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FabrieksNummer)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.IdCpu }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdCpu }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdCpu }) 
-            </td>
-        </tr>
-    }
-</table>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- nieuw modal -->
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>Vul in</strong>
+            </div>
+            @using (Html.BeginForm("Create", "Cpu"))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Merk)
+                        <input class="form-control" type="text" name="Merk" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Type)
+                        <input class="form-control" type="text" name="Type" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Snelheid)
+                        <input class="form-control" type="text" name="Snelheid" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.FabrieksNummer)
+                        <input class="form-control" type="text" name="FabrieksNummer" required />
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Voeg cpu toe</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<script src="~/Scripts/Custom/Custom.js"></script>
+
+

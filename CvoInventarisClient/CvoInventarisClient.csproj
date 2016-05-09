@@ -194,7 +194,9 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
@@ -253,8 +255,6 @@
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Cpu\Index.cshtml" />
-    <Content Include="Views\Cpu\Edit.cshtml" />
     <None Include="Service References\ServiceReference\CvoInventarisService.wsdl" />
     <None Include="Service References\ServiceReference\Service1.xsd">
       <SubType>Designer</SubType>
@@ -265,19 +265,6 @@
     <None Include="Service References\ServiceReference\Service12.xsd">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Views\Cpu\Create.cshtml" />
-    <Content Include="Views\Cpu\Details.cshtml" />
-    <Content Include="Views\Cpu\Delete.cshtml" />
-    <Content Include="Views\Device\Create.cshtml" />
-    <Content Include="Views\Device\Delete.cshtml" />
-    <Content Include="Views\Device\Details.cshtml" />
-    <Content Include="Views\Device\Edit.cshtml" />
-    <Content Include="Views\Device\Index.cshtml" />
-    <Content Include="Views\GrafischeKaart\Create.cshtml" />
-    <Content Include="Views\GrafischeKaart\Delete.cshtml" />
-    <Content Include="Views\GrafischeKaart\Details.cshtml" />
-    <Content Include="Views\GrafischeKaart\Edit.cshtml" />
-    <Content Include="Views\GrafischeKaart\Index.cshtml" />
     <Content Include="Views\Harddisk\Edit.cshtml" />
     <Content Include="Views\Leverancier\Edit.cshtml" />
     <Content Include="Views\Lokaal\Edit.cshtml" />
@@ -318,6 +305,12 @@
     <Content Include="Views\Rapportering\LokaalRapportering.cshtml" />
     <Content Include="Views\Account\Loguit.cshtml" />
     <Content Include="Views\Rapportering\HardwareRapportering.cshtml" />
+    <Content Include="Views\Cpu\Index.cshtml" />
+    <Content Include="Views\Cpu\Edit.cshtml" />
+    <Content Include="Views\Device\Index.cshtml" />
+    <Content Include="Views\Device\Edit.cshtml" />
+    <Content Include="Views\GrafischeKaart\Index.cshtml" />
+    <Content Include="Views\GrafischeKaart\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

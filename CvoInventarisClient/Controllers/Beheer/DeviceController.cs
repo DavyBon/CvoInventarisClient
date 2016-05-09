@@ -3,198 +3,97 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CvoInventarisClient.Models;
 using CvoInventarisClient.ServiceReference;
 
-namespace CvoInventarisClient.Controllers
+namespace CvoInventarisClient.Controllers.Beheer
 {
     public class DeviceController : Controller
     {
+        // GET: Inventaris
         public ActionResult Index()
         {
-            return View(GetDevices());
+            ViewBag.action = TempData["action"];
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                List<Models.DeviceModel> model = new List<Models.DeviceModel>();
+                foreach (Device dev in client.DeviceGetAll())
+                {
+                    model.Add(new Models.DeviceModel() { IdDevice = dev.IdDevice, Merk = dev.Merk, Type = dev.Type, Serienummer = dev.Serienummer, IsPcCompatibel = dev.IsPcCompatibel, FabrieksNummer = dev.FabrieksNummer });
+                }
+                return View(model);
+            }
         }
 
+        // POST: Inventaris/Create
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                Device dev = new Device();
+                dev.Merk = Request.Form["Merk"];
+                dev.Type = Request.Form["Type"];
+                dev.Serienummer = Request.Form["Serienummer"];
+                dev.IsPcCompatibel = Convert.ToBoolean(Request.Form["IsPcCompatibel"]);
+                dev.FabrieksNummer = Request.Form["FabrieksNummer"];
+                client.DeviceCreate(dev);
+
+                TempData["action"] = "device" + " " + Request.Form["Merk"] + " werd toegevoegd";
+            }
+            return RedirectToAction("Index");
+        }
+
+        // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            return View(GetDeviceById(id));
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                Device dev = client.DeviceGetById(id);
+                return View(new Models.DeviceModel() { IdDevice = dev.IdDevice, Merk = dev.Merk, Type = dev.Type, Serienummer = dev.Serienummer, IsPcCompatibel = dev.IsPcCompatibel, FabrieksNummer = dev.FabrieksNummer });
+            }
         }
 
+        // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(DeviceModel dm)
+        public ActionResult Edit(int id, FormCollection collection)
         {
-            if (UpdateDevice(dm))
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.EditMesage = "Row updated";
-                //return View("Index");
-                return View();
+                Device dev = new Device();
+                dev.IdDevice = Convert.ToInt16(Request.Form["IdDevice"]);
+                dev.Merk = Request.Form["Merk"];
+                dev.Type = Request.Form["Type"];
+                dev.Serienummer = Request.Form["Serienummer"];
+                dev.IsPcCompatibel = Convert.ToBoolean(Request.Form["IsPcCompatibel"]);
+                dev.FabrieksNummer = Request.Form["FabrieksNummer"];
+
+                TempData["action"] = Request.Form["Merk"] + " werd aangepast";
+
+                client.DeviceUpdate(dev);
             }
-            else
-            {
-                ViewBag.EditMesage = "Row not updated";
-                return View();
-            }
+            return RedirectToAction("Index");
         }
 
-        public ActionResult Create()
-        {
-            return View(new DeviceModel());
-        }
-
+        // POST: Inventaris/Delete/5
         [HttpPost]
-        public ActionResult Create(DeviceModel dm)
+        public ActionResult Delete(int[] idArray)
         {
-            if (InsertDevice(dm) >= 0)
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                ViewBag.CreateMesage = "Row inserted";
-                //return View("Index");
-                return View();
+                foreach (int id in idArray)
+                {
+                    client.DeviceDelete(id);
+                }
+                if (idArray.Length >= 2)
+                {
+                    TempData["action"] = idArray.Length + " devices werden verwijderd";
+                }
+                else
+                {
+                    TempData["action"] = idArray.Length + " device werd verwijderd";
+                }
             }
-            else
-            {
-                ViewBag.CreateMesage = "Row not inserted";
-                return View();
-            }
-        }
-
-        public ActionResult Details(int id)
-        {
-            return View(GetDeviceById(id));
-        }
-
-        public ActionResult Delete(int id)
-        {
-            return View(GetDeviceById(id));
-        }
-
-        [HttpPost]
-        public ActionResult Delete(DeviceModel dm)
-        {
-            if (DeleteDevice(dm))
-            {
-                ViewBag.DeleteMesage = "Row deleted";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.DeleteMesage = "Row not deleted";
-                return View();
-            }
-        }
-
-        public List<DeviceModel> GetDevices()
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Device[] d = new Device[] { };
-
-            try
-            {
-                d = service.DeviceGetAll();
-            }
-            catch
-            {
-            }
-
-            List<DeviceModel> devs = new List<DeviceModel>();
-
-            foreach (Device dev in d)
-            {
-                DeviceModel dm = new DeviceModel();
-                dm.IdDevice = dev.IdDevice;
-                dm.Merk = dev.Merk;
-                dm.Type = dev.Type;
-                dm.Serienummer = dev.Serienummer;
-                dm.IsPcCompatibel = dev.IsPcCompatibel;
-                dm.FabrieksNummer = dev.FabrieksNummer;
-                devs.Add(dm);
-            }
-
-            return devs;
-        }
-
-        public DeviceModel GetDeviceById(int id)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Device dev = new Device();
-
-            try
-            {
-                dev = service.DeviceGetById(id);
-            }
-            catch
-            {
-            }
-
-            DeviceModel dm = new DeviceModel();
-            dm.IdDevice = dev.IdDevice;
-            dm.Merk = dev.Merk;
-            dm.Type = dev.Type;
-            dm.Serienummer = dev.Serienummer;
-            dm.IsPcCompatibel = dev.IsPcCompatibel;
-            dm.FabrieksNummer = dev.FabrieksNummer;
-
-            return dm;
-        }
-
-        public bool UpdateDevice(DeviceModel dm)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Device dev = new Device();
-            dev.IdDevice = dm.IdDevice;
-            dev.Merk = dm.Merk;
-            dev.Type = dm.Type;
-            dev.Serienummer = dm.Serienummer;
-            dev.IsPcCompatibel = dm.IsPcCompatibel;
-            dev.FabrieksNummer = dm.FabrieksNummer;
-
-            try
-            {
-                return service.DeviceUpdate(dev);
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        public int InsertDevice(DeviceModel dm)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Device dev = new Device();
-            dev.IdDevice = dm.IdDevice;
-            dev.Merk = dm.Merk;
-            dev.Type = dm.Type;
-            dev.Serienummer = dm.Serienummer;
-            dev.IsPcCompatibel = dm.IsPcCompatibel;
-            dev.FabrieksNummer = dm.FabrieksNummer;
-
-            try
-            {
-                return service.DeviceCreate(dev);
-            }
-            catch
-            {
-                return -1;
-            }
-        }
-
-        public bool DeleteDevice(DeviceModel dm)
-        {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            int id = dm.IdDevice;
-
-            try
-            {
-                return service.DeviceDelete(id);
-            }
-            catch
-            {
-                return false;
-            }
+            return RedirectToAction("Index");
         }
     }
 }

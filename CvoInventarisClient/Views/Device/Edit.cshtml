@@ -1,70 +1,37 @@
 ﻿@model CvoInventarisClient.Models.DeviceModel
 
 @{
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Device - Edit";
 }
 
-@{
-    ViewBag.Title = "Edit";
-}
-
-<h2>Edit</h2>
-
-<h2>@ViewBag.EditMesage</h2>
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Device"))
 {
-    <div class="form-horizintal">
-        <h4>Device</h4>
-        <hr />
-        @Html.ValidationSummary(true)
-        @Html.HiddenFor(model => model.IdDevice)
-
-        <div>
-            @Html.LabelFor(model => model.Merk)
-            <div>
-                @Html.EditorFor(model => model.Merk)
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="container-fluid">
+            @Html.Hidden("IdDevice", Model.IdDevice)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Merk)
+                <input class="form-control" type="text" name="merk" value="@Model.Merk" required />
             </div>
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.Type)
-            <div>
-                @Html.EditorFor(model => model.Type)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Type)
+                <input class="form-control" type="text" name="driver" value="@Model.Type" required />
             </div>
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.Serienummer)
-            <div>
-                @Html.EditorFor(model => model.Serienummer)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Serienummer)
+                <input class="form-control" type="text" name="snelheid" value="@Model.Serienummer" required />
             </div>
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.IsPcCompatibel)
-            <div>
-                @Html.EditorFor(model => model.IsPcCompatibel)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.IsPcCompatibel)
+                <input class="form-control" type="text" name="snelheid" value="@Model.IsPcCompatibel" required />
             </div>
-        </div>
-
-        <div>
-            @Html.LabelFor(model => model.FabrieksNummer)
-            <div>
-                @Html.EditorFor(model => model.FabrieksNummer)
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.FabrieksNummer)
+                <input class="form-control" type="text" name="type" value="@Model.FabrieksNummer" min="1" required />
             </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-primary">Pas device aan</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-
-
