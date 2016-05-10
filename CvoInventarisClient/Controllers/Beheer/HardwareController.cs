@@ -172,5 +172,63 @@ namespace CvoInventarisClient.Controllers
             }
             return RedirectToAction("Index");
         }
+        public List<HardwareModel> HardwareGetAll()
+        {
+            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+            Hardware[] hw = new Hardware[] { };
+
+            try
+            {
+                hw = service.HardwareGetAll();
+            }
+            catch (Exception)
+            {
+
+            }
+
+            List<HardwareModel> hardwares = new List<HardwareModel>();
+
+            foreach (Hardware hardware in hw)
+            {
+                HardwareModel h = new HardwareModel();
+                CpuModel cm = new CpuModel();
+                DeviceModel dm = new DeviceModel();
+                GrafischeKaartModel gm = new GrafischeKaartModel();
+                HarddiskModel hm = new HarddiskModel();
+
+                h.IdHardware = hardware.Id;
+
+                cm.FabrieksNummer = hardware.Cpu.FabrieksNummer;
+                cm.IdCpu = hardware.Cpu.IdCpu;
+                cm.Merk = hardware.Cpu.Merk;
+                cm.Snelheid = hardware.Cpu.Snelheid;
+                cm.Type = hardware.Cpu.Type;
+                h.Cpu = cm;
+
+                dm.FabrieksNummer = hardware.Device.FabrieksNummer;
+                dm.IdDevice = hardware.Device.IdDevice;
+                dm.IsPcCompatibel = hardware.Device.IsPcCompatibel;
+                dm.Merk = hardware.Device.Merk;
+                dm.Serienummer = hardware.Device.Serienummer;
+                dm.Type = hardware.Device.Type;
+                h.Device = dm;
+
+                gm.Driver = hardware.GrafischeKaart.Driver;
+                gm.FabrieksNummer = hardware.GrafischeKaart.FabrieksNummer;
+                gm.IdGrafischeKaart = hardware.GrafischeKaart.IdGrafischeKaart;
+                gm.Merk = hardware.GrafischeKaart.Merk;
+                gm.Type = hardware.GrafischeKaart.Type;
+                h.GrafischeKaart = gm;
+
+                hm.FabrieksNummer = hardware.Harddisk.FabrieksNummer;
+                hm.Grootte = hardware.Harddisk.Grootte;
+                hm.IdHarddisk = hardware.Harddisk.IdHarddisk;
+                hm.Merk = hardware.Harddisk.Merk;
+                h.Harddisk = hm;
+                hardwares.Add(h);
+            }
+
+            return hardwares;
+        }
     }
 }

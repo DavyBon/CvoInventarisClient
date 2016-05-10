@@ -1,455 +1,132 @@
-﻿@{
-    Layout = null;
+﻿@model CvoInventarisClient.Models.TabelModel
+@{
+    ViewBag.Title = "Index";
 }
 
-<!DOCTYPE html>
+@using (Html.BeginForm("stap1", "Rapportering"))
+{
+    @Html.DropDownList("tabelKeuzes", "selecteer een tabel")
+    <input type="submit" value="Submit" />
+}
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <h1>Rapportering</h1>
-    <p>Stap 1 : Uit welke tabel wilt u gegevens halen ?</p>
-    <form action="/Rapportering/Stap1" method="post">
-        <select id="stap1" name="stap1">
-            <option value="objectType">ObjectType</option>
-            <option value="verzekering">Verzekering</option>
-            <option value="cpu">Cpu</option>
-            <option value="device">Apparaat</option>
-            <option value="factuur">Factuur</option>
-            <option value="grafischeKaart">Grafische kaart</option>
-            <option value="harddisk">Harde schijf</option>
-            <option value="hardware">Hardware</option>
-            <option value="inventaris">Inventaris</option>
-            <option value="leverancier">Leverancier</option>
-            <option value="lokaal">Lokaal</option>
-            <option value="netwerk">Netwerk</option>
-            <option value="object">Object</option>
-        </select>
-            <p>Stap 2 : Wilt u al de gegevens uit de tabel of enkel bepaalde gegevens</p>
-            <button name="action" type="submit" value="stap2ZonderConditie">Alle gegevens</button>
-            <button name="action" type="submit" value="stap2Conditie">bepaalde gegevens</button>
+<div style="visibility : @ViewBag.stijlStap2">
 
-        <div style="display: @ViewBag.Objecttype">
-            
-                @if (ViewBag.Mylist != null)
-                {
-                    foreach (var item in ViewBag.MyList)
-                    {
-                        <table>
-                            <tr>
-                                <td>
-                                    @item.Id
-                                </td>
-                                <td>
-                                    @item.Omschrijving
-                                </td>
-                            </tr>
-                        </table>
-                    }
-                    <p>stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                    <button name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                    <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-                }
+    @using (Html.BeginForm("stap2", "Rapportering"))
+    {
+        <p>Wilt u uit de tabel : @ViewBag.tabelkeuze</p>
+        <input name="submit" type="submit" id="alleGegevens" value="alle gegevens van de tabel : @ViewBag.tabelkeuze" />
+        <input name="submit" type="submit" id="conditieGegevens" value="bepaalde conditie van de tabel : @ViewBag.tabelkeuze" />
+    }
+</div>
 
 
-        </div>
-        <div style="display: @ViewBag.Verzekering">
-
-            @if (ViewBag.VerzekeringList != null)
-            {
-                foreach (var item in ViewBag.VerzekeringList)
-                {
-                    <table>
-                        <tr>
-                            <td>
-                                @item.Id
-                            </td>
-                            <td>
-                                @item.Omschrijving
-                            </td>
-                        </tr>
-                    </table>
-                }
-
-                <p>stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                    <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                    <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
+<table style="visibility : @ViewBag.cpu" class="table">
+    @if (Model.cpus != null)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.cpus[0].IdCpu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cpus[0].Merk)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cpus[0].Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cpus[0].Snelheid)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.cpus[0].FabrieksNummer)
+            </th>
+        </tr>
 
 
-        </div>
+        foreach (var item in Model.cpus)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdCpu)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Merk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Snelheid)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FabrieksNummer)
+                </td>
+            </tr>
+        }
+    }
 
-        <div style="display : @ViewBag.Cpu">
-            @if (ViewBag.CpuList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>merk</td>
-                        <td>type</td>
-                        <td>snelheid</td>
-                        <td>fabrieksnummer</td>
-                    </tr>
-                    @foreach (var item in ViewBag.CpuList)
-                    {
-                    <tr>
-                        <td>@item.IdCpu</td>
-                        <td>@item.Merk</td>
-                        <td>@item.Type</td>
-                        <td>@item.Snelheid</td>
-                        <td>@item.FabrieksNummer</td>
-                    </tr>
-                    }
-                </table>
-               <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                    <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                    <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Device">
-            @if (ViewBag.DeviceList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>merk</td>
-                        <td>type</td>
-                        <td>serienummer</td>
-                        <td>pc compatibel</td>
-                        <td>fabrieksnummer</td>
-                    </tr>
-                    @foreach (var item in ViewBag.DeviceList)
-                    {
+</table>
 
-                        <tr>
-                            <td>@item.IdDevice</td>
-                            <td>@item.Merk</td>
-                            <td>@item.Type</td>
-                            <td>@item.Serienummer</td>
-                            <td>@item.IsPcCompatibel</td>
-                            <td>@item.FabrieksNummer</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                    <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Factuur">
-            @if (ViewBag.FactuurList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>boekjaar</td>
-                        <td>cvo volgnummer</td>
-                        <td>factuurnummer</td>
-                        <td>factuurdatum</td>
-                        <td>factuur status getekend</td>
-                        <td>verwerkingsdatum</td>
-                        <td>leverancier</td>
-                        <td>prijs</td>
-                        <td>garantie</td>
-                        <td>omschrijving</td>
-                        <td>Opmerking</td>
-                        <td>afschrijfperiode</td>
-                        <td>OleDoc</td>
-                        <td>OleDoc path</td>
-                        <td>OleDocFileName</td>
-                        <td>datum toegevoegd</td>
-                        <td>User insert</td>
-                        <td>Datum aangepast</td>
-                        <td>UserModified</td>
-                    </tr>
-                    @foreach (var item in ViewBag.FactuurList)
-                    {
+<table class="table">
+    @if (Model.hardwares != null)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.hardwares[0].IdHardware)
+            </th>
+            <th>
+                Cpu
+            </th>
+            <th>
+                Apparaat
+            </th>
+            <th>
+                Grafische kaart
+            </th>
+            <th>
+                Harddisk
+            </th>
+        </tr>
 
-                        <tr>
-                            <td>@item.IdFactuur</td>
-                            <td>@item.Boekjaar</td>
-                            <td>@item.CvoVolgNummer</td>
-                            <td>@item.FactuurNummer</td>
-                            <td>@item.FactuurDatum</td>
-                            <td>@item.FactuurStatusGetekend</td>
-                            <td>@item.VerwerkingsDatum</td>
-                            <td>@item.Leverancier.Naam</td>
-                            <td>@item.Prijs</td>
-                            <td>@item.Garantie</td>
-                            <td>@item.Omschrijving</td>
-                            <td>@item.Opmerking</td>
-                            <td>@item.Afschrijfperiode</td>
-                            <td>@item.OleDoc</td>
-                            <td>@item.OleDocPath</td>
-                            <td>@item.OleDocFileName</td>
-                            <td>@item.DatumInsert</td>
-                            <td>@item.UserInsert</td>
-                            <td>@item.DatumModified</td>
-                            <td>@item.UserModified</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.GrafischeKaart">
-            @if (ViewBag.GrafischeKaartList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>merk</td>
-                        <td>type</td>
-                        <td>driver</td>
-                        <td>fabrieksnummer</td>
-                    </tr>
-                    @foreach (var item in ViewBag.GrafischeKaartList)
-                    {
+        foreach (var item in Model.hardwares)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdHardware)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cpu.Merk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Device.Merk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GrafischeKaart.Merk)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Harddisk.Merk)
+                </td>
+            </tr>
+        }
+    }
+</table>
 
-                        <tr>
-                            <td>@item.IdGrafischeKaart</td>
-                            <td>@item.Merk</td>
-                            <td>@item.Type</td>
-                            <td>@item.Driver</td>
-                            <td>@item.FabrieksNummer</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Harddisk">
-            @if (ViewBag.HarddiskList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>merk</td>
-                        <td>grootte</td>
-                        <td>fabrieksnummer</td>
-                    </tr>
-                    @foreach (var item in ViewBag.HarddiskList)
-                    {
+<div style="visibility : @ViewBag.stijlStapOpslaan">
 
-                        <tr>
-                            <td>@item.IdHarddisk</td>
-                            <td>@item.Merk</td>
-                            <td>@item.Grootte</td>
-                            <td>@item.FabrieksNummer</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Hardware">
-            @if (ViewBag.HardwareList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>Cpu</td>
-                        <td>Device</td>
-                        <td>GrafischeKaart</td>
-                        <td>Hardisk</td>
-                    </tr>
-                    @foreach (var item in ViewBag.HardwareList)
-                    {
+    @using (Html.BeginForm("StapOpslaan", "Rapportering"))
+    {
+        @Html.Hidden("tabelKeuze", (string)@ViewBag.tabelKeuze)
+        <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
+        <button name="opslaan" type="submit" value="OpslaanExcel">Opslaan als excel</button>
+        <button name="opslaan" type="submit" value="OpslaanPdf">Opslaan als Pdf</button>
+    }
+</div>
 
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Cpu.Merk</td>
-                            <td>@item.Device.Merk</td>
-                            <td>@item.GrafischeKaart.Merk</td>
-                            <td>@item.Harddisk.Merk</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Inventaris">
-            @if (ViewBag.InventarisList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>label</td>
-                        <td>Lokaal</td>
-                        <td>Object</td>
-                        <td>aankoopjaar</td>
-                        <td>afschrijvingsperiode</td>
-                        <td>historiek</td>
-                        <td>isActief</td>
-                        <td>isAanwezig</td>
-                        <td>Verzekering</td>
-                    </tr>
-                    @foreach (var item in ViewBag.InventarisList)
-                    {
 
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Label</td>
-                            <td>@item.Lokaal.LokaalNaam</td>
-                            <td>@item.Object.Id</td>
-                            <td>@item.Aankoopjaar</td>
-                            <td>@item.Afschrijvingsperiode</td>
-                            <td>@item.Historiek</td>
-                            <td>@item.IsActief</td>
-                            <td>@item.IsAanwezig</td>
-                            <td>@item.Verzekering.Omschrijving</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Leverancier">
-            @if (ViewBag.LeverancierList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>naam</td>
-                        <td>afkorting</td>
-                        <td>straat</td>
-                        <td>huisnummer</td>
-                        <td>busnummer</td>
-                        <td>postcode</td>
-                        <td>telefoon</td>
-                        <td>fax</td>
-                        <td>email</td>
-                        <td>website</td>
-                        <td>btw nummer</td>
-                        <td>iban</td>
-                        <td>bic</td>
-                        <td>toegevoegd op</td>
-                    </tr>
-                    @foreach (var item in ViewBag.LeverancierList)
-                    {
 
-                        <tr>
-                            <td>@item.IdLeverancier</td>
-                            <td>@item.Naam</td>
-                            <td>@item.Afkorting</td>
-                            <td>@item.Straat</td>
-                            <td>@item.HuisNummer</td>
-                            <td>@item.BusNummer</td>
-                            <td>@item.Postcode</td>
-                            <td>@item.Telefoon</td>
-                            <td>@item.Fax</td>
-                            <td>@item.Email</td>
-                            <td>@item.Website</td>
-                            <td>@item.BtwNummer</td>
-                            <td>@item.Iban</td>
-                            <td>@item.Bic</td>
-                            <td>@item.ToegevoegdOp</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Lokaal">
-            @if (ViewBag.LokaalList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>naam</td>
-                        <td>aantal plaatsen</td>
-                        <td>computerlokaal</td>
-                        <td>Netwerk</td>
-                    </tr>
-                    @foreach (var item in ViewBag.LokaalList)
-                    {
 
-                        <tr>
-                            <td>@item.IdLokaal</td>
-                            <td>@item.LokaalNaam</td>
-                            <td>@item.AantalPlaatsen</td>
-                            <td>@item.IsComputerLokaal</td>
-                            <td>@item.Netwerk.Merk</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Netwerk">
-            @if (ViewBag.NetwerkList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>merk</td>
-                        <td>type</td>
-                        <td>snelheid</td>
-                        <td>driver</td>
-                    </tr>
-                    @foreach (var item in ViewBag.NetwerkList)
-                    {
 
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.Merk</td>
-                            <td>@item.Type</td>
-                            <td>@item.Snelheid</td>
-                            <td>@item.Driver</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        <div style="display : @ViewBag.Object">
-            @if (ViewBag.ObjectList != null)
-            {
-                <table>
-                    <tr>
-                        <td>id</td>
-                        <td>object type</td>
-                        <td>kenmerken</td>
-                        <td>leverancier</td>
-                        <td>factuur</td>
-                    </tr>
-                    @foreach (var item in ViewBag.ObjectList)
-                    {
 
-                        <tr>
-                            <td>@item.Id</td>
-                            <td>@item.ObjectType.Omschrijving</td>
-                            <td>@item.Kenmerken</td>
-                            <td>@item.Leverancier.Naam</td>
-                            <td>@item.Factuur.IdFactuur</td>
-                        </tr>
-                    }
-                </table>
-                <p> stap 3 wilt u de informatie uit tabel @ViewBag.resultaat opslaan als pdf of excel</p>
-                <button  name="action" type="submit" value="OpslaanExcel/@ViewBag.resultaat">Opslaan als excel</button>
-                <button name="action" type="submit" value="OpslaanPdf/@ViewBag.resultaat">Opslaan als Pdf</button>
-            }
-        </div>
-        </form>
 
-</body>
-</html>
+
+
+

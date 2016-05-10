@@ -213,12 +213,10 @@
     <Compile Include="Controllers\Beheer\ObjectController.cs" />
     <Compile Include="Controllers\Beheer\ObjectTypeController.cs" />
     <Compile Include="Controllers\BeheerController.cs" />
-    <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\Beheer\VerzekeringController.cs" />
+    <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\RapporteringCpuController.cs" />
-    <Compile Include="Controllers\RapporteringFactuurController.cs" />
     <Compile Include="Controllers\RapporteringHardwareController.cs" />
-    <Compile Include="Controllers\RapporteringLokaalController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -243,6 +241,7 @@
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
+    <Compile Include="Models\TabelModel.cs" />
     <Compile Include="Models\TicketModel.cs" />
     <Compile Include="Models\VerzekeringModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -282,13 +281,6 @@
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Beheer\Index.cshtml" />
-    <Content Include="Views\Rapportering\CpuRapportering.cshtml" />
-    <Content Include="Views\Rapportering\DeviceRapportering.cshtml" />
-    <Content Include="Views\Rapportering\GrafischeKaartRapportering.cshtml" />
-    <Content Include="Views\Rapportering\HarddiskRapportering.cshtml" />
-    <Content Include="Views\Rapportering\Index.cshtml" />
-    <Content Include="Views\Rapportering\LeverancierRapportering.cshtml" />
-    <Content Include="Views\Rapportering\NetwerkRapportering.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <None Include="Service References\ServiceReference\Service13.xsd">
       <SubType>Designer</SubType>
@@ -302,16 +294,16 @@
     <Content Include="Views\Account\Details.cshtml" />
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\Rapportering\FactuurRapportering.cshtml" />
-    <Content Include="Views\Rapportering\LokaalRapportering.cshtml" />
     <Content Include="Views\Account\Loguit.cshtml" />
-    <Content Include="Views\Rapportering\HardwareRapportering.cshtml" />
     <Content Include="Views\Cpu\Index.cshtml" />
     <Content Include="Views\Cpu\Edit.cshtml" />
     <Content Include="Views\Device\Index.cshtml" />
     <Content Include="Views\Device\Edit.cshtml" />
     <Content Include="Views\GrafischeKaart\Index.cshtml" />
     <Content Include="Views\GrafischeKaart\Edit.cshtml" />
+    <Content Include="Views\Rapportering\Index.cshtml" />
+    <Content Include="Views\RapporteringCpu\CpuRapportering.cshtml" />
+    <Content Include="Views\RapporteringHardware\HardwareRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

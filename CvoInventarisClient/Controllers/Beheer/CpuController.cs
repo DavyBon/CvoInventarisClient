@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CvoInventarisClient.ServiceReference;
+using CvoInventarisClient.Models;
 
 namespace CvoInventarisClient.Controllers.Beheer
 {
@@ -93,6 +94,35 @@ namespace CvoInventarisClient.Controllers.Beheer
                 }
             }
             return RedirectToAction("Index");
+        }
+        public List<CpuModel> GetCpus()
+        {
+            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+            Cpu[] c = new Cpu[] { };
+
+            try
+            {
+                c = service.CpuGetAll();
+            }
+            catch (Exception)
+            {
+
+            }
+
+            List<CpuModel> cpus = new List<CpuModel>();
+
+            foreach (Cpu cpu in c)
+            {
+                CpuModel cm = new CpuModel();
+                cm.IdCpu = cpu.IdCpu;
+                cm.Merk = cpu.Merk;
+                cm.Type = cpu.Type;
+                cm.Snelheid = cpu.Snelheid;
+                cm.FabrieksNummer = cpu.FabrieksNummer;
+                cpus.Add(cm);
+            }
+
+            return cpus;
         }
     }
 }

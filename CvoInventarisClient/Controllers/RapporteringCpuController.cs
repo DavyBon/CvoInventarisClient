@@ -7,264 +7,315 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using System.Web.UI.WebControls;
+using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CvoInventarisClient.Controllers
 {
     public class RapporteringCpuController : Controller
     {
-        CvoInventarisServiceClient test = new CvoInventarisServiceClient();
+        public CvoInventarisServiceClient test = new CvoInventarisServiceClient();
+        //nodig voor mijn dropdown menu te maken
+        List<Cpu> cpus;
+        TabelModel model;
+        public void vulCpus()
+        {
+            cpus = test.CpuGetAll().ToList();
+
+        }
+
+        public List<List<object>> maakDropDownlijst()
+        {
+            List<List<object>> dropDownlijst = new List<List<object>>();
+            vulCpus();
+            List<System.Object> merken = new List<object>();
+            List<System.Object> types = new List<object>();
+            List<System.Object> fabrieksnummer = new List<object>();
+            foreach (Cpu c in cpus)
+            {
+                merken.Add(new { value = c.IdCpu, text = c.Merk });
+                types.Add(new { value = c.IdCpu, text = c.Type });
+                fabrieksnummer.Add(new { value = c.IdCpu, text = c.FabrieksNummer });
+            }
+            dropDownlijst.Add(merken);
+            dropDownlijst.Add(types);
+            dropDownlijst.Add(fabrieksnummer);
+            return dropDownlijst;
+        }
+
+        public void VulDropDownLijstIn()
+        {
+            List<List<object>> dropDownLijst = maakDropDownlijst();
+            SelectList merken = new SelectList(dropDownLijst[0], "value", "text");
+            SelectList types = new SelectList(dropDownLijst[1], "value", "text");
+            SelectList fabrieksnummer = new SelectList(dropDownLijst[2], "value", "text");
+            ViewBag.merken = merken;
+            ViewBag.types = types;
+            ViewBag.fabrieksNummers = fabrieksnummer;
+        }
+
         public ActionResult CpuRapportering()
         {
-            ViewBag.styleCpuStap4 = "none";
-            ViewBag.styleCpuStap5 = "none";
-            return View("CpuRapportering");
+            ViewBag.stijlStapOpslaan = "hidden";
+            model = new TabelModel();
+            VulDropDownLijstIn();
+            return View(model);
         }
-        public RapporteringCpuController()
-        {
 
-        }
-        [HttpPost]
         public ActionResult Stap3Cpu(FormCollection collection)
         {
-            string request = Request["action"];
-            string[] requestOplossing = request.Split('/');
-            if (requestOplossing[0].Equals("OpslaanPdf"))
-            {
-                OpslaanPdfCpu(requestOplossing[1], requestOplossing[2]);
-                ViewBag.testj = requestOplossing[1] + requestOplossing[2];
-            }
-            if (requestOplossing[0].Equals("OpslaanExcel"))
-            {
-                OpslaanExcelCpu(requestOplossing[1], requestOplossing[2]);
-                ViewBag.testj = requestOplossing[1] + requestOplossing[2];
-            }
-            if (requestOplossing[0].Equals("kolomKeuze"))
-            {
-                string resultaat = "";
-                bool checkId = Convert.ToBoolean(collection["idCpu"].Split(',')[0]);
-                bool checkMerk = Convert.ToBoolean(collection["merk"].Split(',')[0]);
-                bool checkType = Convert.ToBoolean(collection["type"].Split(',')[0]);
-                bool checkSnelheid = Convert.ToBoolean(collection["snelheid"].Split(',')[0]);
-                bool checkFabrieksnummer = Convert.ToBoolean(collection["fabrieksnummer"].Split(',')[0]);
-                if (checkId == true)
-                    resultaat += "idCpu";
-                if (checkMerk == true)
-                    resultaat += " merk";
-                if (checkType == true)
-                    resultaat += " type";
-                if (checkSnelheid == true)
-                    resultaat += " snelheid";
-                if (checkFabrieksnummer == true)
-                    resultaat += " fabrieksNummer";
-                ViewBag.styleCpuStap4 = "inline";
-                ViewBag.resultaatCheck = resultaat;
-            }
-            if (requestOplossing[0].Equals("conditieKeuze"))
-            {
-                ViewBag.styleCpuStap5 = "inline";
-                string keuzeKolom = requestOplossing[1];
-                string[] tussen = keuzeKolom.Split(' ');
-                List<string> keuzeKolommen = new List<string>();
-                foreach (string s in tussen)
-                {
-                    if (!s.Equals(""))
-                    {
-                        keuzeKolommen.Add(s);
-                    }
-                }
+            model = new TabelModel();
+            //een tabel van drie omdat je maar drie lijnen nodig hebt. een select statement, u from en u where clausule
+            string[] query = new string[3];
+            //hier gaat hem nakijken welke checkboxen er aan gevinkt zijn. dus welke tabellen de klant gegevens van wilt hebben
+            List<string> kolomKeuze = new List<string>();
+            if (Convert.ToBoolean(collection["idCpu"].Split(',')[0]) == true)
+                kolomKeuze.Add("idCpu");
+            if (Convert.ToBoolean(collection["merk"].Split(',')[0]) == true)
+                kolomKeuze.Add("merk");
+            if (Convert.ToBoolean(collection["type"].Split(',')[0]) == true)
+                kolomKeuze.Add("type");
+            if (Convert.ToBoolean(collection["snelheid"].Split(',')[0]) == true)
+                kolomKeuze.Add("snelheid");
+            if (Convert.ToBoolean(collection["fabrieksnummer"].Split(',')[0]) == true)
+                kolomKeuze.Add("fabrieksNummer");
 
-                var lijstConditie = new List<KeyValuePair<string, string>>();
-                bool checkMerk = Convert.ToBoolean(collection["merkKeuzeCheck"].Split(',')[0]);
-                bool checkType = Convert.ToBoolean(collection["typeKeuzeCheck"].Split(',')[0]);
-                bool checkSnelheid = Convert.ToBoolean(collection["snelheidKeuzeCheck"].Split(',')[0]);
-                bool checkFabrieksnummer = Convert.ToBoolean(collection["fabrieksnummerKeuzeCheck"].Split(',')[0]);
-                if (checkMerk == true)
-                {
-                    lijstConditie.Add(new KeyValuePair<string, string>("merk", " = " + "'" + collection["merkKeuzeTekst"].Split(',')[0] + "'"));
-                }
-                if (checkType == true)
-                {
-                    lijstConditie.Add(new KeyValuePair<string, string>("type", " = " + "'" + collection["typeKeuzeTekst"].Split(',')[0] + "'"));
-                }
-                if (checkSnelheid == true)
-                {
-                    string resultaat = collection["snelheidKeuze"].Split(',')[0] + " " + collection["snelheidKeuze1"].Split(',')[0];
-                    lijstConditie.Add(new KeyValuePair<string, string>("snelheid", " " + resultaat));
-                }
-                if (checkFabrieksnummer == true)
-                {
-                    string resultaat = collection["fabrieksnummerKeuze"].Split(',')[0] + " " + collection["fabrieksnummerKeuze1"].Split(',')[0];
-                    lijstConditie.Add(new KeyValuePair<string, string>("fabrieksNummer", " " + resultaat));
-                }
-                string query = "SELECT ";
-                foreach (string s in keuzeKolommen)
-                {
-                    query += s + ", ";
-                }
-                query = query.Substring(0, query.Length - 2);
-                query += " FROM TblCpu ";
-                query += " WHERE ";
-                foreach (var element in lijstConditie)
-                {
-                    query += element.Key + element.Value + " AND ";
-                }
-                query = query.Substring(0, query.Length - 4);
-                query += " ;";
-                ViewBag.Rapport = test.RapporteringCpu(query, keuzeKolommen.ToArray());
+            List<string> lijstConditie = new List<string>();
 
-                foreach (string s in keuzeKolommen)
-                {
-                    ViewBag.tables += s + " ";
-                    if (s.Equals("idCpu"))
-                        ViewBag.test = s;
-                    if (s.Equals("merk"))
-                        ViewBag.test1 = s;
-                    if (s.Equals("type"))
-                        ViewBag.test2 = s;
-                    if (s.Equals("snelheid"))
-                        ViewBag.test3 = s;
-                    if (s.Equals("fabrieksNummer"))
-                        ViewBag.test4 = s;
-                }
-                ViewBag.query = query;
+            //kijkt welke checkboxen van stap 4 van CpuRapporting zijn aangevinkt en deze waarden slaat hem op
+            if (Convert.ToBoolean(collection["merkKeuzeCheck"].Split(',')[0]) == true)
+            {
+                int id = Int32.Parse(collection["merken"].Split(',')[0]);
+                string l = test.CpuGetById(id).Merk;
+                lijstConditie.Add("merk = " + "'" + l.Trim() + "'");
             }
-            return View("CpuRapportering");
+            if (Convert.ToBoolean(collection["typeKeuzeCheck"].Split(',')[0]) == true)
+            {
+                int id = Int32.Parse(collection["types"].Split(',')[0]);
+                string l = test.CpuGetById(id).Type;
+                lijstConditie.Add("type = " + "'" + l.Trim() + "'");
+            }
+            if (Convert.ToBoolean(collection["snelheidKeuzeCheck"].Split(',')[0]) == true)
+            {
+                string r = collection["snelheidKeuze"].Split(',')[0] + " " + collection["snelheidKeuze1"].Split(',')[0];
+                lijstConditie.Add("snelheid =  " + r.Trim());
+            }
+            if (Convert.ToBoolean(collection["fabrieksnummerKeuzeCheck"].Split(',')[0]) == true)
+            {
+                int id = Int32.Parse(collection["fabrieksNummers"].Split(',')[0]);
+                string l = test.CpuGetById(id).FabrieksNummer;
+                lijstConditie.Add("fabrieksNummer = " + "'" + l.Trim() + "'");
+            }
+            //maak de select statement
+            query[0] = "SELECT ";
+            foreach (string s in kolomKeuze)
+            {
+                query[0] += s + ",";
+            }
+            //verwijder de laatste komma
+            query[0] = query[0].Substring(0, query[0].Length - 1);
+
+            //de FROM
+            query[1] = " FROM TblCpu ";
+
+            //de where clausule
+            query[2] = "WHERE ";
+            foreach (string s in lijstConditie)
+            {
+                query[2] += s + ",";
+            }
+            query[2] = query[2].Substring(0, query[2].Length - 1);
+            string queryResultaat = "";
+            foreach (string s in query)
+            {
+                queryResultaat += s;
+            }
+            queryResultaat += ";";
+            string[] kolomKeuzeArray = kolomKeuze.ToArray();
+            cpus = test.RapporteringCpu(queryResultaat, kolomKeuzeArray).ToList();
+            List<CpuModel> cpuModellen = new List<CpuModel>();
+            foreach (Cpu c in cpus)
+            {
+                CpuModel cm = new CpuModel();
+                cm.FabrieksNummer = c.FabrieksNummer;
+                cm.IdCpu = c.IdCpu;
+                cm.Merk = c.Merk;
+                cm.Snelheid = c.Snelheid;
+                cm.Type = c.Type;
+                cpuModellen.Add(cm);
+            }
+            model.cpus = cpuModellen;
+            //ik geef die mee omdat ik die op de view op hidden ga zetten maar dan kan ik daarna terug aan als ik ze wil opslaan als pdf of excel
+            ViewBag.query = queryResultaat;
+            ViewBag.kolomKeuze = kolomKeuzeArray;
+            VulDropDownLijstIn();
+            ViewBag.stijlStapOpslaan = "inline";
+            string kolomnamen = "";
+            foreach (string s in kolomKeuze)
+            {
+                kolomnamen += s + " ";
+            }
+            ViewBag.kolomnamen = kolomnamen.Trim();
+            return View("CpuRapportering", model);
         }
 
-        public void toExcel(GridView grid)
+        [HttpPost]
+        public ActionResult StapOpslaan(string kolomnaam, string opslaan, string query)
         {
-            Response.ClearContent();
-            Response.AddHeader("content-disposition", "attachment;filename=rapport.xls");
-            Response.AddHeader("Content-Type", "application/vnd.ms-excel");
-            using (System.IO.StringWriter sw = new System.IO.StringWriter())
-            {
-                using (System.Web.UI.HtmlTextWriter htw = new System.Web.UI.HtmlTextWriter(sw))
-                {
-                    grid.AllowSorting = false;
-                    grid.DataBind();
-                    grid.RenderControl(htw);
-                    Response.Write(sw.ToString());
-                }
-            }
-
-            Response.End();
-        }
-
-        public void OpslaanExcelCpu(string query, string tables)
-        {
-            GridView grid = new GridView();
-            string[] tablesOplossingVoorlopig = tables.Split(' ');
-            string[] tabllesOplossing = new string[tablesOplossingVoorlopig.Count()];
+            model = new TabelModel();
+            string[] kolomKeuze = new string[kolomnaam.Split(' ').Length];
             int teller = 0;
-            foreach (string s in tablesOplossingVoorlopig)
+            foreach (string s in kolomnaam.Split(' '))
             {
-                if (!s.Equals(" "))
-                {
-                    tabllesOplossing[teller] = s; teller++;
-                }
+                kolomKeuze[teller] = s;
+                teller++;
             }
-            tabllesOplossing = tablesOplossingVoorlopig.Take(tablesOplossingVoorlopig.Count() - 1).ToArray();
-            List<Cpu> cpuRapport = test.RapporteringCpu(query, tabllesOplossing).ToList();
-            List<CpuModel> modellen = new List<CpuModel>();
-            foreach (Cpu c in cpuRapport)
+            if (opslaan.Equals("OpslaanExcel"))
             {
-                CpuModel model = new CpuModel();
-                if (c.IdCpu != 0)
-                {
-                    model.IdCpu = c.IdCpu;
-                }
-                if (c.Merk != null)
-                {
-                    model.Merk = c.Merk;
-                }
-                if (c.Type != null)
-                {
-                    model.Type = c.Type;
-                }
-                if (c.Snelheid != 0)
-                {
-                    model.Snelheid = c.Snelheid;
-                }
-                if (c.FabrieksNummer != null)
-                {
-                    model.FabrieksNummer = c.FabrieksNummer;
-                }
-                modellen.Add(model);
+                OpslaanExcel(kolomKeuze, query);
             }
-            grid.DataSource = modellen;
-            toExcel(grid);
+            if (opslaan.Equals("OpslaanPdf"))
+            {
+                OpslaanPdf(kolomKeuze, query);
+            }
+            VulDropDownLijstIn();
+            return View("CpuRapportering", model);
         }
-
-        public void OpslaanPdfCpu(string query, string tables)
+        public void OpslaanPdf(string[] kolomKeuze, string query)
         {
             try
             {
+                //maakt een nieuw Pdf document aan
                 Document pdfDoc = new Document(PageSize.A4, 25, 10, 25, 10);
+                //maakt een nieuw pdf writer object aan waar je in u pdf document in ga writen. net zoals een streamwriter
                 PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
                 pdfDoc.Open();
-                string[] tablesOplossingVoorlopig = tables.Split(' ');
-                string[] tabllesOplossing = new string[tablesOplossingVoorlopig.Count()];
-                int teller = 0;
-                foreach (string s in tablesOplossingVoorlopig)
+                PdfPTable table = new PdfPTable(kolomKeuze.Length);
+                cpus = test.RapporteringCpu(query, kolomKeuze).ToList();
+                List<CpuModel> cpuModellen = new List<CpuModel>();
+                foreach (Cpu c in cpus)
                 {
-                    if (!s.Equals(" "))
-                    {
-                        tabllesOplossing[teller] = s; teller++;
-                    }
+                    CpuModel cm = new CpuModel();
+                    cm.FabrieksNummer = c.FabrieksNummer;
+                    cm.IdCpu = c.IdCpu;
+                    cm.Merk = c.Merk;
+                    cm.Snelheid = c.Snelheid;
+                    cm.Type = c.Type;
+                    cpuModellen.Add(cm);
                 }
-                tabllesOplossing = tablesOplossingVoorlopig.Take(tablesOplossingVoorlopig.Count() - 1).ToArray();
 
-                PdfPTable table = new PdfPTable(tabllesOplossing.Length);
-                List<Cpu> cpuRapport = test.RapporteringCpu(query, tabllesOplossing).ToList();
-                foreach (string s in tabllesOplossing)
+                if (cpuModellen[0].IdCpu != 0)
+                    table.AddCell("id");
+                if (cpuModellen[0].Merk != null)
+                    table.AddCell("merk");
+                if (cpuModellen[0].Type != null)
+                    table.AddCell("type");
+                if (cpuModellen[0].Snelheid != 0)
+                    table.AddCell("snelheid");
+                if (cpuModellen[0].FabrieksNummer != null)
+                    table.AddCell("fabrieksnummer");
+
+                foreach (var item in cpuModellen)
                 {
-                    if (s.Equals("idCpu"))
-                        table.AddCell(s);
-                    if (s.Equals("merk"))
-                        table.AddCell(s);
-                    if (s.Equals("type"))
-                        table.AddCell(s);
-                    if (s.Equals("snelheid"))
-                        table.AddCell(s);
-                    if (s.Equals("fabrieksNummer"))
-                        table.AddCell(s);
-                }
-                foreach (Cpu c in cpuRapport)
-                {
-                    if (c.IdCpu != 0)
-                    {
-                        table.AddCell(c.IdCpu.ToString());
-                    }
-                    if (c.Merk != null)
-                    {
-                        table.AddCell(c.Merk);
-                    }
-                    if (c.Type != null)
-                    {
-                        table.AddCell(c.Type);
-                    }
-                    if (c.Snelheid != 0)
-                    {
-                        table.AddCell(c.Snelheid.ToString());
-                    }
-                    if (c.FabrieksNummer != null)
-                    {
-                        table.AddCell(c.FabrieksNummer);
-                    }
+                    if (cpuModellen[0].IdCpu != 0)
+                        table.AddCell(item.IdCpu.ToString());
+                    if (cpuModellen[0].Merk != null)
+                        table.AddCell(item.Merk);
+                    if (cpuModellen[0].Type != null)
+                        table.AddCell(item.Type);
+                    if (cpuModellen[0].Snelheid != 0)
+                        table.AddCell(item.Snelheid.ToString());
+                    if (cpuModellen[0].FabrieksNummer != null)
+                        table.AddCell(item.FabrieksNummer.ToString());
                 }
                 pdfDoc.Add(table);
+
                 pdfWriter.CloseStream = false;
                 pdfDoc.Close();
                 Response.Buffer = true;
+                //dit is het stuk dat zorgt dat je het kunt opslaan op een locatie naar keuze
                 Response.ContentType = "application/pdf";
-                Response.AddHeader("content-disposition", "attachment;filename=Example.pdf");
-                //Response.Cache.SetCacheability(HttpCacheability.NoCache);
+                Response.AddHeader("content-disposition", "attachment;filename=Rapport.pdf");
                 Response.Write(pdfDoc);
                 Response.End();
             }
             catch (Exception ex)
             { Response.Write(ex.Message); }
+        }
+        public void OpslaanExcel(string[] kolomKeuze, string query)
+        {
+            //maakt een nieuwe excel programma waar je in kunt werken met daaronder een workbook en daarin een worksheet waar u gegevens in komt
+            Excel.Application app = new Excel.Application();
+            app.Visible = true;
+            Excel.Workbook workbook = app.Workbooks.Add(1);
+            Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Sheets[1];
+            List<Cpu> cpus = new List<Cpu>();
+            cpus = test.RapporteringCpu(query, kolomKeuze).ToList();
+            List<CpuModel> cpuModellen = new List<CpuModel>();
+            foreach (Cpu c in cpus)
+            {
+                CpuModel cm = new CpuModel();
+                cm.FabrieksNummer = c.FabrieksNummer;
+                cm.IdCpu = c.IdCpu;
+                cm.Merk = c.Merk;
+                cm.Snelheid = c.Snelheid;
+                cm.Type = c.Type;
+                cpuModellen.Add(cm);
+            }
+            for (int i = 0; i < kolomKeuze.Length; i++)
+            {
+                if (cpuModellen[0].IdCpu != 0)
+                    worksheet.Cells[1, 1 + i] = "id";
+                if (cpuModellen[0].Merk != null)
+                    worksheet.Cells[1, i + 1] = "merk";
+                if (cpuModellen[0].Type != null)
+                    worksheet.Cells[1, i + 1] = "type";
+                if (cpuModellen[0].Snelheid != 0)
+                    worksheet.Cells[1, i + 1] = "snelheid";
+                if (cpuModellen[0].FabrieksNummer != null)
+                    worksheet.Cells[1, i + 1] = "fabrieksnummer";
+            }
+            for (int i = 0; i < cpus.Count; i++)
+            {
+                //ik werkt met een teller omdat niet alle kolommen getoond worden. dus als er een kolom gegevens heeft gaat de teller met 1 omhoog waardoor het perfect naast elkaar komt
+                int teller = 0;
+                if (cpuModellen[0].IdCpu != 0)
+                {
+                    worksheet.Cells[i + 2, 1 + teller] = cpus[i].IdCpu;
+                    teller++;
+                }
+
+                if (cpuModellen[0].Merk != null)
+                {
+                    worksheet.Cells[i + 2, 1 + teller] = cpus[i].Merk;
+                    teller++;
+                }
+
+                if (cpuModellen[0].Type != null)
+                {
+                    worksheet.Cells[i + 2, 1 + teller] = cpus[i].Type;
+                    teller++;
+                }
+
+                if (cpuModellen[0].Snelheid != 0)
+                {
+                    worksheet.Cells[i + 2, 1 + teller] = cpus[i].Snelheid;
+                    teller++;
+                }
+
+                if (cpuModellen[0].FabrieksNummer != null)
+                {
+                    worksheet.Cells[i + 2, 1 + teller] = "=\"" + cpus[i].FabrieksNummer.Trim() + "\"";
+                    teller++;
+                }
+            }
+            worksheet.Columns.AutoFit();
+            Response.Buffer = true;
+            //dit is het stuk dat zorgt dat je het kunt opslaan op een locatie naar keuze
+            Response.ContentType = "application/vnd.ms-excel";
+            Response.AppendHeader("Content-Disposition", "attachment; filename=rapport.xls");
+            Response.Write(worksheet);
+            Response.End();
+
         }
     }
 }
