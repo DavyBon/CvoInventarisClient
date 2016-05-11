@@ -1404,25 +1404,10 @@ namespace CvoInventarisClient.ServiceReference {
         private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string AchternaamField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EmailField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string GebruikersnaamField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private int IdAccountField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TelefoonnummerField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string TypeField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string VoornaamField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string WachtwoordField;
@@ -1434,19 +1419,6 @@ namespace CvoInventarisClient.ServiceReference {
             }
             set {
                 this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Achternaam {
-            get {
-                return this.AchternaamField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.AchternaamField, value) != true)) {
-                    this.AchternaamField = value;
-                    this.RaisePropertyChanged("Achternaam");
-                }
             }
         }
         
@@ -1464,19 +1436,6 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Gebruikersnaam {
-            get {
-                return this.GebruikersnaamField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.GebruikersnaamField, value) != true)) {
-                    this.GebruikersnaamField = value;
-                    this.RaisePropertyChanged("Gebruikersnaam");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
         public int IdAccount {
             get {
                 return this.IdAccountField;
@@ -1485,45 +1444,6 @@ namespace CvoInventarisClient.ServiceReference {
                 if ((this.IdAccountField.Equals(value) != true)) {
                     this.IdAccountField = value;
                     this.RaisePropertyChanged("IdAccount");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Telefoonnummer {
-            get {
-                return this.TelefoonnummerField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TelefoonnummerField, value) != true)) {
-                    this.TelefoonnummerField = value;
-                    this.RaisePropertyChanged("Telefoonnummer");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Type {
-            get {
-                return this.TypeField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.TypeField, value) != true)) {
-                    this.TypeField = value;
-                    this.RaisePropertyChanged("Type");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Voornaam {
-            get {
-                return this.VoornaamField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.VoornaamField, value) != true)) {
-                    this.VoornaamField = value;
-                    this.RaisePropertyChanged("Voornaam");
                 }
             }
         }

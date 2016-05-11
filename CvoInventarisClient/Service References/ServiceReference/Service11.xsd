@@ -147,13 +147,8 @@
   <xs:element name="Factuur" nillable="true" type="tns:Factuur" />
   <xs:complexType name="Account">
     <xs:sequence>
-      <xs:element minOccurs="0" name="Achternaam" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Gebruikersnaam" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="IdAccount" type="xs:int" />
-      <xs:element minOccurs="0" name="Telefoonnummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Voornaam" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Wachtwoord" nillable="true" type="xs:string" />
     </xs:sequence>
   </xs:complexType>

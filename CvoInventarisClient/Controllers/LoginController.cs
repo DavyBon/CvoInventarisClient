@@ -32,20 +32,9 @@ namespace CvoInventarisClient.Controllers
                 {
                     ViewBag.LoginMessage = "Welkom, je bent ingelogd";
 
-                    // Haal het Account uit DB voor zijn id
+                    // Haal het Account uit DB voor zijn id (username van de cookie is de id van de gebruiker (IdAccount))
                     Account accUitDB = service.AccountGetByEmail(acc.Email);
                     string username = accUitDB.IdAccount.ToString();             
-
-                    
-                    string role = "Admin"; // TODO haal de role van deze gebruiker uit de DB
-
-
-                    // maak een nieuwe role, als die nog niet bestaat
-                    if (!Roles.RoleExists(role))
-                        Roles.CreateRole(role);
-                    // voeg de gebruiker toe aan de role, als die er nog niet is aan toegevoegd
-                    if (!Roles.IsUserInRole(username, role))
-                        Roles.AddUserToRole(username, role);
 
                     // hou bij of dit een persistente cookie moet zijn, volgens de onthouden checkbox
                     bool onthouden = formCollection["remember-me"] == "on" ? true : false;

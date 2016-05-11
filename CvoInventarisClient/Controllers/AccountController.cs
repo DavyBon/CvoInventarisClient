@@ -104,11 +104,6 @@ namespace CvoInventarisClient.Controllers
             {
                 AccountModel am = new AccountModel();
                 am.IdAccount = acc.IdAccount;
-                am.Type = acc.Type;
-                am.Gebruikersnaam = acc.Gebruikersnaam;
-                am.Voornaam = acc.Voornaam;
-                am.Achternaam = acc.Achternaam;
-                am.Telefoonnummer = acc.Telefoonnummer;
                 am.Email = acc.Email;
                 am.Wachtwoord = acc.Wachtwoord;
                 accs.Add(am);              
@@ -133,11 +128,6 @@ namespace CvoInventarisClient.Controllers
 
             AccountModel am = new AccountModel();
             am.IdAccount = acc.IdAccount;
-            am.Type = acc.Type;
-            am.Gebruikersnaam = acc.Gebruikersnaam;
-            am.Voornaam = acc.Voornaam;
-            am.Achternaam = acc.Achternaam;
-            am.Telefoonnummer = acc.Telefoonnummer;
             am.Email = acc.Email;
             am.Wachtwoord = acc.Wachtwoord;
 
@@ -150,11 +140,6 @@ namespace CvoInventarisClient.Controllers
 
             Account acc = new Account();
             acc.IdAccount = am.IdAccount;
-            acc.Type = am.Type;
-            acc.Gebruikersnaam = am.Gebruikersnaam;
-            acc.Voornaam = am.Voornaam;
-            acc.Achternaam = am.Achternaam;
-            acc.Telefoonnummer = am.Telefoonnummer;
             acc.Email = am.Email;
             acc.Wachtwoord = am.Wachtwoord;
 
@@ -173,11 +158,6 @@ namespace CvoInventarisClient.Controllers
             CvoInventarisServiceClient service = new CvoInventarisServiceClient();
 
             Account acc = new Account();
-            acc.Type = am.Type;
-            acc.Gebruikersnaam = am.Gebruikersnaam;
-            acc.Voornaam = am.Voornaam;
-            acc.Achternaam = am.Achternaam;
-            acc.Telefoonnummer = am.Telefoonnummer;
             acc.Email = am.Email;
             acc.Wachtwoord = am.Wachtwoord;
 
