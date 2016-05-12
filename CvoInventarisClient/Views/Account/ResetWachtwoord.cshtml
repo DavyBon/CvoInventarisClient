@@ -24,20 +24,16 @@
             <div class="page-header">
                 <h1 class="form-signin-heading">CVO inventaris</h1>
             </div>
-            <h2>@ViewBag.LoginMessage</h2>
-            <h2 class="form-signin-heading">Log in</h2>
+            <h2>@ViewBag.ResetWachtwoordMessage</h2>
+            <h3 class="form-signin-heading">Wachtwoord vergeten?</h3>
+            <h5>Vul hieronder uw log in e-mailadres in en u ontvangt een link waarmee u uw wachtwoord kunt wijzigen.</h5>
+            <br />
             <label for="Email" class="sr-only">E-mailadres</label>
             <input type="email" pattern="^[a-zA-Z0-9._+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" id="Email" name="Email" class="form-control" placeholder="Email" required autofocus>
-            <label for="Wachtwoord" class="sr-only">Wachtwoord</label>
-            <input type="password" id="Wachtwoord" name="Wachtwoord" class="form-control" placeholder="Wachtwoord" required>
-            <div class="checkbox">
-                <label>
-                    <input type="checkbox" name="remember-me"> Onthouden
-                </label>
-            </div>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+            <br />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Verstuur</button>
             <div class="pager">
-                <a href="/Account/ResetWachtwoord">Wachtwoord vergeten?</a>
+                <a href="/Login/Index">Log in</a>
             </div>
         </form>
 

@@ -8,6 +8,12 @@
       <xsd:import schemaLocation="http://localhost:50881/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="ICvoInventarisService_HardwareGetById_InputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareGetById" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareGetById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareGetByIdResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_HardwareGetAll_InputMessage">
     <wsdl:part name="parameters" element="tns:HardwareGetAll" />
   </wsdl:message>
@@ -176,6 +182,36 @@
   <wsdl:message name="ICvoInventarisService_RapporteringFactuur_OutputMessage">
     <wsdl:part name="parameters" element="tns:RapporteringFactuurResponse" />
   </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusGetAll_InputMessage">
+    <wsdl:part name="parameters" element="tns:CampusGetAll" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusGetAll_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CampusGetAllResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusGetById_InputMessage">
+    <wsdl:part name="parameters" element="tns:CampusGetById" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusGetById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CampusGetByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusCreate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CampusCreate" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusCreate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CampusCreateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:CampusUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CampusUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusDelete_InputMessage">
+    <wsdl:part name="parameters" element="tns:CampusDelete" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_CampusDelete_OutputMessage">
+    <wsdl:part name="parameters" element="tns:CampusDeleteResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_AccountGetById_InputMessage">
     <wsdl:part name="parameters" element="tns:AccountGetById" />
   </wsdl:message>
@@ -217,6 +253,12 @@
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_AccountGetByEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:AccountGetByEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_AccountVerstuurWachtwoordResetEmail_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountVerstuurWachtwoordResetEmail" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_AccountVerstuurWachtwoordResetEmail_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountVerstuurWachtwoordResetEmailResponse" />
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_SessionGetById_InputMessage">
     <wsdl:part name="parameters" element="tns:SessionGetById" />
@@ -554,13 +596,11 @@
   <wsdl:message name="ICvoInventarisService_HardwareCreate_OutputMessage">
     <wsdl:part name="parameters" element="tns:HardwareCreateResponse" />
   </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareGetById_InputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareGetById" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareGetById_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareGetByIdResponse" />
-  </wsdl:message>
   <wsdl:portType name="ICvoInventarisService">
+    <wsdl:operation name="HardwareGetById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetById" message="tns:ICvoInventarisService_HardwareGetById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetByIdResponse" message="tns:ICvoInventarisService_HardwareGetById_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="HardwareGetAll">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetAll" message="tns:ICvoInventarisService_HardwareGetAll_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetAllResponse" message="tns:ICvoInventarisService_HardwareGetAll_OutputMessage" />
@@ -673,6 +713,26 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringFactuur" message="tns:ICvoInventarisService_RapporteringFactuur_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/RapporteringFactuurResponse" message="tns:ICvoInventarisService_RapporteringFactuur_OutputMessage" />
     </wsdl:operation>
+    <wsdl:operation name="CampusGetAll">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusGetAll" message="tns:ICvoInventarisService_CampusGetAll_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusGetAllResponse" message="tns:ICvoInventarisService_CampusGetAll_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CampusGetById">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusGetById" message="tns:ICvoInventarisService_CampusGetById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusGetByIdResponse" message="tns:ICvoInventarisService_CampusGetById_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CampusCreate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusCreate" message="tns:ICvoInventarisService_CampusCreate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusCreateResponse" message="tns:ICvoInventarisService_CampusCreate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CampusUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusUpdate" message="tns:ICvoInventarisService_CampusUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusUpdateResponse" message="tns:ICvoInventarisService_CampusUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="CampusDelete">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusDelete" message="tns:ICvoInventarisService_CampusDelete_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/CampusDeleteResponse" message="tns:ICvoInventarisService_CampusDelete_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="AccountGetById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountGetById" message="tns:ICvoInventarisService_AccountGetById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountGetByIdResponse" message="tns:ICvoInventarisService_AccountGetById_OutputMessage" />
@@ -700,6 +760,10 @@
     <wsdl:operation name="AccountGetByEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountGetByEmail" message="tns:ICvoInventarisService_AccountGetByEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountGetByEmailResponse" message="tns:ICvoInventarisService_AccountGetByEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountVerstuurWachtwoordResetEmail">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmail" message="tns:ICvoInventarisService_AccountVerstuurWachtwoordResetEmail_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmailResponse" message="tns:ICvoInventarisService_AccountVerstuurWachtwoordResetEmail_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SessionGetById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/SessionGetById" message="tns:ICvoInventarisService_SessionGetById_InputMessage" />
@@ -925,13 +989,18 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareCreate" message="tns:ICvoInventarisService_HardwareCreate_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareCreateResponse" message="tns:ICvoInventarisService_HardwareCreate_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="HardwareGetById">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetById" message="tns:ICvoInventarisService_HardwareGetById_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetByIdResponse" message="tns:ICvoInventarisService_HardwareGetById_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICvoInventarisService" type="tns:ICvoInventarisService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="HardwareGetById">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareGetById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="HardwareGetAll">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareGetAll" style="document" />
       <wsdl:input>
@@ -1184,6 +1253,51 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="CampusGetAll">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/CampusGetAll" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CampusGetById">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/CampusGetById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CampusCreate">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/CampusCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CampusUpdate">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/CampusUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="CampusDelete">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/CampusDelete" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="AccountGetById">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/AccountGetById" style="document" />
       <wsdl:input>
@@ -1240,6 +1354,15 @@
     </wsdl:operation>
     <wsdl:operation name="AccountGetByEmail">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/AccountGetByEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountVerstuurWachtwoordResetEmail">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmail" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1744,15 +1867,6 @@
     </wsdl:operation>
     <wsdl:operation name="HardwareCreate">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareCreate" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HardwareGetById">
-      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareGetById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>

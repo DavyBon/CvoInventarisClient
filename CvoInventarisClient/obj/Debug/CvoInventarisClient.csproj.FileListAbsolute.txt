@@ -192,7 +192,6 @@ D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.dll
-D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xml
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.xml
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.xml

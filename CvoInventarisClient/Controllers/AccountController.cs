@@ -6,6 +6,11 @@ using System.Web.Mvc;
 using CvoInventarisClient.Models;
 using CvoInventarisClient.ServiceReference;
 using System.Web.Security;
+using System.Net.Mail;
+using System.Text;
+using System.Configuration;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace CvoInventarisClient.Controllers
 {
@@ -191,6 +196,27 @@ namespace CvoInventarisClient.Controllers
         {
             FormsAuthentication.SignOut();
             return Redirect(Url.Action("Index", "Login"));
+        }
+
+        public ActionResult ResetWachtwoord()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult ResetWachtwoord(AccountModel am)
+        {
+            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+
+            if (service.AccountVerstuurWachtwoordResetEmail(am.Email))
+            {
+                ViewBag.ResetWachtwoordMessage = "Een e-mail met instructies om uw wachtwoord te wijzigen werd naar uw geregistreerde e-mailadres verstuurd.";
+            }
+            else
+            {
+                ViewBag.ResetWachtwoordMessage = "E-mailadres niet gevonden!";
+            }
+            return View();
         }
     }
 }

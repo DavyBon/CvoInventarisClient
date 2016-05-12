@@ -187,6 +187,9 @@
     <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Ticket.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Content>
+    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Campus.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Content>
     <None Include="Service References\ServiceReference\Service1.disco" />
     <None Include="Service References\ServiceReference\configuration91.svcinfo" />
     <None Include="Service References\ServiceReference\configuration.svcinfo" />
@@ -304,6 +307,7 @@
     <Content Include="Views\Rapportering\Index.cshtml" />
     <Content Include="Views\RapporteringCpu\CpuRapportering.cshtml" />
     <Content Include="Views\RapporteringHardware\HardwareRapportering.cshtml" />
+    <Content Include="Views\Account\ResetWachtwoord.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

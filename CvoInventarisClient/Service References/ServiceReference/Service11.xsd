@@ -1,11 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-  <xs:complexType name="ArrayOfHardware">
-    <xs:sequence>
-      <xs:element minOccurs="0" maxOccurs="unbounded" name="Hardware" nillable="true" type="tns:Hardware" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="ArrayOfHardware" nillable="true" type="tns:ArrayOfHardware" />
   <xs:complexType name="Hardware">
     <xs:sequence>
       <xs:element minOccurs="0" name="Cpu" nillable="true" type="tns:Cpu" />
@@ -56,6 +50,12 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Harddisk" nillable="true" type="tns:Harddisk" />
+  <xs:complexType name="ArrayOfHardware">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Hardware" nillable="true" type="tns:Hardware" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfHardware" nillable="true" type="tns:ArrayOfHardware" />
   <xs:complexType name="ArrayOfHarddisk">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Harddisk" nillable="true" type="tns:Harddisk" />
@@ -100,20 +100,9 @@
       <xs:element minOccurs="0" name="IdLokaal" type="xs:int" />
       <xs:element minOccurs="0" name="IsComputerLokaal" type="xs:boolean" />
       <xs:element minOccurs="0" name="LokaalNaam" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Netwerk" nillable="true" type="tns:Netwerk" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Lokaal" nillable="true" type="tns:Lokaal" />
-  <xs:complexType name="Netwerk">
-    <xs:sequence>
-      <xs:element minOccurs="0" name="Driver" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Id" type="xs:int" />
-      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Snelheid" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
-    </xs:sequence>
-  </xs:complexType>
-  <xs:element name="Netwerk" nillable="true" type="tns:Netwerk" />
   <xs:complexType name="ArrayOfFactuur">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Factuur" nillable="true" type="tns:Factuur" />
@@ -129,23 +118,34 @@
       <xs:element minOccurs="0" name="DatumModified" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FactuurDatum" type="xs:dateTime" />
       <xs:element minOccurs="0" name="FactuurNummer" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="FactuurStatusGetekend" type="xs:boolean" />
       <xs:element minOccurs="0" name="Garantie" type="xs:int" />
       <xs:element minOccurs="0" name="IdFactuur" type="xs:int" />
       <xs:element minOccurs="0" name="Leverancier" nillable="true" type="tns:Leverancier" />
-      <xs:element minOccurs="0" name="OleDoc" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OleDocFileName" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="OleDocPath" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Omschrijving" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Opmerking" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Prijs" type="xs:int" />
       <xs:element minOccurs="0" name="ScholengroepNummer" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserInsert" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserModified" nillable="true" type="xs:string" />
-      <xs:element minOccurs="0" name="VerwerkingsDatum" type="xs:dateTime" />
     </xs:sequence>
   </xs:complexType>
   <xs:element name="Factuur" nillable="true" type="tns:Factuur" />
+  <xs:complexType name="ArrayOfCampus">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="Campus" nillable="true" type="tns:Campus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfCampus" nillable="true" type="tns:ArrayOfCampus" />
+  <xs:complexType name="Campus">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="IdCampus" type="xs:int" />
+      <xs:element minOccurs="0" name="Naam" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Nummer" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Postcode" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Straat" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Campus" nillable="true" type="tns:Campus" />
   <xs:complexType name="Account">
     <xs:sequence>
       <xs:element minOccurs="0" name="Email" nillable="true" type="xs:string" />
@@ -261,6 +261,16 @@
     </xs:sequence>
   </xs:complexType>
   <xs:element name="ArrayOfObject" nillable="true" type="tns:ArrayOfObject" />
+  <xs:complexType name="Netwerk">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Driver" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Id" type="xs:int" />
+      <xs:element minOccurs="0" name="Merk" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Snelheid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Type" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="Netwerk" nillable="true" type="tns:Netwerk" />
   <xs:complexType name="ArrayOfNetwerk">
     <xs:sequence>
       <xs:element minOccurs="0" maxOccurs="unbounded" name="Netwerk" nillable="true" type="tns:Netwerk" />
