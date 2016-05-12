@@ -30,6 +30,11 @@ namespace CvoInventarisClient.Models
         [Display(Name = "factuurNummer")]
         public string FactuurNummer { get; set; }
 
+        
+        [StringLength(50, MinimumLength = 1, ErrorMessage = "Een scholengroep nummer bestaat uit minimum 1 en maximum 50 characters")]
+        [Display(Name = "scholengroepNummer")]
+        public string ScholengroepNummer { get; set; }
+
         // DataType: specifies the name of an additional type to associate with a data field
         // DisplayFormat: specifies how the data should be displayed (example "{0:d}": 01/01/2001 00:00 becomes 01/01/2001)
         [Required(ErrorMessage = "Vul een factuurdatum in")]

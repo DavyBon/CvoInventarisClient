@@ -1106,6 +1106,9 @@ namespace CvoInventarisClient.ServiceReference {
         private int PrijsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ScholengroepNummerField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string UserInsertField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
@@ -1341,6 +1344,19 @@ namespace CvoInventarisClient.ServiceReference {
                 if ((this.PrijsField.Equals(value) != true)) {
                     this.PrijsField = value;
                     this.RaisePropertyChanged("Prijs");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string ScholengroepNummer {
+            get {
+                return this.ScholengroepNummerField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ScholengroepNummerField, value) != true)) {
+                    this.ScholengroepNummerField = value;
+                    this.RaisePropertyChanged("ScholengroepNummer");
                 }
             }
         }

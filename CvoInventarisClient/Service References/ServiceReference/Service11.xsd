@@ -139,6 +139,7 @@
       <xs:element minOccurs="0" name="Omschrijving" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Opmerking" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="Prijs" type="xs:int" />
+      <xs:element minOccurs="0" name="ScholengroepNummer" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserInsert" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="UserModified" nillable="true" type="xs:string" />
       <xs:element minOccurs="0" name="VerwerkingsDatum" type="xs:dateTime" />

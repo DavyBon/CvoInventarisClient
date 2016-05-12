@@ -22,6 +22,10 @@
                 <input class="form-control" type="text" name="factuurNummer" value="@Model.FactuurNummer" required />
             </div>
             <div class="form-group">
+                @Html.DisplayNameFor(model => model.ScholengroepNummer)
+                <input class="form-control" type="text" name="scholengroepNummer" value="@Model.ScholengroepNummer" required />
+            </div>
+            <div class="form-group">
                 @Html.DisplayNameFor(model => model.FactuurDatum)
                 <input class="form-control" type="date" name="factuurDatum" value="@Model.FactuurDatum" required />
             </div>

@@ -33,6 +33,7 @@ namespace CvoInventarisClient.Controllers
                     factuurModel.Boekjaar = factuur.Boekjaar;
                     factuurModel.CvoVolgNummer = factuur.CvoVolgNummer;
                     factuurModel.FactuurNummer = factuur.FactuurNummer;
+                    factuurModel.ScholengroepNummer = factuur.ScholengroepNummer;
                     factuurModel.FactuurDatum = factuur.FactuurDatum;
                     factuurModel.FactuurStatusGetekend = factuur.FactuurStatusGetekend;
                     factuurModel.VerwerkingsDatum = factuur.VerwerkingsDatum;
@@ -93,6 +94,7 @@ namespace CvoInventarisClient.Controllers
                 factuur.Boekjaar = Request.Form["boekjaar"];
                 factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
                 factuur.FactuurNummer = Request.Form["factuurNummer"];
+                factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
                 factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
                 factuur.FactuurStatusGetekend = Boolean.Parse(Request.Form["factuurStatusGetekend"]);
                 factuur.VerwerkingsDatum = Convert.ToDateTime(Request.Form["verwerkingsDatum"]);
@@ -136,6 +138,7 @@ namespace CvoInventarisClient.Controllers
                 factuur.Boekjaar = Request.Form["boekjaar"];
                 factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
                 factuur.FactuurNummer = Request.Form["factuurNummer"];
+                factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
                 factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
                 factuur.FactuurStatusGetekend = Boolean.Parse(Request.Form["factuurStatusGetekend"]);
                 factuur.VerwerkingsDatum = Convert.ToDateTime(Request.Form["verwerkingsDatum"]);

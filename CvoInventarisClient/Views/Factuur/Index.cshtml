@@ -33,6 +33,9 @@
                     @Html.DisplayNameFor(model => model.Factuur[0].FactuurNummer)
                 </th>
                 <th>
+                    @Html.DisplayNameFor(model => model.Factuur[0].ScholengroepNummer)
+                </th>
+                <th>
                     @Html.DisplayNameFor(model => model.Factuur[0].FactuurDatum)
                 </th>
                 <th>
@@ -99,6 +102,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FactuurNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScholengroepNummer)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.FactuurDatum)
