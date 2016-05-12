@@ -204,6 +204,7 @@
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\Beheer\CampusController.cs" />
     <Compile Include="Controllers\Beheer\CpuController.cs" />
     <Compile Include="Controllers\Beheer\DeviceController.cs" />
     <Compile Include="Controllers\Beheer\FactuurController.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Controllers\Beheer\LeverancierController.cs" />
     <Compile Include="Controllers\Beheer\LokaalController.cs" />
     <Compile Include="Models\AccountModel.cs" />
+    <Compile Include="Models\CampusModel.cs" />
     <Compile Include="Models\FactuurModel.cs" />
     <Compile Include="Models\FactuurViewModel.cs" />
     <Compile Include="Models\HarddiskModel.cs" />
@@ -239,7 +241,6 @@
     <Compile Include="Models\CpuModel.cs" />
     <Compile Include="Models\DeviceModel.cs" />
     <Compile Include="Models\GrafischeKaartModel.cs" />
-    <Compile Include="Models\LokaalViewModel.cs" />
     <Compile Include="Models\NetwerkModel.cs" />
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />

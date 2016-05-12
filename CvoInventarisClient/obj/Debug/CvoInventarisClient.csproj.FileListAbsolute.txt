@@ -201,6 +201,5 @@ D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.xml
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xml
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xml
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache

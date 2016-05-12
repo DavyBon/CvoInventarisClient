@@ -28,11 +28,7 @@ namespace CvoInventarisClient.Models
         [Display(Name = "aantalPlaatsen")]
         public int AantalPlaatsen { get; set; }
 
-
         [Display(Name = "isComputerLokaal")]
         public bool IsComputerLokaal { get; set; }
-
-        [Display(Name = "Netwerk")]
-        public NetwerkModel Netwerk { get; set; }
     }
 }

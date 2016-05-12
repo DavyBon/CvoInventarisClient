@@ -1,4 +1,4 @@
-﻿@model CvoInventarisClient.Models.LokaalViewModel
+﻿@model CvoInventarisClient.Models.LokaalModel
 
 @{
     ViewBag.Title = "Lokaal - Edit";
@@ -9,24 +9,19 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
-            @Html.Hidden("idLokaal", Model.Lokaal[0].IdLokaal)
-            @Html.Hidden("idNetwerk", Model.Lokaal[0].Netwerk.Id)
+            @Html.Hidden("idLokaal", Model.IdLokaal)
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Lokaal[0].LokaalNaam)
-                @Html.ValidationMessageFor(model => model.Lokaal[0].LokaalNaam)
-                <input class="form-control" type="text" name="lokaalNaam" value="@Model.Lokaal[0].LokaalNaam"/>
+                @Html.DisplayNameFor(model => model.LokaalNaam)
+                @Html.ValidationMessageFor(model => model.LokaalNaam)
+                <input class="form-control" type="text" name="lokaalNaam" value="@Model.LokaalNaam"/>
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Lokaal[0].AantalPlaatsen)
-                @Html.ValidationMessageFor(model => model.Lokaal[0].AantalPlaatsen)
-                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.Lokaal[0].AantalPlaatsen"/>
+                @Html.DisplayNameFor(model => model.AantalPlaatsen)
+                @Html.ValidationMessageFor(model => model.AantalPlaatsen)
+                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen"/>
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.Lokaal[0].IsComputerLokaal)</label>
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Lokaal[0].Netwerk)
-                @Html.DropDownListFor(model => model.Netwerk, Model.Netwerk, Model.Lokaal[0].Netwerk.Merk, new { @class = "form-control" })
+                <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
             </div>
         </div>
     </div>
