@@ -2,6 +2,13 @@
 @{
     ViewBag.Title = "Index";
 }
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
+}
 
 @using (Html.BeginForm("stap1", "Rapportering"))
 {
