@@ -309,6 +309,8 @@
     <Content Include="Views\RapporteringCpu\CpuRapportering.cshtml" />
     <Content Include="Views\RapporteringHardware\HardwareRapportering.cshtml" />
     <Content Include="Views\Account\ResetWachtwoord.cshtml" />
+    <Content Include="Views\Campus\Edit.cshtml" />
+    <Content Include="Views\Campus\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
