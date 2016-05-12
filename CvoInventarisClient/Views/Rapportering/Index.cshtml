@@ -109,6 +109,56 @@
         }
     }
 </table>
+<table class="table">
+    @if (Model.verzekeringen != null)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.verzekeringen[0].IdVerzekering)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.verzekeringen[0].Omschrijving)
+            </th>
+        </tr>
+
+        foreach (var item in Model.verzekeringen)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdVerzekering)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Omschrijving)
+                </td>
+            </tr>
+        }
+    }
+</table>
+<table class="table">
+    @if (Model.objectTypes != null)
+    {
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.objectTypes[0].IdObjectType)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.objectTypes[0].Omschrijving)
+            </th>
+        </tr>
+
+        foreach (var item in Model.objectTypes)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.IdObjectType)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Omschrijving)
+                </td>
+            </tr>
+        }
+    }
+</table>
 
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 

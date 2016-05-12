@@ -123,7 +123,6 @@ C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventari
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.dll
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.dll
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.dll
-C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\itextsharp.xml
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.xml
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.xml

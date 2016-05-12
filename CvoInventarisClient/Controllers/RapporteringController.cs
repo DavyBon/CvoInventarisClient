@@ -96,6 +96,18 @@ namespace CvoInventarisClient.Controllers
                     ViewBag.hardware = "inline";
                     ViewBag.tabelKeuze = "hardware";
                 }
+                if (tabelKeuze[1].Trim().Equals("Verzekering"))
+                {
+                    VerzekeringController vc = new VerzekeringController();
+                    model.verzekeringen = vc.Getverzekeringen();
+                    ViewBag.tabelKeuze = "verzekering";
+                }
+                if (tabelKeuze[1].Trim().Equals("ObjectType"))
+                {
+                    ObjectTypeController oc = new ObjectTypeController();
+                    model.objectTypes = oc.GetObjectTypes();
+                    ViewBag.tabelKeuze = "objectType";
+                }
 
             }
             if (tabelKeuze[0].Trim().Equals("bepaalde conditie van de tabel"))
@@ -184,6 +196,32 @@ namespace CvoInventarisClient.Controllers
                     }
                     pdfDoc.Add(table);
                 }
+                if (tabelKeuze == "verzekering")
+                {
+                    PdfPTable table = new PdfPTable(2);
+                    table.AddCell("id verzekering");
+                    table.AddCell("omschrijving");
+                    VerzekeringController vz = new VerzekeringController();
+                    foreach (var item in vz.Getverzekeringen())
+                    {
+                        table.AddCell(item.IdVerzekering.ToString());
+                        table.AddCell(item.Omschrijving);
+                    }
+                    pdfDoc.Add(table);
+                }
+                if (tabelKeuze == "objectType")
+                {
+                    PdfPTable table = new PdfPTable(2);
+                    table.AddCell("id objectType");
+                    table.AddCell("omschrijving");
+                    ObjectTypeController oc = new ObjectTypeController();
+                    foreach (var item in oc.GetObjectTypes())
+                    {
+                        table.AddCell(item.IdObjectType.ToString());
+                        table.AddCell(item.Omschrijving);
+                    }
+                    pdfDoc.Add(table);
+                }
                 pdfWriter.CloseStream = false;
                 pdfDoc.Close();
                 Response.Buffer = true;
@@ -240,6 +278,30 @@ namespace CvoInventarisClient.Controllers
                     worksheet.Cells[i + 2, 3] = hm[i].Device.Merk;
                     worksheet.Cells[i + 2, 4] = hm[i].GrafischeKaart.Merk;
                     worksheet.Cells[i + 2, 5] = hm[i].Harddisk.Merk;
+                }
+            }
+            if (tabelKeuze.Equals("verzekering"))
+            {
+                VerzekeringController vc = new VerzekeringController();
+                List<VerzekeringModel> vm = vc.Getverzekeringen().ToList();
+                worksheet.Cells[1, 1] = "id verzekering";
+                worksheet.Cells[1, 2] = "omschrijving";
+                for (int i = 0; i < vm.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = vm[i].IdVerzekering;
+                    worksheet.Cells[i + 2, 2] = vm[i].Omschrijving;
+                }
+            }
+            if (tabelKeuze.Equals("objectType"))
+            {
+                ObjectTypeController oc = new ObjectTypeController();
+                List<ObjectTypeModel> om = oc.GetObjectTypes().ToList();
+                worksheet.Cells[1, 1] = "id objectType";
+                worksheet.Cells[1, 2] = "omschrijving";
+                for (int i = 0; i < om.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = om[i].IdObjectType;
+                    worksheet.Cells[i + 2, 2] = om[i].Omschrijving;
                 }
             }
             worksheet.Columns.AutoFit();

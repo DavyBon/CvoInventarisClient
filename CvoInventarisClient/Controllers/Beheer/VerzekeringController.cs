@@ -10,6 +10,18 @@ namespace CvoInventarisClient.Controllers
 {
     public class VerzekeringController : Controller
     {
+        public List<VerzekeringModel> Getverzekeringen()
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                List<Models.VerzekeringModel> model = new List<Models.VerzekeringModel>();
+                foreach (Verzekering verzekering in client.VerzekeringGetAll())
+                {
+                    model.Add(new Models.VerzekeringModel() { IdVerzekering = verzekering.Id, Omschrijving = verzekering.Omschrijving });
+                }
+                return model;
+            }
+            }
         public ActionResult Index()
         {
             ViewBag.action = TempData["action"];

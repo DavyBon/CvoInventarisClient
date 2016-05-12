@@ -9,6 +9,18 @@ namespace CvoInventarisClient.Controllers
 {
     public class ObjectTypeController : Controller
     {
+        public List<ObjectTypeModel> GetObjectTypes()
+        {
+            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            {
+                List<Models.ObjectTypeModel> model = new List<Models.ObjectTypeModel>();
+                foreach (ObjectTypes objectType in client.ObjectTypeGetAll())
+                {
+                    model.Add(new Models.ObjectTypeModel() { IdObjectType = objectType.Id, Omschrijving = objectType.Omschrijving });
+                }
+                return model;
+            }
+        }
         public ActionResult Index()
         {
             ViewBag.action = TempData["action"];
