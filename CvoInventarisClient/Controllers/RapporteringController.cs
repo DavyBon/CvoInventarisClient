@@ -51,6 +51,7 @@ namespace CvoInventarisClient.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.action = TempData["action"];
             TabelModel model = new TabelModel();
             ViewBag.tabelKeuzes = vulListKeuzeTabellen();
             ViewBag.stijlStap2 = "hidden";
@@ -120,6 +121,17 @@ namespace CvoInventarisClient.Controllers
                 {
                     return Redirect("/RapporteringHardware/HardwareRapportering");
                 }
+                if (tabelKeuze[1].Trim().Equals("Verzekering"))
+                {
+                    TempData["action"] = "Je kan geen conditie toepassen op verzekering. Enkel alle gegevens bekijken";
+                    return RedirectToAction("Index");
+                }
+                if (tabelKeuze[1].Trim().Equals("ObjectType"))
+                {
+                    TempData["action"] = "Je kan geen conditie toepassen op objectType. Enkel alle gegevens bekijken";
+                    return Redirect("/Rapportering/Index");
+                }
+
             }
             ViewBag.tabelKeuzes = vulListKeuzeTabellen();
             return View("Index", model);
