@@ -61,25 +61,28 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                Inventaris inventaris = new Inventaris();
-                inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
-                inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
-                inventaris.Historiek = Request.Form["historiek"];
-                inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
-                inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) };
-                inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) };
-                if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
-                else
+                for (int i = 0; i < Convert.ToInt32(Request.Form["aantal"]); i++)
                 {
-                    inventaris.IsActief = false;
-                };
-                if (Request.Form["isAanwezig"] != null) { inventaris.IsAanwezig = true; }
-                else
-                {
-                    inventaris.IsAanwezig = false;
-                };
-                inventaris.Label = "TBA";
-                client.InventarisCreate(inventaris);
+                    Inventaris inventaris = new Inventaris();
+                    inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
+                    inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
+                    inventaris.Historiek = Request.Form["historiek"];
+                    inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
+                    inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) };
+                    inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) };
+                    if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
+                    else
+                    {
+                        inventaris.IsActief = false;
+                    };
+                    if (Request.Form["isAanwezig"] != null) { inventaris.IsAanwezig = true; }
+                    else
+                    {
+                        inventaris.IsAanwezig = false;
+                    };
+                    inventaris.Label = "TBA";
+                    client.InventarisCreate(inventaris);
+                }
             }
             TempData["action"] = "Object werd toegevoegd aan inventaris";
             return RedirectToAction("Index");
