@@ -43,15 +43,6 @@ namespace CvoInventarisClient.Models
         [Display(Name = "factuurDatum")]
         public DateTime FactuurDatum { get; set; }
 
-        [Display(Name = "factuurStatusGetekend")]
-        public bool FactuurStatusGetekend { get; set; }
-
-        [Required(ErrorMessage = "Vul een verwerkingsdatum in")]
-        [DataType(DataType.Date, ErrorMessage = "Vul een correcte datum in in dd/mm/yyyy notatie")]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "verwerkingsDatum")]
-        public DateTime VerwerkingsDatum { get; set; }
-
         [Required(ErrorMessage = "Kies een leverancier")]
         [Display(Name = "idLeverancier")]
         public LeverancierModel Leverancier { get; set; }
@@ -83,21 +74,6 @@ namespace CvoInventarisClient.Models
         [Range(1, 100, ErrorMessage = "De afschrijfperiode moet tussen 1 en 100 liggen")]
         [Display(Name = "afschrijfperiode")]
         public int Afschrijfperiode { get; set; }
-
-        [Required(ErrorMessage = "Vul een oleDoc naam in")]
-        [StringLength(255, MinimumLength = 1, ErrorMessage = "Een oleDoc naam bestaat uit minimum 1 en maximum 255 characters")]
-        [Display(Name = "oleDoc")]
-        public string OleDoc { get; set; }
-
-        [Required(ErrorMessage = "Vul een oleDoc path in")]
-        [StringLength(255, MinimumLength = 1, ErrorMessage = "Een oleDoc path bestaat uit minimum 1 en maximum 255 characters")]
-        [Display(Name = "oleDocPath")]
-        public string OleDocPath { get; set; }
-
-        [Required(ErrorMessage = "Vul een oleDoc filenaam in")]
-        [StringLength(255, MinimumLength = 1, ErrorMessage = "Een oleDoc file naam bestaat uit minimum 1 en maximum 255 characters")]
-        [Display(Name = "oleDocFileName")]
-        public string OleDocFileName { get; set; }
 
         [Required(ErrorMessage = "Vul een insertdatum in")]
         [DataType(DataType.Date, ErrorMessage = "Vul een correcte datum in in dd/mm/yyyy notatie")]
