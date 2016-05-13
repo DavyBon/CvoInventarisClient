@@ -202,6 +202,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Beheer\CampusController.cs" />
@@ -210,6 +211,7 @@
     <Compile Include="Controllers\Beheer\FactuurController.cs" />
     <Compile Include="Controllers\Beheer\GrafischeKaartController.cs" />
     <Compile Include="Controllers\Beheer\HardwareController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Beheer\InventarisController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -311,6 +313,8 @@
     <Content Include="Views\Account\ResetWachtwoord.cshtml" />
     <Content Include="Views\Campus\Edit.cshtml" />
     <Content Include="Views\Campus\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\NotFound.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
