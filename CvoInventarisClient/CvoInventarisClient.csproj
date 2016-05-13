@@ -313,12 +313,9 @@
     <Content Include="Views\Account\ResetWachtwoord.cshtml" />
     <Content Include="Views\Campus\Edit.cshtml" />
     <Content Include="Views\Campus\Index.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\Account\WijzigWachtwoord.cshtml" />
-=======
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
->>>>>>> origin/master
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
