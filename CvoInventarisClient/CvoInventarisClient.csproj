@@ -311,6 +311,7 @@
     <Content Include="Views\Account\ResetWachtwoord.cshtml" />
     <Content Include="Views\Campus\Edit.cshtml" />
     <Content Include="Views\Campus\Index.cshtml" />
+    <Content Include="Views\Account\WijzigWachtwoord.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

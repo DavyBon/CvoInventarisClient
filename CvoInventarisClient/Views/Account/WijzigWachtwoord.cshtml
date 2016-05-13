@@ -1,0 +1,45 @@
+﻿@model CvoInventarisClient.Models.AccountModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Login.css" rel="stylesheet" />
+
+    <meta name="description" content="CvoInventaris applicatie" />
+</head>
+<body>
+
+    <div class="container">
+
+        <form action="/Account/WijzigWachtwoord" method="post" class="form-signin">
+            <div class="page-header">
+                <h1 class="form-signin-heading">CVO inventaris</h1>
+            </div>
+            <h2>@ViewBag.WijzigWachtwoordMessage</h2>
+            <h3 class="form-signin-heading">Wachtwoord wijzigen</h3>
+            <h5>Vul in de velden hieronder uw nieuwe wachtwoord in.</h5>
+            <br />
+            <input type="hidden" name="GUID" value="@Request.QueryString["uid"]" />
+            <label for="Wachtwoord" class="sr-only">Wachtwoord</label>
+            <input type="password" id="Wachtwoord" name="Wachtwoord" class="form-control" placeholder="Wachtwoord" required autofocus>
+            <label for="HerhaalWachtwoord" class="sr-only">Herhaal wachtwoord</label>
+            <input type="password" id="HerhaalWachtwoord" name="HerhaalWachtwoord" class="form-control" placeholder="Herhaal wachtwoord" required>            
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+            <div class="pager">
+                <a href="/Login/Index">Log in</a>
+            </div>
+        </form>
+
+    </div> <!-- /container -->
+
+</body>
+</html>

@@ -15,6 +15,67 @@ namespace CvoInventarisClient.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectTypes", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
+    [System.SerializableAttribute()]
+    public partial class ObjectTypes : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OmschrijvingField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((this.IdField.Equals(value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Omschrijving {
+            get {
+                return this.OmschrijvingField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OmschrijvingField, value) != true)) {
+                    this.OmschrijvingField = value;
+                    this.RaisePropertyChanged("Omschrijving");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Hardware", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
     [System.SerializableAttribute()]
     public partial class Hardware : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -1970,67 +2031,6 @@ namespace CvoInventarisClient.ServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="ObjectTypes", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
-    [System.SerializableAttribute()]
-    public partial class ObjectTypes : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
-        
-        [System.NonSerializedAttribute()]
-        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int IdField;
-        
-        [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private string OmschrijvingField;
-        
-        [global::System.ComponentModel.BrowsableAttribute(false)]
-        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
-            get {
-                return this.extensionDataField;
-            }
-            set {
-                this.extensionDataField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Id {
-            get {
-                return this.IdField;
-            }
-            set {
-                if ((this.IdField.Equals(value) != true)) {
-                    this.IdField = value;
-                    this.RaisePropertyChanged("Id");
-                }
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Omschrijving {
-            get {
-                return this.OmschrijvingField;
-            }
-            set {
-                if ((object.ReferenceEquals(this.OmschrijvingField, value) != true)) {
-                    this.OmschrijvingField = value;
-                    this.RaisePropertyChanged("Omschrijving");
-                }
-            }
-        }
-        
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-        
-        protected void RaisePropertyChanged(string propertyName) {
-            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
-            if ((propertyChanged != null)) {
-                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Netwerk", Namespace="http://schemas.datacontract.org/2004/07/WcfServiceCvoInventaris")]
     [System.SerializableAttribute()]
     public partial class Netwerk : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
@@ -2141,6 +2141,18 @@ namespace CvoInventarisClient.ServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference.ICvoInventarisService")]
     public interface ICvoInventarisService {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdateResponse")]
+        bool ObjectTypeUpdate(CvoInventarisClient.ServiceReference.ObjectTypes objectType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdateResponse")]
+        System.Threading.Tasks.Task<bool> ObjectTypeUpdateAsync(CvoInventarisClient.ServiceReference.ObjectTypes objectType);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareCreate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareCreateResponse")]
+        int HardwareCreate(CvoInventarisClient.ServiceReference.Hardware hardware);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareCreate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareCreateResponse")]
+        System.Threading.Tasks.Task<int> HardwareCreateAsync(CvoInventarisClient.ServiceReference.Hardware hardware);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareGetByIdResponse")]
         CvoInventarisClient.ServiceReference.Hardware HardwareGetById(int id);
@@ -2395,6 +2407,20 @@ namespace CvoInventarisClient.ServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmail", ReplyAction="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmailRespo" +
             "nse")]
         System.Threading.Tasks.Task<bool> AccountVerstuurWachtwoordResetEmailAsync(string email);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/AccountIsWachtwoordResetLinkValid", ReplyAction="http://tempuri.org/ICvoInventarisService/AccountIsWachtwoordResetLinkValidRespons" +
+            "e")]
+        bool AccountIsWachtwoordResetLinkValid(string GUID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/AccountIsWachtwoordResetLinkValid", ReplyAction="http://tempuri.org/ICvoInventarisService/AccountIsWachtwoordResetLinkValidRespons" +
+            "e")]
+        System.Threading.Tasks.Task<bool> AccountIsWachtwoordResetLinkValidAsync(string GUID);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/AccountWijzigWachtwoord", ReplyAction="http://tempuri.org/ICvoInventarisService/AccountWijzigWachtwoordResponse")]
+        bool AccountWijzigWachtwoord(string GUID, string wachtwoord);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/AccountWijzigWachtwoord", ReplyAction="http://tempuri.org/ICvoInventarisService/AccountWijzigWachtwoordResponse")]
+        System.Threading.Tasks.Task<bool> AccountWijzigWachtwoordAsync(string GUID, string wachtwoord);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/SessionGetById", ReplyAction="http://tempuri.org/ICvoInventarisService/SessionGetByIdResponse")]
         CvoInventarisClient.ServiceReference.Session SessionGetById(int id);
@@ -2719,18 +2745,6 @@ namespace CvoInventarisClient.ServiceReference {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/ObjectTypeDelete", ReplyAction="http://tempuri.org/ICvoInventarisService/ObjectTypeDeleteResponse")]
         System.Threading.Tasks.Task<bool> ObjectTypeDeleteAsync(int id);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdateResponse")]
-        bool ObjectTypeUpdate(CvoInventarisClient.ServiceReference.ObjectTypes objectType);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate", ReplyAction="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdateResponse")]
-        System.Threading.Tasks.Task<bool> ObjectTypeUpdateAsync(CvoInventarisClient.ServiceReference.ObjectTypes objectType);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareCreate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareCreateResponse")]
-        int HardwareCreate(CvoInventarisClient.ServiceReference.Hardware hardware);
-        
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ICvoInventarisService/HardwareCreate", ReplyAction="http://tempuri.org/ICvoInventarisService/HardwareCreateResponse")]
-        System.Threading.Tasks.Task<int> HardwareCreateAsync(CvoInventarisClient.ServiceReference.Hardware hardware);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -2758,6 +2772,22 @@ namespace CvoInventarisClient.ServiceReference {
         
         public CvoInventarisServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
+        }
+        
+        public bool ObjectTypeUpdate(CvoInventarisClient.ServiceReference.ObjectTypes objectType) {
+            return base.Channel.ObjectTypeUpdate(objectType);
+        }
+        
+        public System.Threading.Tasks.Task<bool> ObjectTypeUpdateAsync(CvoInventarisClient.ServiceReference.ObjectTypes objectType) {
+            return base.Channel.ObjectTypeUpdateAsync(objectType);
+        }
+        
+        public int HardwareCreate(CvoInventarisClient.ServiceReference.Hardware hardware) {
+            return base.Channel.HardwareCreate(hardware);
+        }
+        
+        public System.Threading.Tasks.Task<int> HardwareCreateAsync(CvoInventarisClient.ServiceReference.Hardware hardware) {
+            return base.Channel.HardwareCreateAsync(hardware);
         }
         
         public CvoInventarisClient.ServiceReference.Hardware HardwareGetById(int id) {
@@ -3094,6 +3124,22 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> AccountVerstuurWachtwoordResetEmailAsync(string email) {
             return base.Channel.AccountVerstuurWachtwoordResetEmailAsync(email);
+        }
+        
+        public bool AccountIsWachtwoordResetLinkValid(string GUID) {
+            return base.Channel.AccountIsWachtwoordResetLinkValid(GUID);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AccountIsWachtwoordResetLinkValidAsync(string GUID) {
+            return base.Channel.AccountIsWachtwoordResetLinkValidAsync(GUID);
+        }
+        
+        public bool AccountWijzigWachtwoord(string GUID, string wachtwoord) {
+            return base.Channel.AccountWijzigWachtwoord(GUID, wachtwoord);
+        }
+        
+        public System.Threading.Tasks.Task<bool> AccountWijzigWachtwoordAsync(string GUID, string wachtwoord) {
+            return base.Channel.AccountWijzigWachtwoordAsync(GUID, wachtwoord);
         }
         
         public CvoInventarisClient.ServiceReference.Session SessionGetById(int id) {
@@ -3526,22 +3572,6 @@ namespace CvoInventarisClient.ServiceReference {
         
         public System.Threading.Tasks.Task<bool> ObjectTypeDeleteAsync(int id) {
             return base.Channel.ObjectTypeDeleteAsync(id);
-        }
-        
-        public bool ObjectTypeUpdate(CvoInventarisClient.ServiceReference.ObjectTypes objectType) {
-            return base.Channel.ObjectTypeUpdate(objectType);
-        }
-        
-        public System.Threading.Tasks.Task<bool> ObjectTypeUpdateAsync(CvoInventarisClient.ServiceReference.ObjectTypes objectType) {
-            return base.Channel.ObjectTypeUpdateAsync(objectType);
-        }
-        
-        public int HardwareCreate(CvoInventarisClient.ServiceReference.Hardware hardware) {
-            return base.Channel.HardwareCreate(hardware);
-        }
-        
-        public System.Threading.Tasks.Task<int> HardwareCreateAsync(CvoInventarisClient.ServiceReference.Hardware hardware) {
-            return base.Channel.HardwareCreateAsync(hardware);
         }
     }
 }

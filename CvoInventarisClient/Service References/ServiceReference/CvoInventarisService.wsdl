@@ -8,6 +8,18 @@
       <xsd:import schemaLocation="http://localhost:50881/Service1.svc?xsd=xsd3" namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
     </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="ICvoInventarisService_ObjectTypeUpdate_InputMessage">
+    <wsdl:part name="parameters" element="tns:ObjectTypeUpdate" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_ObjectTypeUpdate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:ObjectTypeUpdateResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareCreate_InputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareCreate" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_HardwareCreate_OutputMessage">
+    <wsdl:part name="parameters" element="tns:HardwareCreateResponse" />
+  </wsdl:message>
   <wsdl:message name="ICvoInventarisService_HardwareGetById_InputMessage">
     <wsdl:part name="parameters" element="tns:HardwareGetById" />
   </wsdl:message>
@@ -259,6 +271,18 @@
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_AccountVerstuurWachtwoordResetEmail_OutputMessage">
     <wsdl:part name="parameters" element="tns:AccountVerstuurWachtwoordResetEmailResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_AccountIsWachtwoordResetLinkValid_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountIsWachtwoordResetLinkValid" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_AccountIsWachtwoordResetLinkValid_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountIsWachtwoordResetLinkValidResponse" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_AccountWijzigWachtwoord_InputMessage">
+    <wsdl:part name="parameters" element="tns:AccountWijzigWachtwoord" />
+  </wsdl:message>
+  <wsdl:message name="ICvoInventarisService_AccountWijzigWachtwoord_OutputMessage">
+    <wsdl:part name="parameters" element="tns:AccountWijzigWachtwoordResponse" />
   </wsdl:message>
   <wsdl:message name="ICvoInventarisService_SessionGetById_InputMessage">
     <wsdl:part name="parameters" element="tns:SessionGetById" />
@@ -584,19 +608,15 @@
   <wsdl:message name="ICvoInventarisService_ObjectTypeDelete_OutputMessage">
     <wsdl:part name="parameters" element="tns:ObjectTypeDeleteResponse" />
   </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_ObjectTypeUpdate_InputMessage">
-    <wsdl:part name="parameters" element="tns:ObjectTypeUpdate" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_ObjectTypeUpdate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:ObjectTypeUpdateResponse" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareCreate_InputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareCreate" />
-  </wsdl:message>
-  <wsdl:message name="ICvoInventarisService_HardwareCreate_OutputMessage">
-    <wsdl:part name="parameters" element="tns:HardwareCreateResponse" />
-  </wsdl:message>
   <wsdl:portType name="ICvoInventarisService">
+    <wsdl:operation name="ObjectTypeUpdate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate" message="tns:ICvoInventarisService_ObjectTypeUpdate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdateResponse" message="tns:ICvoInventarisService_ObjectTypeUpdate_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="HardwareCreate">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareCreate" message="tns:ICvoInventarisService_HardwareCreate_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareCreateResponse" message="tns:ICvoInventarisService_HardwareCreate_OutputMessage" />
+    </wsdl:operation>
     <wsdl:operation name="HardwareGetById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetById" message="tns:ICvoInventarisService_HardwareGetById_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareGetByIdResponse" message="tns:ICvoInventarisService_HardwareGetById_OutputMessage" />
@@ -764,6 +784,14 @@
     <wsdl:operation name="AccountVerstuurWachtwoordResetEmail">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmail" message="tns:ICvoInventarisService_AccountVerstuurWachtwoordResetEmail_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmailResponse" message="tns:ICvoInventarisService_AccountVerstuurWachtwoordResetEmail_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountIsWachtwoordResetLinkValid">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountIsWachtwoordResetLinkValid" message="tns:ICvoInventarisService_AccountIsWachtwoordResetLinkValid_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountIsWachtwoordResetLinkValidResponse" message="tns:ICvoInventarisService_AccountIsWachtwoordResetLinkValid_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="AccountWijzigWachtwoord">
+      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountWijzigWachtwoord" message="tns:ICvoInventarisService_AccountWijzigWachtwoord_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/AccountWijzigWachtwoordResponse" message="tns:ICvoInventarisService_AccountWijzigWachtwoord_OutputMessage" />
     </wsdl:operation>
     <wsdl:operation name="SessionGetById">
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/SessionGetById" message="tns:ICvoInventarisService_SessionGetById_InputMessage" />
@@ -981,17 +1009,27 @@
       <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/ObjectTypeDelete" message="tns:ICvoInventarisService_ObjectTypeDelete_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/ObjectTypeDeleteResponse" message="tns:ICvoInventarisService_ObjectTypeDelete_OutputMessage" />
     </wsdl:operation>
-    <wsdl:operation name="ObjectTypeUpdate">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate" message="tns:ICvoInventarisService_ObjectTypeUpdate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdateResponse" message="tns:ICvoInventarisService_ObjectTypeUpdate_OutputMessage" />
-    </wsdl:operation>
-    <wsdl:operation name="HardwareCreate">
-      <wsdl:input wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareCreate" message="tns:ICvoInventarisService_HardwareCreate_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/ICvoInventarisService/HardwareCreateResponse" message="tns:ICvoInventarisService_HardwareCreate_OutputMessage" />
-    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_ICvoInventarisService" type="tns:ICvoInventarisService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="ObjectTypeUpdate">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="HardwareCreate">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareCreate" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="HardwareGetById">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareGetById" style="document" />
       <wsdl:input>
@@ -1363,6 +1401,24 @@
     </wsdl:operation>
     <wsdl:operation name="AccountVerstuurWachtwoordResetEmail">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/AccountVerstuurWachtwoordResetEmail" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountIsWachtwoordResetLinkValid">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/AccountIsWachtwoordResetLinkValid" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="AccountWijzigWachtwoord">
+      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/AccountWijzigWachtwoord" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -1849,24 +1905,6 @@
     </wsdl:operation>
     <wsdl:operation name="ObjectTypeDelete">
       <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/ObjectTypeDelete" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="ObjectTypeUpdate">
-      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/ObjectTypeUpdate" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
-    <wsdl:operation name="HardwareCreate">
-      <soap:operation soapAction="http://tempuri.org/ICvoInventarisService/HardwareCreate" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
