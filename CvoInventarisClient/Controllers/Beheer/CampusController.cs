@@ -71,7 +71,7 @@ namespace CvoInventarisClient.Controllers
 
 
         [HttpPost, ValidateInput(false)]
-        public ActionResult Edit(int id, FormCollection collection, Models.CampusModel c)
+        public ActionResult Edit(int id, Models.CampusModel c)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
@@ -81,7 +81,7 @@ namespace CvoInventarisClient.Controllers
                 if (ModelState.IsValid)
                 {
                     Campus campus = new Campus();
-                    campus.IdCampus = Convert.ToInt16(Request.Form["idCampus"]);
+                    campus.IdCampus = id;
                     campus.Naam = Request.Form["naam"];
                     campus.Postcode = Request.Form["postcode"];
                     campus.Straat = Request.Form["straat"];

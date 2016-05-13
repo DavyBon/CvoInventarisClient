@@ -97,11 +97,11 @@
                     <div class="modal-body">
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.LokaalNaam)
-                            <input class="form-control" type="text" name="lokaalNaam"/>
+                            <input class="form-control" type="text" name="lokaalNaam" required/>
                         </div>
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.AantalPlaatsen)
-                            <input class="form-control" type="text" name="aantalPlaatsen"/>
+                            <input class="form-control" type="text" name="aantalPlaatsen" required/>
                         </div>
                         <div class="checkbox">
                             <label><input type="checkbox" name="isComputerLokaal" value="True"/>@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>

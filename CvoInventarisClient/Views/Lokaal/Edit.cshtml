@@ -13,12 +13,12 @@
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.LokaalNaam)
                 @Html.ValidationMessageFor(model => model.LokaalNaam)
-                <input class="form-control" type="text" name="lokaalNaam" value="@Model.LokaalNaam"/>
+                <input class="form-control" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.AantalPlaatsen)
                 @Html.ValidationMessageFor(model => model.AantalPlaatsen)
-                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen"/>
+                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen" required/>
             </div>
             <div class="checkbox">
                 <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>

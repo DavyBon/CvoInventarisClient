@@ -9,7 +9,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
-            @Html.Hidden("idHarddisk", Model.IdCampus)
+            @Html.Hidden("idCampus", Model.IdCampus)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Naam)
                 @Html.ValidationMessageFor(model => model.Naam)
