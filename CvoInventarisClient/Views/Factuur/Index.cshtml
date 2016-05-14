@@ -13,7 +13,12 @@
 @using (Html.BeginForm("Delete", "Factuur"))
 {
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
-    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
+
+    <div class="input-group col-lg-4 pull-right">
+        <span class="input-group-addon">Zoeken</span>
+        <input id="filter" type="text" class="form-control">
+    </div>
 
     <div class="spacer"></div>
 
@@ -161,59 +166,59 @@
                 <div class="modal-body">
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].Boekjaar)
-                        <input class="form-control" type="date" name="boekjaar" required />
+                        <input class="form-control" type="date" name="boekjaar" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].CvoVolgNummer)
-                        <input class="form-control" type="text" name="cvoVolgNummer" required />
+                        <input class="form-control" type="text" name="cvoVolgNummer" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].FactuurNummer)
-                        <input class="form-control" type="text" name="factuurNummer" required />
+                        <input class="form-control" type="text" name="factuurNummer" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].FactuurDatum)
-                        <input class="form-control" type="date" name="factuurDatum" required />
+                        <input class="form-control" type="date" name="factuurDatum" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].Leverancier)
+                        Leverancier
                         @Html.DropDownListFor(model => model.Leverancier, Model.Leverancier, "", new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].Prijs)
-                        <input class="form-control" type="text" name="prijs" required />
+                        <input class="form-control" type="text" name="prijs" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].Garantie)
-                        <input class="form-control" type="text" name="garantie" required />
+                        <input class="form-control" type="text" name="garantie" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].Omschrijving)
-                        <input class="form-control" type="text" name="omschrijving" required />
+                        <input class="form-control" type="text" name="omschrijving" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].Opmerking)
-                        <input class="form-control" type="text" name="opmerking" required />
+                        <input class="form-control" type="text" name="opmerking" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].Afschrijfperiode)
-                        <input class="form-control" type="text" name="afschrijfperiode" required />
+                        <input class="form-control" type="text" name="afschrijfperiode" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].DatumInsert)
-                        <input class="form-control" type="date" name="datumInsert" required />
+                        <input class="form-control" type="date" name="datumInsert" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].UserInsert)
-                        <input class="form-control" type="text" name="userInsert" required />
+                        <input class="form-control" type="text" name="userInsert" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].DatumModified)
-                        <input class="form-control" type="date" name="datumModified" required />
+                        <input class="form-control" type="date" name="datumModified" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].UserModified)
-                        <input class="form-control" type="text" name="userModified" required />
+                        <input class="form-control" type="text" name="userModified" required/>
                     </div>
 
                 </div>

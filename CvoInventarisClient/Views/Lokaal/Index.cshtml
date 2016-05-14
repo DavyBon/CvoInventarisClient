@@ -65,53 +65,51 @@
             </tbody>
         </table>
     </div>
-}
-<!-- DELETE -->
-<div class="modal fade verwijderModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <strong>Let op!</strong>
-            </div>
-            <div class="modal-body">
-                Bent u zeker?
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
 
-<!-- NIEUW -->
 <div class="modal fade nieuwModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
                 <strong>Vul in</strong>
             </div>
-                @using (Html.BeginForm("Create", "Lokaal"))
-                {
-                    @Html.ValidationSummary()
-                    <div class="modal-body">
-                        <div class="form-group">
-                            @Html.DisplayNameFor(model => model.LokaalNaam)
-                            <input class="form-control" type="text" name="lokaalNaam" required/>
-                        </div>
-                        <div class="form-group">
-                            @Html.DisplayNameFor(model => model.AantalPlaatsen)
-                            <input class="form-control" type="text" name="aantalPlaatsen" required/>
-                        </div>
-                        <div class="checkbox">
-                            <label><input type="checkbox" name="isComputerLokaal" value="True"/>@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
-                        </div>
+            @using (Html.BeginForm("Create", "Lokaal"))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.LokaalNaam)
+                        <input class="form-control" type="text" name="lokaalNaam" required/>
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-primary">Voeg toe aan lokaal</button>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.AantalPlaatsen)
+                        <input class="form-control" type="text" name="aantalPlaatsen" required/>
                     </div>
-                }
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Voeg lokaal toe</button>
+                </div>
+            }
         </div>
     </div>
 </div>

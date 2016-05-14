@@ -17,55 +17,38 @@ namespace CvoInventarisClient.Controllers
             ViewBag.action = TempData["action"];
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                List<Models.LokaalModel> model = new List<Models.LokaalModel>();
+                List<LokaalModel> model = new List<LokaalModel>();
                 foreach (Lokaal lokaal in client.LokaalGetAll())
                 {
-                    model.Add(new Models.LokaalModel() { IdLokaal = lokaal.IdLokaal, LokaalNaam = lokaal.LokaalNaam, AantalPlaatsen = lokaal.AantalPlaatsen, IsComputerLokaal = lokaal.IsComputerLokaal });
+                    model.Add(new LokaalModel() { IdLokaal = lokaal.IdLokaal, LokaalNaam = lokaal.LokaalNaam, AantalPlaatsen = lokaal.AantalPlaatsen, IsComputerLokaal = lokaal.IsComputerLokaal });
                 }
                 return View(model);
             }
         }
-
-        // CREATE:
-        // ValidateInput(false) voorkomt dat er een errormessage verschijnt bij bv:
-        // < of > input in velden (potentieel gevaarlijke input error)       
-        [HttpPost, ValidateInput(false)]
-        public ActionResult Create(FormCollection collection, Models.LokaalModel lk)
+     
+        [HttpPost]
+        public ActionResult Create(FormCollection collection)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                // Wanneer ModelState.IsValid == true
-                // Nieuw object word aangemaakt adhv Request.Form
-                // User wordt ge-redirect naar Index pagina
-                if (ModelState.IsValid)
+                Lokaal lokaal = new Lokaal();
+                lokaal.LokaalNaam = Request.Form["lokaalNaam"];
+                lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+
+                if (Request.Form["isComputerLokaal"] != null)
                 {
-                    Lokaal lokaal = new Lokaal();
-                    lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-                    lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-
-                    if (Request.Form["isComputerLokaal"] != null)
-                    {
-                        lokaal.IsComputerLokaal = true;
-                    }
-                    else
-                    {
-                        lokaal.IsComputerLokaal = false;
-                    }
-
-                    client.LokaalCreate(lokaal);
-
-                    TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
-                    return RedirectToAction("Index");
+                    lokaal.IsComputerLokaal = true;
+                }
+                else
+                {
+                    lokaal.IsComputerLokaal = false;
                 }
 
-                // Wanneer ModelState.IsValid == false
-                // User wordt ge-redirect naar Index pagina en de errors zijn te zien bovenaan het scherm
-                string validationErrors = string.Join(",", ModelState.Values.Where(E => E.Errors.Count > 0)
-                    .SelectMany(E => E.Errors).Select(E => E.ErrorMessage).ToArray());
+                client.LokaalCreate(lokaal);
 
-                TempData["action"] = "lokaal niet toegevoegd: " + validationErrors;
-                return RedirectToAction("Index");
+                TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
             }
+            return RedirectToAction("Index");
         }
 
         // EDIT:
@@ -74,37 +57,31 @@ namespace CvoInventarisClient.Controllers
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
                 Lokaal lokaal = client.LokaalGetById(id);
-                return View(new Models.LokaalModel() { IdLokaal = lokaal.IdLokaal, LokaalNaam = lokaal.LokaalNaam, AantalPlaatsen = lokaal.AantalPlaatsen, IsComputerLokaal = lokaal.IsComputerLokaal });
+                return View(new LokaalModel() { IdLokaal = lokaal.IdLokaal, LokaalNaam = lokaal.LokaalNaam, AantalPlaatsen = lokaal.AantalPlaatsen, IsComputerLokaal = lokaal.IsComputerLokaal });
             }
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, LokaalModel lk)
+        public ActionResult Edit(int id, FormCollection collection)
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
-                if (ModelState.IsValid)
+                Lokaal lokaal = new Lokaal();
+                lokaal.IdLokaal = Convert.ToInt16(Request.Form["idLokaal"]);
+                lokaal.LokaalNaam = Request.Form["lokaalNaam"];
+                lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+
+                if (Request.Form["isComputerLokaal"] != null) { lokaal.IsComputerLokaal = true; }
+                else
                 {
-                    Lokaal lokaal = new Lokaal();
-                    lokaal.IdLokaal = Convert.ToInt16(Request.Form["idLokaal"]);
-                    lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-                    lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-
-                    if (Request.Form["isComputerLokaal"] != null) { lokaal.IsComputerLokaal = true; }
-                    else
-                    {
-                        lokaal.IsComputerLokaal = false;
-                    }
-
-                    client.LokaalUpdate(lokaal);
-
-                    TempData["action"] = "lokaal " + Request.Form["lokaalNaam"] + " werd aangepast";
-                    return RedirectToAction("Index");
+                    lokaal.IsComputerLokaal = false;
                 }
 
-                Lokaal lokaalnv = client.LokaalGetById(id);
-                return View(new Models.LokaalModel() { IdLokaal = lokaalnv.IdLokaal, LokaalNaam = lokaalnv.LokaalNaam, AantalPlaatsen = lokaalnv.AantalPlaatsen, IsComputerLokaal = lokaalnv.IsComputerLokaal });
+                client.LokaalUpdate(lokaal);
+
+                TempData["action"] = "lokaal " + Request.Form["lokaalNaam"] + " werd aangepast";
             }
+            return RedirectToAction("Index");
         }
 
 

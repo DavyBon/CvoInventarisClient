@@ -12,23 +12,19 @@
             @Html.Hidden("idCampus", Model.IdCampus)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Naam)
-                @Html.ValidationMessageFor(model => model.Naam)
-                <input class="form-control" type="text" name="naam" value="@Model.Naam"/>
+                <input class="form-control" type="text" name="naam" value="@Model.Naam" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Postcode)
-                @Html.ValidationMessageFor(model => model.Postcode)
-                <input class="form-control" type="text" name="postcode" value="@Model.Postcode" />
+                <input class="form-control" type="text" name="postcode" value="@Model.Postcode" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Straat)
-                @Html.ValidationMessageFor(model => model.Straat)
-                <input class="form-control" type="text" name="straat" value="@Model.Straat"/>
+                <input class="form-control" type="text" name="straat" value="@Model.Straat" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Nummer)
-                @Html.ValidationMessageFor(model => model.Nummer)
-                <input class="form-control" type="text" name="nummer" value="@Model.Nummer"/>
+                <input class="form-control" type="text" name="nummer" value="@Model.Nummer" required/>
             </div>
         </div>
     </div>
