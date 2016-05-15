@@ -2,10 +2,8 @@
 @{
     ViewBag.Title = "Overzicht";
 }
-
 <div class="row">
-
-    <div class="col-sm-12 col-md-4 col-lg-4">
+    <div class="col-sm-12 col-md-6 col-lg-6">
         <a href="@Url.Action("Index","Inventaris")">
             <div class="tile main col-sm-1 col-md-4 col-lg-3">
                 <h3 class="title">Inventaris</h3>
@@ -13,165 +11,60 @@
             </div>
         </a>
     </div>
-
-    <div class="col-sm-12 col-md-4 col-lg-4">
+    <div class="col-sm-12 col-md-6 col-lg-6">
         <a href="@Url.Action("Index","Object")">
             <div class="tile main col-sm-1 col-md-4 col-lg-3">
-                <h3 class="title">Objecten</h3>
-                <span class="glyphicon glyphicon-blackboard" aria-hidden="true"></span>
+                <h3 class="title">Object</h3>
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             </div>
         </a>
     </div>
-
-    <div class="col-sm-12 col-md-4 col-lg-4">
-        <a href="@Url.Action("Index","Leverancier")">
-            <div class="tile main col-sm-1 col-md-4 col-lg-3">
-                <h3 class="title">Leveranciers</h3>
-                <span class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-12 col-md-4 col-lg-4">
-        <a href="@Url.Action("Index","Factuur")">
-            <div class="tile main col-sm-1 col-md-4 col-lg-3">
-                <h3 class="title">Facturen</h3>
-                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-12 col-md-4 col-lg-4">
-        <a href="@Url.Action("Index","Verzekering")">
-            <div class="tile main col-sm-1 col-md-4 col-lg-3">
-                <h3 class="title">Verzekering</h3>
-                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-12 col-md-4 col-lg-4">
-        <a href="@Url.Action("Index","Campus")">
-            <div class="tile main col-sm-1 col-md-4 col-lg-3">
-                <h3 class="title">Campus</h3>
-                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-            </div>
-        </a>
-    </div>
-
-    @*Computers*@
-    <div class="col-sm-12 col-md-4 col-lg-4">
-        <a href="" data-toggle="modal" data-target=".computerModal">
-            <div class="tile main col-sm-1 col-md-4 col-lg-3">
-                <h3 class="title">Computers</h3>
-                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-            </div>
-        </a>
-    </div>
-
-    @*Infrastructuur*@
-    <div class="col-sm-12 col-md-4 col-lg-4">
-        <a href="" data-toggle="modal" data-target=".infrastructuurModal">
-            <div class="tile main col-sm-1 col-md-4 col-lg-3">
-                <h3 class="title">Infrastructuur</h3>
-                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-                <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>             
-            </div>
-        </a>
-    </div>
-
-    <div class="col-sm-12 col-md-4 col-lg-4">
+    <div class="col-sm-12 col-md-6 col-lg-6">
         <a href="@Url.Action("Index","ObjectType")">
             <div class="tile main col-sm-1 col-md-4 col-lg-3">
                 <h3 class="title">ObjectType</h3>
-                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             </div>
         </a>
     </div>
-</div>
-
-<div class="modal fade computerModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <a href="@Url.Action("Index","Hardware")">
-                            <div class="tile main">
-                                <h3 class="title">Hardware</h3>
-                                <span class="glyphicon glyphicon-hd-video" aria-hidden="true"></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <a href="@Url.Action("Index","Harddisk")">
-                            <div class="tile main">
-                                <h3 class="title">Harddisks</h3>
-                                <span class="glyphicon glyphicon-hd-video" aria-hidden="true"></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <a href="@Url.Action("Index","Cpu")">
-                            <div class="tile main">
-                                <h3 class="title">Cpu</h3>
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <a href="@Url.Action("Index","Device")">
-                            <div class="tile main">
-                                <h3 class="title">Device</h3>
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-6 col-md-6 col-lg-6">
-                        <a href="@Url.Action("Index","GrafischeKaart")">
-                            <div class="tile main">
-                                <h3 class="title">Grafische Kaart</h3>
-                                <span class="glyphicon glyphicon-file" aria-hidden="true"></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <a href="@Url.Action("Index","Campus")">
+            <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                <h3 class="title">Campus</h3>
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             </div>
-        </div>
+        </a>
     </div>
-</div>
-
-<div class="modal fade infrastructuurModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel">
-    <div class="modal-dialog modal-lg">
-        <div class="modal-content">
-            <div class="modal-body">
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <a href="@Url.Action("Index","Lokaal")">
-                            <div class="tile main">
-                                <h3 class="title">Lokalen</h3>
-                                <span class="glyphicon glyphicon-education" aria-hidden="true"></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 col-md-12 col-lg-12">
-                        <a href="@Url.Action("Index","Netwerk")">
-                            <div class="tile main">
-                                <h3 class="title">Netwerken</h3>
-                                <span class="glyphicon glyphicon-transfer" aria-hidden="true"></span>
-                            </div>
-                        </a>
-                    </div>
-                </div>             
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <a href="@Url.Action("Index","Lokaal")">
+            <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                <h3 class="title">Lokaal</h3>
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             </div>
-        </div>
+        </a>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <a href="@Url.Action("Index","Leverancier")">
+            <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                <h3 class="title">Leverancier</h3>
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <a href="@Url.Action("Index","Factuur")">
+            <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                <h3 class="title">Factuur</h3>
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </div>
+        </a>
+    </div>
+    <div class="col-sm-12 col-md-6 col-lg-6">
+        <a href="@Url.Action("Index","Verzekering")">
+            <div class="tile main col-sm-1 col-md-4 col-lg-3">
+                <h3 class="title">Verzekering</h3>
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </div>
+        </a>
     </div>
 </div>

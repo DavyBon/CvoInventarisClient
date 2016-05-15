@@ -16,21 +16,25 @@
     <meta name="description" content="CvoInventaris applicatie" />
 </head>
 <body>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-lg-2">
-                <ul class="nav nav-pills nav-stacked">
-                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Profiel" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-user"></span> Account</a></li>
-                    <li class="@(new List<String>() { "Beheer", "Inventaris", "Object", "Netwerk", "Harddisk","Leverancier","Lokaal","Factuur","Cpu","Device","GrafischeKaart","Verzekering","Hardware","ObjectType"}.Contains(ViewContext.RouteData.Values["controller"].ToString()) ? "active" : "")"><a href="@Url.Action("Index","Beheer")"><span class="glyphicon glyphicon-list-alt"></span> Beheer</a></li>
-                    <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Rapportering" ? "active" : "")"><a href="@Url.Action("Index","Rapportering")"><span class="glyphicon glyphicon-file"></span> Rapportering</a></li>
-                    <li><a class="bottom-align-text" href="@Url.Action("Loguit","Account")"><span class="glyphicon glyphicon-log-out"></span> Log uit</a></li>
-                </ul>
-            </div>
-            <div class="col-lg-10">               
-                    @RenderBody()             
+        <div class="content-background">
+            <div class="content-wrapper">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <ul class="nav nav-pills nav-stacked">
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Profiel" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-user"></span> Account</a></li>
+                                <li class="@(new List<String>() { "Beheer", "Inventaris", "Object", "Netwerk", "Harddisk","Leverancier","Lokaal","Factuur","Cpu","Device","GrafischeKaart","Verzekering","Hardware","ObjectType"}.Contains(ViewContext.RouteData.Values["controller"].ToString()) ? "active" : "")"><a href="@Url.Action("Index","Beheer")"><span class="glyphicon glyphicon-list-alt"></span> Beheer</a></li>
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Rapportering" ? "active" : "")"><a href="@Url.Action("Index","Rapportering")"><span class="glyphicon glyphicon-file"></span> Rapportering</a></li>
+                                <li><a class="bottom-align-text" href="@Url.Action("Loguit","Account")"><span class="glyphicon glyphicon-log-out"></span> Log uit</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-10">
+                            @RenderBody()
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 </body>
 </html>
