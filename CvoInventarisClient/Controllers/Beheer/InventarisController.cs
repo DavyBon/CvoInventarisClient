@@ -61,12 +61,14 @@ namespace CvoInventarisClient.Controllers
         {
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
+
                 for (int i = 0; i < Convert.ToInt32(Request.Form["aantal"]); i++)
                 {
                     Inventaris inventaris = new Inventaris();
                     inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                     inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                     inventaris.Historiek = Request.Form["historiek"];
+                    inventaris.Label = Request.Form["reeks"] + Convert.ToInt32(Request.Form["volgnummer"]) + i;
                     inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
                     inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) };
                     inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) };
