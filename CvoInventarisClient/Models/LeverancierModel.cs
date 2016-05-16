@@ -52,7 +52,7 @@ namespace CvoInventarisClient.Models
         public string Bic { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "toegevoegdOp")]
         public DateTime ToegevoegdOp { get; set; }
     }

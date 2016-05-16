@@ -22,7 +22,7 @@ namespace CvoInventarisClient.Models
         [Display(Name = "scholengroepNummer")]
         public string ScholengroepNummer { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "factuurDatum")]
         public DateTime FactuurDatum { get; set; }
 
@@ -45,7 +45,7 @@ namespace CvoInventarisClient.Models
         public int Afschrijfperiode { get; set; }
  
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "datumInsert")]
         public DateTime DatumInsert { get; set; }
 
@@ -53,7 +53,7 @@ namespace CvoInventarisClient.Models
         public string UserInsert { get; set; }
 
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/mm/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "datumModified")]
         public DateTime DatumModified { get; set; }
 
