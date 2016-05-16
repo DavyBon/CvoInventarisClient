@@ -72,8 +72,10 @@ namespace CvoInventarisClient.Controllers
                 factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
                 factuur.DatumInsert = Convert.ToDateTime(Request.Form["datumInsert"]);
                 factuur.UserInsert = Request.Form["userInsert"];
-                factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]);
-                factuur.UserModified = Request.Form["userModified"];
+                if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumInsert"]); }
+                else { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]); }
+                if (String.IsNullOrWhiteSpace(Request.Form["userModified"])) { factuur.UserModified = Request.Form["userInsert"]; }
+                else { factuur.UserModified = Request.Form["userModified"]; }
 
                 client.FactuurCreate(factuur);
             }
@@ -161,8 +163,10 @@ namespace CvoInventarisClient.Controllers
                 factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
                 factuur.DatumInsert = Convert.ToDateTime(Request.Form["datumInsert"]);
                 factuur.UserInsert = Request.Form["userInsert"];
-                factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]);
-                factuur.UserModified = Request.Form["userModified"];
+                if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumInsert"]); }
+                else { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]); }
+                if (String.IsNullOrWhiteSpace(Request.Form["userModified"])) { factuur.UserModified = Request.Form["userInsert"]; }
+                else { factuur.UserModified = Request.Form["userModified"]; }
                 if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["Leveranciers"]) }; }
                 else { factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
 

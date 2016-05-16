@@ -177,6 +177,10 @@
                         <input class="form-control" type="text" name="factuurNummer" required/>
                     </div>
                     <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Factuur[0].ScholengroepNummer)
+                        <input class="form-control" type="text" name="scholengroepNummer" required />
+                    </div>
+                    <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].FactuurDatum)
                         <input class="form-control" type="date" name="factuurDatum" required/>
                     </div>
@@ -214,11 +218,11 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].DatumModified)
-                        <input class="form-control" type="date" name="datumModified" required/>
+                        <input class="form-control" type="date" name="datumModified"/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Factuur[0].UserModified)
-                        <input class="form-control" type="text" name="userModified" required/>
+                        <input class="form-control" type="text" name="userModified"/>
                     </div>
 
                 </div>
