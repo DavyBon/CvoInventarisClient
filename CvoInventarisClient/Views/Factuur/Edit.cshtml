@@ -10,7 +10,7 @@
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
             @Html.Hidden("idFactuur", Model.Factuur[0].IdFactuur)
-            @Html.Hidden("idLeverancier", Model.Factuur[0].Leverancier.IdLeverancier)
+            @Html.Hidden("defaultIdLeverancier", Model.Factuur[0].Leverancier.IdLeverancier)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Factuur[0].Boekjaar)
                 <input class="form-control" type="date" name="boekjaar" value="@Model.Factuur[0].Boekjaar" required/>

@@ -158,9 +158,11 @@ namespace CvoInventarisClient.Controllers
                 factuur.UserInsert = Request.Form["userInsert"];
                 factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]);
                 factuur.UserModified = Request.Form["userModified"];
-                factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["idLeverancier"]) };
+                if (!String.IsNullOrWhiteSpace(Request.Form["Leverancier"])) { factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["Leverancier"]) }; }
+                else { factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
 
                 client.FactuurUpdate(factuur);
+
             }
             TempData["action"] = "factuur met factuurnummer " + Request.Form["factuurNummer"] + " werd aangepast";
             return RedirectToAction("Index");
