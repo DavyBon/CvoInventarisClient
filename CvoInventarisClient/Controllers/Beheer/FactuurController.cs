@@ -19,7 +19,7 @@ namespace CvoInventarisClient.Controllers
             {
                 FactuurViewModel model = new FactuurViewModel();
                 model.Factuur = new List<FactuurModel>();
-                model.Leverancier = new List<SelectListItem>();
+                model.Leveranciers = new List<SelectListItem>();
 
                 foreach (Factuur factuur in client.FactuurGetAll())
                 {
@@ -44,7 +44,6 @@ namespace CvoInventarisClient.Controllers
                 }
                 foreach (Leverancier l in client.LeverancierGetAll())
                 {
-                    if (!model.Factuur.Exists(f => f.Leverancier.IdLeverancier == l.IdLeverancier)) { model.Leverancier.Add(new SelectListItem { Text = l.Naam, Value = l.IdLeverancier.ToString() }); }
                 }
                 return View(model);
             }
@@ -62,8 +61,10 @@ namespace CvoInventarisClient.Controllers
                 factuur.FactuurNummer = Request.Form["factuurNummer"];
                 factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
                 factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
-                factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["Leverancier"]) };
-                factuur.Prijs = Convert.ToDecimal(Request.Form["prijs"], CultureInfo.GetCultureInfo("nl-BE"));
+                factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["Leveranciers"]) };
+                string prijs = Request.Form["prijs"].ToString(CultureInfo.InvariantCulture);
+                factuur.Prijs = decimal.Parse(prijs, CultureInfo.InvariantCulture);
+                //factuur.Prijs = Convert.ToDecimal(Request.Form["prijs"], CultureInfo.GetCultureInfo("nl-BE"));
                 factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
                 factuur.Omschrijving = Request.Form["omschrijving"];
                 factuur.Opmerking = Request.Form["opmerking"];
@@ -88,7 +89,7 @@ namespace CvoInventarisClient.Controllers
             {
                 FactuurViewModel model = new FactuurViewModel();
                 model.Factuur = new List<FactuurModel>();
-                model.Leverancier = new List<SelectListItem>();
+                model.Leveranciers = new List<SelectListItem>();
 
                 Factuur f = client.FactuurGetById(id);
                 FactuurModel factuur = new FactuurModel();
@@ -131,7 +132,7 @@ namespace CvoInventarisClient.Controllers
                 {
                     if (!(l.IdLeverancier == factuur.Leverancier.IdLeverancier))
                     {
-                        model.Leverancier.Add(new SelectListItem { Text = l.Naam, Value = l.IdLeverancier.ToString() });
+                        model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.IdLeverancier.ToString() });
                     }
                 }
                 return View(model);
@@ -150,7 +151,9 @@ namespace CvoInventarisClient.Controllers
                 factuur.FactuurNummer = Request.Form["factuurNummer"];
                 factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
                 factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
-                factuur.Prijs = Convert.ToDecimal(Request.Form["prijs"], CultureInfo.GetCultureInfo("nl-BE"));
+                string prijs = Request.Form["prijs"].ToString(CultureInfo.InvariantCulture);
+                factuur.Prijs = decimal.Parse(prijs, CultureInfo.InvariantCulture);
+                //factuur.Prijs = Convert.ToDecimal(Request.Form["prijs"], CultureInfo.GetCultureInfo("nl-BE"));
                 factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
                 factuur.Omschrijving = Request.Form["omschrijving"];
                 factuur.Opmerking = Request.Form["opmerking"];
@@ -159,7 +162,7 @@ namespace CvoInventarisClient.Controllers
                 factuur.UserInsert = Request.Form["userInsert"];
                 factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]);
                 factuur.UserModified = Request.Form["userModified"];
-                if (!String.IsNullOrWhiteSpace(Request.Form["Leverancier"])) { factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["Leverancier"]) }; }
+                if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["Leveranciers"]) }; }
                 else { factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
 
                 client.FactuurUpdate(factuur);
