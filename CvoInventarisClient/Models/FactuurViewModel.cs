@@ -9,6 +9,6 @@ namespace CvoInventarisClient.Models
     public class FactuurViewModel
     {
         public List<FactuurModel> Factuur { get; set; }
-        public List<SelectListItem> Leverancier { get; set; }
+        public List<SelectListItem> Leveranciers { get; set; }
     }
 }

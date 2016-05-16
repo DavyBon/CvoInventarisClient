@@ -31,8 +31,13 @@
             <input type="hidden" name="GUID" value="@Request.QueryString["uid"]" />
             <label for="Wachtwoord" class="sr-only">Wachtwoord</label>
             <input type="password" id="Wachtwoord" name="Wachtwoord" class="form-control" placeholder="Wachtwoord" required autofocus>
-            <label for="HerhaalWachtwoord" class="sr-only">Herhaal wachtwoord</label>
-            <input type="password" id="HerhaalWachtwoord" name="HerhaalWachtwoord" class="form-control" placeholder="Herhaal wachtwoord" required>            
+            @*<label for="HerhaalWachtwoord" class="sr-only">Herhaal wachtwoord</label>
+            <input type="password" id="HerhaalWachtwoord" name="HerhaalWachtwoord" class="form-control" placeholder="Herhaal wachtwoord" required>*@  
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" onchange="document.getElementById('Wachtwoord').type = this.checked ? 'text' : 'password'"> Toon wachtwoord
+                </label>
+            </div>         
             <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
             <div class="pager">
                 <a href="/Login/Index">Log in</a>

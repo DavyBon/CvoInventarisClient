@@ -223,9 +223,7 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient service = new CvoInventarisServiceClient();
 
-            string GUID = Request.QueryString["uid"];
-
-            if (!service.AccountIsWachtwoordResetLinkValid(GUID))
+            if (!service.AccountIsWachtwoordResetLinkValid(Request.QueryString["uid"]))
             {
                 ViewBag.WijzigWachtwoordMessage = "Opgelet, wachtwoord reset link is verlopen of ongeldig!";
             }
@@ -238,14 +236,9 @@ namespace CvoInventarisClient.Controllers
         {
             CvoInventarisServiceClient service = new CvoInventarisServiceClient();
 
-            // TODO: in ActionResult WijzigWachtwoord eerst nagaan of wachtwoord en herhaal wachtwoord gelijk zijn anders geef een foutmelding “Opgelet, de ingevulde wachtwoorden waren niet gelijk!” 
-
-            string wachtwoord = am.Wachtwoord;
-            string GUIDTest = GUID;
-
-            if (service.AccountWijzigWachtwoord(GUIDTest, wachtwoord))
+            if (service.AccountWijzigWachtwoord(GUID, am.Wachtwoord))
             {
-                ViewBag.WijzigWachtwoordMessage = "Uw wachtwoord is veranderd! U kan nu inloggen met uw nieuwe wachtwoord.";
+                ViewBag.WijzigWachtwoordMessage = "Uw wachtwoord is gewijzigd! U kan nu inloggen met uw nieuwe wachtwoord.";
             }
             else
             {

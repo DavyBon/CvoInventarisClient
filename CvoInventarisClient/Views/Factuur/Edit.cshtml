@@ -10,7 +10,7 @@
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
             @Html.Hidden("idFactuur", Model.Factuur[0].IdFactuur)
-            @Html.Hidden("idLeverancier", Model.Factuur[0].Leverancier.IdLeverancier)
+            @Html.Hidden("defaultIdLeverancier", Model.Factuur[0].Leverancier.IdLeverancier)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Factuur[0].Boekjaar)
                 <input class="form-control" type="date" name="boekjaar" value="@Model.Factuur[0].Boekjaar" required/>
@@ -33,11 +33,11 @@
             </div>
             <div class="form-group">
                 Leverancier
-                @Html.DropDownListFor(model => model.Leverancier, Model.Leverancier, Model.Factuur[0].Leverancier.Naam, new { @class="form-control" })
+                @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, Model.Factuur[0].Leverancier.Naam, new { @class="form-control" })
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Factuur[0].Prijs)
-                <input class="form-control" type="text" name="prijs" value="@Model.Factuur[0].Prijs." required/>
+                <input class="form-control" type="text" name="prijs" value="@Model.Factuur[0].Prijs" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Factuur[0].Garantie)
@@ -65,11 +65,11 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Factuur[0].DatumModified)
-                <input class="form-control" type="date" name="datumModified" value="@Model.Factuur[0].DatumModified" required/>
+                <input class="form-control" type="date" name="datumModified" value="@Model.Factuur[0].DatumModified"/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Factuur[0].UserModified)
-                <input class="form-control" type="text" name="userModified" value="@Model.Factuur[0].UserModified" required/>
+                <input class="form-control" type="text" name="userModified" value="@Model.Factuur[0].UserModified"/>
             </div>
         </div>
     </div>
