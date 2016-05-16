@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using CvoInventarisClient.Models;
 using CvoInventarisClient.ServiceReference;
+using System.Globalization;
 
 namespace CvoInventarisClient.Controllers
 {
@@ -62,7 +63,7 @@ namespace CvoInventarisClient.Controllers
                 factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
                 factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
                 factuur.Leverancier = new Leverancier() { IdLeverancier = Convert.ToInt16(Request.Form["Leverancier"]) };
-                factuur.Prijs = Convert.ToInt32(Request.Form["prijs"]);
+                factuur.Prijs = Convert.ToDecimal(Request.Form["prijs"], CultureInfo.GetCultureInfo("nl-BE"));
                 factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
                 factuur.Omschrijving = Request.Form["omschrijving"];
                 factuur.Opmerking = Request.Form["opmerking"];
@@ -149,7 +150,7 @@ namespace CvoInventarisClient.Controllers
                 factuur.FactuurNummer = Request.Form["factuurNummer"];
                 factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
                 factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
-                factuur.Prijs = Convert.ToInt32(Request.Form["prijs"]);
+                factuur.Prijs = Convert.ToDecimal(Request.Form["prijs"], CultureInfo.GetCultureInfo("nl-BE"));
                 factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
                 factuur.Omschrijving = Request.Form["omschrijving"];
                 factuur.Opmerking = Request.Form["opmerking"];

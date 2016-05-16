@@ -29,9 +29,8 @@ namespace CvoInventarisClient.Models
         [Display(Name = "idLeverancier")]
         public LeverancierModel Leverancier { get; set; }
 
-        [DataType(DataType.Currency)]
-        [Display(Name = "prijs")]
-        public int Prijs { get; set; }
+        [Display(Name = "prijs(€)")]
+        public decimal Prijs { get; set; }
 
         [Display(Name = "garantie")]
         public int Garantie { get; set; }
