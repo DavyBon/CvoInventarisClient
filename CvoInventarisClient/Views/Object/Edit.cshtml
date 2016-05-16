@@ -1,63 +1,31 @@
-﻿@model CvoInventarisClient.ServiceReference.Object
+﻿@model CvoInventarisClient.Models.ObjectViewModel
 
 @{
-    ViewBag.Title = "Edit";
+    ViewBag.Title = "Object - Edit";
 }
 
-<h2>Edit</h2>
-
-
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Object"))
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>TblObject</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.Id)
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdFactuur, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdFactuur, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdFactuur, "", new { @class = "text-danger" })
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="container-fluid">
+            @Html.Hidden("idObject", Model.Objecten[0].Id)
+            @Html.Hidden("defaultIdObjectType", Model.Objecten[0].ObjectType.IdObjectType)
+            @Html.Hidden("defaultIdFactuur", Model.Objecten[0].Factuur.IdFactuur)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Objecten[0].ObjectType)
+                @Html.DropDownListFor(model => model.ObjectTypes, Model.ObjectTypes, Model.Objecten[0].ObjectType.Omschrijving, new { @class = "form-control" })
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdLeverancier, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdLeverancier, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdLeverancier, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Objecten[0].Kenmerken)
+                <input class="form-control" type="text" name="kenmerken" value="@Model.Objecten[0].Kenmerken" required />
             </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.IdObjectType, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.IdObjectType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.IdObjectType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Kenmerken, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Kenmerken, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Kenmerken, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Objecten[0].Factuur)
+                @Html.DropDownListFor(model => model.Facturen, Model.Facturen, Model.Objecten[0].Factuur.FactuurNummer, new { @class = "form-control" })
             </div>
         </div>
     </div>
+    <button type="submit" class="btn btn-primary">Pas campus aan</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-

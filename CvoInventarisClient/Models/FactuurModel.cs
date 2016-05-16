@@ -27,7 +27,7 @@ namespace CvoInventarisClient.Models
 
         [Required(ErrorMessage = "Vul een factuurnummer in")]
         [StringLength(50, MinimumLength = 1, ErrorMessage = "Een factuurnummer bestaat uit minimum 1 en maximum 50 characters")]
-        [Display(Name = "factuurNummer")]
+        [Display(Name = "FactuurNummer")]
         public string FactuurNummer { get; set; }
 
         
@@ -44,7 +44,7 @@ namespace CvoInventarisClient.Models
         public DateTime FactuurDatum { get; set; }
 
         [Required(ErrorMessage = "Kies een leverancier")]
-        [Display(Name = "idLeverancier")]
+        [Display(Name = "Leverancier")]
         public LeverancierModel Leverancier { get; set; }
 
         // DataType.Currency: Displays the integer as a currency (example: 100 becomes €100,00)
@@ -53,7 +53,7 @@ namespace CvoInventarisClient.Models
         [DataType(DataType.Currency)]
         [Range(1, 1000000, ErrorMessage = "De prijs moet tussen 1 en 1000000 liggen")]
         [Display(Name = "prijs")]
-        public int Prijs { get; set; }
+        public decimal Prijs { get; set; }
 
         [Required(ErrorMessage = "Vul een garantie in")]
         [Range(1, 100, ErrorMessage = "De garantie moet tussen 1 en 100 liggen")]

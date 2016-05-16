@@ -6016,7 +6016,7 @@
       <wsa10:EndpointReference>
         <wsa10:Address>http://localhost:50881/Service1.svc/WcfServiceCvoInventaris.CvoInventarisService</wsa10:Address>
         <Identity xmlns="http://schemas.xmlsoap.org/ws/2006/02/addressingidentity">
-          <Upn>Gebruiker-PC\Gebruiker</Upn>
+          <Upn>home\HomePc</Upn>
         </Identity>
       </wsa10:EndpointReference>
     </wsdl:port>

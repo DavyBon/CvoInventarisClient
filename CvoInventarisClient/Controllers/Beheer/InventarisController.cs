@@ -32,7 +32,7 @@ namespace CvoInventarisClient.Controllers
                     inventaris.IsActief = i.IsActief;
                     inventaris.Label = i.Label;
                     inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam, };
-                    inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, Leverancier = new LeverancierModel() { IdLeverancier = i.Object.Leverancier.IdLeverancier, Afkorting = i.Object.Leverancier.Afkorting, Bic = i.Object.Leverancier.Bic, BtwNummer = i.Object.Leverancier.BtwNummer, BusNummer = i.Object.Leverancier.BusNummer, Email = i.Object.Leverancier.Email, Fax = i.Object.Leverancier.Fax, HuisNummer = i.Object.Leverancier.HuisNummer, Iban = i.Object.Leverancier.Iban, Naam = i.Object.Leverancier.Naam, Postcode = i.Object.Leverancier.Postcode, Straat = i.Object.Leverancier.Straat, Telefoon = i.Object.Leverancier.Telefoon, ToegevoegdOp = i.Object.Leverancier.ToegevoegdOp, Website = i.Object.Leverancier.Website }, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
+                    inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
                     inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving };
                     inventaris.Aankoopjaar = i.Aankoopjaar;
                     inventaris.Afschrijvingsperiode = i.Afschrijvingsperiode;
@@ -109,7 +109,7 @@ namespace CvoInventarisClient.Controllers
                 inventaris.IsActief = i.IsActief;
                 inventaris.Label = i.Label;
                 inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam, };
-                inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, Leverancier = new LeverancierModel() { IdLeverancier = i.Object.Leverancier.IdLeverancier, Afkorting = i.Object.Leverancier.Afkorting, Bic = i.Object.Leverancier.Bic, BtwNummer = i.Object.Leverancier.BtwNummer, BusNummer = i.Object.Leverancier.BusNummer, Email = i.Object.Leverancier.Email, Fax = i.Object.Leverancier.Fax, HuisNummer = i.Object.Leverancier.HuisNummer, Iban = i.Object.Leverancier.Iban, Naam = i.Object.Leverancier.Naam, Postcode = i.Object.Leverancier.Postcode, Straat = i.Object.Leverancier.Straat, Telefoon = i.Object.Leverancier.Telefoon, ToegevoegdOp = i.Object.Leverancier.ToegevoegdOp, Website = i.Object.Leverancier.Website }, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
+                inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
                 inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving };
                 inventaris.Aankoopjaar = i.Aankoopjaar;
                 inventaris.Afschrijvingsperiode = i.Afschrijvingsperiode;

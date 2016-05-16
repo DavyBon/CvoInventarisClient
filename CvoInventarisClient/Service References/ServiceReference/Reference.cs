@@ -1027,7 +1027,7 @@ namespace CvoInventarisClient.ServiceReference {
         private string OpmerkingField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
-        private int PrijsField;
+        private decimal PrijsField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string ScholengroepNummerField;
@@ -1205,7 +1205,7 @@ namespace CvoInventarisClient.ServiceReference {
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public int Prijs {
+        public decimal Prijs {
             get {
                 return this.PrijsField;
             }

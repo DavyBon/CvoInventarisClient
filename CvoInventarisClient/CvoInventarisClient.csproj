@@ -246,6 +246,7 @@
     <Compile Include="Models\NetwerkModel.cs" />
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />
+    <Compile Include="Models\ObjectViewModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\TabelModel.cs" />
     <Compile Include="Models\TicketModel.cs" />
@@ -281,11 +282,6 @@
     <Content Include="Views\Inventaris\Edit.cshtml" />
     <Content Include="Views\Netwerk\Edit.cshtml" />
     <Content Include="Views\Netwerk\Index.cshtml" />
-    <Content Include="Views\Object\Create.cshtml" />
-    <Content Include="Views\Object\Delete.cshtml" />
-    <Content Include="Views\Object\Details.cshtml" />
-    <Content Include="Views\Object\Edit.cshtml" />
-    <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Beheer\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <None Include="Service References\ServiceReference\Service13.xsd">
@@ -316,6 +312,8 @@
     <Content Include="Views\Account\WijzigWachtwoord.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
+    <Content Include="Views\Object\Index.cshtml" />
+    <Content Include="Views\Object\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
