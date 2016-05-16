@@ -44,6 +44,7 @@ namespace CvoInventarisClient.Controllers
                 }
                 foreach (Leverancier l in client.LeverancierGetAll())
                 {
+                    model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.IdLeverancier.ToString() });
                 }
                 return View(model);
             }
