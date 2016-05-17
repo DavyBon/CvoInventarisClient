@@ -30,54 +30,54 @@
                     <th></th>
                     <th></th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].Boekjaar)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Boekjaar)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].CvoVolgNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].CvoVolgNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].FactuurNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].ScholengroepNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].FactuurDatum)
+                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurDatum)
                     </th>
                     <th>
                         Leverancier
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].Prijs)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].Garantie)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].Omschrijving)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].Opmerking)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Opmerking)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].Afschrijfperiode)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].DatumInsert)
+                        @Html.DisplayNameFor(model => model.Facturen[0].DatumInsert)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].UserInsert)
+                        @Html.DisplayNameFor(model => model.Facturen[0].UserInsert)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].DatumModified)
+                        @Html.DisplayNameFor(model => model.Facturen[0].DatumModified)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Factuur[0].UserModified)
+                        @Html.DisplayNameFor(model => model.Facturen[0].UserModified)
                     </th>
                 </tr>
             </thead>
             <tbody class="search">
-                @foreach (var item in Model.Factuur)
+                @foreach (var item in Model.Facturen)
                 {
                     <tr>
                         <td>
@@ -165,23 +165,23 @@
             {
                 <div class="modal-body">
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].Boekjaar)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Boekjaar)
                         <input class="form-control" type="date" name="boekjaar" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].CvoVolgNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].CvoVolgNummer)
                         <input class="form-control" type="text" name="cvoVolgNummer" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].FactuurNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurNummer)
                         <input class="form-control" type="text" name="factuurNummer" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].ScholengroepNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
                         <input class="form-control" type="text" name="scholengroepNummer" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].FactuurDatum)
+                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurDatum)
                         <input class="form-control" type="date" name="factuurDatum" required/>
                     </div>
                     <div class="form-group">
@@ -189,39 +189,39 @@
                         @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, "", new { @class = "form-control", required = "required" })
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].Prijs)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
                         <input class="form-control" type="text" name="prijs" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].Garantie)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
                         <input class="form-control" type="text" name="garantie" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].Omschrijving)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
                         <input class="form-control" type="text" name="omschrijving" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].Opmerking)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Opmerking)
                         <input class="form-control" type="text" name="opmerking" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].Afschrijfperiode)
+                        @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
                         <input class="form-control" type="text" name="afschrijfperiode" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].DatumInsert)
+                        @Html.DisplayNameFor(model => model.Facturen[0].DatumInsert)
                         <input class="form-control" type="date" name="datumInsert" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].UserInsert)
+                        @Html.DisplayNameFor(model => model.Facturen[0].UserInsert)
                         <input class="form-control" type="text" name="userInsert" required/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].DatumModified)
+                        @Html.DisplayNameFor(model => model.Facturen[0].DatumModified)
                         <input class="form-control" type="date" name="datumModified"/>
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Factuur[0].UserModified)
+                        @Html.DisplayNameFor(model => model.Facturen[0].UserModified)
                         <input class="form-control" type="text" name="userModified"/>
                     </div>
 

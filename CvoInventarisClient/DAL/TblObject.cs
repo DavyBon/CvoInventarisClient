@@ -111,7 +111,7 @@ namespace CvoInventarisClient.DAL
                         factuur.Leverancier = leverancier;
                         factuur.Omschrijving = mySqlDataReader["Omschrijving"].ToString();
                         factuur.Opmerking = mySqlDataReader["Opmerking"].ToString();
-                        factuur.Prijs = (decimal)mySqlDataReader["Prijs"];
+                        factuur.Prijs = mySqlDataReader["Prijs"].ToString();
                         factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
                         factuur.UserModified = mySqlDataReader["UserModified"].ToString();
 
@@ -187,7 +187,7 @@ namespace CvoInventarisClient.DAL
                         factuur.Leverancier = leverancier;
                         factuur.Omschrijving = mySqlDataReader["Omschrijving"].ToString();
                         factuur.Opmerking = mySqlDataReader["Opmerking"].ToString();
-                        factuur.Prijs = (decimal)mySqlDataReader["Prijs"];
+                        factuur.Prijs = mySqlDataReader["Prijs"].ToString();
                         factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
                         factuur.UserModified = mySqlDataReader["UserModified"].ToString();
 

@@ -70,7 +70,7 @@ namespace CvoInventarisClient.DAL
                         factuur.ScholengroepNummer = dr["ScholengroepNummer"].ToString();
                         factuur.FactuurDatum = (DateTime)dr["FactuurDatum"];
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = (decimal)dr["Prijs"];
+                        factuur.Prijs = dr["Prijs"].ToString();
                         factuur.Garantie = (int)dr["Garantie"];
                         factuur.Omschrijving = dr["Omschrijving"].ToString();
                         factuur.Opmerking = dr["Opmerking"].ToString();
@@ -140,7 +140,7 @@ namespace CvoInventarisClient.DAL
                         factuur.ScholengroepNummer = dr["ScholengroepNummer"].ToString();
                         factuur.FactuurDatum = (DateTime)dr["FactuurDatum"];
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = (decimal)dr["Prijs"];
+                        factuur.Prijs = dr["Prijs"].ToString();
                         factuur.Garantie = (int)dr["Garantie"];
                         factuur.Omschrijving = dr["Omschrijving"].ToString();
                         factuur.Opmerking = dr["Opmerking"].ToString();
@@ -303,7 +303,7 @@ namespace CvoInventarisClient.DAL
                             if (keuzeKolommen.Contains("TblFactuur.ScholengroepNummer")) { factuur.ScholengroepNummer = dr["ScholengroepNummer"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.FactuurDatum")) { factuur.FactuurDatum = (DateTime)dr["FactuurDatum"]; }
                             if (keuzeKolommen.Contains("TblLeverancier.naam")) { leverancier.Naam = dr["Naam"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.Prijs")) { factuur.Prijs = (decimal)dr["Prijs"]; }
+                            if (keuzeKolommen.Contains("TblFactuur.Prijs")) { factuur.Prijs = dr["Prijs"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.Garantie")) { factuur.Garantie = (int)dr["Garantie"]; }
                             if (keuzeKolommen.Contains("TblFactuur.Omschrijving")) { factuur.Omschrijving = dr["Omschrijving"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.Opmerking")) { factuur.Opmerking = dr["Opmerking"].ToString(); }

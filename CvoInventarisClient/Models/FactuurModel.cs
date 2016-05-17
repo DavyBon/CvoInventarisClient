@@ -30,7 +30,7 @@ namespace CvoInventarisClient.Models
         public LeverancierModel Leverancier { get; set; }
 
         [Display(Name = "prijs(€)")]
-        public decimal Prijs { get; set; }
+        public string Prijs { get; set; }
 
         [Display(Name = "garantie")]
         public int Garantie { get; set; }
