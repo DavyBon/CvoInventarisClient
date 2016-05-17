@@ -15,143 +15,53 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Index()
         {
             ViewBag.action = TempData["action"];
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                //WCF servicereference objecten collection naar InventarisModel objecten collection
-                InventarisViewModel model = new InventarisViewModel();
-                model.Inventaris = new List<InventarisModel>();
-                model.Objecten = new List<SelectListItem>();
-                model.Lokalen = new List<SelectListItem>();
-                model.Verzekeringen = new List<SelectListItem>();
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+            DAL.TblObject TblObject = new DAL.TblObject();
 
-                foreach (Inventaris i in client.InventarisGetAll())
-                {
-                    InventarisModel inventaris = new InventarisModel();
-                    inventaris.Id = i.Id;
-                    inventaris.IsAanwezig = i.IsAanwezig;
-                    inventaris.IsActief = i.IsActief;
-                    inventaris.Label = i.Label;
-                    inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam, };
-                    inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
-                    inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving };
-                    inventaris.Aankoopjaar = i.Aankoopjaar;
-                    inventaris.Afschrijvingsperiode = i.Afschrijvingsperiode;
-                    inventaris.Historiek = i.Historiek;
-                    model.Inventaris.Add(inventaris);
-                }
-                foreach (ServiceReference.Object o in client.ObjectGetAll())
-                {
-                    if (!model.Inventaris.Exists(i => i.Object.Id == o.Id)) { model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() }); }
-                }
-                foreach (Lokaal l in client.LokaalGetAll())
-                {
-                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
-                }
-                foreach (Verzekering v in client.VerzekeringGetAll())
-                {
-                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
-                }
-                return View(model);
+            //WCF servicereference objecten collection naar InventarisModel objecten collection
+            InventarisViewModel model = new InventarisViewModel();
+            model.Inventaris = new List<InventarisModel>();
+            model.Objecten = new List<SelectListItem>();
+            model.Lokalen = new List<SelectListItem>();
+            model.Verzekeringen = new List<SelectListItem>();
+
+            foreach (InventarisModel i in TblInventaris.GetAll())
+            {
+                model.Inventaris.Add(i);
             }
+            foreach (ObjectModel o in TblObject.GetAll())
+            {
+                if (!model.Inventaris.Exists(i => i.Object.Id == o.Id)) { model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() }); }
+            }
+            //foreach (LokaalModel l in TblLokaal.GetAll())
+            //{
+            //    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+            //}
+            //foreach (VerzekeringModel v in TblVerzekering.GetAll())
+            //{
+            //    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.IdVerzekering.ToString() });
+            //}
+            return View(model);
+
         }
 
         // POST: Inventaris/Create
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+
+            for (int i = 0; i < Convert.ToInt32(Request.Form["aantal"]); i++)
             {
-
-                for (int i = 0; i < Convert.ToInt32(Request.Form["aantal"]); i++)
-                {
-                    int labelnr = Convert.ToInt32(Request.Form["volgnummer"]) + i;
-                    Inventaris inventaris = new Inventaris();
-                    inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
-                    inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
-                    inventaris.Historiek = Request.Form["historiek"];
-                    inventaris.Label = Request.Form["reeks"]+ labelnr;
-                    inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
-                    inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) };
-                    inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) };
-                    if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
-                    else
-                    {
-                        inventaris.IsActief = false;
-                    };
-                    if (Request.Form["isAanwezig"] != null) { inventaris.IsAanwezig = true; }
-                    else
-                    {
-                        inventaris.IsAanwezig = false;
-                    };
-                    client.InventarisCreate(inventaris);
-                }
-            }
-            TempData["action"] = "Object werd toegevoegd aan inventaris";
-            return RedirectToAction("Index");
-        }
-
-        // GET: Inventaris/Edit/5
-        public ActionResult Edit(int id)
-        {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                //WCF servicereference objecten collection naar InventarisModel objecten collection
-                InventarisViewModel model = new InventarisViewModel();
-                model.Inventaris = new List<InventarisModel>();
-                model.Objecten = new List<SelectListItem>();
-                model.Lokalen = new List<SelectListItem>();
-                model.Verzekeringen = new List<SelectListItem>();
-
-                Inventaris i = client.InventarisGetById(id);
+                int labelnr = Convert.ToInt32(Request.Form["volgnummer"]) + i;
                 InventarisModel inventaris = new InventarisModel();
-                inventaris.Id = i.Id;
-                inventaris.IsAanwezig = i.IsAanwezig;
-                inventaris.IsActief = i.IsActief;
-                inventaris.Label = i.Label;
-                inventaris.Lokaal = new LokaalModel() { IdLokaal = i.Lokaal.IdLokaal, AantalPlaatsen = i.Lokaal.AantalPlaatsen, IsComputerLokaal = i.Lokaal.IsComputerLokaal, LokaalNaam = i.Lokaal.LokaalNaam, };
-                inventaris.Object = new ObjectModel() { Id = i.Object.Id, Kenmerken = i.Object.Kenmerken, ObjectType = new ObjectTypeModel() { IdObjectType = i.Object.ObjectType.Id, Omschrijving = i.Object.ObjectType.Omschrijving } };
-                inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = i.Verzekering.Id, Omschrijving = i.Verzekering.Omschrijving };
-                inventaris.Aankoopjaar = i.Aankoopjaar;
-                inventaris.Afschrijvingsperiode = i.Afschrijvingsperiode;
-                inventaris.Historiek = i.Historiek;
-                model.Inventaris.Add(inventaris);
-
-                foreach (Lokaal l in client.LokaalGetAll())
-                {
-                    if (!(l.IdLokaal == inventaris.Lokaal.IdLokaal))
-                    {
-                        model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
-                    }
-                }
-                foreach (Verzekering v in client.VerzekeringGetAll())
-                {
-                    if (!(v.Id == inventaris.Verzekering.IdVerzekering))
-                    {
-                        model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
-                    }
-                }
-                return View(model);
-            }
-        }
-
-        // POST: Inventaris/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                Inventaris inventaris = new Inventaris();
-                inventaris.Id = Convert.ToInt16(Request.Form["idInventaris"]);
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
-                inventaris.Object = new ServiceReference.Object() { Id = Convert.ToInt16(Request.Form["idObject"]) };
-                if (!String.IsNullOrWhiteSpace(Request.Form["Lokalen"])) { inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) }; }
-                else { inventaris.Lokaal = new ServiceReference.Lokaal() { IdLokaal = Convert.ToInt16(Request.Form["defaultIdLokaal"]) }; }
-
-                if (!String.IsNullOrWhiteSpace(Request.Form["Verzekeringen"])) { inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) }; }
-                else { inventaris.Verzekering = new ServiceReference.Verzekering() { Id = Convert.ToInt16(Request.Form["defaultIdVerzekering"]) }; }
-
+                inventaris.Label = Request.Form["reeks"] + labelnr;
+                inventaris.Object = new ObjectModel() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
+                inventaris.Lokaal = new LokaalModel() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) };
+                inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = Convert.ToInt16(Request.Form["Verzekeringen"]) };
                 if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
                 else
                 {
@@ -162,24 +72,94 @@ namespace CvoInventarisClient.Controllers
                 {
                     inventaris.IsAanwezig = false;
                 };
-                inventaris.Label = "TBA";
-                client.InventarisUpdate(inventaris);
+                TblInventaris.Create(inventaris);
             }
+
+            TempData["action"] = "Object werd toegevoegd aan inventaris";
+            return RedirectToAction("Index");
+        }
+
+        // GET: Inventaris/Edit/5
+        public ActionResult Edit(int id)
+        {
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+            //DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+            //WCF servicereference objecten collection naar InventarisModel objecten collection
+            InventarisViewModel model = new InventarisViewModel();
+            model.Inventaris = new List<InventarisModel>();
+            model.Objecten = new List<SelectListItem>();
+            model.Lokalen = new List<SelectListItem>();
+            model.Verzekeringen = new List<SelectListItem>();
+
+            InventarisModel i = TblInventaris.GetById(id);
+            model.Inventaris.Add(i);
+
+            //foreach (Lokaal l in TblLokaal.GetAll())
+            //{
+            //    if (!(l.IdLokaal == i.Lokaal.IdLokaal))
+            //    {
+            //        model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+            //    }
+            //}
+            //foreach (Verzekering v in TblVerzekering.GetAll())
+            //{
+            //    if (!(v.Id == i.Verzekering.IdVerzekering))
+            //    {
+            //        model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+            //    }
+            //}
+            return View(model);
+
+        }
+
+        // POST: Inventaris/Edit/5
+        [HttpPost]
+        public ActionResult Edit(int id, FormCollection collection)
+        {
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+
+            InventarisModel inventaris = new InventarisModel();
+            inventaris.Id = Convert.ToInt16(Request.Form["idInventaris"]);
+            inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
+            inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
+            inventaris.Historiek = Request.Form["historiek"];
+            inventaris.Object = new ObjectModel() { Id = Convert.ToInt16(Request.Form["idObject"]) };
+            if (!String.IsNullOrWhiteSpace(Request.Form["Lokalen"])) { inventaris.Lokaal = new LokaalModel() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) }; }
+            else { inventaris.Lokaal = new LokaalModel() { IdLokaal = Convert.ToInt16(Request.Form["defaultIdLokaal"]) }; }
+
+            if (!String.IsNullOrWhiteSpace(Request.Form["Verzekeringen"])) { inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = Convert.ToInt16(Request.Form["Verzekeringen"]) }; }
+            else { inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = Convert.ToInt16(Request.Form["defaultIdVerzekering"]) }; }
+
+            if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
+            else
+            {
+                inventaris.IsActief = false;
+            };
+            if (Request.Form["isAanwezig"] != null) { inventaris.IsAanwezig = true; }
+            else
+            {
+                inventaris.IsAanwezig = false;
+            };
+            inventaris.Label = "TBA";
+            TblInventaris.Update(inventaris);
+
             TempData["action"] = "Object in inventaris werd gewijzigd";
             return RedirectToAction("Index");
         }
+
+
 
         // POST: Inventaris/Delete/5
         [HttpPost]
         public ActionResult Delete(int[] idArray, FormCollection collection)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+
+            foreach (int id in idArray)
             {
-                foreach (int id in idArray)
-                {
-                    client.InventarisDelete(id);
-                }
+                TblInventaris.Delete(id);
             }
+
             if (idArray.Length >= 2)
             {
                 TempData["action"] = idArray.Length + " objecten werden verwijderd uit de inventaris";
@@ -192,3 +172,4 @@ namespace CvoInventarisClient.Controllers
         }
     }
 }
+
