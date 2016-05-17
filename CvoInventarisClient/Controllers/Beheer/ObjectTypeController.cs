@@ -11,80 +11,62 @@ namespace CvoInventarisClient.Controllers
     {
         public List<ObjectTypeModel> GetObjectTypes()
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                List<Models.ObjectTypeModel> model = new List<Models.ObjectTypeModel>();
-                foreach (ObjectTypes objectType in client.ObjectTypeGetAll())
-                {
-                    model.Add(new Models.ObjectTypeModel() { IdObjectType = objectType.Id, Omschrijving = objectType.Omschrijving });
-                }
-                return model;
-            }
+            DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
+            List<ObjectTypeModel> model = tblObjectType.GetAll();
+            return model;
+            
         }
         public ActionResult Index()
         {
             ViewBag.action = TempData["action"];
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                List<Models.ObjectTypeModel> model = new List<Models.ObjectTypeModel>();
-                foreach (ObjectTypes objectType in client.ObjectTypeGetAll())
-                {
-                    model.Add(new Models.ObjectTypeModel() { IdObjectType = objectType.Id, Omschrijving = objectType.Omschrijving });
-                }
-                return View(model);
-            }
+            DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
+            List<ObjectTypeModel> model = tblObjectType.GetAll();
+            return View(model);
+            
         }
 
         // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                ObjectTypes objectType = client.ObjectTypeGetById(id);
-                return View(new Models.ObjectTypeModel() { IdObjectType = objectType.Id,Omschrijving = objectType.Omschrijving });
-            }
+            DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
+            ObjectTypeModel objectType = new ObjectTypeModel();
+            objectType = tblObjectType.GetById(id);
+            return View(objectType);
+            
         }
 
         // POST: Inventaris/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                ObjectTypes objectType = new ObjectTypes();
-                objectType.Id = Convert.ToInt16(Request.Form["idObjectType"]);
-                objectType.Omschrijving = Request.Form["omschrijving"];
-
-                TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
-
-                client.ObjectTypeUpdate(objectType);
-            }
+            DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
+            ObjectTypeModel objectType = new ObjectTypeModel();
+            objectType.IdObjectType = Convert.ToInt16(Request.Form["idObjectType"]);
+            objectType.Omschrijving = Request.Form["omschrijving"];
+            TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
+            tblObjectType.Update(objectType);
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                ObjectTypes objectType = new ObjectTypes();
-                objectType.Id = Convert.ToInt16(Request.Form["driver"]);
-                objectType.Omschrijving = Request.Form["omschrijving"];
-                client.ObjectTypeCreate(objectType);
-
-                TempData["action"] = "objectType" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
-            }
+            DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
+            ObjectTypeModel objectType = new ObjectTypeModel();
+            objectType.IdObjectType = Convert.ToInt16(Request.Form["driver"]);
+            objectType.Omschrijving = Request.Form["omschrijving"];
+            tblObjectType.Create(objectType);
+            TempData["action"] = "objectType" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
             return RedirectToAction("Index");
         }
 
         [HttpPost]
         public ActionResult Delete(int[] idArray)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
+            DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
                 foreach (int id in idArray)
                 {
-                    client.ObjectTypeDelete(id);
+                tblObjectType.Delete(id);
                 }
                 if (idArray.Length >= 2)
                 {
@@ -94,7 +76,6 @@ namespace CvoInventarisClient.Controllers
                 {
                     TempData["action"] = idArray.Length + " objectType werd verwijderd";
                 }
-            }
             return RedirectToAction("Index");
         }
 

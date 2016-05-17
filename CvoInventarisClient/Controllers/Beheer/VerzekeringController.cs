@@ -12,67 +12,47 @@ namespace CvoInventarisClient.Controllers
     {
         public List<VerzekeringModel> Getverzekeringen()
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                List<Models.VerzekeringModel> model = new List<Models.VerzekeringModel>();
-                foreach (Verzekering verzekering in client.VerzekeringGetAll())
-                {
-                    model.Add(new Models.VerzekeringModel() { IdVerzekering = verzekering.Id, Omschrijving = verzekering.Omschrijving });
-                }
-                return model;
-            }
+            DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            return dalVerzekering.GetAll();
             }
         public ActionResult Index()
         {
             ViewBag.action = TempData["action"];
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                List<Models.VerzekeringModel> model = new List<Models.VerzekeringModel>();
-                foreach (Verzekering verzekering in client.VerzekeringGetAll())
-                {
-                    model.Add(new Models.VerzekeringModel() { IdVerzekering = verzekering.Id,Omschrijving = verzekering.Omschrijving});
-                }
-                return View(model);
-            }
+            DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            List<VerzekeringModel> model = dalVerzekering.GetAll();
+            return View(model);
+            
         }
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                Verzekering verzekering = new Verzekering();
-                verzekering.Omschrijving = Request.Form["omschrijving"];
-                client.VerzekeringCreate(verzekering);
-
-                TempData["action"] = "verzekering" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
-            }
+            DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            VerzekeringModel verzekering = new VerzekeringModel();
+            verzekering.Omschrijving = Request.Form["omschrijving"];
+            dalVerzekering.Create(verzekering);
+            TempData["action"] = "verzekering" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
+           
             return RedirectToAction("Index");
         }
 
         // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                Verzekering verzekering = client.VerzekeringGetById(id);
-                return View(new Models.VerzekeringModel() { IdVerzekering = verzekering.Id,Omschrijving = verzekering.Omschrijving });
-            }
+            DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            VerzekeringModel verzekering = dalVerzekering.GetById(id);
+            return View(verzekering);
         }
 
         // POST: Inventaris/Edit/5
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                Verzekering verzekering = new Verzekering();
-                verzekering.Id = Convert.ToInt16(Request.Form["idVerzekering"]);
-                verzekering.Omschrijving = Request.Form["omschrijving"];
-
-                TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
-
-                client.VerzekeringUpdate(verzekering);
-            }
+            DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            VerzekeringModel verzekering = new VerzekeringModel();
+            verzekering.IdVerzekering = Convert.ToInt16(Request.Form["idVerzekering"]);
+            verzekering.Omschrijving = Request.Form["omschrijving"];
+            TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
+            dalVerzekering.Update(verzekering);
             return RedirectToAction("Index");
         }
 
@@ -80,21 +60,20 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
-                foreach (int id in idArray)
+            DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            foreach (int id in idArray)
                 {
-                    client.VerzekeringDelete(id);
+                    dalVerzekering.Delete(id);
                 }
-                if (idArray.Length >= 2)
+            if (idArray.Length >= 2)
                 {
                     TempData["action"] = idArray.Length + " verzekeringen werden verwijderd";
                 }
-                else
+            else
                 {
                     TempData["action"] = idArray.Length + " verzekeringen werd verwijderd";
                 }
-            }
+            
             return RedirectToAction("Index");
         }
     }

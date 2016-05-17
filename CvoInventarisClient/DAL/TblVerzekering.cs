@@ -9,25 +9,29 @@ using System.Web;
 
 namespace CvoInventarisClient.DAL
 {
-    public class TblObjectType : ICrudable<ObjectTypeModel>
+    public class TblVerzekering : ICrudable<VerzekeringModel>
     {
         SqlConnection connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867");
 
-        public int Create(ObjectTypeModel t)
+        public int Create(VerzekeringModel t)
         {
             int result = 0;
             using (connection)
             {
-                SqlCommand command = new SqlCommand("TbIObjectTypeInsert", connection);
+                SqlCommand command = new SqlCommand("TblVerzekeringInsert", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 command.Parameters.AddWithValue("@Omschrijving", t.Omschrijving);
-                SqlParameter id = new SqlParameter("@idObjectType", SqlDbType.Int);
+                SqlParameter id = new SqlParameter("@idVerzekering", SqlDbType.Int);
                 id.Direction = ParameterDirection.Output;
                 command.Parameters.Add(id);
                 try
                 {
                     connection.Open();
                     result = command.ExecuteNonQuery();
+                    if (result > 0)
+                    {
+                        result = (int)id.Value;
+                    }
                 }
                 catch { }
             }
@@ -40,9 +44,9 @@ namespace CvoInventarisClient.DAL
             bool result = false;
             using (connection)
             {
-                SqlCommand command = new SqlCommand("TbIObjectTypeDelete", connection);
+                SqlCommand command = new SqlCommand("TblVerzekeringDelete", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idObjectType", id);
+                command.Parameters.AddWithValue("idVerzekering", id);
                 try
                 {
                     connection.Open();
@@ -57,12 +61,12 @@ namespace CvoInventarisClient.DAL
             return result;
         }
 
-        public List<ObjectTypeModel> GetAll()
+        public List<VerzekeringModel> GetAll()
         {
-            List<ObjectTypeModel> objectTypes = new List<ObjectTypeModel>();
+            List<VerzekeringModel> verzekeringen = new List<VerzekeringModel>();
             using (connection)
             {
-                SqlCommand command = new SqlCommand("TblObjectTypeReadAll", connection);
+                SqlCommand command = new SqlCommand("TblVerzekeringReadAll", connection);
                 command.CommandType = CommandType.StoredProcedure;
                 try
                 {
@@ -72,27 +76,27 @@ namespace CvoInventarisClient.DAL
                     {
                         while (reader.Read())
                         {
-                            ObjectTypeModel objectType = new ObjectTypeModel();
-                            objectType.IdObjectType = (int)reader["idObjectType"];
-                            objectType.Omschrijving = reader["omschrijving"].ToString();
-                            objectTypes.Add(objectType);
+                            VerzekeringModel verzekering = new VerzekeringModel();
+                            verzekering.IdVerzekering = (int)reader["idVerzekering"];
+                            verzekering.Omschrijving = reader["omschrijving"].ToString();
+                            verzekeringen.Add(verzekering);
                         }
                     }
                 }
                 catch { }
             }
 
-            return objectTypes;
+            return verzekeringen;
         }
 
-        public ObjectTypeModel GetById(int id)
+        public VerzekeringModel GetById(int id)
         {
-            ObjectTypeModel objectTypes = new ObjectTypeModel();
+            VerzekeringModel verzekering = new VerzekeringModel();
             using (connection)
             {
-                SqlCommand command = new SqlCommand("TblObjectTypeReadOne", connection);
+                SqlCommand command = new SqlCommand("TblVerzekeringReadOne", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idObjectType", id);
+                command.Parameters.AddWithValue("@idVerzekering", id);
                 try
                 {
                     connection.Open();
@@ -100,24 +104,24 @@ namespace CvoInventarisClient.DAL
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        objectTypes.IdObjectType = (int)reader["idObjectType"];
-                        objectTypes.Omschrijving = reader["omschrijving"].ToString();
+                        verzekering.IdVerzekering = (int)reader["idVerzekering"];
+                        verzekering.Omschrijving = reader["omschrijving"].ToString();
                     }
                 }
                 catch { }
             }
 
-            return objectTypes;
+            return verzekering;
         }
 
-        public bool Update(ObjectTypeModel t)
+        public bool Update(VerzekeringModel t)
         {
             bool result = false;
             using (connection)
             {
-                SqlCommand command = new SqlCommand("TblObjectTypeUpdate", connection);
+                SqlCommand command = new SqlCommand("TblVerzekeringUpdate", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idObjectType", t.IdObjectType);
+                command.Parameters.AddWithValue("@idVerzekering", t.IdVerzekering);
                 command.Parameters.AddWithValue("@Omschrijving", t.Omschrijving);
                 try
                 {

@@ -228,6 +228,7 @@
     <Compile Include="DAL\TblInventaris.cs" />
     <Compile Include="DAL\TblObject.cs" />
     <Compile Include="DAL\TblObjectType.cs" />
+    <Compile Include="DAL\TblVerzekering.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -27,16 +27,11 @@ namespace CvoInventarisClient.Controllers
         public List<string> vulTabellen()
         {
             tabellen = new List<string>();
-            tabellen.Add("Cpu");
-            tabellen.Add("Device");
             tabellen.Add("Factuur");
-            tabellen.Add("GrafischeKaart");
-            tabellen.Add("Harddisk");
-            tabellen.Add("Hardware");
             tabellen.Add("Inventaris");
             tabellen.Add("leverancier");
-            tabellen.Add("Lokaal");
-            tabellen.Add("Netwerk");
+            tabellen.Add("campus");
+            tabellen.Add("lokaal");
             tabellen.Add("Object");
             tabellen.Add("ObjectType");
             tabellen.Add("Verzekering");
@@ -99,14 +94,14 @@ namespace CvoInventarisClient.Controllers
                 }
                 if (tabelKeuze[1].Trim().Equals("Verzekering"))
                 {
-                    VerzekeringController vc = new VerzekeringController();
-                    model.verzekeringen = vc.Getverzekeringen();
+                    DAL.TblVerzekering verzekering = new DAL.TblVerzekering();
+                    model.verzekeringen = verzekering.GetAll();
                     ViewBag.tabelKeuze = "verzekering";
                 }
                 if (tabelKeuze[1].Trim().Equals("ObjectType"))
                 {
-                    ObjectTypeController oc = new ObjectTypeController();
-                    model.objectTypes = oc.GetObjectTypes();
+                    DAL.TblObjectType objectType = new DAL.TblObjectType();
+                    model.objectTypes = objectType.GetAll();
                     ViewBag.tabelKeuze = "objectType";
                 }
 
@@ -213,8 +208,8 @@ namespace CvoInventarisClient.Controllers
                     PdfPTable table = new PdfPTable(2);
                     table.AddCell("id verzekering");
                     table.AddCell("omschrijving");
-                    VerzekeringController vz = new VerzekeringController();
-                    foreach (var item in vz.Getverzekeringen())
+                    DAL.TblVerzekering verzekering = new DAL.TblVerzekering();
+                    foreach (var item in verzekering.GetAll())
                     {
                         table.AddCell(item.IdVerzekering.ToString());
                         table.AddCell(item.Omschrijving);
@@ -226,8 +221,8 @@ namespace CvoInventarisClient.Controllers
                     PdfPTable table = new PdfPTable(2);
                     table.AddCell("id objectType");
                     table.AddCell("omschrijving");
-                    ObjectTypeController oc = new ObjectTypeController();
-                    foreach (var item in oc.GetObjectTypes())
+                    DAL.TblObjectType objectType = new DAL.TblObjectType();
+                    foreach (var item in objectType.GetAll())
                     {
                         table.AddCell(item.IdObjectType.ToString());
                         table.AddCell(item.Omschrijving);
@@ -294,8 +289,8 @@ namespace CvoInventarisClient.Controllers
             }
             if (tabelKeuze.Equals("verzekering"))
             {
-                VerzekeringController vc = new VerzekeringController();
-                List<VerzekeringModel> vm = vc.Getverzekeringen().ToList();
+                DAL.TblVerzekering verzekering = new DAL.TblVerzekering();
+                List<VerzekeringModel> vm = verzekering.GetAll();
                 worksheet.Cells[1, 1] = "id verzekering";
                 worksheet.Cells[1, 2] = "omschrijving";
                 for (int i = 0; i < vm.Count; i++)
@@ -306,8 +301,8 @@ namespace CvoInventarisClient.Controllers
             }
             if (tabelKeuze.Equals("objectType"))
             {
-                ObjectTypeController oc = new ObjectTypeController();
-                List<ObjectTypeModel> om = oc.GetObjectTypes().ToList();
+                DAL.TblObjectType objectType = new DAL.TblObjectType();
+                List<ObjectTypeModel> om = objectType.GetAll();
                 worksheet.Cells[1, 1] = "id objectType";
                 worksheet.Cells[1, 2] = "omschrijving";
                 for (int i = 0; i < om.Count; i++)
