@@ -462,6 +462,40 @@
         </table>
     </div>
 }
+@if (Model.objecten != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.objecten[0].Kenmerken)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.objecten[0].Factuur)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.objecten[0].ObjectType)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.objecten)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Kenmerken)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Factuur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ObjectType)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
 
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 

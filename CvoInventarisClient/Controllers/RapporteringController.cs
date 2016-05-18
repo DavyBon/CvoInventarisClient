@@ -130,6 +130,12 @@ namespace CvoInventarisClient.Controllers
                     model.leveranciers = leverancier.GetAll();
                     ViewBag.tabelKeuze = "leverancier";
                 }
+                if (tabelKeuze[1].Trim().Equals("Object"))
+                {
+                    DAL.TblObject Object = new DAL.TblObject();
+                    model.objecten = Object.GetAll();
+                    ViewBag.tabelKeuze = "object";
+                }
 
 
             }
@@ -168,6 +174,10 @@ namespace CvoInventarisClient.Controllers
                 if (tabelKeuze[1].Trim().Equals("Leverancier"))
                 {
                     return Redirect("/RapporteringLeverancier/LeverancierRapportering");
+                }
+                if (tabelKeuze[1].Trim().Equals("Object"))
+                {
+                    return Redirect("/RapporteringObject/ObjectRapportering");
                 }
 
             }
@@ -341,6 +351,7 @@ namespace CvoInventarisClient.Controllers
                         table.AddCell(item.DatumModified.ToString());
                         table.AddCell(item.UserModified);
                     }
+                    pdfDoc.Add(table);
                 }
                 if (tabelKeuze == "leverancier")
                 {
@@ -376,6 +387,21 @@ namespace CvoInventarisClient.Controllers
                         table.AddCell(item.Iban);
                         table.AddCell(item.Bic);
                         table.AddCell(item.ToegevoegdOp.ToString());
+                    }
+                    pdfDoc.Add(table);
+                }
+                if (tabelKeuze == "object")
+                {
+                    PdfPTable table = new PdfPTable(15);
+                    table.AddCell("Kenmerken");
+                    table.AddCell("Factuur nummer");
+                    table.AddCell("Object type");
+                    DAL.TblObject Object = new DAL.TblObject();
+                    foreach (var item in Object.GetAll())
+                    {
+                        table.AddCell(item.Kenmerken);
+                        table.AddCell(item.Factuur.FactuurNummer);
+                        table.AddCell(item.ObjectType.Omschrijving);
                     }
                     pdfDoc.Add(table);
                 }
@@ -564,6 +590,20 @@ namespace CvoInventarisClient.Controllers
                     worksheet.Cells[i + 2, 12] = lm[i].Iban;
                     worksheet.Cells[i + 2, 13] = lm[i].Bic;
                     worksheet.Cells[i + 2, 14] = lm[i].ToegevoegdOp;
+                }
+            }
+            if (tabelKeuze.Equals("factuur"))
+            {
+                DAL.TblObject Object = new DAL.TblObject();
+                List<ObjectModel> om = Object.GetAll();
+                worksheet.Cells[1, 1] = "Kenmerken";
+                worksheet.Cells[1, 2] = "Factuur nummer";
+                worksheet.Cells[1, 3] = "Object type";
+                for (int i = 0; 1 < om.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = om[i].Kenmerken;
+                    worksheet.Cells[i + 2, 2] = om[i].Factuur.FactuurNummer;
+                    worksheet.Cells[i + 2, 3] = om[i].ObjectType.Omschrijving;
                 }
             }
             worksheet.Columns.AutoFit();
