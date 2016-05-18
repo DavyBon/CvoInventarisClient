@@ -136,6 +136,12 @@ namespace CvoInventarisClient.Controllers
                     model.objecten = Object.GetAll();
                     ViewBag.tabelKeuze = "object";
                 }
+                if (tabelKeuze[1].Trim().Equals("Inventaris"))
+                {
+                    DAL.TblInventaris inventaris = new DAL.TblInventaris();
+                    model.inventarissen = inventaris.GetAll();
+                    ViewBag.tabelKeuze = "inventaris";
+                }
 
 
             }
@@ -178,6 +184,10 @@ namespace CvoInventarisClient.Controllers
                 if (tabelKeuze[1].Trim().Equals("Object"))
                 {
                     return Redirect("/RapporteringObject/ObjectRapportering");
+                }
+                if (tabelKeuze[1].Trim().Equals("Inventaris"))
+                {
+                    return Redirect("/RapporteringInventaris/InventarisRapportering");
                 }
 
             }
@@ -355,7 +365,7 @@ namespace CvoInventarisClient.Controllers
                 }
                 if (tabelKeuze == "leverancier")
                 {
-                    PdfPTable table = new PdfPTable(14); // aantal kolommen
+                    PdfPTable table = new PdfPTable(14);
                     table.AddCell("Naam");
                     table.AddCell("Afkorting");
                     table.AddCell("Straat");
@@ -370,8 +380,8 @@ namespace CvoInventarisClient.Controllers
                     table.AddCell("Iban");
                     table.AddCell("Bic");
                     table.AddCell("Toegevoegd op");
-                    DAL.TblLeverancier objectType = new DAL.TblLeverancier();
-                    foreach (var item in objectType.GetAll())
+                    DAL.TblLeverancier leverancier = new DAL.TblLeverancier();
+                    foreach (var item in leverancier.GetAll())
                     {
                         table.AddCell(item.Naam);
                         table.AddCell(item.Afkorting);
@@ -402,6 +412,33 @@ namespace CvoInventarisClient.Controllers
                         table.AddCell(item.Kenmerken);
                         table.AddCell(item.Factuur.FactuurNummer);
                         table.AddCell(item.ObjectType.Omschrijving);
+                    }
+                    pdfDoc.Add(table);
+                }
+                if (tabelKeuze == "inventaris")
+                {
+                    PdfPTable table = new PdfPTable(9);
+                    table.AddCell("Lokaal");
+                    table.AddCell("Object");
+                    table.AddCell("Verzekering");
+                    table.AddCell("Is aanwezig");
+                    table.AddCell("Is actief");
+                    table.AddCell("Label");
+                    table.AddCell("Historiek");
+                    table.AddCell("Aankoopjaar");
+                    table.AddCell("Afschrijvingsperiode");
+                    DAL.TblInventaris inventaris = new DAL.TblInventaris();
+                    foreach (var item in inventaris.GetAll())
+                    {
+                        table.AddCell(item.Lokaal.LokaalNaam);
+                        table.AddCell(item.Object.Kenmerken);
+                        table.AddCell(item.Verzekering.Omschrijving);
+                        table.AddCell(item.IsAanwezig.ToString());
+                        table.AddCell(item.IsActief.ToString());
+                        table.AddCell(item.Label);
+                        table.AddCell(item.Historiek);
+                        table.AddCell(item.Aankoopjaar.ToString());
+                        table.AddCell(item.Afschrijvingsperiode.ToString());
                     }
                     pdfDoc.Add(table);
                 }
@@ -604,6 +641,33 @@ namespace CvoInventarisClient.Controllers
                     worksheet.Cells[i + 2, 1] = om[i].Kenmerken;
                     worksheet.Cells[i + 2, 2] = om[i].Factuur.FactuurNummer;
                     worksheet.Cells[i + 2, 3] = om[i].ObjectType.Omschrijving;
+                }
+            }
+            if (tabelKeuze.Equals("inventaris"))
+            {
+                DAL.TblInventaris inventaris = new DAL.TblInventaris();
+                List<InventarisModel> im = inventaris.GetAll();
+                worksheet.Cells[1, 1] = "Lokaal";
+                worksheet.Cells[1, 2] = "Object";
+                worksheet.Cells[1, 3] = "Verzekering";
+                worksheet.Cells[1, 4] = "Is aanwezig";
+                worksheet.Cells[1, 5] = "Is actief";
+                worksheet.Cells[1, 6] = "Label";
+                worksheet.Cells[1, 7] = "Historiek";
+                worksheet.Cells[1, 8] = "Aankoopjaar";
+                worksheet.Cells[1, 9] = "Afschrijvingsperiode";
+
+                for (int i = 0; i < im.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = im[i].Lokaal;
+                    worksheet.Cells[i + 2, 2] = im[i].Object;
+                    worksheet.Cells[i + 2, 3] = im[i].Verzekering;
+                    worksheet.Cells[i + 2, 4] = im[i].IsAanwezig;
+                    worksheet.Cells[i + 2, 5] = im[i].IsActief;
+                    worksheet.Cells[i + 2, 6] = im[i].Label;
+                    worksheet.Cells[i + 2, 7] = im[i].Historiek;
+                    worksheet.Cells[i + 2, 8] = im[i].Aankoopjaar;
+                    worksheet.Cells[i + 2, 9] = im[i].Afschrijvingsperiode;
                 }
             }
             worksheet.Columns.AutoFit();

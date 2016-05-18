@@ -497,6 +497,77 @@
     </div>
 }
 
+@if (Model.inventarissen != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].Label)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].Object.Kenmerken)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].IsAanwezig)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].IsActief)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].Lokaal.LokaalNaam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].Historiek)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].Aankoopjaar)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].Afschrijvingsperiode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.inventarissen[0].Verzekering.Omschrijving)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.inventarissen)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Label)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Object.Kenmerken)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsAanwezig)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsActief)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Lokaal.LokaalNaam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Historiek)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Aankoopjaar)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Afschrijvingsperiode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 
     @using (Html.BeginForm("StapOpslaan", "Rapportering"))
