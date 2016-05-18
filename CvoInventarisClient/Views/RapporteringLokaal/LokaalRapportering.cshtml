@@ -1,0 +1,122 @@
+﻿@model CvoInventarisClient.Models.TabelModel
+@{
+    ViewBag.Title = "LokaalRapportering";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>LokaalRapportering</h2>
+<div style="visibility: @ViewBag.cpuConditie">
+    <form action="/RapporteringLokaal/Stap3" method="post">
+        <p>stap 3 : Kies welke gegevens je uit de tabel Campus wilt hebben</p>
+        @Html.CheckBox("lokaalNaam") naam
+        @Html.CheckBox("aantalPlaatsen") aantal plaatsen
+        @Html.CheckBox("isComputerLokaal") computerlokaal
+        @Html.CheckBox("campus") campus
+        <br />
+        <br />
+        <p>stap 4 : Kies welke conditie of condities u op de gegevens wilt toepassen</p>
+        <br />
+        @Html.DropDownList("namen", (IEnumerable<SelectListItem>)ViewBag.namen, "selecteer een naam", new { @class = "form-control" })
+        <p>
+            aantal plaatsen @Html.RadioButton("aantalPlaatsenKeuze", ">") >
+            @Html.RadioButton("aantalPlaatsenKeuze", "<") <
+            @Html.RadioButton("aantalPlaatsenKeuze", "=") =
+            @Html.RadioButton("aantalPlaatsenKeuze", ">=") >=
+            @Html.RadioButton("aantalPlaatsenKeuze", "<=") <=
+            @Html.TextBox("aantalPlaatsenKeuze1")
+        </p>
+        <p>
+            computerlokaal @Html.RadioButton("isComputerLokaalKeuze", "ja") ja
+            @Html.RadioButton("isComputerLokaalKeuze", "neen") neen
+        </p>
+        @Html.DropDownList("campussen", (IEnumerable<SelectListItem>)ViewBag.campussen, "selecteer een campus", new { @class = "form-control" })
+        <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
+    </form>
+</div>
+@if (Model.lokalen != null)
+{
+    if (Model.lokalen.Any())
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">@ViewBag.Title</div>
+            <table style="visibility : @ViewBag.campus" class="table table-striped">
+                <tr>
+                    <th>
+                        @if (Model.lokalen[0].LokaalNaam != null)
+                    {
+                            @Html.DisplayNameFor(model => model.lokalen[0].LokaalNaam);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.lokalen[0].AantalPlaatsen != 0)
+                    {
+                            @Html.DisplayNameFor(model => model.lokalen[0].AantalPlaatsen);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.lokalen[0].IsComputerLokaal != null)
+                    {
+                            @Html.DisplayNameFor(model => model.lokalen[0].IsComputerLokaal);
+                    }
+
+                    </th>
+                    <th>
+                        @if (Model.lokalen[0].Campus != null)
+                    {
+                            @Html.DisplayNameFor(model => model.lokalen[0].Campus.Naam);
+                    }
+                    </th>
+                </tr>
+
+
+                @foreach (var item in Model.lokalen)
+                {
+                    <tr>
+                        <td>
+                            @if (item.LokaalNaam != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.LokaalNaam);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.AantalPlaatsen != 0)
+                        {
+                                @Html.DisplayFor(modelItem => item.AantalPlaatsen);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.IsComputerLokaal != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.IsComputerLokaal);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.Campus != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Campus.Naam);
+                        }
+
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+    }
+}
+<div style="visibility : @ViewBag.stijlStapOpslaan">
+
+    @using (Html.BeginForm("StapOpslaan", "RapporteringLokaal"))
+    {
+        @Html.Hidden("kolomnaam", (string)@ViewBag.kolomnamen)
+        @Html.Hidden("query", (string)@ViewBag.query)
+        <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
+        <button name="opslaan" type="submit" value="OpslaanExcel">Opslaan als excel</button>
+        <button name="opslaan" type="submit" value="OpslaanPdf">Opslaan als Pdf</button>
+    }
+</div>
+

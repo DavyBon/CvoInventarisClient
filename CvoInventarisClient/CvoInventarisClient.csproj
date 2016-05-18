@@ -224,6 +224,7 @@
     <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\RapporteringCpuController.cs" />
     <Compile Include="Controllers\RapporteringHardwareController.cs" />
+    <Compile Include="Controllers\RapporteringLokaalController.cs" />
     <Compile Include="DAL\Helpers\PasswordStorage.cs" />
     <Compile Include="DAL\Interfaces\ICrudable.cs" />
     <Compile Include="DAL\TblAccount.cs" />
@@ -327,6 +328,7 @@
     <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\RapporteringCampus\CampusRapportering.cshtml" />
+    <Content Include="Views\RapporteringLokaal\LokaalRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

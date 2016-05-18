@@ -315,12 +315,14 @@ namespace CvoInventarisClient.Controllers
                     table.AddCell("naam");
                     table.AddCell("aantal plaatsen");
                     table.AddCell("computerlokaal");
+                    table.AddCell("campus");
                     DAL.TblLokaal lokaal = new DAL.TblLokaal();
                     foreach (var item in lokaal.GetAll())
                     {
                         table.AddCell(item.LokaalNaam);
                         table.AddCell(item.AantalPlaatsen.ToString());
                         table.AddCell(item.IsComputerLokaal.ToString());
+                        table.AddCell(item.Campus.Naam);
                     }
                     pdfDoc.Add(table);
                 }
@@ -547,11 +549,13 @@ namespace CvoInventarisClient.Controllers
                 worksheet.Cells[1, 1] = "naam";
                 worksheet.Cells[1, 2] = "aantal plaatsen";
                 worksheet.Cells[1, 3] = "computerlokaal";
+                worksheet.Cells[1, 4] = "campus";
                 for (int i = 0; i < lm.Count; i++)
                 {
                     worksheet.Cells[i + 2, 1] = lm[i].LokaalNaam;
                     worksheet.Cells[i + 2, 2] = lm[i].AantalPlaatsen.ToString();
                     worksheet.Cells[i + 2, 3] = lm[i].IsComputerLokaal.ToString();
+                    worksheet.Cells[i + 2, 4] = lm[i].Campus.Naam;
                 }
             }
             if (tabelKeuze.Equals("factuur"))

@@ -236,6 +236,9 @@
                 <th>
                     @Html.DisplayNameFor(model => model.lokalen[0].IsComputerLokaal)
                 </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lokalen[0].Campus)
+                </th>
             </tr>
 
             @foreach (var item in Model.lokalen)
@@ -249,6 +252,9 @@
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.IsComputerLokaal)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Campus.Naam)
                     </td>
                 </tr>
             }
