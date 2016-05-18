@@ -255,6 +255,112 @@
         </table>
     </div>
 }
+@if (Model.facturen != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].Boekjaar)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].CvoVolgNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].FactuurNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].ScholengroepNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].FactuurDatum)
+                </th>
+                <th>
+                    Leverancier
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].Prijs)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].Garantie)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].Omschrijving)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].Opmerking)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].Afschrijfperiode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].DatumInsert)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].UserInsert)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].DatumModified)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.facturen[0].UserModified)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.facturen)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Boekjaar)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CvoVolgNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FactuurNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ScholengroepNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FactuurDatum)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Leverancier.Naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Prijs)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Garantie)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Omschrijving)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Opmerking)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Afschrijfperiode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DatumInsert)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserInsert)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DatumModified)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserModified)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
 
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 

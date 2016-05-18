@@ -118,6 +118,12 @@ namespace CvoInventarisClient.Controllers
                     model.lokalen = lokalen.GetAll();
                     ViewBag.tabelKeuze = "lokalen";
                 }
+                if (tabelKeuze[1].Trim().Equals("Factuur"))
+                {
+                    DAL.TblFactuur factuur = new DAL.TblFactuur();
+                    model.facturen = factuur.GetAll();
+                    ViewBag.tabelKeuze = "factuur";
+                }
 
 
             }
@@ -148,6 +154,10 @@ namespace CvoInventarisClient.Controllers
                 if (tabelKeuze[1].Trim().Equals("Lokalen"))
                 {
                     return Redirect("/RapporteringLokalen/LokalenRapportering");
+                }
+                if (tabelKeuze[1].Trim().Equals("Factuur"))
+                {
+                    return Redirect("/RapporteringFactuur/FactuurRapportering");
                 }
 
             }
@@ -284,6 +294,44 @@ namespace CvoInventarisClient.Controllers
                     }
                     pdfDoc.Add(table);
                 }
+                if (tabelKeuze == "factuur")
+                {
+                    PdfPTable table = new PdfPTable(15);
+                    table.AddCell("Boekjaar");
+                    table.AddCell("CVO volgnummer");
+                    table.AddCell("Factuurnummer");
+                    table.AddCell("ScholengroepNummer");
+                    table.AddCell("Factuur datum");
+                    table.AddCell("Leverancier");
+                    table.AddCell("Prijs");
+                    table.AddCell("Garantie");
+                    table.AddCell("Omschrijving");
+                    table.AddCell("Opmerking");
+                    table.AddCell("Afschrijfperiode");
+                    table.AddCell("Datum insert");
+                    table.AddCell("User insert");
+                    table.AddCell("Datum modified");
+                    table.AddCell("User modified");
+                    DAL.TblFactuur factuur = new DAL.TblFactuur();
+                    foreach (var item in factuur.GetAll())
+                    {
+                        table.AddCell(item.Boekjaar);
+                        table.AddCell(item.CvoVolgNummer);
+                        table.AddCell(item.FactuurNummer);
+                        table.AddCell(item.ScholengroepNummer);
+                        table.AddCell(item.FactuurDatum.ToString());
+                        table.AddCell(item.Leverancier.Naam);
+                        table.AddCell(item.Prijs);
+                        table.AddCell(item.Garantie.ToString());
+                        table.AddCell(item.Omschrijving);
+                        table.AddCell(item.Opmerking);
+                        table.AddCell(item.Afschrijfperiode.ToString());
+                        table.AddCell(item.DatumInsert.ToString());
+                        table.AddCell(item.UserInsert);
+                        table.AddCell(item.DatumModified.ToString());
+                        table.AddCell(item.UserModified);
+                    }
+                }
                 pdfWriter.CloseStream = false;
                 pdfDoc.Close();
                 Response.Buffer = true;
@@ -394,6 +442,44 @@ namespace CvoInventarisClient.Controllers
                     worksheet.Cells[i + 2, 1] = lm[i].LokaalNaam;
                     worksheet.Cells[i + 2, 2] = lm[i].AantalPlaatsen.ToString();
                     worksheet.Cells[i + 2, 3] = lm[i].IsComputerLokaal.ToString();
+                }
+            }
+            if (tabelKeuze.Equals("factuur"))
+            {
+                DAL.TblFactuur factuur = new DAL.TblFactuur();
+                List<FactuurModel> fm = factuur.GetAll();
+                worksheet.Cells[1, 1] = "Boekjaar";
+                worksheet.Cells[1, 2] = "CVO volgnummer";
+                worksheet.Cells[1, 3] = "Factuurnummer";
+                worksheet.Cells[1, 4] = "ScholengroepNummer";
+                worksheet.Cells[1, 5] = "Factuur datum";
+                worksheet.Cells[1, 6] = "Leverancier";
+                worksheet.Cells[1, 7] = "Prijs";
+                worksheet.Cells[1, 8] = "Garantie";
+                worksheet.Cells[1, 9] = "Omschrijving";
+                worksheet.Cells[1, 10] = "Opmerking";
+                worksheet.Cells[1, 11] = "Afschrijfperiode";
+                worksheet.Cells[1, 12] = "Datum insert";
+                worksheet.Cells[1, 13] = "User insert";
+                worksheet.Cells[1, 14] = "Datum modified";
+                worksheet.Cells[1, 15] = "User modified";
+                for (int i = 0; 1 < fm.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = fm[i].Boekjaar;
+                    worksheet.Cells[i + 2, 2] = fm[i].CvoVolgNummer;
+                    worksheet.Cells[i + 2, 3] = fm[i].FactuurNummer;
+                    worksheet.Cells[i + 2, 4] = fm[i].ScholengroepNummer;
+                    worksheet.Cells[i + 2, 5] = fm[i].FactuurDatum;
+                    worksheet.Cells[i + 2, 6] = fm[i].Leverancier;
+                    worksheet.Cells[i + 2, 7] = fm[i].Prijs;
+                    worksheet.Cells[i + 2, 8] = fm[i].Garantie;
+                    worksheet.Cells[i + 2, 9] = fm[i].Omschrijving;
+                    worksheet.Cells[i + 2, 10] = fm[i].Opmerking;
+                    worksheet.Cells[i + 2, 11] = fm[i].Afschrijfperiode;
+                    worksheet.Cells[i + 2, 12] = fm[i].DatumInsert;
+                    worksheet.Cells[i + 2, 13] = fm[i].UserInsert;
+                    worksheet.Cells[i + 2, 14] = fm[i].DatumModified;
+                    worksheet.Cells[i + 2, 15] = fm[i].UserModified;
                 }
             }
             worksheet.Columns.AutoFit();
