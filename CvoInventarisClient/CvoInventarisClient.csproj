@@ -223,11 +223,14 @@
     <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\RapporteringCpuController.cs" />
     <Compile Include="Controllers\RapporteringHardwareController.cs" />
+    <Compile Include="DAL\Helpers\PasswordStorage.cs" />
     <Compile Include="DAL\Interfaces\ICrudable.cs" />
+    <Compile Include="DAL\TblAccount.cs" />
     <Compile Include="DAL\TblCampus.cs" />
     <Compile Include="DAL\TblFactuur.cs" />
     <Compile Include="DAL\TblInventaris.cs" />
     <Compile Include="DAL\TblLeverancier.cs" />
+    <Compile Include="DAL\TblLokaal.cs" />
     <Compile Include="DAL\TblObject.cs" />
     <Compile Include="DAL\TblObjectType.cs" />
     <Compile Include="DAL\TblVerzekering.cs" />
