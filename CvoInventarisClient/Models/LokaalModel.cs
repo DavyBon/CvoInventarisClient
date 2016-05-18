@@ -19,5 +19,8 @@ namespace CvoInventarisClient.Models
 
         [Display(Name = "isComputerLokaal")]
         public bool IsComputerLokaal { get; set; }
+
+        [Display(Name = "Campus")]
+        public CampusModel Campus { get; set; }
     }
 }
