@@ -31,6 +31,7 @@ namespace CvoInventarisClient.Controllers
             tabellen.Add("Cpu");
             tabellen.Add("Inventaris");
             tabellen.Add("leverancier");
+            tabellen.Add("Campus");
             tabellen.Add("campus");
             tabellen.Add("lokaal");
             tabellen.Add("Object");
@@ -105,6 +106,19 @@ namespace CvoInventarisClient.Controllers
                     model.objectTypes = objectType.GetAll();
                     ViewBag.tabelKeuze = "objectType";
                 }
+                if (tabelKeuze[1].Trim().Equals("Campus"))
+                {
+                    DAL.TblCampus campus = new DAL.TblCampus();
+                    model.campussen = campus.GetAll();
+                    ViewBag.tabelKeuze = "campus";
+                }
+                if (tabelKeuze[1].Trim().Equals("Lokaal"))
+                {
+                    DAL.TblLokaal lokalen = new DAL.TblLokaal();
+                    model.lokalen = lokalen.GetAll();
+                    ViewBag.tabelKeuze = "lokalen";
+                }
+
 
             }
             if (tabelKeuze[0].Trim().Equals("bepaalde conditie van de tabel"))
@@ -126,6 +140,14 @@ namespace CvoInventarisClient.Controllers
                 {
                     TempData["action"] = "Je kan geen conditie toepassen op objectType. Enkel alle gegevens bekijken";
                     return Redirect("/Rapportering/Index");
+                }
+                if (tabelKeuze[1].Trim().Equals("Campus"))
+                {
+                    return Redirect("/RapporteringCampus/CampusRapportering");
+                }
+                if (tabelKeuze[1].Trim().Equals("Lokalen"))
+                {
+                    return Redirect("/RapporteringLokalen/LokalenRapportering");
                 }
 
             }
@@ -230,6 +252,38 @@ namespace CvoInventarisClient.Controllers
                     }
                     pdfDoc.Add(table);
                 }
+                if (tabelKeuze == "campus")
+                {
+                    PdfPTable table = new PdfPTable(4);
+                    table.AddCell("naam");
+                    table.AddCell("postcode");
+                    table.AddCell("straat");
+                    table.AddCell("nummer");
+                    DAL.TblCampus campus = new DAL.TblCampus();
+                    foreach (var item in campus.GetAll())
+                    {
+                        table.AddCell(item.Naam);
+                        table.AddCell(item.Postcode);
+                        table.AddCell(item.Straat);
+                        table.AddCell(item.Nummer);
+                    }
+                    pdfDoc.Add(table);
+                }
+                if (tabelKeuze == "lokalen")
+                {
+                    PdfPTable table = new PdfPTable(3);
+                    table.AddCell("naam");
+                    table.AddCell("aantal plaatsen");
+                    table.AddCell("computerlokaal");
+                    DAL.TblLokaal lokaal = new DAL.TblLokaal();
+                    foreach (var item in lokaal.GetAll())
+                    {
+                        table.AddCell(item.LokaalNaam);
+                        table.AddCell(item.AantalPlaatsen.ToString());
+                        table.AddCell(item.IsComputerLokaal.ToString());
+                    }
+                    pdfDoc.Add(table);
+                }
                 pdfWriter.CloseStream = false;
                 pdfDoc.Close();
                 Response.Buffer = true;
@@ -310,6 +364,36 @@ namespace CvoInventarisClient.Controllers
                 {
                     worksheet.Cells[i + 2, 1] = om[i].IdObjectType;
                     worksheet.Cells[i + 2, 2] = om[i].Omschrijving;
+                }
+            }
+            if (tabelKeuze.Equals("campus"))
+            {
+                DAL.TblCampus campus = new DAL.TblCampus();
+                List<CampusModel> cm = new List<CampusModel>();
+                worksheet.Cells[1, 1] = "naam";
+                worksheet.Cells[1, 2] = "postcode";
+                worksheet.Cells[1, 3] = "straat";
+                worksheet.Cells[1, 4] = "nummer";
+                for (int i = 0; i < cm.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = cm[i].Naam;
+                    worksheet.Cells[i + 2, 2] = cm[i].Postcode;
+                    worksheet.Cells[i + 2, 3] = cm[i].Straat;
+                    worksheet.Cells[i + 2, 4] = cm[i].Nummer;
+                }
+            }
+            if (tabelKeuze.Equals("lokalen"))
+            {
+                DAL.TblLokaal lokaal = new DAL.TblLokaal();
+                List<LokaalModel> lm = new List<LokaalModel>();
+                worksheet.Cells[1, 1] = "naam";
+                worksheet.Cells[1, 2] = "aantal plaatsen";
+                worksheet.Cells[1, 3] = "computerlokaal";
+                for (int i = 0; i < lm.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = lm[i].LokaalNaam;
+                    worksheet.Cells[i + 2, 2] = lm[i].AantalPlaatsen.ToString();
+                    worksheet.Cells[i + 2, 3] = lm[i].IsComputerLokaal.ToString();
                 }
             }
             worksheet.Columns.AutoFit();

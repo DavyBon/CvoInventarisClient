@@ -181,6 +181,80 @@
         </table>
     </div>
 }
+@if (Model.campussen != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.campussen[0].Naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.campussen[0].Postcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.campussen[0].Straat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.campussen[0].Nummer)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.campussen)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Postcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Straat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nummer)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+@if (Model.lokalen != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.lokalen[0].LokaalNaam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lokalen[0].AantalPlaatsen)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.lokalen[0].IsComputerLokaal)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.lokalen)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.LokaalNaam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AantalPlaatsen)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsComputerLokaal)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
 
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 

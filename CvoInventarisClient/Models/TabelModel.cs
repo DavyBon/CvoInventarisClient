@@ -20,5 +20,6 @@ namespace CvoInventarisClient.Models
         public List<NetwerkModel> netwerken { get; set; }
         public List<ObjectModel> objecten { get; set; }
         public List<ObjectTypeModel> objectTypes { get; set; }
+        public List<CampusModel> campussen { get; set; }
     }
 }
