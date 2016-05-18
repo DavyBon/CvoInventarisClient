@@ -91,28 +91,33 @@ namespace CvoInventarisClient.Controllers
 
         public List<AccountModel> GetAccounts()
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Account[] a = new Account[] { };
+            //CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
+
+            //AccountModel[] a = new AccountModel[] { };
+
+            List<AccountModel> accs = new List<AccountModel>();
 
             try
             {
-                a = service.AccountGetAll();
+                accs = tblAccount.GetAll();
             }
             catch (Exception)
             {
 
             }
 
-            List<AccountModel> accs = new List<AccountModel>();
+            //List<AccountModel> accs = new List<AccountModel>();
 
-            foreach (Account acc in a)
-            {
-                AccountModel am = new AccountModel();
-                am.IdAccount = acc.IdAccount;
-                am.Email = acc.Email;
-                am.Wachtwoord = acc.Wachtwoord;
-                accs.Add(am);              
-            }
+            //foreach (Account acc in a)
+            //{
+            //    AccountModel am = new AccountModel();
+            //    am.IdAccount = acc.IdAccount;
+            //    am.Email = acc.Email;
+            //    am.Wachtwoord = acc.Wachtwoord;
+            //    accs.Add(am);              
+            //}
 
             return accs;
         }

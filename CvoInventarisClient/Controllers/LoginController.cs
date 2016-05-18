@@ -19,21 +19,23 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Index(AccountModel am, FormCollection formCollection)
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+            //CvoInventarisServiceClient service = new CvoInventarisServiceClient();
 
-            Account acc = new Account();
-            acc.Email = am.Email;
-            acc.Wachtwoord = am.Wachtwoord;
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
+
+            //Account acc = new Account();
+            //acc.Email = am.Email;
+            //acc.Wachtwoord = am.Wachtwoord;
 
             try
             {
                 // Als de ingegeven email en paswoord combinatie juist is
-                if (service.AccountLogin(acc))
+                if (tblAccount.Login(am))
                 {
                     ViewBag.LoginMessage = "Welkom, je bent ingelogd";
 
                     // Haal het Account uit DB voor zijn id (username van de cookie is de id van de gebruiker (IdAccount))
-                    Account accUitDB = service.AccountGetByEmail(acc.Email);
+                    AccountModel accUitDB = tblAccount.GetByEmail(am.Email);
                     string username = accUitDB.IdAccount.ToString();             
 
                     // hou bij of dit een persistente cookie moet zijn, volgens de onthouden checkbox
