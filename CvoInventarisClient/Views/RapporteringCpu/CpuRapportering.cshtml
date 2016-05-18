@@ -30,86 +30,90 @@
         <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
     </form>
 </div>
-<table style="visibility : @ViewBag.cpu" class="table">
-    @if (Model.cpus != null)
-    {
-        <tr>
-            <th>
-                @if (Model.cpus[0].IdCpu != 0)
-                {
-                    @Html.DisplayNameFor(model => model.cpus[0].IdCpu);
-                }
-            </th>
-            <th>
-                @if (Model.cpus[0].Merk != null)
-                {
-                    @Html.DisplayNameFor(model => model.cpus[0].Snelheid);
-                }
-            </th>
-            <th>
-                @if (Model.cpus[0].Type != null)
-                {
-                    @Html.DisplayNameFor(model => model.cpus[0].Merk);
-                }
-            </th>
-            <th>
-                @if (Model.cpus[0].Snelheid != 0)
-                {
-                    @Html.DisplayNameFor(model => model.cpus[0].Type);
-                }
-
-            </th>
-            <th>
-                @if (Model.cpus[0].FabrieksNummer != null)
-                {
-                    @Html.DisplayNameFor(model => model.cpus[0].FabrieksNummer);
-                }
-            </th>
-        </tr>
-
-
-        foreach (var item in Model.cpus)
-        {
+@if (Model.cpus != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <table style="visibility : @ViewBag.cpu" class="table table-striped">
             <tr>
-                <td>
-                    @if (item.IdCpu != 0)
+                <th>
+                    @if (Model.cpus[0].IdCpu != 0)
                     {
-                        @Html.DisplayFor(modelItem => item.IdCpu);
+                        @Html.DisplayNameFor(model => model.cpus[0].IdCpu);
+                    }
+                </th>
+                <th>
+                    @if (Model.cpus[0].Merk != null)
+                    {
+                        @Html.DisplayNameFor(model => model.cpus[0].Snelheid);
+                    }
+                </th>
+                <th>
+                    @if (Model.cpus[0].Type != null)
+                    {
+                        @Html.DisplayNameFor(model => model.cpus[0].Merk);
+                    }
+                </th>
+                <th>
+                    @if (Model.cpus[0].Snelheid != 0)
+                    {
+                        @Html.DisplayNameFor(model => model.cpus[0].Type);
                     }
 
-                </td>
-                <td>
-                    @if (item.Merk != null)
+                </th>
+                <th>
+                    @if (Model.cpus[0].FabrieksNummer != null)
                     {
-                        @Html.DisplayFor(modelItem => item.Merk);
+                        @Html.DisplayNameFor(model => model.cpus[0].FabrieksNummer);
                     }
-
-                </td>
-                <td>
-                    @if (item.Type != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.Type);
-                    }
-
-                </td>
-                <td>
-                    @if (item.Snelheid != 0)
-                    {
-                        @Html.DisplayFor(modelItem => item.Snelheid);
-                    }
-
-                </td>
-                <td>
-                    @if (item.FabrieksNummer != null)
-                    {
-                        @Html.DisplayFor(modelItem => item.FabrieksNummer);
-                    }
-                </td>
+                </th>
             </tr>
-        }
-    }
 
-</table>
+
+            @foreach (var item in Model.cpus)
+            {
+                <tr>
+                    <td>
+                        @if (item.IdCpu != 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.IdCpu);
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.Merk != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Merk);
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.Type != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.Type);
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.Snelheid != 0)
+                        {
+                            @Html.DisplayFor(modelItem => item.Snelheid);
+                        }
+
+                    </td>
+                    <td>
+                        @if (item.FabrieksNummer != null)
+                        {
+                            @Html.DisplayFor(modelItem => item.FabrieksNummer);
+                        }
+                    </td>
+                </tr>
+            }
+
+
+        </table>
+    </div>
+}
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 
     @using (Html.BeginForm("StapOpslaan", "RapporteringCpu"))
@@ -118,6 +122,6 @@
         @Html.Hidden("query", (string)@ViewBag.query)
         <p> stap 3 wilt u de informatie uit tabel CPU opslaan als pdf of excel</p>
         <button name="opslaan" type="submit" value="OpslaanExcel">Opslaan als excel</button>
-        <button name="opslaan" type="submit" value="OpslaanPdf">Opslaan als Pdf</button>
+            <button name="opslaan" type="submit" value="OpslaanPdf">Opslaan als Pdf</button>
     }
 </div>

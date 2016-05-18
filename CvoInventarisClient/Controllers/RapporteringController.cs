@@ -28,6 +28,7 @@ namespace CvoInventarisClient.Controllers
         {
             tabellen = new List<string>();
             tabellen.Add("Factuur");
+            tabellen.Add("Cpu");
             tabellen.Add("Inventaris");
             tabellen.Add("leverancier");
             tabellen.Add("campus");
@@ -83,7 +84,7 @@ namespace CvoInventarisClient.Controllers
                     model.cpus = cc.GetCpus();
                     ViewBag.cpu = "inline";
                     ViewBag.stijlStapOpslaan = "inline";
-                    ViewBag.tabelKeuze = "cpu";
+                    ViewBag.tabelKeuze = "Cpu";
                 }
                 if (tabelKeuze[1].Trim().Equals("Hardware"))
                 {

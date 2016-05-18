@@ -1,6 +1,7 @@
 ﻿@model CvoInventarisClient.Models.TabelModel
 @{
     ViewBag.Title = "Index";
+    string selectie = ViewBag.tabelkeuze;
 }
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
 {
@@ -10,162 +11,176 @@
     </div>
 }
 
-@using (Html.BeginForm("stap1", "Rapportering"))
+@using (Html.BeginForm("Stap1", "Rapportering"))
 {
-    @Html.DropDownList("tabelKeuzes", "selecteer een tabel")
-    <input type="submit" value="Submit" />
+    @Html.DropDownList("tabelkeuzes", (IEnumerable<SelectListItem>)ViewBag.tabelKeuzes, (ViewBag.tabelkeuze == null ? "Selecteer" : selectie), new { onchange = "$(this).parent('form:first').submit();", @class = "form-control" })
 }
-
+<div class="spacer"></div>
 <div style="visibility : @ViewBag.stijlStap2">
 
     @using (Html.BeginForm("stap2", "Rapportering"))
     {
-        <p>Wilt u uit de tabel : @ViewBag.tabelkeuze</p>
-        <input name="submit" type="submit" id="alleGegevens" value="alle gegevens van de tabel : @ViewBag.tabelkeuze" />
-        <input name="submit" type="submit" id="conditieGegevens" value="bepaalde conditie van de tabel : @ViewBag.tabelkeuze" />
+        <div class="text-center">
+            <input class="btn btn-primary" name="submit" type="submit" id="alleGegevens" value="alle gegevens van de tabel : @ViewBag.tabelkeuze" />
+            <input class="btn btn-primary" name="submit" type="submit" id="conditieGegevens" value="bepaalde conditie van de tabel : @ViewBag.tabelkeuze" />
+        </div>
     }
 </div>
+<div class="spacer"></div>
+@if (Model.cpus != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table style="visibility : @ViewBag.cpu" class="table table-striped">
 
-
-<table style="visibility : @ViewBag.cpu" class="table">
-    @if (Model.cpus != null)
-    {
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.cpus[0].IdCpu)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cpus[0].Merk)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cpus[0].Type)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cpus[0].Snelheid)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.cpus[0].FabrieksNummer)
-            </th>
-        </tr>
-
-
-        foreach (var item in Model.cpus)
-        {
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdCpu)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Merk)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Type)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Snelheid)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FabrieksNummer)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.cpus[0].IdCpu)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cpus[0].Merk)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cpus[0].Type)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cpus[0].Snelheid)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.cpus[0].FabrieksNummer)
+                </th>
             </tr>
-        }
-    }
 
-</table>
 
-<table class="table">
-    @if (Model.hardwares != null)
-    {
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.hardwares[0].IdHardware)
-            </th>
-            <th>
-                Cpu
-            </th>
-            <th>
-                Apparaat
-            </th>
-            <th>
-                Grafische kaart
-            </th>
-            <th>
-                Harddisk
-            </th>
-        </tr>
+            @foreach (var item in Model.cpus)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCpu)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Merk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Type)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Snelheid)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FabrieksNummer)
+                    </td>
+                </tr>
+            }
 
-        foreach (var item in Model.hardwares)
-        {
+
+        </table>
+    </div>
+}
+@if (Model.hardwares != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdHardware)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Cpu.Merk)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Device.Merk)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.GrafischeKaart.Merk)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Harddisk.Merk)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.hardwares[0].IdHardware)
+                </th>
+                <th>
+                    Cpu
+                </th>
+                <th>
+                    Apparaat
+                </th>
+                <th>
+                    Grafische kaart
+                </th>
+                <th>
+                    Harddisk
+                </th>
             </tr>
-        }
-    }
-</table>
-<table class="table">
-    @if (Model.verzekeringen != null)
-    {
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.verzekeringen[0].IdVerzekering)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.verzekeringen[0].Omschrijving)
-            </th>
-        </tr>
 
-        foreach (var item in Model.verzekeringen)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdVerzekering)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Omschrijving)
-                </td>
-            </tr>
-        }
-    }
-</table>
-<table class="table">
-    @if (Model.objectTypes != null)
-    {
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.objectTypes[0].IdObjectType)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.objectTypes[0].Omschrijving)
-            </th>
-        </tr>
+            @foreach (var item in Model.hardwares)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdHardware)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cpu.Merk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Device.Merk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.GrafischeKaart.Merk)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Harddisk.Merk)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
 
-        foreach (var item in Model.objectTypes)
-        {
+@if (Model.verzekeringen != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
             <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.IdObjectType)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Omschrijving)
-                </td>
+                <th>
+                    @Html.DisplayNameFor(model => model.verzekeringen[0].IdVerzekering)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.verzekeringen[0].Omschrijving)
+                </th>
             </tr>
-        }
-    }
-</table>
+
+            @foreach (var item in Model.verzekeringen)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdVerzekering)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Omschrijving)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
+@if (Model.objectTypes != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.objectTypes[0].IdObjectType)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.objectTypes[0].Omschrijving)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.objectTypes)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdObjectType)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Omschrijving)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
 
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 
