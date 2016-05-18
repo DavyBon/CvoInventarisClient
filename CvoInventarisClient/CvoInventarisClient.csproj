@@ -220,6 +220,7 @@
     <Compile Include="Controllers\Beheer\ObjectTypeController.cs" />
     <Compile Include="Controllers\BeheerController.cs" />
     <Compile Include="Controllers\Beheer\VerzekeringController.cs" />
+    <Compile Include="Controllers\RapporteringCampusController.cs" />
     <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\RapporteringCpuController.cs" />
     <Compile Include="Controllers\RapporteringHardwareController.cs" />
@@ -325,6 +326,7 @@
     <Content Include="Views\Shared\NotFound.cshtml" />
     <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Object\Edit.cshtml" />
+    <Content Include="Views\RapporteringCampus\CampusRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
