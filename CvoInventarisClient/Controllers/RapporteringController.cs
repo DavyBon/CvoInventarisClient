@@ -124,6 +124,12 @@ namespace CvoInventarisClient.Controllers
                     model.facturen = factuur.GetAll();
                     ViewBag.tabelKeuze = "factuur";
                 }
+                if (tabelKeuze[1].Trim().Equals("Leverancier"))
+                {
+                    DAL.TblLeverancier leverancier = new DAL.TblLeverancier();
+                    model.leveranciers = leverancier.GetAll();
+                    ViewBag.tabelKeuze = "leverancier";
+                }
 
 
             }
@@ -158,6 +164,10 @@ namespace CvoInventarisClient.Controllers
                 if (tabelKeuze[1].Trim().Equals("Factuur"))
                 {
                     return Redirect("/RapporteringFactuur/FactuurRapportering");
+                }
+                if (tabelKeuze[1].Trim().Equals("Leverancier"))
+                {
+                    return Redirect("/RapporteringLeverancier/LeverancierRapportering");
                 }
 
             }
@@ -332,6 +342,43 @@ namespace CvoInventarisClient.Controllers
                         table.AddCell(item.UserModified);
                     }
                 }
+                if (tabelKeuze == "leverancier")
+                {
+                    PdfPTable table = new PdfPTable(14); // aantal kolommen
+                    table.AddCell("Naam");
+                    table.AddCell("Afkorting");
+                    table.AddCell("Straat");
+                    table.AddCell("HuisNummer");
+                    table.AddCell("BusNummer");
+                    table.AddCell("Postcode");
+                    table.AddCell("Telefoon");
+                    table.AddCell("Fax");
+                    table.AddCell("Email");
+                    table.AddCell("Website");
+                    table.AddCell("Btw nummer");
+                    table.AddCell("Iban");
+                    table.AddCell("Bic");
+                    table.AddCell("Toegevoegd op");
+                    DAL.TblLeverancier objectType = new DAL.TblLeverancier();
+                    foreach (var item in objectType.GetAll())
+                    {
+                        table.AddCell(item.Naam);
+                        table.AddCell(item.Afkorting);
+                        table.AddCell(item.Straat);
+                        table.AddCell(item.HuisNummer.ToString());
+                        table.AddCell(item.BusNummer.ToString());
+                        table.AddCell(item.Postcode.ToString());
+                        table.AddCell(item.Telefoon);
+                        table.AddCell(item.Fax);
+                        table.AddCell(item.Email);
+                        table.AddCell(item.Website);
+                        table.AddCell(item.BtwNummer);
+                        table.AddCell(item.Iban);
+                        table.AddCell(item.Bic);
+                        table.AddCell(item.ToegevoegdOp.ToString());
+                    }
+                    pdfDoc.Add(table);
+                }
                 pdfWriter.CloseStream = false;
                 pdfDoc.Close();
                 Response.Buffer = true;
@@ -480,6 +527,43 @@ namespace CvoInventarisClient.Controllers
                     worksheet.Cells[i + 2, 13] = fm[i].UserInsert;
                     worksheet.Cells[i + 2, 14] = fm[i].DatumModified;
                     worksheet.Cells[i + 2, 15] = fm[i].UserModified;
+                }
+            }
+            if (tabelKeuze.Equals("leverancier"))
+            {
+                DAL.TblLeverancier leverancier = new DAL.TblLeverancier();
+                List<LeverancierModel> lm = leverancier.GetAll();
+                worksheet.Cells[1, 1] = "Naam";
+                worksheet.Cells[1, 2] = "Afkorting";
+                worksheet.Cells[1, 3] = "Straat";
+                worksheet.Cells[1, 4] = "HuisNummer";
+                worksheet.Cells[1, 5] = "BusNummer";
+                worksheet.Cells[1, 6] = "Postcode";
+                worksheet.Cells[1, 7] = "Telefoon";
+                worksheet.Cells[1, 8] = "Fax";
+                worksheet.Cells[1, 9] = "Email";
+                worksheet.Cells[1, 10] = "Website";
+                worksheet.Cells[1, 11] = "Btw nummer";
+                worksheet.Cells[1, 12] = "Iban";
+                worksheet.Cells[1, 13] = "Bic";
+                worksheet.Cells[1, 14] = "Toegevoegd op";
+
+                for (int i = 0; i < lm.Count; i++)
+                {
+                    worksheet.Cells[i + 2, 1] = lm[i].Naam;
+                    worksheet.Cells[i + 2, 2] = lm[i].Afkorting;
+                    worksheet.Cells[i + 2, 3] = lm[i].Straat;
+                    worksheet.Cells[i + 2, 4] = lm[i].HuisNummer;
+                    worksheet.Cells[i + 2, 5] = lm[i].BusNummer;
+                    worksheet.Cells[i + 2, 6] = lm[i].Postcode;
+                    worksheet.Cells[i + 2, 7] = lm[i].Telefoon;
+                    worksheet.Cells[i + 2, 8] = lm[i].Fax;
+                    worksheet.Cells[i + 2, 9] = lm[i].Email;
+                    worksheet.Cells[i + 2, 10] = lm[i].Website;
+                    worksheet.Cells[i + 2, 11] = lm[i].BtwNummer;
+                    worksheet.Cells[i + 2, 12] = lm[i].Iban;
+                    worksheet.Cells[i + 2, 13] = lm[i].Bic;
+                    worksheet.Cells[i + 2, 14] = lm[i].ToegevoegdOp;
                 }
             }
             worksheet.Columns.AutoFit();

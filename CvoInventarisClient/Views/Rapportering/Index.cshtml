@@ -362,6 +362,107 @@
     </div>
 }
 
+@if (Model.leveranciers != null)
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@selectie</div>
+        <table class="table table-striped">
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Naam)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Afkorting)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Straat)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].HuisNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].BusNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Postcode)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Telefoon)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Fax)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Email)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Website)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].BtwNummer)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Iban)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].Bic)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.leveranciers[0].ToegevoegdOp)
+                </th>
+            </tr>
+
+            @foreach (var item in Model.leveranciers)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Naam)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Afkorting)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Straat)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.HuisNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BusNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Postcode)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Telefoon)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Fax)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Email)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Website)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BtwNummer)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Iban)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Bic)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ToegevoegdOp)
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+}
+
 <div style="visibility : @ViewBag.stijlStapOpslaan">
 
     @using (Html.BeginForm("StapOpslaan", "Rapportering"))
