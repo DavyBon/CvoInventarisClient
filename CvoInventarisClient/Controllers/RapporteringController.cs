@@ -592,7 +592,7 @@ namespace CvoInventarisClient.Controllers
                     worksheet.Cells[i + 2, 14] = lm[i].ToegevoegdOp;
                 }
             }
-            if (tabelKeuze.Equals("factuur"))
+            if (tabelKeuze.Equals("object"))
             {
                 DAL.TblObject Object = new DAL.TblObject();
                 List<ObjectModel> om = Object.GetAll();
