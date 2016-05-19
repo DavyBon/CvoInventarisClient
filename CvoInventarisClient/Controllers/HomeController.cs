@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class HomeController : Controller
     {
         // GET: Home

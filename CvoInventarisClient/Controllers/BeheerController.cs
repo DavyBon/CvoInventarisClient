@@ -6,6 +6,7 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class BeheerController : Controller
     {
         // GET: Overzicht

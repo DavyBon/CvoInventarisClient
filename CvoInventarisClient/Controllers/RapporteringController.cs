@@ -18,6 +18,7 @@ using CvoInventarisClient.Controllers.Beheer;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class RapporteringController : Controller
     {
         public CvoInventarisServiceClient service = new CvoInventarisServiceClient();

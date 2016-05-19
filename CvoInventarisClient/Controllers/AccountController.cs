@@ -14,14 +14,15 @@ using System.Data;
 
 namespace CvoInventarisClient.Controllers
 {
-    [Authorize]
     public class AccountController : Controller
     {
+        [Authorize]
         public ActionResult Index()
         {
             return View(GetAccounts());
         }
 
+        [Authorize]
         public ActionResult Create()
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
@@ -32,6 +33,7 @@ namespace CvoInventarisClient.Controllers
             return View("index", GetAccounts());
         }
 
+        [Authorize]
         public ActionResult Delete(int id)
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
@@ -42,6 +44,7 @@ namespace CvoInventarisClient.Controllers
             return View("index", GetAccounts());
         }
 
+        [Authorize]
         public List<AccountModel> GetAccounts()
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
@@ -58,6 +61,7 @@ namespace CvoInventarisClient.Controllers
             return accs;
         }
 
+        [Authorize]
         public AccountModel GetAccountById(int id)
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
@@ -74,6 +78,7 @@ namespace CvoInventarisClient.Controllers
             return acc;
         }
 
+        [Authorize]
         public bool UpdateAccount(AccountModel am)
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
@@ -88,6 +93,7 @@ namespace CvoInventarisClient.Controllers
             }
         }
 
+        [Authorize]
         public int InsertAccount(AccountModel am)
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
@@ -102,6 +108,7 @@ namespace CvoInventarisClient.Controllers
             }
         }
 
+        [Authorize]
         public bool DeleteAccount(AccountModel am)
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
