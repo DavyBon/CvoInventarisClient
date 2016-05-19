@@ -3,7 +3,7 @@
     ViewBag.Title = "Index";
 }
 <div style="visibility: @ViewBag.HardwareConditie">
-    <form action="/RapporteringHardware/Stap3" method="post">
+    <form action="~/RapporteringHardware/Stap3" method="post">
         <p>stap 3 : Kies welke gegevens je uit de tabel Hardware wilt hebben</p>
         @Html.CheckBox("idHardware", new { @checked = "checked", @disabled = "disabled" }) id hardware
         @Html.CheckBox("idCpu") cpu

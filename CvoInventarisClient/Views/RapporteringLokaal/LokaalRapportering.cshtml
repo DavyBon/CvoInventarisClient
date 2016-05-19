@@ -6,7 +6,7 @@
 
 <h2>LokaalRapportering</h2>
 <div style="visibility: @ViewBag.cpuConditie">
-    <form action="/RapporteringLokaal/Stap3" method="post">
+    <form action="~/RapporteringLokaal/Stap3" method="post">
         <p>stap 3 : Kies welke gegevens je uit de tabel Campus wilt hebben</p>
         @Html.CheckBox("lokaalNaam") naam
         @Html.CheckBox("aantalPlaatsen") aantal plaatsen

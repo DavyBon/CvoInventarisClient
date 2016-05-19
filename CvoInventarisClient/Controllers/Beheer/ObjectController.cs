@@ -73,14 +73,14 @@ namespace CvoInventarisClient.Controllers
 
             model.Objecten.Add(o);
 
-            //foreach (Factuur f in   TblObject.FactuurGetAll())
-            //{
-            //    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
-            //}
-            //foreach (ObjectTypes ot in TblObject.ObjectTypeGetAll())
-            //{
-            //    model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
-            //}
+            foreach (FactuurModel f in TblFactuur.GetAll())
+            {
+                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
+            }
+            foreach (ObjectTypeModel ot in TblObjectType.GetAll())
+            {
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+            }
             return View(model);
 
         }
@@ -111,6 +111,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray)
         {
+            if (idArray == null) { return RedirectToAction("Index"); }
             DAL.TblObject TblObject = new DAL.TblObject();
             foreach (int id in idArray)
             {

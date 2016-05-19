@@ -78,6 +78,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray)
         {
+            if (idArray == null) { return RedirectToAction("Index"); }
             TblCampus TblCampus = new TblCampus();
 
             foreach (int id in idArray)

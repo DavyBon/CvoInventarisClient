@@ -64,6 +64,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray)
         {
+            if (idArray == null) { return RedirectToAction("Index"); }
             DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
                 foreach (int id in idArray)
                 {

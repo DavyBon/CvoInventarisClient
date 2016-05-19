@@ -148,6 +148,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray, FormCollection collection)
         {
+            if (idArray == null) { return RedirectToAction("Index"); }
             TblFactuur TblFactuur = new TblFactuur();
 
             foreach (int id in idArray)

@@ -61,6 +61,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray)
         {
+            if (idArray == null) { return RedirectToAction("Index"); }
             DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
             foreach (int id in idArray)
                 {

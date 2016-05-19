@@ -157,6 +157,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray, FormCollection collection)
         {
+            if(idArray == null) { return RedirectToAction("Index"); }
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
             foreach (int id in idArray)
