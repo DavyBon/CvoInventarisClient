@@ -12,7 +12,7 @@
             @Html.Hidden("idCampus", Model.IdCampus)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Naam)
-                <input class="form-control" type="text" name="naam" value="@Model.Naam" required/>
+                <input class="form-control" maxlength="50" type="text" name="naam" value="@Model.Naam" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Postcode)
@@ -20,11 +20,11 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Straat)
-                <input class="form-control" type="text" name="straat" value="@Model.Straat" required/>
+                <input class="form-control" maxlength="50" type="text" name="straat" value="@Model.Straat" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Nummer)
-                <input class="form-control" type="text" name="nummer" value="@Model.Nummer" required/>
+                <input class="form-control" maxlength="50" type="text" name="nummer" value="@Model.Nummer" required/>
             </div>
         </div>
     </div>

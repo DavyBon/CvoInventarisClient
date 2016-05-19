@@ -12,7 +12,7 @@
             @Html.Hidden("idLokaal", Model.IdLokaal)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.LokaalNaam)
-                <input class="form-control" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required/>
+                <input class="form-control" maxlength="50" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.AantalPlaatsen)

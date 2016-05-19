@@ -329,6 +329,8 @@
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\RapporteringCampus\CampusRapportering.cshtml" />
     <Content Include="Views\RapporteringLokaal\LokaalRapportering.cshtml" />
+    <Content Include="Views\ObjectType\Edit.cshtml" />
+    <Content Include="Views\Verzekering\Edit.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

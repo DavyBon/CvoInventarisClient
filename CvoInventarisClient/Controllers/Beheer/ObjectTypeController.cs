@@ -7,6 +7,7 @@ using CvoInventarisClient.Models;
 using CvoInventarisClient.ServiceReference;
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class ObjectTypeController : Controller
     {
         public List<ObjectTypeModel> GetObjectTypes()

@@ -4,46 +4,51 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-@{ 
-    ViewBag.Title = "Index";
+@{
+    ViewBag.Title = "Accountbeheer";
 }
 
-<h2>Index</h2>
-
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.IdAccount)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Wachtwoord)
-        </th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="panel panel-primary">
+    <div class="panel-heading">Bestaande accounts</div>
+    <table class="table table-striped">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdAccount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Wachtwoord)
-            </td>
-            <td>
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.IdAccount }) |
-                @Html.ActionLink("Details", "Details", new { id = item.IdAccount }) |*@
-                @Html.ActionLink("Delete", "Delete", new { id = item.IdAccount }) 
-            </td>
+            <th></th>
+            <th>
+                @Html.DisplayNameFor(model => model.Email)
+            </th>
         </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <a class="bottom-align-text" href="@Url.Action("Delete", "Account", new { id = item.IdAccount })"><s><span class="glyphicon glyphicon-trash"></span></s></a>
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Email)
+                </td>
+            </tr>
+        }
+    </table>
+</div>
+<div class="panel panel-default">
+    <div class="panel-heading">Nieuw account aanmaken</div>
+    @using (Html.BeginForm("Create", "Account"))
+            {
+
+        <div class="container-fluid">
+            <form role="form">
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" class="form-control" name="emailinp" placeholder="naam@email.be">
+                </div>
+                <div class="form-group">
+                    <label for="pwd">Password:</label>
+                    <input type="password" class="form-control" name="passwordinp" placeholder="paswoord">
+                </div>
+
+                <button type="submit" class="btn btn-default">Creëer</button>
+            </form>
+        </div>
     }
-</table>
+</div>

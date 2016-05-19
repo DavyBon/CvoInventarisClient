@@ -24,7 +24,7 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
-        <table class="table table-striped">
+        <table class="table table-striped dataTable">
             <thead>
                 <tr>
                     <th></th>
@@ -160,23 +160,23 @@
                 <div class="modal-body">
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Naam)
-                        <input class="form-control" type="text" name="naam" required/>
+                        <input class="form-control" maxlength="255" type="text" name="naam" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Afkorting)
-                        <input class="form-control" type="text" name="afkorting" required/>
+                        <input class="form-control" maxlength="10" type="text" name="afkorting" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Straat)
-                        <input class="form-control" type="text" name="straat" required/>
+                        <input class="form-control" maxlength="255" type="text" name="straat" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.HuisNummer)
-                        <input class="form-control" type="text" name="huisNummer" required/>
+                        <input class="form-control" maxlength="10" type="text" name="huisNummer" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.BusNummer)
-                        <input class="form-control" type="text" name="busNummer" required/>
+                        <input class="form-control" maxlength="10" type="text" name="busNummer" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Postcode)
@@ -184,35 +184,35 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Telefoon)
-                        <input class="form-control" type="text" name="telefoon" required/>
+                        <input class="form-control" maxlength="50" type="text" name="telefoon" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Fax)
-                        <input class="form-control" type="text" name="fax" required/>
+                        <input class="form-control" maxlength="50" type="text" name="fax" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Email)
-                        <input class="form-control" type="text" name="email" required/>
+                        <input class="form-control" maxlength="50" type="text" name="email" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Website)
-                        <input class="form-control" type="text" name="website" required/>
+                        <input class="form-control" maxlength="50" type="text" name="website" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.BtwNummer)
-                        <input class="form-control" type="text" name="btwNummer" required/>
+                        <input class="form-control" maxlength="50" type="text" name="btwNummer" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Iban)
-                        <input class="form-control" type="text" name="iban" required/>
+                        <input class="form-control" maxlength="50" type="text" name="iban" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Bic)
-                        <input class="form-control" type="text" name="bic" required/>
+                        <input class="form-control" maxlength="50" type="text" name="bic" required/>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.ToegevoegdOp)
-                        <input class="form-control" type="date" name="toegevoegdOp" required/>
+                        <input class="form-control" maxlength="20" type="date" name="toegevoegdOp" required/>
                     </div>
                 </div>
                 <div class="modal-footer">

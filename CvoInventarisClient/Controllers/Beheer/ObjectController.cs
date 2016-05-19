@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class ObjectController : Controller
     {
         // GET: Inventaris
@@ -27,15 +28,14 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Objecten.Add(o);
             }
-            //uncomment na dal refactor
-            //foreach (Factuur f in TblFactuur.FactuurGetAll())
-            //{
-            //    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
-            //}
-            //foreach (ObjectTypes ot in TblOBjectType.ObjectTypeGetAll())
-            //{
-            //    model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
-            //}
+            foreach (FactuurModel f in TblFactuur.GetAll())
+            {
+                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
+            }
+            foreach (ObjectTypeModel ot in TblObjectType.GetAll())
+            {
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
+            }
             return View(model);
 
         }

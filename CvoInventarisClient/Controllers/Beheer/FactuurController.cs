@@ -10,6 +10,7 @@ using CvoInventarisClient.DAL;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class FactuurController : Controller
     {
         // INDEX:

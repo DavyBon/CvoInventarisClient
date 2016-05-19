@@ -13,23 +13,23 @@
             @Html.Hidden("defaultIdLeverancier", Model.Facturen[0].Leverancier.IdLeverancier)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].Boekjaar)
-                <input class="form-control" type="date" name="boekjaar" value="@Model.Facturen[0].Boekjaar" required/>
+                <input class="form-control" type="date" maxlength="50" name="boekjaar" value="@Model.Facturen[0].Boekjaar" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].CvoVolgNummer)
-                <input class="form-control" type="text" name="cvoVolgNummer" value="@Model.Facturen[0].CvoVolgNummer" required/>
+                <input class="form-control" type="text" maxlength="50" name="cvoVolgNummer" value="@Model.Facturen[0].CvoVolgNummer" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].FactuurNummer)
-                <input class="form-control" type="text" name="factuurNummer" value="@Model.Facturen[0].FactuurNummer" required/>
+                <input class="form-control" type="text" maxlength="50" name="factuurNummer" value="@Model.Facturen[0].FactuurNummer" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
-                <input class="form-control" type="text" name="scholengroepNummer" value="@Model.Facturen[0].ScholengroepNummer" required/>
+                <input class="form-control" type="text" maxlength="50" name="scholengroepNummer" value="@Model.Facturen[0].ScholengroepNummer" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].FactuurDatum)
-                <input class="form-control" type="date" name="factuurDatum" value="@Model.Facturen[0].FactuurDatum" required/>
+                <input class="form-control" type="date" maxlength="50" name="factuurDatum" value="@Model.Facturen[0].FactuurDatum" required/>
             </div>
             <div class="form-group">
                 Leverancier
@@ -37,7 +37,7 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
-                <input class="form-control" type="text" name="prijs" value="@Model.Facturen[0].Prijs" required/>
+                <input class="form-control" type="text" maxlength="50" name="prijs" value="@Model.Facturen[0].Prijs" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
@@ -45,11 +45,11 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
-                <input class="form-control" type="text" name="omschrijving" value="@Model.Facturen[0].Omschrijving" required/>
+                <input class="form-control" type="text" maxlength="1200" name="omschrijving" value="@Model.Facturen[0].Omschrijving" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].Opmerking)
-                <input class="form-control" type="text" name="opmerking" value="@Model.Facturen[0].Opmerking" required/>
+                <input class="form-control" type="text" maxlength="1200" name="opmerking" value="@Model.Facturen[0].Opmerking" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
@@ -57,19 +57,19 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].DatumInsert)
-                <input class="form-control" type="date" name="datumInsert" value="@Model.Facturen[0].DatumInsert" required/>
+                <input class="form-control" type="date" maxlength="50" name="datumInsert" value="@Model.Facturen[0].DatumInsert" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].UserInsert)
-                <input class="form-control" type="text" name="userInsert" value="@Model.Facturen[0].UserInsert" required/>
+                <input class="form-control" type="text" maxlength="50" name="userInsert" value="@Model.Facturen[0].UserInsert" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].DatumModified)
-                <input class="form-control" type="date" name="datumModified" value="@Model.Facturen[0].DatumModified"/>
+                <input class="form-control" type="date" maxlength="50" name="datumModified" value="@Model.Facturen[0].DatumModified"/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].UserModified)
-                <input class="form-control" type="text" name="userModified" value="@Model.Facturen[0].UserModified"/>
+                <input class="form-control" type="text" maxlength="50" name="userModified" value="@Model.Facturen[0].UserModified"/>
             </div>
         </div>
     </div>

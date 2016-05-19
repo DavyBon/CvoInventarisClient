@@ -28,7 +28,7 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
-                <input class="form-control" type="text" name="historiek" required value="@Model.Inventaris[0].Historiek"/>
+                <input class="form-control" type="text" name="historiek" maxlength="1024" required value="@Model.Inventaris[0].Historiek"/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)

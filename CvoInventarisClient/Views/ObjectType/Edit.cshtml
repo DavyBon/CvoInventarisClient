@@ -12,7 +12,7 @@
             @Html.Hidden("idObjectType", Model.IdObjectType)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Omschrijving)
-                <input class="form-control" type="text" name="omschrijving" value="@Model.Omschrijving" required />
+                <input class="form-control" maxlength="50" type="text" name="omschrijving" value="@Model.Omschrijving" required />
             </div>
         </div>
     </div>

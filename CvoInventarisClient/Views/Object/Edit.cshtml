@@ -18,7 +18,7 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Objecten[0].Kenmerken)
-                <input class="form-control" type="text" name="kenmerken" value="@Model.Objecten[0].Kenmerken" required />
+                <input class="form-control" type="text" maxlength="50" name="kenmerken" value="@Model.Objecten[0].Kenmerken" required />
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Objecten[0].Factuur)

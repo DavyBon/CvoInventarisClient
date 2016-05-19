@@ -9,6 +9,7 @@ using CvoInventarisClient.DAL;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class CampusController : Controller
     {
         // INDEX:

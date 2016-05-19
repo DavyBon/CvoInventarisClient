@@ -24,7 +24,7 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
-        <table class="table table-striped">
+        <table class="table table-striped dataTable">
             <thead>
                 <tr>
                     <th></th>
@@ -131,7 +131,7 @@
 
                     <div class="form-group">
                         @Html.DisplayName("Reeks")
-                        <select name="reeks" class="form-control">
+                        <select name="reeks" class="form-control" required>
                             <option value="05">05</option>
                             <option value="06">06</option>
                             <option value="07">07</option>
@@ -159,7 +159,7 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
-                        <input class="form-control" type="text" name="historiek" required />
+                        <input class="form-control" type="text" maxlength="1024" name="historiek" required />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)
@@ -178,8 +178,6 @@
                         @Html.Label("Aantal")
                         <input class="form-control" type="number" name="aantal" value="1" min="1" required />
                     </div>
-
-
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

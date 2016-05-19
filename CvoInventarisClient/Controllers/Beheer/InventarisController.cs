@@ -9,6 +9,7 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class InventarisController : Controller
     {
         // GET: Inventaris
@@ -17,6 +18,8 @@ namespace CvoInventarisClient.Controllers
             ViewBag.action = TempData["action"];
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
             DAL.TblObject TblObject = new DAL.TblObject();
+            DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
+            DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
 
             //WCF servicereference objecten collection naar InventarisModel objecten collection
             InventarisViewModel model = new InventarisViewModel();
@@ -33,14 +36,14 @@ namespace CvoInventarisClient.Controllers
             {
                 if (!model.Inventaris.Exists(i => i.Object.Id == o.Id)) { model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() }); }
             }
-            //foreach (LokaalModel l in TblLokaal.GetAll())
-            //{
-            //    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
-            //}
-            //foreach (VerzekeringModel v in TblVerzekering.GetAll())
-            //{
-            //    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.IdVerzekering.ToString() });
-            //}
+            foreach (LokaalModel l in TblLokaal.GetAll())
+            {
+                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+            }
+            foreach (VerzekeringModel v in TblVerzekering.GetAll())
+            {
+                model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.IdVerzekering.ToString() });
+            }
             return View(model);
 
         }
@@ -83,9 +86,10 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Edit(int id)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
-            //DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
-            //WCF servicereference objecten collection naar InventarisModel objecten collection
+            DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+            DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
             InventarisViewModel model = new InventarisViewModel();
+
             model.Inventaris = new List<InventarisModel>();
             model.Objecten = new List<SelectListItem>();
             model.Lokalen = new List<SelectListItem>();
@@ -94,20 +98,20 @@ namespace CvoInventarisClient.Controllers
             InventarisModel i = TblInventaris.GetById(id);
             model.Inventaris.Add(i);
 
-            //foreach (Lokaal l in TblLokaal.GetAll())
-            //{
-            //    if (!(l.IdLokaal == i.Lokaal.IdLokaal))
-            //    {
-            //        model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
-            //    }
-            //}
-            //foreach (Verzekering v in TblVerzekering.GetAll())
-            //{
-            //    if (!(v.Id == i.Verzekering.IdVerzekering))
-            //    {
-            //        model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
-            //    }
-            //}
+            foreach (LokaalModel l in TblLokaal.GetAll())
+            {
+                if (!(l.IdLokaal == i.Lokaal.IdLokaal))
+                {
+                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+                }
+            }
+            foreach (VerzekeringModel v in TblVerzekering.GetAll())
+            {
+                if (!(v.IdVerzekering == i.Verzekering.IdVerzekering))
+                {
+                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.IdVerzekering.ToString() });
+                }
+            }
             return View(model);
 
         }

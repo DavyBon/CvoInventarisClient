@@ -8,6 +8,7 @@ using CvoInventarisClient.ServiceReference;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class VerzekeringController : Controller
     {
         public List<VerzekeringModel> Getverzekeringen()

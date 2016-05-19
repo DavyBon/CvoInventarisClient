@@ -12,23 +12,23 @@
             @Html.Hidden("idLeverancier", Model.IdLeverancier)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Naam)
-                <input class="form-control" type="text" name="naam" value="@Model.Naam" required/>
+                <input class="form-control" maxlength="255" type="text" name="naam" value="@Model.Naam" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Afkorting)
-                <input class="form-control" type="text" name="afkorting" value="@Model.Afkorting" required/>
+                <input class="form-control" maxlength="10" type="text" name="afkorting" value="@Model.Afkorting" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Straat)
-                <input class="form-control" type="text" name="straat" value="@Model.Straat" required/>
+                <input class="form-control" maxlength="255" type="text" name="straat" value="@Model.Straat" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.HuisNummer)
-                <input class="form-control" type="text" name="huisNummer" value="@Model.HuisNummer" required/>
+                <input class="form-control" maxlength="10" type="text" name="huisNummer" value="@Model.HuisNummer" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.BusNummer)
-                <input class="form-control" type="text" name="busNummer" value="@Model.BusNummer" required/>
+                <input class="form-control" maxlength="10" type="text" name="busNummer" value="@Model.BusNummer" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Postcode)
@@ -36,35 +36,35 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Telefoon)
-                <input class="form-control" type="text" name="telefoon" value="@Model.Telefoon" required/>
+                <input class="form-control" maxlength="50" type="text" name="telefoon" value="@Model.Telefoon" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Fax)
-                <input class="form-control" type="text" name="fax" value="@Model.Fax" required/>
+                <input class="form-control" maxlength="50" type="text" name="fax" value="@Model.Fax" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Email)
-                <input class="form-control" type="text" name="email" value="@Model.Email" required/>
+                <input class="form-control" maxlength="50" type="text" name="email" value="@Model.Email" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Website)
-                <input class="form-control" type="text" name="website" value="@Model.Website" required/>
+                <input class="form-control" maxlength="50" type="text" name="website" value="@Model.Website" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.BtwNummer)
-                <input class="form-control" type="text" name="btwNummer" value="@Model.BtwNummer" required/>
+                <input class="form-control" maxlength="50" type="text" name="btwNummer" value="@Model.BtwNummer" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Iban)
-                <input class="form-control" type="text" name="iban" value="@Model.Iban" required/>
+                <input class="form-control" maxlength="50" type="text" name="iban" value="@Model.Iban" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Bic)
-                <input class="form-control" type="text" name="bic" value="@Model.Bic" required/>
+                <input class="form-control" maxlength="50" type="text" name="bic" value="@Model.Bic" required/>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.ToegevoegdOp)
-                <input class="form-control" type="date" name="toegevoegdOp" value="@Model.ToegevoegdOp" required/>
+                <input class="form-control" maxlength="20" type="date" name="toegevoegdOp" value="@Model.ToegevoegdOp" required/>
             </div>
         </div>
     </div>

@@ -21,70 +21,24 @@ namespace CvoInventarisClient.Controllers
             return View(GetAccounts());
         }
 
-        public ActionResult Edit(int id)
-        {
-            return View(GetAccountById(id));
-        }
-
-        [HttpPost]
-        public ActionResult Edit(AccountModel am)
-        {
-            if (UpdateAccount(am))
-            {
-                ViewBag.EditMesage = "Het account is aangepst";
-                //return View("Index");
-                return View();
-            }
-            else
-            {
-                ViewBag.EditMesage = "Het account is niet aangepst";
-                return View();
-            }
-        }
-
         public ActionResult Create()
         {
-            return View(new AccountModel());
-        }
-
-        [HttpPost]
-        public ActionResult Create(AccountModel am)
-        {
-            if (InsertAccount(am) >= 0)
-            {
-                ViewBag.CreateMesage = "Het account is toegevoegd";
-                return View();
-            }
-            else
-            {
-                ViewBag.CreateMesage = "Het account is niet toegevoegd";
-                return View();
-            }
-        }
-
-        public ActionResult Details(int id)
-        {
-            return View(GetAccountById(id));
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
+            AccountModel account = new AccountModel();
+            account.Email = Request.Form["emailinp"];
+            account.Wachtwoord = Request.Form["passwordinp"];
+            tblAccount.Create(account);
+            return View("index", GetAccounts());
         }
 
         public ActionResult Delete(int id)
         {
-            return View(GetAccountById(id));
-        }
-
-        [HttpPost]
-        public ActionResult Delete(AccountModel am)
-        {
-            if (DeleteAccount(am))
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
+            if(tblAccount.Delete(id))
             {
-                ViewBag.DeleteMesage = "Het account is verwijderd";
-                return View();
+                ViewBag.DeleteMessage = "Account verwijdert";
             }
-            else
-            {
-                ViewBag.DeleteMesage = "Het account is niet verwijderd";
-                return View();
-            }
+            return View("index", GetAccounts());
         }
 
         public List<AccountModel> GetAccounts()

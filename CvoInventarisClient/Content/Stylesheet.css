@@ -57,3 +57,8 @@
         background: #337AB7;
         color: #f4f4f4;
     }
+.dataTable{
+    display:inline-block;
+    height:40em;
+    overflow-y: scroll;
+}
