@@ -296,7 +296,6 @@ namespace CvoInventarisClient.DAL
                             factuur = new FactuurModel();
                             leverancier = new LeverancierModel();
 
-                            if (keuzeKolommen.Contains("TblFactuur.idFactuur")) { factuur.IdFactuur = (int)dr["idFactuur"]; }
                             if (keuzeKolommen.Contains("TblFactuur.Boekjaar")) { factuur.Boekjaar = dr["Boekjaar"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.CvoVolgNummer")) { factuur.CvoVolgNummer = dr["CvoVolgNummer"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.FactuurNummer")) { factuur.FactuurNummer = dr["FactuurNummer"].ToString(); }

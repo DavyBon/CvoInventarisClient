@@ -223,6 +223,7 @@
     <Compile Include="Controllers\RapporteringCampusController.cs" />
     <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\RapporteringCpuController.cs" />
+    <Compile Include="Controllers\RapporteringFactuurController.cs" />
     <Compile Include="Controllers\RapporteringHardwareController.cs" />
     <Compile Include="Controllers\RapporteringLeverancierController.cs" />
     <Compile Include="Controllers\RapporteringLokaalController.cs" />
@@ -330,12 +331,10 @@
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\RapporteringCampus\CampusRapportering.cshtml" />
     <Content Include="Views\RapporteringLokaal\LokaalRapportering.cshtml" />
-
     <Content Include="Views\ObjectType\Edit.cshtml" />
     <Content Include="Views\Verzekering\Edit.cshtml" />
-
     <Content Include="Views\RapporteringLeverancier\LeverancierRapportering.cshtml" />
-
+    <Content Include="Views\RapporteringFactuur\FactuurRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

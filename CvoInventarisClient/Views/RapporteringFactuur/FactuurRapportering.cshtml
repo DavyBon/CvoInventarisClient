@@ -1,0 +1,273 @@
+﻿@model CvoInventarisClient.Models.TabelModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>FactuurRapportering</h2>
+<div style="visibility: @ViewBag.cpuConditie">
+    <form action="/RapporteringCampus/Stap3" method="post">
+        <p>stap 3 : Kies welke gegevens je uit de tabel Factuur wilt hebben</p>
+        @Html.CheckBox("boekjaar") boekjaar
+        @Html.CheckBox("cvoVolgNummer") CVO volgnummer
+        @Html.CheckBox("factuurNummer") factuurnummer
+        @Html.CheckBox("scholengroepNummer") scholengroepnummer
+        @Html.CheckBox("factuurDatum") factuurdatum
+        @Html.CheckBox("leverancier") leverancier
+        @Html.CheckBox("prijs") prijs
+        @Html.CheckBox("garantie") garantie
+        @Html.CheckBox("omschrijving") omschrijving
+        @Html.CheckBox("opmerking") opmerking
+        @Html.CheckBox("afschrijfperiode") afschrijfperiode
+        @Html.CheckBox("datumInsert") datum insert
+        @Html.CheckBox("userInsert") user insert
+        @Html.CheckBox("datumModified") datum modified
+        @Html.CheckBox("userModified") user modified
+        <br />
+        <br />
+        <p>stap 4 : Kies welke conditie of condities u op de gegevens wilt toepassen</p>
+        <br />
+        @Html.DropDownList("boekjaren", (IEnumerable<SelectListItem>)ViewBag.boekjaren, "selecteer een boekjaar", new { @class = "form-control" })
+        @Html.DropDownList("cvoVolgNummer", (IEnumerable<SelectListItem>)ViewBag.cvoVolgNummer, "selecteer een CVO volgnummer", new { @class = "form-control" })
+        @Html.DropDownList("factuurNummer", (IEnumerable<SelectListItem>)ViewBag.factuurNummer, "selecteer een factuurnummer", new { @class = "form-control" })
+        @Html.DropDownList("scholengroepNummer", (IEnumerable<SelectListItem>)ViewBag.scholengroepNummer, "selecteer een scholengroepnummer", new { @class = "form-control" })
+        @Html.DropDownList("factuurDatum", (IEnumerable<SelectListItem>)ViewBag.factuurDatum, "selecteer een factuurdatum", new { @class = "form-control" })
+        @Html.DropDownList("leverancier", (IEnumerable<SelectListItem>)ViewBag.leverancier, "selecteer een leverancier", new { @class = "form-control" })
+        @Html.DropDownList("prijs", (IEnumerable<SelectListItem>)ViewBag.prijs, "selecteer een prijs", new { @class = "form-control" })
+        @Html.DropDownList("garantie", (IEnumerable<SelectListItem>)ViewBag.garantie, "selecteer een garantie", new { @class = "form-control" })
+        @Html.DropDownList("omschrijving", (IEnumerable<SelectListItem>)ViewBag.omschrijving, "selecteer een omschrijving", new { @class = "form-control" })
+        @Html.DropDownList("opmerking", (IEnumerable<SelectListItem>)ViewBag.opmerking, "selecteer een opmerking", new { @class = "form-control" })
+        @Html.DropDownList("afschrijfperiode", (IEnumerable<SelectListItem>)ViewBag.afschrijfperiode, "selecteer een afschrijfperiode", new { @class = "form-control" })
+        @Html.DropDownList("datumInsert", (IEnumerable<SelectListItem>)ViewBag.datumInsert, "selecteer een insert datum", new { @class = "form-control" })
+        @Html.DropDownList("userInsert", (IEnumerable<SelectListItem>)ViewBag.userInsert, "selecteer een insert user", new { @class = "form-control" })
+        @Html.DropDownList("datumModified", (IEnumerable<SelectListItem>)ViewBag.datumModified, "selecteer een modified datum", new { @class = "form-control" })
+        @Html.DropDownList("userModified", (IEnumerable<SelectListItem>)ViewBag.userModified, "selecteer een modified user", new { @class = "form-control" })
+        <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
+    </form>
+</div>
+@if (Model.facturen != null)
+{
+    if (Model.facturen.Any())
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">@ViewBag.Title</div>
+            <table style="visibility : @ViewBag.campus" class="table table-striped">
+                <tr>
+                    <th>
+                        @if (Model.facturen[0].Boekjaar != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].Boekjaar);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].CvoVolgNummer != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].CvoVolgNummer);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].FactuurNummer != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].FactuurNummer);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].ScholengroepNummer != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].ScholengroepNummer);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].FactuurDatum != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].FactuurDatum);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].Leverancier != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].Leverancier.Naam);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].Prijs != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].Prijs);
+                    }
+                    </th>
+                    <th>
+                        @if ((object)Model.facturen[0].Garantie != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].Garantie);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].Omschrijving != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].Omschrijving);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].Opmerking != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].Opmerking);
+                    }
+                    </th>
+                    <th>
+                        @if ((object)Model.facturen[0].Afschrijfperiode != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].Afschrijfperiode);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].DatumInsert != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].DatumInsert);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].UserInsert != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].UserInsert);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].DatumModified != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].DatumModified);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.facturen[0].UserModified != null)
+                    {
+                            @Html.DisplayNameFor(model => model.facturen[0].UserModified);
+                    }
+                    </th>
+                </tr>
+
+
+                @foreach (var item in Model.facturen)
+                {
+                    <tr>
+                        <td>
+                            @if (item.Boekjaar != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Boekjaar);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.CvoVolgNummer != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.CvoVolgNummer);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.FactuurNummer != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.FactuurNummer);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.ScholengroepNummer != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.ScholengroepNummer);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.FactuurDatum != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.FactuurDatum);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.Leverancier != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Leverancier.Naam);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.Prijs != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Prijs);
+                        }
+
+                        </td>
+                        <td>
+                            @if ((object)item.Garantie != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Garantie);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.Omschrijving != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Omschrijving);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.Opmerking != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Opmerking);
+                        }
+
+                        </td>
+                        <td>
+                            @if ((object)item.Afschrijfperiode != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Afschrijfperiode);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.DatumInsert != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.DatumInsert);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.UserInsert != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.UserInsert);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.DatumModified != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.DatumModified);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.UserModified != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.UserModified);
+                        }
+
+                        </td>                        
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+}
+<div style="visibility : @ViewBag.stijlStapOpslaan">
+
+    @using (Html.BeginForm("StapOpslaan", "RapporteringFactuur"))
+    {
+        @Html.Hidden("kolomnaam", (string)@ViewBag.kolomnamen)
+        @Html.Hidden("query", (string)@ViewBag.query)
+        <p> stap 3 wilt u de informatie uit tabel Factuur opslaan als pdf of excel</p>
+        <button name="opslaan" type="submit" value="OpslaanExcel">Opslaan als excel</button>
+        <button name="opslaan" type="submit" value="OpslaanPdf">Opslaan als Pdf</button>
+    }
+</div>
+
