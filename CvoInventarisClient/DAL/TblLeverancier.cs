@@ -68,8 +68,8 @@ namespace CvoInventarisClient.DAL
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
-                            l.HuisNummer = (int)dr["huisNummer"];
-                            l.BusNummer = (int)dr["busNummer"];
+                            l.HuisNummer = dr["huisNummer"].ToString();
+                            l.BusNummer = dr["busNummer"].ToString();
                             l.Postcode = (int)dr["postcode"];
                             l.Telefoon = dr["telefoon"].ToString();
                             l.Fax = dr["fax"].ToString();
@@ -78,7 +78,7 @@ namespace CvoInventarisClient.DAL
                             l.BtwNummer = dr["btwNummer"].ToString();
                             l.Iban = dr["iban"].ToString();
                             l.Bic = dr["bic"].ToString();
-                            l.ToegevoegdOp = (DateTime)dr["toegevoegdOp"];
+                            l.ToegevoegdOp = dr["toegevoegdOp"].ToString();
                             list.Add(l);
                         }
                         return list;
@@ -118,8 +118,8 @@ namespace CvoInventarisClient.DAL
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
-                            l.HuisNummer = (int)dr["huisNummer"];
-                            l.BusNummer = (int)dr["busNummer"];
+                            l.HuisNummer = dr["huisNummer"].ToString();
+                            l.BusNummer = dr["busNummer"].ToString();
                             l.Postcode = (int)dr["postcode"];
                             l.Telefoon = dr["telefoon"].ToString();
                             l.Fax = dr["fax"].ToString();
@@ -128,7 +128,7 @@ namespace CvoInventarisClient.DAL
                             l.BtwNummer = dr["btwNummer"].ToString();
                             l.Iban = dr["iban"].ToString();
                             l.Bic = dr["bic"].ToString();
-                            l.ToegevoegdOp = (DateTime)dr["toegevoegdOp"];
+                            l.ToegevoegdOp = dr["toegevoegdOp"].ToString();
                         }
                         return l;
                     }
@@ -269,8 +269,8 @@ namespace CvoInventarisClient.DAL
                             if (keuzeKolommen.Contains("naam")) { l.Naam = dr["naam"].ToString(); }
                             if (keuzeKolommen.Contains("afkorting")) { l.Afkorting = dr["afkorting"].ToString(); }
                             if (keuzeKolommen.Contains("straat")) { l.Straat = dr["straat"].ToString(); }
-                            if (keuzeKolommen.Contains("huisNummer")) { l.HuisNummer = (int)dr["huisNummer"]; }
-                            if (keuzeKolommen.Contains("busNummer")) { l.BusNummer = (int)dr["busNummer"]; }
+                            if (keuzeKolommen.Contains("huisNummer")) { l.HuisNummer = dr["huisNummer"].ToString(); }
+                            if (keuzeKolommen.Contains("busNummer")) { l.BusNummer = dr["busNummer"].ToString(); }
                             if (keuzeKolommen.Contains("postcode")) { l.Postcode = (int)dr["postcode"]; }
                             if (keuzeKolommen.Contains("telefoon")) { l.Telefoon = dr["telefoon"].ToString(); }
                             if (keuzeKolommen.Contains("fax")) { l.Fax = dr["fax"].ToString(); }
@@ -279,7 +279,7 @@ namespace CvoInventarisClient.DAL
                             if (keuzeKolommen.Contains("btwNummer")) { l.BtwNummer = dr["btwNummer"].ToString(); }
                             if (keuzeKolommen.Contains("iban")) { l.Iban = dr["iban"].ToString(); }
                             if (keuzeKolommen.Contains("bic")) { l.Bic = dr["bic"].ToString(); }
-                            if (keuzeKolommen.Contains("toegevoegdOp")) { l.ToegevoegdOp = (DateTime)dr["toegevoegdOp"]; }
+                            if (keuzeKolommen.Contains("toegevoegdOp")) { l.ToegevoegdOp = dr["toegevoegdOp"].ToString(); }
                             list.Add(l);
                         }
                         return list;

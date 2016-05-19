@@ -65,17 +65,17 @@ namespace CvoInventarisClient.Controllers
             factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
             factuur.FactuurNummer = Request.Form["factuurNummer"];
             factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
-            factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
+            factuur.FactuurDatum = Request.Form["factuurDatum"];
             factuur.Leverancier = new LeverancierModel() { IdLeverancier = Convert.ToInt16(Request.Form["Leveranciers"]) };
             factuur.Prijs = Request.Form["prijs"];
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
             factuur.Opmerking = Request.Form["opmerking"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-            factuur.DatumInsert = Convert.ToDateTime(Request.Form["datumInsert"]);
+            factuur.DatumInsert = Request.Form["datumInsert"];
             factuur.UserInsert = Request.Form["userInsert"];
-            if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumInsert"]); }
-            else { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]); }
+            if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Request.Form["datumInsert"]; }
+            else { factuur.DatumModified = Request.Form["datumModified"]; }
             if (String.IsNullOrWhiteSpace(Request.Form["userModified"])) { factuur.UserModified = Request.Form["userInsert"]; }
             else { factuur.UserModified = Request.Form["userModified"]; }
 
@@ -120,16 +120,16 @@ namespace CvoInventarisClient.Controllers
             factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
             factuur.FactuurNummer = Request.Form["factuurNummer"];
             factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
-            factuur.FactuurDatum = Convert.ToDateTime(Request.Form["factuurDatum"]);
+            factuur.FactuurDatum = Request.Form["factuurDatum"];
             factuur.Prijs = Request.Form["prijs"];
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
             factuur.Opmerking = Request.Form["opmerking"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-            factuur.DatumInsert = Convert.ToDateTime(Request.Form["datumInsert"]);
+            factuur.DatumInsert = Request.Form["datumInsert"].ToString();
             factuur.UserInsert = Request.Form["userInsert"];
-            if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumInsert"]); }
-            else { factuur.DatumModified = Convert.ToDateTime(Request.Form["datumModified"]); }
+            if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Request.Form["datumInsert"]; }
+            else { factuur.DatumModified = Request.Form["datumModified"]; }
             if (String.IsNullOrWhiteSpace(Request.Form["userModified"])) { factuur.UserModified = Request.Form["userInsert"]; }
             else { factuur.UserModified = Request.Form["userModified"]; }
             if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new LeverancierModel() { IdLeverancier = Convert.ToInt16(Request.Form["Leveranciers"]) }; }

@@ -20,10 +20,10 @@ namespace CvoInventarisClient.Models
         public string Straat { get; set; }
 
         [Display(Name = "huisNummer")]
-        public int HuisNummer { get; set; }
+        public string HuisNummer { get; set; }
 
         [Display(Name = "busNummer")]
-        public int BusNummer { get; set; }
+        public string BusNummer { get; set; }
 
         [Display(Name = "postcode")]
         public int Postcode { get; set; }
@@ -54,6 +54,6 @@ namespace CvoInventarisClient.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "toegevoegdOp")]
-        public DateTime ToegevoegdOp { get; set; }
+        public string ToegevoegdOp { get; set; }
     }
 }

@@ -20,7 +20,7 @@ namespace CvoInventarisClient.Controllers
                 List<LeverancierModel> model = new List<LeverancierModel>();
                 foreach (Leverancier leverancier in client.LeverancierGetAll())
                 {
-                    model.Add(new LeverancierModel() { IdLeverancier = leverancier.IdLeverancier, Naam = leverancier.Naam, Afkorting = leverancier.Afkorting, Straat = leverancier.Straat, HuisNummer = leverancier.HuisNummer, BusNummer = leverancier.BusNummer, Postcode = leverancier.Postcode, Telefoon = leverancier.Telefoon, Fax = leverancier.Fax, Email = leverancier.Email, Website = leverancier.Website, BtwNummer = leverancier.BtwNummer, Iban = leverancier.Iban, Bic = leverancier.Bic, ToegevoegdOp = leverancier.ToegevoegdOp });
+                    //model.Add(new LeverancierModel() { IdLeverancier = leverancier.IdLeverancier, Naam = leverancier.Naam, Afkorting = leverancier.Afkorting, Straat = leverancier.Straat, HuisNummer = leverancier.HuisNummer, BusNummer = leverancier.BusNummer, Postcode = leverancier.Postcode, Telefoon = leverancier.Telefoon, Fax = leverancier.Fax, Email = leverancier.Email, Website = leverancier.Website, BtwNummer = leverancier.BtwNummer, Iban = leverancier.Iban, Bic = leverancier.Bic, ToegevoegdOp = leverancier.ToegevoegdOp });
                 }
                 return View(model);
             }
@@ -61,7 +61,8 @@ namespace CvoInventarisClient.Controllers
             using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
             {
                 Leverancier leverancier = client.LeverancierGetById(id);
-                return View(new LeverancierModel() { IdLeverancier = leverancier.IdLeverancier, Naam = leverancier.Naam, Afkorting = leverancier.Afkorting, Straat = leverancier.Straat, HuisNummer = leverancier.HuisNummer, BusNummer = leverancier.BusNummer, Postcode = leverancier.Postcode, Telefoon = leverancier.Telefoon, Fax = leverancier.Fax, Email = leverancier.Email, Website = leverancier.Website, BtwNummer = leverancier.BtwNummer, Iban = leverancier.Iban, Bic = leverancier.Bic, ToegevoegdOp = leverancier.ToegevoegdOp });
+                return View();
+                //return View(new LeverancierModel() { IdLeverancier = leverancier.IdLeverancier, Naam = leverancier.Naam, Afkorting = leverancier.Afkorting, Straat = leverancier.Straat, HuisNummer = leverancier.HuisNummer, BusNummer = leverancier.BusNummer, Postcode = leverancier.Postcode, Telefoon = leverancier.Telefoon, Fax = leverancier.Fax, Email = leverancier.Email, Website = leverancier.Website, BtwNummer = leverancier.BtwNummer, Iban = leverancier.Iban, Bic = leverancier.Bic, ToegevoegdOp = leverancier.ToegevoegdOp });
             }
         }
 

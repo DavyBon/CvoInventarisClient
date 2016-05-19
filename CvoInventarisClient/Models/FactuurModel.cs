@@ -24,7 +24,7 @@ namespace CvoInventarisClient.Models
 
         [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "factuurDatum")]
-        public DateTime FactuurDatum { get; set; }
+        public string FactuurDatum { get; set; }
 
         [Display(Name = "idLeverancier")]
         public LeverancierModel Leverancier { get; set; }
@@ -47,7 +47,7 @@ namespace CvoInventarisClient.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "datumInsert")]
-        public DateTime DatumInsert { get; set; }
+        public string DatumInsert { get; set; }
 
         [Display(Name = "userInsert")]
         public string UserInsert { get; set; }
@@ -55,7 +55,7 @@ namespace CvoInventarisClient.Models
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "datumModified")]
-        public DateTime DatumModified { get; set; }
+        public string DatumModified { get; set; }
 
         [Display(Name = "userModified")]
         public string UserModified { get; set; }
