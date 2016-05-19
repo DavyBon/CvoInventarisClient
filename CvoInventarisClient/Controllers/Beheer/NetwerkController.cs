@@ -7,6 +7,7 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class NetwerkController : Controller
     {
         // GET: Inventaris

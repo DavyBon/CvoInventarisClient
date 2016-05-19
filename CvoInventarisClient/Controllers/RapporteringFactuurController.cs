@@ -10,6 +10,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class RapporteringFactuurController : Controller
     {
         TabelModel model;

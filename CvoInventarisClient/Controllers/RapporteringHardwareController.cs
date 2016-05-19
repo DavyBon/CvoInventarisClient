@@ -8,6 +8,7 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class RapporteringHardwareController : Controller
     {
         public CvoInventarisServiceClient test = new CvoInventarisServiceClient();

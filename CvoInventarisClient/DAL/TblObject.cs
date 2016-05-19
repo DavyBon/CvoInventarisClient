@@ -2,6 +2,7 @@
 using CvoInventarisClient.Models;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
@@ -237,6 +238,44 @@ namespace CvoInventarisClient.DAL
             {
                 connection.Close();
             }
+        }
+
+        public List<ObjectModel> Rapportering(string s, string[] keuzeKolommen)
+        {
+            List<ObjectModel> list = new List<ObjectModel>();
+            ObjectModel objecten = new ObjectModel();
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand(s, connection))
+                {
+                    cmd.CommandType = System.Data.CommandType.Text;
+                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            LokaalModel lokaal = new LokaalModel();
+                            if (keuzeKolommen.Contains("TblObject.kenmerken")) { objecten.Kenmerken = dr["kenmerken"].ToString(); }
+                            if (keuzeKolommen.Contains("tblFactuur.FactuurNummer")) { objecten.Factuur.FactuurNummer = dr["FactuurNummer"].ToString(); }
+                            if (keuzeKolommen.Contains("TblObjectType.omschrijving")) { objecten.ObjectType.Omschrijving = dr["aantalPlaatsen"].ToString(); }
+
+                            list.Add(objecten);
+                        }
+                        return list;
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return list;
         }
     }
 }

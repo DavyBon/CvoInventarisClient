@@ -7,6 +7,7 @@ using CvoInventarisClient.ServiceReference;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class HarddiskController : Controller
     {
         // INDEX:

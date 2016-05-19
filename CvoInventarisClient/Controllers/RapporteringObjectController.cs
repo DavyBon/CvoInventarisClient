@@ -11,73 +11,75 @@ using Excel = Microsoft.Office.Interop.Excel;
 namespace CvoInventarisClient.Controllers
 {
     [Authorize]
-    public class RapporteringLokaalController : Controller
+    public class RapporteringObjectController : Controller
     {
         TabelModel model;
 
         public void vulDropDownLijstenIn()
         {
-            DAL.TblLokaal lokaalDal = new DAL.TblLokaal();
-            List<LokaalModel> lokaalModel = lokaalDal.GetAll();
-            List<string> namen = new List<string>();
-            List<string> campussen = new List<string>();
-            foreach (LokaalModel cm in lokaalModel)
+            DAL.TblObject objectDal = new DAL.TblObject();
+            List<ObjectModel> objectModel = objectDal.GetAll();
+            List<string> kenmerken = new List<string>();
+            List<string> facturen = new List<string>();
+            List<string> objectTypes = new List<string>();
+            foreach (ObjectModel om in objectModel)
             {
-                namen.Add(cm.LokaalNaam);
-                campussen.Add(cm.Campus.Naam);
+                kenmerken.Add(om.Kenmerken);
+                facturen.Add(om.Factuur.FactuurNummer);
+                objectTypes.Add(om.ObjectType.Omschrijving);
             }
-            SelectList namenSelectList = new SelectList(namen);
-            SelectList campusSelectList = new SelectList(campussen);
-            ViewBag.namen = namenSelectList;
-            ViewBag.campussen = campusSelectList;
+            SelectList kenmerkenSelectList = new SelectList(kenmerken);
+            SelectList facturenSelectlist = new SelectList(facturen);
+            SelectList objecytTypesSelelist = new SelectList(objectTypes);
+            ViewBag.kenmerken = kenmerkenSelectList;
+            ViewBag.facturen = facturenSelectlist;
+            ViewBag.objectTypes = objecytTypesSelelist;
         }
 
-        public ActionResult LokaalRapportering()
+        public ActionResult ObjectRapportering()
         {
             model = new TabelModel();
             return View(model);
         }
+
         public ActionResult Stap3(FormCollection collection)
         {
             model = new TabelModel();
-            DAL.TblLokaal lokaalDal = new DAL.TblLokaal();
-            List<LokaalModel> lokalen = new List<LokaalModel>();
+            DAL.TblObject objectDal = new DAL.TblObject();
+            List<ObjectModel> objecten = new List<ObjectModel>();
             //een tabel van drie omdat je maar drie lijnen nodig hebt. een select statement, u from en u where clausule
             string[] query = new string[4];
-            
+
             //hier gaat hem nakijken welke checkboxen er aan gevinkt zijn. dus welke tabellen de klant gegevens van wilt hebben
             List<string> kolomKeuze = new List<string>();
-            if (Convert.ToBoolean(collection["lokaalNaam"].Split(',')[0]) == true)
-                kolomKeuze.Add("TblLokaal.lokaalNaam");
-            if (Convert.ToBoolean(collection["aantalPlaatsen"].Split(',')[0]) == true)
-                kolomKeuze.Add("TblLokaal.aantalPlaatsen");
-            if (Convert.ToBoolean(collection["isComputerLokaal"].Split(',')[0]) == true)
-                kolomKeuze.Add("TblLokaal.isComputerLokaal");
-            if (Convert.ToBoolean(collection["campus"].Split(',')[0]) == true)
+            if (Convert.ToBoolean(collection["kenmerken"].Split(',')[0]) == true)
+                kolomKeuze.Add("TblObject.kenmerken");
+            if (Convert.ToBoolean(collection["factuur"].Split(',')[0]) == true)
             {
-                kolomKeuze.Add("TblCampus.naam");
-                query[2] = "LEFT JOIN TblCampus ON TblLokaal.idCampus = TblCampus.idCampus";
+                kolomKeuze.Add("TblFactuur.FactuurNummer");
+                query[2] = "LEFT JOIN TblFactuur ON TblObject.idFactuur = TblFactuur.idFactuur";
             }
-                
+            if (Convert.ToBoolean(collection["objecttype"].Split(',')[0]) == true)
+            {
+                kolomKeuze.Add("TblObjectType.omschrijving");
+                query[2] = "LEFT JOIN TblObjectType ON TblObject.idObjectType = TblObject.idObjectType";
+            }
 
             List<string> lijstConditie = new List<string>();
-            if (collection["namen"].Split(',')[0].Count() != 0)
+            if (collection["kenmerken"].Split(',')[0].Count() != 0)
             {
-                string naam = collection["namen"].Split(',')[0];
-                lijstConditie.Add("TblLokaal.naam = " + "'" + naam + "'");
+                string kenmerken = collection["kenmerken"].Split(',')[0];
+                lijstConditie.Add("TblObject.kenmerken = " + "'" + kenmerken + "'");
             }
-            if (Convert.ToBoolean(collection["aantalPlaatsenKeuze"].Split(',')[0]) == true)
+            if (collection["facturen"].Split(',')[0].Count() != 0)
             {
-                lijstConditie.Add("TblLokaal.aantalPlaatsen " + collection["aantalPlaatsenKeuze"].Split(',')[0] + " " + collection["aantalPlaatsenKeuze1"].Split(',')[0]);
+                string facturen = collection["facturen"].Split(',')[0];
+                lijstConditie.Add("TblFactuur.FactuurNummer = " + "'" + facturen + "'");
             }
-            if (Convert.ToBoolean(collection["isComputerLokaalKeuze"].Split(',')[0]) == true)
+            if (collection["objecttypes"].Split(',')[0].Count() != 0)
             {
-                lijstConditie.Add("TblLokaal.isComputerLokaalKeuze =  " + collection["isComputerLokaalKeuze"].Split(',')[0]);
-            }
-            if (collection["campussen"].Split(',')[0].Count() != 0)
-            {
-                string campus = collection["campussen"].Split(',')[0];
-                lijstConditie.Add("TblCampus.naam = " + "'" + campus + "'");
+                string objecttypes = collection["objecttypes"].Split(',')[0];
+                lijstConditie.Add("TblObjectType.omschrijving = " + "'" + objecttypes + "'");
             }
             //maak de select statement
             query[0] = "SELECT ";
@@ -89,7 +91,7 @@ namespace CvoInventarisClient.Controllers
             query[0] = query[0].Substring(0, query[0].Length - 1);
 
             //de FROM
-            query[1] = " FROM TblLokaal ";
+            query[1] = " FROM TblObject ";
 
             //de where clausule
             query[3] = "WHERE ";
@@ -105,8 +107,8 @@ namespace CvoInventarisClient.Controllers
             }
             queryResultaat += ";";
             string[] kolomKeuzeArray = kolomKeuze.ToArray();
-            lokalen = lokaalDal.Rapportering(queryResultaat, kolomKeuzeArray).ToList();
-            model.lokalen = lokalen;
+            objecten = objectDal.Rapportering(queryResultaat, kolomKeuzeArray).ToList();
+            model.objecten = objecten;
             //ik geef die mee omdat ik die op de view op hidden ga zetten maar dan kan ik daarna terug aan als ik ze wil opslaan als pdf of excel
             ViewBag.query = queryResultaat;
             ViewBag.kolomKeuze = kolomKeuzeArray;
@@ -118,11 +120,12 @@ namespace CvoInventarisClient.Controllers
                 kolomnamen += s + " ";
             }
             ViewBag.kolomnamen = kolomnamen.Trim();
-            return View("LokaalRapportering", model);
+            return View("ObjectRapportering", model);
         }
         [HttpPost]
         public ActionResult StapOpslaan(string kolomnaam, string opslaan, string query)
         {
+            model = new TabelModel();
             model = new TabelModel();
             string[] kolomKeuze = new string[kolomnaam.Split(' ').Length];
             int teller = 0;
@@ -140,7 +143,7 @@ namespace CvoInventarisClient.Controllers
                 OpslaanPdf(kolomKeuze, query);
             }
             vulDropDownLijstenIn();
-            return View("CpuRapportering", model);
+            return View("ObjectRapportering", model);
         }
         public void OpslaanPdf(string[] kolomKeuze, string query)
         {
@@ -152,29 +155,25 @@ namespace CvoInventarisClient.Controllers
                 PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
                 pdfDoc.Open();
                 PdfPTable table = new PdfPTable(kolomKeuze.Length);
-                DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
-                List<LokaalModel> lokalen = new List<LokaalModel>();
-                lokalen = tblLokaal.Rapportering(query, kolomKeuze).ToList();
+                DAL.TblObject tblObject = new DAL.TblObject();
+                List<ObjectModel> objecten = new List<ObjectModel>();
+                objecten = tblObject.Rapportering(query, kolomKeuze).ToList();
 
-                if (lokalen[0].LokaalNaam != null)
-                    table.AddCell("naam");
-                if (lokalen[0].AantalPlaatsen != 0)
-                    table.AddCell("aantal plaatsen");
-                if (lokalen[0].IsComputerLokaal != null)
-                    table.AddCell("computerlokaal");
-                if (lokalen[0].Campus != null)
-                    table.AddCell("campus");
+                if (objecten[0].Kenmerken != null)
+                    table.AddCell("kenmerken");
+                if (objecten[0].Factuur != null)
+                    table.AddCell("factuur");
+                if (objecten[0].ObjectType != null)
+                    table.AddCell("object type");
 
-                foreach (var item in lokalen)
+                foreach (var item in objecten)
                 {
-                    if (lokalen[0].LokaalNaam != null)
-                        table.AddCell(item.LokaalNaam);
-                    if (lokalen[0].AantalPlaatsen != 0)
-                        table.AddCell(item.AantalPlaatsen.ToString());
-                    if (lokalen[0].IsComputerLokaal)
-                        table.AddCell(item.IsComputerLokaal.ToString());
-                    if (lokalen[0].Campus != null)
-                        table.AddCell(item.Campus.Naam);
+                    if (objecten[0].Kenmerken != null)
+                        table.AddCell(item.Kenmerken);
+                    if (objecten[0].Factuur != null)
+                        table.AddCell(item.Factuur.FactuurNummer);
+                    if (objecten[0].ObjectType != null)
+                        table.AddCell(item.ObjectType.Omschrijving);
                 }
                 pdfDoc.Add(table);
 
@@ -197,45 +196,38 @@ namespace CvoInventarisClient.Controllers
             app.Visible = true;
             Excel.Workbook workbook = app.Workbooks.Add(1);
             Excel.Worksheet worksheet = (Excel.Worksheet)workbook.Sheets[1];
-            DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
-            List<LokaalModel> lokalen = new List<LokaalModel>();
-            lokalen = tblLokaal.Rapportering(query, kolomKeuze).ToList();
+            DAL.TblObject tblObject = new DAL.TblObject();
+            List<ObjectModel> objecten = new List<ObjectModel>();
+
+            objecten = tblObject.Rapportering(query, kolomKeuze).ToList();
             for (int i = 0; i < kolomKeuze.Length; i++)
             {
-                if (lokalen[0].LokaalNaam != null)
-                    worksheet.Cells[1, 1 + i] = "naam";
-                if (lokalen[0].AantalPlaatsen != 0)
-                    worksheet.Cells[1, i + 1] = "aantal plaatsen";
-                if (lokalen[0].IsComputerLokaal != null)
-                    worksheet.Cells[1, i + 1] = "computer lokaal";
-                if (lokalen[0].Campus.Naam != null)
-                    worksheet.Cells[1, i + 1] = "campus";
+                if (objecten[0].Kenmerken != null)
+                    worksheet.Cells[1, 1 + i] = "kenmerken";
+                if (objecten[0].Factuur != null)
+                    worksheet.Cells[1, i + 1] = "factuurnummer";
+                if (objecten[0].ObjectType != null)
+                    worksheet.Cells[1, i + 1] = "object type";
             }
-            for (int i = 0; i < lokalen.Count; i++)
+            for (int i = 0; i < objecten.Count; i++)
             {
                 //ik werkt met een teller omdat niet alle kolommen getoond worden. dus als er een kolom gegevens heeft gaat de teller met 1 omhoog waardoor het perfect naast elkaar komt
                 int teller = 0;
-                if (lokalen[0].LokaalNaam != null)
+                if (objecten[0].Kenmerken != null)
                 {
-                    worksheet.Cells[i + 2, 1 + teller] = lokalen[i].LokaalNaam;
+                    worksheet.Cells[i + 2, 1 + teller] = objecten[i].Kenmerken;
                     teller++;
                 }
 
-                if (lokalen[0].AantalPlaatsen != 0)
+                if (objecten[0].Factuur != null)
                 {
-                    worksheet.Cells[i + 2, 1 + teller] = lokalen[i].AantalPlaatsen;
+                    worksheet.Cells[i + 2, 1 + teller] = objecten[i].Factuur.FactuurNummer;
                     teller++;
                 }
 
-                if (lokalen[0].IsComputerLokaal != null)
+                if (objecten[0].ObjectType != null)
                 {
-                    worksheet.Cells[i + 2, 1 + teller] = lokalen[i].IsComputerLokaal;
-                    teller++;
-                }
-
-                if (lokalen[0].Campus != null)
-                {
-                    worksheet.Cells[i + 2, 1 + teller] = lokalen[i].Campus.Naam;
+                    worksheet.Cells[i + 2, 1 + teller] = objecten[i].ObjectType.Omschrijving;
                     teller++;
                 }
             }
@@ -246,7 +238,6 @@ namespace CvoInventarisClient.Controllers
             Response.AppendHeader("Content-Disposition", "attachment; filename=rapport.xls");
             Response.Write(worksheet);
             Response.End();
-
         }
     }
 }

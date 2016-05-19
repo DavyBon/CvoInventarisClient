@@ -1,0 +1,97 @@
+﻿@model CvoInventarisClient.Models.TabelModel
+@{
+    ViewBag.Title = "LokaalRapportering";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>ObjectRapportering</h2>
+<div style="visibility: @ViewBag.cpuConditie">
+    <form action="/RapporteringLokaal/Stap3" method="post">
+        <p>stap 3 : Kies welke gegevens je uit de tabel Object wilt hebben</p>
+        @Html.CheckBox("kenmerken") kenmerken
+        @Html.CheckBox("factuur") factuur
+        @Html.CheckBox("objecttype") objecttype
+        <br />
+        <br />
+        <p>stap 4 : Kies welke conditie of condities u op de gegevens wilt toepassen</p>
+        <br />
+        @Html.DropDownList("kenmerken", (IEnumerable<SelectListItem>)ViewBag.kenmerken, "selecteer een kenmerk", new { @class = "form-control" })
+        @Html.DropDownList("facturen", (IEnumerable<SelectListItem>)ViewBag.facturen, "selecteer een factuur", new { @class = "form-control" })
+        @Html.DropDownList("objecttypes", (IEnumerable<SelectListItem>)ViewBag.objecttypes, "selecteer een objecttype", new { @class = "form-control" })
+        <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
+    </form>
+</div>
+@if (Model.objecten != null)
+{
+    if (Model.objecten.Any())
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">@ViewBag.Title</div>
+            <table style="visibility : @ViewBag.objecten" class="table table-striped">
+                <tr>
+                    <th>
+                        @if (Model.objecten[0].Kenmerken != null)
+                    {
+                            @Html.DisplayNameFor(model => model.objecten[0].Kenmerken);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.objecten[0].Factuur != null)
+                    {
+                            @Html.DisplayNameFor(model => model.objecten[0].Factuur.FactuurNummer);
+                    }
+                    </th>
+                    <th>
+                        @if (Model.objecten[0].ObjectType != null)
+                    {
+                            @Html.DisplayNameFor(model => model.objecten[0].ObjectType.Omschrijving);
+                    }
+
+                    </th>
+                </tr>
+
+
+                @foreach (var item in Model.objecten)
+                {
+                    <tr>
+                        <td>
+                            @if (item.Kenmerken != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Kenmerken);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.Factuur != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.Factuur.FactuurNummer);
+                        }
+
+                        </td>
+                        <td>
+                            @if (item.ObjectType != null)
+                        {
+                                @Html.DisplayFor(modelItem => item.ObjectType.Omschrijving);
+                        }
+
+                        </td>
+                    </tr>
+                }
+
+
+            </table>
+        </div>
+    }
+}
+<div style="visibility : @ViewBag.stijlStapOpslaan">
+
+    @using (Html.BeginForm("StapOpslaan", "RapporteringObject"))
+    {
+        @Html.Hidden("kolomnaam", (string)@ViewBag.kolomnamen)
+        @Html.Hidden("query", (string)@ViewBag.query)
+        <p> stap 3 wilt u de informatie uit tabel Object opslaan als pdf of excel</p>
+        <button name="opslaan" type="submit" value="OpslaanExcel">Opslaan als excel</button>
+        <button name="opslaan" type="submit" value="OpslaanPdf">Opslaan als Pdf</button>
+    }
+</div>
+

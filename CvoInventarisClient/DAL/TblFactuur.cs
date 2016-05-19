@@ -301,7 +301,7 @@ namespace CvoInventarisClient.DAL
                             if (keuzeKolommen.Contains("TblFactuur.FactuurNummer")) { factuur.FactuurNummer = dr["FactuurNummer"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.ScholengroepNummer")) { factuur.ScholengroepNummer = dr["ScholengroepNummer"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.FactuurDatum")) { factuur.FactuurDatum = dr["FactuurDatum"].ToString(); }
-                            if (keuzeKolommen.Contains("TblLeverancier.naam")) { leverancier.Naam = dr["Naam"].ToString(); }
+                            if (keuzeKolommen.Contains("TblLeverancier.naam")) { factuur.Leverancier.Naam = dr["Naam"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.Prijs")) { factuur.Prijs = dr["Prijs"].ToString(); }
                             if (keuzeKolommen.Contains("TblFactuur.Garantie")) { factuur.Garantie = (int)dr["Garantie"]; }
                             if (keuzeKolommen.Contains("TblFactuur.Omschrijving")) { factuur.Omschrijving = dr["Omschrijving"].ToString(); }
