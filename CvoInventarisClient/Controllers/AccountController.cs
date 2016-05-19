@@ -31,13 +31,13 @@ namespace CvoInventarisClient.Controllers
         {
             if (UpdateAccount(am))
             {
-                ViewBag.EditMesage = "Row updated";
+                ViewBag.EditMesage = "Het account is aangepst";
                 //return View("Index");
                 return View();
             }
             else
             {
-                ViewBag.EditMesage = "Row not updated";
+                ViewBag.EditMesage = "Het account is niet aangepst";
                 return View();
             }
         }
@@ -52,13 +52,12 @@ namespace CvoInventarisClient.Controllers
         {
             if (InsertAccount(am) >= 0)
             {
-                ViewBag.CreateMesage = "Row inserted";
-                //return View("Index");
+                ViewBag.CreateMesage = "Het account is toegevoegd";
                 return View();
             }
             else
             {
-                ViewBag.CreateMesage = "Row not inserted";
+                ViewBag.CreateMesage = "Het account is niet toegevoegd";
                 return View();
             }
         }
@@ -78,25 +77,19 @@ namespace CvoInventarisClient.Controllers
         {
             if (DeleteAccount(am))
             {
-                ViewBag.DeleteMesage = "Row deleted";
-                //return View("Index");
+                ViewBag.DeleteMesage = "Het account is verwijderd";
                 return View();
             }
             else
             {
-                ViewBag.DeleteMesage = "Row not deleted";
+                ViewBag.DeleteMesage = "Het account is niet verwijderd";
                 return View();
             }
         }
 
         public List<AccountModel> GetAccounts()
         {
-            //CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
             DAL.TblAccount tblAccount = new DAL.TblAccount();
-
-            //AccountModel[] a = new AccountModel[] { };
-
             List<AccountModel> accs = new List<AccountModel>();
 
             try
@@ -105,57 +98,34 @@ namespace CvoInventarisClient.Controllers
             }
             catch (Exception)
             {
-
             }
-
-            //List<AccountModel> accs = new List<AccountModel>();
-
-            //foreach (Account acc in a)
-            //{
-            //    AccountModel am = new AccountModel();
-            //    am.IdAccount = acc.IdAccount;
-            //    am.Email = acc.Email;
-            //    am.Wachtwoord = acc.Wachtwoord;
-            //    accs.Add(am);              
-            //}
 
             return accs;
         }
 
         public AccountModel GetAccountById(int id)
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-            Account acc = new Account();
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
+            AccountModel acc = new AccountModel();
 
             try
             {
-                acc = service.AccountGetById(id);
+                acc = tblAccount.GetById(id);
             }
             catch (Exception)
             {
-
             }
 
-            AccountModel am = new AccountModel();
-            am.IdAccount = acc.IdAccount;
-            am.Email = acc.Email;
-            am.Wachtwoord = acc.Wachtwoord;
-
-            return am;
+            return acc;
         }
 
         public bool UpdateAccount(AccountModel am)
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Account acc = new Account();
-            acc.IdAccount = am.IdAccount;
-            acc.Email = am.Email;
-            acc.Wachtwoord = am.Wachtwoord;
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
 
             try
             {
-                return service.AccountUpdate(acc);
+                return tblAccount.Update(am);
             }
             catch (Exception)
             {
@@ -165,15 +135,11 @@ namespace CvoInventarisClient.Controllers
 
         public int InsertAccount(AccountModel am)
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            Account acc = new Account();
-            acc.Email = am.Email;
-            acc.Wachtwoord = am.Wachtwoord;
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
 
             try
             {
-                return service.AccountCreate(acc);
+                return tblAccount.Create(am);
             }
             catch (Exception)
             {
@@ -183,13 +149,11 @@ namespace CvoInventarisClient.Controllers
 
         public bool DeleteAccount(AccountModel am)
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
-            int id = am.IdAccount;
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
 
             try
             {
-                return service.AccountDelete(id);
+                return tblAccount.Delete(am.IdAccount);
             }
             catch (Exception)
             {
@@ -211,24 +175,24 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult ResetWachtwoord(AccountModel am)
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
 
-            if (service.AccountVerstuurWachtwoordResetEmail(am.Email))
+            if (tblAccount.VerstuurWachtwoordResetEmail(am.Email))
             {
                 ViewBag.ResetWachtwoordMessage = "Een e-mail met instructies om uw wachtwoord te wijzigen werd naar uw geregistreerde e-mailadres verstuurd.";
             }
             else
             {
-                ViewBag.ResetWachtwoordMessage = "E-mail niet verstuurd!";
+                ViewBag.ResetWachtwoordMessage = "E-mailadres niet gevonden!";
             }
             return View();
         }
 
         public ActionResult WijzigWachtwoord()
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
 
-            if (!service.AccountIsWachtwoordResetLinkValid(Request.QueryString["uid"]))
+            if (!tblAccount.IsWachtwoordResetLinkValid(Request.QueryString["uid"]))
             {
                 ViewBag.WijzigWachtwoordMessage = "Opgelet, wachtwoord reset link is verlopen of ongeldig!";
             }
@@ -239,9 +203,9 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult WijzigWachtwoord(AccountModel am, string GUID)
         {
-            CvoInventarisServiceClient service = new CvoInventarisServiceClient();
+            DAL.TblAccount tblAccount = new DAL.TblAccount();
 
-            if (service.AccountWijzigWachtwoord(GUID, am.Wachtwoord))
+            if (tblAccount.WijzigWachtwoord(GUID, am.Wachtwoord))
             {
                 ViewBag.WijzigWachtwoordMessage = "Uw wachtwoord is gewijzigd! U kan nu inloggen met uw nieuwe wachtwoord.";
             }

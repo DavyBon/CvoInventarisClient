@@ -221,7 +221,7 @@ namespace CvoInventarisClient.DAL
             sbEmailBody.Append("Beste,<br/><br/>");
             sbEmailBody.Append("Klik op de onderstaande link om uw wachtwoord te wijzigen.");
             sbEmailBody.Append("<br/>");
-            sbEmailBody.Append("http://localhost/Account/WijzigWachtwoord?uid=" + uniqueId);
+            sbEmailBody.Append("http://www.studyplanit.com/cvoi/Account/WijzigWachtwoord?uid=" + uniqueId);
             sbEmailBody.Append("<br/><br/>");
             sbEmailBody.Append("<b>CVO inventaris</b>");
 
