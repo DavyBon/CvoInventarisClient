@@ -8,7 +8,7 @@ using CvoInventarisClient.Models;
 
 namespace CvoInventarisClient.Controllers.Beheer
 {
-    [Authorize(Roles = "Admin")] // enkel een ingelogde admin kan gebruik maken van deze controler
+    [Authorize]
     public class CpuController : Controller
     {
         // GET: Inventaris

@@ -11,6 +11,7 @@ using Excel = Microsoft.Office.Interop.Excel;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class RapporteringCpuController : Controller
     {
         public CvoInventarisServiceClient test = new CvoInventarisServiceClient();

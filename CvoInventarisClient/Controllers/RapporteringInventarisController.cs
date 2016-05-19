@@ -10,6 +10,7 @@ using System.Web.Mvc;
 using Excel = Microsoft.Office.Interop.Excel;
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class RapporteringInventarisController : Controller
     {
         TabelModel model;

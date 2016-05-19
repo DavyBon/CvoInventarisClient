@@ -7,6 +7,7 @@ using CvoInventarisClient.ServiceReference;
 
 namespace CvoInventarisClient.Controllers.Beheer
 {
+    [Authorize]
     public class DeviceController : Controller
     {
         // GET: Inventaris

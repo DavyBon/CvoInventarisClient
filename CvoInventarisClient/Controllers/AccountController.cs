@@ -14,6 +14,7 @@ using System.Data;
 
 namespace CvoInventarisClient.Controllers
 {
+    [Authorize]
     public class AccountController : Controller
     {
         public ActionResult Index()
