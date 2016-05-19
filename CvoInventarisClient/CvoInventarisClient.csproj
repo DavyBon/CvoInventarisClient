@@ -224,6 +224,7 @@
     <Compile Include="Controllers\RapporteringController.cs" />
     <Compile Include="Controllers\RapporteringCpuController.cs" />
     <Compile Include="Controllers\RapporteringHardwareController.cs" />
+    <Compile Include="Controllers\RapporteringLeverancierController.cs" />
     <Compile Include="Controllers\RapporteringLokaalController.cs" />
     <Compile Include="DAL\Helpers\PasswordStorage.cs" />
     <Compile Include="DAL\Interfaces\ICrudable.cs" />
@@ -329,8 +330,12 @@
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\RapporteringCampus\CampusRapportering.cshtml" />
     <Content Include="Views\RapporteringLokaal\LokaalRapportering.cshtml" />
+<<<<<<< HEAD
     <Content Include="Views\ObjectType\Edit.cshtml" />
     <Content Include="Views\Verzekering\Edit.cshtml" />
+=======
+    <Content Include="Views\RapporteringLeverancier\LeverancierRapportering.cshtml" />
+>>>>>>> origin/master
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
