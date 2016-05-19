@@ -225,6 +225,7 @@
     <Compile Include="Controllers\RapporteringCpuController.cs" />
     <Compile Include="Controllers\RapporteringFactuurController.cs" />
     <Compile Include="Controllers\RapporteringHardwareController.cs" />
+    <Compile Include="Controllers\RapporteringInventarisController.cs" />
     <Compile Include="Controllers\RapporteringLeverancierController.cs" />
     <Compile Include="Controllers\RapporteringLokaalController.cs" />
     <Compile Include="DAL\Helpers\PasswordStorage.cs" />
@@ -335,6 +336,7 @@
     <Content Include="Views\Verzekering\Edit.cshtml" />
     <Content Include="Views\RapporteringLeverancier\LeverancierRapportering.cshtml" />
     <Content Include="Views\RapporteringFactuur\FactuurRapportering.cshtml" />
+    <Content Include="Views\RapporteringInventaris\InventarisRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

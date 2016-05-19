@@ -1,0 +1,178 @@
+﻿@model CvoInventarisClient.Models.TabelModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>InventarisRapportering</h2>
+<div style="visibility: @ViewBag.InventarisConditie">
+    <form action="/RapporteringInventaris/Stap3" method="post">
+        <p>stap 3 : Kies welke gegevens je uit de tabel Inventaris wilt hebben</p>
+        @Html.CheckBox("Lokaal") Lokaal
+        @Html.CheckBox("Object") Object
+        @Html.CheckBox("Verzekering") Verzekering
+        @Html.CheckBox("Aanwezig") Aanwezig
+        @Html.CheckBox("Actief") Actief
+        @Html.CheckBox("Label") Label
+        @Html.CheckBox("Historiek") Historiek
+        @Html.CheckBox("Aankoopjaar") Aankoopjaar
+        @Html.CheckBox("Afschrijvingsperiode") Afschrijvingsperiode
+        <br />
+        <br />
+        <p>stap 4 : Kies welke conditie of condities u op de gegevens wilt toepassen</p>
+        <br />
+        @Html.DropDownList("lokalen", (IEnumerable<SelectListItem>)ViewBag.lokalen, "selecteer een lokaal", new { @class = "form-control" })
+        @Html.DropDownList("objecten", (IEnumerable<SelectListItem>)ViewBag.objecten, "selecteer een object", new { @class = "form-control" })
+        @Html.DropDownList("verzekeringen", (IEnumerable<SelectListItem>)ViewBag.verzekeringen, "selecteer een verzekering", new { @class = "form-control" })
+        @Html.DropDownList("aanwezigs", (IEnumerable<SelectListItem>)ViewBag.aanwezigs, "selecteer aanwezig", new { @class = "form-control" })
+        @Html.DropDownList("actiefs", (IEnumerable<SelectListItem>)ViewBag.actiefs, "selecteer actief", new { @class = "form-control" })
+        @Html.DropDownList("labels", (IEnumerable<SelectListItem>)ViewBag.labels, "selecteer een label", new { @class = "form-control" })
+        @Html.DropDownList("historieken", (IEnumerable<SelectListItem>)ViewBag.historieken, "selecteer een historiek", new { @class = "form-control" })
+        @Html.DropDownList("aankoopjaren", (IEnumerable<SelectListItem>)ViewBag.aankoopjaren, "selecteer een aankoopjaar", new { @class = "form-control" })
+        @Html.DropDownList("afschrijvingsperiodes", (IEnumerable<SelectListItem>)ViewBag.afschrijvingsperiodes, "selecteer een afschrijvingsperiode", new { @class = "form-control" })
+        <button name="action" type="submit" value="conditieKeuze/@ViewBag.resultaatCheck">klaar</button>
+    </form>
+</div>
+@if (Model.inventarissen != null)
+{
+    if (Model.inventarissen.Any())
+    {
+        <div class="panel panel-primary">
+            <div class="panel-heading">@ViewBag.Title</div>
+            <table style="visibility : @ViewBag.inventaris" class="table table-striped">
+                <tr>
+                    <th>
+                        @if (Model.inventarissen[0].Lokaal != null)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].Lokaal);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].Object != null)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].Object);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].Verzekering != null)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].Verzekering);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].IsAanwezig != false)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].IsAanwezig);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].IsActief != false)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].IsActief);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].Label != null)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].Label);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].Historiek != null)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].Historiek);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].Aankoopjaar != 0)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].Aankoopjaar);
+                        }
+                    </th>
+                    <th>
+                        @if (Model.inventarissen[0].Afschrijvingsperiode != 0)
+                        {
+                            @Html.DisplayNameFor(model => model.inventarissen[0].Afschrijvingsperiode);
+                        }
+                    </th>
+                </tr>
+
+                @foreach (var item in Model.inventarissen)
+                {
+                    <tr>
+                        <td>
+                            @if (item.Lokaal != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Lokaal);
+                            }
+                        </td>
+                        <td>
+                            @if (item.Object != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Object);
+                            }
+                        </td>
+                        <td>
+                            @if (item.Verzekering != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Verzekering);
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsAanwezig != false)
+                            {
+                                @Html.DisplayFor(modelItem => item.IsAanwezig);
+                            }
+                        </td>
+                        <td>
+                            @if (item.IsActief != false)
+                            {
+                                @Html.DisplayFor(modelItem => item.IsActief);
+                            }
+                        </td>
+                        <td>
+                            @if (item.Label != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Label);
+                            }
+                        </td>
+                        <td>
+                            @if (item.Historiek != null)
+                            {
+                                @Html.DisplayFor(modelItem => item.Historiek);
+                            }
+                        <td>
+                            @if (item.Aankoopjaar != 0)
+                            {
+                                @Html.DisplayFor(modelItem => item.Aankoopjaar);
+                            }
+                        </td>
+                        <td>
+                            @if (item.Afschrijvingsperiode != 0)
+                            {
+                                @Html.DisplayFor(modelItem => item.Afschrijvingsperiode);
+                            }
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    }
+}
+<div style="visibility : @ViewBag.stijlStapOpslaan">
+
+    @using (Html.BeginForm("StapOpslaan", "RapporteringInventaris"))
+    {
+        @Html.Hidden("kolomnaam", (string)@ViewBag.kolomnamen)
+        @Html.Hidden("query", (string)@ViewBag.query)
+        <p> stap 3 wilt u de informatie uit tabel Inventaris opslaan als pdf of excel</p>
+        <button name="opslaan" type="submit" value="OpslaanExcel">Opslaan als excel</button>
+        <button name="opslaan" type="submit" value="OpslaanPdf">Opslaan als Pdf</button>
+    }
+</div>
+
+
+
+
+
+
+

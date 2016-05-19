@@ -6,6 +6,8 @@ using System.Linq;
 using System.Web;
 using CvoInventarisClient.DAL.interfaces;
 using CvoInventarisClient.Models;
+using System.Configuration;
+using System.Data;
 
 namespace CvoInventarisClient.DAL
 {
@@ -306,6 +308,50 @@ namespace CvoInventarisClient.DAL
             {
                 connection.Close();
             }
+        }
+
+        public List<InventarisModel> Rapportering(string s, string[] keuzeKolommen)
+        {
+            List<InventarisModel> list = new List<InventarisModel>();
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand(s, con))
+                    {
+                        con.Open();
+                        cmd.CommandType = System.Data.CommandType.Text;
+                        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                        while (dr.Read())
+                        {
+                            InventarisModel i = new InventarisModel();
+                            if (keuzeKolommen.Contains("Lokaal")) { i.Lokaal = (LokaalModel)dr["Lokaal"]; }
+                            if (keuzeKolommen.Contains("Object")) { i.Object = (ObjectModel)dr["Object"]; }
+                            if (keuzeKolommen.Contains("Verzekering")) { i.Verzekering = (VerzekeringModel)dr["Verzekering"]; }
+                            if (keuzeKolommen.Contains("Aanwezig")) { i.IsAanwezig = Convert.ToBoolean(dr["Aanwezig"]); }
+                            if (keuzeKolommen.Contains("Actief")) { i.IsActief = Convert.ToBoolean(dr["Actief"]); }
+                            if (keuzeKolommen.Contains("Label")) { i.Label = dr["Label"].ToString(); }
+                            if (keuzeKolommen.Contains("Historiek")) { i.Historiek = dr["Historiek"].ToString(); }
+                            if (keuzeKolommen.Contains("Aankoopjaar")) { i.Aankoopjaar = (int)dr["Aankoopjaar"]; }
+                            if (keuzeKolommen.Contains("Afschrijvingsperiode")) { i.Afschrijvingsperiode = (int)dr["Afschrijvingsperiode"]; }
+                            list.Add(i);
+                        }
+                        return list;
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        private string GetConnectionString()
+        {
+            return ConfigurationManager
+                .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
         }
     }
 }
