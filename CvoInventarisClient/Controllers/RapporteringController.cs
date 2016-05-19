@@ -28,16 +28,17 @@ namespace CvoInventarisClient.Controllers
         public List<string> vulTabellen()
         {
             tabellen = new List<string>();
-            tabellen.Add("Factuur");
-            tabellen.Add("Cpu");
-            tabellen.Add("Inventaris");
-            tabellen.Add("leverancier");
             tabellen.Add("Campus");
-            tabellen.Add("campus");
-            tabellen.Add("lokaal");
-            tabellen.Add("Object");
-            tabellen.Add("ObjectType");
-            tabellen.Add("Verzekering");
+            //
+            //Enkel tabel campus laten zien in de zandbak aangezien deze momenteel het beste werkt.
+            //
+            //tabellen.Add("Factuur");
+            //tabellen.Add("Inventaris");
+            //tabellen.Add("Leverancier");
+            //tabellen.Add("Lokaal");
+            //tabellen.Add("Object");
+            //tabellen.Add("ObjectType");
+            //tabellen.Add("Verzekering");
             return tabellen;
         }
 

@@ -25,6 +25,7 @@
             <input class="btn btn-primary" name="submit" type="submit" id="conditieGegevens" value="bepaalde conditie van de tabel : @ViewBag.tabelkeuze" />
         </div>
     }
+
 </div>
 <div class="spacer"></div>
 @if (Model.cpus != null)
@@ -478,10 +479,10 @@
                     @Html.DisplayNameFor(model => model.objecten[0].Kenmerken)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.objecten[0].Factuur)
+                    @Html.DisplayNameFor(model => model.objecten[0].Factuur.FactuurNummer)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.objecten[0].ObjectType)
+                    @Html.DisplayNameFor(model => model.objecten[0].ObjectType.Omschrijving)
                 </th>
             </tr>
 
@@ -492,10 +493,10 @@
                         @Html.DisplayFor(modelItem => item.Kenmerken)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Factuur)
+                        @Html.DisplayFor(modelItem => item.Factuur.FactuurNummer)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.ObjectType)
+                        @Html.DisplayFor(modelItem => item.ObjectType.Omschrijving)
                     </td>
                 </tr>
             }
