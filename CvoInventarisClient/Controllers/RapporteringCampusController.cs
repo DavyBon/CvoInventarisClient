@@ -147,7 +147,7 @@ namespace CvoInventarisClient.Controllers
                 OpslaanPdf(kolomKeuze, query);
             }
             vulDropDownLijstenIn();
-            return View("CpuRapportering", model);
+            return View("CampusRapportering", model);
         }
         public void OpslaanPdf(string[] kolomKeuze, string query)
         {
