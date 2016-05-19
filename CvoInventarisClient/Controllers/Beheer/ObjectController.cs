@@ -79,7 +79,7 @@ namespace CvoInventarisClient.Controllers
             }
             foreach (ObjectTypeModel ot in TblObjectType.GetAll())
             {
-                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
             }
             return View(model);
 
