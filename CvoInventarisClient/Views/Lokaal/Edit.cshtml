@@ -12,14 +12,21 @@
             @Html.Hidden("idLokaal", Model.IdLokaal)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.LokaalNaam)
-                <input class="form-control" maxlength="50" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required/>
+                <input class="form-control" maxlength="50" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required />
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.AantalPlaatsen)
-                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen" required/>
+                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen" required />
             </div>
             <div class="checkbox">
-                <label><input type="checkbox" name="isComputerLokaal" value="True"/>@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
+                @if (Model.IsComputerLokaal)
+                {
+                    <label><input type="checkbox" name="isComputerLokaal" checked="checked" />@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
+                }
+                else
+                {
+                    <label><input type="checkbox" name="isComputerLokaal"/>@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
+                }
             </div>
         </div>
     </div>
