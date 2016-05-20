@@ -16,13 +16,9 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
-    <div class="input-group col-lg-4 pull-right">
-        <span class="input-group-addon">Zoeken</span>
-        <input id="filter" type="text" class="form-control">
-    </div>
+    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
 
     <div class="spacer"></div>
-
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <table class="table table-striped dataTable">
@@ -44,7 +40,7 @@
                     </th>
                 </tr>
             </thead>
-            <tbody class="search">
+            <tbody>
                 @foreach (var item in Model.Objecten)
                 {
                     <tr>
@@ -120,4 +116,46 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Custom/Custom.js"></script>
+
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Object"))
+            {
+
+                <div class="modal-body">
+                    <div cclass="form-group">
+                        <label>Kenmerk:</label>
+                        <input class="form-control" type="text" name="kenmerkenFilter" placeholder="Kenmerk.." />
+
+                        <label>ObjectType:</label>
+                        <select class="form-control" name="objectTypeFilter">
+                            <option value="0">-Selecteer-</option>
+                            @foreach (var item in Model.ObjectTypes)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+
+                        <label>Factuur:</label>
+                        <select class="form-control" name="factuurIdFilter">
+                            <option value="0">-Selecteer-</option>
+                            @foreach (var item in Model.Facturen)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>

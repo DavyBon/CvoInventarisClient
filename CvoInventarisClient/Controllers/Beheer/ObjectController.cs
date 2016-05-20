@@ -128,5 +128,56 @@ namespace CvoInventarisClient.Controllers
             }
             return RedirectToAction("Index");
         }
+
+        [HttpPost]
+        public ActionResult Filter(string kenmerkenFilter, int factuurIdFilter, int ObjectTypeFilter)
+        {
+            ViewBag.action = TempData["action"];
+            DAL.TblObject TblObject = new DAL.TblObject();
+            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+            DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
+
+            ObjectViewModel model = new ObjectViewModel();
+            model.Objecten = new List<ObjectModel>();
+            model.Facturen = new List<SelectListItem>();
+            model.ObjectTypes = new List<SelectListItem>();
+
+            foreach (ObjectModel o in TblObject.GetAll())
+            {
+                if (!String.IsNullOrWhiteSpace(kenmerkenFilter))
+                {
+                    if (!o.Kenmerken.ToLower().Contains(kenmerkenFilter.ToLower()))
+                    {
+                        continue;
+                    }
+                }
+                if (factuurIdFilter >= 1)
+                {
+                    if (!o.Factuur.IdFactuur.Equals(factuurIdFilter))
+                    {
+                        continue;
+                    }
+                }
+                if (ObjectTypeFilter >= 1)
+                {
+                    if (!o.ObjectType.IdObjectType.Equals(ObjectTypeFilter))
+                    {
+                        continue;
+                    }
+                }
+                model.Objecten.Add(o);
+            }
+            foreach (FactuurModel f in TblFactuur.GetAll())
+            {
+                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
+            }
+            foreach (ObjectTypeModel ot in TblObjectType.GetAll())
+            {
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
+            }
+
+
+            return View("index", model);
+        }
     }
 }
