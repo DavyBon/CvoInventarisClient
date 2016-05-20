@@ -14,6 +14,9 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Login.css" rel="stylesheet" />
 
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
     <meta name="description" content="CvoInventaris applicatie" />
 </head>
 <body>
@@ -24,7 +27,20 @@
             <div class="page-header">
                 <h1 class="form-signin-heading">CVO inventaris</h1>
             </div>
-            <h2>@ViewBag.LoginMessage</h2>
+            @if (!String.IsNullOrWhiteSpace(ViewBag.successLoginMessage))
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Welkom!</strong> @ViewBag.successLoginMessage
+                </div>
+            }
+            @if (!String.IsNullOrWhiteSpace(ViewBag.warningLoginMessage))
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Opgelet!</strong> @ViewBag.warningLoginMessage
+                </div>
+            }
             <h2 class="form-signin-heading">Log in</h2>
             <label for="Email" class="sr-only">E-mailadres</label>
             <input type="email" pattern="^[a-zA-Z0-9._+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" id="Email" name="Email" class="form-control" placeholder="Email" required autofocus>
