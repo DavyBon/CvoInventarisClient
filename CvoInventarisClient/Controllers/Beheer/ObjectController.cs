@@ -130,7 +130,7 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(string kenmerkenFilter, int factuurIdFilter, int ObjectTypeFilter)
+        public ActionResult Filter(string kenmerkenFilter, int factuurIdFilter, int ObjectTypeFilter,int[] modelList)
         {
             ViewBag.action = TempData["action"];
             DAL.TblObject TblObject = new DAL.TblObject();
@@ -141,9 +141,9 @@ namespace CvoInventarisClient.Controllers
             model.Objecten = new List<ObjectModel>();
             model.Facturen = new List<SelectListItem>();
             model.ObjectTypes = new List<SelectListItem>();
-
             foreach (ObjectModel o in TblObject.GetAll())
             {
+
                 if (!String.IsNullOrWhiteSpace(kenmerkenFilter))
                 {
                     if (!o.Kenmerken.ToLower().Contains(kenmerkenFilter.ToLower()))
@@ -165,8 +165,10 @@ namespace CvoInventarisClient.Controllers
                         continue;
                     }
                 }
+
                 model.Objecten.Add(o);
             }
+
             foreach (FactuurModel f in TblFactuur.GetAll())
             {
                 model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
@@ -176,7 +178,9 @@ namespace CvoInventarisClient.Controllers
                 model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
             }
 
-
+            ViewBag.KenmerkFilters = kenmerkenFilter;
+            ViewBag.FactuurFilters = factuurIdFilter;
+            ViewBag.ObjectTypeFilters = ObjectTypeFilter;
             return View("index", model);
         }
     }
