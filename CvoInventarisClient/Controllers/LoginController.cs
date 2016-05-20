@@ -32,7 +32,7 @@ namespace CvoInventarisClient.Controllers
                 // Als de ingegeven email en paswoord combinatie juist is
                 if (tblAccount.Login(am))
                 {
-                    ViewBag.LoginMessage = "Welkom, je bent ingelogd";
+                    ViewBag.successLoginMessage = "Je bent ingelogd";
 
                     // Haal het Account uit DB voor zijn id (username van de cookie is de id van de gebruiker (IdAccount))
                     AccountModel accUitDB = tblAccount.GetByEmail(am.Email);
@@ -46,7 +46,7 @@ namespace CvoInventarisClient.Controllers
                 }
                 else
                 {
-                    ViewBag.LoginMessage = "Ongeldig e-mailadres of wachtwoord";
+                    ViewBag.warningLoginMessage = "Ongeldig e-mailadres of wachtwoord";
                 }
             }
             catch
