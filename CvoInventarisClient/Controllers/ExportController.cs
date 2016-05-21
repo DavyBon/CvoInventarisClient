@@ -69,7 +69,40 @@ namespace CvoInventarisClient.Controllers
             }
             else if(exportType.Equals("excel"))
             {
-                //export code hier
+                Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+                app.Visible = true;
+                Microsoft.Office.Interop.Excel.Workbook workbook = app.Workbooks.Add(1);
+                Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+                int counter = 0;
+                for (int i = 0; i < objects[0].GetType().GetProperties().Count(); i++)
+                {
+                    var prop = objects[0].GetType().GetProperties()[i];
+                    if (prop.GetValue(objects[0], null) != null)
+                    {
+                        worksheet.Cells[1, 1 + counter] = prop.Name;
+                        counter++;
+                    }
+                }
+                for (int i = 0; i < objects.Count; i++)
+                {
+                    int teller = 0;
+                    for (int y = 0; y < objects[i].GetType().GetProperties().Count(); y++)
+                    {
+                        var prop = objects[i].GetType().GetProperties()[y];
+                        if (prop.GetValue(objects[0], null) != null)
+                        {
+                            worksheet.Cells[i + 2, 1 + teller] = prop.GetValue(objects[i], null).ToString();
+                            teller++;
+                        }
+                    }
+                }
+                worksheet.Columns.AutoFit();
+                Response.Buffer = true;
+                //dit is het stuk dat zorgt dat je het kunt opslaan op een locatie naar keuze
+                Response.ContentType = "application/vnd.ms-excel";
+                Response.AppendHeader("Content-Disposition", "attachment; filename=rapport.xls");
+                Response.Write(worksheet);
+                Response.End();
             }
             return RedirectToAction("Index", type);
         }
