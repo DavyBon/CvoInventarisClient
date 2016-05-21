@@ -212,6 +212,7 @@
     <Compile Include="Controllers\Beheer\GrafischeKaartController.cs" />
     <Compile Include="Controllers\Beheer\HardwareController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
+    <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Beheer\InventarisController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
@@ -349,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Export\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
