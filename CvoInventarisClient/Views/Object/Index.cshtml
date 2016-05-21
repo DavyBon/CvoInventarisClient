@@ -11,6 +11,21 @@
         @ViewBag.action
     </div>
 }
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Objecten)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+    <button type="submit" name="exportType" value="pdf" class="btn btn-primary">Export to PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-primary">Export to Excel</button>
+}
+
+
+
+
 @using (Html.BeginForm("Delete", "Object"))
 {
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
@@ -62,7 +77,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Factuur.Leverancier.Naam)
                         </td>
-                    </tr>                
+                    </tr>
                 }
             </tbody>
         </table>
