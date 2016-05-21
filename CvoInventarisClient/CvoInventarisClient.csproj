@@ -186,7 +186,6 @@
     <Compile Include="Models\ObjectViewModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\TicketModel.cs" />
-    <Compile Include="Models\Utilities.cs" />
     <Compile Include="Models\VerzekeringModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -221,6 +220,7 @@
     <Content Include="Views\Object\Edit.cshtml" />
     <Content Include="Views\ObjectType\Edit.cshtml" />
     <Content Include="Views\Verzekering\Edit.cshtml" />
+    <Content Include="Views\Object\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

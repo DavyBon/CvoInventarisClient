@@ -14,6 +14,7 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Export(int[] modelList, string type, string exportType)
         {
             List<object> objects = new List<object>();
+
             switch (type)
             {
                 case "Object":
@@ -21,6 +22,55 @@ namespace CvoInventarisClient.Controllers
                     foreach (int id in modelList)
                     {
                         objects.Add(tblObject.GetById(id));
+                    }
+                    break;
+                case "ObjectType":
+                    DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
+                    foreach (int id in modelList)
+                    {
+                        objects.Add(tblObjectType.GetById(id));
+                    }
+                    break;
+                case "Verzekering":
+                    DAL.TblVerzekering tblVerzekering = new DAL.TblVerzekering();
+                    foreach (int id in modelList)
+                    {
+                        objects.Add(tblVerzekering.GetById(id));
+                    }
+                    break;
+                case "Lokaal":
+                    DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
+                    foreach (int id in modelList)
+                    {
+                        objects.Add(tblLokaal.GetById(id));
+                    }
+                    break;
+                case "Leverancier":
+                    DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+                    foreach (int id in modelList)
+                    {
+                        objects.Add(tblLeverancier.GetById(id));
+                    }
+                    break;
+                case "Inventaris":
+                    DAL.TblInventaris tblInventaris = new DAL.TblInventaris();
+                    foreach (int id in modelList)
+                    {
+                        objects.Add(tblInventaris.GetById(id));
+                    }
+                    break;
+                case "Factuur":
+                    DAL.TblFactuur tblFactuur = new DAL.TblFactuur();
+                    foreach (int id in modelList)
+                    {
+                        objects.Add(tblFactuur.GetById(id));
+                    }
+                    break;
+                case "Campus":
+                    DAL.TblCampus tblCampus = new DAL.TblCampus();
+                    foreach (int id in modelList)
+                    {
+                        objects.Add(tblCampus.GetById(id));
                     }
                     break;
             }
