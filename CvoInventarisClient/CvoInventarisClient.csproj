@@ -135,68 +135,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <None Include="Scripts\_references.js" />
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Cpu.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Device.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.GrafischeKaart.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Harddisk.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Leverancier.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Lokaal.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Views\Harddisk\Index.cshtml" />
     <Content Include="Views\Leverancier\Index.cshtml" />
     <Content Include="Views\Lokaal\Index.cshtml" />
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Factuur.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Hardware.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Inventaris.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Netwerk.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Object.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.ObjectTypes.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Verzekering.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
     <Content Include="Scripts\jquery-1.9.1.min.map" />
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Account.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Session.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Ticket.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <Content Include="Service References\ServiceReference\CvoInventarisClient.ServiceReference.Campus.datasource">
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Content>
-    <None Include="Service References\ServiceReference\Service1.disco" />
-    <None Include="Service References\ServiceReference\configuration91.svcinfo" />
-    <None Include="Service References\ServiceReference\configuration.svcinfo" />
-    <None Include="Service References\ServiceReference\Reference.svcmap">
-      <Generator>WCF Proxy Generator</Generator>
-      <LastGenOutput>Reference.cs</LastGenOutput>
-    </None>
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -206,30 +147,16 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Beheer\CampusController.cs" />
-    <Compile Include="Controllers\Beheer\CpuController.cs" />
-    <Compile Include="Controllers\Beheer\DeviceController.cs" />
     <Compile Include="Controllers\Beheer\FactuurController.cs" />
-    <Compile Include="Controllers\Beheer\GrafischeKaartController.cs" />
-    <Compile Include="Controllers\Beheer\HardwareController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Beheer\InventarisController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\Beheer\NetwerkController.cs" />
     <Compile Include="Controllers\Beheer\ObjectController.cs" />
     <Compile Include="Controllers\Beheer\ObjectTypeController.cs" />
     <Compile Include="Controllers\BeheerController.cs" />
     <Compile Include="Controllers\Beheer\VerzekeringController.cs" />
-    <Compile Include="Controllers\RapporteringCampusController.cs" />
-    <Compile Include="Controllers\RapporteringController.cs" />
-    <Compile Include="Controllers\RapporteringCpuController.cs" />
-    <Compile Include="Controllers\RapporteringFactuurController.cs" />
-    <Compile Include="Controllers\RapporteringHardwareController.cs" />
-    <Compile Include="Controllers\RapporteringInventarisController.cs" />
-    <Compile Include="Controllers\RapporteringLeverancierController.cs" />
-    <Compile Include="Controllers\RapporteringLokaalController.cs" />
-    <Compile Include="Controllers\RapporteringObjectController.cs" />
     <Compile Include="DAL\Helpers\PasswordStorage.cs" />
     <Compile Include="DAL\Interfaces\ICrudable.cs" />
     <Compile Include="DAL\TblAccount.cs" />
@@ -244,54 +171,29 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Controllers\Beheer\HarddiskController.cs" />
     <Compile Include="Controllers\Beheer\LeverancierController.cs" />
     <Compile Include="Controllers\Beheer\LokaalController.cs" />
     <Compile Include="Models\AccountModel.cs" />
     <Compile Include="Models\CampusModel.cs" />
     <Compile Include="Models\FactuurModel.cs" />
     <Compile Include="Models\FactuurViewModel.cs" />
-    <Compile Include="Models\HarddiskModel.cs" />
-    <Compile Include="Models\HardwareModel.cs" />
-    <Compile Include="Models\HardwareViewModel.cs" />
     <Compile Include="Models\InventarisModel.cs" />
     <Compile Include="Models\InventarisViewModel.cs" />
     <Compile Include="Models\LeverancierModel.cs" />
     <Compile Include="Models\LokaalModel.cs" />
-    <Compile Include="Models\CpuModel.cs" />
-    <Compile Include="Models\DeviceModel.cs" />
-    <Compile Include="Models\GrafischeKaartModel.cs" />
-    <Compile Include="Models\NetwerkModel.cs" />
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />
     <Compile Include="Models\ObjectViewModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
-    <Compile Include="Models\TabelModel.cs" />
     <Compile Include="Models\TicketModel.cs" />
     <Compile Include="Models\Utilities.cs" />
     <Compile Include="Models\VerzekeringModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service References\ServiceReference\Reference.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Reference.svcmap</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <None Include="Service References\ServiceReference\CvoInventarisService.wsdl" />
-    <None Include="Service References\ServiceReference\Service1.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\Service11.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <None Include="Service References\ServiceReference\Service12.xsd">
-      <SubType>Designer</SubType>
-    </None>
-    <Content Include="Views\Harddisk\Edit.cshtml" />
     <Content Include="Views\Leverancier\Edit.cshtml" />
     <Content Include="Views\Lokaal\Edit.cshtml" />
     <Content Include="Views\_ViewStart.cshtml" />
@@ -299,16 +201,10 @@
     <Content Include="Views\Factuur\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Inventaris\Edit.cshtml" />
-    <Content Include="Views\Netwerk\Edit.cshtml" />
-    <Content Include="Views\Netwerk\Index.cshtml" />
     <Content Include="Views\Beheer\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
-    <None Include="Service References\ServiceReference\Service13.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Content Include="Views\Verzekering\Index.cshtml" />
     <Content Include="Views\ObjectType\Index.cshtml" />
-    <Content Include="Views\Hardware\Index.cshtml" />
     <Content Include="Views\Inventaris\Index.cshtml" />
     <Content Include="Views\Account\Create.cshtml" />
     <Content Include="Views\Account\Delete.cshtml" />
@@ -316,31 +212,15 @@
     <Content Include="Views\Account\Edit.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
     <Content Include="Views\Account\Loguit.cshtml" />
-    <Content Include="Views\Cpu\Index.cshtml" />
-    <Content Include="Views\Cpu\Edit.cshtml" />
-    <Content Include="Views\Device\Index.cshtml" />
-    <Content Include="Views\Device\Edit.cshtml" />
-    <Content Include="Views\GrafischeKaart\Index.cshtml" />
-    <Content Include="Views\GrafischeKaart\Edit.cshtml" />
-    <Content Include="Views\Rapportering\Index.cshtml" />
-    <Content Include="Views\RapporteringCpu\CpuRapportering.cshtml" />
-    <Content Include="Views\RapporteringHardware\HardwareRapportering.cshtml" />
     <Content Include="Views\Account\ResetWachtwoord.cshtml" />
     <Content Include="Views\Campus\Edit.cshtml" />
     <Content Include="Views\Campus\Index.cshtml" />
     <Content Include="Views\Account\WijzigWachtwoord.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\NotFound.cshtml" />
-    <Content Include="Views\Object\Index.cshtml" />
     <Content Include="Views\Object\Edit.cshtml" />
-    <Content Include="Views\RapporteringCampus\CampusRapportering.cshtml" />
-    <Content Include="Views\RapporteringLokaal\LokaalRapportering.cshtml" />
     <Content Include="Views\ObjectType\Edit.cshtml" />
     <Content Include="Views\Verzekering\Edit.cshtml" />
-    <Content Include="Views\RapporteringLeverancier\LeverancierRapportering.cshtml" />
-    <Content Include="Views\RapporteringFactuur\FactuurRapportering.cshtml" />
-    <Content Include="Views\RapporteringInventaris\InventarisRapportering.cshtml" />
-    <Content Include="Views\RapporteringObject\ObjectRapportering.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -350,13 +230,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\Export\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadataStorage Include="Service References\ServiceReference\" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

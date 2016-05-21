@@ -4,7 +4,6 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using CvoInventarisClient.Models;
-using CvoInventarisClient.ServiceReference;
 
 namespace CvoInventarisClient.Controllers
 {
@@ -48,11 +47,8 @@ namespace CvoInventarisClient.Controllers
         // EDIT:
         public ActionResult Edit(int id)
         {
-            using (CvoInventarisServiceClient client = new CvoInventarisServiceClient())
-            {
                 DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
                 return View(tblLokaal.GetById(id));
-            }
         }
 
         [HttpPost]

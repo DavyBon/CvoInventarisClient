@@ -1,5 +1,4 @@
 ﻿using CvoInventarisClient.Models;
-using CvoInventarisClient.ServiceReference;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
