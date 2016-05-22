@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CvoInventarisClient.Models.LeverancierModel>
+﻿@model CvoInventarisClient.Models.LeverancierViewModel
 
 @{
     ViewBag.Title = "Leveranciers";
@@ -15,10 +15,14 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
-    <div class="input-group col-lg-4 pull-right">
-        <span class="input-group-addon">Zoeken</span>
-        <input id="filter" type="text" class="form-control">
-    </div>
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Leverancier")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
 
     <div class="spacer"></div>
 
@@ -30,51 +34,51 @@
                     <th></th>
                     <th></th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Naam)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Naam)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Afkorting)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Afkorting)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Straat)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.HuisNummer)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].HuisNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.BusNummer)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Postcode)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Telefoon)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Fax)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Fax)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Email)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Email)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Website)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Website)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.BtwNummer)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BtwNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Iban)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Iban)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Bic)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Bic)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ToegevoegdOp)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].ToegevoegdOp)
                     </th>
                 </tr>
             </thead>
-            <tbody class="search">
-                @foreach (var item in Model)
+            <tbody>
+                @foreach (var item in Model.Leveranciers)
                 {
                     <tr>
                         <td>
@@ -148,7 +152,7 @@
         </div>
     </div>
 }
-
+<!-- nieuw modal -->
 <div class="modal fade nieuwModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -159,60 +163,60 @@
             {
                 <div class="modal-body">
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Naam)
-                        <input class="form-control" maxlength="255" type="text" name="naam" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Naam)
+                        <input class="form-control" maxlength="255" type="text" name="naam" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Afkorting)
-                        <input class="form-control" maxlength="10" type="text" name="afkorting" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Afkorting)
+                        <input class="form-control" maxlength="10" type="text" name="afkorting" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Straat)
-                        <input class="form-control" maxlength="255" type="text" name="straat" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
+                        <input class="form-control" maxlength="255" type="text" name="straat" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.HuisNummer)
-                        <input class="form-control" maxlength="10" type="text" name="huisNummer" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].HuisNummer)
+                        <input class="form-control" maxlength="10" type="text" name="huisNummer" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.BusNummer)
-                        <input class="form-control" maxlength="10" type="text" name="busNummer" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
+                        <input class="form-control" maxlength="10" type="text" name="busNummer" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Postcode)
-                        <input class="form-control" type="text" name="postcode" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode)
+                        <input class="form-control" type="text" name="postcode" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Telefoon)
-                        <input class="form-control" maxlength="50" type="text" name="telefoon" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)
+                        <input class="form-control" maxlength="50" type="text" name="telefoon" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Fax)
-                        <input class="form-control" maxlength="50" type="text" name="fax" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Fax)
+                        <input class="form-control" maxlength="50" type="text" name="fax" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Email)
-                        <input class="form-control" maxlength="50" type="text" name="email" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Email)
+                        <input class="form-control" maxlength="50" type="text" name="email" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Website)
-                        <input class="form-control" maxlength="50" type="text" name="website" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Website)
+                        <input class="form-control" maxlength="50" type="text" name="website" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.BtwNummer)
-                        <input class="form-control" maxlength="50" type="text" name="btwNummer" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BtwNummer)
+                        <input class="form-control" maxlength="50" type="text" name="btwNummer" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Iban)
-                        <input class="form-control" maxlength="50" type="text" name="iban" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Iban)
+                        <input class="form-control" maxlength="50" type="text" name="iban" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Bic)
-                        <input class="form-control" maxlength="50" type="text" name="bic" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Bic)
+                        <input class="form-control" maxlength="50" type="text" name="bic" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.ToegevoegdOp)
-                        <input class="form-control" maxlength="20" type="date" name="toegevoegdOp" required/>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].ToegevoegdOp)
+                        <input class="form-control" maxlength="20" type="date" name="toegevoegdOp" required />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -223,5 +227,83 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Custom/Custom.js"></script>
+
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Leverancier"))
+            {
+
+                <div class="modal-body">
+                    <div cclass="form-group">
+                        <label>Naam:</label>
+                        <input type="text" name="naamFilter" />
+
+                        <label>Afkorting:</label>
+                        <input type="text" name="afkortingFilter" />
+
+                        <label>Straat:</label>
+                        <input type="text" name="straatFilter" />
+
+                        <label>Huisnummer:</label>
+                        <input type="text" name="huisnummerFilter" />
+
+                        <label>Busnummer:</label>
+                        <input type="text" name="busnummerFilter" />
+
+                        <label>Postcode:</label>
+                        <select name="filterPostcodeSecondary">
+                            <option value="=">van</option>
+                            <option value="<">voor</option>
+                            <option value=">">na</option>
+                        </select>
+                        <input type="number" name="filterPostcode" />
+
+                        <label>Telefoon:</label>
+                        <input type="text" name="telefoonFilter" />
+
+                        <label>Fax:</label>
+                        <input type="text" name="faxFilter" />
+
+                        <label>Website:</label>
+                        <input type="url" name="websiteFilter" />
+
+                        <label>Btwnummer:</label>
+                        <input type="text" name="btwnummerFilter" />
+
+                        <label>Iban:</label>
+                        <input type="text" name="ibanFilter" />
+
+                        <label>Bic:</label>
+                        <input type="text" name="bicFilter" />
+
+                        <label>Toegevoegd op:</label>
+                        <input type="date" name="toegevoegdOpFilter" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Leveranciers)
+    {
+        <input type="hidden" name="modelList" value="@item.IdLeverancier" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Export to PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Export to Excel</button>
+}
 

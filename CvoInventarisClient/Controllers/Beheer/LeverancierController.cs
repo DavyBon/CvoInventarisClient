@@ -16,7 +16,10 @@ namespace CvoInventarisClient.Controllers
         {
             ViewBag.action = TempData["action"];
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
-            return View(tblLeverancier.GetAll());
+            LeverancierViewModel model = new LeverancierViewModel();
+            model.Leveranciers = tblLeverancier.GetAll();
+            this.Session["leverancierview"] = model;
+            return View(model);
         }
 
         // CREATE:
@@ -46,7 +49,7 @@ namespace CvoInventarisClient.Controllers
 
             return RedirectToAction("Index");
         }
-        
+
         // EDIT:
         public ActionResult Edit(int id)
         {
@@ -78,7 +81,7 @@ namespace CvoInventarisClient.Controllers
             tblLeverancier.Update(leverancier);
 
             TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd aangepast";
-            
+
             return RedirectToAction("Index");
         }
 
@@ -102,6 +105,82 @@ namespace CvoInventarisClient.Controllers
             }
 
             return RedirectToAction("Index");
+        }
+
+        [HttpPost]
+        public ActionResult Filter(string naamFilter, string afkortingFilter, string straatFilter, string huisnummerFilter, string busnummerFilter,
+            string filterPostcodeSecondary, int filterPostcode, string telefoonFilter, string faxFilter, string websiteFilter, string btwnummerFilter,
+            string ibanFilter, string bicFilter, string toegevoegdOpFilter, int[] modelList)
+        {
+            ViewBag.action = TempData["action"];
+
+            LeverancierViewModel model = (LeverancierViewModel)(Session["leverancierview"] as LeverancierViewModel).Clone();
+
+            // Hier start filteren
+            if (!String.IsNullOrWhiteSpace(naamFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Naam.ToLower().Contains(naamFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(afkortingFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Afkorting.ToLower().Contains(afkortingFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(straatFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Straat.ToLower().Contains(straatFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(huisnummerFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.HuisNummer.ToLower().Contains(huisnummerFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(busnummerFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.BusNummer.ToLower().Contains(busnummerFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(filterPostcode.ToString()))
+            {
+                if (filterPostcodeSecondary.Equals("="))
+                {
+                    model.Leveranciers.RemoveAll(x => !(x.Postcode != Convert.ToInt32(filterPostcode)));
+                }
+                else if (filterPostcodeSecondary.Equals("<"))
+                {
+                    model.Leveranciers.RemoveAll(x => !(x.Postcode > Convert.ToInt32(filterPostcode)));
+                }
+                else if (filterPostcodeSecondary.Equals(">"))
+                {
+                    model.Leveranciers.RemoveAll(x => !(x.Postcode < Convert.ToInt32(filterPostcode)));
+                }
+            }
+            if (!String.IsNullOrWhiteSpace(telefoonFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Telefoon.ToLower().Contains(telefoonFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(faxFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Fax.ToLower().Contains(faxFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(websiteFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Fax.ToLower().Contains(websiteFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(btwnummerFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.BtwNummer.ToLower().Contains(btwnummerFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(ibanFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Iban.ToLower().Contains(ibanFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(bicFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.Bic.ToLower().Contains(bicFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(toegevoegdOpFilter))
+            {
+                model.Leveranciers.RemoveAll(x => !x.ToegevoegdOp.ToLower().Contains(toegevoegdOpFilter.ToLower()));
+            }
+            return View("index", model);
         }
     }
 }
