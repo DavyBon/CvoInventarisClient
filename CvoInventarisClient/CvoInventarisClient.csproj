@@ -183,6 +183,7 @@
     <Compile Include="Models\LeverancierModel.cs" />
     <Compile Include="Models\LeverancierViewModel.cs" />
     <Compile Include="Models\LokaalModel.cs" />
+    <Compile Include="Models\LokaalViewModel.cs" />
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />
     <Compile Include="Models\ObjectViewModel.cs" />

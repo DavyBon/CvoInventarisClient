@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CvoInventarisClient.Models.LokaalModel>
+﻿@model CvoInventarisClient.Models.LokaalViewModel
 
 @{
     ViewBag.Title = "Lokalen";
@@ -16,10 +16,14 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
-    <div class="input-group col-lg-4 pull-right">
-        <span class="input-group-addon">Zoeken</span>
-        <input id="filter" type="text" class="form-control">
-    </div>
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Lokaal")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
 
     <div class="spacer"></div>
 
@@ -31,25 +35,28 @@
                     <th></th>
                     <th></th>
                     <th>
-                        @Html.DisplayNameFor(model => model.LokaalNaam)
+                        @Html.DisplayNameFor(model => model.Lokalen[0].LokaalNaam)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.AantalPlaatsen)
+                        @Html.DisplayNameFor(model => model.Lokalen[0].AantalPlaatsen)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.IsComputerLokaal)
+                        @Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokalen[0].Campus.Naam)
                     </th>
                 </tr>
             </thead>
             <tbody class="search">
-                @foreach (var item in Model)
+                @foreach (var item in Model.Lokalen)
                 {
                     <tr>
                         <td>
-                            <input type="checkbox" name="idArray" value="@item.IdLokaal" />
+                            <input type="checkbox" name="idArray" value="@item.Id" />
                         </td>
                         <td>
-                            <a class="bottom-align-text" href="@Url.Action("Edit", "Lokaal", new { id = item.IdLokaal })"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Lokaal", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.LokaalNaam)
@@ -59,6 +66,9 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.IsComputerLokaal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Campus.Naam)
                         </td>
                     </tr>
                 }
@@ -83,7 +93,7 @@
         </div>
     </div>
 }
-
+<!-- nieuw modal -->
 <div class="modal fade nieuwModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -94,15 +104,19 @@
             {
                 <div class="modal-body">
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.LokaalNaam)
-                        <input class="form-control" maxlength="50" type="text" name="lokaalNaam" required/>
+                        @Html.DisplayNameFor(model => model.Lokalen[0].LokaalNaam)
+                        <input class="form-control" maxlength="50" type="text" name="lokaalNaam" required />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.AantalPlaatsen)
-                        <input class="form-control" type="text" name="aantalPlaatsen" required/>
+                        @Html.DisplayNameFor(model => model.Lokalen[0].AantalPlaatsen)
+                        <input class="form-control" type="text" name="aantalPlaatsen" required />
                     </div>
                     <div class="checkbox">
-                        <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
+                        <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Lokalen[0].Campus)
+                        @Html.DropDownListFor(model => model.Campussen, Model.Campussen, "", new { @class = "form-control", required = "required" })
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -113,4 +127,63 @@
         </div>
     </div>
 </div>
+
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Lokaal"))
+            {
+
+                <div class="modal-body">
+                    <div cclass="form-group">
+
+                        <label>Lokaal naam:</label>
+                        <input type="text" name="lokaalNaamFilter" />
+
+                        <label>Aantal plaatsen:</label>
+                        <select name="aantalPlaatsenSecondary">
+                            <option value="=">van</option>
+                            <option value="<">kleiner dan</option>
+                            <option value=">">groter dan</option>
+                        </select>
+                        <input type="number" name="filterAantalPlaatsen" />
+
+                        <label>computer lokaal:</label>
+                        <input type="checkbox" value="true" name="computerLokaalFilter" />
+
+                        <label>Campus:</label>
+                        <select class="form-control" name="campusFilter">
+                            <option value="-1">-Selecteer-</option>
+                            @foreach (var item in Model.Campussen)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Lokalen)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Export to PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Export to Excel</button>
+}
 <script src="~/Scripts/Custom/Custom.js"></script>
