@@ -14,7 +14,7 @@ namespace CvoInventarisClient.Models
         public string Naam { get; set; }
 
         [Display(Name = "postcode")]
-        public string Postcode { get; set; }
+        public PostcodeModel Postcode { get; set; }
 
         [Display(Name = "straat")]
         public string Straat { get; set; }
@@ -26,6 +26,5 @@ namespace CvoInventarisClient.Models
         {
             return this.Naam;
         }
-
     }
 }

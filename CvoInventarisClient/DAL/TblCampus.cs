@@ -32,6 +32,7 @@ namespace CvoInventarisClient.DAL
         {
             List<CampusModel> list = new List<CampusModel>();
             CampusModel campus;
+            PostcodeModel postcode;
 
             try
             {
@@ -44,9 +45,15 @@ namespace CvoInventarisClient.DAL
                     while (dr.Read())
                     {
                         campus = new CampusModel();
+                        postcode = new PostcodeModel();
+
+                        postcode.Id = (int)dr["idPostcode"];
+                        postcode.Postcode = dr["postcode"].ToString();
+                        postcode.Gemeente = dr["gemeente"].ToString();
+
                         campus.Id = (int)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
-                        campus.Postcode = dr["postcode"].ToString();
+                        campus.Postcode = postcode;
                         campus.Straat = dr["straat"].ToString();
                         campus.Nummer = dr["nummer"].ToString();
                         list.Add(campus);
@@ -71,6 +78,7 @@ namespace CvoInventarisClient.DAL
         public CampusModel GetById(int id)
         {
             CampusModel campus = new CampusModel();
+            PostcodeModel postcode;
 
             try
             {
@@ -84,9 +92,15 @@ namespace CvoInventarisClient.DAL
                     while (dr.Read())
                     {
                         campus = new CampusModel();
+                        postcode = new PostcodeModel();
+
+                        postcode.Id = (int)dr["idPostcode"];
+                        postcode.Postcode = dr["postcode"].ToString();
+                        postcode.Gemeente = dr["gemeente"].ToString();
+
                         campus.Id = (int)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
-                        campus.Postcode = dr["postcode"].ToString();
+                        campus.Postcode = postcode;
                         campus.Straat = dr["straat"].ToString();
                         campus.Nummer = dr["nummer"].ToString();
                     }
@@ -116,7 +130,7 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("naam", campus.Naam);
-                    cmd.Parameters.AddWithValue("postcode", campus.Postcode);
+                    cmd.Parameters.AddWithValue("idPostcode", campus.Postcode.Id);
                     cmd.Parameters.AddWithValue("straat", campus.Straat);
                     cmd.Parameters.AddWithValue("nummer", campus.Nummer);
                     return Convert.ToInt32(cmd.ExecuteScalar());
@@ -147,7 +161,7 @@ namespace CvoInventarisClient.DAL
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("idCampus", campus.Id);
                     cmd.Parameters.AddWithValue("naam", campus.Naam);
-                    cmd.Parameters.AddWithValue("postcode", campus.Postcode);
+                    cmd.Parameters.AddWithValue("idPostcode", campus.Postcode.Id);
                     cmd.Parameters.AddWithValue("straat", campus.Straat);
                     cmd.Parameters.AddWithValue("nummer", campus.Nummer);
                     cmd.ExecuteReader();
@@ -211,7 +225,7 @@ namespace CvoInventarisClient.DAL
                         campus = new CampusModel();
                         if (keuzeKolommen.Contains("idCampus")) { campus.Id = (int)dr["idCampus"]; }
                         if (keuzeKolommen.Contains("naam")) { campus.Naam = dr["naam"].ToString(); }
-                        if (keuzeKolommen.Contains("postcode")) { campus.Postcode = dr["postcode"].ToString(); }
+                        if (keuzeKolommen.Contains("postcode")) { campus.Postcode.Postcode = dr["postcode"].ToString(); }
                         if (keuzeKolommen.Contains("straat")) { campus.Straat = dr["straat"].ToString(); }
                         if (keuzeKolommen.Contains("nummer")) { campus.Nummer = dr["nummer"].ToString(); }
                         list.Add(campus);

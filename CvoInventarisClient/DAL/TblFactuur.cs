@@ -64,21 +64,21 @@ namespace CvoInventarisClient.DAL
                         leverancier.Website = dr["website"].ToString();
 
                         factuur.Id = (int)dr["idFactuur"];
-                        factuur.Boekjaar = dr["Boekjaar"].ToString();
-                        factuur.CvoVolgNummer = dr["CvoVolgNummer"].ToString();
-                        factuur.FactuurNummer = dr["FactuurNummer"].ToString();
-                        factuur.ScholengroepNummer = dr["ScholengroepNummer"].ToString();
-                        factuur.FactuurDatum = dr["FactuurDatum"].ToString();
+                        factuur.Boekjaar = dr["boekjaar"].ToString();
+                        factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString();
+                        factuur.FactuurNummer = dr["factuurNummer"].ToString();
+                        factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
+                        factuur.FactuurDatum = dr["factuurDatum"].ToString();
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = dr["Prijs"].ToString();
-                        factuur.Garantie = (int)dr["Garantie"];
-                        factuur.Omschrijving = dr["Omschrijving"].ToString();
-                        factuur.Opmerking = dr["Opmerking"].ToString();
-                        factuur.Afschrijfperiode = (int)dr["Afschrijfperiode"];
-                        factuur.DatumInsert = dr["DatumInsert"].ToString();
-                        factuur.UserInsert = dr["UserInsert"].ToString();
-                        factuur.DatumModified = dr["DatumModified"].ToString();
-                        factuur.UserModified = dr["UserModified"].ToString();
+                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Garantie = (int)dr["garantie"];
+                        factuur.Omschrijving = dr["omschrijving"].ToString();
+                        factuur.Opmerking = dr["opmerking"].ToString();
+                        factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
+                        factuur.DatumInsert = dr["datumInsert"].ToString();
+                        factuur.UserInsert = dr["userInsert"].ToString();
+                        factuur.DatumModified = dr["datumModified"].ToString();
+                        factuur.UserModified = dr["userModified"].ToString();
                         list.Add(factuur);
                     }
                     return list;
@@ -134,21 +134,21 @@ namespace CvoInventarisClient.DAL
                         leverancier.Website = dr["website"].ToString();
 
                         factuur.Id = (int)dr["idFactuur"];
-                        factuur.Boekjaar = dr["Boekjaar"].ToString();
-                        factuur.CvoVolgNummer = dr["CvoVolgNummer"].ToString();
-                        factuur.FactuurNummer = dr["FactuurNummer"].ToString();
-                        factuur.ScholengroepNummer = dr["ScholengroepNummer"].ToString();
-                        factuur.FactuurDatum = dr["FactuurDatum"].ToString();
+                        factuur.Boekjaar = dr["boekjaar"].ToString();
+                        factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString();
+                        factuur.FactuurNummer = dr["factuurNummer"].ToString();
+                        factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
+                        factuur.FactuurDatum = dr["factuurDatum"].ToString();
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = dr["Prijs"].ToString();
-                        factuur.Garantie = (int)dr["Garantie"];
-                        factuur.Omschrijving = dr["Omschrijving"].ToString();
-                        factuur.Opmerking = dr["Opmerking"].ToString();
-                        factuur.Afschrijfperiode = (int)dr["Afschrijfperiode"];
-                        factuur.DatumInsert = dr["DatumInsert"].ToString();
-                        factuur.UserInsert = dr["UserInsert"].ToString();
-                        factuur.DatumModified = dr["DatumModified"].ToString();
-                        factuur.UserModified = dr["UserModified"].ToString();
+                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Garantie = (int)dr["garantie"];
+                        factuur.Omschrijving = dr["omschrijving"].ToString();
+                        factuur.Opmerking = dr["opmerking"].ToString();
+                        factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
+                        factuur.DatumInsert = dr["datumInsert"].ToString();
+                        factuur.UserInsert = dr["userInsert"].ToString();
+                        factuur.DatumModified = dr["datumModified"].ToString();
+                        factuur.UserModified = dr["userModified"].ToString();
                     }
                     return factuur;
                 }
@@ -175,21 +175,21 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("Boekjaar", factuur.Boekjaar);
-                    cmd.Parameters.AddWithValue("CvoVolgNummer", factuur.CvoVolgNummer);
-                    cmd.Parameters.AddWithValue("FactuurNummer", factuur.FactuurNummer);
-                    cmd.Parameters.AddWithValue("ScholengroepNummer", factuur.ScholengroepNummer);
-                    cmd.Parameters.AddWithValue("FactuurDatum", factuur.FactuurDatum);
+                    cmd.Parameters.AddWithValue("boekjaar", factuur.Boekjaar);
+                    cmd.Parameters.AddWithValue("cvoVolgNummer", factuur.CvoVolgNummer);
+                    cmd.Parameters.AddWithValue("factuurNummer", factuur.FactuurNummer);
+                    cmd.Parameters.AddWithValue("scholengroepNummer", factuur.ScholengroepNummer);
+                    cmd.Parameters.AddWithValue("factuurDatum", factuur.FactuurDatum);
                     cmd.Parameters.AddWithValue("idLeverancier", factuur.Leverancier.Id);
-                    cmd.Parameters.AddWithValue("Prijs", factuur.Prijs);
-                    cmd.Parameters.AddWithValue("Garantie", factuur.Garantie);
-                    cmd.Parameters.AddWithValue("Omschrijving", factuur.Omschrijving);
-                    cmd.Parameters.AddWithValue("Opmerking", factuur.Opmerking);
-                    cmd.Parameters.AddWithValue("Afschrijfperiode", factuur.Afschrijfperiode);
-                    cmd.Parameters.AddWithValue("DatumInsert", factuur.DatumInsert);
-                    cmd.Parameters.AddWithValue("UserInsert", factuur.UserInsert);
-                    cmd.Parameters.AddWithValue("DatumModified", factuur.DatumModified);
-                    cmd.Parameters.AddWithValue("UserModified", factuur.UserModified);
+                    cmd.Parameters.AddWithValue("prijs", factuur.Prijs);
+                    cmd.Parameters.AddWithValue("garantie", factuur.Garantie);
+                    cmd.Parameters.AddWithValue("omschrijving", factuur.Omschrijving);
+                    cmd.Parameters.AddWithValue("opmerking", factuur.Opmerking);
+                    cmd.Parameters.AddWithValue("afschrijfperiode", factuur.Afschrijfperiode);
+                    cmd.Parameters.AddWithValue("datumInsert", factuur.DatumInsert);
+                    cmd.Parameters.AddWithValue("userInsert", factuur.UserInsert);
+                    cmd.Parameters.AddWithValue("datumModified", factuur.DatumModified);
+                    cmd.Parameters.AddWithValue("userModified", factuur.UserModified);
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
@@ -217,21 +217,21 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("idFactuur", factuur.Id);
-                    cmd.Parameters.AddWithValue("Boekjaar", factuur.Boekjaar);
-                    cmd.Parameters.AddWithValue("CvoVolgNummer", factuur.CvoVolgNummer);
-                    cmd.Parameters.AddWithValue("FactuurNummer", factuur.FactuurNummer);
-                    cmd.Parameters.AddWithValue("ScholengroepNummer", factuur.ScholengroepNummer);
-                    cmd.Parameters.AddWithValue("FactuurDatum", factuur.FactuurDatum);
+                    cmd.Parameters.AddWithValue("boekjaar", factuur.Boekjaar);
+                    cmd.Parameters.AddWithValue("cvoVolgNummer", factuur.CvoVolgNummer);
+                    cmd.Parameters.AddWithValue("factuurNummer", factuur.FactuurNummer);
+                    cmd.Parameters.AddWithValue("scholengroepNummer", factuur.ScholengroepNummer);
+                    cmd.Parameters.AddWithValue("factuurDatum", factuur.FactuurDatum);
                     cmd.Parameters.AddWithValue("idLeverancier", factuur.Leverancier.Id);
-                    cmd.Parameters.AddWithValue("Prijs", factuur.Prijs);
-                    cmd.Parameters.AddWithValue("Garantie", factuur.Garantie);
-                    cmd.Parameters.AddWithValue("Omschrijving", factuur.Omschrijving);
-                    cmd.Parameters.AddWithValue("Opmerking", factuur.Opmerking);
-                    cmd.Parameters.AddWithValue("Afschrijfperiode", factuur.Afschrijfperiode);
-                    cmd.Parameters.AddWithValue("DatumInsert", factuur.DatumInsert);
-                    cmd.Parameters.AddWithValue("UserInsert", factuur.UserInsert);
-                    cmd.Parameters.AddWithValue("DatumModified", factuur.DatumModified);
-                    cmd.Parameters.AddWithValue("UserModified", factuur.UserModified);
+                    cmd.Parameters.AddWithValue("prijs", factuur.Prijs);
+                    cmd.Parameters.AddWithValue("garantie", factuur.Garantie);
+                    cmd.Parameters.AddWithValue("omschrijving", factuur.Omschrijving);
+                    cmd.Parameters.AddWithValue("opmerking", factuur.Opmerking);
+                    cmd.Parameters.AddWithValue("afschrijfperiode", factuur.Afschrijfperiode);
+                    cmd.Parameters.AddWithValue("datumInsert", factuur.DatumInsert);
+                    cmd.Parameters.AddWithValue("userInsert", factuur.UserInsert);
+                    cmd.Parameters.AddWithValue("datumModified", factuur.DatumModified);
+                    cmd.Parameters.AddWithValue("userModified", factuur.UserModified);
                     cmd.ExecuteReader();
                 }
                 return true;
@@ -296,21 +296,21 @@ namespace CvoInventarisClient.DAL
                             factuur = new FactuurModel();
                             leverancier = new LeverancierModel();
 
-                            if (keuzeKolommen.Contains("TblFactuur.Boekjaar")) { factuur.Boekjaar = dr["Boekjaar"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.CvoVolgNummer")) { factuur.CvoVolgNummer = dr["CvoVolgNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.FactuurNummer")) { factuur.FactuurNummer = dr["FactuurNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.ScholengroepNummer")) { factuur.ScholengroepNummer = dr["ScholengroepNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.FactuurDatum")) { factuur.FactuurDatum = dr["FactuurDatum"].ToString(); }
-                            if (keuzeKolommen.Contains("TblLeverancier.naam")) { factuur.Leverancier.Naam = dr["Naam"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.Prijs")) { factuur.Prijs = dr["Prijs"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.Garantie")) { factuur.Garantie = (int)dr["Garantie"]; }
-                            if (keuzeKolommen.Contains("TblFactuur.Omschrijving")) { factuur.Omschrijving = dr["Omschrijving"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.Opmerking")) { factuur.Opmerking = dr["Opmerking"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.Afschrijfperiode")) { factuur.Afschrijfperiode = (int)dr["Afschrijfperiode"]; }
-                            if (keuzeKolommen.Contains("TblFactuur.DatumInsert")) { factuur.DatumInsert = dr["DatumInsert"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.UserInsert")) { factuur.UserInsert = dr["UserInsert"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.DatumModified")) { factuur.DatumModified = dr["DatumModified"].ToString(); }
-                            if (keuzeKolommen.Contains("TblFactuur.UserModified")) { factuur.UserModified = dr["UserModified"].ToString(); }
+                            if (keuzeKolommen.Contains("boekjaar")) { factuur.Boekjaar = dr["boekjaar"].ToString(); }
+                            if (keuzeKolommen.Contains("cvoVolgNummer")) { factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString(); }
+                            if (keuzeKolommen.Contains("factuurNummer")) { factuur.FactuurNummer = dr["factuurNummer"].ToString(); }
+                            if (keuzeKolommen.Contains("scholengroepNummer")) { factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString(); }
+                            if (keuzeKolommen.Contains("factuurDatum")) { factuur.FactuurDatum = dr["factuurDatum"].ToString(); }
+                            if (keuzeKolommen.Contains("leverancier")) { factuur.Leverancier.Naam = dr["naam"].ToString(); }
+                            if (keuzeKolommen.Contains("prijs")) { factuur.Prijs = dr["prijs"].ToString(); }
+                            if (keuzeKolommen.Contains("garantie")) { factuur.Garantie = (int)dr["garantie"]; }
+                            if (keuzeKolommen.Contains("omschrijving")) { factuur.Omschrijving = dr["omschrijving"].ToString(); }
+                            if (keuzeKolommen.Contains("opmerking")) { factuur.Opmerking = dr["opmerking"].ToString(); }
+                            if (keuzeKolommen.Contains("afschrijfperiode")) { factuur.Afschrijfperiode = (int)dr["afschrijfperiode"]; }
+                            if (keuzeKolommen.Contains("datumInsert")) { factuur.DatumInsert = dr["datumInsert"].ToString(); }
+                            if (keuzeKolommen.Contains("userInsert")) { factuur.UserInsert = dr["userInsert"].ToString(); }
+                            if (keuzeKolommen.Contains("datumModified")) { factuur.DatumModified = dr["datumModified"].ToString(); }
+                            if (keuzeKolommen.Contains("userModified")) { factuur.UserModified = dr["userModified"].ToString(); }
                             factuur.Leverancier = leverancier;
                             list.Add(factuur);
                         }

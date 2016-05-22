@@ -23,7 +23,7 @@ namespace CvoInventarisClient.Controllers
             {
                 campusmodel.Add(new CampusModel() { Id = campus.Id, Naam = campus.Naam, Postcode = campus.Postcode, Straat = campus.Straat, Nummer = campus.Nummer });
             }
-            model.campussen = campusmodel;
+            model.Campussen = campusmodel;
             this.Session["campusview"] = model;
             return View(model);
         }
@@ -106,19 +106,19 @@ namespace CvoInventarisClient.Controllers
 
             if (!String.IsNullOrWhiteSpace(naamFilter))
             {
-                model.campussen.RemoveAll(x => !x.Naam.ToLower().Contains(naamFilter.ToLower()));
+                model.Campussen.RemoveAll(x => !x.Naam.ToLower().Contains(naamFilter.ToLower()));
             }
             if (!String.IsNullOrWhiteSpace(postcodekFilter))
             {
-                model.campussen.RemoveAll(x => !x.Postcode.ToLower().Contains(postcodekFilter.ToLower()));
+                model.Campussen.RemoveAll(x => !x.Postcode.ToLower().Contains(postcodekFilter.ToLower()));
             }
             if (!String.IsNullOrWhiteSpace(straatFilter))
             {
-                model.campussen.RemoveAll(x => !x.Straat.ToLower().Contains(straatFilter.ToLower()));
+                model.Campussen.RemoveAll(x => !x.Straat.ToLower().Contains(straatFilter.ToLower()));
             }
             if (!String.IsNullOrWhiteSpace(nummmerFilter))
             {
-                model.campussen.RemoveAll(x => !x.Nummer.ToLower().Contains(nummmerFilter.ToLower()));
+                model.Campussen.RemoveAll(x => !x.Nummer.ToLower().Contains(nummmerFilter.ToLower()));
             }
             return View("index", model);
         }
