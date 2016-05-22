@@ -6,11 +6,16 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Models
 {
-    public class InventarisViewModel
+    public class InventarisViewModel:ICloneable
     {
         public List<InventarisModel> Inventaris { get; set; }
         public List<SelectListItem> Objecten { get; set; }
         public List<SelectListItem> Verzekeringen { get; set; }
         public List<SelectListItem> Lokalen { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

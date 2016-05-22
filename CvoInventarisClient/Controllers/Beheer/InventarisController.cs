@@ -33,7 +33,7 @@ namespace CvoInventarisClient.Controllers
             }
             foreach (ObjectModel o in TblObject.GetAll())
             {
-                if (!model.Inventaris.Exists(i => i.Object.Id == o.Id)) { model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() }); }
+                model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
             }
             foreach (LokaalModel l in TblLokaal.GetAll())
             {
@@ -43,6 +43,9 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.IdVerzekering.ToString() });
             }
+
+            this.Session["inventarisview"] = model;
+
             return View(model);
 
         }
@@ -156,7 +159,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Delete(int[] idArray, FormCollection collection)
         {
-            if(idArray == null) { return RedirectToAction("Index"); }
+            if (idArray == null) { return RedirectToAction("Index"); }
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
             foreach (int id in idArray)
@@ -174,6 +177,89 @@ namespace CvoInventarisClient.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int[] modelList)
+        {
+            ViewBag.action = TempData["action"];
+
+            InventarisViewModel model = (InventarisViewModel)(Session["inventarisview"] as InventarisViewModel).Clone();
+
+            bool isAanwezig;
+            bool isActief;
+
+            if (aanwezigFilter != null)
+            {
+                isAanwezig = true;
+            }
+            else
+            {
+                isAanwezig = false;
+            }
+
+
+            if (actiefFilter != null)
+            {
+                isActief = true;
+            }
+            else
+            {
+                isActief = false;
+            }
+
+            // Hier start filteren
+            if (objectFilter >= 0)
+            {
+                model.Inventaris.RemoveAll(x => x.Object.Id != objectFilter);
+            }
+
+            model.Inventaris.RemoveAll(x => x.IsAanwezig != isAanwezig);
+            model.Inventaris.RemoveAll(x => x.IsAanwezig != isActief);
+
+            if (lokaalFilter >= 0)
+            {
+                model.Inventaris.RemoveAll(x => x.Lokaal.IdLokaal.ToString().Equals(lokaalFilter));
+            }
+
+            if (!String.IsNullOrWhiteSpace(historiekFilter))
+            {
+                model.Inventaris.RemoveAll(x => x.Historiek.ToLower().Contains(historiekFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(filterAankoopjaar))
+            {
+                if (filterAankoopjaarSecondary.Equals("="))
+                {
+                    model.Inventaris.RemoveAll(x => x.Aankoopjaar != Convert.ToInt32(filterAankoopjaar));
+                }
+                else if (filterAankoopjaarSecondary.Equals("<"))
+                {
+                    model.Inventaris.RemoveAll(x => x.Aankoopjaar > Convert.ToInt32(filterAankoopjaar));
+                }
+                else if (filterAankoopjaarSecondary.Equals(">"))
+                {
+                    model.Inventaris.RemoveAll(x => x.Aankoopjaar < Convert.ToInt32(filterAankoopjaar));
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(filterAfschrijvingsperiode))
+            {
+                if (filterAfschrijvingsperiodeSecondary.Equals("="))
+                {
+                    model.Inventaris.RemoveAll(x => x.Afschrijvingsperiode != Convert.ToInt32(filterAfschrijvingsperiode));
+                }
+                else if (filterAfschrijvingsperiodeSecondary.Equals("<"))
+                {
+                    model.Inventaris.RemoveAll(x => x.Afschrijvingsperiode > Convert.ToInt32(filterAfschrijvingsperiode));
+                }
+                else if (filterAfschrijvingsperiodeSecondary.Equals(">"))
+                {
+                    model.Inventaris.RemoveAll(x => x.Afschrijvingsperiode < Convert.ToInt32(filterAfschrijvingsperiode));
+                }
+            }
+            if (verzekeringFilter >= 0)
+            {
+                model.Inventaris.RemoveAll(x => x.Verzekering.IdVerzekering != verzekeringFilter);
+            }
+            return View("index", model);
+        }
     }
 }
-
