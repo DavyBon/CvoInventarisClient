@@ -147,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Beheer\CampusController.cs" />
+    <Compile Include="DAL\TblPostcode.cs" />
     <Compile Include="Models\CampusViewModel.cs" />
     <Compile Include="Controllers\Beheer\FactuurController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
@@ -187,6 +188,7 @@
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />
     <Compile Include="Models\ObjectViewModel.cs" />
+    <Compile Include="Models\PostcodeModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\TicketModel.cs" />
     <Compile Include="Models\VerzekeringModel.cs" />
