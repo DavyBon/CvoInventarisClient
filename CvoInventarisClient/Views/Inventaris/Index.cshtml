@@ -204,57 +204,73 @@
 
                 <div class="modal-body">
                     <div cclass="form-group">
-                        <label>Object:</label>
-                        <select class="form-control" name="objectFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Objecten)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                        <div class="form-group">
+                            <label>Object:</label>
+                            <select class="form-control" name="objectFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Objecten)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
 
-                        <label>aanwezig:</label>
-                        <input type="checkbox" value="true" name="aanwezigFilter"/>
+                        <div class="form-group">
+                            <label>aanwezig:</label>
+                            <input type="checkbox" value="true" name="aanwezigFilter" />
+                        </div>
 
-                        <label>actief:</label>
-                        <input type="checkbox" value="true" name="actiefFilter" />
+                        <div class="form-group">
+                            <label>actief:</label>
+                            <input type="checkbox" value="true" name="actiefFilter" />
+                        </div>
 
-                        <label>Lokaal:</label>
-                        <select class="form-control" name="lokaalFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Lokalen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                        <div class="form-group">
+                            <label>Lokaal:</label>
+                            <select class="form-control" name="lokaalFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Lokalen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
 
-                        <label>Historiek:</label>
-                        <input type="text" name="historiekFilter"/>
+                        <div class="form-group">
+                            <label>Historiek:</label>
+                            <input class="form-control" type="text" name="historiekFilter" />
+                        </div>
 
-                        <label>Aankoopjaar:</label>
-                        <select name="filterAankoopjaarSecondary">
-                            <option value="=">van</option>
-                            <option value="<">voor</option>
-                            <option value=">">na</option>
-                        </select>
-                        <input type="number" name="filterAankoopjaar"/>
 
-                        <label>Afschrijvingsperiode:</label>
-                        <select name="filterAfschrijvingsperiodeSecondary">
-                            <option value="=">van</option>
-                            <option value="<">voor</option>
-                            <option value=">">na</option>
-                        </select>
-                        <input type="number"name="filterAfschrijvingsperiode" />
+                        <div class="form-group">
+                            <label>Aankoopjaar:</label>
+                            <select class="form-control" name="filterAankoopjaarSecondary">
+                                <option value="=">van</option>
+                                <option value="<">voor</option>
+                                <option value=">">na</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAankoopjaar" placeholder="jaar"/>
+                        </div>
 
-                        <label>Verzekering:</label>
-                        <select class="form-control" name="verzekeringFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Verzekeringen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                        <div class="form-group">
+                            <label>Afschrijvingsperiode:</label>
+                            <select class="form-control" name="filterAfschrijvingsperiodeSecondary">
+                                <option value="=">van</option>
+                                <option value="<">voor</option>
+                                <option value=">">na</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAfschrijvingsperiode" placeholder="periode(in jaar)"/>
+                        </div>
+                        <div class="form-group">
+                            <label>Verzekering:</label>
+                            <select class="form-control" name="verzekeringFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Verzekeringen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
