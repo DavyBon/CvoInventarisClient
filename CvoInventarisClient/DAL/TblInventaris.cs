@@ -287,7 +287,6 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@id", inventaris.Id));
-                    command.Parameters.Add(new SqlParameter("@label", inventaris.Label));
                     command.Parameters.Add(new SqlParameter("@idLokaal", inventaris.Lokaal.Id));
                     command.Parameters.Add(new SqlParameter("@idObject", inventaris.Object.Id));
                     command.Parameters.Add(new SqlParameter("@aankoopjaar", inventaris.Aankoopjaar));

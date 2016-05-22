@@ -10,8 +10,8 @@
         <div class="container-fluid">
             @Html.Hidden("idInventaris", Model.Inventaris[0].Id)
             @Html.Hidden("idObject", Model.Inventaris[0].Object.Id)
-            @Html.Hidden("defaultIdLokaal", Model.Inventaris[0].Lokaal.IdLokaal)
-            @Html.Hidden("defaultIdVerzekering", Model.Inventaris[0].Verzekering.IdVerzekering)
+            @Html.Hidden("defaultIdLokaal", Model.Inventaris[0].Lokaal.Id)
+            @Html.Hidden("defaultIdVerzekering", Model.Inventaris[0].Verzekering.Id)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Inventaris[0].Object)
                 <input class="form-control" type="text" disabled value="@Model.Inventaris[0].Object.Kenmerken" />

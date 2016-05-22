@@ -146,7 +146,6 @@ namespace CvoInventarisClient.Controllers
             {
                 inventaris.IsAanwezig = false;
             };
-            inventaris.Label = "TBA";
             TblInventaris.Update(inventaris);
 
             TempData["action"] = "Object in inventaris werd gewijzigd";

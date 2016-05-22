@@ -10,8 +10,8 @@
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
             @Html.Hidden("idObject", Model.Objecten[0].Id)
-            @Html.Hidden("defaultIdObjectType", Model.Objecten[0].ObjectType.IdObjectType)
-            @Html.Hidden("defaultIdFactuur", Model.Objecten[0].Factuur.IdFactuur)
+            @Html.Hidden("defaultIdObjectType", Model.Objecten[0].ObjectType.Id)
+            @Html.Hidden("defaultIdFactuur", Model.Objecten[0].Factuur.Id)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Objecten[0].ObjectType)
                 @Html.DropDownListFor(model => model.ObjectTypes, Model.ObjectTypes, Model.Objecten[0].ObjectType.Omschrijving, new { @class = "form-control" })
