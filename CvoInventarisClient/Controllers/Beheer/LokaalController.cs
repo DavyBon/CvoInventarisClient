@@ -16,7 +16,23 @@ namespace CvoInventarisClient.Controllers
         {
             ViewBag.action = TempData["action"];
             DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
-            return View(tblLokaal.GetAll());            
+            DAL.TblCampus tblCampus = new DAL.TblCampus();
+
+            LokaalViewModel model = new LokaalViewModel();
+            model.Lokalen = new List<LokaalModel>();
+            model.Campussen = new List<SelectListItem>();
+            foreach (LokaalModel i in tblLokaal.GetAll())
+            {
+                model.Lokalen.Add(i);
+            }
+            foreach (CampusModel v in tblCampus.GetAll())
+            {
+                model.Campussen.Add(new SelectListItem { Text = v.Naam, Value = v.Id.ToString() });
+            }
+
+            this.Session["lokaalview"] = model;
+
+            return View(model);            
         }
      
         [HttpPost]
