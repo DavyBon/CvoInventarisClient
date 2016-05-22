@@ -17,14 +17,20 @@ namespace CvoInventarisClient.Controllers
             ViewBag.action = TempData["action"];
             CampusViewModel model = new CampusViewModel();
             TblCampus TblCampus = new TblCampus();
+            TblPostcode TblPostcode = new TblPostcode();
 
             List<CampusModel> campusmodel = new List<CampusModel>();
-            foreach (CampusModel campus in TblCampus.GetAll())
+            foreach (CampusModel c in TblCampus.GetAll())
             {
-                campusmodel.Add(new CampusModel() { Id = campus.Id, Naam = campus.Naam, Postcode = campus.Postcode, Straat = campus.Straat, Nummer = campus.Nummer });
+                model.Campussen.Add(c);
             }
-            model.Campussen = campusmodel;
+            foreach (PostcodeModel p in TblPostcode.GetAll())
+            {
+                model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+            }
+
             this.Session["campusview"] = model;
+
             return View(model);
         }
 
@@ -41,6 +47,7 @@ namespace CvoInventarisClient.Controllers
             campus.Nummer = Request.Form["nummer"];
 
             TblCampus.Create(campus);
+
             TempData["action"] = "campus met naam " + Request.Form["naam"] + " werd toegevoegd";
 
             return RedirectToAction("Index");
@@ -50,10 +57,24 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Edit(int id)
         {
             TblCampus TblCampus = new TblCampus();
+            TblPostcode TblPostcode = new TblPostcode();
 
-            CampusModel campus = TblCampus.GetById(id);
+            CampusViewModel model = new CampusViewModel();
+            model.Campussen = new List<CampusModel>();
+            model.Postcodes = new List<SelectListItem>();
 
-            return View(campus);
+            CampusModel c = TblCampus.GetById(id);
+            model.Campussen.Add(c);
+
+            foreach (PostcodeModel p in TblPostcode.GetAll())
+            {
+                if (!(p.Id == c.Postcode.Id))
+                {
+                    model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+                }
+            }
+
+            return View(model);
         }
 
 
@@ -73,6 +94,7 @@ namespace CvoInventarisClient.Controllers
             TblCampus.Update(campus);
 
             TempData["action"] = "campus met naam " + Request.Form["naam"] + " werd aangepast";
+
             return RedirectToAction("Index");
         }
 

@@ -6,9 +6,14 @@ using System.Web.Mvc;
 
 namespace CvoInventarisClient.Models
 {
-    public class FactuurViewModel
+    public class FactuurViewModel:ICloneable
     {
         public List<FactuurModel> Facturen { get; set; }
         public List<SelectListItem> Leveranciers { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

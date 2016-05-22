@@ -234,7 +234,31 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Custom/Custom.js"></script>
+
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Factuur"))
+            {
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Boekjaar:</label>
+                            <select class="form-control" name="boekjaarFilter">
+                                <option value="-1">-Selecteer-</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
 
 
 
