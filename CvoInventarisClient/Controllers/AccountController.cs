@@ -155,7 +155,7 @@ namespace CvoInventarisClient.Controllers
 
             if (!tblAccount.IsWachtwoordResetLinkValid(Request.QueryString["uid"]))
             {
-                ViewBag.WijzigWachtwoordMessage = "Opgelet, wachtwoord reset link is verlopen of ongeldig!";
+                ViewBag.warningWijzigWachtwoordMessage = "Wachtwoord reset link is verlopen of ongeldig!";
             }
 
             return View();
@@ -168,11 +168,11 @@ namespace CvoInventarisClient.Controllers
 
             if (tblAccount.WijzigWachtwoord(GUID, am.Wachtwoord))
             {
-                ViewBag.WijzigWachtwoordMessage = "Uw wachtwoord is gewijzigd! U kan nu inloggen met uw nieuwe wachtwoord.";
+                ViewBag.successWijzigWachtwoordMessage = "Uw wachtwoord is gewijzigd! U kan nu inloggen met uw nieuwe wachtwoord.";
             }
             else
             {
-                ViewBag.WijzigWachtwoordMessage = "Opgelet, wachtwoord reset link is verlopen of ongeldig!";
+                ViewBag.warningWijzigWachtwoordMessage = "Wachtwoord reset link is verlopen of ongeldig!";
             }
             return View();
         }
