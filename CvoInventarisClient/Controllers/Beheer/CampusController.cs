@@ -36,7 +36,7 @@ namespace CvoInventarisClient.Controllers
             CampusModel campus = new CampusModel();
 
             campus.Naam = Request.Form["naam"];
-            campus.Postcode = Request.Form["postcode"];
+            campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["postcode"]) };
             campus.Straat = Request.Form["straat"];
             campus.Nummer = Request.Form["nummer"];
 
@@ -65,7 +65,8 @@ namespace CvoInventarisClient.Controllers
             CampusModel campus = new CampusModel();
             campus.Id = Convert.ToInt16(Request.Form["idCampus"]);
             campus.Naam = Request.Form["naam"];
-            campus.Postcode = Request.Form["postcode"];
+            if (!String.IsNullOrWhiteSpace(Request.Form["postcode"])) { campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["postcode"]) }; }
+            else { campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["defaultIdPostcode"]) }; }
             campus.Straat = Request.Form["straat"];
             campus.Nummer = Request.Form["nummer"];
 
@@ -98,7 +99,7 @@ namespace CvoInventarisClient.Controllers
             return RedirectToAction("Index");
         }
         [HttpPost]
-        public ActionResult Filter(string naamFilter,string postcodekFilter,string straatFilter,string nummmerFilter,int[] modelList)
+        public ActionResult Filter(string naamFilter,int postcodeFilter,string straatFilter,string nummmerFilter,int[] modelList)
         {
             ViewBag.action = TempData["action"];
             CampusViewModel model = (CampusViewModel)(Session["campusview"] as CampusViewModel).Clone();
@@ -108,9 +109,9 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Campussen.RemoveAll(x => !x.Naam.ToLower().Contains(naamFilter.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(postcodekFilter))
+            if (postcodeFilter >= 0)
             {
-                model.Campussen.RemoveAll(x => !x.Postcode.ToLower().Contains(postcodekFilter.ToLower()));
+                model.Campussen.RemoveAll(x => x.Postcode.Id != postcodeFilter);
             }
             if (!String.IsNullOrWhiteSpace(straatFilter))
             {

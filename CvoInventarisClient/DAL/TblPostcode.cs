@@ -26,7 +26,6 @@ namespace CvoInventarisClient.DAL
         public List<PostcodeModel> GetAll()
         {
             List<PostcodeModel> list = new List<PostcodeModel>();
-            CampusModel campus;
 
             try
             {
