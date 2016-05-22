@@ -19,7 +19,14 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
-    <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Object")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
 
     <div class="spacer"></div>
     <div class="panel panel-primary">
@@ -137,7 +144,7 @@
 
                         <label>ObjectType:</label>
                         <select class="form-control" name="objectTypeFilter">
-                            <option value="0">-Selecteer-</option>
+                            <option value="-1">-Selecteer-</option>
                             @foreach (var item in Model.ObjectTypes)
                             {
                                 <option value="@item.Value">@item.Text</option>
@@ -146,7 +153,7 @@
 
                         <label>Factuur:</label>
                         <select class="form-control" name="factuurIdFilter">
-                            <option value="0">-Selecteer-</option>
+                            <option value="-1">-Selecteer-</option>
                             @foreach (var item in Model.Facturen)
                             {
                                 <option value="@item.Value">@item.Text</option>

@@ -35,6 +35,9 @@ namespace CvoInventarisClient.Controllers
             {
                 model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
             }
+
+            this.Session["objectview"] = model;
+
             return View(model);
 
         }
@@ -129,57 +132,26 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(string kenmerkenFilter, int factuurIdFilter, int ObjectTypeFilter,int[] modelList)
+        public ActionResult Filter(string kenmerkenFilter, int factuurIdFilter, int ObjectTypeFilter, int[] modelList)
         {
-            ViewBag.action = TempData["action"];
-            DAL.TblObject TblObject = new DAL.TblObject();
-            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
-            DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
+            ObjectViewModel model = (ObjectViewModel)(Session["objectview"] as ObjectViewModel).Clone();
 
-            ObjectViewModel model = new ObjectViewModel();
-            model.Objecten = new List<ObjectModel>();
-            model.Facturen = new List<SelectListItem>();
-            model.ObjectTypes = new List<SelectListItem>();
-            foreach (ObjectModel o in TblObject.GetAll())
+            if (!String.IsNullOrWhiteSpace(kenmerkenFilter))
             {
-
-                if (!String.IsNullOrWhiteSpace(kenmerkenFilter))
-                {
-                    if (!o.Kenmerken.ToLower().Contains(kenmerkenFilter.ToLower()))
-                    {
-                        continue;
-                    }
-                }
-                if (factuurIdFilter >= 1)
-                {
-                    if (!o.Factuur.IdFactuur.Equals(factuurIdFilter))
-                    {
-                        continue;
-                    }
-                }
-                if (ObjectTypeFilter >= 1)
-                {
-                    if (!o.ObjectType.IdObjectType.Equals(ObjectTypeFilter))
-                    {
-                        continue;
-                    }
-                }
-
-                model.Objecten.Add(o);
+                model.Objecten.RemoveAll(x => !x.Kenmerken.ToLower().Contains(kenmerkenFilter.ToLower()));
             }
 
-            foreach (FactuurModel f in TblFactuur.GetAll())
+            if (factuurIdFilter >= 0)
             {
-                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
-            }
-            foreach (ObjectTypeModel ot in TblObjectType.GetAll())
-            {
-                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
+                model.Objecten.RemoveAll(x => x.Factuur.IdFactuur != factuurIdFilter);
             }
 
-            ViewBag.KenmerkFilters = kenmerkenFilter;
-            ViewBag.FactuurFilters = factuurIdFilter;
-            ViewBag.ObjectTypeFilters = ObjectTypeFilter;
+            if (ObjectTypeFilter >= 0)
+            {
+                model.Objecten.RemoveAll(x => x.ObjectType.IdObjectType != ObjectTypeFilter);
+            }
+
+
             return View("index", model);
         }
     }

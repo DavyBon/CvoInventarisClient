@@ -217,13 +217,14 @@ namespace CvoInventarisClient.Controllers
 
             if (lokaalFilter >= 0)
             {
-                model.Inventaris.RemoveAll(x => x.Lokaal.IdLokaal.ToString().Equals(lokaalFilter));
+                model.Inventaris.RemoveAll(x => x.Lokaal.IdLokaal != lokaalFilter);
             }
 
             if (!String.IsNullOrWhiteSpace(historiekFilter))
             {
-                model.Inventaris.RemoveAll(x => x.Historiek.ToLower().Contains(historiekFilter.ToLower()));
+                model.Inventaris.RemoveAll(x => !x.Historiek.ToLower().Contains(historiekFilter.ToLower()));
             }
+
             if (!String.IsNullOrWhiteSpace(filterAankoopjaar))
             {
                 if (filterAankoopjaarSecondary.Equals("="))
@@ -255,6 +256,7 @@ namespace CvoInventarisClient.Controllers
                     model.Inventaris.RemoveAll(x => x.Afschrijvingsperiode < Convert.ToInt32(filterAfschrijvingsperiode));
                 }
             }
+
             if (verzekeringFilter >= 0)
             {
                 model.Inventaris.RemoveAll(x => x.Verzekering.IdVerzekering != verzekeringFilter);
