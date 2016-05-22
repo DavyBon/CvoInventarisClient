@@ -111,5 +111,53 @@ namespace CvoInventarisClient.Controllers
 
             return RedirectToAction("Index");            
         }
+
+        [HttpPost]
+        public ActionResult Filter(string lokaalNaamFilter, string filterAantalPlaatsenSecondary, 
+            string filterAantalPlaatsen, string computerLokaalFilter, int campusFilter, int[] modelList)
+        {
+            ViewBag.action = TempData["action"];
+
+            LokaalViewModel model = (LokaalViewModel)(Session["lokaalview"] as LokaalViewModel).Clone();
+
+            bool IsComputerLokaal;
+
+            if (computerLokaalFilter != null)
+            {
+                IsComputerLokaal = true;
+            }
+            else
+            {
+                IsComputerLokaal = false;
+            }
+
+            // Hier start filteren
+            if (!String.IsNullOrWhiteSpace(lokaalNaamFilter))
+            {
+                model.Lokalen.RemoveAll(x => !x.LokaalNaam.ToLower().Contains(lokaalNaamFilter.ToLower()));
+            }
+
+            if (!String.IsNullOrWhiteSpace(filterAantalPlaatsen))
+            {
+                if (filterAantalPlaatsenSecondary.Equals("="))
+                {
+                    model.Lokalen.RemoveAll(x => x.AantalPlaatsen != Convert.ToInt32(filterAantalPlaatsen));
+                }
+                else if (filterAantalPlaatsenSecondary.Equals("<"))
+                {
+                    model.Lokalen.RemoveAll(x => x.AantalPlaatsen > Convert.ToInt32(filterAantalPlaatsen));
+                }
+                else if (filterAantalPlaatsenSecondary.Equals(">"))
+                {
+                    model.Lokalen.RemoveAll(x => x.AantalPlaatsen < Convert.ToInt32(filterAantalPlaatsen));
+                }
+            }            
+
+            if (campusFilter >= 0)
+            {
+                model.Lokalen.RemoveAll(x => !(x.Campus.Id != campusFilter));
+            }
+            return View("index", model);
+        }
     }
 }
