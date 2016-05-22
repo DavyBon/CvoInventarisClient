@@ -52,7 +52,7 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int? Objecten, int? Lokalen, int? Verzekeringen)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
@@ -64,9 +64,9 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
                 inventaris.Label = Request.Form["reeks"] + labelnr;
-                inventaris.Object = new ObjectModel() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
-                inventaris.Lokaal = new LokaalModel() { Id = Convert.ToInt16(Request.Form["Lokalen"]) };
-                inventaris.Verzekering = new VerzekeringModel() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) };
+                inventaris.Object = new ObjectModel() { Id = Objecten };
+                inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
+                inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
                 if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
                 else
                 {

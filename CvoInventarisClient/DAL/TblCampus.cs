@@ -47,9 +47,8 @@ namespace CvoInventarisClient.DAL
                         campus = new CampusModel();
                         postcode = new PostcodeModel();
 
-                        postcode.Id = (int)dr["idPostcode"];
-                        postcode.Postcode = dr["postcode"].ToString();
-                        postcode.Gemeente = dr["gemeente"].ToString();
+                        postcode.Id = (int)dr["idPostcode"];                     
+
 
                         campus.Id = (int)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
@@ -61,8 +60,9 @@ namespace CvoInventarisClient.DAL
                     return list;
                 }
             }
-            catch
+            catch(Exception e)
             {
+                Debug.WriteLine(e);
                 return null;
             }
             finally

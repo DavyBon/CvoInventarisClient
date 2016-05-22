@@ -8,7 +8,7 @@ namespace CvoInventarisClient.Models
 {
     public class CampusModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Display(Name = "naam")]
         public string Naam { get; set; }

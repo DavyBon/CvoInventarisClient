@@ -38,7 +38,17 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal)
-                @Html.DropDownListFor(model => model.Lokalen, Model.Lokalen, Model.Inventaris[0].Lokaal.LokaalNaam, new { @class = "form-control" })
+                <select class="form-control" name="Lokalen">
+                    <option value="@Model.Inventaris[0].Lokaal.Id">@Model.Inventaris[0].Lokaal.LokaalNaam</option>
+                    @foreach (var item in Model.Lokalen)
+                    {
+                        if (item.Value != Model.Inventaris[0].Lokaal.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
+
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
@@ -54,7 +64,16 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
-                @Html.DropDownListFor(model => model.Verzekeringen, Model.Verzekeringen, Model.Inventaris[0].Verzekering.Omschrijving, new { @class = "form-control" })
+                <select class="form-control" name="Verzekeringen">
+                    <option value="@Model.Inventaris[0].Verzekering.Id">@Model.Inventaris[0].Verzekering.Omschrijving</option>
+                    @foreach (var item in Model.Verzekeringen)
+                    {
+                        if (item.Value != Model.Inventaris[0].Verzekering.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
             </div>
         </div>
     </div>

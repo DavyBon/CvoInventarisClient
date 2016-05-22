@@ -8,7 +8,7 @@ namespace CvoInventarisClient.Models
 {
     public class InventarisModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Display(Name = "Lokaal")]
         public LokaalModel Lokaal { get; set; }
         [Display(Name = "Object")]

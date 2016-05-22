@@ -149,7 +149,13 @@
 
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Object)
-                        @Html.DropDownListFor(model => model.Objecten, Model.Objecten, "", new { @class = "form-control", required = "required" })
+                        <select class="form-control" name="Objecten">
+                            <option value="">-Selecteer-</option>
+                            @foreach (var item in Model.Objecten)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
                     </div>
                     <div class="checkbox">
                         <label><input type="checkbox" name="isAanwezig" value="True" />@Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)</label>
@@ -159,7 +165,16 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal)
-                        @Html.DropDownListFor(model => model.Lokalen, Model.Lokalen, "", new { @class = "form-control", required = "required" })
+                        <select class="form-control" name="Lokalen">
+                            <option value="">-Selecteer-</option>
+                            @foreach (var item in Model.Lokalen)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+
+
+
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
@@ -175,7 +190,13 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
-                        @Html.DropDownListFor(model => model.Verzekeringen, Model.Verzekeringen, "", new { @class = "form-control", required = "required" })
+                        <select class="form-control" name="Verzekeringen">
+                            <option value="">-Selecteer-</option>
+                            @foreach (var item in Model.Verzekeringen)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
                     </div>
                     <hr />
                     <div class="form-group">

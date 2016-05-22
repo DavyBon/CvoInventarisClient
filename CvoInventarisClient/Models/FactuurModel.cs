@@ -8,7 +8,7 @@ namespace CvoInventarisClient.Models
 {
     public class FactuurModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Display(Name = "boekjaar")]
         public string Boekjaar { get; set; }
