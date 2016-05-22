@@ -24,32 +24,17 @@ namespace CvoInventarisClient.Controllers
             model.Facturen = new List<FactuurModel>();
             model.Leveranciers = new List<SelectListItem>();
 
-            foreach (FactuurModel factuur in TblFactuur.GetAll())
+            foreach (FactuurModel f in TblFactuur.GetAll())
             {
-
-                FactuurModel factuurModel = new FactuurModel();
-                factuurModel.Id = factuur.Id;
-                factuurModel.Boekjaar = factuur.Boekjaar;
-                factuurModel.CvoVolgNummer = factuur.CvoVolgNummer;
-                factuurModel.FactuurNummer = factuur.FactuurNummer;
-                factuurModel.ScholengroepNummer = factuur.ScholengroepNummer;
-                factuurModel.FactuurDatum = factuur.FactuurDatum;
-                factuurModel.Leverancier = new LeverancierModel() { Id = factuur.Leverancier.Id, Naam = factuur.Leverancier.Naam, Afkorting = factuur.Leverancier.Afkorting, Straat = factuur.Leverancier.Straat, HuisNummer = factuur.Leverancier.HuisNummer, BusNummer = factuur.Leverancier.BusNummer, Postcode = factuur.Leverancier.Postcode, Telefoon = factuur.Leverancier.Telefoon, Fax = factuur.Leverancier.Fax, Email = factuur.Leverancier.Email, Website = factuur.Leverancier.Website, BtwNummer = factuur.Leverancier.BtwNummer, Iban = factuur.Leverancier.Iban, Bic = factuur.Leverancier.Bic, ToegevoegdOp = factuur.Leverancier.ToegevoegdOp };
-                factuurModel.Prijs = factuur.Prijs;
-                factuurModel.Garantie = factuur.Garantie;
-                factuurModel.Omschrijving = factuur.Omschrijving;
-                factuurModel.Opmerking = factuur.Opmerking;
-                factuurModel.Afschrijfperiode = factuur.Afschrijfperiode;
-                factuurModel.DatumInsert = factuur.DatumInsert;
-                factuurModel.UserInsert = factuur.UserInsert;
-                factuurModel.DatumModified = factuur.DatumModified;
-                factuurModel.UserModified = factuur.UserModified;
-                model.Facturen.Add(factuurModel);
+                model.Facturen.Add(f);
             }
-            //foreach (Leverancier l in TblLeverancier.GetAll())
-            //{
-            //    model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.IdLeverancier.ToString() });
-            //}
+            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            {
+                model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+            }
+
+            this.Session["factuurView"] = model;
+
             return View(model);
         }
 
@@ -86,7 +71,6 @@ namespace CvoInventarisClient.Controllers
         }
 
         // EDIT:
-        [HttpGet]
         public ActionResult Edit(int id)
         {
             TblFactuur TblFactuur = new TblFactuur();
@@ -99,13 +83,13 @@ namespace CvoInventarisClient.Controllers
             FactuurModel factuur = TblFactuur.GetById(id);
             model.Facturen.Add(factuur);
 
-            //foreach (Leverancier l in TblLeverancier.GetAll())
-            //{
-            //    if (!(l.IdLeverancier == factuur.Leverancier.IdLeverancier))
-            //    {
-            //        model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.IdLeverancier.ToString() });
-            //    }
-            //}
+            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            {
+                if (!(l.Id == factuur.Leverancier.Id))
+                {
+                    model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+                }
+            }
             return View(model);
         }
 
@@ -164,6 +148,104 @@ namespace CvoInventarisClient.Controllers
                 TempData["action"] = idArray.Length + " factuur werd verwijderd";
             }
             return RedirectToAction("Index");
+        }
+
+
+        // FILTER:
+        [HttpPost]
+        public ActionResult Filter(string boekjaarFilter, string boekjaarFilterSecondary, string cvoVolgNummerFilter, string factuurNummerFilter,
+            string scholengroepNummerFilter, string factuurdatumFilter, int leverancierFilter, string prijsFilter, 
+            string prijsFilterSecondary, string garantieFilter, string garantieFilterSecondary, string afschrijfperiodeFilter,
+            string afschrijfperiodeFilterSecondary , int[] modelList)
+        {
+            ViewBag.action = TempData["action"];
+
+            FactuurViewModel model = (FactuurViewModel)(Session["factuurView"] as FactuurViewModel).Clone();
+
+            // Hier start filteren
+
+            if (!String.IsNullOrWhiteSpace(boekjaarFilter))
+            {
+                if (boekjaarFilterSecondary.Equals("="))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Boekjaar) != Convert.ToInt32(boekjaarFilter));
+                }
+                else if (boekjaarFilterSecondary.Equals("<"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Boekjaar) > Convert.ToInt32(boekjaarFilter));
+                }
+                else if (boekjaarFilterSecondary.Equals(">"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Boekjaar) < Convert.ToInt32(boekjaarFilter));
+                }
+            }
+            if (!String.IsNullOrWhiteSpace(cvoVolgNummerFilter))
+            {
+                model.Facturen.RemoveAll(x => !x.CvoVolgNummer.ToLower().Contains(cvoVolgNummerFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(factuurNummerFilter))
+            {
+                model.Facturen.RemoveAll(x => !x.FactuurNummer.ToLower().Contains(factuurNummerFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(scholengroepNummerFilter))
+            {
+                model.Facturen.RemoveAll(x => !x.ScholengroepNummer.ToLower().Contains(scholengroepNummerFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(factuurdatumFilter))
+            {
+                model.Facturen.RemoveAll(x => !x.FactuurDatum.ToLower().Contains(factuurdatumFilter.ToLower()));
+            }
+            if (leverancierFilter >= 0)
+            {
+                model.Facturen.RemoveAll(x => x.Leverancier.Id != leverancierFilter);
+            }
+            if (!String.IsNullOrWhiteSpace(prijsFilter))
+            {
+                if (prijsFilterSecondary.Equals("="))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Prijs) != Convert.ToInt32(prijsFilter));
+                }
+                else if (prijsFilterSecondary.Equals("<"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Prijs) > Convert.ToInt32(prijsFilter));
+                }
+                else if (prijsFilterSecondary.Equals(">"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Prijs) < Convert.ToInt32(prijsFilter));
+                }
+            }
+            if (!String.IsNullOrWhiteSpace(garantieFilter))
+            {
+                if (garantieFilterSecondary.Equals("="))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Garantie) != Convert.ToInt32(garantieFilter));
+                }
+                else if (garantieFilterSecondary.Equals("<"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Garantie) > Convert.ToInt32(garantieFilter));
+                }
+                else if (garantieFilterSecondary.Equals(">"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Garantie) < Convert.ToInt32(garantieFilter));
+                }
+            }
+            if (!String.IsNullOrWhiteSpace(afschrijfperiodeFilter))
+            {
+                if (afschrijfperiodeFilterSecondary.Equals("="))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Afschrijfperiode) != Convert.ToInt32(afschrijfperiodeFilter));
+                }
+                else if (afschrijfperiodeFilterSecondary.Equals("<"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Afschrijfperiode) > Convert.ToInt32(afschrijfperiodeFilter));
+                }
+                else if (afschrijfperiodeFilterSecondary.Equals(">"))
+                {
+                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Afschrijfperiode) < Convert.ToInt32(afschrijfperiodeFilter));
+                }
+            }
+
+            return View("index", model);
         }
     }
 }

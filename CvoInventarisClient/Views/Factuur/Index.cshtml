@@ -15,10 +15,14 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
-    <div class="input-group col-lg-4 pull-right">
-        <span class="input-group-addon">Zoeken</span>
-        <input id="filter" type="text" class="form-control">
-    </div>
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Factuur")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
 
     <div class="spacer"></div>
 
@@ -154,7 +158,7 @@
         </div>
     </div>
 }
-
+<!-- nieuw modal -->
 <div class="modal fade nieuwModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
@@ -247,18 +251,86 @@
 
                 <div class="modal-body">
                     <div class="form-group">
+
                         <div class="form-group">
                             <label>Boekjaar:</label>
-                            <select class="form-control" name="boekjaarFilter">
+                            <select class="form-control" name="boekjaarFilterSecondary">
+                                <option value="=">van</option>
+                                <option value="<">voor</option>
+                                <option value=">">na</option>
+                            </select>
+                            <input class="form-control" type="number" name="boekjaarFilter" placeholder="jaar(bv: 2001)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>CVO volgnummer:</label>
+                            <input class="form-control" type="text" name="cvoVolgNummerFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Factuurnummer:</label>
+                            <input class="form-control" type="text" name="factuurNummerFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Scholengroepnummer:</label>
+                            <input class="form-control" type="text" name="scholengroepNummerFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Leverancier:</label>
+                            <select class="form-control" name="leverancierFilter">
                                 <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Leveranciers)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
                             </select>
                         </div>
+
+                        <div class="form-group">
+                            <label>Garantie:</label>
+                            <select class="form-control" name="garantieFilterSecondary">
+                                <option value="=">gelijk aan</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" name="garantieFilter" placeholder="garantie(bv: 5)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Afschrijfperiode:</label>
+                            <select class="form-control" name="afschrijfperiodeFilterSecondary">
+                                <option value="=">gelijk aan</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" name="afschrijfperiodeFilter" placeholder="periode(bv: 5)" />
+                        </div>
+
                     </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
                 </div>
             }
         </div>
     </div>
 </div>
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Facturen)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Export to PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Export to Excel</button>
+}
 
 
 
