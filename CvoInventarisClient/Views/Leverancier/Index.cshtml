@@ -82,10 +82,10 @@
                 {
                     <tr>
                         <td>
-                            <input type="checkbox" name="idArray" value="@item.IdLeverancier" />
+                            <input type="checkbox" name="idArray" value="@item.Id" />
                         </td>
                         <td>
-                            <a class="bottom-align-text" href="@Url.Action("Edit", "Leverancier", new { id = item.IdLeverancier })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Leverancier", new { id = item.Id })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Naam)
@@ -299,7 +299,7 @@
     //loop aanpassen naar model
     foreach (var item in Model.Leveranciers)
     {
-        <input type="hidden" name="modelList" value="@item.IdLeverancier" />
+        <input type="hidden" name="modelList" value="@item.Id" />
     }
     <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
 
