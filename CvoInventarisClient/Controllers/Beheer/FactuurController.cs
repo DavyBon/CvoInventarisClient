@@ -40,7 +40,7 @@ namespace CvoInventarisClient.Controllers
 
         // CREATE:
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int? Leveranciers)
         {
             TblFactuur TblFactuur = new TblFactuur();
 
@@ -51,7 +51,7 @@ namespace CvoInventarisClient.Controllers
             factuur.FactuurNummer = Request.Form["factuurNummer"];
             factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
             factuur.FactuurDatum = Request.Form["factuurDatum"];
-            factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["Leveranciers"]) };
+            factuur.Leverancier = new LeverancierModel() { Id = Leveranciers };
             factuur.Prijs = Request.Form["prijs"];
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];

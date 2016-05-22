@@ -33,7 +33,16 @@
             </div>
             <div class="form-group">
                 Leverancier
-                @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, Model.Facturen[0].Leverancier.Naam, new { @class="form-control" })
+                <select class="form-control" name="Leveranciers">
+                    <option value="@Model.Facturen[0].Leverancier.Id">@Model.Facturen[0].Leverancier.Naam</option>
+                    @foreach (var item in Model.Leveranciers)
+                    {
+                        if (item.Value != Model.Facturen[0].Leverancier.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
