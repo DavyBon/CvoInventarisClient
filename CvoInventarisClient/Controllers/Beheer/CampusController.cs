@@ -15,13 +15,16 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Index()
         {
             ViewBag.action = TempData["action"];
+            CampusViewModel model = new CampusViewModel();
             TblCampus TblCampus = new TblCampus();
 
-            List<CampusModel> model = new List<CampusModel>();
+            List<CampusModel> campusmodel = new List<CampusModel>();
             foreach (CampusModel campus in TblCampus.GetAll())
             {
-                model.Add(new CampusModel() { IdCampus = campus.IdCampus, Naam = campus.Naam, Postcode = campus.Postcode, Straat = campus.Straat, Nummer = campus.Nummer });
+                campusmodel.Add(new CampusModel() { IdCampus = campus.IdCampus, Naam = campus.Naam, Postcode = campus.Postcode, Straat = campus.Straat, Nummer = campus.Nummer });
             }
+            model.campussen = campusmodel;
+            this.Session["campusview"] = model;
             return View(model);
         }
 
@@ -93,6 +96,31 @@ namespace CvoInventarisClient.Controllers
                 TempData["action"] = idArray.Length + " campus werd verwijderd";
             }
             return RedirectToAction("Index");
+        }
+        [HttpPost]
+        public ActionResult Filter(string naamFilter,string postcodekFilter,string straatFilter,string nummmerFilter,int[] modelList)
+        {
+            ViewBag.action = TempData["action"];
+            CampusViewModel model = (CampusViewModel)(Session["campusview"] as CampusViewModel).Clone();
+            //var new1 = new List<MyObject>(a1.Select(x => x.Clone()));
+
+            if (!String.IsNullOrWhiteSpace(naamFilter))
+            {
+                model.campussen.RemoveAll(x => !x.Naam.ToLower().Contains(naamFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(postcodekFilter))
+            {
+                model.campussen.RemoveAll(x => !x.Postcode.ToLower().Contains(postcodekFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(straatFilter))
+            {
+                model.campussen.RemoveAll(x => !x.Straat.ToLower().Contains(straatFilter.ToLower()));
+            }
+            if (!String.IsNullOrWhiteSpace(nummmerFilter))
+            {
+                model.campussen.RemoveAll(x => !x.Nummer.ToLower().Contains(nummmerFilter.ToLower()));
+            }
+            return View("index", model);
         }
     }
 }

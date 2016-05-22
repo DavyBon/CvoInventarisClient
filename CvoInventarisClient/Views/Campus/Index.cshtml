@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CvoInventarisClient.Models.CampusModel>
+﻿@model CvoInventarisClient.Models.CampusViewModel
 
 @{
     ViewBag.Title = "Campus";
@@ -16,10 +16,14 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
-    <div class="input-group col-lg-4 pull-right">
-        <span class="input-group-addon">Zoeken</span>
-        <input id="filter" type="text" class="form-control">
-    </div>
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Campus")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
 
     <div class="spacer"></div>
 
@@ -31,21 +35,21 @@
                     <th></th>
                     <th></th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Naam)
+                        @Html.DisplayNameFor(model => model.campussen[0].Naam)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Postcode)
+                        @Html.DisplayNameFor(model => model.campussen[0].Postcode)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Straat)
+                        @Html.DisplayNameFor(model => model.campussen[0].Straat)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Nummer)
+                        @Html.DisplayNameFor(model => model.campussen[0].Nummer)
                     </th>
                 </tr>
             </thead>
             <tbody class="search">
-                @foreach (var item in Model)
+                @foreach (var item in Model.campussen)
                 {
                     <tr>
                         <td>
@@ -100,19 +104,19 @@
                 {
                     <div class="modal-body">
                         <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Naam)
+                            @Html.DisplayNameFor(model => model.campussen[0].Naam)
                             <input class="form-control" maxlength="50" type="text" name="naam" required/>
                         </div>
                         <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Postcode)
+                            @Html.DisplayNameFor(model => model.campussen[0].Postcode)
                             <input class="form-control" type="text" name="postcode" required/>
                         </div>
                         <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Straat)
+                            @Html.DisplayNameFor(model => model.campussen[0].Straat)
                             <input class="form-control" maxlength="50" type="text" name="straat" required/>
                         </div>
                         <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Nummer)
+                            @Html.DisplayNameFor(model => model.campussen[0].Nummer)
                             <input class="form-control" maxlength="50" type="text" name="nummer" required/>
                         </div>
                     </div>
@@ -124,5 +128,46 @@
         </div>
     </div>
 </div>
-<script src="~/Scripts/Custom/Custom.js"></script>
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Campus"))
+            {
+                <div class="modal-body">
+                    <div cclass="form-group">
+                        <label>Naam:</label>
+                        <input type="text" name="naamFilter" />
+                        <label>Postcode:</label>
+                        <input type="text" name="postcodekFilter" />
+                        <label>Straat:</label>
+                        <input type="text" name="straatFilter" />
+                        <label>Nummer:</label>
+                        <input type="text" name="nummmerFilter" />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.campussen)
+    {
+        <input type="hidden" name="modelList" value="@item.IdCampus" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Export to PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Export to Excel</button>
+}
 

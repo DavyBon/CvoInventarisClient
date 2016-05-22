@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CvoInventarisClient.Models
 {
-    public class CampusModel
+    public class CampusModel : ICloneable
     {
         public int IdCampus { get; set; }
 
@@ -21,5 +21,10 @@ namespace CvoInventarisClient.Models
 
         [Display(Name = "nummer")]
         public string Nummer { get; set; }
+
+        public object Clone()
+        {
+            return this.MemberwiseClone();
+        }
     }
 }

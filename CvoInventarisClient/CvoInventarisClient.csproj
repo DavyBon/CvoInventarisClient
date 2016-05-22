@@ -147,6 +147,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\Beheer\CampusController.cs" />
+    <Compile Include="Models\CampusViewModel.cs" />
     <Compile Include="Controllers\Beheer\FactuurController.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\ExportController.cs" />
