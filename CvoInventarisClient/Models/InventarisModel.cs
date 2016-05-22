@@ -27,5 +27,11 @@ namespace CvoInventarisClient.Models
         public int Aankoopjaar { get; set; }
         [Display(Name = "Afschrijvingsperiode")]
         public int Afschrijvingsperiode { get; set; }
+
+
+        public override string ToString()
+        {
+            return this.Label;
+        }
     }
 }

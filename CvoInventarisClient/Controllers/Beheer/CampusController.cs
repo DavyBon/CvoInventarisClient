@@ -21,7 +21,7 @@ namespace CvoInventarisClient.Controllers
             List<CampusModel> campusmodel = new List<CampusModel>();
             foreach (CampusModel campus in TblCampus.GetAll())
             {
-                campusmodel.Add(new CampusModel() { IdCampus = campus.IdCampus, Naam = campus.Naam, Postcode = campus.Postcode, Straat = campus.Straat, Nummer = campus.Nummer });
+                campusmodel.Add(new CampusModel() { Id = campus.Id, Naam = campus.Naam, Postcode = campus.Postcode, Straat = campus.Straat, Nummer = campus.Nummer });
             }
             model.campussen = campusmodel;
             this.Session["campusview"] = model;
@@ -63,7 +63,7 @@ namespace CvoInventarisClient.Controllers
             TblCampus TblCampus = new TblCampus();
 
             CampusModel campus = new CampusModel();
-            campus.IdCampus = Convert.ToInt16(Request.Form["idCampus"]);
+            campus.Id = Convert.ToInt16(Request.Form["idCampus"]);
             campus.Naam = Request.Form["naam"];
             campus.Postcode = Request.Form["postcode"];
             campus.Straat = Request.Form["straat"];

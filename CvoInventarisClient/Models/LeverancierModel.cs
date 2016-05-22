@@ -8,7 +8,7 @@ namespace CvoInventarisClient.Models
 {
     public class LeverancierModel
     {
-        public int IdLeverancier { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "naam")]
         public string Naam { get; set; }
@@ -55,5 +55,11 @@ namespace CvoInventarisClient.Models
         [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
         [Display(Name = "toegevoegdOp")]
         public string ToegevoegdOp { get; set; }
+
+
+        public override string ToString()
+        {
+            return this.Naam;
+        }
     }
 }

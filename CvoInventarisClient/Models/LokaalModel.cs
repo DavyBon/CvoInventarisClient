@@ -9,7 +9,7 @@ namespace CvoInventarisClient.Models
     public class LokaalModel
     {
 
-        public int IdLokaal { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "lokaalNaam")]
         public string LokaalNaam { get; set; }
@@ -22,5 +22,11 @@ namespace CvoInventarisClient.Models
 
         [Display(Name = "Campus")]
         public CampusModel Campus { get; set; }
+
+
+        public override string ToString()
+        {
+            return this.LokaalNaam;
+        }
     }
 }

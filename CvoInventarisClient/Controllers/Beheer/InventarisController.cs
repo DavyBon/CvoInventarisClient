@@ -37,11 +37,11 @@ namespace CvoInventarisClient.Controllers
             }
             foreach (LokaalModel l in TblLokaal.GetAll())
             {
-                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
             }
             foreach (VerzekeringModel v in TblVerzekering.GetAll())
             {
-                model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.IdVerzekering.ToString() });
+                model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
             }
 
             this.Session["inventarisview"] = model;
@@ -65,8 +65,8 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Historiek = Request.Form["historiek"];
                 inventaris.Label = Request.Form["reeks"] + labelnr;
                 inventaris.Object = new ObjectModel() { Id = Convert.ToInt16(Request.Form["Objecten"]) };
-                inventaris.Lokaal = new LokaalModel() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) };
-                inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = Convert.ToInt16(Request.Form["Verzekeringen"]) };
+                inventaris.Lokaal = new LokaalModel() { Id = Convert.ToInt16(Request.Form["Lokalen"]) };
+                inventaris.Verzekering = new VerzekeringModel() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) };
                 if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
                 else
                 {
@@ -102,16 +102,16 @@ namespace CvoInventarisClient.Controllers
 
             foreach (LokaalModel l in TblLokaal.GetAll())
             {
-                if (!(l.IdLokaal == i.Lokaal.IdLokaal))
+                if (!(l.Id == i.Lokaal.Id))
                 {
-                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.IdLokaal.ToString() });
+                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
                 }
             }
             foreach (VerzekeringModel v in TblVerzekering.GetAll())
             {
-                if (!(v.IdVerzekering == i.Verzekering.IdVerzekering))
+                if (!(v.Id == i.Verzekering.Id))
                 {
-                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.IdVerzekering.ToString() });
+                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
                 }
             }
             return View(model);
@@ -130,11 +130,11 @@ namespace CvoInventarisClient.Controllers
             inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
             inventaris.Historiek = Request.Form["historiek"];
             inventaris.Object = new ObjectModel() { Id = Convert.ToInt16(Request.Form["idObject"]) };
-            if (!String.IsNullOrWhiteSpace(Request.Form["Lokalen"])) { inventaris.Lokaal = new LokaalModel() { IdLokaal = Convert.ToInt16(Request.Form["Lokalen"]) }; }
-            else { inventaris.Lokaal = new LokaalModel() { IdLokaal = Convert.ToInt16(Request.Form["defaultIdLokaal"]) }; }
+            if (!String.IsNullOrWhiteSpace(Request.Form["Lokalen"])) { inventaris.Lokaal = new LokaalModel() { Id = Convert.ToInt16(Request.Form["Lokalen"]) }; }
+            else { inventaris.Lokaal = new LokaalModel() { Id = Convert.ToInt16(Request.Form["defaultIdLokaal"]) }; }
 
-            if (!String.IsNullOrWhiteSpace(Request.Form["Verzekeringen"])) { inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = Convert.ToInt16(Request.Form["Verzekeringen"]) }; }
-            else { inventaris.Verzekering = new VerzekeringModel() { IdVerzekering = Convert.ToInt16(Request.Form["defaultIdVerzekering"]) }; }
+            if (!String.IsNullOrWhiteSpace(Request.Form["Verzekeringen"])) { inventaris.Verzekering = new VerzekeringModel() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) }; }
+            else { inventaris.Verzekering = new VerzekeringModel() { Id = Convert.ToInt16(Request.Form["defaultIdVerzekering"]) }; }
 
             if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
             else
@@ -217,7 +217,7 @@ namespace CvoInventarisClient.Controllers
 
             if (lokaalFilter >= 0)
             {
-                model.Inventaris.RemoveAll(x => x.Lokaal.IdLokaal != lokaalFilter);
+                model.Inventaris.RemoveAll(x => x.Lokaal.Id != lokaalFilter);
             }
 
             if (!String.IsNullOrWhiteSpace(historiekFilter))
@@ -259,7 +259,7 @@ namespace CvoInventarisClient.Controllers
 
             if (verzekeringFilter >= 0)
             {
-                model.Inventaris.RemoveAll(x => x.Verzekering.IdVerzekering != verzekeringFilter);
+                model.Inventaris.RemoveAll(x => x.Verzekering.Id != verzekeringFilter);
             }
             return View("index", model);
         }

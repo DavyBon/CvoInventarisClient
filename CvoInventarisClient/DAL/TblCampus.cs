@@ -44,7 +44,7 @@ namespace CvoInventarisClient.DAL
                     while (dr.Read())
                     {
                         campus = new CampusModel();
-                        campus.IdCampus = (int)dr["idCampus"];
+                        campus.Id = (int)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
                         campus.Postcode = dr["postcode"].ToString();
                         campus.Straat = dr["straat"].ToString();
@@ -84,7 +84,7 @@ namespace CvoInventarisClient.DAL
                     while (dr.Read())
                     {
                         campus = new CampusModel();
-                        campus.IdCampus = (int)dr["idCampus"];
+                        campus.Id = (int)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
                         campus.Postcode = dr["postcode"].ToString();
                         campus.Straat = dr["straat"].ToString();
@@ -145,7 +145,7 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("idCampus", campus.IdCampus);
+                    cmd.Parameters.AddWithValue("idCampus", campus.Id);
                     cmd.Parameters.AddWithValue("naam", campus.Naam);
                     cmd.Parameters.AddWithValue("postcode", campus.Postcode);
                     cmd.Parameters.AddWithValue("straat", campus.Straat);
@@ -209,7 +209,7 @@ namespace CvoInventarisClient.DAL
                     while (dr.Read())
                     {
                         campus = new CampusModel();
-                        if (keuzeKolommen.Contains("idCampus")) { campus.IdCampus = (int)dr["idCampus"]; }
+                        if (keuzeKolommen.Contains("idCampus")) { campus.Id = (int)dr["idCampus"]; }
                         if (keuzeKolommen.Contains("naam")) { campus.Naam = dr["naam"].ToString(); }
                         if (keuzeKolommen.Contains("postcode")) { campus.Postcode = dr["postcode"].ToString(); }
                         if (keuzeKolommen.Contains("straat")) { campus.Straat = dr["straat"].ToString(); }

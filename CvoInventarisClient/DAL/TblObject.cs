@@ -22,9 +22,9 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.IdObjectType));
+                    command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.Id));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
-                    command.Parameters.Add(new SqlParameter("@idFactuur", obj.Factuur.IdFactuur));
+                    command.Parameters.Add(new SqlParameter("@idFactuur", obj.Factuur.Id));
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
@@ -84,7 +84,7 @@ namespace CvoInventarisClient.DAL
                         factuur = new FactuurModel();
                         objType = new ObjectTypeModel();
 
-                        leverancier.IdLeverancier = (int)mySqlDataReader["idLeverancier"];
+                        leverancier.Id = (int)mySqlDataReader["idLeverancier"];
                         leverancier.Afkorting = mySqlDataReader["afkorting"].ToString();
                         leverancier.Bic = mySqlDataReader["bic"].ToString();
                         leverancier.BtwNummer = mySqlDataReader["btwNummer"].ToString();
@@ -100,7 +100,7 @@ namespace CvoInventarisClient.DAL
                         leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
                         leverancier.Website = mySqlDataReader["website"].ToString();
 
-                        factuur.IdFactuur = (int)mySqlDataReader["idFactuur"];
+                        factuur.Id = (int)mySqlDataReader["idFactuur"];
                         factuur.Afschrijfperiode = (int)mySqlDataReader["Afschrijfperiode"];
                         factuur.Boekjaar = mySqlDataReader["Boekjaar"].ToString();
                         factuur.CvoVolgNummer = mySqlDataReader["CvoVolgNummer"].ToString();
@@ -116,7 +116,7 @@ namespace CvoInventarisClient.DAL
                         factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
                         factuur.UserModified = mySqlDataReader["UserModified"].ToString();
 
-                        objType.IdObjectType = (int)mySqlDataReader["idObjectType"];
+                        objType.Id = (int)mySqlDataReader["idObjectType"];
                         objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
 
                         obj.Id = (int)mySqlDataReader["idObject"];
@@ -160,7 +160,7 @@ namespace CvoInventarisClient.DAL
                         factuur = new FactuurModel();
                         objType = new ObjectTypeModel();
 
-                        leverancier.IdLeverancier = (int)mySqlDataReader["idLeverancier"];
+                        leverancier.Id = (int)mySqlDataReader["idLeverancier"];
                         leverancier.Afkorting = mySqlDataReader["afkorting"].ToString();
                         leverancier.Bic = mySqlDataReader["bic"].ToString();
                         leverancier.BtwNummer = mySqlDataReader["btwNummer"].ToString();
@@ -176,7 +176,7 @@ namespace CvoInventarisClient.DAL
                         leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
                         leverancier.Website = mySqlDataReader["website"].ToString();
 
-                        factuur.IdFactuur = (int)mySqlDataReader["idFactuur"];
+                        factuur.Id = (int)mySqlDataReader["idFactuur"];
                         factuur.Afschrijfperiode = (int)mySqlDataReader["Afschrijfperiode"];
                         factuur.Boekjaar = mySqlDataReader["Boekjaar"].ToString();
                         factuur.CvoVolgNummer = mySqlDataReader["CvoVolgNummer"].ToString();
@@ -192,7 +192,7 @@ namespace CvoInventarisClient.DAL
                         factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
                         factuur.UserModified = mySqlDataReader["UserModified"].ToString();
 
-                        objType.IdObjectType = (int)mySqlDataReader["idObjectType"];
+                        objType.Id = (int)mySqlDataReader["idObjectType"];
                         objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
 
                         obj.Id = (int)mySqlDataReader["idObject"];
@@ -223,9 +223,9 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@id", obj.Id));
-                    command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.IdObjectType));
+                    command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.Id));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
-                    command.Parameters.Add(new SqlParameter("@idFactuur", obj.Factuur.IdFactuur));
+                    command.Parameters.Add(new SqlParameter("@idFactuur", obj.Factuur.Id));
                     command.ExecuteReader();
                 }
                 return true;

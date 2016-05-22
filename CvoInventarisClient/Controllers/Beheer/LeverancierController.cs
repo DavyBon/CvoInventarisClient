@@ -62,7 +62,7 @@ namespace CvoInventarisClient.Controllers
         {
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
             LeverancierModel leverancier = new LeverancierModel();
-            leverancier.IdLeverancier = Convert.ToInt16(Request.Form["idLeverancier"]);
+            leverancier.Id = Convert.ToInt16(Request.Form["idLeverancier"]);
             leverancier.Naam = Request.Form["naam"];
             leverancier.Afkorting = Request.Form["afkorting"];
             leverancier.Straat = Request.Form["straat"];

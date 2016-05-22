@@ -28,13 +28,13 @@ namespace CvoInventarisClient.Controllers
             {
 
                 FactuurModel factuurModel = new FactuurModel();
-                factuurModel.IdFactuur = factuur.IdFactuur;
+                factuurModel.Id = factuur.Id;
                 factuurModel.Boekjaar = factuur.Boekjaar;
                 factuurModel.CvoVolgNummer = factuur.CvoVolgNummer;
                 factuurModel.FactuurNummer = factuur.FactuurNummer;
                 factuurModel.ScholengroepNummer = factuur.ScholengroepNummer;
                 factuurModel.FactuurDatum = factuur.FactuurDatum;
-                factuurModel.Leverancier = new LeverancierModel() { IdLeverancier = factuur.Leverancier.IdLeverancier, Naam = factuur.Leverancier.Naam, Afkorting = factuur.Leverancier.Afkorting, Straat = factuur.Leverancier.Straat, HuisNummer = factuur.Leverancier.HuisNummer, BusNummer = factuur.Leverancier.BusNummer, Postcode = factuur.Leverancier.Postcode, Telefoon = factuur.Leverancier.Telefoon, Fax = factuur.Leverancier.Fax, Email = factuur.Leverancier.Email, Website = factuur.Leverancier.Website, BtwNummer = factuur.Leverancier.BtwNummer, Iban = factuur.Leverancier.Iban, Bic = factuur.Leverancier.Bic, ToegevoegdOp = factuur.Leverancier.ToegevoegdOp };
+                factuurModel.Leverancier = new LeverancierModel() { Id = factuur.Leverancier.Id, Naam = factuur.Leverancier.Naam, Afkorting = factuur.Leverancier.Afkorting, Straat = factuur.Leverancier.Straat, HuisNummer = factuur.Leverancier.HuisNummer, BusNummer = factuur.Leverancier.BusNummer, Postcode = factuur.Leverancier.Postcode, Telefoon = factuur.Leverancier.Telefoon, Fax = factuur.Leverancier.Fax, Email = factuur.Leverancier.Email, Website = factuur.Leverancier.Website, BtwNummer = factuur.Leverancier.BtwNummer, Iban = factuur.Leverancier.Iban, Bic = factuur.Leverancier.Bic, ToegevoegdOp = factuur.Leverancier.ToegevoegdOp };
                 factuurModel.Prijs = factuur.Prijs;
                 factuurModel.Garantie = factuur.Garantie;
                 factuurModel.Omschrijving = factuur.Omschrijving;
@@ -66,7 +66,7 @@ namespace CvoInventarisClient.Controllers
             factuur.FactuurNummer = Request.Form["factuurNummer"];
             factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
             factuur.FactuurDatum = Request.Form["factuurDatum"];
-            factuur.Leverancier = new LeverancierModel() { IdLeverancier = Convert.ToInt16(Request.Form["Leveranciers"]) };
+            factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["Leveranciers"]) };
             factuur.Prijs = Request.Form["prijs"];
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
@@ -115,7 +115,7 @@ namespace CvoInventarisClient.Controllers
             TblFactuur TblFactuur = new TblFactuur();
 
             FactuurModel factuur = new FactuurModel();
-            factuur.IdFactuur = Convert.ToInt16(Request.Form["idFactuur"]);
+            factuur.Id = Convert.ToInt16(Request.Form["idFactuur"]);
             factuur.Boekjaar = Request.Form["boekjaar"];
             factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
             factuur.FactuurNummer = Request.Form["factuurNummer"];
@@ -132,8 +132,8 @@ namespace CvoInventarisClient.Controllers
             else { factuur.DatumModified = Request.Form["datumModified"]; }
             if (String.IsNullOrWhiteSpace(Request.Form["userModified"])) { factuur.UserModified = Request.Form["userInsert"]; }
             else { factuur.UserModified = Request.Form["userModified"]; }
-            if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new LeverancierModel() { IdLeverancier = Convert.ToInt16(Request.Form["Leveranciers"]) }; }
-            else { factuur.Leverancier = new LeverancierModel() { IdLeverancier = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
+            if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["Leveranciers"]) }; }
+            else { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
 
             TblFactuur.Update(factuur);
 

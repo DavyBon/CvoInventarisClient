@@ -49,7 +49,7 @@ namespace CvoInventarisClient.Controllers
         {
             DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
             VerzekeringModel verzekering = new VerzekeringModel();
-            verzekering.IdVerzekering = Convert.ToInt16(Request.Form["idVerzekering"]);
+            verzekering.Id = Convert.ToInt16(Request.Form["idVerzekering"]);
             verzekering.Omschrijving = Request.Form["omschrijving"];
             TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
             dalVerzekering.Update(verzekering);

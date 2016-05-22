@@ -29,11 +29,11 @@ namespace CvoInventarisClient.Controllers
             }
             foreach (FactuurModel f in TblFactuur.GetAll())
             {
-                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
+                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
             }
             foreach (ObjectTypeModel ot in TblObjectType.GetAll())
             {
-                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
             }
 
             this.Session["objectview"] = model;
@@ -51,8 +51,8 @@ namespace CvoInventarisClient.Controllers
             ObjectModel obj = new ObjectModel();
             obj.Kenmerken = Request.Form["kenmerken"];
 
-            obj.Factuur = new FactuurModel() { IdFactuur = Convert.ToInt32(Request.Form["Facturen"]) };
-            obj.ObjectType = new ObjectTypeModel() { IdObjectType = Convert.ToInt32(Request.Form["ObjectTypes"]) };
+            obj.Factuur = new FactuurModel() { Id = Convert.ToInt32(Request.Form["Facturen"]) };
+            obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt32(Request.Form["ObjectTypes"]) };
             TblObject.Create(obj);
 
             TempData["action"] = "Object werd toegevoegd";
@@ -77,11 +77,11 @@ namespace CvoInventarisClient.Controllers
 
             foreach (FactuurModel f in TblFactuur.GetAll())
             {
-                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.IdFactuur.ToString() });
+                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
             }
             foreach (ObjectTypeModel ot in TblObjectType.GetAll())
             {
-                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.IdObjectType.ToString() });
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
             }
             return View(model);
 
@@ -98,10 +98,10 @@ namespace CvoInventarisClient.Controllers
             ObjectModel obj = new ObjectModel();
             obj.Id = Convert.ToInt32(Request.Form["idObject"]);
             obj.Kenmerken = Request.Form["kenmerken"];
-            if (!String.IsNullOrWhiteSpace(Request.Form["facturen"])) { obj.Factuur = new FactuurModel() { IdFactuur = Convert.ToInt16(Request.Form["Facturen"]) }; }
-            else { obj.Factuur = new FactuurModel() { IdFactuur = Convert.ToInt16(Request.Form["defaultIdFactuur"]) }; }
-            if (!String.IsNullOrWhiteSpace(Request.Form["ObjectTypes"])) { obj.ObjectType = new ObjectTypeModel() { IdObjectType = Convert.ToInt16(Request.Form["ObjectTypes"]) }; }
-            else { obj.ObjectType = new ObjectTypeModel() { IdObjectType = Convert.ToInt16(Request.Form["defaultIdObjectType"]) }; }
+            if (!String.IsNullOrWhiteSpace(Request.Form["facturen"])) { obj.Factuur = new FactuurModel() { Id = Convert.ToInt16(Request.Form["Facturen"]) }; }
+            else { obj.Factuur = new FactuurModel() { Id = Convert.ToInt16(Request.Form["defaultIdFactuur"]) }; }
+            if (!String.IsNullOrWhiteSpace(Request.Form["ObjectTypes"])) { obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt16(Request.Form["ObjectTypes"]) }; }
+            else { obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt16(Request.Form["defaultIdObjectType"]) }; }
 
             TblObject.Update(obj);
 
@@ -143,12 +143,12 @@ namespace CvoInventarisClient.Controllers
 
             if (factuurIdFilter >= 0)
             {
-                model.Objecten.RemoveAll(x => x.Factuur.IdFactuur != factuurIdFilter);
+                model.Objecten.RemoveAll(x => x.Factuur.Id != factuurIdFilter);
             }
 
             if (ObjectTypeFilter >= 0)
             {
-                model.Objecten.RemoveAll(x => x.ObjectType.IdObjectType != ObjectTypeFilter);
+                model.Objecten.RemoveAll(x => x.ObjectType.Id != ObjectTypeFilter);
             }
 
 

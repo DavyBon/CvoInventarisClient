@@ -64,7 +64,7 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             LeverancierModel l = new LeverancierModel();
-                            l.IdLeverancier = (int)dr["idLeverancier"];
+                            l.Id = (int)dr["idLeverancier"];
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
@@ -114,7 +114,7 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             l = new LeverancierModel();
-                            l.IdLeverancier = (int)dr["idLeverancier"];
+                            l.Id = (int)dr["idLeverancier"];
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
@@ -194,7 +194,7 @@ namespace CvoInventarisClient.DAL
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("idLeverancier", l.IdLeverancier);
+                        cmd.Parameters.AddWithValue("idLeverancier", l.Id);
                         cmd.Parameters.AddWithValue("naam", l.Naam);
                         cmd.Parameters.AddWithValue("afkorting", l.Afkorting);
                         cmd.Parameters.AddWithValue("straat", l.Straat);
@@ -265,7 +265,7 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             LeverancierModel l = new LeverancierModel();
-                            if (keuzeKolommen.Contains("idLeverancier")) { l.IdLeverancier = (int)dr["idLeverancier"]; }
+                            if (keuzeKolommen.Contains("idLeverancier")) { l.Id = (int)dr["idLeverancier"]; }
                             if (keuzeKolommen.Contains("naam")) { l.Naam = dr["naam"].ToString(); }
                             if (keuzeKolommen.Contains("afkorting")) { l.Afkorting = dr["afkorting"].ToString(); }
                             if (keuzeKolommen.Contains("straat")) { l.Straat = dr["straat"].ToString(); }

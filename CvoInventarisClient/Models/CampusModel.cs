@@ -6,9 +6,9 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CvoInventarisClient.Models
 {
-    public class CampusModel : ICloneable
+    public class CampusModel
     {
-        public int IdCampus { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "naam")]
         public string Naam { get; set; }
@@ -22,9 +22,10 @@ namespace CvoInventarisClient.Models
         [Display(Name = "nummer")]
         public string Nummer { get; set; }
 
-        public object Clone()
+        public override string ToString()
         {
-            return this.MemberwiseClone();
+            return this.Naam;
         }
+
     }
 }

@@ -64,7 +64,7 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             LokaalModel l = new LokaalModel();
-                            l.IdLokaal = (int)dr["idLokaal"];
+                            l.Id = (int)dr["idLokaal"];
                             l.LokaalNaam = dr["lokaalNaam"].ToString();
                             l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
                             l.IsComputerLokaal = (bool)dr["isComputerLokaal"];
@@ -104,7 +104,7 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             l = new LokaalModel();
-                            l.IdLokaal = (int)dr["idLokaal"];
+                            l.Id = (int)dr["idLokaal"];
                             l.LokaalNaam = dr["lokaalNaam"].ToString();
                             l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
                             l.IsComputerLokaal = (bool)dr["isComputerLokaal"];
@@ -161,7 +161,7 @@ namespace CvoInventarisClient.DAL
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("idLokaal", l.IdLokaal);
+                        cmd.Parameters.AddWithValue("idLokaal", l.Id);
                         cmd.Parameters.AddWithValue("lokaalNaam", l.LokaalNaam);
                         cmd.Parameters.AddWithValue("aantalPlaatsen", l.AantalPlaatsen);
                         cmd.Parameters.AddWithValue("isComputerLokaal", l.IsComputerLokaal);
@@ -221,7 +221,7 @@ namespace CvoInventarisClient.DAL
                         while (result.Read())
                         {
                             LokaalModel lokaal = new LokaalModel();
-                            if (keuzeKolommen.Contains("TblLokaal.idLokaal")) { lokaal.IdLokaal = (int)result["idLokaal"]; }
+                            if (keuzeKolommen.Contains("TblLokaal.idLokaal")) { lokaal.Id = (int)result["idLokaal"]; }
                             if (keuzeKolommen.Contains("TblLokaal.lokaalNaam")) { lokaal.LokaalNaam = result["lokaalNaam"].ToString(); }
                             if (keuzeKolommen.Contains("TblLokaal.aantalPlaatsen")) { lokaal.AantalPlaatsen = (int)result["aantalPlaatsen"]; }
                             if (keuzeKolommen.Contains("TblLokaal.isComputerLokaal")) { lokaal.IsComputerLokaal = (bool)result["isComputerLokaal"]; }

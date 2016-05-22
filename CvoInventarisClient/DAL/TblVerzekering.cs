@@ -77,7 +77,7 @@ namespace CvoInventarisClient.DAL
                         while (reader.Read())
                         {
                             VerzekeringModel verzekering = new VerzekeringModel();
-                            verzekering.IdVerzekering = (int)reader["idVerzekering"];
+                            verzekering.Id = (int)reader["idVerzekering"];
                             verzekering.Omschrijving = reader["omschrijving"].ToString();
                             verzekeringen.Add(verzekering);
                         }
@@ -104,7 +104,7 @@ namespace CvoInventarisClient.DAL
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        verzekering.IdVerzekering = (int)reader["idVerzekering"];
+                        verzekering.Id = (int)reader["idVerzekering"];
                         verzekering.Omschrijving = reader["omschrijving"].ToString();
                     }
                 }
@@ -121,7 +121,7 @@ namespace CvoInventarisClient.DAL
             {
                 SqlCommand command = new SqlCommand("TblVerzekeringUpdate", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idVerzekering", t.IdVerzekering);
+                command.Parameters.AddWithValue("@idVerzekering", t.Id);
                 command.Parameters.AddWithValue("@Omschrijving", t.Omschrijving);
                 try
                 {

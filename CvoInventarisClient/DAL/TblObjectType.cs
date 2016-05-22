@@ -73,7 +73,7 @@ namespace CvoInventarisClient.DAL
                         while (reader.Read())
                         {
                             ObjectTypeModel objectType = new ObjectTypeModel();
-                            objectType.IdObjectType = (int)reader["idObjectType"];
+                            objectType.Id = (int)reader["idObjectType"];
                             objectType.Omschrijving = reader["omschrijving"].ToString();
                             objectTypes.Add(objectType);
                         }
@@ -100,7 +100,7 @@ namespace CvoInventarisClient.DAL
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        objectTypes.IdObjectType = (int)reader["idObjectType"];
+                        objectTypes.Id = (int)reader["idObjectType"];
                         objectTypes.Omschrijving = reader["omschrijving"].ToString();
                     }
                 }
@@ -117,7 +117,7 @@ namespace CvoInventarisClient.DAL
             {
                 SqlCommand command = new SqlCommand("TblObjectTypeUpdate", connection);
                 command.CommandType = CommandType.StoredProcedure;
-                command.Parameters.AddWithValue("@idObjectType", t.IdObjectType);
+                command.Parameters.AddWithValue("@idObjectType", t.Id);
                 command.Parameters.AddWithValue("@Omschrijving", t.Omschrijving);
                 try
                 {

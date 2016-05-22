@@ -8,7 +8,7 @@ namespace CvoInventarisClient.Models
 {
     public class FactuurModel
     {
-        public int IdFactuur { get; set; }
+        public int Id { get; set; }
 
         [Display(Name = "boekjaar")]
         public string Boekjaar { get; set; }
@@ -59,5 +59,11 @@ namespace CvoInventarisClient.Models
 
         [Display(Name = "userModified")]
         public string UserModified { get; set; }
+
+
+        public override string ToString()
+        {
+            return this.FactuurNummer;
+        }
     }
 }

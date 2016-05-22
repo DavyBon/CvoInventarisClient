@@ -55,7 +55,7 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Edit(int id, FormCollection collection)
         {
             LokaalModel lokaal = new LokaalModel();
-            lokaal.IdLokaal = Convert.ToInt16(Request.Form["idLokaal"]);
+            lokaal.Id = Convert.ToInt16(Request.Form["idLokaal"]);
             lokaal.LokaalNaam = Request.Form["lokaalNaam"];
             lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
 

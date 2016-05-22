@@ -41,7 +41,7 @@ namespace CvoInventarisClient.Controllers
         {
             DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
             ObjectTypeModel objectType = new ObjectTypeModel();
-            objectType.IdObjectType = Convert.ToInt16(Request.Form["idObjectType"]);
+            objectType.Id = Convert.ToInt16(Request.Form["idObjectType"]);
             objectType.Omschrijving = Request.Form["omschrijving"];
             TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
             tblObjectType.Update(objectType);
@@ -53,7 +53,7 @@ namespace CvoInventarisClient.Controllers
         {
             DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
             ObjectTypeModel objectType = new ObjectTypeModel();
-            objectType.IdObjectType = Convert.ToInt16(Request.Form["driver"]);
+            objectType.Id = Convert.ToInt16(Request.Form["driver"]);
             objectType.Omschrijving = Request.Form["omschrijving"];
             tblObjectType.Create(objectType);
             TempData["action"] = "objectType" + " " + Request.Form["omschrijving"] + " werd toegevoegd";

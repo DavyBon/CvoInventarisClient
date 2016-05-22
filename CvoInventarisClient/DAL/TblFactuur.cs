@@ -47,7 +47,7 @@ namespace CvoInventarisClient.DAL
                         factuur = new FactuurModel();
                         leverancier = new LeverancierModel();
 
-                        leverancier.IdLeverancier = (int)dr["idLeverancier"];
+                        leverancier.Id = (int)dr["idLeverancier"];
                         leverancier.Afkorting = dr["afkorting"].ToString();
                         leverancier.Bic = dr["bic"].ToString();
                         leverancier.BtwNummer = dr["btwNummer"].ToString();
@@ -63,7 +63,7 @@ namespace CvoInventarisClient.DAL
                         leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
                         leverancier.Website = dr["website"].ToString();
 
-                        factuur.IdFactuur = (int)dr["idFactuur"];
+                        factuur.Id = (int)dr["idFactuur"];
                         factuur.Boekjaar = dr["Boekjaar"].ToString();
                         factuur.CvoVolgNummer = dr["CvoVolgNummer"].ToString();
                         factuur.FactuurNummer = dr["FactuurNummer"].ToString();
@@ -117,7 +117,7 @@ namespace CvoInventarisClient.DAL
                         factuur = new FactuurModel();
                         leverancier = new LeverancierModel();
 
-                        leverancier.IdLeverancier = (int)dr["idLeverancier"];
+                        leverancier.Id = (int)dr["idLeverancier"];
                         leverancier.Afkorting = dr["afkorting"].ToString();
                         leverancier.Bic = dr["bic"].ToString();
                         leverancier.BtwNummer = dr["btwNummer"].ToString();
@@ -133,7 +133,7 @@ namespace CvoInventarisClient.DAL
                         leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
                         leverancier.Website = dr["website"].ToString();
 
-                        factuur.IdFactuur = (int)dr["idFactuur"];
+                        factuur.Id = (int)dr["idFactuur"];
                         factuur.Boekjaar = dr["Boekjaar"].ToString();
                         factuur.CvoVolgNummer = dr["CvoVolgNummer"].ToString();
                         factuur.FactuurNummer = dr["FactuurNummer"].ToString();
@@ -180,7 +180,7 @@ namespace CvoInventarisClient.DAL
                     cmd.Parameters.AddWithValue("FactuurNummer", factuur.FactuurNummer);
                     cmd.Parameters.AddWithValue("ScholengroepNummer", factuur.ScholengroepNummer);
                     cmd.Parameters.AddWithValue("FactuurDatum", factuur.FactuurDatum);
-                    cmd.Parameters.AddWithValue("idLeverancier", factuur.Leverancier.IdLeverancier);
+                    cmd.Parameters.AddWithValue("idLeverancier", factuur.Leverancier.Id);
                     cmd.Parameters.AddWithValue("Prijs", factuur.Prijs);
                     cmd.Parameters.AddWithValue("Garantie", factuur.Garantie);
                     cmd.Parameters.AddWithValue("Omschrijving", factuur.Omschrijving);
@@ -216,13 +216,13 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("idFactuur", factuur.IdFactuur);
+                    cmd.Parameters.AddWithValue("idFactuur", factuur.Id);
                     cmd.Parameters.AddWithValue("Boekjaar", factuur.Boekjaar);
                     cmd.Parameters.AddWithValue("CvoVolgNummer", factuur.CvoVolgNummer);
                     cmd.Parameters.AddWithValue("FactuurNummer", factuur.FactuurNummer);
                     cmd.Parameters.AddWithValue("ScholengroepNummer", factuur.ScholengroepNummer);
                     cmd.Parameters.AddWithValue("FactuurDatum", factuur.FactuurDatum);
-                    cmd.Parameters.AddWithValue("idLeverancier", factuur.Leverancier.IdLeverancier);
+                    cmd.Parameters.AddWithValue("idLeverancier", factuur.Leverancier.Id);
                     cmd.Parameters.AddWithValue("Prijs", factuur.Prijs);
                     cmd.Parameters.AddWithValue("Garantie", factuur.Garantie);
                     cmd.Parameters.AddWithValue("Omschrijving", factuur.Omschrijving);
