@@ -168,7 +168,7 @@ namespace CvoInventarisClient.Controllers
 
             if (tblAccount.WijzigWachtwoord(GUID, am.Wachtwoord))
             {
-                ViewBag.successWijzigWachtwoordMessage = "Uw wachtwoord is gewijzigd! U kan nu inloggen met uw nieuwe wachtwoord.";
+                ViewBag.successWijzigWachtwoordMessage = "U kan nu inloggen met uw nieuwe wachtwoord.";
             }
             else
             {

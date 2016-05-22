@@ -31,7 +31,7 @@
             {
                 <div class="alert alert-success alert-dismissible" role="alert">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <strong>Gelukt!</strong> @ViewBag.successWijzigWachtwoordMessage
+                    <strong>Uw wachtwoord is gewijzigd!</strong> @ViewBag.successWijzigWachtwoordMessage
                 </div>
             }
             @if (!String.IsNullOrWhiteSpace(ViewBag.warningWijzigWachtwoordMessage))
@@ -42,7 +42,7 @@
                 </div>
             }
             <h3 class="form-signin-heading">Wachtwoord wijzigen</h3>
-            <h5>Vul in de velden hieronder uw nieuwe wachtwoord in.</h5>
+            <h5>Vul in het veld hieronder uw nieuwe wachtwoord in.</h5>
             <br />
             <input type="hidden" name="GUID" value="@Request.QueryString["uid"]" />
             <label for="Wachtwoord" class="sr-only">Wachtwoord</label>
