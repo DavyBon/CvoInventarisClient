@@ -14,6 +14,9 @@
     <link href="~/Content/bootstrap.css" rel="stylesheet" />
     <link href="~/Content/Login.css" rel="stylesheet" />
 
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
     <meta name="description" content="CvoInventaris applicatie" />
 </head>
 <body>
@@ -24,7 +27,20 @@
             <div class="page-header">
                 <h1 class="form-signin-heading">CVO inventaris</h1>
             </div>
-            <h2>@ViewBag.ResetWachtwoordMessage</h2>
+            @if (!String.IsNullOrWhiteSpace(ViewBag.successResetWachtwoordMessage))
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Gelukt!</strong> @ViewBag.successResetWachtwoordMessage
+                </div>
+            }
+            @if (!String.IsNullOrWhiteSpace(ViewBag.warningResetWachtwoordMessage))
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Opgelet!</strong> @ViewBag.warningResetWachtwoordMessage
+                </div>
+            }
             <h3 class="form-signin-heading">Wachtwoord vergeten?</h3>
             <h5>Vul hieronder uw log in e-mailadres in en u ontvangt een link waarmee u uw wachtwoord kunt wijzigen.</h5>
             <br />

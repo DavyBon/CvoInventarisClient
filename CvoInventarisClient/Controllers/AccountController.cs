@@ -140,11 +140,11 @@ namespace CvoInventarisClient.Controllers
 
             if (tblAccount.VerstuurWachtwoordResetEmail(am.Email))
             {
-                ViewBag.ResetWachtwoordMessage = "Een e-mail met instructies om uw wachtwoord te wijzigen werd naar uw geregistreerde e-mailadres verstuurd.";
+                ViewBag.successResetWachtwoordMessage = "Een e-mail met instructies om uw wachtwoord te wijzigen werd naar uw geregistreerde e-mailadres verstuurd.";
             }
             else
             {
-                ViewBag.ResetWachtwoordMessage = "E-mailadres niet gevonden!";
+                ViewBag.warningResetWachtwoordMessage = "E-mailadres niet gevonden!";
             }
             return View();
         }
