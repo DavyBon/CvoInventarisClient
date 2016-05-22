@@ -81,10 +81,10 @@
                 {
                     <tr>
                         <td>
-                            <input type="checkbox" name="idArray" value="@item.IdFactuur" />
+                            <input type="checkbox" name="idArray" value="@item.Id" />
                         </td>
                         <td>
-                            <a class="bottom-align-text" href="@Url.Action("Edit", "Factuur", new { id = item.IdFactuur })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Factuur", new { id = item.Id })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Boekjaar)

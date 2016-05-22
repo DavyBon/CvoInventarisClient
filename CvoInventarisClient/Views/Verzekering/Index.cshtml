@@ -39,10 +39,10 @@
                 {
                     <tr>
                         <td>
-                            <input type="checkbox" name="idArray" value="@item.IdVerzekering" />
+                            <input type="checkbox" name="idArray" value="@item.Id" />
                         </td>
                         <td>
-                            <a class="bottom-align-text" href="@Url.Action("Edit", "Verzekering", new { id = item.IdVerzekering })"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Verzekering", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Omschrijving)

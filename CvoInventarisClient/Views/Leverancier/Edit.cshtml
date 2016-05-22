@@ -9,7 +9,7 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
-            @Html.Hidden("idLeverancier", Model.IdLeverancier)
+            @Html.Hidden("idLeverancier", Model.Id)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Naam)
                 <input class="form-control" maxlength="255" type="text" name="naam" value="@Model.Naam" required/>
