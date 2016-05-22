@@ -9,13 +9,13 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
-            @Html.Hidden("idObjectType", Model.IdObjectType)
+            @Html.Hidden("idObjectType", Model.Id)
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Omschrijving)
                 <input class="form-control" maxlength="50" type="text" name="omschrijving" value="@Model.Omschrijving" required />
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Pas object aan</button>
+    <button type="submit" class="btn btn-primary">Pas objecttype aan</button>
     @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
 }

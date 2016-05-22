@@ -195,8 +195,8 @@ namespace CvoInventarisClient.DAL
                     cmd.Parameters.AddWithValue("afschrijfperiode", factuur.Afschrijfperiode);
                     cmd.Parameters.AddWithValue("datumInsert", factuur.DatumInsert);
                     cmd.Parameters.AddWithValue("userInsert", factuur.UserInsert);
-                    cmd.Parameters.AddWithValue("datumModified", factuur.DatumModified);
-                    cmd.Parameters.AddWithValue("userModified", factuur.UserModified);
+                    cmd.Parameters.AddWithValue("datumModified", App_Code.DALutil.checkStringForDBNull(factuur.DatumModified));
+                    cmd.Parameters.AddWithValue("userModified", App_Code.DALutil.checkStringForDBNull(factuur.UserModified));
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }

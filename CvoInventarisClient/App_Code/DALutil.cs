@@ -18,5 +18,17 @@ namespace CvoInventarisClient.App_Code
                 return i;
             }
         }
+
+        public static object checkStringForDBNull(string s)
+        {
+            if (s == null)
+            {
+                return DBNull.Value;
+            }
+            else
+            {
+                return s;
+            }
+        }
     }
 }

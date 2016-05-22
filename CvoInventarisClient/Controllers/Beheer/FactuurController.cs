@@ -12,6 +12,7 @@ namespace CvoInventarisClient.Controllers
     [Authorize]
     public class FactuurController : Controller
     {
+
         // INDEX:
         public ActionResult Index()
         {
@@ -42,6 +43,12 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Create(int? Leveranciers)
         {
+
+            string idAccount = HttpContext.User.Identity.Name;
+            TblAccount TblAccount = new TblAccount();
+            AccountModel account = TblAccount.GetById(Convert.ToInt32(idAccount));
+            string email = account.Email;
+
             TblFactuur TblFactuur = new TblFactuur();
 
             FactuurModel factuur = new FactuurModel();
@@ -57,12 +64,8 @@ namespace CvoInventarisClient.Controllers
             factuur.Omschrijving = Request.Form["omschrijving"];
             factuur.Opmerking = Request.Form["opmerking"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-            factuur.DatumInsert = Request.Form["datumInsert"];
-            factuur.UserInsert = Request.Form["userInsert"];
-            if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Request.Form["datumInsert"]; }
-            else { factuur.DatumModified = Request.Form["datumModified"]; }
-            if (String.IsNullOrWhiteSpace(Request.Form["userModified"])) { factuur.UserModified = Request.Form["userInsert"]; }
-            else { factuur.UserModified = Request.Form["userModified"]; }
+            factuur.DatumInsert = DateTime.Now.ToString("dd/MM/yyyy");
+            factuur.UserInsert = email;
 
             TblFactuur.Create(factuur);
 
@@ -96,6 +99,12 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
+
+            string idAccount = HttpContext.User.Identity.Name;
+            TblAccount TblAccount = new TblAccount();
+            AccountModel account = TblAccount.GetById(Convert.ToInt32(idAccount));
+            string email = account.Email;
+
             TblFactuur TblFactuur = new TblFactuur();
 
             FactuurModel factuur = new FactuurModel();
@@ -112,10 +121,8 @@ namespace CvoInventarisClient.Controllers
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
             factuur.DatumInsert = Request.Form["datumInsert"].ToString();
             factuur.UserInsert = Request.Form["userInsert"];
-            if (String.IsNullOrWhiteSpace(Request.Form["datumModified"])) { factuur.DatumModified = Request.Form["datumInsert"]; }
-            else { factuur.DatumModified = Request.Form["datumModified"]; }
-            if (String.IsNullOrWhiteSpace(Request.Form["userModified"])) { factuur.UserModified = Request.Form["userInsert"]; }
-            else { factuur.UserModified = Request.Form["userModified"]; }
+            factuur.DatumModified = DateTime.Now.ToString("dd/MM/yyyy");
+            factuur.UserModified = email;
             if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["Leveranciers"]) }; }
             else { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
 
