@@ -67,14 +67,36 @@ namespace CvoInventarisClient.Controllers
         // EDIT:
         public ActionResult Edit(int id)
         {
+            //DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+            //return View(tblLeverancier.GetById(id));
+
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
-            return View(tblLeverancier.GetById(id));
+            DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
+            LeverancierViewModel model = new LeverancierViewModel();
+
+            model.Leveranciers = new List<LeverancierModel>();
+            model.Postcodes = new List<SelectListItem>();
+
+            LeverancierModel l = tblLeverancier.GetById(id);
+            model.Leveranciers.Add(l);
+
+            foreach (PostcodeModel p in tblPostcode.GetAll())
+            {
+                if (!(p.Id == l.Postcode.Id))
+                {
+                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                }
+                model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+            }
+
+            return View(model);
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, FormCollection collection, int? Postcodes)
         {
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+
             LeverancierModel leverancier = new LeverancierModel();
             leverancier.Id = Convert.ToInt16(Request.Form["idLeverancier"]);
             leverancier.Naam = Request.Form["naam"];
@@ -82,8 +104,12 @@ namespace CvoInventarisClient.Controllers
             leverancier.Straat = Request.Form["straat"];
             leverancier.HuisNummer = Request.Form["huisNummer"];
             leverancier.BusNummer = Request.Form["busNummer"];
-            if (!String.IsNullOrWhiteSpace(Request.Form["postcodes"])) { leverancier.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["Postcodes"]) }; }
-            else { leverancier.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["defaultIdPostcode"]) }; }
+
+            //if (!String.IsNullOrWhiteSpace(Request.Form["postcodes"])) { leverancier.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["Postcodes"]) }; }
+            //else { leverancier.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["defaultIdPostcode"]) }; }
+
+            leverancier.Postcode = new PostcodeModel() { Id = Postcodes };
+
             leverancier.Telefoon = Request.Form["telefoon"];
             leverancier.Fax = Request.Form["fax"];
             leverancier.Email = Request.Form["email"];
