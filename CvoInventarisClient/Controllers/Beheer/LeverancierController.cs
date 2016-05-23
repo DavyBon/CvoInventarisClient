@@ -24,7 +24,7 @@ namespace CvoInventarisClient.Controllers
 
         // CREATE:
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int? Postcodes)
         {
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
             LeverancierModel leverancier = new LeverancierModel();
@@ -33,7 +33,7 @@ namespace CvoInventarisClient.Controllers
             leverancier.Straat = Request.Form["straat"];
             leverancier.HuisNummer = Request.Form["huisNummer"];
             leverancier.BusNummer = Request.Form["busNummer"];
-            leverancier.Postcode = Convert.ToInt32(Request.Form["postcode"]);
+            leverancier.Postcode = new PostcodeModel() { Id = (int)Postcodes };
             leverancier.Telefoon = Request.Form["telefoon"];
             leverancier.Fax = Request.Form["fax"];
             leverancier.Email = Request.Form["email"];
@@ -68,7 +68,8 @@ namespace CvoInventarisClient.Controllers
             leverancier.Straat = Request.Form["straat"];
             leverancier.HuisNummer = Request.Form["huisNummer"];
             leverancier.BusNummer = Request.Form["busNummer"];
-            leverancier.Postcode = Convert.ToInt32(Request.Form["postcode"]);
+            if (!String.IsNullOrWhiteSpace(Request.Form["postcodes"])) { leverancier.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["Postcodes"]) }; }
+            else { leverancier.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["defaultIdPostcode"]) }; }
             leverancier.Telefoon = Request.Form["telefoon"];
             leverancier.Fax = Request.Form["fax"];
             leverancier.Email = Request.Form["email"];
@@ -109,7 +110,7 @@ namespace CvoInventarisClient.Controllers
 
         [HttpPost]
         public ActionResult Filter(string naamFilter, string afkortingFilter, string straatFilter, string huisnummerFilter, string busnummerFilter,
-            string filterPostcodeSecondary, int filterPostcode, string telefoonFilter, string faxFilter, string websiteFilter, string btwnummerFilter,
+            int postcodeFilter, string telefoonFilter, string faxFilter, string websiteFilter, string btwnummerFilter,
             string ibanFilter, string bicFilter, string toegevoegdOpFilter, int[] modelList)
         {
             ViewBag.action = TempData["action"];
@@ -137,20 +138,9 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Leveranciers.RemoveAll(x => !x.BusNummer.ToLower().Contains(busnummerFilter.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(filterPostcode.ToString()))
+            if (postcodeFilter >= 0)
             {
-                if (filterPostcodeSecondary.Equals("="))
-                {
-                    model.Leveranciers.RemoveAll(x => !(x.Postcode != Convert.ToInt32(filterPostcode)));
-                }
-                else if (filterPostcodeSecondary.Equals("<"))
-                {
-                    model.Leveranciers.RemoveAll(x => !(x.Postcode > Convert.ToInt32(filterPostcode)));
-                }
-                else if (filterPostcodeSecondary.Equals(">"))
-                {
-                    model.Leveranciers.RemoveAll(x => !(x.Postcode < Convert.ToInt32(filterPostcode)));
-                }
+                model.Leveranciers.RemoveAll(x => x.Postcode.Id != postcodeFilter);
             }
             if (!String.IsNullOrWhiteSpace(telefoonFilter))
             {

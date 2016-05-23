@@ -240,49 +240,64 @@
 
                 <div class="modal-body">
                     <div cclass="form-group">
-                        <label>Naam:</label>
-                        <input type="text" name="naamFilter" />
-
-                        <label>Afkorting:</label>
-                        <input type="text" name="afkortingFilter" />
-
-                        <label>Straat:</label>
-                        <input type="text" name="straatFilter" />
-
-                        <label>Huisnummer:</label>
-                        <input type="text" name="huisnummerFilter" />
-
-                        <label>Busnummer:</label>
-                        <input type="text" name="busnummerFilter" />
-
-                        <label>Postcode:</label>
-                        <select name="filterPostcodeSecondary">
-                            <option value="=">van</option>
-                            <option value="<">voor</option>
-                            <option value=">">na</option>
-                        </select>
-                        <input type="number" name="filterPostcode" />
-
-                        <label>Telefoon:</label>
-                        <input type="text" name="telefoonFilter" />
-
-                        <label>Fax:</label>
-                        <input type="text" name="faxFilter" />
-
-                        <label>Website:</label>
-                        <input type="url" name="websiteFilter" />
-
-                        <label>Btwnummer:</label>
-                        <input type="text" name="btwnummerFilter" />
-
-                        <label>Iban:</label>
-                        <input type="text" name="ibanFilter" />
-
-                        <label>Bic:</label>
-                        <input type="text" name="bicFilter" />
-
-                        <label>Toegevoegd op:</label>
-                        <input type="date" name="toegevoegdOpFilter" />
+                        <div class="form-group">
+                            <label>Naam:</label>
+                            <input type="text" name="naamFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Afkorting:</label>
+                            <input type="text" name="afkortingFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Straat:</label>
+                            <input type="text" name="straatFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Huisnummer:</label>
+                            <input type="text" name="huisnummerFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Busnummer:</label>
+                            <input type="text" name="busnummerFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Postcode:</label>
+                            <select class="form-control" name="postcodeFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Postcodes)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefoon:</label>
+                            <input type="text" name="telefoonFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Fax:</label>
+                            <input type="text" name="faxFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Website:</label>
+                            <input type="url" name="websiteFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Btwnummer:</label>
+                            <input type="text" name="btwnummerFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Iban:</label>
+                            <input type="text" name="ibanFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Bic:</label>
+                            <input type="text" name="bicFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Toegevoegd op:</label>
+                            <input type="date" name="toegevoegdOpFilter" />
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
