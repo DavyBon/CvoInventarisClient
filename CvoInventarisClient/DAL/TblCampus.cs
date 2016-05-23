@@ -47,8 +47,12 @@ namespace CvoInventarisClient.DAL
                         campus = new CampusModel();
                         postcode = new PostcodeModel();
 
-                        postcode.Id = (int)dr["idPostcode"];                     
-
+                        if(dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
 
                         campus.Id = (int)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
@@ -94,9 +98,12 @@ namespace CvoInventarisClient.DAL
                         campus = new CampusModel();
                         postcode = new PostcodeModel();
 
-                        postcode.Id = (int)dr["idPostcode"];
-                        postcode.Postcode = dr["postcode"].ToString();
-                        postcode.Gemeente = dr["gemeente"].ToString();
+                        if (dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
 
                         campus.Id = (int)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
@@ -130,7 +137,7 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("naam", campus.Naam);
-                    cmd.Parameters.AddWithValue("idPostcode", campus.Postcode.Id);
+                    cmd.Parameters.AddWithValue("idPostcode", App_Code.DALutil.checkIntForDBNUll(campus.Postcode.Id));
                     cmd.Parameters.AddWithValue("straat", campus.Straat);
                     cmd.Parameters.AddWithValue("nummer", campus.Nummer);
                     return Convert.ToInt32(cmd.ExecuteScalar());
@@ -161,7 +168,7 @@ namespace CvoInventarisClient.DAL
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("idCampus", campus.Id);
                     cmd.Parameters.AddWithValue("naam", campus.Naam);
-                    cmd.Parameters.AddWithValue("idPostcode", campus.Postcode.Id);
+                    cmd.Parameters.AddWithValue("idPostcode", App_Code.DALutil.checkIntForDBNUll(campus.Postcode.Id));
                     cmd.Parameters.AddWithValue("straat", campus.Straat);
                     cmd.Parameters.AddWithValue("nummer", campus.Nummer);
                     cmd.ExecuteReader();

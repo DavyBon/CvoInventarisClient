@@ -16,8 +16,17 @@
                 <input class="form-control" maxlength="50" type="text" name="naam" value="@Model.Campussen[0].Naam" required/>
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Campussen[0].Postcode)
-                <input class="form-control" type="text" name="postcode" value="@Model.Campussen[0].Postcode" required/>
+                Postcode
+                <select class="form-control" name="Postcodes">
+                    <option value="@Model.Campussen[0].Postcode.Id">@Model.Campussen[0].Postcode.Postcode"</option>
+                    @foreach (var item in Model.Postcodes)
+                    {
+                        if (item.Value != Model.Campussen[0].Postcode.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Campussen[0].Straat)

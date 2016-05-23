@@ -58,7 +58,7 @@ namespace CvoInventarisClient.Controllers
             factuur.FactuurNummer = Request.Form["factuurNummer"];
             factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
             factuur.FactuurDatum = Request.Form["factuurDatum"];
-            factuur.Leverancier = new LeverancierModel() { Id = Leveranciers };
+            factuur.Leverancier = new LeverancierModel() { Id = (int)Leveranciers };
             factuur.Prijs = Request.Form["prijs"];
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];

@@ -16,6 +16,9 @@ namespace CvoInventarisClient.Controllers
         {
             ViewBag.action = TempData["action"];
             CampusViewModel model = new CampusViewModel();
+            model.Campussen = new List<CampusModel>();
+            model.Postcodes = new List<SelectListItem>();
+
             TblCampus TblCampus = new TblCampus();
             TblPostcode TblPostcode = new TblPostcode();
 
@@ -35,14 +38,14 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int? Postcodes)
         {
             TblCampus TblCampus = new TblCampus();
 
             CampusModel campus = new CampusModel();
 
             campus.Naam = Request.Form["naam"];
-            campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["postcode"]) };
+            campus.Postcode = new PostcodeModel() { Id = (int)Postcodes };
             campus.Straat = Request.Form["straat"];
             campus.Nummer = Request.Form["nummer"];
 
@@ -86,7 +89,7 @@ namespace CvoInventarisClient.Controllers
             CampusModel campus = new CampusModel();
             campus.Id = Convert.ToInt16(Request.Form["idCampus"]);
             campus.Naam = Request.Form["naam"];
-            if (!String.IsNullOrWhiteSpace(Request.Form["postcode"])) { campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["postcode"]) }; }
+            if (!String.IsNullOrWhiteSpace(Request.Form["postcodes"])) { campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["Postcodes"]) }; }
             else { campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["defaultIdPostcode"]) }; }
             campus.Straat = Request.Form["straat"];
             campus.Nummer = Request.Form["nummer"];

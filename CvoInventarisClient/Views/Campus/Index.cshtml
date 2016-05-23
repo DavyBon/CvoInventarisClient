@@ -62,7 +62,7 @@
                             @Html.DisplayFor(modelItem => item.Naam)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Postcode)
+                            @Html.DisplayFor(modelItem => item.Postcode.Postcode)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Straat)
@@ -108,8 +108,8 @@
                             <input class="form-control" maxlength="50" type="text" name="naam" required/>
                         </div>
                         <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Campussen[0].Postcode)
-                            <input class="form-control" type="text" name="postcode" required/>
+                            Postcode
+                            @Html.DropDownListFor(model => model.Postcodes, Model.Postcodes, "", new { @class = "form-control", required = "required" })
                         </div>
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.Campussen[0].Straat)
