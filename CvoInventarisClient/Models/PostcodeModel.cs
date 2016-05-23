@@ -13,7 +13,7 @@ namespace CvoInventarisClient.Models
 
         public override string ToString()
         {
-            return this.Postcode +", " +this.Gemeente;
+            return this.Postcode.Replace(" ", string.Empty) + ", " +this.Gemeente.Replace(" ", string.Empty);
         }
     }
 }
