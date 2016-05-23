@@ -50,6 +50,8 @@ namespace CvoInventarisClient.DAL
         public List<LokaalModel> GetAll()
         {
             List<LokaalModel> list = new List<LokaalModel>();
+            CampusModel campus;
+            PostcodeModel postcode;
 
             try
             {
@@ -64,10 +66,30 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             LokaalModel l = new LokaalModel();
+                            campus = new CampusModel();
+                            postcode = new PostcodeModel();
+
+                            if (dr["idPostcode"] != DBNull.Value)
+                            {
+                                postcode.Id = (int?)dr["idPostcode"];
+                                postcode.Gemeente = dr["gemeente"].ToString();
+                                postcode.Postcode = dr["postcode"].ToString();
+                            }
+
+                            if (dr["idCampus"] != DBNull.Value)
+                            {
+                                campus.Id = (int?)dr["idCampus"];
+                                campus.Naam = dr["naam"].ToString();
+                                campus.Postcode = postcode;
+                                campus.Straat = dr["straat"].ToString();
+                                campus.Nummer = dr["nummer"].ToString();
+                            }
+
                             l.Id = (int?)dr["idLokaal"];
                             l.LokaalNaam = dr["lokaalNaam"].ToString();
                             l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
                             l.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            l.Campus = campus;
                             list.Add(l);
                         }
                         return list;
@@ -89,6 +111,8 @@ namespace CvoInventarisClient.DAL
         public LokaalModel GetById(int id)
         {
             LokaalModel l = null;
+            CampusModel campus;
+            PostcodeModel postcode;
 
             try
             {
@@ -104,10 +128,30 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             l = new LokaalModel();
+                            campus = new CampusModel();
+                            postcode = new PostcodeModel();
+
+                            if (dr["idPostcode"] != DBNull.Value)
+                            {
+                                postcode.Id = (int?)dr["idPostcode"];
+                                postcode.Gemeente = dr["gemeente"].ToString();
+                                postcode.Postcode = dr["postcode"].ToString();
+                            }
+
+                            if (dr["idCampus"] != DBNull.Value)
+                            {
+                                campus.Id = (int?)dr["idCampus"];
+                                campus.Naam = dr["naam"].ToString();
+                                campus.Postcode = postcode;
+                                campus.Straat = dr["straat"].ToString();
+                                campus.Nummer = dr["nummer"].ToString();
+                            }
+
                             l.Id = (int?)dr["idLokaal"];
                             l.LokaalNaam = dr["lokaalNaam"].ToString();
                             l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
                             l.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            l.Campus = campus;
                         }
                         return l;
                     }
@@ -136,6 +180,7 @@ namespace CvoInventarisClient.DAL
                         cmd.Parameters.AddWithValue("lokaalNaam", l.LokaalNaam);
                         cmd.Parameters.AddWithValue("aantalPlaatsen", l.AantalPlaatsen);
                         cmd.Parameters.AddWithValue("isComputerLokaal", l.IsComputerLokaal);
+                        cmd.Parameters.AddWithValue("idCampus", l.Campus.Id);
                         return Convert.ToInt32(cmd.ExecuteScalar());
                     }
                 }
@@ -165,6 +210,7 @@ namespace CvoInventarisClient.DAL
                         cmd.Parameters.AddWithValue("lokaalNaam", l.LokaalNaam);
                         cmd.Parameters.AddWithValue("aantalPlaatsen", l.AantalPlaatsen);
                         cmd.Parameters.AddWithValue("isComputerLokaal", l.IsComputerLokaal);
+                        cmd.Parameters.AddWithValue("idCampus", l.Campus.Id);
                         cmd.ExecuteReader();
                     }
                     return true;

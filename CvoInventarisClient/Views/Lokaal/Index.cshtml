@@ -44,7 +44,7 @@
                         @Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Lokalen[0].Campus.Naam)
+                        Campus
                     </th>
                 </tr>
             </thead>
@@ -152,7 +152,7 @@
                                 <option value="">-Selecteer-</option>
                                 <option value="true">computerlokaal</option>
                                 <option value="false">geen computerlokaal</option>
-                                </select>
+                            </select>
                         </div>
 
                         <div class="-form-group">
@@ -167,7 +167,7 @@
                                 <option value="<">kleiner dan</option>
                                 <option value=">">groter dan</option>
                             </select>
-                            <input class="form-control" type="number" name="filterAantalPlaatsen" placeholder="Aantal plaatsen(bv: 10)"/>
+                            <input class="form-control" type="number" name="filterAantalPlaatsen" placeholder="Aantal plaatsen(bv: 10)" />
                         </div>
 
                         <div class="form-group">
