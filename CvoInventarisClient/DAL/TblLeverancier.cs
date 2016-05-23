@@ -70,7 +70,7 @@ namespace CvoInventarisClient.DAL
                             l.Straat = dr["straat"].ToString();
                             l.HuisNummer = dr["huisNummer"].ToString();
                             l.BusNummer = dr["busNummer"].ToString();
-                            l.Postcode = (int)dr["postcode"];
+                            l.Postcode = (int?)dr["idPostcode"];
                             l.Telefoon = dr["telefoon"].ToString();
                             l.Fax = dr["fax"].ToString();
                             l.Email = dr["email"].ToString();
@@ -120,7 +120,7 @@ namespace CvoInventarisClient.DAL
                             l.Straat = dr["straat"].ToString();
                             l.HuisNummer = dr["huisNummer"].ToString();
                             l.BusNummer = dr["busNummer"].ToString();
-                            l.Postcode = (int)dr["postcode"];
+                            l.Postcode = (int?)dr["idPostcode"];
                             l.Telefoon = dr["telefoon"].ToString();
                             l.Fax = dr["fax"].ToString();
                             l.Email = dr["email"].ToString();

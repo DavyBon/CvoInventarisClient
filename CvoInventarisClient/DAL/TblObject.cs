@@ -94,7 +94,7 @@ namespace CvoInventarisClient.DAL
                         leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
                         leverancier.Iban = mySqlDataReader["iban"].ToString();
                         leverancier.Naam = mySqlDataReader["naam"].ToString();
-                        leverancier.Postcode = (int)mySqlDataReader["postcode"];
+                        leverancier.Postcode = (int?)mySqlDataReader["idPostcode"];
                         leverancier.Straat = mySqlDataReader["straat"].ToString();
                         leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
                         leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
@@ -170,7 +170,7 @@ namespace CvoInventarisClient.DAL
                         leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
                         leverancier.Iban = mySqlDataReader["iban"].ToString();
                         leverancier.Naam = mySqlDataReader["naam"].ToString();
-                        leverancier.Postcode = (int)mySqlDataReader["postcode"];
+                        leverancier.Postcode = (int?)mySqlDataReader["idPostcode"];
                         leverancier.Straat = mySqlDataReader["straat"].ToString();
                         leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
                         leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();

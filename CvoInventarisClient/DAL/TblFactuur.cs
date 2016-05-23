@@ -59,7 +59,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.HuisNummer = dr["huisNummer"].ToString();
                             leverancier.Iban = dr["iban"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
-                            leverancier.Postcode = (int)dr["postcode"];
+                            leverancier.Postcode = (int?)dr["idPostcode"];
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
                             leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
@@ -133,7 +133,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.HuisNummer = dr["huisNummer"].ToString();
                             leverancier.Iban = dr["iban"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
-                            leverancier.Postcode = (int)dr["postcode"];
+                            leverancier.Postcode = (int?)dr["idPostcode"];
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
                             leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();

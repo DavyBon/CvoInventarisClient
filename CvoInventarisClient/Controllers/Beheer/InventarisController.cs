@@ -182,37 +182,35 @@ namespace CvoInventarisClient.Controllers
             ViewBag.action = TempData["action"];
 
             InventarisViewModel model = (InventarisViewModel)(Session["inventarisview"] as InventarisViewModel).Clone();
-
-            bool isAanwezig;
-            bool isActief;
-
-            if (aanwezigFilter != null)
-            {
-                isAanwezig = true;
-            }
-            else
-            {
-                isAanwezig = false;
-            }
-
-
-            if (actiefFilter != null)
-            {
-                isActief = true;
-            }
-            else
-            {
-                isActief = false;
-            }
-
+          
             // Hier start filteren
             if (objectFilter >= 0)
             {
                 model.Inventaris.RemoveAll(x => x.Object.Id != objectFilter);
             }
 
-            model.Inventaris.RemoveAll(x => x.IsAanwezig != isAanwezig);
-            model.Inventaris.RemoveAll(x => x.IsAanwezig != isActief);
+            if (!String.IsNullOrWhiteSpace(aanwezigFilter))
+            {
+                if (aanwezigFilter.Equals("true"))
+                {
+                    model.Inventaris.RemoveAll(x => x.IsAanwezig != true);
+                }
+                else
+                {
+                    model.Inventaris.RemoveAll(x => x.IsAanwezig != false);
+                }
+            }
+            if (!String.IsNullOrWhiteSpace(actiefFilter))
+            {
+                if (actiefFilter.Equals("true"))
+                {
+                    model.Inventaris.RemoveAll(x => x.IsActief != true);
+                }
+                else
+                {
+                    model.Inventaris.RemoveAll(x => x.IsActief != false);
+                }
+            }
 
             if (lokaalFilter >= 0)
             {
