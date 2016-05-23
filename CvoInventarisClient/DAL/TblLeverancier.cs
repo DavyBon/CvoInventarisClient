@@ -50,6 +50,7 @@ namespace CvoInventarisClient.DAL
         public List<LeverancierModel> GetAll()
         {
             List<LeverancierModel> list = new List<LeverancierModel>();
+            PostcodeModel postcode;
 
             try
             {
@@ -64,13 +65,22 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             LeverancierModel l = new LeverancierModel();
+                            postcode = new PostcodeModel();
+
+                            if (dr["idPostcode"] != DBNull.Value)
+                            {
+                                postcode.Id = (int)dr["idPostcode"];
+                                postcode.Gemeente = dr["gemeente"].ToString();
+                                postcode.Postcode = dr["postcode"].ToString();
+                            }
+
                             l.Id = (int)dr["idLeverancier"];
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
                             l.HuisNummer = dr["huisNummer"].ToString();
                             l.BusNummer = dr["busNummer"].ToString();
-                            l.Postcode = (int?)dr["idPostcode"];
+                            l.Postcode = postcode;
                             l.Telefoon = dr["telefoon"].ToString();
                             l.Fax = dr["fax"].ToString();
                             l.Email = dr["email"].ToString();
@@ -99,6 +109,7 @@ namespace CvoInventarisClient.DAL
         public LeverancierModel GetById(int id)
         {
             LeverancierModel l = null;
+            PostcodeModel postcode;
 
             try
             {
@@ -114,13 +125,22 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             l = new LeverancierModel();
+                            postcode = new PostcodeModel();
+
+                            if (dr["idPostcode"] != DBNull.Value)
+                            {
+                                postcode.Id = (int)dr["idPostcode"];
+                                postcode.Gemeente = dr["gemeente"].ToString();
+                                postcode.Postcode = dr["postcode"].ToString();
+                            }
+
                             l.Id = (int)dr["idLeverancier"];
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
                             l.HuisNummer = dr["huisNummer"].ToString();
                             l.BusNummer = dr["busNummer"].ToString();
-                            l.Postcode = (int?)dr["idPostcode"];
+                            l.Postcode = postcode;
                             l.Telefoon = dr["telefoon"].ToString();
                             l.Fax = dr["fax"].ToString();
                             l.Email = dr["email"].ToString();
@@ -248,49 +268,6 @@ namespace CvoInventarisClient.DAL
             }
         }
 
-        public List<LeverancierModel> Rapportering(string s, string[] keuzeKolommen)
-        {
-            List<LeverancierModel> list = new List<LeverancierModel>();
-
-            try
-            {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
-                {
-                    using (SqlCommand cmd = new SqlCommand(s, con))
-                    {
-                        con.Open();
-                        cmd.CommandType = System.Data.CommandType.Text;
-                        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                        while (dr.Read())
-                        {
-                            LeverancierModel l = new LeverancierModel();
-                            if (keuzeKolommen.Contains("idLeverancier")) { l.Id = (int)dr["idLeverancier"]; }
-                            if (keuzeKolommen.Contains("naam")) { l.Naam = dr["naam"].ToString(); }
-                            if (keuzeKolommen.Contains("afkorting")) { l.Afkorting = dr["afkorting"].ToString(); }
-                            if (keuzeKolommen.Contains("straat")) { l.Straat = dr["straat"].ToString(); }
-                            if (keuzeKolommen.Contains("huisNummer")) { l.HuisNummer = dr["huisNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("busNummer")) { l.BusNummer = dr["busNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("postcode")) { l.Postcode = (int)dr["postcode"]; }
-                            if (keuzeKolommen.Contains("telefoon")) { l.Telefoon = dr["telefoon"].ToString(); }
-                            if (keuzeKolommen.Contains("fax")) { l.Fax = dr["fax"].ToString(); }
-                            if (keuzeKolommen.Contains("email")) { l.Email = dr["email"].ToString(); }
-                            if (keuzeKolommen.Contains("website")) { l.Website = dr["website"].ToString(); }
-                            if (keuzeKolommen.Contains("btwNummer")) { l.BtwNummer = dr["btwNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("iban")) { l.Iban = dr["iban"].ToString(); }
-                            if (keuzeKolommen.Contains("bic")) { l.Bic = dr["bic"].ToString(); }
-                            if (keuzeKolommen.Contains("toegevoegdOp")) { l.ToegevoegdOp = dr["toegevoegdOp"].ToString(); }
-                            list.Add(l);
-                        }
-                        return list;
-                    }
-                }
-            }
-            catch
-            {
-                return null;
-            }
-        }
         #endregion
     }
 }

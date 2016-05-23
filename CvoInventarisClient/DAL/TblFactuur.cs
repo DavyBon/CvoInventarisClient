@@ -33,6 +33,7 @@ namespace CvoInventarisClient.DAL
             List<FactuurModel> list = new List<FactuurModel>();
             FactuurModel factuur;
             LeverancierModel leverancier;
+            PostcodeModel postcode;
 
             try
             {
@@ -46,6 +47,14 @@ namespace CvoInventarisClient.DAL
                     {
                         factuur = new FactuurModel();
                         leverancier = new LeverancierModel();
+                        postcode = new PostcodeModel();
+
+                        if (dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
 
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
@@ -59,7 +68,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.HuisNummer = dr["huisNummer"].ToString();
                             leverancier.Iban = dr["iban"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
-                            leverancier.Postcode = (int?)dr["idPostcode"];
+                            leverancier.Postcode = postcode;
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
                             leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
@@ -106,6 +115,7 @@ namespace CvoInventarisClient.DAL
         {
             FactuurModel factuur = new FactuurModel();
             LeverancierModel leverancier;
+            PostcodeModel postcode;
 
             try
             {
@@ -120,6 +130,14 @@ namespace CvoInventarisClient.DAL
                     {
                         factuur = new FactuurModel();
                         leverancier = new LeverancierModel();
+                        postcode = new PostcodeModel();
+
+                        if (dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
 
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
@@ -133,7 +151,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.HuisNummer = dr["huisNummer"].ToString();
                             leverancier.Iban = dr["iban"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
-                            leverancier.Postcode = (int?)dr["idPostcode"];
+                            leverancier.Postcode = postcode;
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
                             leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
@@ -282,58 +300,6 @@ namespace CvoInventarisClient.DAL
         }
 
         #endregion
-        public List<FactuurModel> Rapportering(string s, string[] keuzeKolommen)
-        {
-            List<FactuurModel> list = new List<FactuurModel>();
-            FactuurModel factuur = new FactuurModel();
-            LeverancierModel leverancier;
 
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand(s, connection))
-                {
-                    connection.Open();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    if (dr.HasRows)
-                    {
-                        while (dr.Read())
-                        {
-                            factuur = new FactuurModel();
-                            leverancier = new LeverancierModel();
-
-                            if (keuzeKolommen.Contains("boekjaar")) { factuur.Boekjaar = dr["boekjaar"].ToString(); }
-                            if (keuzeKolommen.Contains("cvoVolgNummer")) { factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("factuurNummer")) { factuur.FactuurNummer = dr["factuurNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("scholengroepNummer")) { factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("factuurDatum")) { factuur.FactuurDatum = dr["factuurDatum"].ToString(); }
-                            if (keuzeKolommen.Contains("leverancier")) { factuur.Leverancier.Naam = dr["naam"].ToString(); }
-                            if (keuzeKolommen.Contains("prijs")) { factuur.Prijs = dr["prijs"].ToString(); }
-                            if (keuzeKolommen.Contains("garantie")) { factuur.Garantie = (int)dr["garantie"]; }
-                            if (keuzeKolommen.Contains("omschrijving")) { factuur.Omschrijving = dr["omschrijving"].ToString(); }
-                            if (keuzeKolommen.Contains("opmerking")) { factuur.Opmerking = dr["opmerking"].ToString(); }
-                            if (keuzeKolommen.Contains("afschrijfperiode")) { factuur.Afschrijfperiode = (int)dr["afschrijfperiode"]; }
-                            if (keuzeKolommen.Contains("datumInsert")) { factuur.DatumInsert = dr["datumInsert"].ToString(); }
-                            if (keuzeKolommen.Contains("userInsert")) { factuur.UserInsert = dr["userInsert"].ToString(); }
-                            if (keuzeKolommen.Contains("datumModified")) { factuur.DatumModified = dr["datumModified"].ToString(); }
-                            if (keuzeKolommen.Contains("userModified")) { factuur.UserModified = dr["userModified"].ToString(); }
-                            factuur.Leverancier = leverancier;
-                            list.Add(factuur);
-                        }
-                        return list;
-                    }
-                }
-            }
-            catch
-            {
-                return null;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return list;
-        }
     }
 }

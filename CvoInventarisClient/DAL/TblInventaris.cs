@@ -82,6 +82,7 @@ namespace CvoInventarisClient.DAL
             FactuurModel factuur;
             ObjectTypeModel objType;
             VerzekeringModel verzekering;
+            PostcodeModel postcode;
 
             try
             {
@@ -100,6 +101,15 @@ namespace CvoInventarisClient.DAL
                         factuur = new FactuurModel();
                         objType = new ObjectTypeModel();
                         verzekering = new VerzekeringModel();
+                        postcode = new PostcodeModel();
+
+
+                        if (mySqlDataReader["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int)mySqlDataReader["idPostcode"];
+                            postcode.Gemeente = mySqlDataReader["gemeente"].ToString();
+                            postcode.Postcode = mySqlDataReader["postcode"].ToString();
+                        }
 
                         if (mySqlDataReader["idLokaal"] != DBNull.Value)
                         {
@@ -121,7 +131,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
                             leverancier.Iban = mySqlDataReader["iban"].ToString();
                             leverancier.Naam = mySqlDataReader["naam"].ToString();
-                            leverancier.Postcode = (int?)mySqlDataReader["idPostcode"];
+                            leverancier.Postcode = postcode;
                             leverancier.Straat = mySqlDataReader["straat"].ToString();
                             leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
                             leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
@@ -206,6 +216,8 @@ namespace CvoInventarisClient.DAL
             FactuurModel factuur;
             ObjectTypeModel objType;
             VerzekeringModel verzekering;
+            PostcodeModel postcode;
+
             try
             {
                 using (SqlCommand command = new SqlCommand("TblInventarisReadOne", connection))
@@ -224,6 +236,15 @@ namespace CvoInventarisClient.DAL
                         factuur = new FactuurModel();
                         objType = new ObjectTypeModel();
                         verzekering = new VerzekeringModel();
+                        postcode = new PostcodeModel();
+
+
+                        if (mySqlDataReader["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int)mySqlDataReader["idPostcode"];
+                            postcode.Gemeente = mySqlDataReader["gemeente"].ToString();
+                            postcode.Postcode = mySqlDataReader["postcode"].ToString();
+                        }
 
 
                         if (mySqlDataReader["idLokaal"] != DBNull.Value)
@@ -246,7 +267,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
                             leverancier.Iban = mySqlDataReader["iban"].ToString();
                             leverancier.Naam = mySqlDataReader["naam"].ToString();
-                            leverancier.Postcode = (int?)mySqlDataReader["idPostcode"];
+                            leverancier.Postcode = postcode;
                             leverancier.Straat = mySqlDataReader["straat"].ToString();
                             leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
                             leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
