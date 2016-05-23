@@ -7,7 +7,7 @@ namespace CvoInventarisClient.Models
 {
     public class PostcodeModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
         public string Postcode { get; set; }
         public string Gemeente { get; set; }
     }

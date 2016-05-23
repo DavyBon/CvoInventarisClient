@@ -39,7 +39,7 @@ namespace CvoInventarisClient.DAL
                     while (dr.Read())
                     {
                         postcode = new PostcodeModel();
-                        postcode.Id = (int)dr["idPostcode"];
+                        postcode.Id = (int?)dr["idPostcode"];
                         postcode.Postcode = dr["postcode"].ToString();
                         postcode.Gemeente = dr["gemeente"].ToString();
                         list.Add(postcode);
@@ -72,7 +72,7 @@ namespace CvoInventarisClient.DAL
 
                     while (dr.Read())
                     {
-                        postcode.Id = (int)dr["idPostcode"];
+                        postcode.Id = (int?)dr["idPostcode"];
                         postcode.Postcode = dr["postcode"].ToString();
                         postcode.Gemeente = dr["gemeente"].ToString();
                     }

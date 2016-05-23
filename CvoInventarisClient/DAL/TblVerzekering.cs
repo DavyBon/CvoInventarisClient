@@ -77,7 +77,7 @@ namespace CvoInventarisClient.DAL
                         while (reader.Read())
                         {
                             VerzekeringModel verzekering = new VerzekeringModel();
-                            verzekering.Id = (int)reader["idVerzekering"];
+                            verzekering.Id = (int?)reader["idVerzekering"];
                             verzekering.Omschrijving = reader["omschrijving"].ToString();
                             verzekeringen.Add(verzekering);
                         }
@@ -104,7 +104,7 @@ namespace CvoInventarisClient.DAL
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        verzekering.Id = (int)reader["idVerzekering"];
+                        verzekering.Id = (int?)reader["idVerzekering"];
                         verzekering.Omschrijving = reader["omschrijving"].ToString();
                     }
                 }

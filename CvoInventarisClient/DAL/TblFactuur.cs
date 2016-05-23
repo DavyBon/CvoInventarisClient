@@ -51,14 +51,14 @@ namespace CvoInventarisClient.DAL
 
                         if (dr["idPostcode"] != DBNull.Value)
                         {
-                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Id = (int?)dr["idPostcode"];
                             postcode.Gemeente = dr["gemeente"].ToString();
                             postcode.Postcode = dr["postcode"].ToString();
                         }
 
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
-                            leverancier.Id = (int)dr["idLeverancier"];
+                            leverancier.Id = (int?)dr["idLeverancier"];
                             leverancier.Afkorting = dr["afkorting"].ToString();
                             leverancier.Bic = dr["bic"].ToString();
                             leverancier.BtwNummer = dr["btwNummer"].ToString();
@@ -75,7 +75,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.Website = dr["website"].ToString();
                         }
 
-                        factuur.Id = (int)dr["idFactuur"];
+                        factuur.Id = (int?)dr["idFactuur"];
                         factuur.Boekjaar = dr["boekjaar"].ToString();
                         factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString();
                         factuur.FactuurNummer = dr["factuurNummer"].ToString();
@@ -134,14 +134,14 @@ namespace CvoInventarisClient.DAL
 
                         if (dr["idPostcode"] != DBNull.Value)
                         {
-                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Id = (int?)dr["idPostcode"];
                             postcode.Gemeente = dr["gemeente"].ToString();
                             postcode.Postcode = dr["postcode"].ToString();
                         }
 
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
-                            leverancier.Id = (int)dr["idLeverancier"];
+                            leverancier.Id = (int?)dr["idLeverancier"];
                             leverancier.Afkorting = dr["afkorting"].ToString();
                             leverancier.Bic = dr["bic"].ToString();
                             leverancier.BtwNummer = dr["btwNummer"].ToString();
@@ -158,7 +158,7 @@ namespace CvoInventarisClient.DAL
                             leverancier.Website = dr["website"].ToString();
                         }
 
-                        factuur.Id = (int)dr["idFactuur"];
+                        factuur.Id = (int?)dr["idFactuur"];
                         factuur.Boekjaar = dr["boekjaar"].ToString();
                         factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString();
                         factuur.FactuurNummer = dr["factuurNummer"].ToString();

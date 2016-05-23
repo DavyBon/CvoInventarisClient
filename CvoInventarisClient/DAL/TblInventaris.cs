@@ -106,7 +106,7 @@ namespace CvoInventarisClient.DAL
 
                         if (mySqlDataReader["idPostcode"] != DBNull.Value)
                         {
-                            postcode.Id = (int)mySqlDataReader["idPostcode"];
+                            postcode.Id = (int?)mySqlDataReader["idPostcode"];
                             postcode.Gemeente = mySqlDataReader["gemeente"].ToString();
                             postcode.Postcode = mySqlDataReader["postcode"].ToString();
                         }
@@ -241,7 +241,7 @@ namespace CvoInventarisClient.DAL
 
                         if (mySqlDataReader["idPostcode"] != DBNull.Value)
                         {
-                            postcode.Id = (int)mySqlDataReader["idPostcode"];
+                            postcode.Id = (int?)mySqlDataReader["idPostcode"];
                             postcode.Gemeente = mySqlDataReader["gemeente"].ToString();
                             postcode.Postcode = mySqlDataReader["postcode"].ToString();
                         }

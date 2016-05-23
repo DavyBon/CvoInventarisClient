@@ -73,7 +73,7 @@ namespace CvoInventarisClient.DAL
                         while (reader.Read())
                         {
                             ObjectTypeModel objectType = new ObjectTypeModel();
-                            objectType.Id = (int)reader["idObjectType"];
+                            objectType.Id = (int?)reader["idObjectType"];
                             objectType.Omschrijving = reader["omschrijving"].ToString();
                             objectTypes.Add(objectType);
                         }
@@ -100,7 +100,7 @@ namespace CvoInventarisClient.DAL
                     if (reader.HasRows)
                     {
                         reader.Read();
-                        objectTypes.Id = (int)reader["idObjectType"];
+                        objectTypes.Id = (int?)reader["idObjectType"];
                         objectTypes.Omschrijving = reader["omschrijving"].ToString();
                     }
                 }

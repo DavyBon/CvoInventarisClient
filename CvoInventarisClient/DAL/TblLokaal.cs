@@ -64,7 +64,7 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             LokaalModel l = new LokaalModel();
-                            l.Id = (int)dr["idLokaal"];
+                            l.Id = (int?)dr["idLokaal"];
                             l.LokaalNaam = dr["lokaalNaam"].ToString();
                             l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
                             l.IsComputerLokaal = (bool)dr["isComputerLokaal"];
@@ -104,7 +104,7 @@ namespace CvoInventarisClient.DAL
                         while (dr.Read())
                         {
                             l = new LokaalModel();
-                            l.Id = (int)dr["idLokaal"];
+                            l.Id = (int?)dr["idLokaal"];
                             l.LokaalNaam = dr["lokaalNaam"].ToString();
                             l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
                             l.IsComputerLokaal = (bool)dr["isComputerLokaal"];

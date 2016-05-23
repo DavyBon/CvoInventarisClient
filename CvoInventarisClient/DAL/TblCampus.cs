@@ -49,12 +49,12 @@ namespace CvoInventarisClient.DAL
 
                         if(dr["idPostcode"] != DBNull.Value)
                         {
-                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Id = (int?)dr["idPostcode"];
                             postcode.Gemeente = dr["gemeente"].ToString();
                             postcode.Postcode = dr["postcode"].ToString();
                         }
 
-                        campus.Id = (int)dr["idCampus"];
+                        campus.Id = (int?)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
                         campus.Postcode = postcode;
                         campus.Straat = dr["straat"].ToString();
@@ -100,12 +100,12 @@ namespace CvoInventarisClient.DAL
 
                         if (dr["idPostcode"] != DBNull.Value)
                         {
-                            postcode.Id = (int)dr["idPostcode"];
+                            postcode.Id = (int?)dr["idPostcode"];
                             postcode.Gemeente = dr["gemeente"].ToString();
                             postcode.Postcode = dr["postcode"].ToString();
                         }
 
-                        campus.Id = (int)dr["idCampus"];
+                        campus.Id = (int?)dr["idCampus"];
                         campus.Naam = dr["naam"].ToString();
                         campus.Postcode = postcode;
                         campus.Straat = dr["straat"].ToString();

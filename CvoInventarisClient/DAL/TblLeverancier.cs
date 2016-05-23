@@ -69,12 +69,12 @@ namespace CvoInventarisClient.DAL
 
                             if (dr["idPostcode"] != DBNull.Value)
                             {
-                                postcode.Id = (int)dr["idPostcode"];
+                                postcode.Id = (int?)dr["idPostcode"];
                                 postcode.Gemeente = dr["gemeente"].ToString();
                                 postcode.Postcode = dr["postcode"].ToString();
                             }
 
-                            l.Id = (int)dr["idLeverancier"];
+                            l.Id = (int?)dr["idLeverancier"];
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
@@ -129,12 +129,12 @@ namespace CvoInventarisClient.DAL
 
                             if (dr["idPostcode"] != DBNull.Value)
                             {
-                                postcode.Id = (int)dr["idPostcode"];
+                                postcode.Id = (int?)dr["idPostcode"];
                                 postcode.Gemeente = dr["gemeente"].ToString();
                                 postcode.Postcode = dr["postcode"].ToString();
                             }
 
-                            l.Id = (int)dr["idLeverancier"];
+                            l.Id = (int?)dr["idLeverancier"];
                             l.Naam = dr["naam"].ToString();
                             l.Afkorting = dr["afkorting"].ToString();
                             l.Straat = dr["straat"].ToString();
