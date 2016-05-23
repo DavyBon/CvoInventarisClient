@@ -1,4 +1,4 @@
-﻿@model CvoInventarisClient.Models.LokaalModel
+﻿@model CvoInventarisClient.Models.LokaalViewModel
 
 @{
     ViewBag.Title = "Lokaal - Edit";
@@ -9,24 +9,37 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
-            @Html.Hidden("idLokaal", Model.Id)
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.LokaalNaam)
-                <input class="form-control" maxlength="50" type="text" name="lokaalNaam" value="@Model.LokaalNaam" required />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.AantalPlaatsen)
-                <input class="form-control" type="text" name="aantalPlaatsen" value="@Model.AantalPlaatsen" required />
-            </div>
+            @Html.Hidden("idLokaal", Model.Lokalen[0].Id)
             <div class="checkbox">
-                @if (Model.IsComputerLokaal)
+                @if (Model.Lokalen[0].IsComputerLokaal)
                 {
-                    <label><input type="checkbox" name="isComputerLokaal" checked="checked" />@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
+                    <label><input type="checkbox" name="isComputerLokaal" checked="checked" />@Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)</label>
                 }
                 else
                 {
-                    <label><input type="checkbox" name="isComputerLokaal"/>@Html.DisplayNameFor(model => model.IsComputerLokaal)</label>
+                    <label><input type="checkbox" name="isComputerLokaal" />@Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)</label>
                 }
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Lokalen[0].LokaalNaam)
+                <input class="form-control" maxlength="50" type="text" name="lokaalNaam" value="@Model.Lokalen[0].LokaalNaam" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Lokalen[0].AantalPlaatsen)
+                <input class="form-control" type="number" name="aantalPlaatsen" value="@Model.Lokalen[0].AantalPlaatsen" required />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => Model.Lokalen[0].Campus)
+                <select class="form-control" name="Campussen">
+                    <option value="@Model.Lokalen[0].Campus.Id">@Model.Lokalen[0].Campus.Naam</option>
+                    @foreach (var item in Model.Campussen)
+                    {
+                        if (item.Value != Model.Lokalen[0].Campus.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
             </div>
         </div>
     </div>

@@ -109,14 +109,20 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Lokalen[0].AantalPlaatsen)
-                        <input class="form-control" type="text" name="aantalPlaatsen" required />
+                        <input class="form-control" type="number" name="aantalPlaatsen" required />
                     </div>
                     <div class="checkbox">
                         <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)</label>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Lokalen[0].Campus)
-                        @Html.DropDownListFor(model => model.Campussen, Model.Campussen, "", new { @class = "form-control", required = "required" })
+                        <select class="form-control" name="Campussen" required>
+                            <option value="">-Selecteer-</option>
+                            @foreach (var item in Model.Campussen)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -139,30 +145,41 @@
             {
 
                 <div class="modal-body">
-                    <div cclass="form-group">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>computer lokaal:</label>
+                            <select class="form-control" name="computerLokaalFilter">
+                                <option value="">-Selecteer-</option>
+                                <option value="true">computerlokaal</option>
+                                <option value="false">geen computerlokaal</option>
+                                </select>
+                        </div>
 
-                        <label>Lokaal naam:</label>
-                        <input type="text" name="lokaalNaamFilter" />
+                        <div class="-form-group">
+                            <label>Lokaal naam:</label>
+                            <input type="text" name="lokaalNaamFilter" />
+                        </div>
 
-                        <label>Aantal plaatsen:</label>
-                        <select name="filterAantalPlaatsenSecondary">
-                            <option value="=">van</option>
-                            <option value="<">kleiner dan</option>
-                            <option value=">">groter dan</option>
-                        </select>
-                        <input type="number" name="filterAantalPlaatsen" />
+                        <div class="form-group">
+                            <label>Aantal plaatsen:</label>
+                            <select name="filterAantalPlaatsenSecondary">
+                                <option value="=">gelijk aan</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAantalPlaatsen" placeholder="Aantal plaatsen(bv: 10)"/>
+                        </div>
 
-                        <label>computer lokaal:</label>
-                        <input type="checkbox" value="true" name="computerLokaalFilter" />
-
-                        <label>Campus:</label>
-                        <select class="form-control" name="campusFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Campussen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                        <div class="form-group">
+                            <label>Campus:</label>
+                            <select class="form-control" name="campusFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Campussen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -186,4 +203,3 @@
     <button type="submit" name="exportType" value="pdf" class="btn btn-success">Export to PDF</button>
     //<button type="submit" name="exportType" value="excel" class="btn btn-success">Export to Excel</button>
 }
-<script src="~/Scripts/Custom/Custom.js"></script>

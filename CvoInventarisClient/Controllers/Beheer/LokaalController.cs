@@ -21,6 +21,7 @@ namespace CvoInventarisClient.Controllers
             LokaalViewModel model = new LokaalViewModel();
             model.Lokalen = new List<LokaalModel>();
             model.Campussen = new List<SelectListItem>();
+
             foreach (LokaalModel i in tblLokaal.GetAll())
             {
                 model.Lokalen.Add(i);
@@ -36,12 +37,14 @@ namespace CvoInventarisClient.Controllers
         }
      
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(int? Campussen)
         {
-                
+            DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
+
             LokaalModel lokaal = new LokaalModel();
             lokaal.LokaalNaam = Request.Form["lokaalNaam"];
             lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+            lokaal.Campus = new CampusModel() { Id = Campussen };
             
             if (Request.Form["isComputerLokaal"] != null)
             {
@@ -52,7 +55,6 @@ namespace CvoInventarisClient.Controllers
                 lokaal.IsComputerLokaal = false;
             }
 
-            DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
             tblLokaal.Create(lokaal);
 
             TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
@@ -68,12 +70,13 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? Campussen)
         {
             LokaalModel lokaal = new LokaalModel();
             lokaal.Id = Convert.ToInt16(Request.Form["idLokaal"]);
             lokaal.LokaalNaam = Request.Form["lokaalNaam"];
             lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+            lokaal.Campus = new CampusModel() { Id = Campussen };
 
             if (Request.Form["isComputerLokaal"] != null) { lokaal.IsComputerLokaal = true; }
             else
@@ -113,25 +116,26 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(string lokaalNaamFilter, string filterAantalPlaatsenSecondary, 
-            string filterAantalPlaatsen, string computerLokaalFilter, int campusFilter, int[] modelList)
+        public ActionResult Filter(string computerLokaalFilter, string lokaalNaamFilter, string filterAantalPlaatsenSecondary, 
+            string filterAantalPlaatsen, int campusFilter, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
             LokaalViewModel model = (LokaalViewModel)(Session["lokaalview"] as LokaalViewModel).Clone();
 
-            bool IsComputerLokaal;
-
-            if (computerLokaalFilter != null)
-            {
-                IsComputerLokaal = true;
-            }
-            else
-            {
-                IsComputerLokaal = false;
-            }
-
             // Hier start filteren
+            if (!String.IsNullOrWhiteSpace(computerLokaalFilter))
+            {
+                if (computerLokaalFilter.Equals("true"))
+                {
+                    model.Lokalen.RemoveAll(x => x.IsComputerLokaal != true);
+                }
+                else
+                {
+                    model.Lokalen.RemoveAll(x => x.IsComputerLokaal != false);
+                }
+            }
+
             if (!String.IsNullOrWhiteSpace(lokaalNaamFilter))
             {
                 model.Lokalen.RemoveAll(x => !x.LokaalNaam.ToLower().Contains(lokaalNaamFilter.ToLower()));
@@ -155,8 +159,9 @@ namespace CvoInventarisClient.Controllers
 
             if (campusFilter >= 0)
             {
-                model.Lokalen.RemoveAll(x => !(x.Campus.Id != campusFilter));
+                model.Lokalen.RemoveAll(x => x.Campus.Id != campusFilter);
             }
+
             return View("index", model);
         }
     }
