@@ -16,9 +16,23 @@ namespace CvoInventarisClient.Controllers
         {
             ViewBag.action = TempData["action"];
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+            DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
+
             LeverancierViewModel model = new LeverancierViewModel();
-            model.Leveranciers = tblLeverancier.GetAll();
+            model.Leveranciers = new List<LeverancierModel>();
+            model.Postcodes = new List<SelectListItem>();
+
+            foreach (LeverancierModel l in tblLeverancier.GetAll())
+            {
+                model.Leveranciers.Add(l);
+            }
+            foreach (PostcodeModel p in tblPostcode.GetAll())
+            {
+                model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+            }
+
             this.Session["leverancierview"] = model;
+
             return View(model);
         }
 
