@@ -26,7 +26,7 @@ namespace CvoInventarisClient.Models
         public string BusNummer { get; set; }
 
         [Display(Name = "postcode")]
-        public int? Postcode { get; set; }
+        public PostcodeModel Postcode { get; set; }
 
         [Display(Name = "telefoon")]
         public string Telefoon { get; set; }
