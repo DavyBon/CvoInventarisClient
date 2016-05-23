@@ -28,7 +28,7 @@ namespace CvoInventarisClient.Controllers
             }
             foreach (PostcodeModel p in tblPostcode.GetAll())
             {
-                model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
             }
 
             this.Session["leverancierview"] = model;
