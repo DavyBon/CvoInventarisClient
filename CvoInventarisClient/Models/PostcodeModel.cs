@@ -10,5 +10,10 @@ namespace CvoInventarisClient.Models
         public int? Id { get; set; }
         public string Postcode { get; set; }
         public string Gemeente { get; set; }
+
+        public override string ToString()
+        {
+            return this.Postcode +", " +this.Gemeente;
+        }
     }
 }
