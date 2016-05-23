@@ -63,7 +63,7 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
-                inventaris.Label = Request.Form["reeks"] + labelnr;
+                inventaris.Label = Request.Form["reeks"] + labelnr.ToString().PadLeft(4,'0');
                 inventaris.Object = new ObjectModel() { Id = Objecten };
                 inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
                 inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
@@ -120,7 +120,7 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int? idObject, int? Lokalen, int? Verzekeringen)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
@@ -129,12 +129,10 @@ namespace CvoInventarisClient.Controllers
             inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
             inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
             inventaris.Historiek = Request.Form["historiek"];
-            inventaris.Object = new ObjectModel() { Id = Convert.ToInt16(Request.Form["idObject"]) };
-            if (!String.IsNullOrWhiteSpace(Request.Form["Lokalen"])) { inventaris.Lokaal = new LokaalModel() { Id = Convert.ToInt16(Request.Form["Lokalen"]) }; }
-            else { inventaris.Lokaal = new LokaalModel() { Id = Convert.ToInt16(Request.Form["defaultIdLokaal"]) }; }
+            inventaris.Object = new ObjectModel() { Id = idObject};
+            inventaris.Lokaal = new LokaalModel() { Id = Lokalen}; 
+            inventaris.Verzekering = new VerzekeringModel() { Id =Verzekeringen }; 
 
-            if (!String.IsNullOrWhiteSpace(Request.Form["Verzekeringen"])) { inventaris.Verzekering = new VerzekeringModel() { Id = Convert.ToInt16(Request.Form["Verzekeringen"]) }; }
-            else { inventaris.Verzekering = new VerzekeringModel() { Id = Convert.ToInt16(Request.Form["defaultIdVerzekering"]) }; }
 
             if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
             else
@@ -172,7 +170,7 @@ namespace CvoInventarisClient.Controllers
             }
             else
             {
-                TempData["action"] = idArray.Length + " netwerk werd verwijderd uit de inventaris";
+                TempData["action"] = idArray.Length + " object werd verwijderd uit de inventaris";
             }
             return RedirectToAction("Index");
         }

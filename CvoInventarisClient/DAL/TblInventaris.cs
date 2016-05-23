@@ -329,14 +329,14 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@id", inventaris.Id));
-                    command.Parameters.Add(new SqlParameter("@idLokaal", inventaris.Lokaal.Id));
-                    command.Parameters.Add(new SqlParameter("@idObject", inventaris.Object.Id));
+                    command.Parameters.Add(new SqlParameter("@idLokaal", App_Code.DALutil.checkIntForDBNUll(inventaris.Lokaal.Id)));
+                    command.Parameters.Add(new SqlParameter("@idObject", App_Code.DALutil.checkIntForDBNUll(inventaris.Object.Id)));
                     command.Parameters.Add(new SqlParameter("@aankoopjaar", inventaris.Aankoopjaar));
                     command.Parameters.Add(new SqlParameter("@afschrijvingsjaar", inventaris.Afschrijvingsperiode));
                     command.Parameters.Add(new SqlParameter("@historiek", inventaris.Historiek));
                     command.Parameters.Add(new SqlParameter("@isActief", Convert.ToInt32(inventaris.IsActief)));
                     command.Parameters.Add(new SqlParameter("@isAanwezig", Convert.ToInt32(inventaris.IsAanwezig)));
-                    command.Parameters.Add(new SqlParameter("@idVerzekering", inventaris.Verzekering.Id));
+                    command.Parameters.Add(new SqlParameter("@idVerzekering", App_Code.DALutil.checkIntForDBNUll(inventaris.Verzekering.Id)));
                     command.ExecuteReader();
                 }
                 return true;
