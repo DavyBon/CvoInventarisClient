@@ -12,6 +12,7 @@ namespace CvoInventarisClient.Models
         public List<SelectListItem> Objecten { get; set; }
         public List<SelectListItem> Verzekeringen { get; set; }
         public List<SelectListItem> Lokalen { get; set; }
+        public List<SelectListItem> Objecttypen { get; set; }
 
         public object Clone()
         {

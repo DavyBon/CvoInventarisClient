@@ -2,6 +2,9 @@
 
 @{
     ViewBag.Title = "Inventaris";
+
+    List<String> amounts = new List<string>() {"100","200","300"};
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Lokaal" };
 }
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
 {
@@ -10,6 +13,37 @@
         @ViewBag.action
     </div>
 }
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Inventaris"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
+
 @using (Html.BeginForm("Delete", "Inventaris"))
 {
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
@@ -17,7 +51,7 @@
 
     if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
     {
-        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Inventaris")">Verwijder filter</a>
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index","Inventaris")">Verwijder filter</a>
     }
     else
     {
@@ -70,7 +104,7 @@
                             <input type="checkbox" name="idArray" value="@item.Id" />
                         </td>
                         <td>
-                            <a class="bottom-align-text" href="@Url.Action("Edit", "Inventaris", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                            <a class="bottom-align-text" href="@Url.Action("Edit","Inventaris", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Label)
@@ -224,7 +258,20 @@
             {
 
                 <div class="modal-body">
-                    <div cclass="form-group">
+                    <div class="form-group">
+
+                        <div class="form-group">
+                            <label>Objecttype:</label>
+                            <select class="form-control" name="objecttypeFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Objecttypen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+
+
                         <div class="form-group">
                             <label>Object:</label>
                             <select class="form-control" name="objectFilter">

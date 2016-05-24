@@ -12,13 +12,14 @@ namespace CvoInventarisClient.Controllers
     public class InventarisController : Controller
     {
         // GET: Inventaris
-        public ActionResult Index()
+        public ActionResult Index(int? amount, string order)
         {
             ViewBag.action = TempData["action"];
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
             DAL.TblObject TblObject = new DAL.TblObject();
             DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
             DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+            DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
 
             //WCF servicereference objecten collection naar InventarisModel objecten collection
             InventarisViewModel model = new InventarisViewModel();
@@ -26,11 +27,39 @@ namespace CvoInventarisClient.Controllers
             model.Objecten = new List<SelectListItem>();
             model.Lokalen = new List<SelectListItem>();
             model.Verzekeringen = new List<SelectListItem>();
+            model.Objecttypen = new List<SelectListItem>();
+            model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
 
-            foreach (InventarisModel i in TblInventaris.GetAll())
+            Session["inventaris"] = model.Inventaris;
+
+            if (amount == null)
             {
-                model.Inventaris.Add(i);
+                model.Inventaris = model.Inventaris.Take(100).ToList();
+                ViewBag.amount = "100";
             }
+            else
+            {
+                model.Inventaris = model.Inventaris.Take((int)amount).ToList();
+                ViewBag.amount = amount.ToString();
+            }
+
+            if (!string.IsNullOrWhiteSpace(order))
+            {
+                if (order.Equals("Oudst"))
+                {
+                    model.Inventaris.Reverse();
+                }
+                else if (order.Equals("Lokaal"))
+                {
+                    model.Inventaris = model.Inventaris.OrderBy(i => i.Lokaal.Id).ToList();
+                }
+                ViewBag.ordertype = order.ToString();
+            }
+            else
+            {
+                ViewBag.ordertype = "Meest recent";
+            }
+
             foreach (ObjectModel o in TblObject.GetAll())
             {
                 model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
@@ -43,8 +72,10 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
             }
-
-            this.Session["inventarisview"] = model;
+            foreach (ObjectTypeModel ot in TblObjecttype.GetAll())
+            {
+                model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+            }
 
             return View(model);
 
@@ -63,7 +94,7 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
                 inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
                 inventaris.Historiek = Request.Form["historiek"];
-                inventaris.Label = Request.Form["reeks"] + labelnr.ToString().PadLeft(4,'0');
+                inventaris.Label = Request.Form["reeks"] + labelnr.ToString().PadLeft(4, '0');
                 inventaris.Object = new ObjectModel() { Id = Objecten };
                 inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
                 inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
@@ -129,9 +160,9 @@ namespace CvoInventarisClient.Controllers
             inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
             inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
             inventaris.Historiek = Request.Form["historiek"];
-            inventaris.Object = new ObjectModel() { Id = idObject};
-            inventaris.Lokaal = new LokaalModel() { Id = Lokalen}; 
-            inventaris.Verzekering = new VerzekeringModel() { Id =Verzekeringen }; 
+            inventaris.Object = new ObjectModel() { Id = idObject };
+            inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
+            inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
 
 
             if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
@@ -174,14 +205,36 @@ namespace CvoInventarisClient.Controllers
             }
             return RedirectToAction("Index");
         }
+
         [HttpPost]
-        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int[] modelList)
+        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int? objecttypeFilter, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
-            InventarisViewModel model = (InventarisViewModel)(Session["inventarisview"] as InventarisViewModel).Clone();
-          
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+
+            InventarisViewModel model = new InventarisViewModel();
+            model.Inventaris = (List<InventarisModel>)Session["inventaris"];
+            model.Lokalen = new List<SelectListItem>();
+            model.Objecten = new List<SelectListItem>();
+            model.Objecttypen = new List<SelectListItem>();
+            model.Verzekeringen = new List<SelectListItem>();
+
+
+            //veiligheid voor als session verlopen is
+            if (model.Inventaris == null)
+            {
+                model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+            }
+
             // Hier start filteren
+            if (objecttypeFilter >= 0)
+            {
+                model.Inventaris.RemoveAll(x => x.Object.ObjectType == null);
+                model.Inventaris.RemoveAll(x => x.Object.ObjectType.Id != objecttypeFilter);
+            }
+
+
             if (objectFilter >= 0)
             {
                 model.Inventaris.RemoveAll(x => x.Object.Id != objectFilter);
