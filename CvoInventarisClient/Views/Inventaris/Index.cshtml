@@ -183,7 +183,7 @@
 
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Object)
-                        <select class="form-control" name="Objecten" required>
+                        <select class="form-control" name="Objecten" >
                             <option value="">-Selecteer-</option>
                             @foreach (var item in Model.Objecten)
                             {
@@ -212,15 +212,15 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
-                        <input class="form-control" type="text" maxlength="1024" name="historiek" required />
+                        <input class="form-control" type="text" maxlength="1024" name="historiek"  />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)
-                        <input class="form-control" type="number" name="aankoopjaar" required />
+                        <input class="form-control" type="number" name="aankoopjaar"  />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
-                        <input class="form-control" type="number" name="afschrijvingsperiode" required />
+                        <input class="form-control" type="number" name="afschrijvingsperiode"  />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
@@ -235,7 +235,7 @@
                     <hr />
                     <div class="form-group">
                         @Html.Label("Aantal")
-                        <input class="form-control" type="number" name="aantal" value="1" min="1" required />
+                        <input class="form-control" type="number" name="aantal" value="1" min="1"  />
                     </div>
                 </div>
                 <div class="modal-footer">

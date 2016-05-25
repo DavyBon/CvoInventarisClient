@@ -170,47 +170,47 @@
                 <div class="modal-body">
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Boekjaar)
-                        <input class="form-control" maxlength="50" type="date" name="boekjaar" required/>
+                        <input class="form-control" maxlength="50" type="date" name="boekjaar" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].CvoVolgNummer)
-                        <input class="form-control" maxlength="50" type="text" name="cvoVolgNummer" required/>
+                        <input class="form-control" maxlength="50" type="text" name="cvoVolgNummer" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].FactuurNummer)
-                        <input class="form-control" maxlength="50" type="text" name="factuurNummer" required/>
+                        <input class="form-control" maxlength="50" type="text" name="factuurNummer" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
-                        <input class="form-control" maxlength="50" type="text" name="scholengroepNummer" required />
+                        <input class="form-control" maxlength="50" type="text" name="scholengroepNummer"  />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].FactuurDatum)
-                        <input class="form-control" maxlength="50" type="date" name="factuurDatum" required/>
+                        <input class="form-control" maxlength="50" type="date" name="factuurDatum" />
                     </div>
                     <div class="form-group">
                         Leverancier
-                        @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, "", new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, "", new { @class = "form-control" })
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
-                        <input class="form-control" maxlength="50" type="text" name="prijs" required/>
+                        <input class="form-control" maxlength="50" type="text" name="prijs" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
-                        <input class="form-control" type="text" name="garantie" required/>
+                        <input class="form-control" type="text" name="garantie" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
-                        <input class="form-control" maxlength="1200" type="text" name="omschrijving" required/>
+                        <input class="form-control" maxlength="1200" type="text" name="omschrijving" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Opmerking)
-                        <input class="form-control" maxlength="1200" type="text" name="opmerking" required/>
+                        <input class="form-control" maxlength="1200" type="text" name="opmerking" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
-                        <input class="form-control" type="text" name="afschrijfperiode" required/>
+                        <input class="form-control" type="text" name="afschrijfperiode" />
                     </div>
 
                 </div>

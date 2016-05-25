@@ -105,19 +105,19 @@
                     <div class="modal-body">
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.Campussen[0].Naam)
-                            <input class="form-control" maxlength="50" type="text" name="naam" required/>
+                            <input class="form-control" maxlength="50" type="text" name="naam" />
                         </div>
                         <div class="form-group">
                             Postcode
-                            @Html.DropDownListFor(model => model.Postcodes, Model.Postcodes, "", new { @class = "form-control", required = "required" })
+                            @Html.DropDownListFor(model => model.Postcodes, Model.Postcodes, "", new { @class = "form-control" })
                         </div>
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.Campussen[0].Straat)
-                            <input class="form-control" maxlength="50" type="text" name="straat" required/>
+                            <input class="form-control" maxlength="50" type="text" name="straat" />
                         </div>
                         <div class="form-group">
                             @Html.DisplayNameFor(model => model.Campussen[0].Nummer)
-                            <input class="form-control" maxlength="50" type="text" name="nummer" required/>
+                            <input class="form-control" maxlength="50" type="text" name="nummer" />
                         </div>
                     </div>
                     <div class="modal-footer">

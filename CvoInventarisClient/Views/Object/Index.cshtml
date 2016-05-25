@@ -108,13 +108,13 @@
 
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Objecten[0].ObjectType)
-                        @Html.DropDownListFor(model => model.ObjectTypes, Model.ObjectTypes, "", new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(model => model.ObjectTypes, Model.ObjectTypes, "", new { @class = "form-control"})
 
                         @Html.DisplayNameFor(model => model.Objecten[0].Kenmerken)
-                        <input class="form-control" type="text" maxlength="50" name="kenmerken" required />
+                        <input class="form-control" type="text" maxlength="50" name="kenmerken"/>
 
                         @Html.DisplayNameFor(model => model.Objecten[0].Factuur)
-                        @Html.DropDownListFor(model => model.Facturen, Model.Facturen, "", new { @class = "form-control", required = "required" })
+                        @Html.DropDownListFor(model => model.Facturen, Model.Facturen, "", new { @class = "form-control" })
                     </div>
 
                 </div>
