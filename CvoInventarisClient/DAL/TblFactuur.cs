@@ -76,21 +76,15 @@ namespace CvoInventarisClient.DAL
                         }
 
                         factuur.Id = (int?)dr["idFactuur"];
-                        factuur.Boekjaar = dr["boekjaar"].ToString();
-                        factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString();
-                        factuur.FactuurNummer = dr["factuurNummer"].ToString();
                         factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
-                        factuur.FactuurDatum = dr["factuurDatum"].ToString();
                         factuur.Leverancier = leverancier;
                         factuur.Prijs = dr["prijs"].ToString();
                         factuur.Garantie = (int)dr["garantie"];
                         factuur.Omschrijving = dr["omschrijving"].ToString();
-                        factuur.Opmerking = dr["opmerking"].ToString();
                         factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
-                        factuur.DatumInsert = dr["datumInsert"].ToString();
-                        factuur.UserInsert = dr["userInsert"].ToString();
-                        factuur.DatumModified = dr["datumModified"].ToString();
-                        factuur.UserModified = dr["userModified"].ToString();
+                        factuur.VerwerkingsDatum = dr["verwerkingsDatum"].ToString();
+                        factuur.CvoFactuurNummer = dr["cvoFactuurNummer"].ToString();
+                        factuur.LeverancierFactuurNummer = dr["leverancierFactuurNummer"].ToString();
 
                         list.Add(factuur);
                     }
@@ -159,21 +153,15 @@ namespace CvoInventarisClient.DAL
                         }
 
                         factuur.Id = (int?)dr["idFactuur"];
-                        factuur.Boekjaar = dr["boekjaar"].ToString();
-                        factuur.CvoVolgNummer = dr["cvoVolgNummer"].ToString();
-                        factuur.FactuurNummer = dr["factuurNummer"].ToString();
                         factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
-                        factuur.FactuurDatum = dr["factuurDatum"].ToString();
                         factuur.Leverancier = leverancier;
                         factuur.Prijs = dr["prijs"].ToString();
                         factuur.Garantie = (int)dr["garantie"];
                         factuur.Omschrijving = dr["omschrijving"].ToString();
-                        factuur.Opmerking = dr["opmerking"].ToString();
                         factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
-                        factuur.DatumInsert = dr["datumInsert"].ToString();
-                        factuur.UserInsert = dr["userInsert"].ToString();
-                        factuur.DatumModified = dr["datumModified"].ToString();
-                        factuur.UserModified = dr["userModified"].ToString();
+                        factuur.VerwerkingsDatum = dr["verwerkingsDatum"].ToString();
+                        factuur.CvoFactuurNummer = dr["cvoFactuurNummer"].ToString();
+                        factuur.LeverancierFactuurNummer = dr["leverancierFactuurNummer"].ToString();
                     }
                     return factuur;
                 }
@@ -200,21 +188,15 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("boekjaar", factuur.Boekjaar);
-                    cmd.Parameters.AddWithValue("cvoVolgNummer", factuur.CvoVolgNummer);
-                    cmd.Parameters.AddWithValue("factuurNummer", factuur.FactuurNummer);
-                    cmd.Parameters.AddWithValue("scholengroepNummer", factuur.ScholengroepNummer);
-                    cmd.Parameters.AddWithValue("factuurDatum", factuur.FactuurDatum);
+                    cmd.Parameters.AddWithValue("scholengroepNummer", App_Code.DALutil.checkStringForDBNull(factuur.ScholengroepNummer));
                     cmd.Parameters.AddWithValue("idLeverancier", App_Code.DALutil.checkIntForDBNUll(factuur.Leverancier.Id));
-                    cmd.Parameters.AddWithValue("prijs", factuur.Prijs);
-                    cmd.Parameters.AddWithValue("garantie", factuur.Garantie);
-                    cmd.Parameters.AddWithValue("omschrijving", factuur.Omschrijving);
-                    cmd.Parameters.AddWithValue("opmerking", factuur.Opmerking);
-                    cmd.Parameters.AddWithValue("afschrijfperiode", factuur.Afschrijfperiode);
-                    cmd.Parameters.AddWithValue("datumInsert", factuur.DatumInsert);
-                    cmd.Parameters.AddWithValue("userInsert", factuur.UserInsert);
-                    cmd.Parameters.AddWithValue("datumModified", App_Code.DALutil.checkStringForDBNull(factuur.DatumModified));
-                    cmd.Parameters.AddWithValue("userModified", App_Code.DALutil.checkStringForDBNull(factuur.UserModified));
+                    cmd.Parameters.AddWithValue("prijs", App_Code.DALutil.checkStringForDBNull(factuur.Prijs));
+                    cmd.Parameters.AddWithValue("garantie", App_Code.DALutil.checkIntForDBNUll(factuur.Garantie));
+                    cmd.Parameters.AddWithValue("omschrijving", App_Code.DALutil.checkStringForDBNull(factuur.Omschrijving));
+                    cmd.Parameters.AddWithValue("afschrijfperiode", App_Code.DALutil.checkIntForDBNUll(factuur.Afschrijfperiode));
+                    cmd.Parameters.AddWithValue("verwerkingsDatum", App_Code.DALutil.checkStringForDBNull(factuur.VerwerkingsDatum));
+                    cmd.Parameters.AddWithValue("cvoFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.CvoFactuurNummer));
+                    cmd.Parameters.AddWithValue("leverancierFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.LeverancierFactuurNummer));
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
@@ -242,21 +224,15 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("idFactuur", factuur.Id);
-                    cmd.Parameters.AddWithValue("boekjaar", factuur.Boekjaar);
-                    cmd.Parameters.AddWithValue("cvoVolgNummer", factuur.CvoVolgNummer);
-                    cmd.Parameters.AddWithValue("factuurNummer", factuur.FactuurNummer);
-                    cmd.Parameters.AddWithValue("scholengroepNummer", factuur.ScholengroepNummer);
-                    cmd.Parameters.AddWithValue("factuurDatum", factuur.FactuurDatum);
+                    cmd.Parameters.AddWithValue("scholengroepNummer", App_Code.DALutil.checkStringForDBNull(factuur.ScholengroepNummer));
                     cmd.Parameters.AddWithValue("idLeverancier", App_Code.DALutil.checkIntForDBNUll(factuur.Leverancier.Id));
-                    cmd.Parameters.AddWithValue("prijs", factuur.Prijs);
-                    cmd.Parameters.AddWithValue("garantie", factuur.Garantie);
-                    cmd.Parameters.AddWithValue("omschrijving", factuur.Omschrijving);
-                    cmd.Parameters.AddWithValue("opmerking", factuur.Opmerking);
-                    cmd.Parameters.AddWithValue("afschrijfperiode", factuur.Afschrijfperiode);
-                    cmd.Parameters.AddWithValue("datumInsert", factuur.DatumInsert);
-                    cmd.Parameters.AddWithValue("userInsert", factuur.UserInsert);
-                    cmd.Parameters.AddWithValue("datumModified", factuur.DatumModified);
-                    cmd.Parameters.AddWithValue("userModified", factuur.UserModified);
+                    cmd.Parameters.AddWithValue("prijs", App_Code.DALutil.checkStringForDBNull(factuur.Prijs));
+                    cmd.Parameters.AddWithValue("garantie", App_Code.DALutil.checkIntForDBNUll(factuur.Garantie));
+                    cmd.Parameters.AddWithValue("omschrijving", App_Code.DALutil.checkStringForDBNull(factuur.Omschrijving));
+                    cmd.Parameters.AddWithValue("afschrijfperiode", App_Code.DALutil.checkIntForDBNUll(factuur.Afschrijfperiode));
+                    cmd.Parameters.AddWithValue("verwerkingsDatum", App_Code.DALutil.checkStringForDBNull(factuur.VerwerkingsDatum));
+                    cmd.Parameters.AddWithValue("cvoFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.CvoFactuurNummer));
+                    cmd.Parameters.AddWithValue("leverancierFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.LeverancierFactuurNummer));
                     cmd.ExecuteReader();
                 }
                 return true;

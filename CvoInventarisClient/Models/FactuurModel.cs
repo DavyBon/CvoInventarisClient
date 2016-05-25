@@ -10,23 +10,19 @@ namespace CvoInventarisClient.Models
     {
         public int? Id { get; set; }
 
-        [Display(Name = "boekjaar")]
-        public string Boekjaar { get; set; }
+        [Display(Name = "cvo-factuurnummer")]
+        public string CvoFactuurNummer { get; set; }
 
-        [Display(Name = "cvoVolgNummer")]
-        public string CvoVolgNummer { get; set; }
+        [Display(Name = "leverancier-factuurnummer")]
+        public string LeverancierFactuurNummer { get; set; }
 
-        [Display(Name = "factuurNummer")]
-        public string FactuurNummer { get; set; }
+        [Display(Name = "verwerkingsdatum")]
+        public string VerwerkingsDatum { get; set; }
 
-        [Display(Name = "scholengroepNummer")]
+        [Display(Name = "scholengroepnummer")]
         public string ScholengroepNummer { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "factuurDatum")]
-        public string FactuurDatum { get; set; }
-
-        [Display(Name = "idLeverancier")]
+        [Display(Name = "leverancier")]
         public LeverancierModel Leverancier { get; set; }
 
         [Display(Name = "prijs(€)")]
@@ -38,32 +34,13 @@ namespace CvoInventarisClient.Models
         [Display(Name = "omschrijving")]
         public string Omschrijving { get; set; }
 
-        [Display(Name = "opmerking")]
-        public string Opmerking { get; set; }
-
         [Display(Name = "afschrijfperiode")]
         public int Afschrijfperiode { get; set; }
 
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "datumInsert")]
-        public string DatumInsert { get; set; }
-
-        [Display(Name = "userInsert")]
-        public string UserInsert { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "datumModified")]
-        public string DatumModified { get; set; }
-
-        [Display(Name = "userModified")]
-        public string UserModified { get; set; }
-
-
         public override string ToString()
         {
-            return this.FactuurNummer;
+            return this.CvoFactuurNummer;
         }
     }
+}
 }

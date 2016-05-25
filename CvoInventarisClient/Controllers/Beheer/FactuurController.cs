@@ -53,23 +53,19 @@ namespace CvoInventarisClient.Controllers
 
             FactuurModel factuur = new FactuurModel();
 
-            factuur.Boekjaar = Request.Form["boekjaar"];
-            factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
-            factuur.FactuurNummer = Request.Form["factuurNummer"];
-            factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
-            factuur.FactuurDatum = Request.Form["factuurDatum"];
+            factuur.CvoFactuurNummer = Request.Form["cvofactuurnummer"];
+            factuur.LeverancierFactuurNummer = Request.Form["leverancierfactuurnummer"];
+            factuur.VerwerkingsDatum = Request.Form["verwerkingsdatum"];
+            factuur.ScholengroepNummer = Request.Form["scholengroepnummer"];
             factuur.Leverancier = new LeverancierModel() { Id = (int)Leveranciers };
             factuur.Prijs = Request.Form["prijs"];
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
-            factuur.Opmerking = Request.Form["opmerking"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-            factuur.DatumInsert = DateTime.Now.ToString("dd/MM/yyyy");
-            factuur.UserInsert = email;
 
             TblFactuur.Create(factuur);
 
-            TempData["action"] = "factuur met factuurnummer" + " " + Request.Form["factuurNummer"] + " werd toegevoegd";
+            TempData["action"] = "factuur met factuurnummer" + " " + Request.Form["cvofactuurnummer"] + " werd toegevoegd";
             return RedirectToAction("Index");
         }
 
@@ -109,20 +105,14 @@ namespace CvoInventarisClient.Controllers
 
             FactuurModel factuur = new FactuurModel();
             factuur.Id = Convert.ToInt16(Request.Form["idFactuur"]);
-            factuur.Boekjaar = Request.Form["boekjaar"];
-            factuur.CvoVolgNummer = Request.Form["cvoVolgNummer"];
-            factuur.FactuurNummer = Request.Form["factuurNummer"];
-            factuur.ScholengroepNummer = Request.Form["scholengroepNummer"];
-            factuur.FactuurDatum = Request.Form["factuurDatum"];
+            factuur.CvoFactuurNummer = Request.Form["cvofactuurnummer"];
+            factuur.LeverancierFactuurNummer = Request.Form["leverancierfactuurnummer"];
+            factuur.VerwerkingsDatum = Request.Form["verwerkingsdatum"];
+            factuur.ScholengroepNummer = Request.Form["scholengroepnummer"];
             factuur.Prijs = Request.Form["prijs"];
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
-            factuur.Opmerking = Request.Form["opmerking"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-            factuur.DatumInsert = Request.Form["datumInsert"].ToString();
-            factuur.UserInsert = Request.Form["userInsert"];
-            factuur.DatumModified = DateTime.Now.ToString("dd/MM/yyyy");
-            factuur.UserModified = email;
             if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["Leveranciers"]) }; }
             else { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
 
@@ -160,10 +150,10 @@ namespace CvoInventarisClient.Controllers
 
         // FILTER:
         [HttpPost]
-        public ActionResult Filter(string boekjaarFilter, string boekjaarFilterSecondary, string cvoVolgNummerFilter, string factuurNummerFilter,
-            string scholengroepNummerFilter, string factuurdatumFilter, int leverancierFilter, string prijsFilter, 
-            string prijsFilterSecondary, string garantieFilter, string garantieFilterSecondary, string afschrijfperiodeFilter,
-            string afschrijfperiodeFilterSecondary , int[] modelList)
+        public ActionResult Filter(string cvoFactuurNummerFilter, string leverancierFactuurNummerFilter, string verwerkingsDatumFilter,
+            string scholengroepNummerFilter, int leverancierFilter, string prijsFilter, string prijsFilterSecondary,
+            string garantieFilter, string garantieFilterSecondary, string afschrijfperiodeFilter,
+            string afschrijfperiodeFilterSecondary, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
@@ -171,36 +161,21 @@ namespace CvoInventarisClient.Controllers
 
             // Hier start filteren
 
-            if (!String.IsNullOrWhiteSpace(boekjaarFilter))
+            if (!String.IsNullOrWhiteSpace(cvoFactuurNummerFilter))
             {
-                if (boekjaarFilterSecondary.Equals("="))
-                {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Boekjaar) != Convert.ToInt32(boekjaarFilter));
-                }
-                else if (boekjaarFilterSecondary.Equals("<"))
-                {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Boekjaar) > Convert.ToInt32(boekjaarFilter));
-                }
-                else if (boekjaarFilterSecondary.Equals(">"))
-                {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Boekjaar) < Convert.ToInt32(boekjaarFilter));
-                }
+                model.Facturen.RemoveAll(x => !x.CvoFactuurNummer.ToLower().Contains(cvoFactuurNummerFilter.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(cvoVolgNummerFilter))
+            if (!String.IsNullOrWhiteSpace(leverancierFactuurNummerFilter))
             {
-                model.Facturen.RemoveAll(x => !x.CvoVolgNummer.ToLower().Contains(cvoVolgNummerFilter.ToLower()));
+                model.Facturen.RemoveAll(x => !x.LeverancierFactuurNummer.ToLower().Contains(leverancierFactuurNummerFilter.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(factuurNummerFilter))
+            if (!String.IsNullOrWhiteSpace(verwerkingsDatumFilter))
             {
-                model.Facturen.RemoveAll(x => !x.FactuurNummer.ToLower().Contains(factuurNummerFilter.ToLower()));
+                model.Facturen.RemoveAll(x => !x.VerwerkingsDatum.ToLower().Contains(verwerkingsDatumFilter.ToLower()));
             }
             if (!String.IsNullOrWhiteSpace(scholengroepNummerFilter))
             {
                 model.Facturen.RemoveAll(x => !x.ScholengroepNummer.ToLower().Contains(scholengroepNummerFilter.ToLower()));
-            }
-            if (!String.IsNullOrWhiteSpace(factuurdatumFilter))
-            {
-                model.Facturen.RemoveAll(x => !x.FactuurDatum.ToLower().Contains(factuurdatumFilter.ToLower()));
             }
             if (leverancierFilter >= 0)
             {

@@ -34,19 +34,16 @@
                     <th></th>
                     <th></th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].Boekjaar)
+                        @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].CvoVolgNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].LeverancierFactuurNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurNummer)
+                        @Html.DisplayNameFor(model => model.Facturen[0].VerwerkingsDatum)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurDatum)
                     </th>
                     <th>
                         Leverancier
@@ -61,22 +58,7 @@
                         @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].Opmerking)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].DatumInsert)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].UserInsert)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].DatumModified)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Facturen[0].UserModified)
                     </th>
                 </tr>
             </thead>
@@ -91,19 +73,16 @@
                             <a class="bottom-align-text" href="@Url.Action("Edit", "Factuur", new { id = item.Id })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Boekjaar)
+                            @Html.DisplayFor(modelItem => item.CvoFactuurNummer)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.CvoVolgNummer)
+                            @Html.DisplayFor(modelItem => item.LeverancierFactuurNummer)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.FactuurNummer)
+                            @Html.DisplayFor(modelItem => item.VerwerkingsDatum)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ScholengroepNummer)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FactuurDatum)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Leverancier.Naam)
@@ -118,22 +97,7 @@
                             @Html.DisplayFor(modelItem => item.Omschrijving)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Opmerking)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Afschrijfperiode)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DatumInsert)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserInsert)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DatumModified)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.UserModified)
                         </td>
                     </tr>
                 }
@@ -169,24 +133,20 @@
             {
                 <div class="modal-body">
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].Boekjaar)
-                        <input class="form-control" maxlength="50" type="date" name="boekjaar" />
+                        @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
+                        <input class="form-control" maxlength="50" type="text" name="cvofactuurnummer" />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].CvoVolgNummer)
-                        <input class="form-control" maxlength="50" type="text" name="cvoVolgNummer" />
+                        @Html.DisplayNameFor(model => model.Facturen[0].LeverancierFactuurNummer)
+                        <input class="form-control" maxlength="50" type="text" name="leverancierfactuurnummer" />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurNummer)
-                        <input class="form-control" maxlength="50" type="text" name="factuurNummer" />
+                        @Html.DisplayNameFor(model => model.Facturen[0].VerwerkingsDatum)
+                        <input class="form-control" maxlength="50" type="text" name="verwerkingsdatum" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
-                        <input class="form-control" maxlength="50" type="text" name="scholengroepNummer"  />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].FactuurDatum)
-                        <input class="form-control" maxlength="50" type="date" name="factuurDatum" />
+                        <input class="form-control" maxlength="50" type="text" name="scholengroepnummer" />
                     </div>
                     <div class="form-group">
                         Leverancier
@@ -203,10 +163,6 @@
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
                         <input class="form-control" maxlength="1200" type="text" name="omschrijving" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].Opmerking)
-                        <input class="form-control" maxlength="1200" type="text" name="opmerking" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
@@ -237,23 +193,18 @@
                     <div class="form-group">
 
                         <div class="form-group">
-                            <label>Boekjaar:</label>
-                            <select class="form-control" name="boekjaarFilterSecondary">
-                                <option value="=">van</option>
-                                <option value="<">voor</option>
-                                <option value=">">na</option>
-                            </select>
-                            <input class="form-control" type="number" name="boekjaarFilter" placeholder="jaar(bv: 2001)" />
+                            <label>CVO-Factuurnummer:</label>
+                            <select class="form-control" type="text" name="cvoFactuurNummerFilter" />
                         </div>
 
                         <div class="form-group">
-                            <label>CVO volgnummer:</label>
-                            <input class="form-control" type="text" name="cvoVolgNummerFilter" />
+                            <label>Leverancier-Factuurnummer:</label>
+                            <input class="form-control" type="text" name="leverancierFactuurNummerFilter" />
                         </div>
 
                         <div class="form-group">
-                            <label>Factuurnummer:</label>
-                            <input class="form-control" type="text" name="factuurNummerFilter" />
+                            <label>Verwerkingsdatum:</label>
+                            <input class="form-control" type="date" name="verwerkingsDatumFilter" />
                         </div>
 
                         <div class="form-group">
