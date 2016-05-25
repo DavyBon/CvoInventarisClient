@@ -54,7 +54,7 @@ namespace CvoInventarisClient.Controllers
                 }
                 foreach (FactuurModel f in TblFactuur.GetAll())
                 {
-                    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                    model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
                 }
             }
             else
@@ -159,7 +159,7 @@ namespace CvoInventarisClient.Controllers
             }
             foreach (FactuurModel f in TblFactuur.GetAll())
             {
-                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
             }
             return View(model);
 
@@ -267,7 +267,7 @@ namespace CvoInventarisClient.Controllers
                 }
                 foreach (FactuurModel f in TblFactuur.GetAll())
                 {
-                    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                    model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
                 }
 
                 Session["inventarisviewmodel"] = model.Clone();

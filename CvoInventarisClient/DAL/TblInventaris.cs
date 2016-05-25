@@ -139,27 +139,18 @@ namespace CvoInventarisClient.DAL
                             leverancier.Website = mySqlDataReader["website"].ToString();
                         }
 
-
-
-
-
                         if (mySqlDataReader["idFactuur"] != DBNull.Value)
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
-                            factuur.Afschrijfperiode = (int)mySqlDataReader["Afschrijvingsperiode"];
-                            factuur.Boekjaar = mySqlDataReader["Boekjaar"].ToString();
-                            factuur.CvoVolgNummer = mySqlDataReader["CvoVolgNummer"].ToString();
-                            factuur.DatumInsert = mySqlDataReader["DatumInsert"].ToString();
-                            factuur.DatumModified = mySqlDataReader["DatumModified"].ToString();
-                            factuur.FactuurDatum = mySqlDataReader["FactuurDatum"].ToString();
-                            factuur.FactuurNummer = mySqlDataReader["FactuurNummer"].ToString();
-                            factuur.Garantie = (int)mySqlDataReader["Garantie"];
+                            factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Omschrijving = mySqlDataReader["Omschrijving"].ToString();
-                            factuur.Opmerking = mySqlDataReader["Opmerking"].ToString();
-                            factuur.Prijs = mySqlDataReader["Prijs"].ToString();
-                            factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
-                            factuur.UserModified = mySqlDataReader["UserModified"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Garantie = (int)mySqlDataReader["garantie"];
+                            factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                            factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
+                            factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
+                            factuur.CvoFactuurNummer = mySqlDataReader["cvoFactuurNummer"].ToString();
+                            factuur.LeverancierFactuurNummer = mySqlDataReader["leverancierFactuurNummer"].ToString();
                         }
 
 
@@ -276,26 +267,18 @@ namespace CvoInventarisClient.DAL
                             leverancier.Website = mySqlDataReader["website"].ToString();
                         }
 
-
-
-
                         if (mySqlDataReader["idFactuur"] != DBNull.Value)
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
-                            factuur.Afschrijfperiode = (int)mySqlDataReader["Afschrijvingsperiode"];
-                            factuur.Boekjaar = mySqlDataReader["Boekjaar"].ToString();
-                            factuur.CvoVolgNummer = mySqlDataReader["CvoVolgNummer"].ToString();
-                            factuur.DatumInsert = mySqlDataReader["DatumInsert"].ToString();
-                            factuur.DatumModified = mySqlDataReader["DatumModified"].ToString();
-                            factuur.FactuurDatum = mySqlDataReader["FactuurDatum"].ToString();
-                            factuur.FactuurNummer = mySqlDataReader["FactuurNummer"].ToString();
-                            factuur.Garantie = (int)mySqlDataReader["Garantie"];
+                            factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Omschrijving = mySqlDataReader["Omschrijving"].ToString();
-                            factuur.Opmerking = mySqlDataReader["Opmerking"].ToString();
-                            factuur.Prijs = mySqlDataReader["Prijs"].ToString();
-                            factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
-                            factuur.UserModified = mySqlDataReader["UserModified"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Garantie = (int)mySqlDataReader["garantie"];
+                            factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                            factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
+                            factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
+                            factuur.CvoFactuurNummer = mySqlDataReader["cvoFactuurNummer"].ToString();
+                            factuur.LeverancierFactuurNummer = mySqlDataReader["leverancierFactuurNummer"].ToString();
                         }
 
 
@@ -418,20 +401,15 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idFactuur"] != DBNull.Value)
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
-                            factuur.Afschrijfperiode = (int)mySqlDataReader["Afschrijvingsperiode"];
-                            factuur.Boekjaar = mySqlDataReader["Boekjaar"].ToString();
-                            factuur.CvoVolgNummer = mySqlDataReader["CvoVolgNummer"].ToString();
-                            factuur.DatumInsert = mySqlDataReader["DatumInsert"].ToString();
-                            factuur.DatumModified = mySqlDataReader["DatumModified"].ToString();
-                            factuur.FactuurDatum = mySqlDataReader["FactuurDatum"].ToString();
-                            factuur.FactuurNummer = mySqlDataReader["FactuurNummer"].ToString();
-                            factuur.Garantie = (int)mySqlDataReader["Garantie"];
+                            factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Omschrijving = mySqlDataReader["Omschrijving"].ToString();
-                            factuur.Opmerking = mySqlDataReader["Opmerking"].ToString();
-                            factuur.Prijs = mySqlDataReader["Prijs"].ToString();
-                            factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
-                            factuur.UserModified = mySqlDataReader["UserModified"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Garantie = (int)mySqlDataReader["garantie"];
+                            factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                            factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
+                            factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
+                            factuur.CvoFactuurNummer = mySqlDataReader["cvoFactuurNummer"].ToString();
+                            factuur.LeverancierFactuurNummer = mySqlDataReader["leverancierFactuurNummer"].ToString();
                         }
 
 
@@ -555,20 +533,15 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idFactuur"] != DBNull.Value)
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
-                            factuur.Afschrijfperiode = (int)mySqlDataReader["Afschrijvingsperiode"];
-                            factuur.Boekjaar = mySqlDataReader["Boekjaar"].ToString();
-                            factuur.CvoVolgNummer = mySqlDataReader["CvoVolgNummer"].ToString();
-                            factuur.DatumInsert = mySqlDataReader["DatumInsert"].ToString();
-                            factuur.DatumModified = mySqlDataReader["DatumModified"].ToString();
-                            factuur.FactuurDatum = mySqlDataReader["FactuurDatum"].ToString();
-                            factuur.FactuurNummer = mySqlDataReader["FactuurNummer"].ToString();
-                            factuur.Garantie = (int)mySqlDataReader["Garantie"];
+                            factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Omschrijving = mySqlDataReader["Omschrijving"].ToString();
-                            factuur.Opmerking = mySqlDataReader["Opmerking"].ToString();
-                            factuur.Prijs = mySqlDataReader["Prijs"].ToString();
-                            factuur.UserInsert = mySqlDataReader["UserInsert"].ToString();
-                            factuur.UserModified = mySqlDataReader["UserModified"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Garantie = (int)mySqlDataReader["garantie"];
+                            factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                            factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
+                            factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
+                            factuur.CvoFactuurNummer = mySqlDataReader["cvoFactuurNummer"].ToString();
+                            factuur.LeverancierFactuurNummer = mySqlDataReader["leverancierFactuurNummer"].ToString();
                         }
 
 
