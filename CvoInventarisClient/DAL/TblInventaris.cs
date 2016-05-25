@@ -33,6 +33,7 @@ namespace CvoInventarisClient.DAL
                     command.Parameters.Add(new SqlParameter("@isActief", Convert.ToInt32(inventaris.IsActief)));
                     command.Parameters.Add(new SqlParameter("@isAanwezig", Convert.ToInt32(inventaris.IsAanwezig)));
                     command.Parameters.Add(new SqlParameter("@idVerzekering", App_Code.DALutil.checkIntForDBNUll(inventaris.Verzekering.Id)));
+                    command.Parameters.Add(new SqlParameter("@idFactuur", App_Code.DALutil.checkIntForDBNUll(inventaris.Factuur.Id)));
 
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
@@ -171,7 +172,6 @@ namespace CvoInventarisClient.DAL
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
                             obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
-                            obj.Factuur = factuur;
                             obj.ObjectType = objType;
                         }
 
@@ -191,6 +191,7 @@ namespace CvoInventarisClient.DAL
                         inventaris.IsActief = Convert.ToBoolean(mySqlDataReader["isActief"]);
                         inventaris.IsAanwezig = Convert.ToBoolean(mySqlDataReader["isAanwezig"]);
                         inventaris.Verzekering = verzekering;
+                        inventaris.Factuur = factuur;
                         list.Add(inventaris);
                     }
                     return list;
@@ -307,7 +308,6 @@ namespace CvoInventarisClient.DAL
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
                             obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
-                            obj.Factuur = factuur;
                             obj.ObjectType = objType;
                         }
 
@@ -327,6 +327,7 @@ namespace CvoInventarisClient.DAL
                         inventaris.IsActief = Convert.ToBoolean(mySqlDataReader["isActief"]);
                         inventaris.IsAanwezig = Convert.ToBoolean(mySqlDataReader["isAanwezig"]);
                         inventaris.Verzekering = verzekering;
+                        inventaris.Factuur = factuur;
                         list.Add(inventaris);
                     }
                     return list;
@@ -443,7 +444,6 @@ namespace CvoInventarisClient.DAL
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
                             obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
-                            obj.Factuur = factuur;
                             obj.ObjectType = objType;
                         }
 
@@ -463,6 +463,7 @@ namespace CvoInventarisClient.DAL
                         inventaris.IsActief = Convert.ToBoolean(mySqlDataReader["isActief"]);
                         inventaris.IsAanwezig = Convert.ToBoolean(mySqlDataReader["isAanwezig"]);
                         inventaris.Verzekering = verzekering;
+                        inventaris.Factuur = factuur;
                         list.Add(inventaris);
                     }
                     return list;
@@ -580,7 +581,6 @@ namespace CvoInventarisClient.DAL
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
                             obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
-                            obj.Factuur = factuur;
                             obj.ObjectType = objType;
                         }
 
@@ -600,6 +600,7 @@ namespace CvoInventarisClient.DAL
                         inventaris.IsActief = Convert.ToBoolean(mySqlDataReader["isActief"]);
                         inventaris.IsAanwezig = Convert.ToBoolean(mySqlDataReader["isAanwezig"]);
                         inventaris.Verzekering = verzekering;
+                        inventaris.Factuur = factuur;
                     }
                     return inventaris;
                 }

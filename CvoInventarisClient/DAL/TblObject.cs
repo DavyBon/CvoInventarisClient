@@ -24,7 +24,6 @@ namespace CvoInventarisClient.DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.Id));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
-                    command.Parameters.Add(new SqlParameter("@idFactuur", obj.Factuur.Id));
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
@@ -131,7 +130,6 @@ namespace CvoInventarisClient.DAL
 
                         obj.Id = (int?)mySqlDataReader["idObject"];
                         obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
-                        obj.Factuur = factuur;
                         obj.ObjectType = objType;
                         list.Add(obj);
                     }
@@ -217,7 +215,6 @@ namespace CvoInventarisClient.DAL
 
                         obj.Id = (int?)mySqlDataReader["idObject"];
                         obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
-                        obj.Factuur = factuur;
                         obj.ObjectType = objType;
 
                     }
@@ -245,7 +242,6 @@ namespace CvoInventarisClient.DAL
                     command.Parameters.Add(new SqlParameter("@id", obj.Id));
                     command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.Id));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
-                    command.Parameters.Add(new SqlParameter("@idFactuur", obj.Factuur.Id));
                     command.ExecuteReader();
                 }
                 return true;
@@ -260,42 +256,6 @@ namespace CvoInventarisClient.DAL
             }
         }
 
-        public List<ObjectModel> Rapportering(string s, string[] keuzeKolommen)
-        {
-            List<ObjectModel> list = new List<ObjectModel>();
-            ObjectModel objecten = new ObjectModel();
-
-            try
-            {
-                using (SqlCommand cmd = new SqlCommand(s, connection))
-                {
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
-
-                    if (dr.HasRows)
-                    {
-                        while (dr.Read())
-                        {
-                            LokaalModel lokaal = new LokaalModel();
-                            if (keuzeKolommen.Contains("TblObject.kenmerken")) { objecten.Kenmerken = dr["kenmerken"].ToString(); }
-                            if (keuzeKolommen.Contains("tblFactuur.FactuurNummer")) { objecten.Factuur.FactuurNummer = dr["FactuurNummer"].ToString(); }
-                            if (keuzeKolommen.Contains("TblObjectType.omschrijving")) { objecten.ObjectType.Omschrijving = dr["aantalPlaatsen"].ToString(); }
-
-                            list.Add(objecten);
-                        }
-                        return list;
-                    }
-                }
-            }
-            catch
-            {
-                return null;
-            }
-            finally
-            {
-                connection.Close();
-            }
-            return list;
-        }
+      
     }
 }

@@ -12,26 +12,56 @@ namespace CvoInventarisClient.Controllers
     public class InventarisController : Controller
     {
         // GET: Inventaris
-        public ActionResult Index(int? amount, string order)
+        public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
-            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
-            DAL.TblObject TblObject = new DAL.TblObject();
-            DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
-            DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
-            DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
 
-            //WCF servicereference objecten collection naar InventarisModel objecten collection
             InventarisViewModel model = new InventarisViewModel();
-            model.Inventaris = new List<InventarisModel>();
-            model.Objecten = new List<SelectListItem>();
-            model.Lokalen = new List<SelectListItem>();
-            model.Verzekeringen = new List<SelectListItem>();
-            model.Objecttypen = new List<SelectListItem>();
-            model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
 
-            Session["inventaris"] = model.Inventaris;
+            if (Session["inventarisviewmodel"] == null || refresh == true)
+            {
+                DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+                DAL.TblObject TblObject = new DAL.TblObject();
+                DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
+                DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+                DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+                DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
+               
+                model.Inventaris = new List<InventarisModel>();
+                model.Objecten = new List<SelectListItem>();
+                model.Lokalen = new List<SelectListItem>();
+                model.Verzekeringen = new List<SelectListItem>();
+                model.Objecttypen = new List<SelectListItem>();
+                model.Facturen = new List<SelectListItem>();
 
+                model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (ObjectModel o in TblObject.GetAll())
+                {
+                    model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
+                }
+                foreach (LokaalModel l in TblLokaal.GetAll())
+                {
+                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
+                }
+                foreach (VerzekeringModel v in TblVerzekering.GetAll())
+                {
+                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+                }
+                foreach (ObjectTypeModel ot in TblObjecttype.GetAll())
+                {
+                    model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+                }
+                foreach (FactuurModel f in TblFactuur.GetAll())
+                {
+                    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                }
+            }
+            else
+            {
+                model = (InventarisViewModel)Session["inventarisviewmodel"];
+            }
+            Session["inventarisviewmodel"] = model.Clone();
             if (amount == null)
             {
                 model.Inventaris = model.Inventaris.Take(100).ToList();
@@ -60,22 +90,7 @@ namespace CvoInventarisClient.Controllers
                 ViewBag.ordertype = "Meest recent";
             }
 
-            foreach (ObjectModel o in TblObject.GetAll())
-            {
-                model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
-            }
-            foreach (LokaalModel l in TblLokaal.GetAll())
-            {
-                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
-            }
-            foreach (VerzekeringModel v in TblVerzekering.GetAll())
-            {
-                model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
-            }
-            foreach (ObjectTypeModel ot in TblObjecttype.GetAll())
-            {
-                model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
-            }
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString()+" ("+model.Inventaris.Count()+")";
 
             return View(model);
 
@@ -207,25 +222,60 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int? objecttypeFilter, int[] modelList)
+        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int? objecttypeFilter, int? factuurFilter,bool? refresh,int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
-            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
             InventarisViewModel model = new InventarisViewModel();
-            model.Inventaris = (List<InventarisModel>)Session["inventaris"];
-            model.Lokalen = new List<SelectListItem>();
-            model.Objecten = new List<SelectListItem>();
-            model.Objecttypen = new List<SelectListItem>();
-            model.Verzekeringen = new List<SelectListItem>();
 
-
-            //veiligheid voor als session verlopen is
-            if (model.Inventaris == null)
+            if (Session["inventarisviewmodel"] == null || refresh == true)
             {
+                DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+                DAL.TblObject TblObject = new DAL.TblObject();
+                DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
+                DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+                DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+                DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
+
+                model.Inventaris = new List<InventarisModel>();
+                model.Objecten = new List<SelectListItem>();
+                model.Lokalen = new List<SelectListItem>();
+                model.Verzekeringen = new List<SelectListItem>();
+                model.Objecttypen = new List<SelectListItem>();
+                model.Facturen = new List<SelectListItem>();
+
                 model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (ObjectModel o in TblObject.GetAll())
+                {
+                    model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
+                }
+                foreach (LokaalModel l in TblLokaal.GetAll())
+                {
+                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
+                }
+                foreach (VerzekeringModel v in TblVerzekering.GetAll())
+                {
+                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+                }
+                foreach (ObjectTypeModel ot in TblObjecttype.GetAll())
+                {
+                    model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+                }
+                foreach (FactuurModel f in TblFactuur.GetAll())
+                {
+                    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                }
+
+                Session["inventarisviewmodel"] = model.Clone();
             }
+            else
+            {
+                model = (InventarisViewModel)Session["inventarisviewmodel"];
+            }
+
+
 
             // Hier start filteren
             if (objecttypeFilter >= 0)
@@ -305,10 +355,16 @@ namespace CvoInventarisClient.Controllers
                 }
             }
 
+            if (factuurFilter >= 0)
+            {
+                model.Inventaris.RemoveAll(x => x.Factuur.Id != factuurFilter);
+            }
+
             if (verzekeringFilter >= 0)
             {
                 model.Inventaris.RemoveAll(x => x.Verzekering.Id != verzekeringFilter);
             }
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Inventaris.Count() + ")";
             return View("index", model);
         }
     }

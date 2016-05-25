@@ -51,7 +51,6 @@ namespace CvoInventarisClient.Controllers
             ObjectModel obj = new ObjectModel();
             obj.Kenmerken = Request.Form["kenmerken"];
 
-            obj.Factuur = new FactuurModel() { Id = Convert.ToInt32(Request.Form["Facturen"]) };
             obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt32(Request.Form["ObjectTypes"]) };
             TblObject.Create(obj);
 
@@ -98,8 +97,6 @@ namespace CvoInventarisClient.Controllers
             ObjectModel obj = new ObjectModel();
             obj.Id = Convert.ToInt32(Request.Form["idObject"]);
             obj.Kenmerken = Request.Form["kenmerken"];
-            if (!String.IsNullOrWhiteSpace(Request.Form["facturen"])) { obj.Factuur = new FactuurModel() { Id = Convert.ToInt16(Request.Form["Facturen"]) }; }
-            else { obj.Factuur = new FactuurModel() { Id = Convert.ToInt16(Request.Form["defaultIdFactuur"]) }; }
             if (!String.IsNullOrWhiteSpace(Request.Form["ObjectTypes"])) { obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt16(Request.Form["ObjectTypes"]) }; }
             else { obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt16(Request.Form["defaultIdObjectType"]) }; }
 
@@ -132,18 +129,13 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(string kenmerkenFilter, int factuurIdFilter, int ObjectTypeFilter, int[] modelList)
+        public ActionResult Filter(string kenmerkenFilter, int ObjectTypeFilter, int[] modelList)
         {
             ObjectViewModel model = (ObjectViewModel)(Session["objectview"] as ObjectViewModel).Clone();
 
             if (!String.IsNullOrWhiteSpace(kenmerkenFilter))
             {
                 model.Objecten.RemoveAll(x => !x.Kenmerken.ToLower().Contains(kenmerkenFilter.ToLower()));
-            }
-
-            if (factuurIdFilter >= 0)
-            {
-                model.Objecten.RemoveAll(x => x.Factuur.Id != factuurIdFilter);
             }
 
             if (ObjectTypeFilter >= 0)

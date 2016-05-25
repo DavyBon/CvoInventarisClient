@@ -2,8 +2,7 @@
 
 @{
     ViewBag.Title = "Inventaris";
-
-    List<String> amounts = new List<string>() {"100","200","300"};
+    List<String> amounts = new List<string>() { "100", "200", "300" };
     List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Lokaal" };
 }
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
@@ -49,19 +48,23 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
+
     if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
     {
-        <a class="btn btn-danger pull-right" href="@Url.Action("Index","Inventaris")">Verwijder filter</a>
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Inventaris")">Verwijder filter</a>
     }
     else
     {
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
     }
 
+    <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Inventaris",new RouteValueDictionary(new { refresh = true}))"><span class="glyphicon glyphicon-refresh"></span></a>
+
+
     <div class="spacer"></div>
 
     <div class="panel panel-primary">
-        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-heading">@ViewBag.Heading</div>
         <table class="table table-striped dataTable">
             <thead>
                 <tr>
@@ -90,6 +93,12 @@
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Factuur.FactuurNummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Factuur.Leverancier)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering.Omschrijving)
@@ -129,6 +138,12 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Afschrijvingsperiode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factuur.FactuurNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factuur.Leverancier)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
@@ -183,7 +198,7 @@
 
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Object)
-                        <select class="form-control" name="Objecten" >
+                        <select class="form-control" name="Objecten">
                             <option value="">-Selecteer-</option>
                             @foreach (var item in Model.Objecten)
                             {
@@ -212,15 +227,15 @@
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
-                        <input class="form-control" type="text" maxlength="1024" name="historiek"  />
+                        <input class="form-control" type="text" maxlength="1024" name="historiek" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)
-                        <input class="form-control" type="number" name="aankoopjaar"  />
+                        <input class="form-control" type="number" name="aankoopjaar" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
-                        <input class="form-control" type="number" name="afschrijvingsperiode"  />
+                        <input class="form-control" type="number" name="afschrijvingsperiode" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
@@ -235,7 +250,7 @@
                     <hr />
                     <div class="form-group">
                         @Html.Label("Aantal")
-                        <input class="form-control" type="number" name="aantal" value="1" min="1"  />
+                        <input class="form-control" type="number" name="aantal" value="1" min="1" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -338,6 +353,16 @@
                                 <option value=">">na</option>
                             </select>
                             <input class="form-control" type="number" name="filterAfschrijvingsperiode" placeholder="periode(in jaar)" />
+                        </div>
+                        <div class="form-group">
+                            <label>Factuur:</label>
+                            <select class="form-control" name="factuurFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Facturen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
                         </div>
                         <div class="form-group">
                             <label>Verzekering:</label>
