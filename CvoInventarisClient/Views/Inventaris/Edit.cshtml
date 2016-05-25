@@ -60,6 +60,19 @@
                 <input class="form-control" type="number" name="afschrijvingsperiode"  value="@Model.Inventaris[0].Afschrijvingsperiode" />
             </div>
             <div class="form-group">
+                <label>Factuur:</label>
+                <select class="form-control" name="Facturen">
+                    <option value="@Model.Inventaris[0].Factuur.Id">@Model.Inventaris[0].Factuur.FactuurNummer</option>
+                    @foreach (var item in Model.Facturen)
+                    {
+                        if (item.Value != Model.Inventaris[0].Factuur.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
                 @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
                 <select class="form-control" name="Verzekeringen">
                     <option value="@Model.Inventaris[0].Verzekering.Id">@Model.Inventaris[0].Verzekering.Omschrijving</option>

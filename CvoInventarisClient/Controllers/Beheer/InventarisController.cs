@@ -26,7 +26,7 @@ namespace CvoInventarisClient.Controllers
                 DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
                 DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
                 DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
-               
+
                 model.Inventaris = new List<InventarisModel>();
                 model.Objecten = new List<SelectListItem>();
                 model.Lokalen = new List<SelectListItem>();
@@ -90,7 +90,7 @@ namespace CvoInventarisClient.Controllers
                 ViewBag.ordertype = "Meest recent";
             }
 
-            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString()+" ("+model.Inventaris.Count()+")";
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Inventaris.Count() + ")";
 
             return View(model);
 
@@ -113,6 +113,7 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Object = new ObjectModel() { Id = Objecten };
                 inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
                 inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
+                inventaris.Factuur = new FactuurModel();
                 if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
                 else
                 {
@@ -127,7 +128,7 @@ namespace CvoInventarisClient.Controllers
             }
 
             TempData["action"] = "Object werd toegevoegd aan inventaris";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // GET: Inventaris/Edit/5
@@ -135,6 +136,7 @@ namespace CvoInventarisClient.Controllers
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
             DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
             DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
             InventarisViewModel model = new InventarisViewModel();
 
@@ -142,23 +144,22 @@ namespace CvoInventarisClient.Controllers
             model.Objecten = new List<SelectListItem>();
             model.Lokalen = new List<SelectListItem>();
             model.Verzekeringen = new List<SelectListItem>();
+            model.Facturen = new List<SelectListItem>();
 
             InventarisModel i = TblInventaris.GetById(id);
             model.Inventaris.Add(i);
 
             foreach (LokaalModel l in TblLokaal.GetAll())
             {
-                if (!(l.Id == i.Lokaal.Id))
-                {
-                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
-                }
+                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
             }
             foreach (VerzekeringModel v in TblVerzekering.GetAll())
             {
-                if (!(v.Id == i.Verzekering.Id))
-                {
-                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
-                }
+                model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+            }
+            foreach (FactuurModel f in TblFactuur.GetAll())
+            {
+                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
             }
             return View(model);
 
@@ -166,7 +167,7 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(int? idObject, int? Lokalen, int? Verzekeringen)
+        public ActionResult Edit(int? idObject, int? Lokalen, int? Verzekeringen, int? Facturen)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
@@ -178,6 +179,7 @@ namespace CvoInventarisClient.Controllers
             inventaris.Object = new ObjectModel() { Id = idObject };
             inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
             inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
+            inventaris.Factuur = new FactuurModel() { Id = Facturen };
 
 
             if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
@@ -193,7 +195,7 @@ namespace CvoInventarisClient.Controllers
             TblInventaris.Update(inventaris);
 
             TempData["action"] = "Object in inventaris werd gewijzigd";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
 
@@ -218,18 +220,18 @@ namespace CvoInventarisClient.Controllers
             {
                 TempData["action"] = idArray.Length + " object werd verwijderd uit de inventaris";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         [HttpPost]
-        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int? objecttypeFilter, int? factuurFilter,bool? refresh,int[] modelList)
+        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int? objecttypeFilter, int? factuurFilter, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
 
             InventarisViewModel model = new InventarisViewModel();
 
-            if (Session["inventarisviewmodel"] == null || refresh == true)
+            if (Session["inventarisviewmodel"] == null)
             {
                 DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
                 DAL.TblObject TblObject = new DAL.TblObject();

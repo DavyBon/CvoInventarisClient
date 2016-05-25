@@ -142,6 +142,7 @@ namespace CvoInventarisClient.DAL
 
 
 
+
                         if (mySqlDataReader["idFactuur"] != DBNull.Value)
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
@@ -605,8 +606,9 @@ namespace CvoInventarisClient.DAL
                     return inventaris;
                 }
             }
-            catch
+            catch(Exception e)
             {
+                Debug.Write(e);
                 return null;
             }
             finally
@@ -632,6 +634,7 @@ namespace CvoInventarisClient.DAL
                     command.Parameters.Add(new SqlParameter("@isActief", Convert.ToInt32(inventaris.IsActief)));
                     command.Parameters.Add(new SqlParameter("@isAanwezig", Convert.ToInt32(inventaris.IsAanwezig)));
                     command.Parameters.Add(new SqlParameter("@idVerzekering", App_Code.DALutil.checkIntForDBNUll(inventaris.Verzekering.Id)));
+                    command.Parameters.Add(new SqlParameter("@idFactuur", App_Code.DALutil.checkIntForDBNUll(inventaris.Factuur.Id)));
                     command.ExecuteReader();
                 }
                 return true;

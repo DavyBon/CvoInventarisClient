@@ -11,32 +11,70 @@ namespace CvoInventarisClient.Controllers
     public class ObjectController : Controller
     {
         // GET: Inventaris
-        public ActionResult Index()
+        public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
-            DAL.TblObject TblObject = new DAL.TblObject();
-            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
-            DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
 
             ObjectViewModel model = new ObjectViewModel();
-            model.Objecten = new List<ObjectModel>();
-            model.Facturen = new List<SelectListItem>();
-            model.ObjectTypes = new List<SelectListItem>();
 
-            foreach (ObjectModel o in TblObject.GetAll())
+            if (Session["objectviewmodel"] == null || refresh == true)
             {
-                model.Objecten.Add(o);
+
+                DAL.TblObject TblObject = new DAL.TblObject();
+                DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+                DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
+
+                model.Objecten = new List<ObjectModel>();
+                model.Facturen = new List<SelectListItem>();
+                model.ObjectTypes = new List<SelectListItem>();
+
+
+                model.Objecten = TblObject.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (FactuurModel f in TblFactuur.GetAll())
+                {
+                    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                }
+                foreach (ObjectTypeModel ot in TblObjectType.GetAll())
+                {
+                    model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+                }
             }
-            foreach (FactuurModel f in TblFactuur.GetAll())
+            else
             {
-                model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                model = (ObjectViewModel)Session["objectviewmodel"];
             }
-            foreach (ObjectTypeModel ot in TblObjectType.GetAll())
+            this.Session["objectviewmodel"] = model;
+            Session["inventarisviewmodel"] = model.Clone();
+            if (amount == null)
             {
-                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+                model.Objecten = model.Objecten.Take(100).ToList();
+                ViewBag.amount = "100";
+            }
+            else
+            {
+                model.Objecten = model.Objecten.Take((int)amount).ToList();
+                ViewBag.amount = amount.ToString();
             }
 
-            this.Session["objectview"] = model;
+            if (!string.IsNullOrWhiteSpace(order))
+            {
+                if (order.Equals("Oudst"))
+                {
+                    model.Objecten.Reverse();
+                }
+                else if (order.Equals("Type"))
+                {
+                    model.Objecten = model.Objecten.OrderBy(o => o.ObjectType.Id).ToList();
+                }
+                ViewBag.ordertype = order.ToString();
+            }
+            else
+            {
+                ViewBag.ordertype = "Meest recent";
+            }
+
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Objecten.Count() + ")";
 
             return View(model);
 
@@ -55,7 +93,7 @@ namespace CvoInventarisClient.Controllers
             TblObject.Create(obj);
 
             TempData["action"] = "Object werd toegevoegd";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // GET: Inventaris/Edit/5
@@ -103,7 +141,7 @@ namespace CvoInventarisClient.Controllers
             TblObject.Update(obj);
 
             TempData["action"] = "Object werd gewijzigd";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // POST: Inventaris/Delete/5
@@ -125,13 +163,45 @@ namespace CvoInventarisClient.Controllers
             {
                 TempData["action"] = idArray.Length + " object werd verwijderd uit objecten";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         [HttpPost]
         public ActionResult Filter(string kenmerkenFilter, int ObjectTypeFilter, int[] modelList)
         {
-            ObjectViewModel model = (ObjectViewModel)(Session["objectview"] as ObjectViewModel).Clone();
+
+            ViewBag.action = TempData["action"];
+
+
+            ObjectViewModel model = new ObjectViewModel();
+
+            if (Session["objectviewmodel"] == null)
+            {
+
+                DAL.TblObject TblObject = new DAL.TblObject();
+                DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+                DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
+
+                model.Objecten = new List<ObjectModel>();
+                model.Facturen = new List<SelectListItem>();
+                model.ObjectTypes = new List<SelectListItem>();
+
+
+                model.Objecten = TblObject.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (FactuurModel f in TblFactuur.GetAll())
+                {
+                    model.Facturen.Add(new SelectListItem { Text = f.FactuurNummer, Value = f.Id.ToString() });
+                }
+                foreach (ObjectTypeModel ot in TblObjectType.GetAll())
+                {
+                    model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+                }
+            }
+            else
+            {
+                model = (ObjectViewModel)Session["objectviewmodel"];
+            }
 
             if (!String.IsNullOrWhiteSpace(kenmerkenFilter))
             {
