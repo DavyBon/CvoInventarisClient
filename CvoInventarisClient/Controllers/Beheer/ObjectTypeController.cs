@@ -16,11 +16,47 @@ namespace CvoInventarisClient.Controllers
             return model;
             
         }
-        public ActionResult Index()
+        public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
-            DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
-            List<ObjectTypeModel> model = tblObjectType.GetAll();
+            ObjectTypeViewModel model = new ObjectTypeViewModel();
+            if (Session["objectTypeviewmodel"] == null || refresh == true)
+            {
+                DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
+                List<ObjectTypeModel> objectType = tblObjectType.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+                model.objectTypes = objectType;
+            }
+            else
+            {
+                model = (ObjectTypeViewModel)Session["objectTypeviewmodel"];
+            }
+            Session["objectTypeviewmodel"] = model.Clone();
+            if (amount == null)
+            {
+                model.objectTypes = model.objectTypes.Take(100).ToList();
+                ViewBag.amount = "100";
+            }
+            else
+            {
+                model.objectTypes = model.objectTypes.Take((int)amount).ToList();
+                ViewBag.amount = amount.ToString();
+            }
+
+            if (!string.IsNullOrWhiteSpace(order))
+            {
+                if (order.Equals("Oudst"))
+                {
+                    model.objectTypes.Reverse();
+                }
+                ViewBag.ordertype = order.ToString();
+            }
+            else
+            {
+                ViewBag.ordertype = "Meest recent";
+            }
+
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.objectTypes.Count() + ")";
+
             return View(model);
             
         }
@@ -28,10 +64,12 @@ namespace CvoInventarisClient.Controllers
         // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
+            ObjectTypeViewModel model = new ObjectTypeViewModel();
             DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
             ObjectTypeModel objectType = new ObjectTypeModel();
             objectType = tblObjectType.GetById(id);
-            return View(objectType);
+            model.objectTypes.Add(objectType);
+            return View(model);
             
         }
 

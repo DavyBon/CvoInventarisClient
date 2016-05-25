@@ -188,11 +188,13 @@
     <Compile Include="Models\LokaalViewModel.cs" />
     <Compile Include="Models\ObjectModel.cs" />
     <Compile Include="Models\ObjectTypeModel.cs" />
+    <Compile Include="Models\ObjectTypeViewModel.cs" />
     <Compile Include="Models\ObjectViewModel.cs" />
     <Compile Include="Models\PostcodeModel.cs" />
     <Compile Include="Models\SessionModel.cs" />
     <Compile Include="Models\TicketModel.cs" />
     <Compile Include="Models\VerzekeringModel.cs" />
+    <Compile Include="Models\VerzekeringViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

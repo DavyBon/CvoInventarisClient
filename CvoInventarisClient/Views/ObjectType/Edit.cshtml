@@ -1,4 +1,4 @@
-﻿@model CvoInventarisClient.Models.ObjectTypeModel
+﻿@model CvoInventarisClient.Models.ObjectTypeViewModel
 
 @{
     ViewBag.Title = "ObjectType - Edit";
@@ -9,10 +9,10 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
-            @Html.Hidden("idObjectType", Model.Id)
+            @Html.Hidden("idObjectType", Model.objectTypes[0].Id)
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Omschrijving)
-                <input class="form-control" maxlength="50" type="text" name="omschrijving" value="@Model.Omschrijving" required />
+                @Html.DisplayNameFor(model => model.objectTypes[0].Omschrijving)
+                <input class="form-control" maxlength="50" type="text" name="omschrijving" value="@Model.objectTypes[0].Omschrijving" required />
             </div>
         </div>
     </div>

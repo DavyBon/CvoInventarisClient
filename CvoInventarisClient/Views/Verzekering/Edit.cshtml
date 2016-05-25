@@ -1,4 +1,4 @@
-﻿@model CvoInventarisClient.Models.VerzekeringModel
+﻿@model CvoInventarisClient.Models.VerzekeringViewModel
 
 @{
     ViewBag.Title = "Verzekering - Edit";
@@ -9,10 +9,10 @@
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
-            @Html.Hidden("idVerzekering", Model.Id)
+            @Html.Hidden("idVerzekering", Model.Verzekeringen[0].Id)
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Omschrijving)
-                <input class="form-control" type="text" maxlength="50" name="omschrijving" value="@Model.Omschrijving" required />
+                @Html.DisplayNameFor(model => model.Verzekeringen[0].Omschrijving)
+                <input class="form-control" type="text" maxlength="50" name="omschrijving" value="@Model.Verzekeringen[0].Omschrijving" required />
             </div>
         </div>
     </div>
