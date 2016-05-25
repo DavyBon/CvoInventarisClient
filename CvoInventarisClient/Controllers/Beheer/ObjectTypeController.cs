@@ -64,13 +64,15 @@ namespace CvoInventarisClient.Controllers
         // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            ObjectTypeViewModel model = new ObjectTypeViewModel();
             DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
-            ObjectTypeModel objectType = new ObjectTypeModel();
-            objectType = tblObjectType.GetById(id);
+
+            ObjectTypeViewModel model = new ObjectTypeViewModel();
+            model.objectTypes = new List<ObjectTypeModel>();
+
+            ObjectTypeModel objectType = tblObjectType.GetById(id);
             model.objectTypes.Add(objectType);
             return View(model);
-            
+
         }
 
         // POST: Inventaris/Edit/5

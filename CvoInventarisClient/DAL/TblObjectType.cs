@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 
@@ -104,7 +105,10 @@ namespace CvoInventarisClient.DAL
                         objectTypes.Omschrijving = reader["omschrijving"].ToString();
                     }
                 }
-                catch { }
+                catch(Exception e)
+                {
+                    Debug.Print(e.Message);
+                }
             }
 
             return objectTypes;

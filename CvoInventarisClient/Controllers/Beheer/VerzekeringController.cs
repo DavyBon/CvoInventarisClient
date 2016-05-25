@@ -75,8 +75,9 @@ namespace CvoInventarisClient.Controllers
         // GET: Inventaris/Edit/5
         public ActionResult Edit(int id)
         {
-            VerzekeringViewModel model = new VerzekeringViewModel();
             DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            VerzekeringViewModel model = new VerzekeringViewModel();
+            model.Verzekeringen = new List<VerzekeringModel>();
             VerzekeringModel verzekering = dalVerzekering.GetById(id);
             model.Verzekeringen.Add(verzekering);
             return View(model);
