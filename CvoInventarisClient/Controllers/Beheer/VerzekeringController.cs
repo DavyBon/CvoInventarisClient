@@ -23,7 +23,7 @@ namespace CvoInventarisClient.Controllers
             if (Session["verzekeringviewwmodel"] == null || refresh == true)
             {
                 DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
-                List<VerzekeringModel> verzekeringen = dalVerzekering.GetAll();
+                List<VerzekeringModel> verzekeringen = dalVerzekering.GetAll().OrderBy(i => i.Id).Reverse().ToList();
                 model.Verzekeringen = verzekeringen;
                 
             }
@@ -45,7 +45,7 @@ namespace CvoInventarisClient.Controllers
 
             if (!string.IsNullOrWhiteSpace(order))
             {
-                if (order.Equals("Meest recent"))
+                if (order.Equals("Oudst"))
                 {
                     model.Verzekeringen.Reverse();
                 }
@@ -53,7 +53,7 @@ namespace CvoInventarisClient.Controllers
             }
             else
             {
-                ViewBag.ordertype = "Oudst";
+                ViewBag.ordertype = "Meest recent"; 
             }
 
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Verzekeringen.Count() + ")";
