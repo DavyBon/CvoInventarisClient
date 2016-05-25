@@ -13,31 +13,65 @@ namespace CvoInventarisClient.Controllers
     public class FactuurController : Controller
     {
 
+        #region Get Index
+
         // INDEX:
-        public ActionResult Index()
+        public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
 
-            TblFactuur TblFactuur = new TblFactuur();
-            TblLeverancier TblLeverancier = new TblLeverancier();
-
             FactuurViewModel model = new FactuurViewModel();
-            model.Facturen = new List<FactuurModel>();
-            model.Leveranciers = new List<SelectListItem>();
 
-            foreach (FactuurModel f in TblFactuur.GetAll())
+            if (Session["factuurviewmodel"] == null || refresh == true)
             {
-                model.Facturen.Add(f);
+                TblFactuur TblFactuur = new TblFactuur();
+                TblLeverancier TblLeverancier = new TblLeverancier();
+
+                model.Facturen = new List<FactuurModel>();
+                model.Leveranciers = new List<SelectListItem>();
+
+                model.Facturen = TblFactuur.GetAll().OrderBy(f => f.Id).Reverse().ToList();
+
+                foreach (LeverancierModel l in TblLeverancier.GetAll())
+                {
+                    model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+                }
             }
-            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            else
             {
-                model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+                model = (FactuurViewModel)Session["factuurviewmodel"];
+            }
+            Session["factuurviewmodel"] = model.Clone();
+            if (amount == null)
+            {
+                model.Facturen = model.Facturen.Take(100).ToList();
+                ViewBag.amount = amount.ToString();
             }
 
-            this.Session["factuurView"] = model;
+            if (!string.IsNullOrWhiteSpace(order))
+            {
+                if (order.Equals("Oudst"))
+                {
+                    model.Facturen.Reverse();
+                }
+                else if (order.Equals("CVO Factuurnummer"))
+                {
+                    model.Facturen = model.Facturen.OrderBy(f => f.CvoFactuurNummer).ToList();
+                }
+            }
+            else
+            {
+                ViewBag.ordertype = "Meest recent";
+            }
+
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Facturen.Count() + ")";
 
             return View(model);
         }
+
+        #endregion
+
+        #region Create
 
         // CREATE:
         [HttpPost]
@@ -69,6 +103,10 @@ namespace CvoInventarisClient.Controllers
             return RedirectToAction("Index");
         }
 
+        #endregion
+
+        #region Get Edit view
+
         // EDIT:
         public ActionResult Edit(int id)
         {
@@ -91,6 +129,10 @@ namespace CvoInventarisClient.Controllers
             }
             return View(model);
         }
+
+        #endregion
+
+        #region Edit
 
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
@@ -122,7 +164,9 @@ namespace CvoInventarisClient.Controllers
             return RedirectToAction("Index");
         }
 
+        #endregion
 
+        #region Delete
 
         // DELETE:
         [HttpPost]
@@ -147,6 +191,9 @@ namespace CvoInventarisClient.Controllers
             return RedirectToAction("Index");
         }
 
+        #endregion
+
+        #region Filter
 
         // FILTER:
         [HttpPost]
@@ -157,7 +204,29 @@ namespace CvoInventarisClient.Controllers
         {
             ViewBag.action = TempData["action"];
 
-            FactuurViewModel model = (FactuurViewModel)(Session["factuurView"] as FactuurViewModel).Clone();
+            FactuurViewModel model = new FactuurViewModel();
+
+            if (Session["factuurviewmodel"] == null)
+            {
+                TblFactuur TblFactuur = new TblFactuur();
+                TblLeverancier TblLeverancier = new TblLeverancier();
+
+                model.Facturen = new List<FactuurModel>();
+                model.Leveranciers = new List<SelectListItem>();
+
+                model.Facturen = TblFactuur.GetAll().OrderBy(f => f.Id).Reverse().ToList();
+
+                foreach (LeverancierModel l in TblLeverancier.GetAll())
+                {
+                    model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+                }
+
+                Session["factuurviewmodel"] = model.Clone();
+            }
+            else
+            {
+                model = (FactuurViewModel)Session["factuurviewmodel"];
+            }
 
             // Hier start filteren
 
@@ -229,5 +298,7 @@ namespace CvoInventarisClient.Controllers
 
             return View("index", model);
         }
+
+        #endregion
     }
 }

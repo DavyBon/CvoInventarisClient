@@ -41,7 +41,7 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    SqlDataReader dr = cmd.ExecuteReader();
 
                     while (dr.Read())
                     {
@@ -118,7 +118,7 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("idFactuur", id);
-                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    SqlDataReader dr = cmd.ExecuteReader();
 
                     while (dr.Read())
                     {
@@ -268,6 +268,160 @@ namespace CvoInventarisClient.DAL
             {
                 Debug.WriteLine(e);
                 return false;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        #endregion
+
+        #region Get Top
+
+        public List<FactuurModel> GetTop()
+        {
+            List<FactuurModel> list = new List<FactuurModel>();
+            FactuurModel factuur;
+            LeverancierModel leverancier;
+            PostcodeModel postcode;
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("TblFactuurReadTop", connection))
+                {
+                    connection.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@amount", 100);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        factuur = new FactuurModel();
+                        leverancier = new LeverancierModel();
+                        postcode = new PostcodeModel();
+
+                        if (dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int?)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
+
+                        if (dr["idLeverancier"] != DBNull.Value)
+                        {
+                            leverancier.Id = (int?)dr["idLeverancier"];
+                            leverancier.Afkorting = dr["afkorting"].ToString();
+                            leverancier.Bic = dr["bic"].ToString();
+                            leverancier.BtwNummer = dr["btwNummer"].ToString();
+                            leverancier.BusNummer = dr["busNummer"].ToString();
+                            leverancier.Email = dr["email"].ToString();
+                            leverancier.Fax = dr["fax"].ToString();
+                            leverancier.HuisNummer = dr["huisNummer"].ToString();
+                            leverancier.Iban = dr["iban"].ToString();
+                            leverancier.Naam = dr["naam"].ToString();
+                            leverancier.Postcode = postcode;
+                            leverancier.Straat = dr["straat"].ToString();
+                            leverancier.Telefoon = dr["telefoon"].ToString();
+                            leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
+                            leverancier.Website = dr["website"].ToString();
+                        }
+
+                        factuur.Id = (int?)dr["idFactuur"];
+                        factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
+                        factuur.Leverancier = leverancier;
+                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Garantie = (int)dr["garantie"];
+                        factuur.Omschrijving = dr["omschrijving"].ToString();
+                        factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
+                        factuur.VerwerkingsDatum = dr["verwerkingsDatum"].ToString();
+                        factuur.CvoFactuurNummer = dr["cvoFactuurNummer"].ToString();
+                        factuur.LeverancierFactuurNummer = dr["leverancierFactuurNummer"].ToString();
+                        list.Add(factuur);
+                    }
+                    return list;
+                }
+            }
+            catch
+            {
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        #endregion
+
+        #region Get Top Amount
+
+        public List<FactuurModel> GetTop(int amount)
+        {
+            List<FactuurModel> list = new List<FactuurModel>();
+            FactuurModel factuur;
+            LeverancierModel leverancier;
+            PostcodeModel postcode;
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("TblFactuurReadTop", connection))
+                {
+                    connection.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@amount", amount);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        factuur = new FactuurModel();
+                        leverancier = new LeverancierModel();
+                        postcode = new PostcodeModel();
+
+                        if (dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int?)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
+
+                        if (dr["idLeverancier"] != DBNull.Value)
+                        {
+                            leverancier.Id = (int?)dr["idLeverancier"];
+                            leverancier.Afkorting = dr["afkorting"].ToString();
+                            leverancier.Bic = dr["bic"].ToString();
+                            leverancier.BtwNummer = dr["btwNummer"].ToString();
+                            leverancier.BusNummer = dr["busNummer"].ToString();
+                            leverancier.Email = dr["email"].ToString();
+                            leverancier.Fax = dr["fax"].ToString();
+                            leverancier.HuisNummer = dr["huisNummer"].ToString();
+                            leverancier.Iban = dr["iban"].ToString();
+                            leverancier.Naam = dr["naam"].ToString();
+                            leverancier.Postcode = postcode;
+                            leverancier.Straat = dr["straat"].ToString();
+                            leverancier.Telefoon = dr["telefoon"].ToString();
+                            leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
+                            leverancier.Website = dr["website"].ToString();
+                        }
+
+                        factuur.Id = (int?)dr["idFactuur"];
+                        factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
+                        factuur.Leverancier = leverancier;
+                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Garantie = (int)dr["garantie"];
+                        factuur.Omschrijving = dr["omschrijving"].ToString();
+                        factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
+                        factuur.VerwerkingsDatum = dr["verwerkingsDatum"].ToString();
+                        factuur.CvoFactuurNummer = dr["cvoFactuurNummer"].ToString();
+                        factuur.LeverancierFactuurNummer = dr["leverancierFactuurNummer"].ToString();
+                        list.Add(factuur);
+                    }
+                    return list;
+                }
+            }
+            catch
+            {
+                return null;
             }
             finally
             {
