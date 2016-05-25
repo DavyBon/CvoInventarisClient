@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Leveranciers";
+    List<String> amounts = new List<string>() { "100", "200", "300" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Lokaal" };
 }
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
 {
@@ -10,6 +12,37 @@
         @ViewBag.action
     </div>
 }
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Leverancier"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
+
 @using (Html.BeginForm("Delete", "Leverancier"))
 {
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
@@ -49,7 +82,7 @@
                         @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode.Gemeente)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)
@@ -164,59 +197,65 @@
                 <div class="modal-body">
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Naam)
-                        <input class="form-control" maxlength="255" type="text" name="naam"  />
+                        <input class="form-control" maxlength="255" type="text" name="naam" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Afkorting)
-                        <input class="form-control" maxlength="10" type="text" name="afkorting"  />
+                        <input class="form-control" maxlength="10" type="text" name="afkorting" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
-                        <input class="form-control" maxlength="255" type="text" name="straat"  />
+                        <input class="form-control" maxlength="255" type="text" name="straat" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].HuisNummer)
-                        <input class="form-control" maxlength="10" type="text" name="huisNummer"  />
+                        <input class="form-control" maxlength="10" type="text" name="huisNummer" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
-                        <input class="form-control" maxlength="10" type="text" name="busNummer"  />
+                        <input class="form-control" maxlength="10" type="text" name="busNummer" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode)
-                        <input class="form-control" type="text" name="postcode"  />
+                        <select class="form-control" name="Verzekeringen">
+                            <option value="">-Selecteer-</option>
+                            @foreach (var item in Model.Postcodes)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)
-                        <input class="form-control" maxlength="50" type="text" name="telefoon"  />
+                        <input class="form-control" maxlength="50" type="text" name="telefoon" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Fax)
-                        <input class="form-control" maxlength="50" type="text" name="fax"  />
+                        <input class="form-control" maxlength="50" type="text" name="fax" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Email)
-                        <input class="form-control" maxlength="50" type="text" name="email"  />
+                        <input class="form-control" maxlength="50" type="text" name="email" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Website)
-                        <input class="form-control" maxlength="50" type="text" name="website"  />
+                        <input class="form-control" maxlength="50" type="text" name="website" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].BtwNummer)
-                        <input class="form-control" maxlength="50" type="text" name="btwNummer"  />
+                        <input class="form-control" maxlength="50" type="text" name="btwNummer" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Iban)
-                        <input class="form-control" maxlength="50" type="text" name="iban"  />
+                        <input class="form-control" maxlength="50" type="text" name="iban" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Bic)
-                        <input class="form-control" maxlength="50" type="text" name="bic"  />
+                        <input class="form-control" maxlength="50" type="text" name="bic" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].ToegevoegdOp)
-                        <input class="form-control" maxlength="20" type="date" name="toegevoegdOp"  />
+                        <input class="form-control" maxlength="20" type="date" name="toegevoegdOp" />
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -295,9 +334,9 @@
                             <input class="form-control" type="text" name="bicFilter" />
                         </div>
                         @*<div class="form-group">
-                            <label>Toegevoegd op:</label>
-                            <input class="form-control" type="date" name="toegevoegdOpFilter" />
-                        </div>*@
+                                <label>Toegevoegd op:</label>
+                                <input class="form-control" type="date" name="toegevoegdOpFilter" />
+                            </div>*@
                     </div>
                 </div>
                 <div class="modal-footer">

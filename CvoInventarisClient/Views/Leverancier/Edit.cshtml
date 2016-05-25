@@ -32,7 +32,16 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode.Gemeente)
-                <input class="form-control" type="text" name="postcode" value="@Model.Leveranciers[0].Postcode.Gemeente" />
+                <select class="form-control" name="Lokalen">
+                    <option value="@Model.Leveranciers[0].Postcode.Id">@Model.Leveranciers[0].Postcode.Gemeente</option>
+                    @foreach (var item in Model.Postcodes)
+                    {
+                        if (item.Value != Model.Leveranciers[0].Postcode.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)

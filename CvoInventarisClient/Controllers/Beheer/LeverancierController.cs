@@ -12,28 +12,67 @@ namespace CvoInventarisClient.Controllers
     {
 
         // INDEX:
-        public ActionResult Index()
+        public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
-            DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
-            DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
 
             LeverancierViewModel model = new LeverancierViewModel();
-            model.Leveranciers = new List<LeverancierModel>();
-            model.Postcodes = new List<SelectListItem>();
 
-            foreach (LeverancierModel l in tblLeverancier.GetAll())
+            if (Session["leverancierviewmodel"] == null || refresh == true)
             {
-                model.Leveranciers.Add(l);
+                DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+                DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
+
+                model.Leveranciers = new List<LeverancierModel>();
+                model.Postcodes = new List<SelectListItem>();
+
+                model.Leveranciers = tblLeverancier.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (PostcodeModel p in tblPostcode.GetAll())
+                {
+                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                }
             }
-            foreach (PostcodeModel p in tblPostcode.GetAll())
+            else
             {
-                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                model = (LeverancierViewModel)Session["leverancierviewmodel"];
+            }
+            Session["leverancierviewmodel"] = model.Clone();
+            if (amount == null)
+            {
+                model.Leveranciers = model.Leveranciers.Take(100).ToList();
+                ViewBag.amount = "100";
+            }
+            else
+            {
+                model.Leveranciers = model.Leveranciers.Take((int)amount).ToList();
+                ViewBag.amount = amount.ToString();
             }
 
-            this.Session["leverancierview"] = model;
+            if (!string.IsNullOrWhiteSpace(order))
+            {
+                if (order.Equals("Oudst"))
+                {
+                    model.Leveranciers.Reverse();
+                }
+                //else if (order.Equals("Lokaal"))
+                //{
+                //    model.Leveranciers = model.Leveranciers.OrderBy(i => i.Lokaal.Id).ToList();
+                //}
+                ViewBag.ordertype = order.ToString();
+            }
+            else
+            {
+                ViewBag.ordertype = "Meest recent";
+            }
+
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Leveranciers.Count() + ")";
 
             return View(model);
+
+            //this.Session["leverancierview"] = model;
+
+            //return View(model);
         }
 
         // CREATE:
@@ -80,13 +119,13 @@ namespace CvoInventarisClient.Controllers
             LeverancierModel l = tblLeverancier.GetById(id);
             model.Leveranciers.Add(l);
 
-            foreach (PostcodeModel p in tblPostcode.GetAll())
+            foreach (PostcodeModel pm in tblPostcode.GetAll())
             {
-                if (!(p.Id == l.Postcode.Id))
+                if (!(pm.Id == l.Postcode.Id))
                 {
-                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                    model.Postcodes.Add(new SelectListItem { Text = pm.Gemeente, Value = pm.Id.ToString() });
                 }
-                model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+                model.Postcodes.Add(new SelectListItem { Text = pm.Postcode, Value = pm.Id.ToString() });
             }
 
             return View(model);
@@ -121,7 +160,7 @@ namespace CvoInventarisClient.Controllers
 
             tblLeverancier.Update(leverancier);
 
-            TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd aangepast";
+            TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd gewijzigd";
 
             return RedirectToAction("Index");
         }
@@ -132,6 +171,7 @@ namespace CvoInventarisClient.Controllers
         {
             if (idArray == null) { return RedirectToAction("Index"); }
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+
             foreach (int id in idArray)
             {
                 tblLeverancier.Delete(id);
@@ -151,11 +191,31 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Filter(string naamFilter, string afkortingFilter, string straatFilter, string huisnummerFilter, string busnummerFilter,
             int postcodeFilter, string telefoonFilter, string faxFilter, string websiteFilter, string btwnummerFilter,
-            string ibanFilter, string bicFilter, string toegevoegdOpFilter, int[] modelList)
+            string ibanFilter, string bicFilter, string toegevoegdOpFilter, bool? refresh, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
-            LeverancierViewModel model = (LeverancierViewModel)(Session["leverancierview"] as LeverancierViewModel).Clone();
+            LeverancierViewModel model = new LeverancierViewModel();
+
+            if (Session["leverancierviewmodel"] == null || refresh == true)
+            {
+                DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+                DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
+
+                model.Leveranciers = new List<LeverancierModel>();
+                model.Postcodes = new List<SelectListItem>();
+
+                model.Leveranciers = tblLeverancier.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (PostcodeModel p in tblPostcode.GetAll())
+                {
+                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                }
+            }
+            else
+            {
+                model = (LeverancierViewModel)Session["leverancierviewmodel"];
+            }
 
             // Hier start filteren
             if (!String.IsNullOrWhiteSpace(naamFilter))
@@ -210,6 +270,7 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Leveranciers.RemoveAll(x => !x.ToegevoegdOp.ToLower().Contains(toegevoegdOpFilter.ToLower()));
             }
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Leveranciers.Count() + ")";
             return View("index", model);
         }
     }
