@@ -65,7 +65,7 @@ namespace CvoInventarisClient.DAL
 
                         while (dr.Read())
                         {
-                            LokaalModel l = new LokaalModel();
+                            LokaalModel lm = new LokaalModel();
                             campus = new CampusModel();
                             postcode = new PostcodeModel();
 
@@ -85,12 +85,12 @@ namespace CvoInventarisClient.DAL
                                 campus.Nummer = dr["nummer"].ToString();
                             }
 
-                            l.Id = (int?)dr["idLokaal"];
-                            l.LokaalNaam = dr["lokaalNaam"].ToString();
-                            l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
-                            l.IsComputerLokaal = (bool)dr["isComputerLokaal"];
-                            l.Campus = campus;
-                            list.Add(l);
+                            lm.Id = (int?)dr["idLokaal"];
+                            lm.LokaalNaam = dr["lokaalNaam"].ToString();
+                            lm.AantalPlaatsen = (int)dr["aantalPlaatsen"];
+                            lm.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            lm.Campus = campus;
+                            list.Add(lm);
                         }
                         return list;
                     }
@@ -103,6 +103,122 @@ namespace CvoInventarisClient.DAL
         }
 
 
+
+        #endregion
+
+        #region GetTop
+
+        public List<LokaalModel> GetTop()
+        {
+            List<LokaalModel> list = new List<LokaalModel>();
+            CampusModel campus;
+            PostcodeModel postcode;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand("TblLokaalReadAll", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@amount", 100);
+                        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                        while (dr.Read())
+                        {
+                            LokaalModel lm = new LokaalModel();
+                            campus = new CampusModel();
+                            postcode = new PostcodeModel();
+
+                            if (dr["idPostcode"] != DBNull.Value)
+                            {
+                                postcode.Id = (int?)dr["idPostcode"];
+                                postcode.Gemeente = dr["gemeente"].ToString();
+                                postcode.Postcode = dr["postcode"].ToString();
+                            }
+
+                            if (dr["idCampus"] != DBNull.Value)
+                            {
+                                campus.Id = (int?)dr["idCampus"];
+                                campus.Naam = dr["naam"].ToString();
+                                campus.Postcode = postcode;
+                                campus.Straat = dr["straat"].ToString();
+                                campus.Nummer = dr["nummer"].ToString();
+                            }
+
+                            lm.Id = (int?)dr["idLokaal"];
+                            lm.LokaalNaam = dr["lokaalNaam"].ToString();
+                            lm.AantalPlaatsen = (int)dr["aantalPlaatsen"];
+                            lm.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            lm.Campus = campus;
+                            list.Add(lm);
+                        }
+                        return list;
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
+        public List<LokaalModel> GetTop(int amount)
+        {
+            List<LokaalModel> list = new List<LokaalModel>();
+            CampusModel campus;
+            PostcodeModel postcode;
+
+            try
+            {
+                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                {
+                    using (SqlCommand cmd = new SqlCommand("TblLokaalReadAll", con))
+                    {
+                        con.Open();
+                        cmd.CommandType = CommandType.StoredProcedure;
+                        cmd.Parameters.AddWithValue("@amount", amount);
+                        SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+
+                        while (dr.Read())
+                        {
+                            LokaalModel lm = new LokaalModel();
+                            campus = new CampusModel();
+                            postcode = new PostcodeModel();
+
+                            if (dr["idPostcode"] != DBNull.Value)
+                            {
+                                postcode.Id = (int?)dr["idPostcode"];
+                                postcode.Gemeente = dr["gemeente"].ToString();
+                                postcode.Postcode = dr["postcode"].ToString();
+                            }
+
+                            if (dr["idCampus"] != DBNull.Value)
+                            {
+                                campus.Id = (int?)dr["idCampus"];
+                                campus.Naam = dr["naam"].ToString();
+                                campus.Postcode = postcode;
+                                campus.Straat = dr["straat"].ToString();
+                                campus.Nummer = dr["nummer"].ToString();
+                            }
+
+                            lm.Id = (int?)dr["idLokaal"];
+                            lm.LokaalNaam = dr["lokaalNaam"].ToString();
+                            lm.AantalPlaatsen = (int)dr["aantalPlaatsen"];
+                            lm.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            lm.Campus = campus;
+                            list.Add(lm);
+                        }
+                        return list;
+                    }
+                }
+            }
+            catch
+            {
+                return null;
+            }
+        }
 
         #endregion
 
@@ -167,7 +283,7 @@ namespace CvoInventarisClient.DAL
 
         #region Create
 
-        public int Create(LokaalModel l)
+        public int Create(LokaalModel lm)
         {
             try
             {
@@ -177,10 +293,10 @@ namespace CvoInventarisClient.DAL
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("lokaalNaam", l.LokaalNaam);
-                        cmd.Parameters.AddWithValue("aantalPlaatsen", l.AantalPlaatsen);
-                        cmd.Parameters.AddWithValue("isComputerLokaal", l.IsComputerLokaal);
-                        cmd.Parameters.AddWithValue("idCampus", l.Campus.Id);
+                        cmd.Parameters.AddWithValue("lokaalNaam", lm.LokaalNaam);
+                        cmd.Parameters.AddWithValue("aantalPlaatsen", lm.AantalPlaatsen);
+                        cmd.Parameters.AddWithValue("isComputerLokaal", lm.IsComputerLokaal);
+                        cmd.Parameters.AddWithValue("idCampus", lm.Campus.Id);
                         return Convert.ToInt32(cmd.ExecuteScalar());
                     }
                 }
@@ -196,7 +312,7 @@ namespace CvoInventarisClient.DAL
 
         #region Update
 
-        public bool Update(LokaalModel l)
+        public bool Update(LokaalModel lm)
         {
             try
             {
@@ -206,11 +322,11 @@ namespace CvoInventarisClient.DAL
                     {
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
-                        cmd.Parameters.AddWithValue("idLokaal", l.Id);
-                        cmd.Parameters.AddWithValue("lokaalNaam", l.LokaalNaam);
-                        cmd.Parameters.AddWithValue("aantalPlaatsen", l.AantalPlaatsen);
-                        cmd.Parameters.AddWithValue("isComputerLokaal", l.IsComputerLokaal);
-                        cmd.Parameters.AddWithValue("idCampus", l.Campus.Id);
+                        cmd.Parameters.AddWithValue("idLokaal", lm.Id);
+                        cmd.Parameters.AddWithValue("lokaalNaam", lm.LokaalNaam);
+                        cmd.Parameters.AddWithValue("aantalPlaatsen", lm.AantalPlaatsen);
+                        cmd.Parameters.AddWithValue("isComputerLokaal", lm.IsComputerLokaal);
+                        cmd.Parameters.AddWithValue("idCampus", lm.Campus.Id);
                         cmd.ExecuteReader();
                     }
                     return true;
@@ -266,13 +382,13 @@ namespace CvoInventarisClient.DAL
                     {
                         while (result.Read())
                         {
-                            LokaalModel lokaal = new LokaalModel();
-                            if (keuzeKolommen.Contains("TblLokaal.idLokaal")) { lokaal.Id = (int)result["idLokaal"]; }
-                            if (keuzeKolommen.Contains("TblLokaal.lokaalNaam")) { lokaal.LokaalNaam = result["lokaalNaam"].ToString(); }
-                            if (keuzeKolommen.Contains("TblLokaal.aantalPlaatsen")) { lokaal.AantalPlaatsen = (int)result["aantalPlaatsen"]; }
-                            if (keuzeKolommen.Contains("TblLokaal.isComputerLokaal")) { lokaal.IsComputerLokaal = (bool)result["isComputerLokaal"]; }
+                            LokaalModel lm = new LokaalModel();
+                            if (keuzeKolommen.Contains("TblLokaal.idLokaal")) { lm.Id = (int)result["idLokaal"]; }
+                            if (keuzeKolommen.Contains("TblLokaal.lokaalNaam")) { lm.LokaalNaam = result["lokaalNaam"].ToString(); }
+                            if (keuzeKolommen.Contains("TblLokaal.aantalPlaatsen")) { lm.AantalPlaatsen = (int)result["aantalPlaatsen"]; }
+                            if (keuzeKolommen.Contains("TblLokaal.isComputerLokaal")) { lm.IsComputerLokaal = (bool)result["isComputerLokaal"]; }
 
-                            lokalen.Add(lokaal);
+                            lokalen.Add(lm);
                         }
                     }
                 }

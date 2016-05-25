@@ -11,27 +11,61 @@ namespace CvoInventarisClient.Controllers
     public class LokaalController : Controller
     {
         // INDEX:
-        [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
-            DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
-            DAL.TblCampus tblCampus = new DAL.TblCampus();
 
             LokaalViewModel model = new LokaalViewModel();
-            model.Lokalen = new List<LokaalModel>();
-            model.Campussen = new List<SelectListItem>();
 
-            foreach (LokaalModel i in tblLokaal.GetAll())
+            if (Session["lokaalviewmodel"] == null || refresh == true)
             {
-                model.Lokalen.Add(i);
+                DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
+                DAL.TblCampus tblCampus = new DAL.TblCampus();
+
+                model.Lokalen = new List<LokaalModel>();
+                model.Campussen = new List<SelectListItem>();
+
+                model.Lokalen = tblLokaal.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (CampusModel c in tblCampus.GetAll())
+                {
+                    model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
+                }
             }
-            foreach (CampusModel c in tblCampus.GetAll())
+            else
             {
-                model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
+                model = (LokaalViewModel)Session["lokaalviewmodel"];
+            }
+            Session["lokaalviewmodel"] = model.Clone();
+            if (amount == null)
+            {
+                model.Lokalen = model.Lokalen.Take(100).ToList();
+                ViewBag.amount = "100";
+            }
+            else
+            {
+                model.Lokalen = model.Lokalen.Take((int)amount).ToList();
+                ViewBag.amount = amount.ToString();
             }
 
-            this.Session["lokaalview"] = model;
+            if (!string.IsNullOrWhiteSpace(order))
+            {
+                if (order.Equals("Oudst"))
+                {
+                    model.Lokalen.Reverse();
+                }
+                else if (order.Equals("Lokaal"))
+                {
+                    model.Lokalen = model.Lokalen.OrderBy(i => i.Id).ToList();
+                }
+                ViewBag.ordertype = order.ToString();
+            }
+            else
+            {
+                ViewBag.ordertype = "Meest recent";
+            }
+
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Lokalen.Count() + ")";
 
             return View(model);
         }
@@ -103,7 +137,7 @@ namespace CvoInventarisClient.Controllers
             DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
             tblLokaal.Update(lokaal);
 
-            TempData["action"] = "lokaal " + Request.Form["lokaalNaam"] + " werd aangepast";
+            TempData["action"] = "lokaal " + Request.Form["lokaalNaam"] + " werd gewijzigd";
 
             return RedirectToAction("Index");
         }
@@ -128,7 +162,7 @@ namespace CvoInventarisClient.Controllers
                 TempData["action"] = idArray.Length + " lokaal werd verwijderd";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         [HttpPost]
@@ -137,7 +171,27 @@ namespace CvoInventarisClient.Controllers
         {
             ViewBag.action = TempData["action"];
 
-            LokaalViewModel model = (LokaalViewModel)(Session["lokaalview"] as LokaalViewModel).Clone();
+            LokaalViewModel model = new LokaalViewModel();
+
+            if (Session["lokaalviewmodel"] == null)
+            {
+                DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
+                DAL.TblCampus tblCampus = new DAL.TblCampus();
+
+                model.Lokalen = new List<LokaalModel>();
+                model.Campussen = new List<SelectListItem>();
+
+                model.Lokalen = tblLokaal.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (CampusModel c in tblCampus.GetAll())
+                {
+                    model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
+                }
+            }
+            else
+            {
+                model = (LokaalViewModel)Session["lokaalviewmodel"];
+            }
 
             // Hier start filteren
             if (!String.IsNullOrWhiteSpace(computerLokaalFilter))

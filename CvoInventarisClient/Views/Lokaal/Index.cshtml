@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Lokalen";
+    List<String> amounts = new List<string>() { "100", "200", "300" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Lokaal" };
 }
 
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
@@ -11,6 +13,37 @@
         @ViewBag.action
     </div>
 }
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Lokaal"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
+
 @using (Html.BeginForm("Delete", "Lokaal"))
 {
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
@@ -24,6 +57,8 @@
     {
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
     }
+
+    <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Inventaris",new RouteValueDictionary(new { refresh = true}))"><span class="glyphicon glyphicon-refresh"></span></a>
 
     <div class="spacer"></div>
 
@@ -157,7 +192,7 @@
 
                         <div class="-form-group">
                             <label>Lokaal naam:</label>
-                            <input class="form-control "type="text" name="lokaalNaamFilter" />
+                            <input class="form-control " type="text" name="lokaalNaamFilter" />
                         </div>
 
                         <div class="form-group">

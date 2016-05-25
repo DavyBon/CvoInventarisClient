@@ -185,7 +185,7 @@ namespace CvoInventarisClient.Controllers
                 TempData["action"] = idArray.Length + " leverancier werd verwijderd";
             }
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         [HttpPost]
