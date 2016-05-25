@@ -123,3 +123,15 @@
         </div>
     </div>
 </div>
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.objectTypes)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Export to PDF</button>
+    //<button type="submit" name="exportType" value="excel" class="btn btn-success">Export to Excel</button>
+}

@@ -89,7 +89,7 @@ namespace CvoInventarisClient.DAL
         public ObjectTypeModel GetById(int id)
         {
             ObjectTypeModel objectTypes = new ObjectTypeModel();
-            using (connection)
+            using (connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867"))
             {
                 SqlCommand command = new SqlCommand("TblObjectTypeReadOne", connection);
                 command.CommandType = CommandType.StoredProcedure;
