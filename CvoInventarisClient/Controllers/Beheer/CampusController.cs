@@ -12,27 +12,59 @@ namespace CvoInventarisClient.Controllers
     public class CampusController : Controller
     {
         // INDEX:
-        public ActionResult Index()
+        public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
             CampusViewModel model = new CampusViewModel();
-            model.Campussen = new List<CampusModel>();
-            model.Postcodes = new List<SelectListItem>();
-
-            TblCampus TblCampus = new TblCampus();
-            TblPostcode TblPostcode = new TblPostcode();
-
-            List<CampusModel> campusmodel = new List<CampusModel>();
-            foreach (CampusModel c in TblCampus.GetAll())
+            if (Session["campusviewmodel"] == null || refresh == true)
             {
-                model.Campussen.Add(c);
+                model.Campussen = new List<CampusModel>();
+                model.Postcodes = new List<SelectListItem>();
+
+                TblCampus TblCampus = new TblCampus();
+                TblPostcode TblPostcode = new TblPostcode();
+
+                model.Campussen = TblCampus.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (PostcodeModel p in TblPostcode.GetAll())
+                {
+                    model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+                }
+
             }
-            foreach (PostcodeModel p in TblPostcode.GetAll())
+            else
             {
-                model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+                model = (CampusViewModel)Session["campusviewmodel"];
+            }
+            if (amount == null)
+            {
+                model.Campussen = model.Campussen.Take(100).ToList();
+                ViewBag.amount = "100";
+            }
+            else
+            {
+                model.Campussen = model.Campussen.Take((int)amount).ToList();
+                ViewBag.amount = amount.ToString();
             }
 
-            this.Session["campusview"] = model;
+            if (!string.IsNullOrWhiteSpace(order))
+            {
+                if (order.Equals("Oudst"))
+                {
+                    model.Campussen.Reverse();
+                }
+                else if (order.Equals("Postcode"))
+                {
+                    model.Campussen = model.Campussen.OrderBy(i => i.Postcode.Id).ToList();
+                }
+                ViewBag.ordertype = order.ToString();
+            }
+            else
+            {
+                ViewBag.ordertype = "Meest recent";
+            }
+
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Campussen.Count() + ")";
 
             return View(model);
         }
@@ -53,7 +85,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "campus met naam " + Request.Form["naam"] + " werd toegevoegd";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // EDIT:
@@ -98,7 +130,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "campus met naam " + Request.Form["naam"] + " werd aangepast";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
 
@@ -121,14 +153,33 @@ namespace CvoInventarisClient.Controllers
             {
                 TempData["action"] = idArray.Length + " campus werd verwijderd";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
         [HttpPost]
-        public ActionResult Filter(string naamFilter,int postcodeFilter,string straatFilter,string nummmerFilter,int[] modelList)
+        public ActionResult Filter(string naamFilter, int postcodeFilter, string straatFilter, string nummmerFilter, bool? refresh, int[] modelList)
         {
             ViewBag.action = TempData["action"];
-            CampusViewModel model = (CampusViewModel)(Session["campusview"] as CampusViewModel).Clone();
-            //var new1 = new List<MyObject>(a1.Select(x => x.Clone()));
+
+            CampusViewModel model = new CampusViewModel();
+            if (Session["campusviewmodel"] == null || refresh == true)
+            {
+                model.Campussen = new List<CampusModel>();
+                model.Postcodes = new List<SelectListItem>();
+
+                TblCampus TblCampus = new TblCampus();
+                TblPostcode TblPostcode = new TblPostcode();
+
+                model.Campussen = TblCampus.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+                foreach (PostcodeModel p in TblPostcode.GetAll())
+                {
+                    model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+                }
+            }
+            else
+            {
+                model = (CampusViewModel)Session["campusviewmodel"];
+            }
 
             if (!String.IsNullOrWhiteSpace(naamFilter))
             {
@@ -146,6 +197,7 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Campussen.RemoveAll(x => !x.Nummer.ToLower().Contains(nummmerFilter.ToLower()));
             }
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Campussen.Count() + ")";
             return View("index", model);
         }
     }

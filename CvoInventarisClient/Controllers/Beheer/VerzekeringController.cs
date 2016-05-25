@@ -68,8 +68,8 @@ namespace CvoInventarisClient.Controllers
             verzekering.Omschrijving = Request.Form["omschrijving"];
             dalVerzekering.Create(verzekering);
             TempData["action"] = "verzekering" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
-           
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // GET: Inventaris/Edit/5
@@ -93,7 +93,7 @@ namespace CvoInventarisClient.Controllers
             verzekering.Omschrijving = Request.Form["omschrijving"];
             TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
             dalVerzekering.Update(verzekering);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // POST: Inventaris/Delete/5
@@ -114,8 +114,8 @@ namespace CvoInventarisClient.Controllers
                 {
                     TempData["action"] = idArray.Length + " verzekeringen werd verwijderd";
                 }
-            
-            return RedirectToAction("Index");
+
+            return RedirectToAction("Index", new { refresh = true });
         }
     }
 }

@@ -83,7 +83,7 @@ namespace CvoInventarisClient.Controllers
             objectType.Omschrijving = Request.Form["omschrijving"];
             TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
             tblObjectType.Update(objectType);
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         [HttpPost]
@@ -95,7 +95,7 @@ namespace CvoInventarisClient.Controllers
             objectType.Omschrijving = Request.Form["omschrijving"];
             tblObjectType.Create(objectType);
             TempData["action"] = "objectType" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         [HttpPost]
@@ -115,7 +115,7 @@ namespace CvoInventarisClient.Controllers
                 {
                     TempData["action"] = idArray.Length + " objectType werd verwijderd";
                 }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
     }

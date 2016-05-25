@@ -2,6 +2,8 @@
 
 @{
     ViewBag.Title = "Campus";
+    List<String> amounts = new List<string>() { "100", "200", "300" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Postcode" };
 }
 
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
@@ -11,6 +13,36 @@
         @ViewBag.action
     </div>
 }
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Campus"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
 @using (Html.BeginForm("Delete", "Campus"))
 {
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
@@ -18,12 +50,13 @@
 
     if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
     {
-        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Campus")">Verwijder filter</a>
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Campus",new RouteValueDictionary(new { refresh = true}))">Verwijder filter</a>
     }
     else
     {
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
     }
+    <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Campus",new RouteValueDictionary(new { refresh = true}))"><span class="glyphicon glyphicon-refresh"></span></a>
 
     <div class="spacer"></div>
 
@@ -100,31 +133,31 @@
             <div class="modal-header">
                 <strong>Vul in</strong>
             </div>
-                @using (Html.BeginForm("Create", "Campus"))
-                {
-                    <div class="modal-body">
-                        <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Campussen[0].Naam)
-                            <input class="form-control" maxlength="50" type="text" name="naam" />
-                        </div>
-                        <div class="form-group">
-                            Postcode
-                            @Html.DropDownListFor(model => model.Postcodes, Model.Postcodes, "", new { @class = "form-control" })
-                        </div>
-                        <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Campussen[0].Straat)
-                            <input class="form-control" maxlength="50" type="text" name="straat" />
-                        </div>
-                        <div class="form-group">
-                            @Html.DisplayNameFor(model => model.Campussen[0].Nummer)
-                            <input class="form-control" maxlength="50" type="text" name="nummer" />
-                        </div>
+            @using (Html.BeginForm("Create", "Campus"))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Campussen[0].Naam)
+                        <input class="form-control" maxlength="50" type="text" name="naam" />
                     </div>
+                    <div class="form-group">
+                        Postcode
+                        @Html.DropDownListFor(model => model.Postcodes, Model.Postcodes, "", new { @class = "form-control" })
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Campussen[0].Straat)
+                        <input class="form-control" maxlength="50" type="text" name="straat" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Campussen[0].Nummer)
+                        <input class="form-control" maxlength="50" type="text" name="nummer" />
+                    </div>
+                </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary">Voeg campus toe</button>
                     </div>
-                }
+            }
         </div>
     </div>
 </div>
@@ -143,16 +176,16 @@
                             <label>Naam:</label>
                             <input type="text" name="naamFilter" />
                         </div>
-                            <div class="form-group">
-                                <label>Postcode:</label>
-                                <select class="form-control" name="postcodeFilter">
-                                    <option value="-1">-Selecteer-</option>
-                                    @foreach (var item in Model.Postcodes)
-                                    {
-                                        <option value="@item.Value">@item.Text</option>
-                                    }
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label>Postcode:</label>
+                            <select class="form-control" name="postcodeFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Postcodes)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                         <div class="form-group">
                             <label>Straat:</label>
                             <input type="text" name="straatFilter" />
@@ -161,7 +194,7 @@
                             <label>Nummer:</label>
                             <input type="text" name="nummmerFilter" />
                         </div>
-                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
