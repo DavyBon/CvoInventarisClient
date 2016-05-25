@@ -40,7 +40,7 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    SqlDataReader dr = cmd.ExecuteReader();
 
                     while (dr.Read())
                     {
@@ -91,7 +91,7 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("idCampus", id);
-                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    SqlDataReader dr = cmd.ExecuteReader();
 
                     while (dr.Read())
                     {
@@ -214,34 +214,49 @@ namespace CvoInventarisClient.DAL
         }
 
         #endregion
-        public List<CampusModel> Rapportering(string s, string[] keuzeKolommen)
+
+        #region Get Top
+
+        public List<CampusModel> GetTop()
         {
             List<CampusModel> list = new List<CampusModel>();
             CampusModel campus;
+            PostcodeModel postcode;
 
             try
             {
-                using (SqlCommand cmd = new SqlCommand(s, connection))
+                using (SqlCommand cmd = new SqlCommand("TblCampusReadTop", connection))
                 {
                     connection.Open();
-                    cmd.CommandType = System.Data.CommandType.Text;
-                    SqlDataReader dr = cmd.ExecuteReader(CommandBehavior.CloseConnection);
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@amount", 100);
+                    SqlDataReader dr = cmd.ExecuteReader();
 
                     while (dr.Read())
                     {
                         campus = new CampusModel();
-                        if (keuzeKolommen.Contains("idCampus")) { campus.Id = (int)dr["idCampus"]; }
-                        if (keuzeKolommen.Contains("naam")) { campus.Naam = dr["naam"].ToString(); }
-                        if (keuzeKolommen.Contains("postcode")) { campus.Postcode.Postcode = dr["postcode"].ToString(); }
-                        if (keuzeKolommen.Contains("straat")) { campus.Straat = dr["straat"].ToString(); }
-                        if (keuzeKolommen.Contains("nummer")) { campus.Nummer = dr["nummer"].ToString(); }
+                        postcode = new PostcodeModel();
+
+                        if (dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int?)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
+
+                        campus.Id = (int?)dr["idCampus"];
+                        campus.Naam = dr["naam"].ToString();
+                        campus.Postcode = postcode;
+                        campus.Straat = dr["straat"].ToString();
+                        campus.Nummer = dr["nummer"].ToString();
                         list.Add(campus);
                     }
                     return list;
                 }
             }
-            catch
+            catch (Exception e)
             {
+                Debug.WriteLine(e);
                 return null;
             }
             finally
@@ -249,5 +264,59 @@ namespace CvoInventarisClient.DAL
                 connection.Close();
             }
         }
+
+        #endregion
+
+        #region Get Top Amount
+
+        public List<CampusModel> GetTop(int amount)
+        {
+            List<CampusModel> list = new List<CampusModel>();
+            CampusModel campus;
+            PostcodeModel postcode;
+
+            try
+            {
+                using (SqlCommand cmd = new SqlCommand("TblCampusReadTop", connection))
+                {
+                    connection.Open();
+                    cmd.CommandType = CommandType.StoredProcedure;
+                    cmd.Parameters.AddWithValue("@amount", amount);
+                    SqlDataReader dr = cmd.ExecuteReader();
+
+                    while (dr.Read())
+                    {
+                        campus = new CampusModel();
+                        postcode = new PostcodeModel();
+
+                        if (dr["idPostcode"] != DBNull.Value)
+                        {
+                            postcode.Id = (int?)dr["idPostcode"];
+                            postcode.Gemeente = dr["gemeente"].ToString();
+                            postcode.Postcode = dr["postcode"].ToString();
+                        }
+
+                        campus.Id = (int?)dr["idCampus"];
+                        campus.Naam = dr["naam"].ToString();
+                        campus.Postcode = postcode;
+                        campus.Straat = dr["straat"].ToString();
+                        campus.Nummer = dr["nummer"].ToString();
+                        list.Add(campus);
+                    }
+                    return list;
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine(e);
+                return null;
+            }
+            finally
+            {
+                connection.Close();
+            }
+        }
+
+        #endregion
     }
 }

@@ -41,10 +41,17 @@ namespace CvoInventarisClient.Controllers
             {
                 model = (FactuurViewModel)Session["factuurviewmodel"];
             }
+
             Session["factuurviewmodel"] = model.Clone();
+
             if (amount == null)
             {
                 model.Facturen = model.Facturen.Take(100).ToList();
+                ViewBag.amount = "100";
+            }
+            else
+            {
+                model.Facturen = model.Facturen.Take((int)amount).ToList();
                 ViewBag.amount = amount.ToString();
             }
 
@@ -58,6 +65,7 @@ namespace CvoInventarisClient.Controllers
                 {
                     model.Facturen = model.Facturen.OrderBy(f => f.CvoFactuurNummer).ToList();
                 }
+                ViewBag.ordertype = order.ToString();
             }
             else
             {
@@ -296,7 +304,9 @@ namespace CvoInventarisClient.Controllers
                 }
             }
 
-            return View("index", model);
+            ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Facturen.Count() + ")";
+
+            return View("Index", model);
         }
 
         #endregion
