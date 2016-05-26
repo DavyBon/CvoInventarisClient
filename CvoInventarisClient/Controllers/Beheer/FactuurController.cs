@@ -61,6 +61,10 @@ namespace CvoInventarisClient.Controllers
                 {
                     model.Facturen.Reverse();
                 }
+                else if (order.Equals("Leverancier"))
+                {
+                    model.Facturen = model.Facturen.OrderBy(f => f.Leverancier.Naam).ToList();
+                }
                 else if (order.Equals("CVO Factuurnummer"))
                 {
                     model.Facturen = model.Facturen.OrderBy(f => f.CvoFactuurNummer).ToList();

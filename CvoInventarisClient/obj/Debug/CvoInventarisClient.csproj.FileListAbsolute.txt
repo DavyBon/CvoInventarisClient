@@ -31,39 +31,8 @@ C:\Users\Davy\Desktop\Eindwerk\Client applicatie\CvoInventarisClient\CvoInventar
 C:\Users\Davy\Desktop\Eindwerk\Client applicatie\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
 C:\Users\Davy\Desktop\Eindwerk\Client applicatie\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 C:\Users\Davy\Desktop\Eindwerk\Client applicatie\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\csc.exe
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CSharp.Core.targets
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Reflection.Metadata.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\vbc.exe
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\VBCSCompiler.exe
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\VBCSCompiler.exe.config
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll.config
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.pdb
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.Web.Infrastructure.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.xml
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.xml
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.xml
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.xml
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.xml
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.xml
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\roslyn\csc.exe
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -166,7 +135,6 @@ D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoI
 D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 D:\School\Eindwerk\Client\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\csc.exe
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -202,3 +170,34 @@ D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\C
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\csc.exe
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CSharp.Core.targets
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.VisualBasic.Core.targets
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\vbc.exe
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\roslyn\VBCSCompiler.exe.config
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll.config
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.pdb
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.Web.Infrastructure.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Razor.xml
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.xml
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Deployment.xml
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.xml
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.xml
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.xml
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
