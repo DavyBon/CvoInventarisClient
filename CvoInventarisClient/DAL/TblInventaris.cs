@@ -148,7 +148,7 @@ namespace CvoInventarisClient.DAL
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
                             factuur.Garantie = (int)mySqlDataReader["garantie"];
                             factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
                             factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
@@ -181,14 +181,14 @@ namespace CvoInventarisClient.DAL
                         inventaris.Label = mySqlDataReader["label"].ToString();
                         inventaris.Lokaal = lokaal;
                         inventaris.Object = obj;
-                        inventaris.Aankoopjaar = mySqlDataReader["aankoopjaar"] as int? ;
+                        inventaris.Aankoopjaar = mySqlDataReader["aankoopjaar"] as int?;
                         inventaris.Afschrijvingsperiode = mySqlDataReader["afschrijvingsperiode"] as int?;
                         inventaris.Historiek = mySqlDataReader["historiek"].ToString();
                         inventaris.IsActief = mySqlDataReader["isActief"] as bool? ?? default(bool);
                         inventaris.IsAanwezig = mySqlDataReader["isAanwezig"] as bool? ?? default(bool);
                         inventaris.Verzekering = verzekering;
                         inventaris.Factuur = factuur;
-                        inventaris.Waarde = mySqlDataReader["waarde"]as decimal?;
+                        inventaris.Waarde = mySqlDataReader["waarde"] as decimal?;
                         inventaris.Costcenter = mySqlDataReader["costcenter"].ToString();
                         inventaris.Boekhoudnr = mySqlDataReader["boekhoudnr"].ToString();
 
@@ -280,7 +280,7 @@ namespace CvoInventarisClient.DAL
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
                             factuur.Garantie = (int)mySqlDataReader["garantie"];
                             factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
                             factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
@@ -411,7 +411,7 @@ namespace CvoInventarisClient.DAL
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
                             factuur.Garantie = (int)mySqlDataReader["garantie"];
                             factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
                             factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
@@ -543,7 +543,7 @@ namespace CvoInventarisClient.DAL
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
-                            factuur.Prijs = mySqlDataReader["prijs"].ToString();
+                            factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
                             factuur.Garantie = (int)mySqlDataReader["garantie"];
                             factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
                             factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
@@ -590,7 +590,7 @@ namespace CvoInventarisClient.DAL
                     return inventaris;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Write(e);
                 return null;
@@ -626,7 +626,7 @@ namespace CvoInventarisClient.DAL
                 }
                 return true;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.Write(e);
                 return false;

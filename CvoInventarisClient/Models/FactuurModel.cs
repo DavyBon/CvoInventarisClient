@@ -10,31 +10,31 @@ namespace CvoInventarisClient.Models
     {
         public int? Id { get; set; }
 
-        [Display(Name = "cvo-factuurnummer")]
+        [Display(Name = "Cvo-factuurnummer")]
         public string CvoFactuurNummer { get; set; }
 
-        [Display(Name = "leverancier-factuurnummer")]
+        [Display(Name = "Leverancier-factuurnummer")]
         public string LeverancierFactuurNummer { get; set; }
 
-        [Display(Name = "verwerkingsdatum")]
+        [Display(Name = "Verwerkingsdatum")]
         public string VerwerkingsDatum { get; set; }
 
-        [Display(Name = "scholengroepnummer")]
+        [Display(Name = "Scholengroepnummer")]
         public string ScholengroepNummer { get; set; }
 
-        [Display(Name = "leverancier")]
+        [Display(Name = "Leverancier")]
         public LeverancierModel Leverancier { get; set; }
 
-        [Display(Name = "prijs(€)")]
-        public string Prijs { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n} €")]
+        public decimal? Prijs { get; set; }
 
-        [Display(Name = "garantie")]
+        [Display(Name = "Garantie")]
         public int Garantie { get; set; }
 
-        [Display(Name = "omschrijving")]
+        [Display(Name = "Omschrijving")]
         public string Omschrijving { get; set; }
 
-        [Display(Name = "afschrijfperiode")]
+        [Display(Name = "Afschrijfperiode")]
         public int Afschrijfperiode { get; set; }
 
         public override string ToString()

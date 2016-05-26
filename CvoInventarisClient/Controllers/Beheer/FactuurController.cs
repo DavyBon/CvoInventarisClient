@@ -79,18 +79,35 @@ namespace CvoInventarisClient.Controllers
 
         #endregion
 
-        #region Create
+        #region Get Create View
 
         // CREATE:
-        [HttpPost]
-        public ActionResult Create(int? Leveranciers)
+
+        public ActionResult Create()
         {
+            FactuurViewModel model = new FactuurViewModel();
 
-            string idAccount = HttpContext.User.Identity.Name;
-            TblAccount TblAccount = new TblAccount();
-            AccountModel account = TblAccount.GetById(Convert.ToInt32(idAccount));
-            string email = account.Email;
+            TblFactuur TblFactuur = new TblFactuur();
+            TblLeverancier TblLeverancier = new TblLeverancier();
 
+            model.Facturen = new List<FactuurModel>();
+            model.Leveranciers = new List<SelectListItem>();
+
+            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            {
+                model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+            }
+
+            return View(model);
+        }
+
+        #endregion
+
+        #region Create
+
+        [HttpPost]
+        public ActionResult Create(int? leveranciers, string prijs)
+        {
             TblFactuur TblFactuur = new TblFactuur();
 
             FactuurModel factuur = new FactuurModel();
@@ -99,8 +116,8 @@ namespace CvoInventarisClient.Controllers
             factuur.LeverancierFactuurNummer = Request.Form["leverancierfactuurnummer"];
             factuur.VerwerkingsDatum = Request.Form["verwerkingsdatum"];
             factuur.ScholengroepNummer = Request.Form["scholengroepnummer"];
-            factuur.Leverancier = new LeverancierModel() { Id = (int)Leveranciers };
-            factuur.Prijs = Request.Form["prijs"];
+            factuur.Leverancier = new LeverancierModel() { Id = (int)leveranciers };
+            factuur.Prijs = Convert.ToDecimal(prijs.Replace(".", ","));
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
@@ -108,7 +125,7 @@ namespace CvoInventarisClient.Controllers
             TblFactuur.Create(factuur);
 
             TempData["action"] = "factuur met factuurnummer" + " " + Request.Form["cvofactuurnummer"] + " werd toegevoegd";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         #endregion
@@ -143,7 +160,7 @@ namespace CvoInventarisClient.Controllers
         #region Edit
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, string prijs)
         {
 
             string idAccount = HttpContext.User.Identity.Name;
@@ -159,7 +176,7 @@ namespace CvoInventarisClient.Controllers
             factuur.LeverancierFactuurNummer = Request.Form["leverancierfactuurnummer"];
             factuur.VerwerkingsDatum = Request.Form["verwerkingsdatum"];
             factuur.ScholengroepNummer = Request.Form["scholengroepnummer"];
-            factuur.Prijs = Request.Form["prijs"];
+            factuur.Prijs = Convert.ToDecimal(prijs.Replace(".", ","));
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
@@ -169,7 +186,7 @@ namespace CvoInventarisClient.Controllers
             TblFactuur.Update(factuur);
 
             TempData["action"] = "factuur met factuurnummer " + Request.Form["factuurNummer"] + " werd aangepast";
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         #endregion
@@ -196,7 +213,7 @@ namespace CvoInventarisClient.Controllers
             {
                 TempData["action"] = idArray.Length + " factuur werd verwijderd";
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         #endregion
@@ -262,45 +279,45 @@ namespace CvoInventarisClient.Controllers
             {
                 if (prijsFilterSecondary.Equals("="))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Prijs) != Convert.ToInt32(prijsFilter));
+                    model.Facturen.RemoveAll(x => x.Prijs != Convert.ToDecimal(prijsFilter.Replace(".", ",")));
                 }
                 else if (prijsFilterSecondary.Equals("<"))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Prijs) > Convert.ToInt32(prijsFilter));
+                    model.Facturen.RemoveAll(x => x.Prijs != Convert.ToDecimal(prijsFilter.Replace(".", ",")));
                 }
                 else if (prijsFilterSecondary.Equals(">"))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Prijs) < Convert.ToInt32(prijsFilter));
+                    model.Facturen.RemoveAll(x => x.Prijs != Convert.ToDecimal(prijsFilter.Replace(".", ",")));
                 }
             }
             if (!String.IsNullOrWhiteSpace(garantieFilter))
             {
                 if (garantieFilterSecondary.Equals("="))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Garantie) != Convert.ToInt32(garantieFilter));
+                    model.Facturen.RemoveAll(x => x.Garantie != Convert.ToInt32(garantieFilter));
                 }
                 else if (garantieFilterSecondary.Equals("<"))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Garantie) > Convert.ToInt32(garantieFilter));
+                    model.Facturen.RemoveAll(x => x.Garantie > Convert.ToInt32(garantieFilter));
                 }
                 else if (garantieFilterSecondary.Equals(">"))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Garantie) < Convert.ToInt32(garantieFilter));
+                    model.Facturen.RemoveAll(x => x.Garantie < Convert.ToInt32(garantieFilter));
                 }
             }
             if (!String.IsNullOrWhiteSpace(afschrijfperiodeFilter))
             {
                 if (afschrijfperiodeFilterSecondary.Equals("="))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Afschrijfperiode) != Convert.ToInt32(afschrijfperiodeFilter));
+                    model.Facturen.RemoveAll(x => x.Afschrijfperiode != Convert.ToInt32(afschrijfperiodeFilter));
                 }
                 else if (afschrijfperiodeFilterSecondary.Equals("<"))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Afschrijfperiode) > Convert.ToInt32(afschrijfperiodeFilter));
+                    model.Facturen.RemoveAll(x => x.Afschrijfperiode > Convert.ToInt32(afschrijfperiodeFilter));
                 }
                 else if (afschrijfperiodeFilterSecondary.Equals(">"))
                 {
-                    model.Facturen.RemoveAll(x => Convert.ToInt32(x.Afschrijfperiode) < Convert.ToInt32(afschrijfperiodeFilter));
+                    model.Facturen.RemoveAll(x => x.Afschrijfperiode < Convert.ToInt32(afschrijfperiodeFilter));
                 }
             }
 

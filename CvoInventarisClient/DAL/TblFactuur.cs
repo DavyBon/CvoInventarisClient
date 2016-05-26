@@ -16,11 +16,11 @@ namespace CvoInventarisClient.DAL
 
         #region Connectionstring
 
-        //private string GetConnectionString()
-        //{
-        //    return ConfigurationManager
-        //        .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
-        //}
+        private string GetConnectionString()
+        {
+            return ConfigurationManager
+                .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
+        }
 
         SqlConnection connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867");
 
@@ -78,7 +78,7 @@ namespace CvoInventarisClient.DAL
                         factuur.Id = (int?)dr["idFactuur"];
                         factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Prijs = dr["prijs"] as decimal?;
                         factuur.Garantie = (int)dr["garantie"];
                         factuur.Omschrijving = dr["omschrijving"].ToString();
                         factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
@@ -155,7 +155,7 @@ namespace CvoInventarisClient.DAL
                         factuur.Id = (int?)dr["idFactuur"];
                         factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Prijs = dr["prijs"] as decimal?;
                         factuur.Garantie = (int)dr["garantie"];
                         factuur.Omschrijving = dr["omschrijving"].ToString();
                         factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
@@ -188,15 +188,15 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
-                    cmd.Parameters.AddWithValue("scholengroepNummer", App_Code.DALutil.checkStringForDBNull(factuur.ScholengroepNummer));
+                    cmd.Parameters.AddWithValue("scholengroepNummer", factuur.ScholengroepNummer);
                     cmd.Parameters.AddWithValue("idLeverancier", App_Code.DALutil.checkIntForDBNUll(factuur.Leverancier.Id));
-                    cmd.Parameters.AddWithValue("prijs", App_Code.DALutil.checkStringForDBNull(factuur.Prijs));
+                    cmd.Parameters.AddWithValue("prijs", App_Code.DALutil.checkDecimalForDBNUll(factuur.Prijs));
                     cmd.Parameters.AddWithValue("garantie", App_Code.DALutil.checkIntForDBNUll(factuur.Garantie));
-                    cmd.Parameters.AddWithValue("omschrijving", App_Code.DALutil.checkStringForDBNull(factuur.Omschrijving));
+                    cmd.Parameters.AddWithValue("omschrijving", factuur.Omschrijving);
                     cmd.Parameters.AddWithValue("afschrijfperiode", App_Code.DALutil.checkIntForDBNUll(factuur.Afschrijfperiode));
-                    cmd.Parameters.AddWithValue("verwerkingsDatum", App_Code.DALutil.checkStringForDBNull(factuur.VerwerkingsDatum));
-                    cmd.Parameters.AddWithValue("cvoFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.CvoFactuurNummer));
-                    cmd.Parameters.AddWithValue("leverancierFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.LeverancierFactuurNummer));
+                    cmd.Parameters.AddWithValue("verwerkingsDatum", factuur.VerwerkingsDatum);
+                    cmd.Parameters.AddWithValue("cvoFactuurNummer", factuur.CvoFactuurNummer);
+                    cmd.Parameters.AddWithValue("leverancierFactuurNummer", factuur.LeverancierFactuurNummer);
                     return Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
@@ -224,15 +224,15 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     cmd.CommandType = CommandType.StoredProcedure;
                     cmd.Parameters.AddWithValue("idFactuur", factuur.Id);
-                    cmd.Parameters.AddWithValue("scholengroepNummer", App_Code.DALutil.checkStringForDBNull(factuur.ScholengroepNummer));
+                    cmd.Parameters.AddWithValue("scholengroepNummer", factuur.ScholengroepNummer);
                     cmd.Parameters.AddWithValue("idLeverancier", App_Code.DALutil.checkIntForDBNUll(factuur.Leverancier.Id));
-                    cmd.Parameters.AddWithValue("prijs", App_Code.DALutil.checkStringForDBNull(factuur.Prijs));
+                    cmd.Parameters.AddWithValue("prijs", App_Code.DALutil.checkDecimalForDBNUll(factuur.Prijs));
                     cmd.Parameters.AddWithValue("garantie", App_Code.DALutil.checkIntForDBNUll(factuur.Garantie));
-                    cmd.Parameters.AddWithValue("omschrijving", App_Code.DALutil.checkStringForDBNull(factuur.Omschrijving));
+                    cmd.Parameters.AddWithValue("omschrijving", factuur.Omschrijving);
                     cmd.Parameters.AddWithValue("afschrijfperiode", App_Code.DALutil.checkIntForDBNUll(factuur.Afschrijfperiode));
-                    cmd.Parameters.AddWithValue("verwerkingsDatum", App_Code.DALutil.checkStringForDBNull(factuur.VerwerkingsDatum));
-                    cmd.Parameters.AddWithValue("cvoFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.CvoFactuurNummer));
-                    cmd.Parameters.AddWithValue("leverancierFactuurNummer", App_Code.DALutil.checkStringForDBNull(factuur.LeverancierFactuurNummer));
+                    cmd.Parameters.AddWithValue("verwerkingsDatum", factuur.VerwerkingsDatum);
+                    cmd.Parameters.AddWithValue("cvoFactuurNummer", factuur.CvoFactuurNummer);
+                    cmd.Parameters.AddWithValue("leverancierFactuurNummer", factuur.LeverancierFactuurNummer);
                     cmd.ExecuteReader();
                 }
                 return true;
@@ -330,7 +330,7 @@ namespace CvoInventarisClient.DAL
                         factuur.Id = (int?)dr["idFactuur"];
                         factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Prijs = dr["prijs"] as decimal?;
                         factuur.Garantie = (int)dr["garantie"];
                         factuur.Omschrijving = dr["omschrijving"].ToString();
                         factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
@@ -407,7 +407,7 @@ namespace CvoInventarisClient.DAL
                         factuur.Id = (int?)dr["idFactuur"];
                         factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
                         factuur.Leverancier = leverancier;
-                        factuur.Prijs = dr["prijs"].ToString();
+                        factuur.Prijs = dr["prijs"] as decimal?;
                         factuur.Garantie = (int)dr["garantie"];
                         factuur.Omschrijving = dr["omschrijving"].ToString();
                         factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];

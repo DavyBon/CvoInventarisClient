@@ -45,7 +45,7 @@
 
 @using (Html.BeginForm("Delete", "Factuur"))
 {
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <a class="btn btn-primary" href="@Url.Action("Create", "Factuur")">Nieuw</a>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
     if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
@@ -140,6 +140,7 @@
             </tbody>
         </table>
     </div>
+
     <!-- Delete modal -->
     <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-sm">
@@ -158,62 +159,63 @@
         </div>
     </div>
 }
-<!-- nieuw modal -->
-<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <strong>Vul in</strong>
-            </div>
-            @using (Html.BeginForm("Create", "Factuur"))
-            {
-                <div class="modal-body">
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
-                        <input class="form-control" maxlength="50" type="text" name="cvofactuurnummer" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].LeverancierFactuurNummer)
-                        <input class="form-control" maxlength="50" type="text" name="leverancierfactuurnummer" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].VerwerkingsDatum)
-                        <input class="form-control" maxlength="50" type="text" name="verwerkingsdatum" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
-                        <input class="form-control" maxlength="50" type="text" name="scholengroepnummer" />
-                    </div>
-                    <div class="form-group">
-                        Leverancier
-                        @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, "", new { @class = "form-control" })
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
-                        <input class="form-control" maxlength="50" type="text" name="prijs" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
-                        <input class="form-control" type="text" name="garantie" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
-                        <input class="form-control" maxlength="1200" type="text" name="omschrijving" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
-                        <input class="form-control" type="text" name="afschrijfperiode" />
-                    </div>
 
+<!-- nieuw modal -->
+@*<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Vul in</strong>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">Voeg factuur toe</button>
-                </div>
-            }
+                @using (Html.BeginForm("Create", "Factuur"))
+                {
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
+                            <input class="form-control" maxlength="50" type="text" name="cvofactuurnummer" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].LeverancierFactuurNummer)
+                            <input class="form-control" maxlength="50" type="text" name="leverancierfactuurnummer" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].VerwerkingsDatum)
+                            <input class="form-control" maxlength="50" type="text" name="verwerkingsdatum" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
+                            <input class="form-control" maxlength="50" type="text" name="scholengroepnummer" />
+                        </div>
+                        <div class="form-group">
+                            Leverancier
+                            @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, "", new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
+                            <input class="form-control" maxlength="50" type="text" name="prijs" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
+                            <input class="form-control" type="text" name="garantie" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
+                            <input class="form-control" maxlength="1200" type="text" name="omschrijving" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
+                            <input class="form-control" type="text" name="afschrijfperiode" />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Voeg factuur toe</button>
+                    </div>
+                }
+            </div>
         </div>
-    </div>
-</div>
+    </div>*@
 
 <!-- Filter modal -->
 <div class="modal fade filterModal" tabindex="-1" role="dialog">
