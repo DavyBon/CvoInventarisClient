@@ -93,7 +93,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // EDIT:
@@ -139,7 +139,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "lokaal " + Request.Form["lokaalNaam"] + " werd gewijzigd";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
 

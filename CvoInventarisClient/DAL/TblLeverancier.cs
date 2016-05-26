@@ -295,7 +295,7 @@ namespace CvoInventarisClient.DAL
                         cmd.Parameters.AddWithValue("straat", l.Straat);
                         cmd.Parameters.AddWithValue("huisNummer", l.HuisNummer);
                         cmd.Parameters.AddWithValue("busNummer", l.BusNummer);
-                        cmd.Parameters.AddWithValue("postcode", l.Postcode);
+                        cmd.Parameters.AddWithValue("postcode", App_Code.DALutil.checkIntForDBNUll(l.Postcode.Id));
                         cmd.Parameters.AddWithValue("telefoon", l.Telefoon);
                         cmd.Parameters.AddWithValue("fax", l.Fax);
                         cmd.Parameters.AddWithValue("email", l.Email);
