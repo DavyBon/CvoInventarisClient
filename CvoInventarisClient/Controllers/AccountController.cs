@@ -35,10 +35,21 @@ namespace CvoInventarisClient.Controllers
         [Authorize]
         public ActionResult Delete(int id)
         {
+            return View(GetAccountById(id));
+        }
+
+        [Authorize]
+        [HttpPost]
+        public ActionResult Delete(AccountModel am)
+        {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
-            if(tblAccount.Delete(id))
+            if (tblAccount.Delete(am.IdAccount))
             {
-                ViewBag.DeleteMessage = "Account verwijdert";
+                ViewBag.successAccountDeleteMessage = "Het account " + am.Email + " is verwijdert";
+            }
+            else
+            {
+                ViewBag.warningAccountDeleteMessage = "Het account " + am.Email + " is niet verwijdert";
             }
             return View("index", GetAccounts());
         }
