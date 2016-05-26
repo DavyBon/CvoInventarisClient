@@ -26,8 +26,8 @@ namespace CvoInventarisClient.Controllers
         {
             DAL.TblAccount tblAccount = new DAL.TblAccount();
             AccountModel account = new AccountModel();
-            account.Email = Request.Form["emailinp"];
-            account.Wachtwoord = Request.Form["passwordinp"];
+            account.Email = Request.Form["Email"];
+            account.Wachtwoord = Request.Form["Wachtwoord"];
             tblAccount.Create(account);
             return View("index", GetAccounts());
         }
