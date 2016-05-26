@@ -19,6 +19,18 @@ namespace CvoInventarisClient.App_Code
             }
         }
 
+        public static object checkDecimalForDBNUll(decimal? d)
+        {
+            if (d == null)
+            {
+                return DBNull.Value;
+            }
+            else
+            {
+                return d;
+            }
+        }
+
         public static object checkStringForDBNull(string s)
         {
             if (s == null)

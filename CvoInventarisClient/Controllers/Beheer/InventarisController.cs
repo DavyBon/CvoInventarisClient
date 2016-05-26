@@ -95,10 +95,50 @@ namespace CvoInventarisClient.Controllers
             return View(model);
 
         }
+        public ActionResult Create()
+        {
+            InventarisViewModel model = new InventarisViewModel();
+
+            DAL.TblObject TblObject = new DAL.TblObject();
+            DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
+            DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+            DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
+
+            model.Objecten = new List<SelectListItem>();
+            model.Lokalen = new List<SelectListItem>();
+            model.Verzekeringen = new List<SelectListItem>();
+            model.Objecttypen = new List<SelectListItem>();
+            model.Facturen = new List<SelectListItem>();
+
+
+            foreach (ObjectModel o in TblObject.GetAll())
+            {
+                model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
+            }
+            foreach (LokaalModel l in TblLokaal.GetAll())
+            {
+                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
+            }
+            foreach (VerzekeringModel v in TblVerzekering.GetAll())
+            {
+                model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+            }
+            foreach (ObjectTypeModel ot in TblObjecttype.GetAll())
+            {
+                model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+            }
+            foreach (FactuurModel f in TblFactuur.GetAll())
+            {
+                model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
+            }
+
+            return View(model);
+        }
 
         // POST: Inventaris/Create
         [HttpPost]
-        public ActionResult Create(int? Objecten, int? Lokalen, int? Verzekeringen)
+        public ActionResult Create(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
@@ -106,12 +146,16 @@ namespace CvoInventarisClient.Controllers
             {
                 int labelnr = Convert.ToInt32(Request.Form["volgnummer"]) + i;
                 InventarisModel inventaris = new InventarisModel();
-                inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
-                inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
+                inventaris.Aankoopjaar = aankoopjaar;
+                inventaris.Afschrijvingsperiode = afschrijvingsperiode;
                 inventaris.Historiek = Request.Form["historiek"];
                 inventaris.Label = Request.Form["reeks"] + labelnr.ToString().PadLeft(4, '0');
+                inventaris.Costcenter = costcenter;
+                inventaris.Boekhoudnr = boekhoudnr;
+                inventaris.Waarde = Convert.ToDecimal(waarde.Replace(".", ","));
                 inventaris.Object = new ObjectModel() { Id = Objecten };
                 inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
+                inventaris.Factuur = new FactuurModel() { Id = Facturen };
                 inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
                 inventaris.Factuur = new FactuurModel();
                 if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
@@ -167,21 +211,31 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(int? idObject, int? Lokalen, int? Verzekeringen, int? Facturen)
+        public ActionResult Edit(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
+
             InventarisModel inventaris = new InventarisModel();
             inventaris.Id = Convert.ToInt16(Request.Form["idInventaris"]);
-            inventaris.Aankoopjaar = Convert.ToInt32(Request.Form["aankoopjaar"]);
-            inventaris.Afschrijvingsperiode = Convert.ToInt32(Request.Form["afschrijvingsperiode"]);
+            inventaris.Aankoopjaar = aankoopjaar;
+            inventaris.Afschrijvingsperiode = afschrijvingsperiode;
             inventaris.Historiek = Request.Form["historiek"];
-            inventaris.Object = new ObjectModel() { Id = idObject };
+            inventaris.Costcenter = costcenter;
+            inventaris.Boekhoudnr = boekhoudnr;
+            if (string.IsNullOrWhiteSpace(waarde))
+            {
+                inventaris.Waarde = null;
+            }
+            else
+            {
+                inventaris.Waarde = Convert.ToDecimal(waarde.Replace(".", ","));
+            }
+            inventaris.Object = new ObjectModel() { Id = Objecten };
             inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
-            inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
             inventaris.Factuur = new FactuurModel() { Id = Facturen };
-
-
+            inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
+            inventaris.Factuur = new FactuurModel();
             if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
             else
             {

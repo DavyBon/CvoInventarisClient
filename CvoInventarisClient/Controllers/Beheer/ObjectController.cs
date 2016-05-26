@@ -45,7 +45,6 @@ namespace CvoInventarisClient.Controllers
                 model = (ObjectViewModel)Session["objectviewmodel"];
             }
             this.Session["objectviewmodel"] = model;
-            Session["inventarisviewmodel"] = model.Clone();
             if (amount == null)
             {
                 model.Objecten = model.Objecten.Take(100).ToList();

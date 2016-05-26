@@ -45,7 +45,7 @@
 
 @using (Html.BeginForm("Delete", "Inventaris"))
 {
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <a class="btn btn-primary" href="@Url.Action("Create", "Inventaris")">Nieuw</a>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
 
@@ -95,13 +95,22 @@
                         @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Inventaris[0].Factuur.FactuurNummer)
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Waarde)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Factuur)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Inventaris[0].Factuur.Leverancier)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering.Omschrijving)
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Costcenter)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Boekhoudnr)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
                     </th>
                 </tr>
             </thead>
@@ -140,10 +149,19 @@
                             @Html.DisplayFor(modelItem => item.Afschrijvingsperiode)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Factuur.FactuurNummer)
+                            @Html.DisplayFor(modelItem => item.Waarde)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factuur.Omschrijving)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Factuur.Leverancier.Id)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Costcenter)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Boekhoudnr)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)

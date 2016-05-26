@@ -24,11 +24,15 @@ namespace CvoInventarisClient.Models
         [Display(Name = "Historiek")]
         public string Historiek { get; set; }
         [Display(Name = "Aankoopjaar")]
-        public int Aankoopjaar { get; set; }
+        public int? Aankoopjaar { get; set; }
         [Display(Name = "Afschrijvingsperiode")]
-        public int Afschrijvingsperiode { get; set; }
+        public int? Afschrijvingsperiode { get; set; }
         [Display(Name = "Factuur")]
         public FactuurModel Factuur { get; set; }
+        [DisplayFormat(DataFormatString = "{0:n} €")]
+        public decimal? Waarde { get; set; }
+        public string Costcenter { get; set; }
+        public string Boekhoudnr { get; set; }
 
 
         public override string ToString()
