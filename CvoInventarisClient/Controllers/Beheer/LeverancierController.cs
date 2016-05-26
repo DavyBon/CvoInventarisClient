@@ -100,7 +100,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd toegevoegd";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // EDIT:
@@ -162,7 +162,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd gewijzigd";
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", new { refresh = true });
         }
 
         // DELETE:

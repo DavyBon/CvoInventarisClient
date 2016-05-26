@@ -220,7 +220,7 @@
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode)
                         <select class="form-control" name="postcode">
-                            <option value="">-Selecteer-</option>
+                            <option value="-1">-Selecteer-</option>
                             @foreach (var item in Model.Postcodes)
                             {
                                 <option value="@item.Value">@item.Text</option>
