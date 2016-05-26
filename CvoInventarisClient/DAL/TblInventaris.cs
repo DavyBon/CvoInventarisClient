@@ -127,19 +127,16 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)mySqlDataReader["idLeverancier"];
-                            leverancier.Afkorting = mySqlDataReader["afkorting"].ToString();
-                            leverancier.Bic = mySqlDataReader["bic"].ToString();
                             leverancier.BtwNummer = mySqlDataReader["btwNummer"].ToString();
                             leverancier.BusNummer = mySqlDataReader["busNummer"].ToString();
                             leverancier.Email = mySqlDataReader["email"].ToString();
                             leverancier.Fax = mySqlDataReader["fax"].ToString();
-                            leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
-                            leverancier.Iban = mySqlDataReader["iban"].ToString();
+                            leverancier.StraatNummer = mySqlDataReader["straatNummer"].ToString();
                             leverancier.Naam = mySqlDataReader["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = mySqlDataReader["straat"].ToString();
                             leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = mySqlDataReader["actiefDatum"].ToString();
                             leverancier.Website = mySqlDataReader["website"].ToString();
                         }
 
@@ -259,19 +256,16 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)mySqlDataReader["idLeverancier"];
-                            leverancier.Afkorting = mySqlDataReader["afkorting"].ToString();
-                            leverancier.Bic = mySqlDataReader["bic"].ToString();
                             leverancier.BtwNummer = mySqlDataReader["btwNummer"].ToString();
                             leverancier.BusNummer = mySqlDataReader["busNummer"].ToString();
                             leverancier.Email = mySqlDataReader["email"].ToString();
                             leverancier.Fax = mySqlDataReader["fax"].ToString();
-                            leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
-                            leverancier.Iban = mySqlDataReader["iban"].ToString();
+                            leverancier.StraatNummer = mySqlDataReader["straatNummer"].ToString();
                             leverancier.Naam = mySqlDataReader["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = mySqlDataReader["straat"].ToString();
                             leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = mySqlDataReader["actiefDatum"].ToString();
                             leverancier.Website = mySqlDataReader["website"].ToString();
                         }
 
@@ -387,19 +381,16 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)mySqlDataReader["idLeverancier"];
-                            leverancier.Afkorting = mySqlDataReader["afkorting"].ToString();
-                            leverancier.Bic = mySqlDataReader["bic"].ToString();
                             leverancier.BtwNummer = mySqlDataReader["btwNummer"].ToString();
                             leverancier.BusNummer = mySqlDataReader["busNummer"].ToString();
                             leverancier.Email = mySqlDataReader["email"].ToString();
                             leverancier.Fax = mySqlDataReader["fax"].ToString();
-                            leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
-                            leverancier.Iban = mySqlDataReader["iban"].ToString();
+                            leverancier.StraatNummer = mySqlDataReader["straatNummer"].ToString();
                             leverancier.Naam = mySqlDataReader["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = mySqlDataReader["straat"].ToString();
                             leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = mySqlDataReader["actiefDatum"].ToString();
                             leverancier.Website = mySqlDataReader["website"].ToString();
                         }
 
@@ -519,19 +510,16 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)mySqlDataReader["idLeverancier"];
-                            leverancier.Afkorting = mySqlDataReader["afkorting"].ToString();
-                            leverancier.Bic = mySqlDataReader["bic"].ToString();
                             leverancier.BtwNummer = mySqlDataReader["btwNummer"].ToString();
                             leverancier.BusNummer = mySqlDataReader["busNummer"].ToString();
                             leverancier.Email = mySqlDataReader["email"].ToString();
                             leverancier.Fax = mySqlDataReader["fax"].ToString();
-                            leverancier.HuisNummer = mySqlDataReader["huisNummer"].ToString();
-                            leverancier.Iban = mySqlDataReader["iban"].ToString();
+                            leverancier.StraatNummer = mySqlDataReader["straatNummer"].ToString();
                             leverancier.Naam = mySqlDataReader["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = mySqlDataReader["straat"].ToString();
                             leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = mySqlDataReader["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = mySqlDataReader["actiefDatum"].ToString();
                             leverancier.Website = mySqlDataReader["website"].ToString();
                         }
 

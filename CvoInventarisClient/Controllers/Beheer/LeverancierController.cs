@@ -55,10 +55,10 @@ namespace CvoInventarisClient.Controllers
                 {
                     model.Leveranciers.Reverse();
                 }
-                //else if (order.Equals("Lokaal"))
-                //{
-                //    model.Leveranciers = model.Leveranciers.OrderBy(i => i.Lokaal.Id).ToList();
-                //}
+                else if (order.Equals("Naam"))
+                {
+                    model.Leveranciers = model.Leveranciers.OrderBy(i => i.Naam).ToList();
+                }
                 ViewBag.ordertype = order.ToString();
             }
             else
@@ -69,10 +69,6 @@ namespace CvoInventarisClient.Controllers
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Leveranciers.Count() + ")";
 
             return View(model);
-
-            //this.Session["leverancierview"] = model;
-
-            //return View(model);
         }
 
         // CREATE:
@@ -82,9 +78,8 @@ namespace CvoInventarisClient.Controllers
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
             LeverancierModel leverancier = new LeverancierModel();
             leverancier.Naam = Request.Form["naam"];
-            leverancier.Afkorting = Request.Form["afkorting"];
             leverancier.Straat = Request.Form["straat"];
-            leverancier.HuisNummer = Request.Form["huisNummer"];
+            leverancier.StraatNummer = Request.Form["straatNummer"];
             leverancier.BusNummer = Request.Form["busNummer"];
             leverancier.Postcode = new PostcodeModel() { Id = (int)postcode };
             leverancier.Telefoon = Request.Form["telefoon"];
@@ -92,9 +87,7 @@ namespace CvoInventarisClient.Controllers
             leverancier.Email = Request.Form["email"];
             leverancier.Website = Request.Form["website"];
             leverancier.BtwNummer = Request.Form["btwNummer"];
-            leverancier.Iban = Request.Form["iban"];
-            leverancier.Bic = Request.Form["bic"];
-            leverancier.ToegevoegdOp = Request.Form["toegevoegdOp"];
+            leverancier.ActiefDatum = Request.Form["actiefDatum"];
 
             tblLeverancier.Create(leverancier);
 
@@ -139,9 +132,8 @@ namespace CvoInventarisClient.Controllers
             LeverancierModel leverancier = new LeverancierModel();
             leverancier.Id = Convert.ToInt16(Request.Form["idLeverancier"]);
             leverancier.Naam = Request.Form["naam"];
-            leverancier.Afkorting = Request.Form["afkorting"];
             leverancier.Straat = Request.Form["straat"];
-            leverancier.HuisNummer = Request.Form["huisNummer"];
+            leverancier.StraatNummer = Request.Form["straatNummer"];
             leverancier.BusNummer = Request.Form["busNummer"];
 
             //if (!String.IsNullOrWhiteSpace(Request.Form["postcodes"])) { leverancier.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["Postcodes"]) }; }
@@ -154,9 +146,7 @@ namespace CvoInventarisClient.Controllers
             leverancier.Email = Request.Form["email"];
             leverancier.Website = Request.Form["website"];
             leverancier.BtwNummer = Request.Form["btwNummer"];
-            leverancier.Iban = Request.Form["iban"];
-            leverancier.Bic = Request.Form["bic"];
-            leverancier.ToegevoegdOp = Request.Form["toegevoegdOp"];
+            leverancier.ActiefDatum = Request.Form["actiefDatum"];
 
             tblLeverancier.Update(leverancier);
 
@@ -189,9 +179,9 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(string naamFilter, string afkortingFilter, string straatFilter, string huisnummerFilter, string busnummerFilter,
+        public ActionResult Filter(string naamFilter, string straatFilter, string straatnummerFilter, string busnummerFilter,
             int postcodeFilter, string telefoonFilter, string faxFilter, string websiteFilter, string btwnummerFilter,
-            string ibanFilter, string bicFilter, string toegevoegdOpFilter, bool? refresh, int[] modelList)
+            string actiefDatumFilter, bool? refresh, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
@@ -222,17 +212,13 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Leveranciers.RemoveAll(x => !x.Naam.ToLower().Contains(naamFilter.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(afkortingFilter))
-            {
-                model.Leveranciers.RemoveAll(x => !x.Afkorting.ToLower().Contains(afkortingFilter.ToLower()));
-            }
             if (!String.IsNullOrWhiteSpace(straatFilter))
             {
                 model.Leveranciers.RemoveAll(x => !x.Straat.ToLower().Contains(straatFilter.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(huisnummerFilter))
+            if (!String.IsNullOrWhiteSpace(straatnummerFilter))
             {
-                model.Leveranciers.RemoveAll(x => !x.HuisNummer.ToLower().Contains(huisnummerFilter.ToLower()));
+                model.Leveranciers.RemoveAll(x => !x.StraatNummer.ToLower().Contains(straatnummerFilter.ToLower()));
             }
             if (!String.IsNullOrWhiteSpace(busnummerFilter))
             {
@@ -258,17 +244,9 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Leveranciers.RemoveAll(x => !x.BtwNummer.ToLower().Contains(btwnummerFilter.ToLower()));
             }
-            if (!String.IsNullOrWhiteSpace(ibanFilter))
+            if (!String.IsNullOrWhiteSpace(actiefDatumFilter))
             {
-                model.Leveranciers.RemoveAll(x => !x.Iban.ToLower().Contains(ibanFilter.ToLower()));
-            }
-            if (!String.IsNullOrWhiteSpace(bicFilter))
-            {
-                model.Leveranciers.RemoveAll(x => !x.Bic.ToLower().Contains(bicFilter.ToLower()));
-            }
-            if (!String.IsNullOrWhiteSpace(toegevoegdOpFilter))
-            {
-                model.Leveranciers.RemoveAll(x => !x.ToegevoegdOp.ToLower().Contains(toegevoegdOpFilter.ToLower()));
+                model.Leveranciers.RemoveAll(x => !x.ActiefDatum.ToLower().Contains(actiefDatumFilter.ToLower()));
             }
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Leveranciers.Count() + ")";
             return View("index", model);

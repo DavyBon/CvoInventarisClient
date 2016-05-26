@@ -59,19 +59,16 @@ namespace CvoInventarisClient.DAL
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)dr["idLeverancier"];
-                            leverancier.Afkorting = dr["afkorting"].ToString();
-                            leverancier.Bic = dr["bic"].ToString();
                             leverancier.BtwNummer = dr["btwNummer"].ToString();
                             leverancier.BusNummer = dr["busNummer"].ToString();
                             leverancier.Email = dr["email"].ToString();
                             leverancier.Fax = dr["fax"].ToString();
-                            leverancier.HuisNummer = dr["huisNummer"].ToString();
-                            leverancier.Iban = dr["iban"].ToString();
+                            leverancier.StraatNummer = dr["straatNummer"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = dr["actiefDatum"].ToString();
                             leverancier.Website = dr["website"].ToString();
                         }
 
@@ -136,19 +133,16 @@ namespace CvoInventarisClient.DAL
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)dr["idLeverancier"];
-                            leverancier.Afkorting = dr["afkorting"].ToString();
-                            leverancier.Bic = dr["bic"].ToString();
                             leverancier.BtwNummer = dr["btwNummer"].ToString();
                             leverancier.BusNummer = dr["busNummer"].ToString();
                             leverancier.Email = dr["email"].ToString();
                             leverancier.Fax = dr["fax"].ToString();
-                            leverancier.HuisNummer = dr["huisNummer"].ToString();
-                            leverancier.Iban = dr["iban"].ToString();
+                            leverancier.StraatNummer = dr["straatNummer"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = dr["actiefDatum"].ToString();
                             leverancier.Website = dr["website"].ToString();
                         }
 
@@ -311,19 +305,16 @@ namespace CvoInventarisClient.DAL
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)dr["idLeverancier"];
-                            leverancier.Afkorting = dr["afkorting"].ToString();
-                            leverancier.Bic = dr["bic"].ToString();
                             leverancier.BtwNummer = dr["btwNummer"].ToString();
                             leverancier.BusNummer = dr["busNummer"].ToString();
                             leverancier.Email = dr["email"].ToString();
                             leverancier.Fax = dr["fax"].ToString();
-                            leverancier.HuisNummer = dr["huisNummer"].ToString();
-                            leverancier.Iban = dr["iban"].ToString();
+                            leverancier.StraatNummer = dr["straatNummer"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = dr["actiefDatum"].ToString();
                             leverancier.Website = dr["website"].ToString();
                         }
 
@@ -388,19 +379,16 @@ namespace CvoInventarisClient.DAL
                         if (dr["idLeverancier"] != DBNull.Value)
                         {
                             leverancier.Id = (int?)dr["idLeverancier"];
-                            leverancier.Afkorting = dr["afkorting"].ToString();
-                            leverancier.Bic = dr["bic"].ToString();
                             leverancier.BtwNummer = dr["btwNummer"].ToString();
                             leverancier.BusNummer = dr["busNummer"].ToString();
                             leverancier.Email = dr["email"].ToString();
                             leverancier.Fax = dr["fax"].ToString();
-                            leverancier.HuisNummer = dr["huisNummer"].ToString();
-                            leverancier.Iban = dr["iban"].ToString();
+                            leverancier.StraatNummer = dr["straatNummer"].ToString();
                             leverancier.Naam = dr["naam"].ToString();
                             leverancier.Postcode = postcode;
                             leverancier.Straat = dr["straat"].ToString();
                             leverancier.Telefoon = dr["telefoon"].ToString();
-                            leverancier.ToegevoegdOp = dr["toegevoegdOp"].ToString();
+                            leverancier.ActiefDatum = dr["actiefDatum"].ToString();
                             leverancier.Website = dr["website"].ToString();
                         }
 

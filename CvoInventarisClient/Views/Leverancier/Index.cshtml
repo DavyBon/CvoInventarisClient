@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Leveranciers";
     List<String> amounts = new List<string>() { "100", "200", "300" };
-    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Lokaal" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Naam" };
 }
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
 {
@@ -72,13 +72,10 @@
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Naam)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].Afkorting)
-                    </th>
-                    <th>
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].HuisNummer)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].StraatNummer)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
@@ -102,13 +99,7 @@
                         @Html.DisplayNameFor(model => model.Leveranciers[0].BtwNummer)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].Iban)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].Bic)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].ToegevoegdOp)
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].ActiefDatum)
                     </th>
                 </tr>
             </thead>
@@ -126,13 +117,10 @@
                             @Html.DisplayFor(modelItem => item.Naam)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Afkorting)
-                        </td>
-                        <td>
                             @Html.DisplayFor(modelItem => item.Straat)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.HuisNummer)
+                            @Html.DisplayFor(modelItem => item.StraatNummer)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.BusNummer)
@@ -156,13 +144,7 @@
                             @Html.DisplayFor(modelItem => item.BtwNummer)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Iban)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Bic)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ToegevoegdOp)
+                            @Html.DisplayFor(modelItem => item.ActiefDatum)
                         </td>
                     </tr>
                 }
@@ -202,16 +184,12 @@
                         <input class="form-control" maxlength="255" type="text" name="naam" />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].Afkorting)
-                        <input class="form-control" maxlength="10" type="text" name="afkorting" />
-                    </div>
-                    <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
                         <input class="form-control" maxlength="255" type="text" name="straat" />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].HuisNummer)
-                        <input class="form-control" maxlength="10" type="text" name="huisNummer" />
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].StraatNummer)
+                        <input class="form-control" maxlength="10" type="text" name="straatNummer" />
                     </div>
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
@@ -248,16 +226,8 @@
                         <input class="form-control" maxlength="50" type="text" name="btwNummer" />
                     </div>
                     <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].Iban)
-                        <input class="form-control" maxlength="50" type="text" name="iban" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].Bic)
-                        <input class="form-control" maxlength="50" type="text" name="bic" />
-                    </div>
-                    <div class="form-group">
-                        @Html.DisplayNameFor(model => model.Leveranciers[0].ToegevoegdOp)
-                        <input class="form-control" maxlength="20" type="date" name="toegevoegdOp" />
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].ActiefDatum)
+                        <input class="form-control" maxlength="50" type="text" name="actiefDatum" placeholder="01/01/2010"/>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -284,10 +254,6 @@
                         <div class="form-group">
                             <label>Naam:</label>
                             <input class="form-control" type="text" name="naamFilter" />
-                        </div>
-                        <div class="form-group">
-                            <label>Afkorting:</label>
-                            <input class="form-control" type="text" name="afkortingFilter" />
                         </div>
                         <div class="form-group">
                             <label>Straat:</label>
@@ -328,17 +294,9 @@
                             <input class="form-control" type="text" name="btwnummerFilter" />
                         </div>
                         <div class="form-group">
-                            <label>Iban:</label>
-                            <input class="form-control" type="text" name="ibanFilter" />
+                            <label>Actief datum:</label>
+                            <input class="form-control" type="text" name="actiefDatumFilter" />
                         </div>
-                        <div class="form-group">
-                            <label>Bic:</label>
-                            <input class="form-control" type="text" name="bicFilter" />
-                        </div>
-                        @*<div class="form-group">
-                                <label>Toegevoegd op:</label>
-                                <input class="form-control" type="date" name="toegevoegdOpFilter" />
-                            </div>*@
                     </div>
                 </div>
                 <div class="modal-footer">

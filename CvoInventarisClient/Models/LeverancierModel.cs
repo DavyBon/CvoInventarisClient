@@ -13,14 +13,11 @@ namespace CvoInventarisClient.Models
         [Display(Name = "naam")]
         public string Naam { get; set; }
 
-        [Display(Name = "afkorting")]
-        public string Afkorting { get; set; }
-
         [Display(Name = "straat")]
         public string Straat { get; set; }
 
-        [Display(Name = "huisNummer")]
-        public string HuisNummer { get; set; }
+        [Display(Name = "straatNummer")]
+        public string StraatNummer { get; set; }
 
         [Display(Name = "busNummer")]
         public string BusNummer { get; set; }
@@ -45,17 +42,8 @@ namespace CvoInventarisClient.Models
         [Display(Name = "btwNummer")]
         public string BtwNummer { get; set; }
 
-        [Display(Name = "iban")]
-        public string Iban { get; set; }
-
-        [Display(Name = "bic")]
-        public string Bic { get; set; }
-
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:MMM dd, yyyy}", ApplyFormatInEditMode = true)]
-        [Display(Name = "toegevoegdOp")]
-        public string ToegevoegdOp { get; set; }
-
+        [Display(Name = "Actief datum")]
+        public string ActiefDatum { get; set; }
 
         public override string ToString()
         {

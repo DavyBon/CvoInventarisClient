@@ -15,16 +15,12 @@
                 <input class="form-control" maxlength="255" type="text" name="naam" value="@Model.Leveranciers[0].Naam" />
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Afkorting)
-                <input class="form-control" maxlength="10" type="text" name="afkorting" value="@Model.Leveranciers[0].Afkorting" />
-            </div>
-            <div class="form-group">
                 @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
                 <input class="form-control" maxlength="255" type="text" name="straat" value="@Model.Leveranciers[0].Straat" />
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].HuisNummer)
-                <input class="form-control" maxlength="10" type="text" name="huisNummer" value="@Model.Leveranciers[0].HuisNummer" />
+                @Html.DisplayNameFor(model => model.Leveranciers[0].StraatNummer)
+                <input class="form-control" maxlength="10" type="text" name="straatNummer" value="@Model.Leveranciers[0].StraatNummer" />
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
@@ -32,7 +28,7 @@
             </div>
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode.Gemeente)
-                <select class="form-control" name="Lokalen">
+                <select class="form-control" name="Postcodes">
                     <option value="@Model.Leveranciers[0].Postcode.Id">@Model.Leveranciers[0].Postcode.Gemeente</option>
                     @foreach (var item in Model.Postcodes)
                     {
@@ -64,16 +60,8 @@
                 <input class="form-control" maxlength="50" type="text" name="btwNummer" value="@Model.Leveranciers[0].BtwNummer" />
             </div>
             <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Iban)
-                <input class="form-control" maxlength="50" type="text" name="iban" value="@Model.Leveranciers[0].Iban" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Bic)
-                <input class="form-control" maxlength="50" type="text" name="bic" value="@Model.Leveranciers[0].Bic" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].ToegevoegdOp)
-                <input class="form-control" maxlength="20" type="date" name="toegevoegdOp" value="@Model.Leveranciers[0].ToegevoegdOp" />
+                @Html.DisplayNameFor(model => model.Leveranciers[0].ActiefDatum)
+                <input class="form-control" maxlength="50" type="text" name="actiefDatum" value="@Model.Leveranciers[0].ActiefDatum" placeholder="01/01/2010"/>
             </div>
         </div>
     </div>
