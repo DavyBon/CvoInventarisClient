@@ -77,7 +77,7 @@ namespace CvoInventarisClient.Controllers
 
         // CREATE:
         [HttpPost]
-        public ActionResult Create(int? Postcodes)
+        public ActionResult Create(int? postcode)
         {
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
             LeverancierModel leverancier = new LeverancierModel();
@@ -86,7 +86,7 @@ namespace CvoInventarisClient.Controllers
             leverancier.Straat = Request.Form["straat"];
             leverancier.HuisNummer = Request.Form["huisNummer"];
             leverancier.BusNummer = Request.Form["busNummer"];
-            leverancier.Postcode = new PostcodeModel() { Id = (int)Postcodes };
+            leverancier.Postcode = new PostcodeModel() { Id = (int)postcode };
             leverancier.Telefoon = Request.Form["telefoon"];
             leverancier.Fax = Request.Form["fax"];
             leverancier.Email = Request.Form["email"];
