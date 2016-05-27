@@ -82,14 +82,14 @@ namespace CvoInventarisClient.Controllers
         #region Create
 
         [HttpPost]
-        public ActionResult Create(int? Postcodes)
+        public ActionResult Create(int? postcode)
         {
             TblCampus TblCampus = new TblCampus();
 
             CampusModel campus = new CampusModel();
 
             campus.Naam = Request.Form["naam"];
-            campus.Postcode = new PostcodeModel() { Id = (int)Postcodes };
+            campus.Postcode = new PostcodeModel() { Id = (int)postcode };
             campus.Straat = Request.Form["straat"];
             campus.Nummer = Request.Form["nummer"];
 
