@@ -72,7 +72,7 @@
                         @Html.DisplayNameFor(model => model.Campussen[0].Naam)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Campussen[0].Postcode)
+                        @Html.DisplayNameFor(model => model.Campussen[0].Postcode.Gemeente)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Campussen[0].Straat)
@@ -96,7 +96,7 @@
                             @Html.DisplayFor(modelItem => item.Naam)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Postcode.Postcode)
+                            @Html.DisplayFor(modelItem => item.Postcode.Gemeente)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Straat)
