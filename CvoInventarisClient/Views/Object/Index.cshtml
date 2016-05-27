@@ -59,7 +59,7 @@
     {
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
     }
-    
+
     <div class="spacer"></div>
     <div class="panel panel-primary">
         <div class="panel-heading">@ViewBag.Heading</div>
@@ -69,10 +69,16 @@
                     <th></th>
                     <th></th>
                     <th>
+                        @Html.DisplayNameFor(model => model.Objecten[0].Omschrijving)
+                    </th>
+                    <th>
                         @Html.DisplayNameFor(model => model.Objecten[0].Kenmerken)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Objecten[0].ObjectType)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Objecten[0].afmetingen)
                     </th>
                 </tr>
             </thead>
@@ -87,10 +93,16 @@
                             <a class="bottom-align-text" href="@Url.Action("Edit", "Object", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
                         </td>
                         <td>
+                            @Html.DisplayFor(modelItem => item.Omschrijving)
+                        </td>
+                        <td>
                             @Html.DisplayFor(modelItem => item.Kenmerken)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.ObjectType.Omschrijving)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.afmetingen)
                         </td>
                     </tr>
                 }
@@ -128,10 +140,10 @@
 
                     <div class="form-group">
                         @Html.DisplayNameFor(model => model.Objecten[0].ObjectType)
-                        @Html.DropDownListFor(model => model.ObjectTypes, Model.ObjectTypes, "", new { @class = "form-control"})
+                        @Html.DropDownListFor(model => model.ObjectTypes, Model.ObjectTypes, "", new { @class = "form-control" })
 
                         @Html.DisplayNameFor(model => model.Objecten[0].Kenmerken)
-                        <input class="form-control" type="text" maxlength="50" name="kenmerken"/>
+                        <input class="form-control" type="text" maxlength="50" name="kenmerken" />
                     </div>
 
                 </div>

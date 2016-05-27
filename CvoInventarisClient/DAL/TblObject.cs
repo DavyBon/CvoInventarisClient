@@ -83,18 +83,20 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idObjectType"] != DBNull.Value)
                         {
                             objType.Id = (int?)mySqlDataReader["idObjectType"];
-                            objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                            objType.Omschrijving = mySqlDataReader["objectTypeOmschrijving"].ToString();
                         }
 
                         obj.Id = (int?)mySqlDataReader["idObject"];
                         obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
+                        obj.afmetingen = mySqlDataReader["afmetingen"].ToString();
+                        obj.Omschrijving = mySqlDataReader["objectOmschrijving"].ToString();
                         obj.ObjectType = objType;
                         list.Add(obj);
                     }
                     return list;
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 Debug.WriteLine(e);
                 return null;
@@ -131,6 +133,8 @@ namespace CvoInventarisClient.DAL
 
                         obj.Id = (int?)mySqlDataReader["idObject"];
                         obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
+                        obj.afmetingen = mySqlDataReader["afmetingen"].ToString();
+                        obj.Omschrijving = mySqlDataReader["objectOmschrijving"].ToString();
                         obj.ObjectType = objType;
 
                     }
@@ -172,6 +176,6 @@ namespace CvoInventarisClient.DAL
             }
         }
 
-      
+
     }
 }

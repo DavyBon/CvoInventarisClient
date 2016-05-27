@@ -9,6 +9,8 @@ namespace CvoInventarisClient.Models
     {
         public int? Id { get; set; }
         public string Kenmerken { get; set; }
+        public string Omschrijving { get; set; }
+        public string afmetingen { get; set; }
         public ObjectTypeModel ObjectType { get; set; }
 
         public override string ToString()
