@@ -57,9 +57,7 @@
     {
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
     }
-
-    <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Lokaal",new RouteValueDictionary(new { refresh = true}))"><span class="glyphicon glyphicon-refresh"></span></a>
-
+    
     <div class="spacer"></div>
 
     <div class="panel panel-primary">
@@ -235,6 +233,6 @@
     }
     <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
 
-    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Export to PDF</button>
-    //<button type="submit" name="exportType" value="excel" class="btn btn-success">Export to Excel</button>
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Exporteee naar PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Exporteer naar Excel</button>
 }
