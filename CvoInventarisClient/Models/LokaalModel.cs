@@ -15,7 +15,7 @@ namespace CvoInventarisClient.Models
         public string LokaalNaam { get; set; }
 
         [Display(Name = "aantalPlaatsen")]
-        public int AantalPlaatsen { get; set; }
+        public int? AantalPlaatsen { get; set; }
 
         [Display(Name = "isComputerLokaal")]
         public bool IsComputerLokaal { get; set; }

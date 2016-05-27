@@ -87,8 +87,8 @@ namespace CvoInventarisClient.DAL
 
                             lm.Id = (int?)dr["idLokaal"];
                             lm.LokaalNaam = dr["lokaalNaam"].ToString();
-                            lm.AantalPlaatsen = (int)dr["aantalPlaatsen"];
-                            lm.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            lm.AantalPlaatsen = dr["aantalPlaatsen"] as int?;
+                            lm.IsComputerLokaal = dr["isComputerLokaal"] as bool? ?? default(bool);
                             lm.Campus = campus;
                             list.Add(lm);
                         }
@@ -149,8 +149,8 @@ namespace CvoInventarisClient.DAL
 
                             lm.Id = (int?)dr["idLokaal"];
                             lm.LokaalNaam = dr["lokaalNaam"].ToString();
-                            lm.AantalPlaatsen = (int)dr["aantalPlaatsen"];
-                            lm.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            lm.AantalPlaatsen = dr["aantalPlaatsen"] as int?;
+                            lm.IsComputerLokaal = dr["isComputerLokaal"] as bool? ?? default(bool);
                             lm.Campus = campus;
                             list.Add(lm);
                         }
@@ -205,8 +205,8 @@ namespace CvoInventarisClient.DAL
 
                             lm.Id = (int?)dr["idLokaal"];
                             lm.LokaalNaam = dr["lokaalNaam"].ToString();
-                            lm.AantalPlaatsen = (int)dr["aantalPlaatsen"];
-                            lm.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            lm.AantalPlaatsen = dr["aantalPlaatsen"] as int?;
+                            lm.IsComputerLokaal = dr["isComputerLokaal"] as bool? ?? default(bool);
                             lm.Campus = campus;
                             list.Add(lm);
                         }
@@ -265,8 +265,8 @@ namespace CvoInventarisClient.DAL
 
                             l.Id = (int?)dr["idLokaal"];
                             l.LokaalNaam = dr["lokaalNaam"].ToString();
-                            l.AantalPlaatsen = (int)dr["aantalPlaatsen"];
-                            l.IsComputerLokaal = (bool)dr["isComputerLokaal"];
+                            l.AantalPlaatsen = dr["aantalPlaatsen"] as int?;
+                            l.IsComputerLokaal = dr["isComputerLokaal"] as bool? ?? default(bool);
                             l.Campus = campus;
                         }
                         return l;
@@ -294,9 +294,9 @@ namespace CvoInventarisClient.DAL
                         con.Open();
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("lokaalNaam", lm.LokaalNaam);
-                        cmd.Parameters.AddWithValue("aantalPlaatsen", lm.AantalPlaatsen);
+                        cmd.Parameters.AddWithValue("aantalPlaatsen", App_Code.DALutil.checkIntForDBNUll(lm.AantalPlaatsen));
                         cmd.Parameters.AddWithValue("isComputerLokaal", lm.IsComputerLokaal);
-                        cmd.Parameters.AddWithValue("idCampus", lm.Campus.Id);
+                        cmd.Parameters.AddWithValue("idCampus", App_Code.DALutil.checkIntForDBNUll(lm.Campus.Id));
                         return Convert.ToInt32(cmd.ExecuteScalar());
                     }
                 }
@@ -324,9 +324,9 @@ namespace CvoInventarisClient.DAL
                         cmd.CommandType = CommandType.StoredProcedure;
                         cmd.Parameters.AddWithValue("idLokaal", lm.Id);
                         cmd.Parameters.AddWithValue("lokaalNaam", lm.LokaalNaam);
-                        cmd.Parameters.AddWithValue("aantalPlaatsen", lm.AantalPlaatsen);
+                        cmd.Parameters.AddWithValue("aantalPlaatsen", App_Code.DALutil.checkIntForDBNUll(lm.AantalPlaatsen));
                         cmd.Parameters.AddWithValue("isComputerLokaal", lm.IsComputerLokaal);
-                        cmd.Parameters.AddWithValue("idCampus", lm.Campus.Id);
+                        cmd.Parameters.AddWithValue("idCampus", App_Code.DALutil.checkIntForDBNUll(lm.Campus.Id));
                         cmd.ExecuteReader();
                     }
                     return true;
@@ -366,37 +366,5 @@ namespace CvoInventarisClient.DAL
         }
 
         #endregion
-        public List<LokaalModel> Rapportering(string s, string[] keuzeKolommen)
-        {
-            List<LokaalModel> lokalen = new List<LokaalModel>();
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
-            {
-                SqlCommand cmd = new SqlCommand(s, con);
-                cmd.CommandType = System.Data.CommandType.Text;
-
-                try
-                {
-                    con.Open();
-                    SqlDataReader result = cmd.ExecuteReader();
-                    if (result.HasRows)
-                    {
-                        while (result.Read())
-                        {
-                            LokaalModel lm = new LokaalModel();
-                            if (keuzeKolommen.Contains("TblLokaal.idLokaal")) { lm.Id = (int)result["idLokaal"]; }
-                            if (keuzeKolommen.Contains("TblLokaal.lokaalNaam")) { lm.LokaalNaam = result["lokaalNaam"].ToString(); }
-                            if (keuzeKolommen.Contains("TblLokaal.aantalPlaatsen")) { lm.AantalPlaatsen = (int)result["aantalPlaatsen"]; }
-                            if (keuzeKolommen.Contains("TblLokaal.isComputerLokaal")) { lm.IsComputerLokaal = (bool)result["isComputerLokaal"]; }
-
-                            lokalen.Add(lm);
-                        }
-                    }
-                }
-                catch
-                {
-                }
-            }
-            return lokalen;
-        }
     }
 }
