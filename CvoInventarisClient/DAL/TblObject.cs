@@ -22,7 +22,7 @@ namespace CvoInventarisClient.DAL
                 {
                     connection.Open();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
-                    command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.Id));
+                    command.Parameters.Add(new SqlParameter("@idObjectType", App_Code.DALutil.checkIntForDBNUll(obj.ObjectType.Id)));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
@@ -80,8 +80,11 @@ namespace CvoInventarisClient.DAL
                         obj = new ObjectModel();
                         objType = new ObjectTypeModel();
 
-                        objType.Id = (int?)mySqlDataReader["idObjectType"];
-                        objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                        if (mySqlDataReader["idObjectType"] != DBNull.Value)
+                        {
+                            objType.Id = (int?)mySqlDataReader["idObjectType"];
+                            objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                        }
 
                         obj.Id = (int?)mySqlDataReader["idObject"];
                         obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
@@ -119,9 +122,12 @@ namespace CvoInventarisClient.DAL
                     while (mySqlDataReader.Read())
                     {
                         objType = new ObjectTypeModel();
-                    
-                        objType.Id = (int?)mySqlDataReader["idObjectType"];
-                        objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+
+                        if (mySqlDataReader["idObjectType"] != DBNull.Value)
+                        {
+                            objType.Id = (int?)mySqlDataReader["idObjectType"];
+                            objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                        }
 
                         obj.Id = (int?)mySqlDataReader["idObject"];
                         obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
@@ -150,7 +156,7 @@ namespace CvoInventarisClient.DAL
                     connection.Open();
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@id", obj.Id));
-                    command.Parameters.Add(new SqlParameter("@idObjectType", obj.ObjectType.Id));
+                    command.Parameters.Add(new SqlParameter("@idObjectType", App_Code.DALutil.checkIntForDBNUll(obj.ObjectType.Id)));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
                     command.ExecuteReader();
                 }
