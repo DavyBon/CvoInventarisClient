@@ -27,7 +27,7 @@ namespace CvoInventarisClient.Controllers
 
                 model.Lokalen = tblLokaal.GetAll().OrderBy(i => i.Id).Reverse().ToList();
 
-                foreach (CampusModel c in tblCampus.GetAll())
+                foreach (CampusModel c in tblCampus.GetAll().OrderBy(c => c.Naam))
                 {
                     model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
                 }

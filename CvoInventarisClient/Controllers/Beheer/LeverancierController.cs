@@ -28,7 +28,7 @@ namespace CvoInventarisClient.Controllers
 
                 model.Leveranciers = tblLeverancier.GetAll().OrderBy(i => i.Id).Reverse().ToList();
 
-                foreach (PostcodeModel p in tblPostcode.GetAll())
+                foreach (PostcodeModel p in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
                 {
                     model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
                 }
