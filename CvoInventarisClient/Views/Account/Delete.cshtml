@@ -14,18 +14,18 @@
         @using (Html.BeginForm())
         {
 
-            <div class="alert alert-danger" role="alert">
-                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <div class="alert alert-warning" role="alert">
                 <strong>Opgelet!</strong> Bent u zerker dat u account <b>@Html.DisplayTextFor(model => model.Email)</b> wilt verwijderen?
             </div>
             @Html.ValidationSummary(true)
             @Html.HiddenFor(model => model.IdAccount)
+            @Html.HiddenFor(model => model.Email)
             <div class="form-group">
                 <input type="submit" value="Verwijder" class="btn btn-primary" />
             </div>
         }
             <form action="~/Account/Index">
-                <button class="btn btn-danger" type="submit">Annuleren</button>
+                <button class="btn btn-danger" type="submit">Annuleer</button>
             </form>
     </div>
 </div>

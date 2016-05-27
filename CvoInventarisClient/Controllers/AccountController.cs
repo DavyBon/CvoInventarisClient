@@ -28,7 +28,23 @@ namespace CvoInventarisClient.Controllers
             AccountModel account = new AccountModel();
             account.Email = Request.Form["Email"];
             account.Wachtwoord = Request.Form["Wachtwoord"];
-            tblAccount.Create(account);
+
+            if(tblAccount.GetByEmail(account.Email).Email == account.Email) // als het e-mailadres al in de DB staat
+            {                
+                ViewBag.warningAccountEmailDuplicateMessage = "Er bestaat al een account met e-mailadres " + account.Email + ". Gelieve een ander e-mailadres te gebruiken.";
+            }
+            else // het email adres staat er nog niet in
+            {
+                if (tblAccount.Create(account) > 0)
+                {
+                    ViewBag.successAccountDeleteMessage = "Het account " + account.Email + " is aangemaakt.";
+                }
+                else
+                {
+                    ViewBag.warningAccountCreatedMessage = "Het account " + account.Email + " is niet aangemaakt.";
+                }
+            }
+
             return View("index", GetAccounts());
         }
 
@@ -45,11 +61,11 @@ namespace CvoInventarisClient.Controllers
             DAL.TblAccount tblAccount = new DAL.TblAccount();
             if (tblAccount.Delete(am.IdAccount))
             {
-                ViewBag.successAccountDeleteMessage = "Het account " + am.Email + " is verwijdert";
+                ViewBag.successAccountDeleteMessage = "Het account " + am.Email + " is verwijdert.";
             }
             else
             {
-                ViewBag.warningAccountDeleteMessage = "Het account " + am.Email + " is niet verwijdert";
+                ViewBag.warningAccountDeleteMessage = "Het account " + am.Email + " is niet verwijdert.";
             }
             return View("index", GetAccounts());
         }
