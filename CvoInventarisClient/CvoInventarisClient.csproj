@@ -43,6 +43,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExcelLibrary">
+      <HintPath>..\..\..\..\..\Desktop\CvoInventarisClient\CvoInventarisClient\ExcelLibrary.dll</HintPath>
+    </Reference>
     <Reference Include="itextsharp">
       <HintPath>..\..\..\..\School\jaargang 2\project\WcfServiceCvoInventaris\WebApplication\itextsharp.dll</HintPath>
     </Reference>

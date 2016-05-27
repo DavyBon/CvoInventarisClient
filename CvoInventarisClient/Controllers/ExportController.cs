@@ -1,7 +1,9 @@
-﻿using iTextSharp.text;
+﻿using ExcelLibrary.SpreadSheet;
+using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -119,17 +121,16 @@ namespace CvoInventarisClient.Controllers
             }
             else if(exportType.Equals("excel"))
             {
-                Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
-                app.Visible = true;
-                Microsoft.Office.Interop.Excel.Workbook workbook = app.Workbooks.Add(1);
-                Microsoft.Office.Interop.Excel.Worksheet worksheet = (Microsoft.Office.Interop.Excel.Worksheet)workbook.Sheets[1];
+                Workbook workbook = new Workbook();
+                Worksheet worksheet = new Worksheet("Rapport Sheet");
+                workbook.Worksheets.Add(worksheet);
                 int counter = 0;
                 for (int i = 0; i < objects[0].GetType().GetProperties().Count(); i++)
                 {
                     var prop = objects[0].GetType().GetProperties()[i];
                     if (prop.GetValue(objects[0], null) != null)
                     {
-                        worksheet.Cells[1, 1 + counter] = prop.Name;
+                        worksheet.Cells[0, 0 + counter] = new Cell(prop.Name);
                         counter++;
                     }
                 }
@@ -141,18 +142,20 @@ namespace CvoInventarisClient.Controllers
                         var prop = objects[i].GetType().GetProperties()[y];
                         if (prop.GetValue(objects[0], null) != null)
                         {
-                            worksheet.Cells[i + 2, 1 + teller] = prop.GetValue(objects[i], null).ToString();
+                            worksheet.Cells[i + 1, y] = new Cell(prop.GetValue(objects[i], null).ToString());
                             teller++;
                         }
                     }
                 }
-                worksheet.Columns.AutoFit();
-                Response.Buffer = true;
-                //dit is het stuk dat zorgt dat je het kunt opslaan op een locatie naar keuze
-                Response.ContentType = "application/vnd.ms-excel";
-                Response.AppendHeader("Content-Disposition", "attachment; filename=rapport.xls");
-                Response.Write(worksheet);
-                Response.End();
+                using (var memoryStream = new MemoryStream())
+                {
+                    Response.ContentType = "application/vnd.ms-excel";
+                    Response.AddHeader("content-disposition", "attachment;  filename=rapport.xls");
+                    workbook.Save(memoryStream);
+                    memoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
             }
             return RedirectToAction("Index", type);
         }
