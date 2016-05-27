@@ -32,7 +32,7 @@ namespace CvoInventarisClient.Controllers
 
                 model.Facturen = TblFactuur.GetAll().OrderBy(f => f.Id).Reverse().ToList();
 
-                foreach (LeverancierModel l in TblLeverancier.GetAll())
+                foreach (LeverancierModel l in TblLeverancier.GetAll().OrderBy(x => x.Naam))
                 {
                     model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
                 }

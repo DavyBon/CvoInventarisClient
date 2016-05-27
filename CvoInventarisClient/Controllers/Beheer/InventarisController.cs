@@ -35,23 +35,23 @@ namespace CvoInventarisClient.Controllers
 
             model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
 
-            foreach (ObjectModel o in TblObject.GetAll())
+            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Kenmerken))
             {
                 model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
             }
-            foreach (LokaalModel l in TblLokaal.GetAll())
+            foreach (LokaalModel l in TblLokaal.GetAll().OrderBy(x => x.LokaalNaam))
             {
                 model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
             }
-            foreach (VerzekeringModel v in TblVerzekering.GetAll())
+            foreach (VerzekeringModel v in TblVerzekering.GetAll().OrderBy(x => x.Omschrijving))
             {
                 model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
             }
-            foreach (ObjectTypeModel ot in TblObjecttype.GetAll())
+            foreach (ObjectTypeModel ot in TblObjecttype.GetAll().OrderBy(x => x.Omschrijving))
             {
                 model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
             }
-            foreach (FactuurModel f in TblFactuur.GetAll())
+            foreach (FactuurModel f in TblFactuur.GetAll().OrderBy(x => x.CvoFactuurNummer))
             {
                 model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
             }

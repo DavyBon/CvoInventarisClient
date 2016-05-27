@@ -32,7 +32,7 @@ namespace CvoInventarisClient.Controllers
 
                 model.Campussen = TblCampus.GetAll().OrderBy(c => c.Id).Reverse().ToList();
 
-                foreach (PostcodeModel p in TblPostcode.GetAll())
+                foreach (PostcodeModel p in TblPostcode.GetAll().OrderBy(x => x.Gemeente))
                 {
                     model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
                 }

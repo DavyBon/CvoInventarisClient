@@ -31,11 +31,11 @@ namespace CvoInventarisClient.Controllers
 
                 model.Objecten = TblObject.GetAll().OrderBy(i => i.Id).Reverse().ToList();
 
-                foreach (FactuurModel f in TblFactuur.GetAll())
+                foreach (FactuurModel f in TblFactuur.GetAll().OrderBy(x => x.CvoFactuurNummer))
                 {
                     model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
                 }
-                foreach (ObjectTypeModel ot in TblObjectType.GetAll())
+                foreach (ObjectTypeModel ot in TblObjectType.GetAll().OrderBy(x => x.Omschrijving))
                 {
                     model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
                 }
