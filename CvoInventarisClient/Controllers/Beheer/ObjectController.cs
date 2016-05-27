@@ -79,20 +79,42 @@ namespace CvoInventarisClient.Controllers
 
         }
 
+        public ActionResult Create()
+        {
+            ObjectViewModel model = new ObjectViewModel();
+
+            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+            DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
+
+            model.Facturen = new List<SelectListItem>();
+            model.ObjectTypes = new List<SelectListItem>();
+
+            foreach (FactuurModel f in TblFactuur.GetAll().OrderBy(x => x.CvoFactuurNummer))
+            {
+                model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
+            }
+            foreach (ObjectTypeModel ot in TblObjectType.GetAll().OrderBy(x => x.Omschrijving))
+            {
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+            }
+            return View(model);
+        }
+
         // POST: Inventaris/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(string kenmerken, string omschrijving, string afmetingen,int? idObjecttype)
         {
             DAL.TblObject TblObject = new DAL.TblObject();
 
             ObjectModel obj = new ObjectModel();
-            obj.Kenmerken = Request.Form["kenmerken"];
-
-            obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt32(Request.Form["ObjectTypes"]) };
+            obj.Kenmerken = kenmerken;
+            obj.ObjectType = new ObjectTypeModel() { Id = idObjecttype };
+            obj.afmetingen = afmetingen;
+            obj.Omschrijving = omschrijving;
             TblObject.Create(obj);
 
             TempData["action"] = "Object werd toegevoegd";
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // GET: Inventaris/Edit/5
@@ -125,22 +147,21 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int idObject, string kenmerken, string omschrijving, string afmetingen, int? idObjecttype)
         {
             DAL.TblObject TblObject = new DAL.TblObject();
 
-            ViewBag.action = Request.Form["kenmerken"] + " was changed";
-
             ObjectModel obj = new ObjectModel();
-            obj.Id = Convert.ToInt32(Request.Form["idObject"]);
-            obj.Kenmerken = Request.Form["kenmerken"];
-            if (!String.IsNullOrWhiteSpace(Request.Form["ObjectTypes"])) { obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt16(Request.Form["ObjectTypes"]) }; }
-            else { obj.ObjectType = new ObjectTypeModel() { Id = Convert.ToInt16(Request.Form["defaultIdObjectType"]) }; }
+            obj.Id = idObject;
+            obj.Kenmerken = kenmerken;
+            obj.Omschrijving = omschrijving;
+            obj.afmetingen = afmetingen;
+            obj.ObjectType = new ObjectTypeModel() { Id = idObjecttype };
 
             TblObject.Update(obj);
 
             TempData["action"] = "Object werd gewijzigd";
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // POST: Inventaris/Delete/5
@@ -162,7 +183,7 @@ namespace CvoInventarisClient.Controllers
             {
                 TempData["action"] = idArray.Length + " object werd verwijderd uit objecten";
             }
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -211,7 +232,6 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Objecten.RemoveAll(x => x.ObjectType.Id != ObjectTypeFilter);
             }
-
 
             return View("index", model);
         }

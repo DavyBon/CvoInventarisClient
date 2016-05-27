@@ -24,6 +24,8 @@ namespace CvoInventarisClient.DAL
                     command.CommandType = System.Data.CommandType.StoredProcedure;
                     command.Parameters.Add(new SqlParameter("@idObjectType", App_Code.DALutil.checkIntForDBNUll(obj.ObjectType.Id)));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
+                    command.Parameters.Add(new SqlParameter("@afmetingen", obj.afmetingen));
+                    command.Parameters.Add(new SqlParameter("@omschrijving", obj.Omschrijving));
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
@@ -162,6 +164,8 @@ namespace CvoInventarisClient.DAL
                     command.Parameters.Add(new SqlParameter("@id", obj.Id));
                     command.Parameters.Add(new SqlParameter("@idObjectType", App_Code.DALutil.checkIntForDBNUll(obj.ObjectType.Id)));
                     command.Parameters.Add(new SqlParameter("@kenmerken", obj.Kenmerken));
+                    command.Parameters.Add(new SqlParameter("@afmetingen", obj.afmetingen));
+                    command.Parameters.Add(new SqlParameter("@omschrijving", obj.Omschrijving));
                     command.ExecuteReader();
                 }
                 return true;
