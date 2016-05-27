@@ -201,3 +201,4 @@ C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Sy
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache

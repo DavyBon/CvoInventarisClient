@@ -76,9 +76,9 @@ namespace CvoInventarisClient.DAL
                             factuur.ScholengroepNummer = dr["scholengroepNummer"].ToString();
                             factuur.Leverancier = leverancier;
                             factuur.Prijs = dr["prijs"] as decimal?;
-                            factuur.Garantie = (int)dr["garantie"];
+                            factuur.Garantie = dr["garantie"] as int?;
                             factuur.Omschrijving = dr["omschrijving"].ToString();
-                            factuur.Afschrijfperiode = (int)dr["afschrijfperiode"];
+                            factuur.Afschrijfperiode = dr["afschrijfperiode"] as int?;
                             factuur.VerwerkingsDatum = dr["verwerkingsDatum"].ToString();
                             factuur.CvoFactuurNummer = dr["cvoFactuurNummer"].ToString();
                             factuur.LeverancierFactuurNummer = dr["leverancierFactuurNummer"].ToString();

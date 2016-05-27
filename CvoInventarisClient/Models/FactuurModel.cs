@@ -29,13 +29,13 @@ namespace CvoInventarisClient.Models
         public decimal? Prijs { get; set; }
 
         [Display(Name = "Garantie")]
-        public int Garantie { get; set; }
+        public int? Garantie { get; set; }
 
         [Display(Name = "Omschrijving")]
         public string Omschrijving { get; set; }
 
         [Display(Name = "Afschrijfperiode")]
-        public int Afschrijfperiode { get; set; }
+        public int? Afschrijfperiode { get; set; }
 
         public override string ToString()
         {
