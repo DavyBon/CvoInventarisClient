@@ -275,7 +275,8 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int? objecttypeFilter, int? factuurFilter, int[] modelList)
+        public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar, 
+            string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter, int? objecttypeFilter, int? factuurFilter,string waardeFilter,string waardeFilterSecondary,string costcenterFilter, string afschrijvingInJaarFilter,string boekhoudnrFilter, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
@@ -408,10 +409,42 @@ namespace CvoInventarisClient.Controllers
                 }
             }
 
+            if (!String.IsNullOrWhiteSpace(waardeFilter))
+            {
+                if (waardeFilterSecondary.Equals("="))
+                {
+                    model.Inventaris.RemoveAll(x => x.Waarde != Convert.ToDecimal(waardeFilter.Replace(".", ",")));
+                }
+                else if (waardeFilterSecondary.Equals("<"))
+                {
+                    model.Inventaris.RemoveAll(x => x.Waarde > Convert.ToDecimal(waardeFilter.Replace(".", ",")));
+                }
+                else if (waardeFilterSecondary.Equals(">"))
+                {
+                    model.Inventaris.RemoveAll(x => x.Waarde < Convert.ToDecimal(waardeFilter.Replace(".", ",")));
+                }
+            }
+
+            if (!String.IsNullOrWhiteSpace(costcenterFilter))
+            {
+                model.Inventaris.RemoveAll(x => !x.Costcenter.ToLower().Contains(costcenterFilter.ToLower()));
+            }
+
+            if (!String.IsNullOrWhiteSpace(boekhoudnrFilter))
+            {
+                model.Inventaris.RemoveAll(x => !x.Boekhoudnr.ToLower().Contains(boekhoudnrFilter.ToLower()));
+            }
+
+            if (!String.IsNullOrWhiteSpace(afschrijvingInJaarFilter))
+            {
+                model.Inventaris.RemoveAll(x => (x.Aankoopjaar + Convert.ToInt16(x.Afschrijvingsperiode)).ToString() != afschrijvingInJaarFilter);
+            }
+
             if (factuurFilter >= 0)
             {
                 model.Inventaris.RemoveAll(x => x.Factuur.Id != factuurFilter);
             }
+
 
             if (verzekeringFilter >= 0)
             {
