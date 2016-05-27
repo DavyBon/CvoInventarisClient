@@ -110,7 +110,7 @@ namespace CvoInventarisClient.Controllers
         #region Create
 
         [HttpPost]
-        public ActionResult Create(int? leveranciers, string prijs)
+        public ActionResult Create(int? leverancier, string prijs)
         {
             TblFactuur TblFactuur = new TblFactuur();
 
@@ -120,7 +120,7 @@ namespace CvoInventarisClient.Controllers
             factuur.LeverancierFactuurNummer = Request.Form["leverancierfactuurnummer"];
             factuur.VerwerkingsDatum = Request.Form["verwerkingsdatum"];
             factuur.ScholengroepNummer = Request.Form["scholengroepnummer"];
-            factuur.Leverancier = new LeverancierModel() { Id = (int)leveranciers };
+            factuur.Leverancier = new LeverancierModel() { Id = leverancier };
             factuur.Prijs = Convert.ToDecimal(prijs.Replace(".", ","));
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
@@ -164,7 +164,7 @@ namespace CvoInventarisClient.Controllers
         #region Edit
 
         [HttpPost]
-        public ActionResult Edit(int id, string prijs)
+        public ActionResult Edit(int id, string prijs, int? leverancier)
         {
 
             string idAccount = HttpContext.User.Identity.Name;
@@ -184,8 +184,7 @@ namespace CvoInventarisClient.Controllers
             factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
             factuur.Omschrijving = Request.Form["omschrijving"];
             factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
-            if (!String.IsNullOrWhiteSpace(Request.Form["Leveranciers"])) { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["Leveranciers"]) }; }
-            else { factuur.Leverancier = new LeverancierModel() { Id = Convert.ToInt16(Request.Form["defaultIdLeverancier"]) }; }
+            factuur.Leverancier = new LeverancierModel() { Id = leverancier };
 
             TblFactuur.Update(factuur);
 

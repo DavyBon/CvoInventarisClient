@@ -10,7 +10,7 @@
         <div class="panel-heading">@ViewBag.Title</div>
         <div class="container-fluid">
             @Html.Hidden("idFactuur", Model.Facturen[0].Id)
-            @Html.Hidden("defaultIdLeverancier", Model.Facturen[0].Leverancier.Id)
+
             <div class="form-group">
                 @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
                 <input class="form-control" type="text" maxlength="50" name="cvofactuurnummer" value="@Model.Facturen[0].CvoFactuurNummer" />
@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 Leverancier
-                <select class="form-control" name="Leveranciers">
+                <select class="form-control" name="leverancier">
                     <option value="@Model.Facturen[0].Leverancier.Id">@Model.Facturen[0].Leverancier.Naam</option>
                     @foreach (var item in Model.Leveranciers)
                     {
