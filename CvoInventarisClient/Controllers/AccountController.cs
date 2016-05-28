@@ -149,11 +149,11 @@ namespace CvoInventarisClient.Controllers
             }
         }
 
-        public ActionResult Loguit()
-        {
-            FormsAuthentication.SignOut();
-            return Redirect(Url.Action("Index", "Login"));
-        }
+        //public ActionResult Loguit()
+        //{
+        //    FormsAuthentication.SignOut();
+        //    return Redirect(Url.Action("Index", "Login"));
+        //}
 
         public ActionResult ResetWachtwoord()
         {
