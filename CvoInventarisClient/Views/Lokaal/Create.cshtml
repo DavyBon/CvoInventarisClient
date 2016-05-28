@@ -1,43 +1,33 @@
 ﻿@model CvoInventarisClient.Models.LokaalViewModel
 
 @{
-    ViewBag.Title = "Lokaal - Aanpassen";
+    ViewBag.Title = "Lokaal - Aanmaken";
 }
 
-@using (Html.BeginForm("Edit", "Lokaal"))
-{
-    <div class="panel panel-primary">
-        <div class="panel-heading">Aanpassen</div>
-        <div class="container-fluid">
-            @Html.Hidden("idLokaal", Model.Lokalen[0].Id)
-
+<div class="panel panel-primary">
+    <div class="panel-heading">Aanmaken</div>
+    <div class="container-fluid">
+        @using (Html.BeginForm("Create", "Lokaal", new { @class = "form-horizontal" }))
+        {
             <div class="form-horizontal">
-
                 <div class="form-group">
                     <label for="lokaalNaam" class="col-sm-2 control-label">Lokaal naam</label>
                     <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Lokalen[0].LokaalNaam" maxlength="50" type="text" name="lokaalNaam" />
+                        <input class="form-control" maxlength="50" type="text" name="lokaalNaam"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="aantalPlaatsen" class="col-sm-2 control-label">Aantal plaatsen</label>
                     <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Lokalen[0].AantalPlaatsen" maxlength="50" type="text" name="aantalPlaatsen" />
+                        <input class="form-control" maxlength="50" type="text" name="aantalPlaatsen"/>
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="isComputerLokaal" class="col-sm-2 control-label">Computer lokaal</label>
                     <div class="col-sm-5">
-                        @if (Model.Lokalen[0].IsComputerLokaal)
-                        {
-                            <input type="checkbox" name="isComputerLokaal" checked="checked" value="True" />
-                        }
-                        else
-                        {
-                            <input type="checkbox" name="isComputerLokaal" value="True" />
-                        }
+                        <input type="checkbox" name="isComputerLokaal" value="True"/>
                     </div>
                 </div>
 
@@ -45,7 +35,7 @@
                     <label for="campussen" class="col-sm-2 control-label">Campus</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="campussen">
-                            <option value="@Model.Lokalen[0].Campus.Id">@Model.Lokalen[0].Campus.Naam</option>
+                            <option value="">-Selecteer-</option>
                             @foreach (var item in Model.Campussen)
                             {
                                 <option value="@item.Value">@item.Text</option>
@@ -60,11 +50,10 @@
                         @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-left" })
                     </div>
                     <div class="col-sm-1">
-                        <button type="submit" class="btn btn-primary pull-left">Pas lokaal aan</button>
+                        <button type="submit" class="btn btn-primary pull-left">Voeg toe</button>
                     </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
-}
-
+</div>

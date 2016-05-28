@@ -46,7 +46,7 @@
 
 @using (Html.BeginForm("Delete", "Lokaal"))
 {
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <a class="btn btn-primary" href="@Url.Action("Create", "Lokaal")">Nieuw</a>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
     if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
@@ -127,7 +127,7 @@
     </div>
 }
 <!-- nieuw modal -->
-<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+@*<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-sm">
         <div class="modal-content">
             <div class="modal-header">
@@ -165,7 +165,7 @@
             }
         </div>
     </div>
-</div>
+</div>*@
 
 <!-- Filter modal -->
 <div class="modal fade filterModal" tabindex="-1" role="dialog">

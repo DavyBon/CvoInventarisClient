@@ -236,6 +236,7 @@
     <Content Include="Views\Inventaris\Create.cshtml" />
     <Content Include="Views\Factuur\Create.cshtml" />
     <Content Include="Views\Object\Create.cshtml" />
+    <Content Include="Views\Lokaal\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

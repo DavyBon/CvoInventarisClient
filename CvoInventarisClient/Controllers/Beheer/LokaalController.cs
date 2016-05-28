@@ -70,15 +70,32 @@ namespace CvoInventarisClient.Controllers
             return View(model);
         }
 
+        public ActionResult Create()
+        {
+            LokaalViewModel model = new LokaalViewModel();
+
+            DAL.TblCampus Tblcampus = new DAL.TblCampus();
+
+            model.Lokalen = new List<LokaalModel>();
+            model.Campussen = new List<SelectListItem>();
+
+            foreach (CampusModel c in Tblcampus.GetAll().OrderBy(x => x.Naam))
+            {
+                model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
-        public ActionResult Create(int? Campussen)
+        public ActionResult Create(int? campussen)
         {
             DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
 
             LokaalModel lokaal = new LokaalModel();
             lokaal.LokaalNaam = Request.Form["lokaalNaam"];
             lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-            lokaal.Campus = new CampusModel() { Id = Campussen };
+            lokaal.Campus = new CampusModel() { Id = campussen };
 
             if (Request.Form["isComputerLokaal"] != null)
             {
@@ -120,13 +137,13 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int? Campussen)
+        public ActionResult Edit(int? campussen)
         {
             LokaalModel lokaal = new LokaalModel();
             lokaal.Id = Convert.ToInt16(Request.Form["idLokaal"]);
             lokaal.LokaalNaam = Request.Form["lokaalNaam"];
             lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
-            lokaal.Campus = new CampusModel() { Id = Campussen };
+            lokaal.Campus = new CampusModel() { Id = campussen };
 
             if (Request.Form["isComputerLokaal"] != null) { lokaal.IsComputerLokaal = true; }
             else
