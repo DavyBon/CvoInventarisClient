@@ -3,7 +3,7 @@
 @{
     ViewBag.Title = "Facturen";
     List<String> amounts = new List<string>() { "100", "200", "300" };
-    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "CVO Factuurnummer" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Leverancier", "CVO Factuurnummer" };
 }
 @if (!String.IsNullOrWhiteSpace(ViewBag.action))
 {
@@ -56,12 +56,12 @@
     {
         <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
     }
-    
+
 
     <div class="spacer"></div>
 
     <div class="panel panel-primary">
-        <div class="panel-heading">@ViewBag.Heading</div>
+        <div class="panel-heading">@ViewBag.Heading @ViewBag.totaalprijs</div>
         <table class="table table-striped dataTable">
             <thead>
                 <tr>
@@ -215,80 +215,96 @@
         </div>
     </div>*@
 
-<!-- Filter modal -->
-<div class="modal fade filterModal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-sm">
-        <div class="modal-content">
-            <div class="modal-header">
-                <strong>nieuwe filter</strong>
-            </div>
-            @using (Html.BeginForm("Filter", "Factuur"))
-            {
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    <!-- Filter modal -->
+    <div class="modal fade filterModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>nieuwe filter</strong>
+                </div>
+                @using (Html.BeginForm("Filter", "Factuur"))
+                {
 
-                <div class="modal-body">
-                    <div class="form-group">
+                    <div class="modal-body clearfix">
 
-                        <div class="form-group">
-                            <label>CVO-Factuurnummer:</label>
-                            <input class="form-control" type="text" name="cvoFactuurNummerFilter" />
+                        <div class="row">
+
+                            <div class="form-group col-lg-6">
+                                <label>CVO-Factuurnummer:</label>
+                                <input class="form-control" type="text" name="cvoFactuurNummerFilter" />
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <label>Leverancier-Factuurnummer:</label>
+                                <input class="form-control" type="text" name="leverancierFactuurNummerFilter" />
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            <label>Leverancier-Factuurnummer:</label>
-                            <input class="form-control" type="text" name="leverancierFactuurNummerFilter" />
+                        <div class="row">
+
+                            <div class="form-group col-lg-6">
+                                <label>Verwerkingsdatum:</label>
+                                <input class="form-control" type="date" name="verwerkingsDatumFilter" />
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <label>Scholengroepnummer:</label>
+                                <input class="form-control" type="text" name="scholengroepNummerFilter" />
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            <label>Verwerkingsdatum:</label>
-                            <input class="form-control" type="date" name="verwerkingsDatumFilter" />
+                        <div class="row">
+
+                            <div class="form-group col-lg-6">
+                                <label>Garantie:</label>
+                                <select class="form-control" name="garantieFilterSecondary">
+                                    <option value="=">gelijk aan</option>
+                                    <option value="<">kleiner dan</option>
+                                    <option value=">">groter dan</option>
+                                </select>
+                                <input class="form-control" type="number" name="garantieFilter" placeholder="garantie(bv: 5)" />
+                            </div>
+
+                            <div class="form-group col-lg-6">
+                                <label>Afschrijfperiode:</label>
+                                <select class="form-control" name="afschrijfperiodeFilterSecondary">
+                                    <option value="=">gelijk aan</option>
+                                    <option value="<">kleiner dan</option>
+                                    <option value=">">groter dan</option>
+                                </select>
+                                <input class="form-control" type="number" name="afschrijfperiodeFilter" placeholder="periode(bv: 5)" />
+                            </div>
+
                         </div>
 
-                        <div class="form-group">
-                            <label>Scholengroepnummer:</label>
-                            <input class="form-control" type="text" name="scholengroepNummerFilter" />
-                        </div>
+                        <div class="row">
 
-                        <div class="form-group">
-                            <label>Leverancier:</label>
-                            <select class="form-control" name="leverancierFilter">
-                                <option value="-1">-Selecteer-</option>
-                                @foreach (var item in Model.Leveranciers)
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
-                            </select>
-                        </div>
+                            <div class="form-group col-lg-6">
+                                <label>Leverancier:</label>
+                                <select class="form-control" name="leverancierFilter">
+                                    <option value="-1">-Selecteer-</option>
+                                    @foreach (var item in Model.Leveranciers)
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                </select>
+                            </div>
 
-                        <div class="form-group">
-                            <label>Garantie:</label>
-                            <select class="form-control" name="garantieFilterSecondary">
-                                <option value="=">gelijk aan</option>
-                                <option value="<">kleiner dan</option>
-                                <option value=">">groter dan</option>
-                            </select>
-                            <input class="form-control" type="number" name="garantieFilter" placeholder="garantie(bv: 5)" />
                         </div>
-
-                        <div class="form-group">
-                            <label>Afschrijfperiode:</label>
-                            <select class="form-control" name="afschrijfperiodeFilterSecondary">
-                                <option value="=">gelijk aan</option>
-                                <option value="<">kleiner dan</option>
-                                <option value=">">groter dan</option>
-                            </select>
-                            <input class="form-control" type="number" name="afschrijfperiodeFilter" placeholder="periode(bv: 5)" />
-                        </div>
-
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">filter</button>
-                </div>
-            }
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">filter</button>
+                    </div>
+                }
+            </div>
         </div>
     </div>
-</div>
+}
 
 @using (Html.BeginForm("Export", "Export"))
 {

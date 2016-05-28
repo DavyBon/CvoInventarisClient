@@ -16,13 +16,17 @@ namespace CvoInventarisClient.Controllers
         #region Get Index
 
         // INDEX:
-        public ActionResult Index(int? amount, string order, bool? refresh)
+        public ActionResult Index(int? amount, string order)
         {
             ViewBag.action = TempData["action"];
 
             FactuurViewModel model = new FactuurViewModel();
 
-            if (Session["factuurviewmodel"] == null || refresh == true)
+            if ((amount != null | !string.IsNullOrWhiteSpace(order)) & Session["leverancierviewmodel"] != null)
+            {
+                model = (FactuurViewModel)Session["factuurviewmodel"];
+            }
+            else
             {
                 TblFactuur TblFactuur = new TblFactuur();
                 TblLeverancier TblLeverancier = new TblLeverancier();
@@ -36,10 +40,6 @@ namespace CvoInventarisClient.Controllers
                 {
                     model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
                 }
-            }
-            else
-            {
-                model = (FactuurViewModel)Session["factuurviewmodel"];
             }
 
             Session["factuurviewmodel"] = model.Clone();
@@ -77,6 +77,14 @@ namespace CvoInventarisClient.Controllers
             }
 
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Facturen.Count() + ")";
+
+            decimal? totaalprijs = 0;
+            foreach (var item in model.Facturen)
+            {
+                totaalprijs += item.Prijs;
+            }
+
+            ViewBag.totaalprijs = "(Totaal prijs: " + totaalprijs.ToString() + "€)";
 
             return View(model);
         }
@@ -325,6 +333,14 @@ namespace CvoInventarisClient.Controllers
             }
 
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Facturen.Count() + ")";
+
+            decimal? totaalprijs = 0;
+            foreach (var item in model.Facturen)
+            {
+                totaalprijs += item.Prijs;
+            }
+
+            ViewBag.totaalprijs = "(Totaal prijs: " + totaalprijs.ToString() + "€)";
 
             return View("Index", model);
         }
