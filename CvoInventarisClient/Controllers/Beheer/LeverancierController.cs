@@ -72,16 +72,33 @@ namespace CvoInventarisClient.Controllers
         }
 
         // CREATE:
+        public ActionResult Create()
+        {
+            LeverancierViewModel model = new LeverancierViewModel();
+
+            DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
+
+            model.Postcodes = new List<SelectListItem>();
+
+            foreach (PostcodeModel p in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
+            {
+                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
-        public ActionResult Create(int? postcode)
+        public ActionResult Create(int? Postcodes)
         {
             DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+
             LeverancierModel leverancier = new LeverancierModel();
             leverancier.Naam = Request.Form["naam"];
             leverancier.Straat = Request.Form["straat"];
             leverancier.StraatNummer = Request.Form["straatNummer"];
             leverancier.BusNummer = Request.Form["busNummer"];
-            leverancier.Postcode = new PostcodeModel() { Id = (int)postcode };
+            leverancier.Postcode = new PostcodeModel() { Id = Postcodes };
             leverancier.Telefoon = Request.Form["telefoon"];
             leverancier.Fax = Request.Form["fax"];
             leverancier.Email = Request.Form["email"];
