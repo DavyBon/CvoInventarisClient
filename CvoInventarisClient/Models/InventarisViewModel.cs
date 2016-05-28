@@ -14,6 +14,8 @@ namespace CvoInventarisClient.Models
         public List<SelectListItem> Lokalen { get; set; }
         public List<SelectListItem> Facturen { get; set; }
         public List<SelectListItem> Objecttypen { get; set; }
+        public List<SelectListItem> Campussen { get; set; }
+        public List<SelectListItem> Leverancieren { get; set; }
 
         public object Clone()
         {

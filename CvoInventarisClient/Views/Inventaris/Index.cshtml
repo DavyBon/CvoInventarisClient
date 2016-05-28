@@ -188,6 +188,8 @@
     </div>
 }
 
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
 <!-- Filter modal -->
 <div class="modal fade filterModal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg">
@@ -198,147 +200,195 @@
             @using (Html.BeginForm("Filter", "Inventaris"))
             {
                 <div class="modal-body clearfix">
-                    <div class="form-group col-lg-6">
-                        <label>Objecttype:</label>
-                        <select class="form-control" name="objecttypeFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Objecttypen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Objecttype:</label>
+                            <select class="form-control" name="objecttypeFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Objecttypen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+
+
+                        <div class="form-group col-lg-6">
+                            <label>Object:</label>
+                            <select class="form-control" name="objectFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Objecten)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>aanwezig:</label>
+
+                            <select class="form-control" name="aanwezigFilter">
+                                <option value="">-Selecteer-</option>
+                                <option value="true">aanwezig</option>
+                                <option value="false">niet aanwezig</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>actief:</label>
+
+                            <select class="form-control" name="actiefFilter">
+                                <option value="">-Selecteer-</option>
+                                <option value="true">actief</option>
+                                <option value="false">niet actief</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Lokaal:</label>
+                            <select class="form-control" name="lokaalFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Lokalen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Historiek:</label>
+                            <input class="form-control" type="text" name="historiekFilter" />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Aankoopjaar:</label>
+                            <select class="form-control" name="filterAankoopjaarSecondary">
+                                <option value="=">van</option>
+                                <option value="<">voor</option>
+                                <option value=">">na</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAankoopjaar" placeholder="jaar" />
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Afschrijvingsperiode:</label>
+                            <select class="form-control" name="filterAfschrijvingsperiodeSecondary">
+                                <option value="=">van</option>
+                                <option value="<">voor</option>
+                                <option value=">">na</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAfschrijvingsperiode" placeholder="periode(in jaar)" />
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Factuur:</label>
+                            <select class="form-control" name="factuurFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Facturen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Verzekering:</label>
+                            <select class="form-control" name="verzekeringFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Verzekeringen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
 
 
-                    <div class="form-group col-lg-6">
-                        <label>Object:</label>
-                        <select class="form-control" name="objectFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Objecten)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Costcenter</label>
+                            <input class="form-control" type="number" name="costcenterFilter" />
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Boekhoudnummer</label>
+                            <input class="form-control" type="number" name="boekhoudnrFilter" />
+                        </div>
+
                     </div>
 
-                    <div class="form-group col-lg-6">
-                        <label>aanwezig:</label>
+                    <div class="row">
 
-                        <select class="form-control" name="aanwezigFilter">
-                            <option value="">-Selecteer-</option>
-                            <option value="true">aanwezig</option>
-                            <option value="false">niet aanwezig</option>
-                        </select>
-                    </div>
+                        <div class="form-group col-lg-6">
+                            <label>Waarde</label>
+                            <select class="form-control" name="waardeFilterSecondary">
+                                <option value="=">is</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" placeholder="" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="waardeFilter" />
+                        </div>
 
-                    <div class="form-group col-lg-6">
-                        <label>actief:</label>
+                        <div class="form-group col-lg-6">
+                            <label>Objecten afgeschreven in</label>
+                            <select class="form-control" name="afschrijvingInJaarFilter">
+                                <option value="">-Selecteer-</option>
+                                @for (int i = DateTime.Now.Year - 10; i < DateTime.Now.Year + 10; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
 
-                        <select class="form-control" name="actiefFilter">
-                            <option value="">-Selecteer-</option>
-                            <option value="true">actief</option>
-                            <option value="false">niet actief</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Lokaal:</label>
-                        <select class="form-control" name="lokaalFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Lokalen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Historiek:</label>
-                        <input class="form-control" type="text" name="historiekFilter" />
                     </div>
 
 
-                    <div class="form-group col-lg-6">
-                        <label>Aankoopjaar:</label>
-                        <select class="form-control" name="filterAankoopjaarSecondary">
-                            <option value="=">van</option>
-                            <option value="<">voor</option>
-                            <option value=">">na</option>
-                        </select>
-                        <input class="form-control" type="number" name="filterAankoopjaar" placeholder="jaar" />
-                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Leverancier</label>
+                            <select class="form-control" name="leverancierFilter">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Leverancieren)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
 
-                    <div class="form-group col-lg-6">
-                        <label>Afschrijvingsperiode:</label>
-                        <select class="form-control" name="filterAfschrijvingsperiodeSecondary">
-                            <option value="=">van</option>
-                            <option value="<">voor</option>
-                            <option value=">">na</option>
-                        </select>
-                        <input class="form-control" type="number" name="filterAfschrijvingsperiode" placeholder="periode(in jaar)" />
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <label>Factuur:</label>
-                        <select class="form-control" name="factuurFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Facturen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
-                    </div>
-                    <div class="form-group col-lg-6">
-                        <label>Verzekering:</label>
-                        <select class="form-control" name="verzekeringFilter">
-                            <option value="-1">-Selecteer-</option>
-                            @foreach (var item in Model.Verzekeringen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Costcenter</label>
-                        <input class="form-control" type="number" name="costcenterFilter" />
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Boekhoudnummer</label>
-                        <input class="form-control" type="number" name="boekhoudnrFilter" />
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Waarde</label>
-                        <select class="form-control" name="waardeFilterSecondary">
-                            <option value="=">is</option>
-                            <option value="<">kleiner dan</option>
-                            <option value=">">groter dan</option>
-                        </select>
-                        <input class="form-control" type="number" placeholder="" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="waardeFilter" />
-                    </div>
-
-                    <div class="form-group col-lg-6">
-                        <label>Objecten afgeschreven in</label>
-                        <select class="form-control" name="afschrijvingInJaarFilter">
-                            <option value="">-Selecteer-</option>
-                            @for (int i = DateTime.Now.Year - 10; i < DateTime.Now.Year + 10; i++)
-                            {
-                                <option value="@i">@i</option>
-                            }
-                        </select>
+                        <div class="form-group col-lg-6">
+                            <label>Campus</label>
+                            <select class="form-control" name="campusFilter">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Campussen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
 
                 </div>
 
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary">filter</button>
-                </div>
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">filter</button>
+                    </div>
             }
         </div>
     </div>
 </div>
+}
 
 @using (Html.BeginForm("Export", "Export"))
 {
