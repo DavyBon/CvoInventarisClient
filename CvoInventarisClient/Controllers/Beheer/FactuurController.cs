@@ -65,10 +65,6 @@ namespace CvoInventarisClient.Controllers
                 {
                     model.Facturen = model.Facturen.OrderBy(f => f.Leverancier.Naam).ToList();
                 }
-                else if (order.Equals("CVO Factuurnummer"))
-                {
-                    model.Facturen = model.Facturen.OrderBy(f => f.CvoFactuurNummer).ToList();
-                }
                 ViewBag.ordertype = order.ToString();
             }
             else
@@ -77,14 +73,6 @@ namespace CvoInventarisClient.Controllers
             }
 
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Facturen.Count() + ")";
-
-            decimal? totaalprijs = 0;
-            foreach (var item in model.Facturen)
-            {
-                totaalprijs += item.Prijs;
-            }
-
-            ViewBag.totaalprijs = "(Totaal prijs: " + totaalprijs.ToString() + "€)";
 
             return View(model);
         }
@@ -340,7 +328,7 @@ namespace CvoInventarisClient.Controllers
                 totaalprijs += item.Prijs;
             }
 
-            ViewBag.totaalprijs = "(Totaal prijs: " + totaalprijs.ToString() + "€)";
+            ViewBag.totaalprijs = "(Totaal prijs: € " + totaalprijs.ToString() + ")";
 
             return View("Index", model);
         }
