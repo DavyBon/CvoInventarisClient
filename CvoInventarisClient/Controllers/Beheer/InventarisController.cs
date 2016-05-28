@@ -459,6 +459,15 @@ namespace CvoInventarisClient.Controllers
                 model.Inventaris.RemoveAll(x => x.Verzekering.Id != verzekeringFilter);
             }
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Inventaris.Count() + ")";
+
+            decimal? totaalWaarde = 0;
+            foreach (var item in model.Inventaris)
+            {
+                totaalWaarde += item.Waarde;
+            }
+
+            ViewBag.totaalWaarde = " (Totaalwaarde: " + totaalWaarde.ToString() + "€)";
+
             return View("index", model);
         }
     }
