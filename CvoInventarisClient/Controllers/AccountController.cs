@@ -149,14 +149,26 @@ namespace CvoInventarisClient.Controllers
             }
         }
 
-        public ActionResult Loguit()
-        {
-            FormsAuthentication.SignOut();
-            return Redirect(Url.Action("Index", "Login"));
-        }
+        //public ActionResult Loguit()
+        //{
+        //    FormsAuthentication.SignOut();
+        //    return Redirect(Url.Action("Index", "Login"));
+        //}
 
         public ActionResult ResetWachtwoord()
         {
+            string idAccount = HttpContext.User.Identity.Name;
+            if(!string.IsNullOrWhiteSpace(idAccount))
+            {
+                DAL.TblAccount tblAccount = new DAL.TblAccount();
+                AccountModel account = tblAccount.GetById(Convert.ToInt32(idAccount));
+                ViewBag.accountEmail = account.Email;
+            }
+            else
+            {
+                ViewBag.accountEmail = "";
+            }           
+
             return View();
         }
 

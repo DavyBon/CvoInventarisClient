@@ -18,13 +18,7 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Index(AccountModel am, FormCollection formCollection)
         {
-            //CvoInventarisServiceClient service = new CvoInventarisServiceClient();
-
             DAL.TblAccount tblAccount = new DAL.TblAccount();
-
-            //Account acc = new Account();
-            //acc.Email = am.Email;
-            //acc.Wachtwoord = am.Wachtwoord;
 
             try
             {
@@ -53,6 +47,13 @@ namespace CvoInventarisClient.Controllers
             }
 
             return View();
+        }
+
+        public ActionResult Loguit()
+        {
+            FormsAuthentication.SignOut();
+            ViewBag.successLoguitMessage = "U bent succesvol uitgelogd.";
+            return View("Index");
         }
     }
 }
