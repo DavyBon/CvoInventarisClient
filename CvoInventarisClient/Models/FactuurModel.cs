@@ -25,7 +25,7 @@ namespace CvoInventarisClient.Models
         [Display(Name = "Leverancier")]
         public LeverancierModel Leverancier { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:n} €")]
+        [DisplayFormat(DataFormatString = "€ {0:n}")]
         public decimal? Prijs { get; set; }
 
         [Display(Name = "Garantie")]

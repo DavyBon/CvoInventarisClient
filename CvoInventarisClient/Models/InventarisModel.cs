@@ -29,7 +29,7 @@ namespace CvoInventarisClient.Models
         public int? Afschrijvingsperiode { get; set; }
         [Display(Name = "Factuur")]
         public FactuurModel Factuur { get; set; }
-        [DisplayFormat(DataFormatString = "{0:n} €")]
+        [DisplayFormat(DataFormatString = "€ {0:n}")]
         public decimal? Waarde { get; set; }
         public string Costcenter { get; set; }
         public string Boekhoudnr { get; set; }
