@@ -1,20 +1,23 @@
 ﻿html, body {
     height: 100%;
     width: 100%;
+    background-color: #efefef;
 }
 
 .content-background {
     height: 100%;
     width: 100%;
-    padding: 1em;
-    background-color: #efefef;
+    padding:1em;
 }
 
 .content-wrapper {
-    height: 100%;
+    display: block;
+    min-height:100%;
     width: 100%;
     background-color: white;
     box-shadow: 0 1px 2px rgba(0,0,0,.1);
+    margin: 0 auto;
+	top:50%;
 }
 
 .spacer {
