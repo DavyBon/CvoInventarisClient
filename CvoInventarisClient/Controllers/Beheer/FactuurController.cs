@@ -325,6 +325,11 @@ namespace CvoInventarisClient.Controllers
             decimal? totaalprijs = 0;
             foreach (var item in model.Facturen)
             {
+                if (item.Prijs == null)
+                {
+                    item.Prijs = 0;
+                }
+
                 totaalprijs += item.Prijs;
             }
 
