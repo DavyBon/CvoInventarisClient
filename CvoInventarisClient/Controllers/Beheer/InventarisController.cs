@@ -435,10 +435,15 @@ namespace CvoInventarisClient.Controllers
             decimal? totaalWaarde = 0;
             foreach (var item in model.Inventaris)
             {
+                if (item.Waarde == null)
+                {
+                    item.Waarde = 0;
+                }
+
                 totaalWaarde += item.Waarde;
             }
 
-            ViewBag.totaalWaarde = " (Totaalwaarde: " + totaalWaarde.ToString() + " €)";
+            ViewBag.totaalWaarde = " (Totaalwaarde: € " + totaalWaarde.ToString() + ")";
 
             return View("index", model);
         }
