@@ -18,75 +18,57 @@ namespace CvoInventarisClient.Controllers
 
             InventarisViewModel model = new InventarisViewModel();
 
-            if ((amount != null | !string.IsNullOrWhiteSpace(order)) & Session["inventarisviewmodel"] != null)
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+            DAL.TblObject TblObject = new DAL.TblObject();
+            DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
+            DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
+            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+            DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
+            DAL.TblCampus TblCampus = new DAL.TblCampus();
+            DAL.TblLeverancier TblLeverancier = new DAL.TblLeverancier();
+
+            model.Inventaris = new List<InventarisModel>();
+            model.Objecten = new List<SelectListItem>();
+            model.Lokalen = new List<SelectListItem>();
+            model.Verzekeringen = new List<SelectListItem>();
+            model.Objecttypen = new List<SelectListItem>();
+            model.Campussen = new List<SelectListItem>();
+            model.Leverancieren = new List<SelectListItem>();
+            model.Facturen = new List<SelectListItem>();
+
+            model.Inventaris = TblInventaris.GetTop(amount);
+
+            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Kenmerken))
             {
-                model = (InventarisViewModel)Session["inventarisviewmodel"];
+                model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
             }
-            else
+            foreach (LokaalModel l in TblLokaal.GetAll().OrderBy(x => x.LokaalNaam))
             {
-                DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
-                DAL.TblObject TblObject = new DAL.TblObject();
-                DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
-                DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
-                DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
-                DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
-                DAL.TblCampus TblCampus = new DAL.TblCampus();
-                DAL.TblLeverancier TblLeverancier = new DAL.TblLeverancier();
-
-                model.Inventaris = new List<InventarisModel>();
-                model.Objecten = new List<SelectListItem>();
-                model.Lokalen = new List<SelectListItem>();
-                model.Verzekeringen = new List<SelectListItem>();
-                model.Objecttypen = new List<SelectListItem>();
-                model.Campussen = new List<SelectListItem>();
-                model.Leverancieren = new List<SelectListItem>();
-                model.Facturen = new List<SelectListItem>();
-
-                model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-
-                foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Kenmerken))
-                {
-                    model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
-                }
-                foreach (LokaalModel l in TblLokaal.GetAll().OrderBy(x => x.LokaalNaam))
-                {
-                    model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
-                }
-                foreach (VerzekeringModel v in TblVerzekering.GetAll().OrderBy(x => x.Omschrijving))
-                {
-                    model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
-                }
-                foreach (ObjectTypeModel ot in TblObjecttype.GetAll().OrderBy(x => x.Omschrijving))
-                {
-                    model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
-                }
-                foreach (FactuurModel f in TblFactuur.GetAll().OrderBy(x => x.CvoFactuurNummer))
-                {
-                    model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
-                }
-                foreach (CampusModel c in TblCampus.GetAll().OrderBy(x => x.Naam))
-                {
-                    model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
-                }
-
-                foreach (LeverancierModel l in TblLeverancier.GetAll().OrderBy(x => x.Naam))
-                {
-                    model.Leverancieren.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
-                }
+                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam, Value = l.Id.ToString() });
+            }
+            foreach (VerzekeringModel v in TblVerzekering.GetAll().OrderBy(x => x.Omschrijving))
+            {
+                model.Verzekeringen.Add(new SelectListItem { Text = v.Omschrijving, Value = v.Id.ToString() });
+            }
+            foreach (ObjectTypeModel ot in TblObjecttype.GetAll().OrderBy(x => x.Omschrijving))
+            {
+                model.Objecttypen.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
+            }
+            foreach (FactuurModel f in TblFactuur.GetAll().OrderBy(x => x.CvoFactuurNummer))
+            {
+                model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
+            }
+            foreach (CampusModel c in TblCampus.GetAll().OrderBy(x => x.Naam))
+            {
+                model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
             }
 
-            Session["inventarisviewmodel"] = model.Clone();
+            foreach (LeverancierModel l in TblLeverancier.GetAll().OrderBy(x => x.Naam))
+            {
+                model.Leverancieren.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+            }
 
-            if (amount == null)
-            {
-                model.Inventaris = model.Inventaris.Take(100).ToList();
-                ViewBag.amount = "100";
-            }
-            else
-            {
-                model.Inventaris = model.Inventaris.Take((int)amount).ToList();
-                ViewBag.amount = amount.ToString();
-            }
+            ViewBag.amount = model.Inventaris.Count.ToString();
 
             if (!string.IsNullOrWhiteSpace(order))
             {
@@ -167,7 +149,10 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Label = Request.Form["reeks"] + labelnr.ToString().PadLeft(4, '0');
                 inventaris.Costcenter = costcenter;
                 inventaris.Boekhoudnr = boekhoudnr;
-                inventaris.Waarde = Convert.ToDecimal(waarde.Replace(".", ","));
+                if (!string.IsNullOrWhiteSpace(waarde))
+                {
+                    inventaris.Waarde = Convert.ToDecimal(waarde.Replace(".", ","));
+                }
                 inventaris.Object = new ObjectModel() { Id = Objecten };
                 inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
                 inventaris.Factuur = new FactuurModel() { Id = Facturen };
@@ -303,20 +288,14 @@ namespace CvoInventarisClient.Controllers
 
             InventarisViewModel model = new InventarisViewModel();
 
-            if (Session["inventarisviewmodel"] == null)
-            {
-                DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
-                model.Inventaris = new List<InventarisModel>();
 
-                model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+            DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
+            model.Inventaris = new List<InventarisModel>();
+
+            model.Inventaris = TblInventaris.GetAll().OrderBy(i => i.Id).Reverse().ToList();
 
 
-                Session["inventarisviewmodel"] = model.Clone();
-            }
-            else
-            {
-                model = (InventarisViewModel)Session["inventarisviewmodel"];
-            }
+            Session["inventarisviewmodel"] = model.Clone();
 
 
 
