@@ -1,0 +1,24 @@
+﻿@model CvoInventarisClient.Models.VerzekeringViewModel
+
+@{
+    ViewBag.Title = "Verzekering - Edit";
+}
+
+@using (Html.BeginForm("Edit", "Verzekering"))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="container-fluid">
+            @Html.Hidden("idVerzekering", Model.Verzekeringen[0].Id)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Verzekeringen[0].Omschrijving)
+                <input class="form-control" type="text" maxlength="50" name="omschrijving" value="@Model.Verzekeringen[0].Omschrijving" required />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Pas verzekering aan</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
+}
+
+
+

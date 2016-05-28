@@ -1,0 +1,66 @@
+﻿@model CvoInventarisClient.Models.AccountModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Login.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <meta name="description" content="CvoInventaris applicatie" />
+</head>
+<body>
+
+    <div class="container">
+
+        <form action="~/Account/WijzigWachtwoord" method="post" class="form-signin">
+            <div class="page-header">
+                <h1 class="form-signin-heading">CVO inventaris</h1>
+            </div>
+            @if (!String.IsNullOrWhiteSpace(ViewBag.successWijzigWachtwoordMessage))
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Uw wachtwoord is gewijzigd!</strong> @ViewBag.successWijzigWachtwoordMessage
+                </div>
+            }
+            @if (!String.IsNullOrWhiteSpace(ViewBag.warningWijzigWachtwoordMessage))
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Opgelet!</strong> @ViewBag.warningWijzigWachtwoordMessage
+                </div>
+            }
+            <h3 class="form-signin-heading">Wachtwoord wijzigen</h3>
+            <h5>Vul in het veld hieronder uw nieuwe wachtwoord in.</h5>
+            <br />
+            <input type="hidden" name="GUID" value="@Request.QueryString["uid"]" />
+            <label for="Wachtwoord" class="sr-only">Wachtwoord</label>
+            <input type="password" id="Wachtwoord" name="Wachtwoord" class="form-control" placeholder="Wachtwoord" required autofocus>
+            @*<label for="HerhaalWachtwoord" class="sr-only">Herhaal wachtwoord</label>
+            <input type="password" id="HerhaalWachtwoord" name="HerhaalWachtwoord" class="form-control" placeholder="Herhaal wachtwoord" required>*@  
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" onchange="document.getElementById('Wachtwoord').type = this.checked ? 'text' : 'password'"> Toon wachtwoord
+                </label>
+            </div>         
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Opslaan</button>
+            <div class="pager">
+                <a href="~/Login/Index">Log in</a>
+            </div>
+        </form>
+
+    </div> <!-- /container -->
+
+</body>
+</html>

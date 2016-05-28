@@ -1,0 +1,307 @@
+﻿@model CvoInventarisClient.Models.FactuurViewModel
+
+@{
+    ViewBag.Title = "Facturen";
+    List<String> amounts = new List<string>() { "100", "200", "300" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "CVO Factuurnummer" };
+}
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
+}
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Factuur"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
+
+@using (Html.BeginForm("Delete", "Factuur"))
+{
+    <a class="btn btn-primary" href="@Url.Action("Create", "Factuur")">Nieuw</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
+
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Factuur")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
+    
+
+    <div class="spacer"></div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <table class="table table-striped dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].LeverancierFactuurNummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].VerwerkingsDatum)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
+                    </th>
+                    <th>
+                        Leverancier
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="search">
+                @foreach (var item in Model.Facturen)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="idArray" value="@item.Id" />
+                        </td>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Factuur", new { id = item.Id })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CvoFactuurNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LeverancierFactuurNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.VerwerkingsDatum)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ScholengroepNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Leverancier.Naam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prijs)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Garantie)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Omschrijving)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Afschrijfperiode)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+<!-- nieuw modal -->
+@*<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Vul in</strong>
+                </div>
+                @using (Html.BeginForm("Create", "Factuur"))
+                {
+                    <div class="modal-body">
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
+                            <input class="form-control" maxlength="50" type="text" name="cvofactuurnummer" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].LeverancierFactuurNummer)
+                            <input class="form-control" maxlength="50" type="text" name="leverancierfactuurnummer" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].VerwerkingsDatum)
+                            <input class="form-control" maxlength="50" type="text" name="verwerkingsdatum" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
+                            <input class="form-control" maxlength="50" type="text" name="scholengroepnummer" />
+                        </div>
+                        <div class="form-group">
+                            Leverancier
+                            @Html.DropDownListFor(model => model.Leveranciers, Model.Leveranciers, "", new { @class = "form-control" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
+                            <input class="form-control" maxlength="50" type="text" name="prijs" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
+                            <input class="form-control" type="text" name="garantie" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
+                            <input class="form-control" maxlength="1200" type="text" name="omschrijving" />
+                        </div>
+                        <div class="form-group">
+                            @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
+                            <input class="form-control" type="text" name="afschrijfperiode" />
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Voeg factuur toe</button>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>*@
+
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Factuur"))
+            {
+
+                <div class="modal-body">
+                    <div class="form-group">
+
+                        <div class="form-group">
+                            <label>CVO-Factuurnummer:</label>
+                            <input class="form-control" type="text" name="cvoFactuurNummerFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Leverancier-Factuurnummer:</label>
+                            <input class="form-control" type="text" name="leverancierFactuurNummerFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Verwerkingsdatum:</label>
+                            <input class="form-control" type="date" name="verwerkingsDatumFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Scholengroepnummer:</label>
+                            <input class="form-control" type="text" name="scholengroepNummerFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Leverancier:</label>
+                            <select class="form-control" name="leverancierFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Leveranciers)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Garantie:</label>
+                            <select class="form-control" name="garantieFilterSecondary">
+                                <option value="=">gelijk aan</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" name="garantieFilter" placeholder="garantie(bv: 5)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Afschrijfperiode:</label>
+                            <select class="form-control" name="afschrijfperiodeFilterSecondary">
+                                <option value="=">gelijk aan</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" name="afschrijfperiodeFilter" placeholder="periode(bv: 5)" />
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Facturen)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Exporteer naar PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Exporteer naar Excel</button>
+}
+
+
+

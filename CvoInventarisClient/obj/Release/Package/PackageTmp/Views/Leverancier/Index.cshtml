@@ -1,0 +1,322 @@
+﻿@model CvoInventarisClient.Models.LeverancierViewModel
+
+@{
+    ViewBag.Title = "Leveranciers";
+    List<String> amounts = new List<string>() { "100", "200", "300" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Naam" };
+}
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
+}
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Leverancier"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
+
+@using (Html.BeginForm("Delete", "Leverancier"))
+{
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
+
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Leverancier")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
+
+    
+    <div class="spacer"></div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <table class="table table-striped dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Naam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].StraatNummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode.Gemeente)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Fax)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Email)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Website)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BtwNummer)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].ActiefDatum)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Leveranciers)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="idArray" value="@item.Id" />
+                        </td>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Leverancier", new { id = item.Id })"><s><span class="glyphicon glyphicon-pencil"></span></s></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Naam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Straat)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StraatNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BusNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Postcode.Gemeente)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Telefoon)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Fax)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Website)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BtwNummer)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ActiefDatum)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- nieuw modal -->
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>Vul in</strong>
+            </div>
+            @using (Html.BeginForm("Create", "Leverancier"))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Naam)
+                        <input class="form-control" maxlength="255" type="text" name="naam" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
+                        <input class="form-control" maxlength="255" type="text" name="straat" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].StraatNummer)
+                        <input class="form-control" maxlength="10" type="text" name="straatNummer" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
+                        <input class="form-control" maxlength="10" type="text" name="busNummer" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode)
+                        <select class="form-control" name="postcode">
+                            <option value="-1">-Selecteer-</option>
+                            @foreach (var item in Model.Postcodes)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)
+                        <input class="form-control" maxlength="50" type="text" name="telefoon" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Fax)
+                        <input class="form-control" maxlength="50" type="text" name="fax" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Email)
+                        <input class="form-control" maxlength="50" type="text" name="email" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].Website)
+                        <input class="form-control" maxlength="50" type="text" name="website" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].BtwNummer)
+                        <input class="form-control" maxlength="50" type="text" name="btwNummer" />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Leveranciers[0].ActiefDatum)
+                        <input class="form-control" maxlength="50" type="text" name="actiefDatum" placeholder="01/01/2010"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Voeg leverancier toe</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Leverancier"))
+            {
+
+                <div class="modal-body">
+                    <div cclass="form-group">
+                        <div class="form-group">
+                            <label>Naam:</label>
+                            <input class="form-control" type="text" name="naamFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Straat:</label>
+                            <input class="form-control" type="text" name="straatFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Huisnummer:</label>
+                            <input class="form-control" type="text" name="huisnummerFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Busnummer:</label>
+                            <input class="form-control" type="text" name="busnummerFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Postcode:</label>
+                            <select class="form-control" name="postcodeFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Postcodes)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Telefoon:</label>
+                            <input class="form-control" type="text" name="telefoonFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Fax:</label>
+                            <input class="form-control" type="text" name="faxFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Website:</label>
+                            <input class="form-control" type="url" name="websiteFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Btwnummer:</label>
+                            <input class="form-control" type="text" name="btwnummerFilter" />
+                        </div>
+                        <div class="form-group">
+                            <label>Actief datum:</label>
+                            <input class="form-control" type="text" name="actiefDatumFilter" />
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Leveranciers)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Exporteer naar PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Exporteer naar Excel</button>
+}
+

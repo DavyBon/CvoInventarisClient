@@ -1,0 +1,43 @@
+﻿@model CvoInventarisClient.Models.CampusViewModel
+
+@{ 
+    ViewBag.Title = "Campus - Edit";
+}
+
+@using (Html.BeginForm("Edit", "Campus"))
+{
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="container-fluid">
+            @Html.Hidden("idCampus", Model.Campussen[0].Id)
+            @Html.Hidden("defaultIdPostcode", Model.Campussen[0].Postcode.Id)
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Campussen[0].Naam)
+                <input class="form-control" maxlength="50" type="text" name="naam" value="@Model.Campussen[0].Naam" />
+            </div>
+            <div class="form-group">
+                Postcode
+                <select class="form-control" name="Postcodes">
+                    <option value="@Model.Campussen[0].Postcode.Id">@Model.Campussen[0].Postcode.Postcode"</option>
+                    @foreach (var item in Model.Postcodes)
+                    {
+                        if (item.Value != Model.Campussen[0].Postcode.Id.ToString())
+                        {
+                            <option value="@item.Value">@item.Text</option>
+                        }
+                    }
+                </select>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Campussen[0].Straat)
+                <input class="form-control" maxlength="50" type="text" name="straat" value="@Model.Campussen[0].Straat" />
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.Campussen[0].Nummer)
+                <input class="form-control" maxlength="50" type="text" name="nummer" value="@Model.Campussen[0].Nummer" />
+            </div>
+        </div>
+    </div>
+    <button type="submit" class="btn btn-primary">Pas campus aan</button>
+    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default"})
+}

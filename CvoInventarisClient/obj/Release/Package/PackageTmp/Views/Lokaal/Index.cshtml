@@ -1,0 +1,238 @@
+﻿@model CvoInventarisClient.Models.LokaalViewModel
+
+@{
+    ViewBag.Title = "Lokalen";
+    List<String> amounts = new List<string>() { "100", "200", "300" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Lokaal" };
+}
+
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
+}
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Lokaal"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
+
+@using (Html.BeginForm("Delete", "Lokaal"))
+{
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
+
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Lokaal")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
+    
+    <div class="spacer"></div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Title</div>
+        <table class="table table-striped dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokalen[0].LokaalNaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokalen[0].AantalPlaatsen)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)
+                    </th>
+                    <th>
+                        Campus
+                    </th>
+                </tr>
+            </thead>
+            <tbody class="search">
+                @foreach (var item in Model.Lokalen)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="idArray" value="@item.Id" />
+                        </td>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Edit", "Lokaal", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LokaalNaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AantalPlaatsen)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsComputerLokaal)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Campus.Naam)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+<!-- nieuw modal -->
+<div class="modal fade nieuwModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>Vul in</strong>
+            </div>
+            @using (Html.BeginForm("Create", "Lokaal"))
+            {
+                <div class="modal-body">
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Lokalen[0].LokaalNaam)
+                        <input class="form-control" maxlength="50" type="text" name="lokaalNaam" required />
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Lokalen[0].AantalPlaatsen)
+                        <input class="form-control" type="number" name="aantalPlaatsen" required />
+                    </div>
+                    <div class="checkbox">
+                        <label><input type="checkbox" name="isComputerLokaal" value="True" />@Html.DisplayNameFor(model => model.Lokalen[0].IsComputerLokaal)</label>
+                    </div>
+                    <div class="form-group">
+                        @Html.DisplayNameFor(model => model.Lokalen[0].Campus)
+                        <select class="form-control" name="Campussen" required>
+                            <option value="">-Selecteer-</option>
+                            @foreach (var item in Model.Campussen)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Voeg lokaal toe</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Lokaal"))
+            {
+
+                <div class="modal-body">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>computer lokaal:</label>
+                            <select class="form-control" name="computerLokaalFilter">
+                                <option value="">-Selecteer-</option>
+                                <option value="true">computerlokaal</option>
+                                <option value="false">geen computerlokaal</option>
+                            </select>
+                        </div>
+
+                        <div class="-form-group">
+                            <label>Lokaal naam:</label>
+                            <input class="form-control " type="text" name="lokaalNaamFilter" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Aantal plaatsen:</label>
+                            <select class="form-control" name="filterAantalPlaatsenSecondary">
+                                <option value="=">gelijk aan</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAantalPlaatsen" placeholder="Aantal plaatsen(bv: 10)" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Campus:</label>
+                            <select class="form-control" name="campusFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Campussen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">filter</button>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Lokalen)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Exporteee naar PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Exporteer naar Excel</button>
+}

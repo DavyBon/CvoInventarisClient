@@ -1,0 +1,404 @@
+﻿@model CvoInventarisClient.Models.InventarisViewModel
+
+@{
+    ViewBag.Title = "Inventaris";
+    List<String> amounts = new List<string>() { "100", "200", "300" };
+    List<String> ordertypes = new List<string>() { "Meest recent", "Oudst", "Lokaal" };
+}
+@if (!String.IsNullOrWhiteSpace(ViewBag.action))
+{
+    <div class="alert alert-info alert-dismissible" role="alert">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        @ViewBag.action
+    </div>
+}
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+    using (Html.BeginForm("Index", "Inventaris"))
+    {
+
+        <select name="amount">
+            <option value="">@ViewBag.amount</option>
+            @foreach (var item in amounts)
+            {
+                if (ViewBag.amount != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <select name="order">
+            <option value="">@ViewBag.ordertype</option>
+            @foreach (var item in ordertypes)
+            {
+                if (ViewBag.ordertype != item)
+                {
+                    <option value="@item">@item</option>
+                }
+            }
+        </select>
+
+        <button type="submit">Ga</button>
+    }
+}
+
+@using (Html.BeginForm("Delete", "Inventaris"))
+{
+    <a class="btn btn-primary" href="@Url.Action("Create", "Inventaris")">Nieuw</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
+
+
+    if (HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+    {
+        <a class="btn btn-danger pull-right" href="@Url.Action("Index", "Inventaris")">Verwijder filter</a>
+    }
+    else
+    {
+        <button type="button" class="btn btn-primary pull-right" data-toggle="modal" data-target=".filterModal"><span class="glyphicon glyphicon-search"></span></button>
+    }
+
+
+    <div class="spacer"></div>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">@ViewBag.Heading</div>
+        <table class="table table-striped dataTable">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th></th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Label)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Object.Kenmerken)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsAanwezig)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].IsActief)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Lokaal.LokaalNaam)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Historiek)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Aankoopjaar)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Afschrijvingsperiode)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Waarde)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Factuur)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Factuur.Leverancier)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Costcenter)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Boekhoudnr)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Verzekering)
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Inventaris)
+                {
+                    <tr>
+                        <td>
+                            <input type="checkbox" name="idArray" value="@item.Id" />
+                        </td>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Edit","Inventaris", new { id = item.Id })"><span class="glyphicon glyphicon-pencil"></span></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Label)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Object.Kenmerken)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsAanwezig)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsActief)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Lokaal.LokaalNaam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Historiek)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Aankoopjaar)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Afschrijvingsperiode)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Waarde)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factuur.Omschrijving)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Factuur.Leverancier.Naam)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Costcenter)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Boekhoudnr)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Verzekering.Omschrijving)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- Delete modal -->
+    <div class="modal fade verwijderModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <strong>Let op!</strong>
+                </div>
+                <div class="modal-body">
+                    Bent u zeker?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <input type="submit" name="Delete" value="Verwijder" class="btn btn-danger" />
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+@if (!HttpContext.Current.Request.RequestContext.RouteData.Values["action"].ToString().ToLower().Equals("filter".ToLower()))
+{
+<!-- Filter modal -->
+<div class="modal fade filterModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <strong>nieuwe filter</strong>
+            </div>
+            @using (Html.BeginForm("Filter", "Inventaris"))
+            {
+                <div class="modal-body clearfix">
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Objecttype:</label>
+                            <select class="form-control" name="objecttypeFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Objecttypen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+
+
+                        <div class="form-group col-lg-6">
+                            <label>Object:</label>
+                            <select class="form-control" name="objectFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Objecten)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>aanwezig:</label>
+
+                            <select class="form-control" name="aanwezigFilter">
+                                <option value="">-Selecteer-</option>
+                                <option value="true">aanwezig</option>
+                                <option value="false">niet aanwezig</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>actief:</label>
+
+                            <select class="form-control" name="actiefFilter">
+                                <option value="">-Selecteer-</option>
+                                <option value="true">actief</option>
+                                <option value="false">niet actief</option>
+                            </select>
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Lokaal:</label>
+                            <select class="form-control" name="lokaalFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Lokalen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Historiek:</label>
+                            <input class="form-control" type="text" name="historiekFilter" />
+                        </div>
+
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Aankoopjaar:</label>
+                            <select class="form-control" name="filterAankoopjaarSecondary">
+                                <option value="=">van</option>
+                                <option value="<">voor</option>
+                                <option value=">">na</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAankoopjaar" placeholder="jaar" />
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Afschrijvingsperiode:</label>
+                            <select class="form-control" name="filterAfschrijvingsperiodeSecondary">
+                                <option value="=">van</option>
+                                <option value="<">voor</option>
+                                <option value=">">na</option>
+                            </select>
+                            <input class="form-control" type="number" name="filterAfschrijvingsperiode" placeholder="periode(in jaar)" />
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Factuur:</label>
+                            <select class="form-control" name="factuurFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Facturen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group col-lg-6">
+                            <label>Verzekering:</label>
+                            <select class="form-control" name="verzekeringFilter">
+                                <option value="-1">-Selecteer-</option>
+                                @foreach (var item in Model.Verzekeringen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Costcenter</label>
+                            <input class="form-control" type="number" name="costcenterFilter" />
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Boekhoudnummer</label>
+                            <input class="form-control" type="number" name="boekhoudnrFilter" />
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-lg-6">
+                            <label>Waarde</label>
+                            <select class="form-control" name="waardeFilterSecondary">
+                                <option value="=">is</option>
+                                <option value="<">kleiner dan</option>
+                                <option value=">">groter dan</option>
+                            </select>
+                            <input class="form-control" type="number" placeholder="" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="waardeFilter" />
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Objecten afgeschreven in</label>
+                            <select class="form-control" name="afschrijvingInJaarFilter">
+                                <option value="">-Selecteer-</option>
+                                @for (int i = DateTime.Now.Year - 10; i < DateTime.Now.Year + 10; i++)
+                                {
+                                    <option value="@i">@i</option>
+                                }
+                            </select>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="form-group col-lg-6">
+                            <label>Leverancier</label>
+                            <select class="form-control" name="leverancierFilter">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Leverancieren)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+
+                        <div class="form-group col-lg-6">
+                            <label>Campus</label>
+                            <select class="form-control" name="campusFilter">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Campussen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">filter</button>
+                    </div>
+            }
+        </div>
+    </div>
+</div>
+}
+
+@using (Html.BeginForm("Export", "Export"))
+{
+    //loop aanpassen naar model
+    foreach (var item in Model.Inventaris)
+    {
+        <input type="hidden" name="modelList" value="@item.Id" />
+    }
+    <input type="hidden" name="type" value="@HttpContext.Current.Request.RequestContext.RouteData.Values["controller"].ToString()" />
+
+    <button type="submit" name="exportType" value="pdf" class="btn btn-success">Exporteer naar PDF</button>
+    <button type="submit" name="exportType" value="excel" class="btn btn-success">Exporteer naar Excel</button>
+}

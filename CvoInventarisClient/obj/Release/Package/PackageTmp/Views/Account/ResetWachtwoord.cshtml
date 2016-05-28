@@ -1,0 +1,59 @@
+﻿@model CvoInventarisClient.Models.AccountModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <link href="~/Content/Login.css" rel="stylesheet" />
+
+    <script src="~/Scripts/jquery-1.9.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+
+    <meta name="description" content="CvoInventaris applicatie" />
+</head>
+<body>
+
+    <div class="container">
+
+        <form action="~/Account/ResetWachtwoord" method="post" class="form-signin">
+            <div class="page-header">
+                <h1 class="form-signin-heading">CVO inventaris</h1>
+            </div>
+            @if (!String.IsNullOrWhiteSpace(ViewBag.successResetWachtwoordMessage))
+            {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Gelukt!</strong> @ViewBag.successResetWachtwoordMessage
+                </div>
+            }
+            @if (!String.IsNullOrWhiteSpace(ViewBag.warningResetWachtwoordMessage))
+            {
+                <div class="alert alert-danger alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Opgelet!</strong> @ViewBag.warningResetWachtwoordMessage
+                </div>
+            }
+            <h3 class="form-signin-heading">Wachtwoord vergeten?</h3>
+            <h5>Vul hieronder uw log in e-mailadres in en u ontvangt een link waarmee u uw wachtwoord kunt wijzigen.</h5>
+            <br />
+            <label for="Email" class="sr-only">E-mailadres</label>
+            <input type="email" pattern="^[a-zA-Z0-9._+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" id="Email" name="Email" class="form-control" placeholder="E-mailadres" required autofocus>
+            <br />
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Verstuur</button>
+            <div class="pager">
+                <a href="~/Login/Index">Log in</a>
+            </div>
+        </form>
+
+    </div> <!-- /container -->
+
+</body>
+</html>
