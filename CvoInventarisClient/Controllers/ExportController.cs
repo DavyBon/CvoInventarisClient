@@ -187,6 +187,21 @@ namespace CvoInventarisClient.Controllers
                         }
                     }
                 }
+                if (objects.Count < 100)
+                {
+                    int row = objects.Count + 1;
+                    int col = 1;
+                    for (int i = 0; i < 25; i++)
+                    {
+                        col = 1;
+                        for (int j = 0; j < 10; j++)
+                        {
+                            worksheet.Cells[row, col] = new Cell(" ");
+                            col++;
+                        }
+                        row++;
+                    }
+                }
                 using (var memoryStream = new MemoryStream())
                 {
                     Response.ContentType = "application/vnd.ms-excel";
