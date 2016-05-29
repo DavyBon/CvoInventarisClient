@@ -282,7 +282,7 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar,
             string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter,
             int? objecttypeFilter, int? factuurFilter, string waardeFilter, string waardeFilterSecondary, string costcenterFilter, string afschrijvingInJaarFilter,
-            string boekhoudnrFilter, int? campusFilter, int? leverancierFilter, int[] modelList)
+            string boekhoudnrFilter, int? campusFilter, int? leverancierFilter,string filterLabel, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
@@ -441,6 +441,11 @@ namespace CvoInventarisClient.Controllers
                 }
 
                 totaalWaarde += item.Waarde;
+            }
+
+            if (!String.IsNullOrWhiteSpace(filterLabel))
+            {
+                model.Inventaris.RemoveAll(x => !x.Label.ToLower().Contains(filterLabel.ToLower()));
             }
 
             ViewBag.totaalWaarde = " (Totaalwaarde: € " + totaalWaarde.ToString() + ")";
