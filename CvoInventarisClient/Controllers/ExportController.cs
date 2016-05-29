@@ -133,7 +133,7 @@ namespace CvoInventarisClient.Controllers
                             if (!prop.Name.Equals("Id"))
                             {
 
-                                if (prop.GetValue(objects[0], null) == null)
+                                if (prop.GetValue(objects[i], null) == null)
                                 {
                                     table.AddCell(new Phrase(""));
 
@@ -180,7 +180,7 @@ namespace CvoInventarisClient.Controllers
                     for (int y = 0; y < objects[i].GetType().GetProperties().Count(); y++)
                     {
                         var prop = objects[i].GetType().GetProperties()[y];
-                        if (prop.GetValue(objects[0], null) != null)
+                        if (prop.GetValue(objects[i], null) != null)
                         {
                             worksheet.Cells[i + 1, y] = new Cell(prop.GetValue(objects[i], null).ToString());
                             teller++;
