@@ -3,6 +3,7 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Web;
@@ -80,17 +81,48 @@ namespace CvoInventarisClient.Controllers
             {
                 try
                 {
+                    Document pdfDoc;
                     //maakt een nieuw Pdf document aan
-                    Document pdfDoc = new Document(PageSize.A4, 25, 10, 25, 10);
+                    if (objects[0].GetType().GetProperties().Count() > 5)
+                        pdfDoc = new Document(iTextSharp.text.PageSize.A4.Rotate(), 25, 10, 25, 10);
+                    else pdfDoc = new Document(PageSize.A4, 25, 10, 25, 10);
+
                     //maakt een nieuw pdf writer object aan waar je in u pdf document in ga writen. net zoals een streamwriter
                     PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, Response.OutputStream);
                     pdfDoc.Open();
-                    PdfPTable table = new PdfPTable(objects[0].GetType().GetProperties().Count());
+                    BaseFont bfTimes = BaseFont.CreateFont(BaseFont.TIMES_ROMAN, BaseFont.CP1252, false);
+                    iTextSharp.text.Font fontRapport = new iTextSharp.text.Font(bfTimes, 20, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+                    Phrase phrase = new Phrase("Rapport", fontRapport);
+                    pdfDoc.Add(phrase);
+                    Paragraph p = new Paragraph(new Chunk(new iTextSharp.text.pdf.draw.LineSeparator(0.0F, 100.0F, BaseColor.BLACK, Element.ALIGN_LEFT, 1)));
+                    pdfDoc.Add(p);
+                    iTextSharp.text.Font fontDatum = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+                    var dateTimeNow = DateTime.Now; // Return 00/00/0000 00:00:00
+                    var dateOnlyString = dateTimeNow.ToShortDateString(); //Return 00/00/0000
+                    Phrase datum = new Phrase("Opgemaakt op " + dateOnlyString, fontDatum);
+                    pdfDoc.Add(datum);
+
+                    PdfPTable table = new PdfPTable(objects[0].GetType().GetProperties().Count() - 1);
+
+                    string naamHoofding = objects[0].GetType().Name;
+                    naamHoofding.Trim();
+                    naamHoofding = naamHoofding.Remove(naamHoofding.Length - 5);
+
+                    iTextSharp.text.Font times = new iTextSharp.text.Font(bfTimes, 18, iTextSharp.text.Font.ITALIC, BaseColor.WHITE);
+                    PdfPCell cell = new PdfPCell(new Phrase(naamHoofding, times));
+                    cell.Colspan = objects[0].GetType().GetProperties().Count();
+                    cell.BackgroundColor = new BaseColor(System.Drawing.Color.FromArgb(62, 182, 222));
+                    cell.BorderColor = new BaseColor(Color.FromArgb(30, 84, 102));
+                    table.AddCell(cell);
+
+                    iTextSharp.text.Font fontHeader = new iTextSharp.text.Font(bfTimes, 12, iTextSharp.text.Font.BOLD, BaseColor.BLACK);
+                    iTextSharp.text.Font font = new iTextSharp.text.Font(bfTimes, 10, iTextSharp.text.Font.NORMAL, BaseColor.BLACK);
+
                     foreach (var prop in objects[0].GetType().GetProperties())
                     {
-                        if (prop.GetValue(objects[0], null) != null)
+                        if (!prop.Name.Equals("Id"))
                         {
-                            table.AddCell(prop.Name);
+                            table.AddCell(new Phrase(prop.Name, fontHeader));
                         }
 
                     }
@@ -98,15 +130,23 @@ namespace CvoInventarisClient.Controllers
                     {
                         foreach (var prop in objects[i].GetType().GetProperties())
                         {
-                            if (prop.GetValue(objects[0], null) != null)
+                            if (!prop.Name.Equals("Id"))
                             {
-                                table.AddCell(prop.GetValue(objects[i], null).ToString());
-                            }
 
+                                if (prop.GetValue(objects[0], null) == null)
+                                {
+                                    table.AddCell(new Phrase(""));
+
+                                    //table.AddCell(prop.GetValue(objects[i], null).ToString());
+                                }
+                                else
+                                {
+                                    table.AddCell(new Phrase(prop.GetValue(objects[i], null).ToString(), font));
+                                }
+                            }
                         }
                     }
                     pdfDoc.Add(table);
-
                     pdfWriter.CloseStream = false;
                     pdfDoc.Close();
                     Response.Buffer = true;
