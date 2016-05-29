@@ -60,6 +60,11 @@ namespace CvoInventarisClient.Controllers
             return View(model);
             
         }
+        public ActionResult Create()
+        {
+            VerzekeringViewModel model = new VerzekeringViewModel();
+            return View(model);
+        }
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {

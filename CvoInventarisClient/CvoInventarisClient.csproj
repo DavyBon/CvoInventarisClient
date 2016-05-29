@@ -239,6 +239,7 @@
     <Content Include="Views\Lokaal\Create.cshtml" />
     <Content Include="Views\Leverancier\Create.cshtml" />
     <Content Include="Views\ObjectType\Create.cshtml" />
+    <Content Include="Views\Verzekering\Create.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
