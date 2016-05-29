@@ -4,68 +4,107 @@
     ViewBag.Title = "Leverancier - Edit";
 }
 
-@using (Html.BeginForm("Edit", "Leverancier"))
-{
-    <div class="panel panel-primary">
-        <div class="panel-heading">@ViewBag.Title</div>
-        <div class="container-fluid">
-            @Html.Hidden("idLeverancier", Model.Leveranciers[0].Id)
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Naam)
-                <input class="form-control" maxlength="255" type="text" name="naam" value="@Model.Leveranciers[0].Naam" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Straat)
-                <input class="form-control" maxlength="255" type="text" name="straat" value="@Model.Leveranciers[0].Straat" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].StraatNummer)
-                <input class="form-control" maxlength="10" type="text" name="straatNummer" value="@Model.Leveranciers[0].StraatNummer" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].BusNummer)
-                <input class="form-control" maxlength="10" type="text" name="busNummer" value="@Model.Leveranciers[0].BusNummer" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Postcode.Gemeente)
-                <select class="form-control" name="Postcodes">
-                    <option value="@Model.Leveranciers[0].Postcode.Id">@Model.Leveranciers[0].Postcode.Gemeente</option>
-                    @foreach (var item in Model.Postcodes)
-                    {
-                        if (item.Value != Model.Leveranciers[0].Postcode.Id.ToString())
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Telefoon)
-                <input class="form-control" maxlength="50" type="text" name="telefoon" value="@Model.Leveranciers[0].Telefoon" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Fax)
-                <input class="form-control" maxlength="50" type="text" name="fax" value="@Model.Leveranciers[0].Fax" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Email)
-                <input class="form-control" maxlength="50" type="text" name="email" value="@Model.Leveranciers[0].Email" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].Website)
-                <input class="form-control" maxlength="50" type="text" name="website" value="@Model.Leveranciers[0].Website" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].BtwNummer)
-                <input class="form-control" maxlength="50" type="text" name="btwNummer" value="@Model.Leveranciers[0].BtwNummer" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Leveranciers[0].ActiefDatum)
-                <input class="form-control" maxlength="50" type="text" name="actiefDatum" value="@Model.Leveranciers[0].ActiefDatum" placeholder="01/01/2010"/>
-            </div>
-        </div>
-    </div>
-    <button type="submit" class="btn btn-primary">Pas leverancier aan</button>
-    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
-}
+<div class="panel panel-primary">
+    <div class="panel-heading">Aanpassen</div>
+    <div class="container-fluid">
+    @using (Html.BeginForm("Edit", "Leverancier"))
+    {
+        @Html.Hidden("idLeverancier", Model.Leveranciers[0].Id)
 
+        <div class="form-horizontal">
+
+            <div class="form-group">
+                <label for="naam" class="col-sm-2 control-label">Naam</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].Naam" type="text" maxlength="1024" name="naam" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="straat" class="col-sm-2 control-label">Straat</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].Straat" type="text" maxlength="1024" name="straat" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="straatNummer" class="col-sm-2 control-label">Straatnummer</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].StraatNummer" type="text" maxlength="1024" name="straatNummer" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="busNummer" class="col-sm-2 control-label">Busnummer</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].BusNummer" type="text" maxlength="1024" name="busNummer" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Postcodes" class="col-sm-2 control-label">Postcode</label>
+                <div class="col-sm-10">
+                    <select class="form-control" name="Postcodes">
+                        <option value="@Model.Leveranciers[0].Postcode.Id">@Model.Leveranciers[0].Postcode.Gemeente</option>
+                        @foreach (var item in Model.Postcodes)
+                        {
+                            if (item.Value != Model.Leveranciers[0].Postcode.Id.ToString())
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="telefoon" class="col-sm-2 control-label">Telefoon</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].Telefoon" type="text" maxlength="1024" name="telefoon" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="fax" class="col-sm-2 control-label">Fax</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].Fax" type="text" maxlength="1024" name="fax" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email" class="col-sm-2 control-label">Email</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].Email" type="text" maxlength="1024" name="email" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="website" class="col-sm-2 control-label">Website</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].Website" type="text" maxlength="1024" name="website" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="btwNummer" class="col-sm-2 control-label">Btw nummer</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].BtwNummer" type="text" maxlength="1024" name="btwNummer" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="actiefDatum" class="col-sm-2 control-label">Actief datum</label>
+                <div class="col-sm-10">
+                    <input class="form-control" value="@Model.Leveranciers[0].ActiefDatum" type="text" maxlength="1024" name="actiefDatum" />
+                </div>
+            </div>
+
+            <hr />
+
+            </div>
+            <button type="submit" class="btn btn-primary pull-right">Pas aan</button>
+            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+
+        }
+    </div>
+</div>

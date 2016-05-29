@@ -129,13 +129,14 @@ namespace CvoInventarisClient.Controllers
             LeverancierModel l = tblLeverancier.GetById(id);
             model.Leveranciers.Add(l);
 
-            foreach (PostcodeModel pm in tblPostcode.GetAll())
+            foreach (PostcodeModel pm in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
             {
-                if (!(pm.Id == l.Postcode.Id))
-                {
-                    model.Postcodes.Add(new SelectListItem { Text = pm.Gemeente, Value = pm.Id.ToString() });
-                }
-                model.Postcodes.Add(new SelectListItem { Text = pm.Postcode, Value = pm.Id.ToString() });
+                model.Postcodes.Add(new SelectListItem { Text = pm.Gemeente, Value = pm.Id.ToString() });
+                //if (!(pm.Id == l.Postcode.Id))
+                //{
+                //    model.Postcodes.Add(new SelectListItem { Text = pm.Gemeente, Value = pm.Id.ToString() });
+                //}
+                //model.Postcodes.Add(new SelectListItem { Text = pm.Postcode, Value = pm.Id.ToString() });
             }
 
             return View(model);
