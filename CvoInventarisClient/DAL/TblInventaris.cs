@@ -178,6 +178,8 @@ namespace CvoInventarisClient.DAL
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
                             obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
+                            obj.Omschrijving = mySqlDataReader["objectOmschrijving"].ToString();
+                            obj.afmetingen = mySqlDataReader["afmetingen"].ToString();
                             obj.ObjectType = objType;
                         }
 
@@ -326,6 +328,8 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idObject"] != DBNull.Value)
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
+                            obj.Omschrijving = mySqlDataReader["objectOmschrijving"].ToString();
+                            obj.afmetingen = mySqlDataReader["afmetingen"].ToString();
                             obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
                             obj.ObjectType = objType;
                         }

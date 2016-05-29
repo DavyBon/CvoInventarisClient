@@ -38,9 +38,9 @@ namespace CvoInventarisClient.Controllers
 
             model.Inventaris = TblInventaris.GetTop(amount);
 
-            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Kenmerken))
+            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Omschrijving))
             {
-                model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
+                model.Objecten.Add(new SelectListItem { Text = o.Omschrijving, Value = o.Id.ToString() });
             }
             foreach (LokaalModel l in TblLokaal.GetAll().OrderBy(x => x.LokaalNaam))
             {
@@ -109,9 +109,9 @@ namespace CvoInventarisClient.Controllers
             model.Facturen = new List<SelectListItem>();
 
 
-            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Kenmerken))
+            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Omschrijving))
             {
-                model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
+                model.Objecten.Add(new SelectListItem { Text = o.Omschrijving, Value = o.Id.ToString() });
             }
             foreach (LokaalModel l in TblLokaal.GetAll().OrderBy(x => x.Campus.Naam))
             {
@@ -190,9 +190,9 @@ namespace CvoInventarisClient.Controllers
             InventarisModel i = TblInventaris.GetById(id);
             model.Inventaris.Add(i);
 
-            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Kenmerken))
+            foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Omschrijving))
             {
-                model.Objecten.Add(new SelectListItem { Text = o.Kenmerken, Value = o.Id.ToString() });
+                model.Objecten.Add(new SelectListItem { Text = o.Omschrijving, Value = o.Id.ToString() });
             }
             foreach (LokaalModel l in TblLokaal.GetAll().OrderBy(x => x.Campus.Naam))
             {
