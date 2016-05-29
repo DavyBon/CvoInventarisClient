@@ -44,7 +44,7 @@
 }
 @using (Html.BeginForm("Delete", "ObjectType"))
 {
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".nieuwModal">Nieuw</button>
+    <a class="btn btn-primary" href="@Url.Action("Create", "ObjectType")">Nieuw</a>
     <button type="button" class="btn btn-danger" data-toggle="modal" data-target=".verwijderModal">Verwijder</button>
 
     <div class="spacer"></div>

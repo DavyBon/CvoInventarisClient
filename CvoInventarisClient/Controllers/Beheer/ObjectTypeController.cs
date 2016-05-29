@@ -87,13 +87,17 @@ namespace CvoInventarisClient.Controllers
             tblObjectType.Update(objectType);
             return RedirectToAction("Index", new { refresh = true });
         }
+        public ActionResult Create()
+        {
+            ObjectTypeViewModel model = new ObjectTypeViewModel();
+            return View(model);
+        }
 
         [HttpPost]
         public ActionResult Create(FormCollection collection)
         {
             DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
             ObjectTypeModel objectType = new ObjectTypeModel();
-            objectType.Id = Convert.ToInt16(Request.Form["driver"]);
             objectType.Omschrijving = Request.Form["omschrijving"];
             tblObjectType.Create(objectType);
             TempData["action"] = "objectType" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
