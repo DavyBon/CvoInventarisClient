@@ -13,35 +13,35 @@
 
                 <div class="form-group">
                     <label for="cvofactuurnummer" class="col-sm-2 control-label">Cvo factuurnummer</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="text" maxlength="50" name="cvofactuurnummer" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="leverancierfactuurnummer" class="col-sm-2 control-label">Leverancier factuurnummer</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="text" maxlength="50" name="leverancierfactuurnummer" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="verwerkingsdatum" class="col-sm-2 control-label">Verwerkingsdatum</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="text" maxlength="50" name="verwerkingsdatum" placeholder="01/01/2001" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="scholengroepnummer" class="col-sm-2 control-label">Scholengroepnummer</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="text" maxlength="50" name="scholengroepnummer" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label class="col-sm-2 control-label">Leverancier</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <select class="form-control" name="leverancier">
                             <option value="">-Selecteer-</option>
                             @foreach (var item in Model.Leveranciers)
@@ -54,36 +54,43 @@
 
                 <div class="form-group">
                     <label for="prijs" class="col-sm-2 control-label">Prijs</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="prijs" placeholder="999,99" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="garantie" class="col-sm-2 control-label">Garantie</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="number" name="garantie" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="omschrijving" class="col-sm-2 control-label">Omschrijving</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="text" maxlength="1200" name="omschrijving" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="afschrijfperiode" class="col-sm-2 control-label">Afschrijfperiode</label>
-                    <div class="col-sm-10">
+                    <div class="col-sm-5">
                         <input class="form-control" type="number" name="Afschrijfperiode" />
                     </div>
                 </div>
 
-            </div>
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-1">
+                        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-left" })
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="submit" class="btn btn-primary pull-left">Voeg toe</button>
+                    </div>
+                </div>
 
-            <button type="submit" class="btn btn-primary pull-right">Voeg toe</button>
-            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+            </div>
         }
     </div>
 </div>

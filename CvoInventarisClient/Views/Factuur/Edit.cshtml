@@ -1,7 +1,7 @@
 ﻿@model CvoInventarisClient.Models.FactuurViewModel
 
 @{
-    ViewBag.Title = "Factuur - Edit";
+    ViewBag.Title = "Factuur - Aanpassen";
 }
 
 @using (Html.BeginForm("Edit", "Factuur"))
@@ -11,53 +11,87 @@
         <div class="container-fluid">
             @Html.Hidden("idFactuur", Model.Facturen[0].Id)
 
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].CvoFactuurNummer)
-                <input class="form-control" type="text" maxlength="50" name="cvofactuurnummer" value="@Model.Facturen[0].CvoFactuurNummer" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].LeverancierFactuurNummer)
-                <input class="form-control" type="text" maxlength="50" name="leverancierfactuurnummer" value="@Model.Facturen[0].LeverancierFactuurNummer" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].VerwerkingsDatum)
-                <input class="form-control" type="date" maxlength="50" name="verwerkingsdatum" value="@Model.Facturen[0].VerwerkingsDatum" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].ScholengroepNummer)
-                <input class="form-control" type="text" maxlength="50" name="scholengroepnummer" value="@Model.Facturen[0].ScholengroepNummer" />
-            </div>
-            <div class="form-group">
-                Leverancier
-                <select class="form-control" name="leverancier">
-                    <option value="@Model.Facturen[0].Leverancier.Id">@Model.Facturen[0].Leverancier.Naam</option>
-                    @foreach (var item in Model.Leveranciers)
-                    {
-                        if (item.Value != Model.Facturen[0].Leverancier.Id.ToString())
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    }
-                </select>
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].Prijs)
-                <input class="form-control" type="text" maxlength="50" name="prijs" value="@Model.Facturen[0].Prijs" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].Garantie)
-                <input class="form-control" type="text" name="garantie" value="@Model.Facturen[0].Garantie" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].Omschrijving)
-                <input class="form-control" type="text" maxlength="1200" name="omschrijving" value="@Model.Facturen[0].Omschrijving" />
-            </div>
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.Facturen[0].Afschrijfperiode)
-                <input class="form-control" type="text" name="afschrijfperiode" value="@Model.Facturen[0].Afschrijfperiode" />
+            <div class="form-horizontal">
+
+                <div class="form-group">
+                    <label for="cvofactuurnummer" class="col-sm-2 control-label">Cvo factuurnummer</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].CvoFactuurNummer" maxlength="50" type="text" name="cvofactuurnummer" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="leverancierfactuurnummer" class="col-sm-2 control-label">Leverancier factuurnummer</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].LeverancierFactuurNummer" maxlength="50" type="text" name="leverancierfactuurnummer" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="verwerkingsdatum" class="col-sm-2 control-label">Verwerkingsdatum</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].VerwerkingsDatum" maxlength="50" type="text" name="verwerkingsdatum" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="scholengroepnummer" class="col-sm-2 control-label">Scholengroepnummer</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].ScholengroepNummer" maxlength="50" type="text" name="scholengroepnummer" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="leverancier" class="col-sm-2 control-label">Leverancier</label>
+                    <div class="col-sm-5">
+                        <select class="form-control" name="leverancier">
+                            <option value="@Model.Facturen[0].Leverancier.Id">@Model.Facturen[0].Leverancier.Naam</option>
+                            @foreach (var item in Model.Leveranciers)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="prijs" class="col-sm-2 control-label">Prijs</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].Prijs" maxlength="50" type="text" name="prijs" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="garantie" class="col-sm-2 control-label">Garantie</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].Garantie" maxlength="50" type="text" name="garantie" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="omschrijving" class="col-sm-2 control-label">Omschrijving</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].Omschrijving" maxlength="50" type="text" name="omschrijving" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="afschrijfperiode" class="col-sm-2 control-label">Afschrijfperiode</label>
+                    <div class="col-sm-5">
+                        <input class="form-control" value="@Model.Facturen[0].Afschrijfperiode" maxlength="50" type="text" name="afschrijfperiode" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-1">
+                        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-left" })
+                    </div>
+                    <div class="col-sm-1">
+                        <button type="submit" class="btn btn-primary pull-left">Pas factuur aan</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Pas factuur aan</button>
-    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
 }

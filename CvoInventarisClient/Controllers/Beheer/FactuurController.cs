@@ -93,7 +93,7 @@ namespace CvoInventarisClient.Controllers
             model.Facturen = new List<FactuurModel>();
             model.Leveranciers = new List<SelectListItem>();
 
-            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            foreach (LeverancierModel l in TblLeverancier.GetAll().OrderBy(x => x.Naam))
             {
                 model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
             }
@@ -145,7 +145,7 @@ namespace CvoInventarisClient.Controllers
             FactuurModel factuur = TblFactuur.GetById(id);
             model.Facturen.Add(factuur);
 
-            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            foreach (LeverancierModel l in TblLeverancier.GetAll().OrderBy(x => x.Naam))
             {
                 if (!(l.Id == factuur.Leverancier.Id))
                 {
@@ -162,11 +162,6 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Edit(int id, string prijs, int? leverancier)
         {
-
-            string idAccount = HttpContext.User.Identity.Name;
-            TblAccount TblAccount = new TblAccount();
-            AccountModel account = TblAccount.GetById(Convert.ToInt32(idAccount));
-            string email = account.Email;
 
             TblFactuur TblFactuur = new TblFactuur();
 

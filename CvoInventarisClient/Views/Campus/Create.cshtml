@@ -1,30 +1,28 @@
 ﻿@model CvoInventarisClient.Models.CampusViewModel
 
 @{
-    ViewBag.Title = "Campus - Edit";
+    ViewBag.Title = "Campus - Aanmaken";
 }
 
-@using (Html.BeginForm("Edit", "Campus"))
-{
-    <div class="panel panel-primary">
-        <div class="panel-heading">@ViewBag.Title</div>
-        <div class="container-fluid">
-            @Html.Hidden("idCampus", Model.Campussen[0].Id)
-
+<div class="panel panel-primary">
+    <div class="panel-heading">Aanmaken</div>
+    <div class="container-fluid">
+        @using (Html.BeginForm("Create", "Campus", new { @class = "form-horizontal" }))
+        {
             <div class="form-horizontal">
 
                 <div class="form-group">
                     <label for="naam" class="col-sm-2 control-label">Naam</label>
                     <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Campussen[0].Naam" maxlength="50" type="text" name="naam" />
+                        <input class="form-control" type="text" maxlength="50" name="naam" />
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <label for="postcode" class="col-sm-2 control-label">Postcode</label>
+                    <label class="col-sm-2 control-label">Postcode</label>
                     <div class="col-sm-5">
                         <select class="form-control" name="postcode">
-                            <option value="@Model.Campussen[0].Postcode.Id">@Model.Campussen[0].Postcode.Gemeente</option>
+                            <option value="">-Selecteer-</option>
                             @foreach (var item in Model.Postcodes)
                             {
                                 <option value="@item.Value">@item.Text</option>
@@ -36,14 +34,14 @@
                 <div class="form-group">
                     <label for="straat" class="col-sm-2 control-label">Straat</label>
                     <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Campussen[0].Straat" maxlength="50" type="text" name="straat" />
+                        <input class="form-control" type="text" maxlength="50" name="straat" />
                     </div>
                 </div>
 
                 <div class="form-group">
                     <label for="nummer" class="col-sm-2 control-label">Nummer</label>
                     <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Campussen[0].Nummer" maxlength="50" type="text" name="nummer" />
+                        <input class="form-control" type="text" maxlength="50" name="nummer" />
                     </div>
                 </div>
 
@@ -53,10 +51,11 @@
                         @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-left" })
                     </div>
                     <div class="col-sm-1">
-                        <button type="submit" class="btn btn-primary pull-left">Pas campus aan</button>
+                        <button type="submit" class="btn btn-primary pull-left">Voeg toe</button>
                     </div>
                 </div>
+
             </div>
-        </div>
+        }
     </div>
-}
+</div>

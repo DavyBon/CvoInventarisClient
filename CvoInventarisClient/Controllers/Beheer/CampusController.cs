@@ -61,9 +61,9 @@ namespace CvoInventarisClient.Controllers
                 {
                     model.Campussen.Reverse();
                 }
-                else if (order.Equals("Postcode"))
+                else if (order.Equals("Gemeente"))
                 {
-                    model.Campussen = model.Campussen.OrderBy(p => p.Postcode.Id).ToList();
+                    model.Campussen = model.Campussen.OrderBy(p => p.Postcode.Gemeente).ToList();
                 }
                 ViewBag.ordertype = order.ToString();
             }
@@ -81,6 +81,22 @@ namespace CvoInventarisClient.Controllers
 
         #region Create
 
+        public ActionResult Create()
+        {
+            CampusViewModel model = new CampusViewModel();
+
+            TblPostcode TblPostcode = new TblPostcode();
+
+            model.Postcodes = new List<SelectListItem>();
+
+            foreach (PostcodeModel p in TblPostcode.GetAll().OrderBy(x => x.Gemeente))
+            {
+                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente + " - " + p.Postcode, Value = p.Id.ToString() });
+            }
+
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Create(int? postcode)
         {
@@ -89,7 +105,7 @@ namespace CvoInventarisClient.Controllers
             CampusModel campus = new CampusModel();
 
             campus.Naam = Request.Form["naam"];
-            campus.Postcode = new PostcodeModel() { Id = (int)postcode };
+            campus.Postcode = new PostcodeModel() { Id = postcode };
             campus.Straat = Request.Form["straat"];
             campus.Nummer = Request.Form["nummer"];
 
@@ -117,11 +133,11 @@ namespace CvoInventarisClient.Controllers
             CampusModel c = TblCampus.GetById(id);
             model.Campussen.Add(c);
 
-            foreach (PostcodeModel p in TblPostcode.GetAll())
+            foreach (PostcodeModel p in TblPostcode.GetAll().OrderBy(x => x.Gemeente))
             {
                 if (!(p.Id == c.Postcode.Id))
                 {
-                    model.Postcodes.Add(new SelectListItem { Text = p.Postcode, Value = p.Id.ToString() });
+                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente + " - " + p.Postcode, Value = p.Id.ToString() });
                 }
             }
 
@@ -134,15 +150,14 @@ namespace CvoInventarisClient.Controllers
 
 
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(int id, int? postcode)
         {
             TblCampus TblCampus = new TblCampus();
 
             CampusModel campus = new CampusModel();
             campus.Id = Convert.ToInt16(Request.Form["idCampus"]);
             campus.Naam = Request.Form["naam"];
-            if (!String.IsNullOrWhiteSpace(Request.Form["postcodes"])) { campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["Postcodes"]) }; }
-            else { campus.Postcode = new PostcodeModel() { Id = Convert.ToInt16(Request.Form["defaultIdPostcode"]) }; }
+            campus.Postcode = new PostcodeModel() { Id = postcode };
             campus.Straat = Request.Form["straat"];
             campus.Nummer = Request.Form["nummer"];
 
