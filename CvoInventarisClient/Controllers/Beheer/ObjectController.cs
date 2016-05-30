@@ -17,34 +17,26 @@ namespace CvoInventarisClient.Controllers
 
             ObjectViewModel model = new ObjectViewModel();
 
-            if (Session["objectviewmodel"] == null || refresh == true)
+            DAL.TblObject TblObject = new DAL.TblObject();
+            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+            DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
+
+            model.Objecten = new List<ObjectModel>();
+            model.Facturen = new List<SelectListItem>();
+            model.ObjectTypes = new List<SelectListItem>();
+
+
+            model.Objecten = TblObject.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+            foreach (FactuurModel f in TblFactuur.GetAll().OrderBy(x => x.CvoFactuurNummer))
             {
-
-                DAL.TblObject TblObject = new DAL.TblObject();
-                DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
-                DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
-
-                model.Objecten = new List<ObjectModel>();
-                model.Facturen = new List<SelectListItem>();
-                model.ObjectTypes = new List<SelectListItem>();
-
-
-                model.Objecten = TblObject.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-
-                foreach (FactuurModel f in TblFactuur.GetAll().OrderBy(x => x.CvoFactuurNummer))
-                {
-                    model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
-                }
-                foreach (ObjectTypeModel ot in TblObjectType.GetAll().OrderBy(x => x.Omschrijving))
-                {
-                    model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
-                }
+                model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
             }
-            else
+            foreach (ObjectTypeModel ot in TblObjectType.GetAll().OrderBy(x => x.Omschrijving))
             {
-                model = (ObjectViewModel)Session["objectviewmodel"];
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
             }
-            this.Session["objectviewmodel"] = model;
+
             if (amount == null)
             {
                 model.Objecten = model.Objecten.Take(100).ToList();
@@ -102,7 +94,7 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Create
         [HttpPost]
-        public ActionResult Create(string kenmerken, string omschrijving, string afmetingen,int? idObjecttype)
+        public ActionResult Create(string kenmerken, string omschrijving, string afmetingen, int? idObjecttype)
         {
             DAL.TblObject TblObject = new DAL.TblObject();
 
@@ -195,33 +187,28 @@ namespace CvoInventarisClient.Controllers
 
             ObjectViewModel model = new ObjectViewModel();
 
-            if (Session["objectviewmodel"] == null)
+
+
+            DAL.TblObject TblObject = new DAL.TblObject();
+            DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
+            DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
+
+            model.Objecten = new List<ObjectModel>();
+            model.Facturen = new List<SelectListItem>();
+            model.ObjectTypes = new List<SelectListItem>();
+
+
+            model.Objecten = TblObject.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+            foreach (FactuurModel f in TblFactuur.GetAll())
             {
-
-                DAL.TblObject TblObject = new DAL.TblObject();
-                DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
-                DAL.TblObjectType TblObjectType = new DAL.TblObjectType();
-
-                model.Objecten = new List<ObjectModel>();
-                model.Facturen = new List<SelectListItem>();
-                model.ObjectTypes = new List<SelectListItem>();
-
-
-                model.Objecten = TblObject.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-
-                foreach (FactuurModel f in TblFactuur.GetAll())
-                {
-                    model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
-                }
-                foreach (ObjectTypeModel ot in TblObjectType.GetAll())
-                {
-                    model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
-                }
+                model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
             }
-            else
+            foreach (ObjectTypeModel ot in TblObjectType.GetAll())
             {
-                model = (ObjectViewModel)Session["objectviewmodel"];
+                model.ObjectTypes.Add(new SelectListItem { Text = ot.Omschrijving, Value = ot.Id.ToString() });
             }
+
 
             if (!String.IsNullOrWhiteSpace(kenmerkenFilter))
             {

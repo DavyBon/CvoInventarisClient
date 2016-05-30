@@ -99,7 +99,7 @@
                         @Html.DisplayNameFor(model => model.Inventaris[0].Factuur)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Inventaris[0].Factuur.Leverancier)
+                        @Html.DisplayNameFor(model => model.Inventaris[0].Leverancier)
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.Inventaris[0].Costcenter)
@@ -150,10 +150,10 @@
                             @Html.DisplayFor(modelItem => item.Waarde)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Factuur.Omschrijving)
+                            @Html.DisplayFor(modelItem => item.Factuur.CvoFactuurNummer)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Factuur.Leverancier.Naam)
+                            @Html.DisplayFor(modelItem => item.Leverancier.Naam)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Costcenter)

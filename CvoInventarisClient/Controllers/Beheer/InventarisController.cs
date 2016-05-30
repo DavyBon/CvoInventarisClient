@@ -101,12 +101,14 @@ namespace CvoInventarisClient.Controllers
             DAL.TblVerzekering TblVerzekering = new DAL.TblVerzekering();
             DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
             DAL.TblObjectType TblObjecttype = new DAL.TblObjectType();
+            DAL.TblLeverancier TblLeverancier = new DAL.TblLeverancier();
 
             model.Objecten = new List<SelectListItem>();
             model.Lokalen = new List<SelectListItem>();
             model.Verzekeringen = new List<SelectListItem>();
             model.Objecttypen = new List<SelectListItem>();
             model.Facturen = new List<SelectListItem>();
+            model.Leverancieren = new List<SelectListItem>();
 
 
             foreach (ObjectModel o in TblObject.GetAll().OrderBy(x => x.Omschrijving))
@@ -125,13 +127,17 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
             }
+            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            {
+                model.Leverancieren.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+            }
 
             return View(model);
         }
 
         // POST: Inventaris/Create
         [HttpPost]
-        public ActionResult Create(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
+        public ActionResult Create(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen,int? Leverancieren, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
@@ -153,7 +159,9 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
                 inventaris.Factuur = new FactuurModel() { Id = Facturen };
                 inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
-                inventaris.Factuur = new FactuurModel();
+                inventaris.Factuur = new FactuurModel() {Id=Facturen};
+                inventaris.Leverancier = new LeverancierModel() { Id = Leverancieren };
+
                 if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
                 else
                 {
@@ -168,7 +176,7 @@ namespace CvoInventarisClient.Controllers
             }
 
             TempData["action"] = "Object werd toegevoegd aan inventaris";
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // GET: Inventaris/Edit/5
@@ -179,6 +187,7 @@ namespace CvoInventarisClient.Controllers
             DAL.TblFactuur TblFactuur = new DAL.TblFactuur();
             DAL.TblLokaal TblLokaal = new DAL.TblLokaal();
             DAL.TblObject TblObject = new DAL.TblObject();
+            DAL.TblLeverancier TblLeverancier = new DAL.TblLeverancier();
             InventarisViewModel model = new InventarisViewModel();
 
             model.Inventaris = new List<InventarisModel>();
@@ -186,6 +195,7 @@ namespace CvoInventarisClient.Controllers
             model.Lokalen = new List<SelectListItem>();
             model.Verzekeringen = new List<SelectListItem>();
             model.Facturen = new List<SelectListItem>();
+            model.Leverancieren = new List<SelectListItem>();
 
             InventarisModel i = TblInventaris.GetById(id);
             model.Inventaris.Add(i);
@@ -206,13 +216,17 @@ namespace CvoInventarisClient.Controllers
             {
                 model.Facturen.Add(new SelectListItem { Text = f.CvoFactuurNummer, Value = f.Id.ToString() });
             }
+            foreach (LeverancierModel l in TblLeverancier.GetAll())
+            {
+                model.Leverancieren.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
+            }
             return View(model);
 
         }
 
         // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
+        public ActionResult Edit(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen,int? Leverancieren, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
@@ -236,7 +250,8 @@ namespace CvoInventarisClient.Controllers
             inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
             inventaris.Factuur = new FactuurModel() { Id = Facturen };
             inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
-            inventaris.Factuur = new FactuurModel();
+            inventaris.Factuur = new FactuurModel() { Id= Facturen};
+            inventaris.Leverancier = new LeverancierModel() { Id = Leverancieren };    
             if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
             else
             {
@@ -250,7 +265,7 @@ namespace CvoInventarisClient.Controllers
             TblInventaris.Update(inventaris);
 
             TempData["action"] = "Object in inventaris werd gewijzigd";
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
 
@@ -275,7 +290,7 @@ namespace CvoInventarisClient.Controllers
             {
                 TempData["action"] = idArray.Length + " object werd verwijderd uit de inventaris";
             }
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -432,6 +447,13 @@ namespace CvoInventarisClient.Controllers
             }
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Inventaris.Count() + ")";
 
+            
+
+            if (!String.IsNullOrWhiteSpace(filterLabel))
+            {
+                model.Inventaris.RemoveAll(x => !x.Label.ToLower().Contains(filterLabel.ToLower()));
+            }
+
             decimal? totaalWaarde = 0;
             foreach (var item in model.Inventaris)
             {
@@ -441,11 +463,6 @@ namespace CvoInventarisClient.Controllers
                 }
 
                 totaalWaarde += item.Waarde;
-            }
-
-            if (!String.IsNullOrWhiteSpace(filterLabel))
-            {
-                model.Inventaris.RemoveAll(x => !x.Label.ToLower().Contains(filterLabel.ToLower()));
             }
 
             ViewBag.totaalWaarde = " (Totaalwaarde: € " + totaalWaarde.ToString() + ")";

@@ -37,6 +37,7 @@ namespace CvoInventarisClient.DAL
                     command.Parameters.Add(new SqlParameter("@waarde", App_Code.DALutil.checkDecimalForDBNUll(inventaris.Waarde)));
                     command.Parameters.Add(new SqlParameter("@costcenter", inventaris.Costcenter));
                     command.Parameters.Add(new SqlParameter("@boekhoudnr", inventaris.Boekhoudnr));
+                    command.Parameters.Add(new SqlParameter("@idLeverancier", inventaris.Leverancier.Id));
 
 
                     return Convert.ToInt32(command.ExecuteScalar());
@@ -155,13 +156,10 @@ namespace CvoInventarisClient.DAL
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
-                            factuur.Leverancier = leverancier;
                             factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
                             factuur.Garantie = (int?)mySqlDataReader["garantie"];
                             factuur.Omschrijving = mySqlDataReader["factuurOmschrijving"].ToString();
-
                             factuur.Afschrijfperiode = mySqlDataReader["afschrijvingsperiode"] as int? ?? default(int);
-
                             factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
                             factuur.CvoFactuurNummer = mySqlDataReader["cvoFactuurNummer"].ToString();
                             factuur.LeverancierFactuurNummer = mySqlDataReader["leverancierFactuurNummer"].ToString();
@@ -193,6 +191,7 @@ namespace CvoInventarisClient.DAL
                         inventaris.Label = mySqlDataReader["label"].ToString();
                         inventaris.Lokaal = lokaal;
                         inventaris.Object = obj;
+                        inventaris.Leverancier = leverancier;
                         inventaris.Aankoopjaar = mySqlDataReader["aankoopjaar"] as int?;
                         inventaris.Afschrijvingsperiode = mySqlDataReader["afschrijvingsperiode"] as int?;
                         inventaris.Historiek = mySqlDataReader["historiek"].ToString();
@@ -261,7 +260,6 @@ namespace CvoInventarisClient.DAL
                         postcode = new PostcodeModel();
                         campus = new CampusModel();
 
-
                         if (mySqlDataReader["idCampus"] != DBNull.Value)
                         {
                             campus.Id = mySqlDataReader["idCampus"] as int?;
@@ -306,13 +304,10 @@ namespace CvoInventarisClient.DAL
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
-                            factuur.Leverancier = leverancier;
                             factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
                             factuur.Garantie = (int?)mySqlDataReader["garantie"];
                             factuur.Omschrijving = mySqlDataReader["factuurOmschrijving"].ToString();
-
                             factuur.Afschrijfperiode = mySqlDataReader["afschrijvingsperiode"] as int? ?? default(int);
-
                             factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
                             factuur.CvoFactuurNummer = mySqlDataReader["cvoFactuurNummer"].ToString();
                             factuur.LeverancierFactuurNummer = mySqlDataReader["leverancierFactuurNummer"].ToString();
@@ -328,9 +323,9 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idObject"] != DBNull.Value)
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
+                            obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
                             obj.Omschrijving = mySqlDataReader["objectOmschrijving"].ToString();
                             obj.afmetingen = mySqlDataReader["afmetingen"].ToString();
-                            obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
                             obj.ObjectType = objType;
                         }
 
@@ -344,6 +339,7 @@ namespace CvoInventarisClient.DAL
                         inventaris.Label = mySqlDataReader["label"].ToString();
                         inventaris.Lokaal = lokaal;
                         inventaris.Object = obj;
+                        inventaris.Leverancier = leverancier;
                         inventaris.Aankoopjaar = mySqlDataReader["aankoopjaar"] as int?;
                         inventaris.Afschrijvingsperiode = mySqlDataReader["afschrijvingsperiode"] as int?;
                         inventaris.Historiek = mySqlDataReader["historiek"].ToString();
@@ -406,6 +402,7 @@ namespace CvoInventarisClient.DAL
                         postcode = new PostcodeModel();
 
 
+
                         if (mySqlDataReader["idPostcode"] != DBNull.Value)
                         {
                             postcode.Id = (int?)mySqlDataReader["idPostcode"];
@@ -413,11 +410,10 @@ namespace CvoInventarisClient.DAL
                             postcode.Postcode = mySqlDataReader["postcode"].ToString();
                         }
 
-
                         if (mySqlDataReader["idLokaal"] != DBNull.Value)
                         {
                             lokaal.Id = (int?)mySqlDataReader["idLokaal"];
-                            lokaal.AantalPlaatsen = (int)mySqlDataReader["aantalPlaatsen"];
+                            lokaal.AantalPlaatsen = (int?)mySqlDataReader["aantalPlaatsen"];
                             lokaal.IsComputerLokaal = Convert.ToBoolean(mySqlDataReader["isComputerLokaal"]);
                             lokaal.LokaalNaam = mySqlDataReader["lokaalNaam"].ToString();
                         }
@@ -430,26 +426,22 @@ namespace CvoInventarisClient.DAL
                             leverancier.Email = mySqlDataReader["email"].ToString();
                             leverancier.Fax = mySqlDataReader["fax"].ToString();
                             leverancier.StraatNummer = mySqlDataReader["straatNummer"].ToString();
-                            leverancier.Naam = mySqlDataReader["naam"].ToString();
+                            leverancier.Naam = mySqlDataReader["leverancierNaam"].ToString();
                             leverancier.Postcode = postcode;
-                            leverancier.Straat = mySqlDataReader["straat"].ToString();
+                            leverancier.Straat = mySqlDataReader["leverancierStraat"].ToString();
                             leverancier.Telefoon = mySqlDataReader["telefoon"].ToString();
                             leverancier.ActiefDatum = mySqlDataReader["actiefDatum"].ToString();
                             leverancier.Website = mySqlDataReader["website"].ToString();
                         }
 
-
-
-
                         if (mySqlDataReader["idFactuur"] != DBNull.Value)
                         {
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
-                            factuur.Leverancier = leverancier;
                             factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
-                            factuur.Garantie = (int)mySqlDataReader["garantie"];
-                            factuur.Omschrijving = mySqlDataReader["omschrijving"].ToString();
-                            factuur.Afschrijfperiode = (int)mySqlDataReader["afschrijfperiode"];
+                            factuur.Garantie = (int?)mySqlDataReader["garantie"];
+                            factuur.Omschrijving = mySqlDataReader["factuurOmschrijving"].ToString();
+                            factuur.Afschrijfperiode = mySqlDataReader["afschrijvingsperiode"] as int? ?? default(int);
                             factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
                             factuur.CvoFactuurNummer = mySqlDataReader["cvoFactuurNummer"].ToString();
                             factuur.LeverancierFactuurNummer = mySqlDataReader["leverancierFactuurNummer"].ToString();
@@ -459,26 +451,29 @@ namespace CvoInventarisClient.DAL
                         if (mySqlDataReader["idObjectType"] != DBNull.Value)
                         {
                             objType.Id = (int?)mySqlDataReader["idObjectType"];
-                            objType.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                            objType.Omschrijving = mySqlDataReader["objectTypeOmschrijving"].ToString();
                         }
 
                         if (mySqlDataReader["idObject"] != DBNull.Value)
                         {
                             obj.Id = (int?)mySqlDataReader["idObject"];
                             obj.Kenmerken = mySqlDataReader["kenmerken"].ToString();
+                            obj.Omschrijving = mySqlDataReader["objectOmschrijving"].ToString();
+                            obj.afmetingen = mySqlDataReader["afmetingen"].ToString();
                             obj.ObjectType = objType;
                         }
 
                         if (mySqlDataReader["idVerzekering"] != DBNull.Value)
                         {
                             verzekering.Id = (int?)mySqlDataReader["idVerzekering"];
-                            verzekering.Omschrijving = mySqlDataReader["omschrijving"].ToString();
+                            verzekering.Omschrijving = mySqlDataReader["verzekeringOmschrijving"].ToString();
                         }
 
                         inventaris.Id = (int?)mySqlDataReader["idInventaris"];
                         inventaris.Label = mySqlDataReader["label"].ToString();
                         inventaris.Lokaal = lokaal;
                         inventaris.Object = obj;
+                        inventaris.Leverancier = leverancier;
                         inventaris.Aankoopjaar = mySqlDataReader["aankoopjaar"] as int?;
                         inventaris.Afschrijvingsperiode = mySqlDataReader["afschrijvingsperiode"] as int?;
                         inventaris.Historiek = mySqlDataReader["historiek"].ToString();
@@ -525,6 +520,7 @@ namespace CvoInventarisClient.DAL
                     command.Parameters.Add(new SqlParameter("@waarde", App_Code.DALutil.checkDecimalForDBNUll(inventaris.Waarde)));
                     command.Parameters.Add(new SqlParameter("@costcenter", inventaris.Costcenter));
                     command.Parameters.Add(new SqlParameter("@boekhoudnr", inventaris.Boekhoudnr));
+                    command.Parameters.Add(new SqlParameter("@idLeverancier", App_Code.DALutil.checkIntForDBNUll(inventaris.Leverancier.Id)));
                     command.ExecuteReader();
                 }
                 return true;

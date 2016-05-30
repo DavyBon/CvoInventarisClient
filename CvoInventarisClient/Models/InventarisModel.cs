@@ -33,7 +33,7 @@ namespace CvoInventarisClient.Models
         public decimal? Waarde { get; set; }
         public string Costcenter { get; set; }
         public string Boekhoudnr { get; set; }
-
+        public LeverancierModel Leverancier { get; set; }
 
         public override string ToString()
         {
