@@ -437,8 +437,7 @@ namespace CvoInventarisClient.Controllers
 
             if (leverancierFilter >= 0)
             {
-                model.Inventaris.RemoveAll(x => (x.Factuur.Leverancier == null || x.Factuur.Leverancier.Id == null));
-                model.Inventaris.RemoveAll(x => (x.Factuur.Leverancier.Id != leverancierFilter));
+                model.Inventaris.RemoveAll(x => (x.Leverancier.Id != leverancierFilter));
             }
 
             if (verzekeringFilter >= 0)
