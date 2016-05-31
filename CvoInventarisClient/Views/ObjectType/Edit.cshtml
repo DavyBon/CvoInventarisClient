@@ -4,18 +4,24 @@
     ViewBag.Title = "ObjectType - Edit";
 }
 
-@using (Html.BeginForm("Edit", "ObjectType"))
-{
+<div class="col-sm-8">
     <div class="panel panel-primary">
-        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-heading">Aanpassen</div>
         <div class="container-fluid">
-            @Html.Hidden("idObjectType", Model.objectTypes[0].Id)
-            <div class="form-group">
-                @Html.DisplayNameFor(model => model.objectTypes[0].Omschrijving)
-                <input class="form-control" maxlength="50" type="text" name="omschrijving" value="@Model.objectTypes[0].Omschrijving" required />
-            </div>
+            @using (Html.BeginForm("Edit", "ObjectType"))
+            {
+                <div class="form-horizontal">                    
+                    @Html.Hidden("idObjectType", Model.objectTypes[0].Id)
+                    <div class="form-group">
+                        <label for="Objecten" class="col-sm-2 control-label">Omschrijving</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" maxlength="50" type="text" name="omschrijving" value="@Model.objectTypes[0].Omschrijving" required />
+                        </div>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Pas aan</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+            }
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Pas objecttype aan</button>
-    @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default" })
-}
+</div>
