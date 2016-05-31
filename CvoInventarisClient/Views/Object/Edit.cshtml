@@ -4,48 +4,55 @@
     ViewBag.Title = "Object - Edit";
 }
 
-@using (Html.BeginForm("Edit", "Object", new { @class = "form-horizontal" }))
-{
-    <div class="form-horizontal">
-        @Html.Hidden("idObject",Model.Objecten[0].Id)
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Omschrijving</label>
-            <div class="col-sm-6">
-                <input class="form-control" value="@Model.Objecten[0].Omschrijving" type="text" name="omschrijving" />
-            </div>
-        </div>
+<div class="col-sm-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Aanpassen</div>
+        <div class="container-fluid">
+            @using (Html.BeginForm("Edit", "Object", new { @class = "form-horizontal" }))
+            {
+                <div class="form-horizontal">
+                    @Html.Hidden("idObject", Model.Objecten[0].Id)
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Omschrijving</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" value="@Model.Objecten[0].Omschrijving" type="text" name="omschrijving" />
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Kenmerken</label>
-            <div class="col-sm-6">
-                <input class="form-control" value="@Model.Objecten[0].Kenmerken" type="text" name="kenmerken" />
-            </div>
-        </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Kenmerken</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" value="@Model.Objecten[0].Kenmerken" type="text" name="kenmerken" />
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Objecttype</label>
-            <div class="col-sm-4">
-                <select class="form-control" name="idObjecttype">
-                    <option value="@Model.Objecten[0].ObjectType.Id">"@Model.Objecten[0].ObjectType.Omschrijving</option>
-                    @foreach (var item in Model.ObjectTypes)
-                    {
-                        if (item.Value != Model.Objecten[0].ObjectType.Id.ToString())
-                        {
-                            <option value="@item.Value">@item.Text</option>
-                        }
-                    }
-                </select>
-            </div>
-        </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Objecttype</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="idObjecttype">
+                                <option value="@Model.Objecten[0].ObjectType.Id">"@Model.Objecten[0].ObjectType.Omschrijving</option>
+                                @foreach (var item in Model.ObjectTypes)
+                                {
+                                    if (item.Value != Model.Objecten[0].ObjectType.Id.ToString())
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
 
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Afmetingen</label>
-            <div class="col-sm-6">
-                <input class="form-control" value="@Model.Objecten[0].afmetingen" type="text" name="afmetingen" />
-            </div>
-        </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Afmetingen</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" value="@Model.Objecten[0].afmetingen" type="text" name="afmetingen" />
+                        </div>
+                    </div>
 
+                </div>
+                <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Pas aan</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+            }
+        </div>
     </div>
-            <button type="submit" class="btn btn-primary pull-right">Pas aan</button>
-            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
-}
+</div>

@@ -4,50 +4,52 @@
     ViewBag.Title = "Object - Nieuw";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Aanmaken</div>
-    <div class="container-fluid">
-        @using (Html.BeginForm("Create", "Object", new { @class = "form-horizontal" }))
-        {
-            <div class="form-horizontal">
+<div class="col-sm-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Aanmaken</div>
+        <div class="container-fluid">
+            @using (Html.BeginForm("Create", "Object", new { @class = "form-horizontal" }))
+            {
+                <div class="form-horizontal">
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Omschrijving</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" type="text" name="omschrijving"/>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Omschrijving</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="omschrijving" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Kenmerken</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" type="text" name="kenmerken" />
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Kenmerken</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="kenmerken" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Objecttype</label>
-                    <div class="col-sm-4">
-                        <select class="form-control" name="idObjecttype">
-                            <option value="">-Selecteer-</option>
-                            @foreach (var item in Model.ObjectTypes)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Objecttype</label>
+                        <div class="col-sm-10">
+                            <select class="form-control" name="idObjecttype">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.ObjectTypes)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label class="col-sm-2 control-label">Afmetingen</label>
-                    <div class="col-sm-6">
-                        <input class="form-control" type="text" name="afmetingen" />
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Afmetingen</label>
+                        <div class="col-sm-10">
+                            <input class="form-control" type="text" name="afmetingen" />
+                        </div>
                     </div>
-                </div>
 
-            </div>
-            <button type="submit" class="btn btn-primary pull-right">Voeg toe</button>
-            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
-        }
+                </div>
+                <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Voeg toe</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+            }
+        </div>
     </div>
 </div>
