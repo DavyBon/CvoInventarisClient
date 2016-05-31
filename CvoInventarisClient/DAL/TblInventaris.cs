@@ -37,7 +37,7 @@ namespace CvoInventarisClient.DAL
                     command.Parameters.Add(new SqlParameter("@waarde", App_Code.DALutil.checkDecimalForDBNUll(inventaris.Waarde)));
                     command.Parameters.Add(new SqlParameter("@costcenter", inventaris.Costcenter));
                     command.Parameters.Add(new SqlParameter("@boekhoudnr", inventaris.Boekhoudnr));
-                    command.Parameters.Add(new SqlParameter("@idLeverancier", inventaris.Leverancier.Id));
+                    command.Parameters.Add(new SqlParameter("@idLeverancier", App_Code.DALutil.checkIntForDBNUll(inventaris.Leverancier.Id)));
 
 
                     return Convert.ToInt32(command.ExecuteScalar());

@@ -65,3 +65,7 @@
     height:40em;
     overflow-y: scroll;
 }
+.multiline
+{
+   white-space: pre-line;
+}

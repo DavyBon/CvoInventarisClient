@@ -204,3 +204,4 @@ D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\C
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
+D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
