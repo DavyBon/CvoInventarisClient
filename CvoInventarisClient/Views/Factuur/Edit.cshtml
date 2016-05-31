@@ -4,94 +4,89 @@
     ViewBag.Title = "Factuur - Aanpassen";
 }
 
-@using (Html.BeginForm("Edit", "Factuur"))
-{
+<div class="col-sm-8">
     <div class="panel panel-primary">
-        <div class="panel-heading">@ViewBag.Title</div>
+        <div class="panel-heading">Aanpassen</div>
         <div class="container-fluid">
-            @Html.Hidden("idFactuur", Model.Facturen[0].Id)
+            @using (Html.BeginForm("Edit", "Factuur"))
+            {
+                @Html.Hidden("idFactuur", Model.Facturen[0].Id)
 
-            <div class="form-horizontal">
+                <div class="form-horizontal">
 
-                <div class="form-group">
-                    <label for="cvofactuurnummer" class="col-sm-2 control-label">Cvo factuurnummer</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].CvoFactuurNummer" maxlength="50" type="text" name="cvofactuurnummer" />
+                    <div class="form-group">
+                        <label for="cvofactuurnummer" class="col-sm-3 control-label">Cvo factuurnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].CvoFactuurNummer" maxlength="50" type="text" name="cvofactuurnummer" />
+                        </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="leverancierfactuurnummer" class="col-sm-3 control-label">Leverancier factuurnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].LeverancierFactuurNummer" maxlength="50" type="text" name="leverancierfactuurnummer" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="verwerkingsdatum" class="col-sm-3 control-label">Verwerkingsdatum</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].VerwerkingsDatum" maxlength="50" type="text" name="verwerkingsdatum" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="scholengroepnummer" class="col-sm-3 control-label">Scholengroepnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].ScholengroepNummer" maxlength="50" type="text" name="scholengroepnummer" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="leverancier" class="col-sm-3 control-label">Leverancier</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="leverancier">
+                                <option value="@Model.Facturen[0].Leverancier.Id">@Model.Facturen[0].Leverancier.Naam</option>
+                                @foreach (var item in Model.Leveranciers)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="prijs" class="col-sm-3 control-label">Prijs</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].Prijs" maxlength="50" type="text" name="prijs" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="garantie" class="col-sm-3 control-label">Garantie</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].Garantie" maxlength="50" type="text" name="garantie" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="omschrijving" class="col-sm-3 control-label">Omschrijving</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].Omschrijving" maxlength="50" type="text" name="omschrijving" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="afschrijfperiode" class="col-sm-3 control-label">Afschrijfperiode</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Facturen[0].Afschrijfperiode" maxlength="50" type="text" name="afschrijfperiode" />
+                        </div>
+                    </div>
+
                 </div>
-
-                <div class="form-group">
-                    <label for="leverancierfactuurnummer" class="col-sm-2 control-label">Leverancier factuurnummer</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].LeverancierFactuurNummer" maxlength="50" type="text" name="leverancierfactuurnummer" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="verwerkingsdatum" class="col-sm-2 control-label">Verwerkingsdatum</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].VerwerkingsDatum" maxlength="50" type="text" name="verwerkingsdatum" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="scholengroepnummer" class="col-sm-2 control-label">Scholengroepnummer</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].ScholengroepNummer" maxlength="50" type="text" name="scholengroepnummer" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="leverancier" class="col-sm-2 control-label">Leverancier</label>
-                    <div class="col-sm-5">
-                        <select class="form-control" name="leverancier">
-                            <option value="@Model.Facturen[0].Leverancier.Id">@Model.Facturen[0].Leverancier.Naam</option>
-                            @foreach (var item in Model.Leveranciers)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="prijs" class="col-sm-2 control-label">Prijs</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].Prijs" maxlength="50" type="text" name="prijs" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="garantie" class="col-sm-2 control-label">Garantie</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].Garantie" maxlength="50" type="text" name="garantie" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="omschrijving" class="col-sm-2 control-label">Omschrijving</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].Omschrijving" maxlength="50" type="text" name="omschrijving" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="afschrijfperiode" class="col-sm-2 control-label">Afschrijfperiode</label>
-                    <div class="col-sm-5">
-                        <input class="form-control" value="@Model.Facturen[0].Afschrijfperiode" maxlength="50" type="text" name="afschrijfperiode" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-1">
-                        @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-left" })
-                    </div>
-                    <div class="col-sm-1">
-                        <button type="submit" class="btn btn-primary pull-left">Pas factuur aan</button>
-                    </div>
-                </div>
-            </div>
+                <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Pas aan</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+            }
         </div>
     </div>
-}
+</div>
