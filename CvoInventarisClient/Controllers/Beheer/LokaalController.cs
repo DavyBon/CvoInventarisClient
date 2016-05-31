@@ -88,13 +88,13 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(int? campussen)
+        public ActionResult Create(int? aantalPlaatsen, int? campussen)
         {
             DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
 
             LokaalModel lokaal = new LokaalModel();
             lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-            lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+            lokaal.AantalPlaatsen = aantalPlaatsen;
             lokaal.Campus = new CampusModel() { Id = campussen };
 
             if (Request.Form["isComputerLokaal"] != null)
@@ -137,12 +137,12 @@ namespace CvoInventarisClient.Controllers
         }
 
         [HttpPost]
-        public ActionResult Edit(int? campussen)
+        public ActionResult Edit(int? aantalPlaatsen, int? campussen)
         {
             LokaalModel lokaal = new LokaalModel();
             lokaal.Id = Convert.ToInt16(Request.Form["idLokaal"]);
             lokaal.LokaalNaam = Request.Form["lokaalNaam"];
-            lokaal.AantalPlaatsen = Convert.ToInt32(Request.Form["aantalPlaatsen"]);
+            lokaal.AantalPlaatsen = aantalPlaatsen;
             lokaal.Campus = new CampusModel() { Id = campussen };
 
             if (Request.Form["isComputerLokaal"] != null) { lokaal.IsComputerLokaal = true; }

@@ -4,100 +4,102 @@
     ViewBag.Title = "Leverancier - Aanmaken";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Aanmaken</div>
-    <div class="container-fluid">
-        @using (Html.BeginForm("Create", "Leverancier", new { @class = "form-horizontal" }))
-        {
-            <div class="form-horizontal">
+<div class="col-sm-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Aanmaken</div>
+        <div class="container-fluid">
+            @using (Html.BeginForm("Create", "Leverancier", new { @class = "form-horizontal" }))
+            {
+                <div class="form-horizontal">
 
-                <div class="form-group">
-                    <label for="naam" class="col-sm-2 control-label">Naam</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="naam" />
+                    <div class="form-group">
+                        <label for="naam" class="col-sm-3 control-label">Naam</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="naam" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="straat" class="col-sm-2 control-label">Straat</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="straat" />
+                    <div class="form-group">
+                        <label for="straat" class="col-sm-3 control-label">Straat</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="straat" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="straatNummer" class="col-sm-2 control-label">Straatnummer</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="straatNummer" />
+                    <div class="form-group">
+                        <label for="straatNummer" class="col-sm-3 control-label">Straatnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="straatNummer" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="busNummer" class="col-sm-2 control-label">Busnummer</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="busNummer" />
+                    <div class="form-group">
+                        <label for="busNummer" class="col-sm-3 control-label">Busnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="busNummer" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Postcodes" class="col-sm-2 control-label">Postcode</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Postcodes">
-                            <option value="">-Selecteer-</option>
-                            @foreach (var item in Model.Postcodes)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="form-group">
+                        <label for="Postcodes" class="col-sm-3 control-label">Postcode</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Postcodes">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Postcodes)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="telefoon" class="col-sm-2 control-label">Telefoon</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="telefoon" />
+                    <div class="form-group">
+                        <label for="telefoon" class="col-sm-3 control-label">Telefoon</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="telefoon" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="fax" class="col-sm-2 control-label">Fax</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="fax" />
+                    <div class="form-group">
+                        <label for="fax" class="col-sm-3 control-label">Fax</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="fax" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="email" class="col-sm-2 control-label">Email</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="email" />
+                    <div class="form-group">
+                        <label for="email" class="col-sm-3 control-label">Email</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="email" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="website" class="col-sm-2 control-label">Website</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="website" />
+                    <div class="form-group">
+                        <label for="website" class="col-sm-3 control-label">Website</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="website" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="btwNummer" class="col-sm-2 control-label">Btw nummer</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="btwNummer" />
+                    <div class="form-group">
+                        <label for="btwNummer" class="col-sm-3 control-label">Btw nummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="btwNummer" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="actiefDatum" class="col-sm-2 control-label">Actief datum</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="text" maxlength="1024" name="actiefDatum" />
+                    <div class="form-group">
+                        <label for="actiefDatum" class="col-sm-3 control-label">Actief datum</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="text" maxlength="1024" name="actiefDatum" />
+                        </div>
                     </div>
-                </div>
 
-            </div>
-            <button type="submit" class="btn btn-primary pull-right">Voeg toe</button>
-            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
-        }
+                </div>
+                <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Voeg toe</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+            }
+        </div>
     </div>
 </div>
 
