@@ -36,68 +36,78 @@
         <strong>Opgelet!</strong> @ViewBag.warningAccountCreatedMessage
     </div>
 }
-<div class="panel panel-primary">
-    <div class="panel-heading">Bestaande accounts</div>
-    <table class="table table-striped">
-        <tr>
-            <th></th>
-            <th>
-                @*@Html.DisplayNameFor(model => model.Email)*@
-                E-mailadres
-            </th>
-        </tr>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Bestaande accounts</div>
+            <table class="table table-striped">
+                <tr>
+                    <th></th>
+                    <th>
+                        @*@Html.DisplayNameFor(model => model.Email)*@
+                        E-mailadres
+                    </th>
+                </tr>
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    <a class="bottom-align-text" href="@Url.Action("Delete", "Account", new { id = item.IdAccount })"><s><span class="glyphicon glyphicon-trash"></span></s></a>
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-            </tr>
-        }
-    </table>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">Nieuw account aanmaken</div>
-    @using (Html.BeginForm("Create", "Account"))
-    {
-        <div class="container-fluid">
-            <form role="form">
-                @if (!String.IsNullOrWhiteSpace(ViewBag.warningAccountEmailDuplicateMessage))
+                @foreach (var item in Model)
                 {
-                    <div class="alert alert-danger alert-dismissible" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>Opgelet!</strong> @ViewBag.warningAccountEmailDuplicateMessage
-                    </div>
+                    <tr>
+                        <td>
+                            <a class="bottom-align-text" href="@Url.Action("Delete", "Account", new { id = item.IdAccount })"><s><span class="glyphicon glyphicon-trash"></span></s></a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Email)
+                        </td>
+                    </tr>
                 }
-                <div class="form-group">
-                    <label for="Email" class="sr-only">E-mailadres</label>
-                    <input type="email" pattern="^[a-zA-Z0-9._+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" id="Email" name="Email" class="form-control" placeholder="E-mailadres" required autofocus>
-                </div>
-                <div class="form-group">
-                    <label for="Wachtwoord" class="sr-only">Wachtwoord</label>
-                    <input type="password" id="Wachtwoord" name="Wachtwoord" class="form-control" placeholder="Wachtwoord" required>
-                </div>
-                <div class="checkbox">
-                    <label>
-                        <input type="checkbox" onchange="document.getElementById('Wachtwoord').type = this.checked ? 'text' : 'password'"> Toon wachtwoord
-                    </label>
-                </div>
-                <button type="submit" class="btn btn-success">Creëer</button>
-            </form>
+            </table>
         </div>
-    }
+    </div>
 </div>
 
-<div class="panel panel-default">
-    <div class="panel-heading">Mijn wachtwoord wijzigen</div>    
-    <div class="container-fluid">
-        <form action="~/Account/ResetWachtwoord">
-            <button class="btn btn-primary" type="submit">Wachtwoord wijzigen</button>
-        </form>
+<div class="row">
+    <div class="col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Nieuw account aanmaken</div>
+            @using (Html.BeginForm("Create", "Account"))
+            {
+                <div class="container-fluid">
+                    <form role="form">
+                        @if (!String.IsNullOrWhiteSpace(ViewBag.warningAccountEmailDuplicateMessage))
+                {
+                            <div class="alert alert-danger alert-dismissible" role="alert">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <strong>Opgelet!</strong> @ViewBag.warningAccountEmailDuplicateMessage
+                            </div>
+                        }
+                        <div class="form-group">
+                            <label for="Email" class="sr-only">E-mailadres</label>
+                            <input type="email" pattern="^[a-zA-Z0-9._+-]+&#64;[a-zA-Z0-9.-]+\.[a-zA-Z]{2,9}$" id="Email" name="Email" class="form-control" placeholder="E-mailadres" required autofocus>
+                        </div>
+                        <div class="form-group">
+                            <label for="Wachtwoord" class="sr-only">Wachtwoord</label>
+                            <input type="password" id="Wachtwoord" name="Wachtwoord" class="form-control" placeholder="Wachtwoord" required>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" onchange="document.getElementById('Wachtwoord').type = this.checked ? 'text' : 'password'"> Toon wachtwoord
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-success pull-right">Creëer</button>
+                    </form>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="col-md-3 col-sm-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">Mijn wachtwoord wijzigen</div>
+            <div class="container-fluid">
+                <form action="~/Account/ResetWachtwoord">
+                    <button class="btn btn-primary" type="submit">Wachtwoord wijzigen</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>

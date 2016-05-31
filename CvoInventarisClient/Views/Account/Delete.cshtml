@@ -8,25 +8,26 @@
     ViewBag.Title = "Delete";
 }
 
-<div class="panel panel-default">
-    <div class="panel-heading">Account verwijderen</div>
-    <div class="container-fluid">
-        @using (Html.BeginForm())
-        {
-
-            <div class="alert alert-warning" role="alert">
-                <strong>Opgelet!</strong> Bent u zerker dat u account <b>@Html.DisplayTextFor(model => model.Email)</b> wilt verwijderen?
-            </div>
-            @Html.ValidationSummary(true)
-            @Html.HiddenFor(model => model.IdAccount)
-            @Html.HiddenFor(model => model.Email)
-            <div class="form-group">
-                <input type="submit" value="Verwijder" class="btn btn-primary" />
-            </div>
-        }
+<div class="col-sm-8">
+    <div class="panel panel-default">
+        <div class="panel-heading">Account verwijderen</div>
+        <div class="container-fluid">
+            @using (Html.BeginForm())
+            {
+                <div class="alert alert-warning" role="alert">
+                    <strong>Opgelet!</strong> Bent u zerker dat u account <b>@Html.DisplayTextFor(model => model.Email)</b> wilt verwijderen?
+                </div>
+                @Html.ValidationSummary(true)
+                @Html.HiddenFor(model => model.IdAccount)
+                @Html.HiddenFor(model => model.Email)
+                <div class="form-group">
+                    <input type="submit" value="Verwijder" class="btn btn-primary" />
+                </div>
+            }
             <form action="~/Account/Index">
                 <button class="btn btn-danger" type="submit">Annuleer</button>
             </form>
+        </div>
     </div>
 </div>
 
