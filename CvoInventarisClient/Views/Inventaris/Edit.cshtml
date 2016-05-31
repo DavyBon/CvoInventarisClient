@@ -3,174 +3,176 @@
     ViewBag.Title = "Inventaris - Aanpassen";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Aanpassen</div>
-    <div class="container-fluid">
-        @using (Html.BeginForm("Edit", "Inventaris"))
-        {
-            @Html.Hidden("idInventaris", Model.Inventaris[0].Id);
+<div class="col-sm-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Aanpassen</div>
+        <div class="container-fluid">
+            @using (Html.BeginForm("Edit", "Inventaris"))
+            {
+                @Html.Hidden("idInventaris", Model.Inventaris[0].Id);
 
-            <div class="form-horizontal">
+                <div class="form-horizontal">
 
-                <div class="form-group">
-                    <label for="Objecten" class="col-sm-2 control-label">Object</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Objecten">
-                            <option value="@Model.Inventaris[0].Object.Id">@Model.Inventaris[0].Object.Id</option>
-                            @foreach (var item in Model.Objecten)
-                            {
-                                if (item.Value != Model.Inventaris[0].Object.Id.ToString())
+                    <div class="form-group">
+                        <label for="Objecten" class="col-sm-3 control-label">Object</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Objecten">
+                                <option value="@Model.Inventaris[0].Object.Id">@Model.Inventaris[0].Object.Id</option>
+                                @foreach (var item in Model.Objecten)
                                 {
-                                    <option value="@item.Value">@item.Text</option>
+                                    if (item.Value != Model.Inventaris[0].Object.Id.ToString())
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
                                 }
-                            }
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="isAanwezig" class="col-sm-2 control-label">Aanwezig</label>
-                    <div class="col-sm-10">
-                        @if (Model.Inventaris[0].IsAanwezig)
+                    <div class="form-group">
+                        <label for="isAanwezig" class="col-sm-3 control-label">Aanwezig</label>
+                        <div class="col-sm-9">
+                            @if (Model.Inventaris[0].IsAanwezig)
                 {
-                            <input type="checkbox" checked="checked" name="isAanwezig" value="True" />
-                        }
-                        else
-                        {
+                                <input type="checkbox" checked="checked" name="isAanwezig" value="True" />
+                            }
+                            else
+                            {
 
-                            <input type="checkbox" name="isAanwezig" value="True" />
-                        }
+                                <input type="checkbox" name="isAanwezig" value="True" />
+                            }
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="isActief" class="col-sm-2 control-label">Actief</label>
-                    <div class="col-sm-10">
-                        @if (Model.Inventaris[0].IsActief)
+                    <div class="form-group">
+                        <label for="isActief" class="col-sm-3 control-label">Actief</label>
+                        <div class="col-sm-9">
+                            @if (Model.Inventaris[0].IsActief)
                 {
-                            <input type="checkbox" name="isActief" checked="checked" value="True" />
-                        }
-                        else
-                        {
-                            <input type="checkbox" name="isActief" value="True" />
-                        }
-                    </div>
-                </div>
-
-
-                <div class="form-group">
-                    <label for="Lokalen" class="col-sm-2 control-label">Lokaal</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Lokalen">
-                            <option value="@Model.Inventaris[0].Lokaal.Id">@Model.Inventaris[0].Lokaal.LokaalNaam</option>
-                            @foreach (var item in Model.Lokalen)
-                            {
-                                if (item.Value != Model.Inventaris[0].Lokaal.Id.ToString())
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
+                                <input type="checkbox" name="isActief" checked="checked" value="True" />
                             }
-                        </select>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="historiek" class="col-sm-2 control-label">Historiek</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" type="text" rows="6" maxlength="1024" name="historiek">@Model.Inventaris[0].Historiek</textarea>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="aankoopjaar" class="col-sm-2 control-label">Aankoopjaar</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" value="@Model.Inventaris[0].Aankoopjaar" type="number" name="aankoopjaar" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="afschrijvingsperiode" class="col-sm-2 control-label">Afschrijvingsperiode</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" value="@Model.Inventaris[0].Afschrijvingsperiode" type="number" name="afschrijvingsperiode" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="waarde" class="col-sm-2 control-label">Waarde</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" value="@Model.Inventaris[0].Waarde" type="text" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="waarde" />
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="Facturen" class="col-sm-2 control-label">Factuur</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Facturen">
-                            <option value="@Model.Inventaris[0].Factuur.Id">@Model.Inventaris[0].Factuur.CvoFactuurNummer</option>
-                            @foreach (var item in Model.Facturen)
+                            else
                             {
-                                if (item.Value != Model.Inventaris[0].Factuur.Id.ToString())
-                                {
-                                    <option value="@item.Value">@item.Text</option>
-                                }
+                                <input type="checkbox" name="isActief" value="True" />
                             }
-                        </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Verzekeringen" class="col-sm-2 control-label">Verzekering</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Verzekeringen">
-                            <option value="@Model.Inventaris[0].Verzekering.Id">@Model.Inventaris[0].Verzekering.Omschrijving</option>
-                            @foreach (var item in Model.Verzekeringen)
-                            {
-                                if (item.Value != Model.Inventaris[0].Verzekering.Id.ToString())
+
+                    <div class="form-group">
+                        <label for="Lokalen" class="col-sm-3 control-label">Lokaal</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Lokalen">
+                                <option value="@Model.Inventaris[0].Lokaal.Id">@Model.Inventaris[0].Lokaal.LokaalNaam</option>
+                                @foreach (var item in Model.Lokalen)
                                 {
-                                    <option value="@item.Value">@item.Text</option>
+                                    if (item.Value != Model.Inventaris[0].Lokaal.Id.ToString())
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
                                 }
-                            }
-                        </select>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="costcenter" class="col-sm-2 control-label">Costcenter</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" value="@Model.Inventaris[0].Costcenter" type="number" name="costcenter" />
+                    <div class="form-group">
+                        <label for="historiek" class="col-sm-3 control-label">Historiek</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" type="text" rows="6" maxlength="1024" name="historiek">@Model.Inventaris[0].Historiek</textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="boekhoudnr" class="col-sm-2 control-label">Boehhoudnummer</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" value="@Model.Inventaris[0].Boekhoudnr" type="number" name="boekhoudnr" />
+                    <div class="form-group">
+                        <label for="aankoopjaar" class="col-sm-3 control-label">Aankoopjaar</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Inventaris[0].Aankoopjaar" type="number" name="aankoopjaar" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Leverancieren" class="col-sm-2 control-label">Leverancier</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Leverancieren">
-                            <option value="">@Model.Inventaris[0].Leverancier.Naam</option>
-                            @foreach (var item in Model.Leverancieren)
-                            {
-                                if (item.Value != Model.Inventaris[0].Leverancier.Id.ToString())
+                    <div class="form-group">
+                        <label for="afschrijvingsperiode" class="col-sm-3 control-label">Afschrijvingsperiode</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Inventaris[0].Afschrijvingsperiode" type="number" name="afschrijvingsperiode" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="waarde" class="col-sm-3 control-label">Waarde</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Inventaris[0].Waarde" type="text" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="waarde" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Facturen" class="col-sm-3 control-label">Factuur</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Facturen">
+                                <option value="@Model.Inventaris[0].Factuur.Id">@Model.Inventaris[0].Factuur.CvoFactuurNummer</option>
+                                @foreach (var item in Model.Facturen)
                                 {
-                                    <option value="@item.Value">@item.Text</option>
+                                    if (item.Value != Model.Inventaris[0].Factuur.Id.ToString())
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
                                 }
-                            }
-                        </select>
+                            </select>
+                        </div>
                     </div>
+
+                    <div class="form-group">
+                        <label for="Verzekeringen" class="col-sm-3 control-label">Verzekering</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Verzekeringen">
+                                <option value="@Model.Inventaris[0].Verzekering.Id">@Model.Inventaris[0].Verzekering.Omschrijving</option>
+                                @foreach (var item in Model.Verzekeringen)
+                                {
+                                    if (item.Value != Model.Inventaris[0].Verzekering.Id.ToString())
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="costcenter" class="col-sm-3 control-label">Costcenter</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Inventaris[0].Costcenter" type="number" name="costcenter" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="boekhoudnr" class="col-sm-3 control-label">Boehhoudnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" value="@Model.Inventaris[0].Boekhoudnr" type="number" name="boekhoudnr" />
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="Leverancieren" class="col-sm-3 control-label">Leverancier</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Leverancieren">
+                                <option value="">@Model.Inventaris[0].Leverancier.Naam</option>
+                                @foreach (var item in Model.Leverancieren)
+                                {
+                                    if (item.Value != Model.Inventaris[0].Leverancier.Id.ToString())
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <hr />
+
                 </div>
-
-                <hr />
-
-            </div>
-            <button type="submit" class="btn btn-primary pull-right">Pas aan</button>
-            @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+                <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Pas aan</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
 
 
-        }
+            }
+        </div>
     </div>
 </div>

@@ -4,166 +4,168 @@
     ViewBag.Title = "Inventaris - Aanmaken";
 }
 
-<div class="panel panel-primary">
-    <div class="panel-heading">Aanmaken</div>
-    <div class="container-fluid">
-        @using (Html.BeginForm("Create", "Inventaris", new { @class = "form-horizontal" }))
-        {
-            <div class="form-horizontal">
-                <div class="form-group">
-                    <label for="reeks" class="col-sm-2 control-label">Reeks</label>
-                    <div class="col-sm-10">
-                        <select name="reeks" class="form-control" required>
-                            <option value="05">05</option>
-                            <option value="06">06</option>
-                            <option value="07">07</option>
-                        </select>
+<div class="col-sm-8">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Aanmaken</div>
+        <div class="container-fluid">
+            @using (Html.BeginForm("Create", "Inventaris", new { @class = "form-horizontal" }))
+            {
+                <div class="form-horizontal">
+                    <div class="form-group">
+                        <label for="reeks" class="col-sm-3 control-label">Reeks</label>
+                        <div class="col-sm-9">
+                            <select name="reeks" class="form-control" required>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="reeks" class="col-sm-2 control-label">Volgnummer</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" name="volgnummer" min="1" max="9999" placeholder="0001-9999" required />
+                    <div class="form-group">
+                        <label for="reeks" class="col-sm-3 control-label">Volgnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" name="volgnummer" min="1" max="9999" placeholder="0001-9999" required />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Objecten" class="col-sm-2 control-label">Object</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Objecten">
-                            <option value="">-Selecteer-</option>
-                            @foreach (var item in Model.Objecten)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="form-group">
+                        <label for="Objecten" class="col-sm-3 control-label">Object</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Objecten">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Objecten)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="isAanwezig" class="col-sm-2 control-label">Aanwezig</label>
-                    <div class="col-sm-10">
-                        <input type="checkbox" name="isAanwezig" value="True" />
+                    <div class="form-group">
+                        <label for="isAanwezig" class="col-sm-3 control-label">Aanwezig</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" name="isAanwezig" value="True" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="isActief" class="col-sm-2 control-label">Actief</label>
-                    <div class="col-sm-10">
-                        <input type="checkbox" name="isActief" value="True" />
+                    <div class="form-group">
+                        <label for="isActief" class="col-sm-3 control-label">Actief</label>
+                        <div class="col-sm-9">
+                            <input type="checkbox" name="isActief" value="True" />
+                        </div>
                     </div>
-                </div>
 
 
-                <div class="form-group">
-                    <label for="Lokalen" class="col-sm-2 control-label">Lokaal</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Lokalen">
-                            <option value="">-Selecteer-</option>
-                            @foreach (var item in Model.Lokalen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="form-group">
+                        <label for="Lokalen" class="col-sm-3 control-label">Lokaal</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Lokalen">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Lokalen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="historiek" class="col-sm-2 control-label">Historiek</label>
-                    <div class="col-sm-10">
-                        <textarea class="form-control" rows="6" type="text" maxlength="1024" name="historiek"></textarea>        
+                    <div class="form-group">
+                        <label for="historiek" class="col-sm-3 control-label">Historiek</label>
+                        <div class="col-sm-9">
+                            <textarea class="form-control" rows="6" type="text" maxlength="1024" name="historiek"></textarea>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="aankoopjaar" class="col-sm-2 control-label">Aankoopjaar</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" name="aankoopjaar" />
+                    <div class="form-group">
+                        <label for="aankoopjaar" class="col-sm-3 control-label">Aankoopjaar</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" name="aankoopjaar" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="afschrijvingsperiode" class="col-sm-2 control-label">Afschrijvingsperiode</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" name="afschrijvingsperiode" />
+                    <div class="form-group">
+                        <label for="afschrijvingsperiode" class="col-sm-3 control-label">Afschrijvingsperiode</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" name="afschrijvingsperiode" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="waarde" class="col-sm-2 control-label">Waarde</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="waarde"/>
+                    <div class="form-group">
+                        <label for="waarde" class="col-sm-3 control-label">Waarde</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" pattern="[0-9]+([\.,][0-9]+)?" step="0.01" name="waarde" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Facturen" class="col-sm-2 control-label">Factuur</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Facturen">
-                            <option value="">-Selecteer-</option>
-                            @foreach (var item in Model.Facturen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="form-group">
+                        <label for="Facturen" class="col-sm-3 control-label">Factuur</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Facturen">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Facturen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Verzekeringen" class="col-sm-2 control-label">Verzekering</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Verzekeringen">
-                            <option value="">-Selecteer-</option>
-                            @foreach (var item in Model.Verzekeringen)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="form-group">
+                        <label for="Verzekeringen" class="col-sm-3 control-label">Verzekering</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Verzekeringen">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Verzekeringen)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="costcenter" class="col-sm-2 control-label">Costcenter</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" name="costcenter" />
+                    <div class="form-group">
+                        <label for="costcenter" class="col-sm-3 control-label">Costcenter</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" name="costcenter" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="boekhoudnr" class="col-sm-2 control-label">Boekhoudnummer</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" name="boekhoudnr" />
+                    <div class="form-group">
+                        <label for="boekhoudnr" class="col-sm-3 control-label">Boekhoudnummer</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" name="boekhoudnr" />
+                        </div>
                     </div>
-                </div>
 
-                <div class="form-group">
-                    <label for="Leverancieren" class="col-sm-2 control-label">Leverancier</label>
-                    <div class="col-sm-10">
-                        <select class="form-control" name="Leverancieren">
-                            <option value="">-Selecteer-</option>
-                            @foreach (var item in Model.Leverancieren)
-                            {
-                                <option value="@item.Value">@item.Text</option>
-                            }
-                        </select>
+                    <div class="form-group">
+                        <label for="Leverancieren" class="col-sm-3 control-label">Leverancier</label>
+                        <div class="col-sm-9">
+                            <select class="form-control" name="Leverancieren">
+                                <option value="">-Selecteer-</option>
+                                @foreach (var item in Model.Leverancieren)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
                     </div>
-                </div>
 
-                <hr />
-                <div class="form-group">
-                    <label for="aantal" class="col-sm-2 control-label">Aantal</label>
-                    <div class="col-sm-10">
-                        <input class="form-control" type="number" name="aantal" value="1" min="1" />
+                    <hr />
+                    <div class="form-group">
+                        <label for="aantal" class="col-sm-3 control-label">Aantal</label>
+                        <div class="col-sm-9">
+                            <input class="form-control" type="number" name="aantal" value="1" min="1" />
+                        </div>
                     </div>
+
+
+
+
                 </div>
-
-                
-
-              
-            </div>
-            <button type="submit" class="btn btn-primary pull-right">Voeg toe</button>
-            @Html.ActionLink("Cancel", "Index")
-        }
+                <button type="submit" class="btn btn-primary pull-right" style="margin-left: 5px">Voeg toe</button>
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-default pull-right" })
+            }
+        </div>
     </div>
 </div>
