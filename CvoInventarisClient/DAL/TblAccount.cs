@@ -13,22 +13,14 @@ namespace CvoInventarisClient.DAL
 {
     public class TblAccount : ICrudable<AccountModel>
     {
-        #region Get Connection String
-        private string GetConnectionString()
-        {
-            return ConfigurationManager
-                .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
-        }
-        #endregion
-
         #region CRUD TblAccount
         public AccountModel GetById(int id)
         {
             AccountModel acc = new AccountModel();
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("TblAccountReadOne", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@Id", id);
 
@@ -54,10 +46,10 @@ namespace CvoInventarisClient.DAL
         public List<AccountModel> GetAll()
         {
             List<AccountModel> accs = new List<AccountModel>();
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("TblAccountReadAll", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 try
                 {
@@ -85,10 +77,10 @@ namespace CvoInventarisClient.DAL
         public int Create(AccountModel acc)
         {
             int affected = 0;
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("TblAccountInsert", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@Email", acc.Email);
                 cmd.Parameters.AddWithValue("@Wachtwoord", PasswordStorage.CreateHash(acc.Wachtwoord));
@@ -107,10 +99,10 @@ namespace CvoInventarisClient.DAL
 
         public bool Update(AccountModel acc)
         {
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("TblAccountUpdate", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@IdAccount", acc.IdAccount);
                 cmd.Parameters.AddWithValue("@Email", acc.Email);
@@ -131,10 +123,10 @@ namespace CvoInventarisClient.DAL
 
         public bool Delete(int id)
         {
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("TblAccountDelete", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@IdAccount", id);
 
@@ -155,10 +147,10 @@ namespace CvoInventarisClient.DAL
         public AccountModel GetByEmail(string email)
         {
             AccountModel acc = new AccountModel();
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("TblAccountReadByEmail", con);
-                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.CommandType = CommandType.StoredProcedure;
 
                 cmd.Parameters.AddWithValue("@Email", email);
 
@@ -183,7 +175,7 @@ namespace CvoInventarisClient.DAL
 
         public bool VerstuurWachtwoordResetEmail(string email)
         {
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("spResetWachtwoord", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -243,7 +235,7 @@ namespace CvoInventarisClient.DAL
 
         public bool IsWachtwoordResetLinkValid(string GUID)
         {
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("spIsWachtwoordResetLinkValid", con);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -264,7 +256,7 @@ namespace CvoInventarisClient.DAL
 
         public bool WijzigWachtwoord(string GUID, string wachtwoord)
         {
-            using (SqlConnection con = new SqlConnection(GetConnectionString()))
+            using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
             {
                 SqlCommand cmd = new SqlCommand("spWijzigWachtwoord", con);
                 cmd.CommandType = CommandType.StoredProcedure;

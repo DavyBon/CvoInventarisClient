@@ -8,23 +8,13 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using CvoInventarisClient.DAL.Helpers;
 
 namespace CvoInventarisClient.DAL
 {
     public class TblCampus : ICrudable<CampusModel>
     {
-
-        #region Connectionstring
-
-        //private string GetConnectionString()
-        //{
-        //    return ConfigurationManager
-        //        .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
-        //}
-
-        SqlConnection connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867");
-
-        #endregion
+        SqlConnection connection = new SqlConnection(DatabaseConnection.GetConnectionString());
 
         #region GetAll
 

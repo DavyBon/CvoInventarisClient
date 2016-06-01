@@ -6,12 +6,13 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
+using CvoInventarisClient.DAL.Helpers;
 
 namespace CvoInventarisClient.DAL
 {
     public class TblVerzekering : ICrudable<VerzekeringModel>
     {
-        SqlConnection connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867");
+        SqlConnection connection = new SqlConnection(DatabaseConnection.GetConnectionString());
 
         public int Create(VerzekeringModel t)
         {
@@ -92,7 +93,7 @@ namespace CvoInventarisClient.DAL
         public VerzekeringModel GetById(int id)
         {
             VerzekeringModel verzekering = new VerzekeringModel();
-            using (connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867"))
+            using (connection)
             {
                 SqlCommand command = new SqlCommand("TblVerzekeringReadOne", connection);
                 command.CommandType = CommandType.StoredProcedure;

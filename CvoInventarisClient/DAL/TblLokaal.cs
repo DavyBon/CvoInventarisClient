@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Linq;
 using CvoInventarisClient.DAL.interfaces;
 using CvoInventarisClient.Models;
+using CvoInventarisClient.DAL.Helpers;
 
 namespace CvoInventarisClient.DAL
 {
@@ -15,16 +16,6 @@ namespace CvoInventarisClient.DAL
         #region Fields
 
         private string message;
-
-        #endregion
-
-        #region Connectionstring
-
-        private string GetConnectionString()
-        {
-            return ConfigurationManager
-                .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
-        }
 
         #endregion
 
@@ -55,7 +46,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblLokaalReadAll", con))
                     {
@@ -116,7 +107,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblLokaalReadAll", con))
                     {
@@ -172,7 +163,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblLokaalReadAll", con))
                     {
@@ -232,7 +223,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblLokaalReadOne", con))
                     {
@@ -287,7 +278,7 @@ namespace CvoInventarisClient.DAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblLokaalInsert", con))
                     {
@@ -316,7 +307,7 @@ namespace CvoInventarisClient.DAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblLokaalUpdate", con))
                     {
@@ -346,7 +337,7 @@ namespace CvoInventarisClient.DAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblLokaalDelete", con))
                     {

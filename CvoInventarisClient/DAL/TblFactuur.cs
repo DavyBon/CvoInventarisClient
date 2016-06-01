@@ -8,22 +8,12 @@ using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Web;
+using CvoInventarisClient.DAL.Helpers;
 
 namespace CvoInventarisClient.DAL
 {
     public class TblFactuur : ICrudable<FactuurModel>
     {
-
-        #region Connectionstring
-
-        private string GetConnectionString()
-        {
-            return ConfigurationManager
-                .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
-        }
-
-        #endregion
-
         #region GetAll
 
         public List<FactuurModel> GetAll()
@@ -35,7 +25,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblFactuurReadAll", con))
                     {
@@ -108,7 +98,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblFactuurReadOne", con))
                     {
@@ -175,7 +165,7 @@ namespace CvoInventarisClient.DAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblFactuurInsert", con))
                     {
@@ -209,7 +199,7 @@ namespace CvoInventarisClient.DAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblFactuurUpdate", con))
                     {
@@ -245,7 +235,7 @@ namespace CvoInventarisClient.DAL
         {
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblFactuurDelete", con))
                     {
@@ -277,7 +267,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblFactuurReadTop", con))
                     {
@@ -350,7 +340,7 @@ namespace CvoInventarisClient.DAL
 
             try
             {
-                using (SqlConnection con = new SqlConnection(GetConnectionString()))
+                using (SqlConnection con = new SqlConnection(DatabaseConnection.GetConnectionString()))
                 {
                     using (SqlCommand cmd = new SqlCommand("TblFactuurReadTop", con))
                     {

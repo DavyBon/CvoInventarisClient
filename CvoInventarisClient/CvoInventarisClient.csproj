@@ -148,6 +148,7 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DAL\Helpers\DatabaseConnection.cs" />
     <Compile Include="UnitTests\DALutilTest.cs" />
     <Compile Include="App_Code\DALutil.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />

@@ -8,13 +8,14 @@ using CvoInventarisClient.DAL.interfaces;
 using CvoInventarisClient.Models;
 using System.Configuration;
 using System.Data;
+using CvoInventarisClient.DAL.Helpers;
 
 
 namespace CvoInventarisClient.DAL
 {
     public class TblInventaris : ICrudable<InventarisModel>
     {
-        SqlConnection connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867");
+        SqlConnection connection = new SqlConnection(DatabaseConnection.GetConnectionString());
 
         public int Create(InventarisModel inventaris)
         {
@@ -534,12 +535,6 @@ namespace CvoInventarisClient.DAL
             {
                 connection.Close();
             }
-        }
-
-        private string GetConnectionString()
-        {
-            return ConfigurationManager
-                .ConnectionStrings["CvoInventarisDBConnection"].ConnectionString;
         }
     }
 }
