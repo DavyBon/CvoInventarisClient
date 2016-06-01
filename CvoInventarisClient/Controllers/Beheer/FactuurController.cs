@@ -106,7 +106,7 @@ namespace CvoInventarisClient.Controllers
         #region Create
 
         [HttpPost]
-        public ActionResult Create(int? leverancier, string prijs)
+        public ActionResult Create(int? leverancier, string prijs, int? garantie, int? afschrijfperiode)
         {
             TblFactuur TblFactuur = new TblFactuur();
 
@@ -117,10 +117,13 @@ namespace CvoInventarisClient.Controllers
             factuur.VerwerkingsDatum = Request.Form["verwerkingsdatum"];
             factuur.ScholengroepNummer = Request.Form["scholengroepnummer"];
             factuur.Leverancier = new LeverancierModel() { Id = leverancier };
-            factuur.Prijs = Convert.ToDecimal(prijs.Replace(".", ","));
-            factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
+            if (!string.IsNullOrWhiteSpace(prijs))
+            {
+                factuur.Prijs = Convert.ToDecimal(prijs.Replace(".", ","));
+            }
+            factuur.Garantie = garantie;
             factuur.Omschrijving = Request.Form["omschrijving"];
-            factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
+            factuur.Afschrijfperiode = afschrijfperiode;
 
             TblFactuur.Create(factuur);
 
@@ -160,7 +163,7 @@ namespace CvoInventarisClient.Controllers
         #region Edit
 
         [HttpPost]
-        public ActionResult Edit(int id, string prijs, int? leverancier)
+        public ActionResult Edit(int id, string prijs, int? leverancier, int? garantie, int? afschrijfperiode)
         {
 
             TblFactuur TblFactuur = new TblFactuur();
@@ -171,10 +174,13 @@ namespace CvoInventarisClient.Controllers
             factuur.LeverancierFactuurNummer = Request.Form["leverancierfactuurnummer"];
             factuur.VerwerkingsDatum = Request.Form["verwerkingsdatum"];
             factuur.ScholengroepNummer = Request.Form["scholengroepnummer"];
-            factuur.Prijs = Convert.ToDecimal(prijs.Replace(".", ","));
-            factuur.Garantie = Convert.ToInt32(Request.Form["garantie"]);
+            if (!string.IsNullOrWhiteSpace(prijs))
+            {
+                factuur.Prijs = Convert.ToDecimal(prijs.Replace(".", ","));
+            }
+            factuur.Garantie = garantie;
             factuur.Omschrijving = Request.Form["omschrijving"];
-            factuur.Afschrijfperiode = Convert.ToInt32(Request.Form["afschrijfperiode"]);
+            factuur.Afschrijfperiode = afschrijfperiode;
             factuur.Leverancier = new LeverancierModel() { Id = leverancier };
 
             TblFactuur.Update(factuur);
