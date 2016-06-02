@@ -17,7 +17,7 @@
                         <label for="Objecten" class="col-sm-3 control-label">Object</label>
                         <div class="col-sm-9">
                             <select class="form-control" name="Objecten">
-                                <option value="@Model.Inventaris[0].Object.Id">@Model.Inventaris[0].Object.Id</option>
+                                <option value="@Model.Inventaris[0].Object.Id">@Model.Inventaris[0].Object.Omschrijving</option>
                                 @foreach (var item in Model.Objecten)
                                 {
                                     if (item.Value != Model.Inventaris[0].Object.Id.ToString())
@@ -33,7 +33,7 @@
                         <label for="isAanwezig" class="col-sm-3 control-label">Aanwezig</label>
                         <div class="col-sm-9">
                             @if (Model.Inventaris[0].IsAanwezig)
-                {
+                            {
                                 <input type="checkbox" checked="checked" name="isAanwezig" value="True" />
                             }
                             else
@@ -48,7 +48,7 @@
                         <label for="isActief" class="col-sm-3 control-label">Actief</label>
                         <div class="col-sm-9">
                             @if (Model.Inventaris[0].IsActief)
-                {
+                            {
                                 <input type="checkbox" name="isActief" checked="checked" value="True" />
                             }
                             else
@@ -78,7 +78,7 @@
                     <div class="form-group">
                         <label for="historiek" class="col-sm-3 control-label">Historiek</label>
                         <div class="col-sm-9">
-                            <textarea class="form-control" type="text" rows="6" maxlength="1024" name="historiek">@Model.Inventaris[0].Historiek</textarea>
+                            <textarea class="form-control" type="text" rows="6" maxlength="1024" name="historiek">@Model.Inventaris[0].Historiek.Trim()</textarea>
                         </div>
                     </div>
 
@@ -138,14 +138,14 @@
                     <div class="form-group">
                         <label for="costcenter" class="col-sm-3 control-label">Costcenter</label>
                         <div class="col-sm-9">
-                            <input class="form-control" value="@Model.Inventaris[0].Costcenter" type="number" name="costcenter" />
+                            <input class="form-control" type="number" value="@Model.Inventaris[0].Costcenter.Trim()" name="costcenter" />
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="boekhoudnr" class="col-sm-3 control-label">Boehhoudnummer</label>
                         <div class="col-sm-9">
-                            <input class="form-control" value="@Model.Inventaris[0].Boekhoudnr" type="number" name="boekhoudnr" />
+                            <input class="form-control" value="@Model.Inventaris[0].Boekhoudnr.Trim()" type="number" name="boekhoudnr" />
                         </div>
                     </div>
 
