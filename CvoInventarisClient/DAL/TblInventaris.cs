@@ -278,8 +278,8 @@ namespace CvoInventarisClient.DAL
 
                         if (mySqlDataReader["idLokaal"] != DBNull.Value)
                         {
-                            lokaal.Id = (int?)mySqlDataReader["idLokaal"];
-                            lokaal.AantalPlaatsen = (int?)mySqlDataReader["aantalPlaatsen"];
+                            lokaal.Id = mySqlDataReader["idLokaal"] as int?;
+                            lokaal.AantalPlaatsen = mySqlDataReader["aantalPlaatsen"] as int?;
                             lokaal.IsComputerLokaal = Convert.ToBoolean(mySqlDataReader["isComputerLokaal"]);
                             lokaal.Campus = campus;
                             lokaal.LokaalNaam = mySqlDataReader["lokaalNaam"].ToString();
@@ -306,7 +306,7 @@ namespace CvoInventarisClient.DAL
                             factuur.Id = (int?)mySqlDataReader["idFactuur"];
                             factuur.ScholengroepNummer = mySqlDataReader["scholengroepNummer"].ToString();
                             factuur.Prijs = mySqlDataReader["prijs"] as decimal?;
-                            factuur.Garantie = (int?)mySqlDataReader["garantie"];
+                            factuur.Garantie = mySqlDataReader["garantie"] as int?;
                             factuur.Omschrijving = mySqlDataReader["factuurOmschrijving"].ToString();
                             factuur.Afschrijfperiode = mySqlDataReader["afschrijvingsperiode"] as int? ?? default(int);
                             factuur.VerwerkingsDatum = mySqlDataReader["verwerkingsDatum"].ToString();
