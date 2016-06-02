@@ -130,8 +130,8 @@ namespace CvoInventarisClient.DAL
 
                         if (mySqlDataReader["idLokaal"] != DBNull.Value)
                         {
-                            lokaal.Id = (int?)mySqlDataReader["idLokaal"];
-                            lokaal.AantalPlaatsen = (int?)mySqlDataReader["aantalPlaatsen"];
+                            lokaal.Id = mySqlDataReader["idLokaal"] as int?;
+                            lokaal.AantalPlaatsen = mySqlDataReader["aantalPlaatsen"] as int?;
                             lokaal.IsComputerLokaal = Convert.ToBoolean(mySqlDataReader["isComputerLokaal"]);
                             lokaal.Campus = campus;
                             lokaal.LokaalNaam = mySqlDataReader["lokaalNaam"].ToString();
