@@ -93,7 +93,7 @@ namespace CvoInventarisClient.DAL
         public VerzekeringModel GetById(int id)
         {
             VerzekeringModel verzekering = new VerzekeringModel();
-            using (connection)
+            using (connection = new SqlConnection("Data Source=92.222.220.213,1500;Initial Catalog=CvoInventarisdb;Persist Security Info=True;User ID=sa;Password=grati#s1867"))
             {
                 SqlCommand command = new SqlCommand("TblVerzekeringReadOne", connection);
                 command.CommandType = CommandType.StoredProcedure;
