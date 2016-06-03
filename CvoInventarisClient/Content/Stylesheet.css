@@ -63,7 +63,7 @@
 .dataTable{
     display:inline-block;
     height:40em;
-    overflow-y: scroll;
+    overflow: scroll;
 }
 .multiline
 {

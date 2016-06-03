@@ -18,7 +18,7 @@
     using (Html.BeginForm("Index", "Lokaal"))
     {
 
-        <select name="amount">
+        <select name="amount" onchange='if(this.value != null) { this.form.submit(); }'>
             <option value="">@ViewBag.amount</option>
             @foreach (var item in amounts)
             {
@@ -29,7 +29,7 @@
             }
         </select>
 
-        <select name="order">
+        <select name="order" onchange='if(this.value != null) { this.form.submit(); }'>
             <option value="">@ViewBag.ordertype</option>
             @foreach (var item in ordertypes)
             {
@@ -39,10 +39,10 @@
                 }
             }
         </select>
-
-        <button type="submit">Ga</button>
     }
 }
+
+<div class="spacer"></div>
 
 @using (Html.BeginForm("Delete", "Lokaal"))
 {

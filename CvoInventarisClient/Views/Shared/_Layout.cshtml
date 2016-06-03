@@ -19,9 +19,8 @@
                     <div class="row">
                         <div class="col-lg-2">
                             <ul class="nav nav-pills nav-stacked">
-                                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Home" ? "active" : "")"><a href="@Url.Action("Index","Home")"><span class="glyphicon glyphicon-home"></span> Home</a></li>
-                                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Account" ? "active" : "")"><a href="@Url.Action("Index","Account")"><span class="glyphicon glyphicon-user"></span> Accountbeheer</a></li>
                                 <li class="@(new List<String>() { "Beheer", "Inventaris", "Object","Campus","Netwerk", "Harddisk","Leverancier","Lokaal","Factuur","Cpu","Device","GrafischeKaart","Verzekering","Hardware","ObjectType"}.Contains(ViewContext.RouteData.Values["controller"].ToString()) ? "active" : "")"><a href="@Url.Action("Index","Beheer")"><span class="glyphicon glyphicon-list-alt"></span> Overzicht</a></li>
+                                <li class="@(ViewContext.RouteData.Values["controller"].ToString() == "Account" ? "active" : "")"><a href="@Url.Action("Index","Account")"><span class="glyphicon glyphicon-user"></span> Accountbeheer</a></li>
                                 <li><a class="bottom-align-text" href="@Url.Action("Loguit","Login")"><span class="glyphicon glyphicon-log-out"></span> Log uit</a></li>
                             </ul>
                         </div>

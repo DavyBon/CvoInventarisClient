@@ -120,7 +120,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="Scripts\Custom\Custom.js" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <None Include="Properties\PublishProfiles\FTP.pubxml" />
     <None Include="Scripts\jquery-1.9.1.intellisense.js" />

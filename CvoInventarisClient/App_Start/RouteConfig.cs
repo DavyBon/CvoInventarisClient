@@ -16,7 +16,7 @@ namespace CvoInventarisClient
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Beheer", action = "Index", id = UrlParameter.Optional }
             );
         }
     }
