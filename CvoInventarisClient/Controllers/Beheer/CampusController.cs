@@ -34,7 +34,7 @@ namespace CvoInventarisClient.Controllers
 
                 foreach (PostcodeModel p in TblPostcode.GetAll().OrderBy(x => x.Gemeente))
                 {
-                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente + " - " + p.Postcode, Value = p.Id.ToString() });
                 }
             }
             else
