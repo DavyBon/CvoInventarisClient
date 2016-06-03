@@ -18,25 +18,20 @@ namespace CvoInventarisClient.Controllers
 
             LeverancierViewModel model = new LeverancierViewModel();
 
-            if (Session["leverancierviewmodel"] == null || refresh == true)
+
+            DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+            DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
+
+            model.Leveranciers = new List<LeverancierModel>();
+            model.Postcodes = new List<SelectListItem>();
+
+            model.Leveranciers = tblLeverancier.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+            foreach (PostcodeModel p in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
             {
-                DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
-                DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
-
-                model.Leveranciers = new List<LeverancierModel>();
-                model.Postcodes = new List<SelectListItem>();
-
-                model.Leveranciers = tblLeverancier.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-
-                foreach (PostcodeModel p in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
-                {
-                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
-                }
+                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
             }
-            else
-            {
-                model = (LeverancierViewModel)Session["leverancierviewmodel"];
-            }
+
             Session["leverancierviewmodel"] = model.Clone();
             if (amount == null)
             {
@@ -110,7 +105,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd toegevoegd";
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // EDIT:
@@ -170,7 +165,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "leverancier" + " " + Request.Form["naam"] + " werd gewijzigd";
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // DELETE:
@@ -193,7 +188,7 @@ namespace CvoInventarisClient.Controllers
                 TempData["action"] = idArray.Length + " leverancier werd verwijderd";
             }
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -205,25 +200,20 @@ namespace CvoInventarisClient.Controllers
 
             LeverancierViewModel model = new LeverancierViewModel();
 
-            if (Session["leverancierviewmodel"] == null || refresh == true)
+
+            DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
+            DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
+
+            model.Leveranciers = new List<LeverancierModel>();
+            model.Postcodes = new List<SelectListItem>();
+
+            model.Leveranciers = tblLeverancier.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+            foreach (PostcodeModel p in tblPostcode.GetAll())
             {
-                DAL.TblLeverancier tblLeverancier = new DAL.TblLeverancier();
-                DAL.TblPostcode tblPostcode = new DAL.TblPostcode();
-
-                model.Leveranciers = new List<LeverancierModel>();
-                model.Postcodes = new List<SelectListItem>();
-
-                model.Leveranciers = tblLeverancier.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-
-                foreach (PostcodeModel p in tblPostcode.GetAll())
-                {
-                    model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
-                }
+                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
             }
-            else
-            {
-                model = (LeverancierViewModel)Session["leverancierviewmodel"];
-            }
+
 
             // Hier start filteren
             if (!String.IsNullOrWhiteSpace(naamFilter))
