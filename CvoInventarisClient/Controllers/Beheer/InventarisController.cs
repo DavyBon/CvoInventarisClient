@@ -15,6 +15,7 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Index(int? amount, string order)
         {
             ViewBag.action = TempData["action"];
+            ViewBag.warning = TempData["warning"];
 
             InventarisViewModel model = new InventarisViewModel();
 
@@ -117,7 +118,7 @@ namespace CvoInventarisClient.Controllers
             }
             foreach (LokaalModel l in TblLokaal.GetAll().OrderBy(x => x.Campus.Naam))
             {
-                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam +", "+l.Campus.Naam, Value = l.Id.ToString() });
+                model.Lokalen.Add(new SelectListItem { Text = l.LokaalNaam + ", " + l.Campus.Naam, Value = l.Id.ToString() });
             }
             foreach (VerzekeringModel v in TblVerzekering.GetAll().OrderBy(x => x.Omschrijving))
             {
@@ -137,11 +138,14 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Create
         [HttpPost]
-        public ActionResult Create(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen,int? Leverancieren, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
+        public ActionResult Create(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen, int? Leverancieren, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter,string boekhoudnr, int? aantal)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
-            for (int i = 0; i < Convert.ToInt32(Request.Form["aantal"]); i++)
+            List<String> duplicates = new List<string>();
+            List<String> toegevoegd = new List<string>();
+
+            for (int i = 0; i < aantal; i++)
             {
                 int labelnr = Convert.ToInt32(Request.Form["volgnummer"]) + i;
                 InventarisModel inventaris = new InventarisModel();
@@ -159,7 +163,7 @@ namespace CvoInventarisClient.Controllers
                 inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
                 inventaris.Factuur = new FactuurModel() { Id = Facturen };
                 inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
-                inventaris.Factuur = new FactuurModel() {Id=Facturen};
+                inventaris.Factuur = new FactuurModel() { Id = Facturen };
                 inventaris.Leverancier = new LeverancierModel() { Id = Leverancieren };
 
                 if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
@@ -172,10 +176,27 @@ namespace CvoInventarisClient.Controllers
                 {
                     inventaris.IsAanwezig = false;
                 };
-                TblInventaris.Create(inventaris);
+
+                int dalresponse = TblInventaris.Create(inventaris);
+
+                if (dalresponse == -1)
+                {
+                    duplicates.Add(inventaris.Label);
+                }
+                else if (dalresponse > 0)
+                {
+                    toegevoegd.Add(inventaris.Label);
+                }
             }
 
-            TempData["action"] = "Object werd toegevoegd aan inventaris";
+            if (duplicates.Any())
+            {
+                TempData["warning"] = "label(s) \"" + String.Join(",", duplicates) + "\" werd(en) niet toegevoegd, bestaat al";
+            }
+            if (toegevoegd.Any())
+            {
+                TempData["action"] = "\"" + String.Join(",", toegevoegd) + " \" werd(en) toegevoegd aan de inventaris";
+            }
             return RedirectToAction("Index");
         }
 
@@ -226,7 +247,7 @@ namespace CvoInventarisClient.Controllers
 
         // POST: Inventaris/Edit/5
         [HttpPost]
-        public ActionResult Edit(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen,int? Leverancieren, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
+        public ActionResult Edit(int? Objecten, int? Lokalen, int? Verzekeringen, int? Facturen, int? Leverancieren, string waarde, int? aankoopjaar, int? afschrijvingsperiode, string costcenter, string boekhoudnr)
         {
             DAL.TblInventaris TblInventaris = new DAL.TblInventaris();
 
@@ -250,8 +271,8 @@ namespace CvoInventarisClient.Controllers
             inventaris.Lokaal = new LokaalModel() { Id = Lokalen };
             inventaris.Factuur = new FactuurModel() { Id = Facturen };
             inventaris.Verzekering = new VerzekeringModel() { Id = Verzekeringen };
-            inventaris.Factuur = new FactuurModel() { Id= Facturen};
-            inventaris.Leverancier = new LeverancierModel() { Id = Leverancieren };    
+            inventaris.Factuur = new FactuurModel() { Id = Facturen };
+            inventaris.Leverancier = new LeverancierModel() { Id = Leverancieren };
             if (Request.Form["isActief"] != null) { inventaris.IsActief = true; }
             else
             {
@@ -297,7 +318,7 @@ namespace CvoInventarisClient.Controllers
         public ActionResult Filter(int objectFilter, string aanwezigFilter, string actiefFilter, int lokaalFilter, string historiekFilter, string filterAankoopjaar,
             string filterAankoopjaarSecondary, string filterAfschrijvingsperiode, string filterAfschrijvingsperiodeSecondary, int verzekeringFilter,
             int? objecttypeFilter, int? factuurFilter, string waardeFilter, string waardeFilterSecondary, string costcenterFilter, string afschrijvingInJaarFilter,
-            string boekhoudnrFilter, int? campusFilter, int? leverancierFilter,string filterLabel, int[] modelList)
+            string boekhoudnrFilter, int? campusFilter, int? leverancierFilter, string filterLabel, int[] modelList)
         {
             ViewBag.action = TempData["action"];
 
@@ -446,7 +467,7 @@ namespace CvoInventarisClient.Controllers
             }
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Inventaris.Count() + ")";
 
-            
+
 
             if (!String.IsNullOrWhiteSpace(filterLabel))
             {

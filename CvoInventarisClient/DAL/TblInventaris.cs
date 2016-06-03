@@ -44,8 +44,12 @@ namespace CvoInventarisClient.DAL
                     return Convert.ToInt32(command.ExecuteScalar());
                 }
             }
-            catch (Exception e)
+            catch (SqlException e)
             {
+                if (e.Number == 2601)
+                {
+                    return -1;
+                }
                 Debug.WriteLine(e);
                 return 0;
             }
