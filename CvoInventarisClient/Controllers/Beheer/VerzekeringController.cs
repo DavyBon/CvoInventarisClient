@@ -14,23 +14,18 @@ namespace CvoInventarisClient.Controllers
         {
             DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
             return dalVerzekering.GetAll();
-            }
+        }
 
         public ActionResult Index(int? amount, string order, bool? refresh)
         {
             ViewBag.action = TempData["action"];
             VerzekeringViewModel model = new VerzekeringViewModel();
-            if (Session["verzekeringviewwmodel"] == null || refresh == true)
-            {
-                DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
-                List<VerzekeringModel> verzekeringen = dalVerzekering.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-                model.Verzekeringen = verzekeringen;
-                
-            }
-            else
-            {
-                model = (VerzekeringViewModel)Session["verzekeringviewwmodel"];
-            }
+
+            DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
+            List<VerzekeringModel> verzekeringen = dalVerzekering.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+            model.Verzekeringen = verzekeringen;
+
+
             Session["verzekeringviewwmodel"] = model.Clone();
             if (amount == null)
             {
@@ -53,12 +48,12 @@ namespace CvoInventarisClient.Controllers
             }
             else
             {
-                ViewBag.ordertype = "Meest recent"; 
+                ViewBag.ordertype = "Meest recent";
             }
 
             ViewBag.Heading = this.ControllerContext.RouteData.Values["controller"].ToString() + " (" + model.Verzekeringen.Count() + ")";
             return View(model);
-            
+
         }
         public ActionResult Create()
         {
@@ -74,7 +69,7 @@ namespace CvoInventarisClient.Controllers
             dalVerzekering.Create(verzekering);
             TempData["action"] = "verzekering" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // GET: Inventaris/Edit/5
@@ -92,14 +87,14 @@ namespace CvoInventarisClient.Controllers
         [HttpPost]
         public ActionResult Edit(int id, FormCollection collection)
         {
-            
+
             DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
             VerzekeringModel verzekering = new VerzekeringModel();
             verzekering.Id = Convert.ToInt16(Request.Form["idVerzekering"]);
             verzekering.Omschrijving = Request.Form["omschrijving"];
             TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
             dalVerzekering.Update(verzekering);
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // POST: Inventaris/Delete/5
@@ -109,19 +104,19 @@ namespace CvoInventarisClient.Controllers
             if (idArray == null) { return RedirectToAction("Index"); }
             DAL.TblVerzekering dalVerzekering = new DAL.TblVerzekering();
             foreach (int id in idArray)
-                {
-                    dalVerzekering.Delete(id);
-                }
+            {
+                dalVerzekering.Delete(id);
+            }
             if (idArray.Length >= 2)
-                {
-                    TempData["action"] = idArray.Length + " verzekeringen werden verwijderd";
-                }
+            {
+                TempData["action"] = idArray.Length + " verzekeringen werden verwijderd";
+            }
             else
-                {
-                    TempData["action"] = idArray.Length + " verzekeringen werd verwijderd";
-                }
+            {
+                TempData["action"] = idArray.Length + " verzekeringen werd verwijderd";
+            }
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
     }
 }

@@ -20,16 +20,11 @@ namespace CvoInventarisClient.Controllers
         {
             ViewBag.action = TempData["action"];
             ObjectTypeViewModel model = new ObjectTypeViewModel();
-            if (Session["objectTypeviewmodel"] == null || refresh == true)
-            {
+
                 DAL.TblObjectType tblObjectType = new DAL.TblObjectType();
                 List<ObjectTypeModel> objectType = tblObjectType.GetAll().OrderBy(i => i.Id).Reverse().ToList();
                 model.objectTypes = objectType;
-            }
-            else
-            {
-                model = (ObjectTypeViewModel)Session["objectTypeviewmodel"];
-            }
+
             Session["objectTypeviewmodel"] = model.Clone();
             if (amount == null)
             {
@@ -85,7 +80,7 @@ namespace CvoInventarisClient.Controllers
             objectType.Omschrijving = Request.Form["omschrijving"];
             TempData["action"] = Request.Form["omschrijving"] + " werd aangepast";
             tblObjectType.Update(objectType);
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
         public ActionResult Create()
         {
@@ -101,7 +96,7 @@ namespace CvoInventarisClient.Controllers
             objectType.Omschrijving = Request.Form["omschrijving"];
             tblObjectType.Create(objectType);
             TempData["action"] = "objectType" + " " + Request.Form["omschrijving"] + " werd toegevoegd";
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -121,7 +116,7 @@ namespace CvoInventarisClient.Controllers
                 {
                     TempData["action"] = idArray.Length + " objectType werd verwijderd";
                 }
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
     }
