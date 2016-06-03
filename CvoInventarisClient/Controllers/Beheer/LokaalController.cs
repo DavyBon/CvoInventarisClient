@@ -17,26 +17,19 @@ namespace CvoInventarisClient.Controllers
 
             LokaalViewModel model = new LokaalViewModel();
 
-            if (Session["lokaalviewmodel"] == null || refresh == true)
+            DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
+            DAL.TblCampus tblCampus = new DAL.TblCampus();
+
+            model.Lokalen = new List<LokaalModel>();
+            model.Campussen = new List<SelectListItem>();
+
+            model.Lokalen = tblLokaal.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+            foreach (CampusModel c in tblCampus.GetAll().OrderBy(c => c.Naam))
             {
-                DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
-                DAL.TblCampus tblCampus = new DAL.TblCampus();
-
-                model.Lokalen = new List<LokaalModel>();
-                model.Campussen = new List<SelectListItem>();
-
-                model.Lokalen = tblLokaal.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-
-                foreach (CampusModel c in tblCampus.GetAll().OrderBy(c => c.Naam))
-                {
-                    model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
-                }
+                model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
             }
-            else
-            {
-                model = (LokaalViewModel)Session["lokaalviewmodel"];
-            }
-            Session["lokaalviewmodel"] = model.Clone();
+
             if (amount == null)
             {
                 model.Lokalen = model.Lokalen.Take(100).ToList();
@@ -110,7 +103,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "lokaal" + " " + Request.Form["lokaalNaam"] + " werd toegevoegd";
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         // EDIT:
@@ -156,7 +149,7 @@ namespace CvoInventarisClient.Controllers
 
             TempData["action"] = "lokaal " + Request.Form["lokaalNaam"] + " werd gewijzigd";
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
 
@@ -179,7 +172,7 @@ namespace CvoInventarisClient.Controllers
                 TempData["action"] = idArray.Length + " lokaal werd verwijderd";
             }
 
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -190,25 +183,20 @@ namespace CvoInventarisClient.Controllers
 
             LokaalViewModel model = new LokaalViewModel();
 
-            if (Session["lokaalviewmodel"] == null)
+
+            DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
+            DAL.TblCampus tblCampus = new DAL.TblCampus();
+
+            model.Lokalen = new List<LokaalModel>();
+            model.Campussen = new List<SelectListItem>();
+
+            model.Lokalen = tblLokaal.GetAll().OrderBy(i => i.Id).Reverse().ToList();
+
+            foreach (CampusModel c in tblCampus.GetAll())
             {
-                DAL.TblLokaal tblLokaal = new DAL.TblLokaal();
-                DAL.TblCampus tblCampus = new DAL.TblCampus();
-
-                model.Lokalen = new List<LokaalModel>();
-                model.Campussen = new List<SelectListItem>();
-
-                model.Lokalen = tblLokaal.GetAll().OrderBy(i => i.Id).Reverse().ToList();
-
-                foreach (CampusModel c in tblCampus.GetAll())
-                {
-                    model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
-                }
+                model.Campussen.Add(new SelectListItem { Text = c.Naam, Value = c.Id.ToString() });
             }
-            else
-            {
-                model = (LokaalViewModel)Session["lokaalviewmodel"];
-            }
+
 
             // Hier start filteren
             if (!String.IsNullOrWhiteSpace(computerLokaalFilter))

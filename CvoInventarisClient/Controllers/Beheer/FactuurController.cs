@@ -22,27 +22,20 @@ namespace CvoInventarisClient.Controllers
 
             FactuurViewModel model = new FactuurViewModel();
 
-            if ((amount != null | !string.IsNullOrWhiteSpace(order)) & Session["leverancierviewmodel"] != null)
+
+            TblFactuur TblFactuur = new TblFactuur();
+            TblLeverancier TblLeverancier = new TblLeverancier();
+
+            model.Facturen = new List<FactuurModel>();
+            model.Leveranciers = new List<SelectListItem>();
+
+            model.Facturen = TblFactuur.GetAll().OrderBy(f => f.Id).Reverse().ToList();
+
+            foreach (LeverancierModel l in TblLeverancier.GetAll().OrderBy(x => x.Naam))
             {
-                model = (FactuurViewModel)Session["factuurviewmodel"];
-            }
-            else
-            {
-                TblFactuur TblFactuur = new TblFactuur();
-                TblLeverancier TblLeverancier = new TblLeverancier();
-
-                model.Facturen = new List<FactuurModel>();
-                model.Leveranciers = new List<SelectListItem>();
-
-                model.Facturen = TblFactuur.GetAll().OrderBy(f => f.Id).Reverse().ToList();
-
-                foreach (LeverancierModel l in TblLeverancier.GetAll().OrderBy(x => x.Naam))
-                {
-                    model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
-                }
+                model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
             }
 
-            Session["factuurviewmodel"] = model.Clone();
 
             if (amount == null)
             {
@@ -128,7 +121,7 @@ namespace CvoInventarisClient.Controllers
             TblFactuur.Create(factuur);
 
             TempData["action"] = "factuur met factuurnummer" + " " + Request.Form["cvofactuurnummer"] + " werd toegevoegd";
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         #endregion
@@ -186,7 +179,7 @@ namespace CvoInventarisClient.Controllers
             TblFactuur.Update(factuur);
 
             TempData["action"] = "factuur met factuurnummer " + Request.Form["factuurNummer"] + " werd aangepast";
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         #endregion
@@ -213,7 +206,7 @@ namespace CvoInventarisClient.Controllers
             {
                 TempData["action"] = idArray.Length + " factuur werd verwijderd";
             }
-            return RedirectToAction("Index", new { refresh = true });
+            return RedirectToAction("Index");
         }
 
         #endregion
@@ -231,27 +224,21 @@ namespace CvoInventarisClient.Controllers
 
             FactuurViewModel model = new FactuurViewModel();
 
-            if (Session["factuurviewmodel"] == null)
+
+            TblFactuur TblFactuur = new TblFactuur();
+            TblLeverancier TblLeverancier = new TblLeverancier();
+
+            model.Facturen = new List<FactuurModel>();
+            model.Leveranciers = new List<SelectListItem>();
+
+            model.Facturen = TblFactuur.GetAll().OrderBy(f => f.Id).Reverse().ToList();
+
+            foreach (LeverancierModel l in TblLeverancier.GetAll())
             {
-                TblFactuur TblFactuur = new TblFactuur();
-                TblLeverancier TblLeverancier = new TblLeverancier();
-
-                model.Facturen = new List<FactuurModel>();
-                model.Leveranciers = new List<SelectListItem>();
-
-                model.Facturen = TblFactuur.GetAll().OrderBy(f => f.Id).Reverse().ToList();
-
-                foreach (LeverancierModel l in TblLeverancier.GetAll())
-                {
-                    model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
-                }
-
-                Session["factuurviewmodel"] = model.Clone();
+                model.Leveranciers.Add(new SelectListItem { Text = l.Naam, Value = l.Id.ToString() });
             }
-            else
-            {
-                model = (FactuurViewModel)Session["factuurviewmodel"];
-            }
+
+
 
             // Hier start filteren
 
