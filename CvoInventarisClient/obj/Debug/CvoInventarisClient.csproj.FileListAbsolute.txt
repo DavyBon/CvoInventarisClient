@@ -169,6 +169,8 @@ C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\De
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
 C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
 C:\Users\kenneth\Documents\CvoInventaris\client\CvoInventarisClient\CvoInventarisClient\bin\ExcelLibrary.dll
+D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\csc.exe
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
@@ -185,6 +187,7 @@ D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\CvoInve
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\CvoInventarisClient.pdb
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.Web.Infrastructure.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.dll
@@ -199,10 +202,7 @@ D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Webpages.Razor.xml
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Helpers.xml
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\System.Web.Mvc.xml
+D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csproj.ResolveComReference.cache
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.dll
 D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.pdb
-D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-D:\Git Werkmap\CvoInventaris\CvoInventarisClient\CvoInventarisClient\obj\Debug\CvoInventarisClient.csprojResolveAssemblyReference.cache
-D:\School\Eindwerk\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
-C:\Users\Gebruiker\Desktop\GitHub\CvoInventarisClient\CvoInventarisClient\bin\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll

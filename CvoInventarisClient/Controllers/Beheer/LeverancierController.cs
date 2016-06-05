@@ -29,7 +29,7 @@ namespace CvoInventarisClient.Controllers
 
             foreach (PostcodeModel p in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
             {
-                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente + " - " + p.Postcode, Value = p.Id.ToString() });
             }
 
             Session["leverancierviewmodel"] = model.Clone();
@@ -77,7 +77,7 @@ namespace CvoInventarisClient.Controllers
 
             foreach (PostcodeModel p in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
             {
-                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente, Value = p.Id.ToString() });
+                model.Postcodes.Add(new SelectListItem { Text = p.Gemeente + " - " + p.Postcode, Value = p.Id.ToString() });
             }
 
             return View(model);
@@ -126,7 +126,7 @@ namespace CvoInventarisClient.Controllers
 
             foreach (PostcodeModel pm in tblPostcode.GetAll().OrderBy(p => p.Gemeente))
             {
-                model.Postcodes.Add(new SelectListItem { Text = pm.Gemeente, Value = pm.Id.ToString() });
+                model.Postcodes.Add(new SelectListItem { Text = pm.Gemeente + " - " + pm.Postcode, Value = pm.Id.ToString() });
                 //if (!(pm.Id == l.Postcode.Id))
                 //{
                 //    model.Postcodes.Add(new SelectListItem { Text = pm.Gemeente, Value = pm.Id.ToString() });
